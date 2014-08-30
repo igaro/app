@@ -89,9 +89,6 @@ module.exports = function(app) {
                     ['support', {
                         en : 'Support',
                         fr : 'Soutien'
-                    }],
-                    ['news', {
-                        en : 'News'
                     }]
                 ]
                 l.forEach(function(o) { list.add({ id:o[0] }) });

@@ -52,7 +52,7 @@ module.exports = function(app) {
                 var t = l.split('-');
                 if (c[t[0]]) return c[t[0]];
             }
-            if (c[en]) return c[en];
+            if (c['en']) return c['en'];
             throw new Error('No language support:'+JSON.stringify(c));
         };
     };

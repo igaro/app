@@ -10,7 +10,9 @@
     "grunt-contrib-watch": "~0.5.3",
     "grunt-contrib-compass": "~0.7.0",
     "grunt-contrib-copy": "",
-    "grunt-contrib-clean": "",
-    "express" : ""
+    "grunt-contrib-clean": ""
+  },
+  "dependencies": {
+    "express": "~4.8.6"
   }
 }

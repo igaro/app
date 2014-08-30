@@ -44,18 +44,18 @@ module.exports = function(app) {
 
     // add supported countries - iso 3166-2
     country.pool.set({
-        'us' : {
-            'currency' : 'USD',
-            'language' : 'en-US',
-            'name' : {
+        us : {
+            currency : 'USD',
+            language : 'en-US',
+            name : {
                 en : 'United States',
                 fr : 'États-Unis'
             }
         },
         fr : {
-            'currency' : 'EUR',
-            'language' : 'fr',
-            'name' : {
+            currency : 'EUR',
+            language : 'fr',
+            name : {
                 en : 'France',
                 fr : 'Francais'
             }

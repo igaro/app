@@ -12,7 +12,7 @@ var p = path.resolve(__dirname + '/../output/debug/');
 app.use('/cdn', express.static(p+'/cdn'));
 
 app.all('*', function(req, res, next) {
-	res.sendfile(p+'/index.html');
+	res.sendFile(p+'/index.html');
 });
 
 // Listen
