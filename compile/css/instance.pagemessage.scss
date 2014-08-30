@@ -1,0 +1,60 @@
+@import "../sass-global/mixins.scss";
+
+@-webkit-keyframes instance-pagemessage-fadeInDown {
+0% { opacity: 0; -webkit-transform: translateY(-2em); }
+100% { opacity: 1; -webkit-transform: translateY(0); }
+}
+
+@keyframes instance-pagemessage-fadeInDown {
+0% { opacity: 0; transform: translateY(-2em); }
+100% { opacity: 1; transform: translateX(0); }
+}
+
+.instance-pagemessage {
+
+    -webkit-animation-name: instance-pagemessage-fadeInDown;
+    animation-name: instance-pagemessage-fadeInDown;
+    -webkit-animation-duration:0.5s;
+    animation-duration:0.5s;
+    
+    margin:0 0 1.5em 0;
+    
+    >.default, >.info, >.critical, >.warn, >.ok, >.success, >.error, >.critical {
+    	padding:0.5em 0.5em 0.5em 2.1em;
+        @include commonboxshadow;
+    	border-radius:0.5em;
+        border: 1px solid #ddd;
+        color:#fff;
+    }
+
+    >.warn, >.error {
+        background: inline-image("instance.pagemessage/warn.svg") #b97b04 no-repeat 0.5em 50%;
+        background-size:1.4em 1.4em;
+    }
+
+    >.default, >.info {
+        background: inline-image("instance.pagemessage/info.svg") #0476c6 no-repeat 0.5em 50%;
+        background-size:1.4em 1.4em;
+    }
+
+    >.ok, >.success {
+        background: inline-image("instance.pagemessage/ok.svg") #2e6302 no-repeat 0.5em 50%;
+        background-size:1.4em 1.4em;
+    }
+
+    >.critical {
+        background: inline-image("instance.pagemessage/critical.svg") #9d0202 no-repeat 0.5em 50%;
+        background-size:1.4em 1.4em;
+    }
+
+    >div >.hide {
+    	width:1.3em;
+    	height:1.3em;
+    	float:right;
+    	background: inline-image("instance.pagemessage/close.svg") no-repeat 50% 50%;
+		background-size:90%;
+        opacity:0.75;
+		&:hover { cursor:pointer; opacity:1 }
+    }
+
+}

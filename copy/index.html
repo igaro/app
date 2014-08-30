@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Igaro App</title>
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="msapplication-tap-highlight" content="no" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+<meta name="description" content="Javscript App framework for Chrome, Firefox, Safari, IE, IOS, Android, Windows Mobile & more">
+<meta name="copyright" content="© igaro.com">
+<script>
+var __igaroapp = {
+    cdn : document.location.protocol === 'file:'? document.location.href+'/../cdn' : 'cdn',
+    geocountry : null,
+    browserincompat : {
+        'en' : 'Your Browser is too old to work with this application. Please upgrade.'
+    },
+    loaderr : {
+        'en' : 'An error occurred while loading the application.'
+    }
+};
+
+var head = document.getElementsByTagName('head')[0];
+var b = document.createElement('base'), s;
+b.target='_blank';
+if (document.location.protocol !== 'file:') {
+    b.href='/';
+    head.appendChild(b);
+} else {
+    head.appendChild(b);
+    s = document.createElement('script');
+    s.src = "cordova.js";
+    head.appendChild(s);
+}
+
+// polyfills
+if (! window.addEventListener) { //ie-8
+    s = document.createElement('script');
+    s.src = __igaroapp.cdn + "/js/polyfix.ie.8.js";
+    async = false;
+    head.appendChild(s);
+}
+if (! Array.prototype.map) { //js-1.6
+    s = document.createElement('script');
+    s.src = __igaroapp.cdn + "/js/polyfix.js.1.6.js";
+    async = false;
+    head.appendChild(s);
+}
+if (!String.prototype.trim) { //js-1.8.1
+    s = document.createElement('script');
+    s.src = __igaroapp.cdn + "/js/polyfix.js.1.8.1.js";
+    async = false;
+    head.appendChild(s);
+}
+if (! Object.keys) { //js-1.8.5
+    s = document.createElement('script');
+    s.src = __igaroapp.cdn + "/js/polyfix.js.1.8.5.js";
+    async = false;
+    head.appendChild(s);
+}
+if (! window.Promise) { //ec6-promises
+    s = document.createElement('script');
+    s.src = __igaroapp.cdn + "/js/polyfix.ec6.promises.js";
+    async = false;
+    head.appendChild(s);
+}
+
+s = document.createElement('link');
+s.type = "text/css";
+s.rel = "stylesheet";
+s.href = __igaroapp.cdn + "/css/igaro.css";
+head.appendChild(s);
+
+s = document.createElement('script');
+s.src = __igaroapp.cdn + "/js/igaro.js";
+head.appendChild(s);
+
+</script>
+
+</head>
+<body>
+
+<noscript>
+<p>Javascript is not enabled. We can't load this application without it.</p>
+<p>Javascript is disabled. We can't load this application without it.</p>
+<p>Javascript está desactivado. No podemos cargar esta solicitud sin ella.</p>
+<p>تم تعطيل جافا سكريبت، ونحن لا يمكن تحميل هذا التطبيق دون ذلك.</p>
+</noscript>
+
+</body>
+</html>

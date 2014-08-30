@@ -1,0 +1,32 @@
+@import "../sass-global/mixins.scss";
+
+
+body >.core-mvc >.main >.modules {
+
+	>.wrapper {
+		@include pagepadding;
+    	@include pagerestrictwidth;
+	}
+
+	>div >.wrapper {
+
+		@include pagepadding;
+    	@include pagerestrictwidth;
+
+		>p >table {
+			>tbody {
+				>tr {		
+					>td { 
+						&:not(:last-child) {
+							white-space:nowrap;
+						}
+					}
+				}
+			}
+		}
+
+		>.extlinks {
+			font-size:90%;
+		}
+	}
+}
