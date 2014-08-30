@@ -66,7 +66,7 @@ module.exports = function(app) {
 
         var t = view.createAppend('textarea',wrapper,
 'mkdir /igaro \n\
-git clone https://github.com/igaro/igaro.git /igaro/git --depth=1'); 
+git clone https://github.com/igaro/app.git /igaro/git --depth=1'); 
         t.readOnly=true;
         t.className='gitcode';
 
