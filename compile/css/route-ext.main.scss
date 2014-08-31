@@ -98,6 +98,7 @@
 @keyframes route-main-spinner-rotateTopRight {
     0% {
         opacity:0;
+        visibility:visible;
         transform-origin: right top;
         transform: rotate(-120deg);
     }
@@ -138,7 +139,7 @@ body >.core-mvc >.main {
             width:100%;
             height:100%;
             z-index:-1;
-
+            visibility:hidden;
             overflow:hidden;
             >div {
                 position:absolute;
