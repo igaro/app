@@ -36,31 +36,39 @@ if (document.location.protocol !== 'file:') {
 // polyfills
 if (! window.addEventListener) { //ie-8
     s = document.createElement('script');
-    s.src = __igaroapp.cdn + "/js/polyfix.ie.8.js";
+    s.src = __igaroapp.cdn + "/js/polyfill.ie.8.js";
     async = false;
     head.appendChild(s);
 }
 if (! Array.prototype.map) { //js-1.6
     s = document.createElement('script');
-    s.src = __igaroapp.cdn + "/js/polyfix.js.1.6.js";
+    s.src = __igaroapp.cdn + "/js/polyfill.js.1.6.js";
     async = false;
     head.appendChild(s);
 }
 if (!String.prototype.trim) { //js-1.8.1
     s = document.createElement('script');
-    s.src = __igaroapp.cdn + "/js/polyfix.js.1.8.1.js";
+    s.src = __igaroapp.cdn + "/js/polyfill.js.1.8.1.js";
     async = false;
     head.appendChild(s);
 }
 if (! Object.keys) { //js-1.8.5
     s = document.createElement('script');
-    s.src = __igaroapp.cdn + "/js/polyfix.js.1.8.5.js";
+    s.src = __igaroapp.cdn + "/js/polyfill.js.1.8.5.js";
     async = false;
     head.appendChild(s);
 }
+
+if (!( "classList" in document.createElement("_"))) {
+    s = document.createElement('script');
+    s.src = __igaroapp.cdn + "/js/polyfill.js.classList.js";
+    async = false;
+    head.appendChild(s);
+} 
+
 if (! window.Promise) { //ec6-promises
     s = document.createElement('script');
-    s.src = __igaroapp.cdn + "/js/polyfix.ec6.promises.js";
+    s.src = __igaroapp.cdn + "/js/polyfill.ec6.promises.js";
     async = false;
     head.appendChild(s);
 }

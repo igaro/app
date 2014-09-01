@@ -137,8 +137,8 @@ module.exports = function(app) {
                         name:'createAppend',
                         type:'function',
                         desc: {
-                            en : 'Create and append DOM elements into the view, with optional locale support. In addition elements created using this function have .hasClass, addClass and removeClass exported into the namespace.',
-                            fr : 'Créer et ajouter des éléments DOM dans la vue, avec le support des locales en option. Dans les éléments d\'addition créés à l\'aide de cette fonction ont. HasClass, addClass et removeClass exportés en l\'espace de noms.'
+                            en : 'Create and append DOM elements into the view, with optional locale support.',
+                            fr : 'Créer et ajouter des éléments DOM dans la vue, avec le support des locales en option.'
                         },
                         attributes : [
                             {

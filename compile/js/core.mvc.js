@@ -115,23 +115,6 @@ module.exports = function(app) {
         } else {
             r = document.createElement(t);
         }
-        // append class helpers (follows Jquery)
-        r.hasClass = function(n) {
-            return r.className.split(' ').indexOf(n) !== -1;
-        };
-        r.addClass = function(n) {
-            if (r.hasClass(n)) return;
-            if (r.className.length) r.className += ' ';
-            r.className += n;
-            return r;
-        };
-        r.removeClass = function(n) {
-            if (! r.hasClass(n)) return;
-            var f = r.className.split(' ');
-            f.splice(r.indexOf(n),1);
-            r.className = f.join(' ');
-            return r;
-        };
         if (t === 'a') r.href='';
         if (o) o.appendChild(r);
         if (m) r.className=m;
