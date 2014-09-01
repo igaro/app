@@ -66,9 +66,9 @@ if (!( "classList" in document.createElement("_"))) {
     head.appendChild(s);
 } 
 
-if (! window.Promise) { //ec6-promises
+if (! window.Promise) { //es6-promises
     s = document.createElement('script');
-    s.src = __igaroapp.cdn + "/js/polyfill.ec6.promises.js";
+    s.src = __igaroapp.cdn + "/js/polyfill.es6.promises.js";
     async = false;
     head.appendChild(s);
 }

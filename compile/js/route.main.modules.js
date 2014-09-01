@@ -189,25 +189,29 @@ module.exports = function(app) {
                         en : 'XHR (Ajax) functionality.',
                         fr : 'XHR (Ajax) fonctionnalité.'
                     }],
-                    ['polyfill.ec6.promises', {
-                        en : 'Async chainable processes.',
-                        fr : 'Processus pouvant être enchaînées asynchrones.'
+                    ['polyfill.es6.promises', {
+                        en : 'A+ Promises for async chainable processes.',
+                        fr : 'A+ Promises pour processus pouvant être enchaînées asynchrones.'
                     }],
                     ['polyfill.ie.8', {
-                        en : 'Polyfill / shims for Internet Explorer 8.',
-                        fr : 'Polyfill / cales pour Internet Explorer 8.'
+                        en : 'Polyfill for Internet Explorer 8.',
+                        fr : 'Polyfill pour Internet Explorer 8.'
                     }],
-                    ['polyfill.js.*', {
-                        en : 'Boost old browsers to newer JS/EC5 spec.',
-                        fr : 'Boostez anciens navigateurs récents JS/EC5 spec.'
+                    ['polyfill.js.1.6', {
+                        en : 'Polyfill very old browsers to Mozilla 1.6 specification.',
+                        fr : 'Polyfill très vieux navigateurs à la spécification Mozilla 1.6.'
                     }],
-                    ['route.*', {
-                        en : 'Internal MVC routes (views).',
-                        fr : 'Routes MVC internes (vues).'
+                    ['polyfill.js.1.8.1', {
+                        en : 'Polyfill old browsers to Mozilla 1.8.1 specification.',
+                        fr : 'Polyfill vieux navigateurs à la spécification Mozilla 1.8.1.'
                     }],
-                    ['route-ext.*', {
-                        en : 'Defers route-view data load to reduce initial load time.',
-                        fr : 'Diffère itinéraire vue chargement de données pour réduire le temps de chargement initial.'
+                    ['polyfill.js.1.8.5', {
+                        en : 'Polyfill old browsers to Mozilla 1.8.5 specification.',
+                        fr : 'Polyfill vieux navigateurs à la spécification Mozilla 1.8.5.'
+                    }],
+                    ['polyfill.js.classList', {
+                        en : 'Polyfill HTML5 classList helpers onto DOM elements.',
+                        fr : 'Polyfill aides HTML5 classList sur ​​les éléments DOM.'
                     }],
                     ['service.consoledebug', {
                         en : 'Routes debug data to the console log.',

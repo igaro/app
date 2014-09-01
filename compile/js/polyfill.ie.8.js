@@ -49,6 +49,7 @@ if (!window.addEventListener) {
         }
         cite.__eventListener[type][useCapture ? 0 : 1].push(listener);
     }
+    
     window.constructor.prototype.removeEventListener = document.constructor.prototype.removeEventListener = Element.prototype.removeEventListener = function(type, listener, useCapture) {
         useCapture = !!useCapture;
         var cite = this, a;
@@ -66,15 +67,12 @@ if (!window.addEventListener) {
     }
 
     if ( !Date.prototype.toISOString ) {
-      ( function() {
-        
-        function pad(number) {
+        var pad = function(number) {
           if ( number < 10 ) {
             return '0' + number;
           }
           return number;
         }
-     
         Date.prototype.toISOString = function() {
           return this.getUTCFullYear() +
             '-' + pad( this.getUTCMonth() + 1 ) +
@@ -85,8 +83,6 @@ if (!window.addEventListener) {
             '.' + (this.getUTCMilliseconds() / 1000).toFixed(3).slice(2, 5) +
             'Z';
         };
-      
-      }() );
     }
 
 };

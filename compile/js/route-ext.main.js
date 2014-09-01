@@ -24,8 +24,8 @@ module.exports = function(app) {
                 fr : 'Votre App, sur <b>IOS</b>, <b>Android</b> et <b>Windows Mobile</b>.'
             }),
             view.createAppend('span', null, { 
-                en : 'ECMA Standard Javascript with EC6 Promises.',
-                fr : 'ECMA Javascript avec EC6 Promeses.',
+                en : 'ECMA Standard Javascript with ES6 Promises.',
+                fr : 'ECMA Javascript avec ES6 Promeses.',
             }),
             view.createAppend('span', null, { 
                 en : 'Advanced MVC Framework with Multiple Sources.',
