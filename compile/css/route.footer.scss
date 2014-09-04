@@ -1,35 +1,79 @@
+@import "../sass-global/mixins.scss";
+
+
 @-webkit-keyframes route-footer-NavTop {
-0% { opacity: 0; -webkit-transform: translateY(100%); }
-100% { opacity: 1; -webkit-transform: translateY(0); }
+0% { opacity: 0; -webkit-transform: translateX(100%); }
+100% { opacity: 1; -webkit-transform: translateX(0); }
 }
 
 @keyframes route-footer-NavTop {
-0% { opacity: 0; transform: translateY(100%); }
-100% { opacity: 1; transform: translateY(0); }
+0% { opacity: 0; transform: translateX(100%); }
+100% { opacity: 1; transform: translateX(0); }
 }
 
 body >.core-mvc >.footer {
-	display:none;
+
+	background-color: #000;
+	height:4.6em;
+
+	>.wrapper {
+
+    	a {
+        	color:#1060a4;
+    	}
+		height:100%;
+		display:table;
+		width:100%;
+		@include pagerestrictwidth;
+		@include pagepadding;
+		padding-top:0;
+		padding-bottom:0;
+		background-color: rgba(32,28,30,.8);
+		border:none;
+		color:#c0c0c0;
+		font-size:75%;
+		font-weight:bold;
+		>div {
+			display:table-cell;
+			text-align:center;
+			vertical-align:middle;
+		}
+
+		>.lastupdate, >.openissues {
+			>span:after { content:' ' }
+		}
+
+	}
+
+	>.toTop {
+		display:none;
+	}
+
+	@media (max-width: 1150px) {
+        >.wrapper { display:none !important; }
+        height:0;
+        background-color:none;
+    }	
+
 }
 
-body:not([scrollposition="0"]) >.core-mvc >.footer {
+body:not([scrollposition="0"]) >.core-mvc >.footer >.toTop {
 	position:fixed;
-	display:'';
+	display:inline-block;
 	width:100%;
 	z-index:9999999;
 	bottom:0;
 	left:0;
-	background:red;
 	>.wrapper {
 		position:absolute;
-		right:20%;
-		bottom:0;
+		right:0;
+		bottom:8em;
 		background: linear-gradient(color-stops(#393832 0%, #111 100%));
 		display:inline-block;
 		box-shadow: 0 0em 1em 0.2em #444;
-		height:2.2em;
-		width:2.7em;
-		border-radius:0.2em 0.2em 0 0;
+		height:3em;
+		width:3em;
+		border-radius: 0.2em 0 0 0.2em;
 		-webkit-animation-name: route-footer-NavTop;
         animation-name: route-footer-NavTop;
         -webkit-animation-duration:0.2s;

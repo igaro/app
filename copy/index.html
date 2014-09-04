@@ -33,26 +33,25 @@ if (document.location.protocol !== 'file:') {
     head.appendChild(s);
 }
 
-// polyfills
-if (! window.addEventListener) { //ie-8
+if (! window.addEventListener) {
     s = document.createElement('script');
     s.src = __igaroapp.cdn + "/js/polyfill.ie.8.js";
     async = false;
     head.appendChild(s);
 }
-if (! Array.prototype.map) { //js-1.6
+if (! Array.prototype.map) {
     s = document.createElement('script');
     s.src = __igaroapp.cdn + "/js/polyfill.js.1.6.js";
     async = false;
     head.appendChild(s);
 }
-if (!String.prototype.trim) { //js-1.8.1
+if (!String.prototype.trim) {
     s = document.createElement('script');
     s.src = __igaroapp.cdn + "/js/polyfill.js.1.8.1.js";
     async = false;
     head.appendChild(s);
 }
-if (! Object.keys) { //js-1.8.5
+if (! Object.keys) {
     s = document.createElement('script');
     s.src = __igaroapp.cdn + "/js/polyfill.js.1.8.5.js";
     async = false;
@@ -66,7 +65,7 @@ if (!( "classList" in document.createElement("_"))) {
     head.appendChild(s);
 } 
 
-if (! window.Promise) { //es6-promises
+if (! window.Promise) {
     s = document.createElement('script');
     s.src = __igaroapp.cdn + "/js/polyfill.es6.promises.js";
     async = false;

@@ -9,7 +9,7 @@ module.exports = function(app,op) {
     // adds route.* files as a model source
     app['core.mvc'].source.append({
         defaultCacheLevel:2,
-        handles:function(path) { return true },
+        handles:function(path) { return true; },
         url : op.repo,
         viewPath:function(path) {
             var p = path.substr(6);

@@ -24,15 +24,21 @@
 
 body >.core-mvc >.header {
 
-	background: linear-gradient(color-stops(#393832 0%, #111 100%));
-
-	height:10%;
+	background: #000;
+	height:13%;
 	min-height:4.2em;
+	max-height:7em;
 
 	>.wrapper {
 
 		height:100%;
 		@include pagerestrictwidth;
+		@include pagepadding;
+		padding-top:0;
+		padding-bottom:0;
+		background-color:rgba(65,60,63,.8);
+		border-left-color:rgba(35,30,33,.8);
+		border-right-color:rgba(35,30,33,.8);
 		
 		>.logo {
 		    height:100%;

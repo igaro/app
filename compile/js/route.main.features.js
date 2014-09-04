@@ -18,7 +18,7 @@ module.exports = function(app) {
         });
 
         view.createAppend('p',wrapper,{
-            en : 'Igaro App comes with many features out-the-box, perhaps everything you need to make an excellent website and mobile application. It\'s easy to develop new modules, to include other javascript and css, and to import your previous work.',
+            en : 'Igaro App comes with everything you need to make an excellent website and mobile application. It\'s easy to develop new modules, to use third party libraries and to import your previous work.',
             fr : 'Igaro App est livré avec de nombreuses fonctionnalités sur-le-boîte, peut-être tout ce que vous avez besoin de faire un excellent site Web et applications mobiles. Il est facile de développer de nouveaux modules, d\'inclure d\'autres javascript et css, et d\'importer votre travail précédent.'
         });
 
@@ -48,8 +48,8 @@ module.exports = function(app) {
         view.createAppend('h1',wrapper,'instance.xhr');
 
         view.createAppend('p',wrapper,{
-            en : 'This example contacts the Youtube API which returns JSON. It\'s then parsed and from it three Justin Bieber videos are loaded. Enjoy.',
-            fr : 'Cet exemple en contact avec l\'API Youtube qui renvoie JSON. Il est ensuite analysé et de lui trois vidéos de Justin Bieber sont chargés. Profitez.'
+            en : 'This example contacts the Youtube API which returns JSON. It\'s then parsed and from it three Justin Bieber videos are loaded. Enjoy!',
+            fr : 'Cet exemple en contact avec l\'API Youtube qui renvoie JSON. Il est ensuite analysé et de lui trois vidéos de Justin Bieber sont chargés. Profitez!'
         });
 
         view.createAppend('input[button]',wrapper,{

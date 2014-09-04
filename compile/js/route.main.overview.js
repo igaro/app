@@ -15,18 +15,13 @@ module.exports = function(app) {
 	    });
 
 	    view.createAppend('p',wrapper,{
-            en : 'Igaro App blurs the distinction between a website and a mobile variant by deploying a scalable, responsive and dynamic app into multiple environments.',
+            en : 'Igaro App lets you produces website and mobile application that are scalable, responsive and dynamic.',
             fr : 'Igaro App brouille la distinction entre un site Web et une variante mobile en déployant une application évolutive, souple et dynamique dans de multiples environnements.'
         });
 
 	    view.createAppend('p',wrapper,{
-            en : 'Utilising pure Javascript and SASS, a developer needn\'t learn about data binding and templating - because there are none! There\'s no HTML either!',
-            fr : 'Utilisant pur Javascript et SASS, un développeur n\'a pas besoin d\'en apprendre davantage sur la liaison de données et de gabarits - car il n\'y en a pas! Il n\'y a pas HTML soit!'
-        });
-
-        view.createAppend('p',wrapper,{
-            en : 'Igaro App comes with XHR, AMD, Promises, Event Management, Locale and many more modules. It\'s as ready as you are, plus you can use all your current Javascript code.',
-            fr : 'Igaro App est livré avec XHR, AMD, promesses, Gestion d\'événements, Locale et beaucoup plus de modules. C\'est aussi prêt que vous êtes, plus vous pouvez utiliser tout le code Javascript actuelle.'
+            en : 'Utilising pure Javascript, Igaro App has the power to satisfy advanced developers with demanding requirements, yet it\'s learning curve is tiny.',
+            fr : 'Utilisant pur Javascript et CSS3, un développeur n\'a pas besoin d\'en apprendre davantage sur la liaison de données et de gabarits - car il n\'y en a pas! Il n\'y a pas HTML soit!'
         });
 
         view.createAppend('h1',wrapper,{
@@ -34,12 +29,12 @@ module.exports = function(app) {
             fr : 'Pour'
         });
 
-        view.createAppend('div',wrapper,null,'viewport');
-
         view.createAppend('p',wrapper,{
-            en : 'Igaro App can be served from a web server and ran as a single page application, distributed through an app store, or bundled on removeable media.',
+            en : 'Igaro App can be served to a web browser, distributed through an app store, or bundled on removeable media.',
             fr : 'Igaro App peut être servi à partir d\'un serveur Web et a couru comme une seule demande de la page, distribué par un App Store, ou livré sur support amovible.'
         });
+
+        view.createAppend('div',wrapper,null,'viewport');
 
         view.createAppend('h2',wrapper,{
             en : 'Websites',
@@ -47,7 +42,7 @@ module.exports = function(app) {
         });
 
         view.createAppend('p',wrapper,{
-            en : 'Dramatically lighten your server load by shifting processing to the client. Keeping your data separate, Igaro App renders content using the renown MVC architecture.',
+            en : 'Most frameworks are HTML with Javascript on top. Igaro App throws that out. Your users will think they\'re using an application.',
             fr : 'Considérablement alléger la charge du serveur en déplaçant le traitement au client. Garder vos données séparé, Igaro App affiche le contenu en utilisant la renommée architecture MVC.'
         });
 
@@ -96,8 +91,8 @@ module.exports = function(app) {
         });
 
         view.createAppend('p',wrapper,{
-            en : 'Igaro App uses standard EC5 Javascript. No external frameworks (aka JQuery) are required.',
-            fr : 'Igaro App utilise la norme EC5 Javascript. Pas de cadres externes (aka JQuery) sont nécessaires.'
+            en : 'Igaro App uses standard ES5 Javascript. No external frameworks (aka JQuery) are required.',
+            fr : 'Igaro App utilise la norme ES5 Javascript. Pas de cadres externes (aka JQuery) sont nécessaires.'
         });
 
         view.createAppend('p',wrapper,{

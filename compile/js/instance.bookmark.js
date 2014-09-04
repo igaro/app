@@ -14,7 +14,7 @@ module.exports = function(app) {
     ];
 
     var a = function(o) {
-        var c = this.container = document.createElement('div');
+        var c = this.container = document.createElement('ul');
         c.className = 'instance-bookmark';
         this.setURL({ url:o.url? o.url : window.location.href, title:o.title });
         if (o.container) o.container.appendChild(c);

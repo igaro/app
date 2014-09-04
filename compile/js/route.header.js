@@ -8,14 +8,15 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var events = app['core.events'];
-    var language = app['core.language'];
-    var mvc = app['core.mvc'];
+    var events = app['core.events'], 
+        language = app['core.language'], 
+        mvc = app['core.mvc'], 
+        xcti = app['core.date'];
 
     return function(model) {
 
-        var view = model.view;
-        var wrapper = view.wrapper;
+        var view = model.view, 
+            wrapper = view.wrapper;
 
         view.createAppend('div',wrapper,null,'logo').addEventListener('click', function() {
             mvc.to('/main').then();
@@ -33,14 +34,14 @@ module.exports = function(app) {
             return view.instances.add({ name:'navigation' },{
                 type:'drop',
                 container:wrapper,
-                onClick : function() { this.toggle() }
+                onClick : function() { this.toggle(); }
             }).then(function (sm) {
                 
                 // country/lang/currency
                 var writeModuleSubs = function(menu,n) {
-                    var name = 'core.'+n;
-                    var mod = app[name];
-                    var write = function() {
+                    var name = 'core.'+n,
+                    mod = app[name],
+                    write = function() {
                         menu.removeOptions();
                         var cco = mod.code.get();
                         menu.addOptions(Object.keys(mod.pool.get({ sortby:'name' })).map(function (o) {
@@ -63,14 +64,13 @@ module.exports = function(app) {
 
                 // timezone
                 var writeTimezone = function(tzmenu) {
-                    var xcti = app['core.date'];
                     var tzval = function() {
-                        var cti = xcti.offset.get();
-                        var t = language.mapKey({
+                        var cti = xcti.offset.get(),
+                        t = language.mapKey({
                             en : 'GMT [t] [h]h [m]m',
                             fr : 'GMT [t] [h]h [m]m'
-                        });
-                        var isNeg = cti < 0? true:false;
+                        }),
+                        isNeg = cti < 0? true:false;
                         t = t.replace('[t]',isNeg? '-' : '+');
                         if (cti < 0) cti *= -1;
                         var h = cti > 0? parseInt(cti/60) : 0;
@@ -78,8 +78,8 @@ module.exports = function(app) {
                         var m = cti % 60;
                         t = t.replace('[m]',m);
                         return t;
-                    }
-                    var tzvalueopt = tzmenu.addOption({ title:tzval, active:true });
+                    },
+                    tzvalueopt = tzmenu.addOption({ title:tzval, active:true });
                     events.on('core.date','offset.set', function() {
                         tzvalueopt.updateTitle(tzval());
                     });
@@ -89,12 +89,12 @@ module.exports = function(app) {
                             fr : 'Spécifier'
                         }, 
                         onClick:function() {
-                            var cti = xcti.offset.get();
-                            var isNeg = cti < 0? true:false;
-                            var hrs = cti > 0? parseInt(cti/60) : 0;
-                            var min = cti % 60;
-                            var frag = document.createDocumentFragment();
-                            var type = view.createAppend('select',frag);
+                            var cti = xcti.offset.get(),
+                            isNeg = cti < 0? true:false,
+                            hrs = cti > 0? parseInt(cti/60) : 0,
+                            min = cti % 60,
+                            frag = document.createDocumentFragment(),
+                            type = view.createAppend('select',frag);
                             ['+','-'].forEach(function (o) { type.options[type.options.length] = new Option(o); });
                             if (isNeg) type.options[1].selected = true;
                             var hours = view.createAppend('select',frag);
@@ -124,19 +124,19 @@ module.exports = function(app) {
                             });
                         } 
                     });
-                }
+                };
 
                 // draw menu
                 var addOption = function(menu,m) {
-                    var c = m.children;
-                    var nm = menu.addOption({ id:m.id, title:m.l, onClick:m.onClick? m.onClick : c? function() { this.setStatus('active') } : null });
+                    var c = m.children,
+                        nm = menu.addOption({ id:m.id, title:m.l, onClick:m.onClick? m.onClick : c? function() { this.setStatus('active') } : null });
                     if (c) addMenu(nm,c);
-                }
-                var addMenu = function(opt, m) {
+                },
+                addMenu = function(opt, m) {
                     var n = opt.addMenu({ autosort:true });
                     if (typeof m === 'function') { m(n) }
                     else { m.forEach(function(o) { addOption(n,o) }) };
-                }
+                };
 
                 // locale
                 addOption(sm.menu,{
@@ -181,9 +181,9 @@ module.exports = function(app) {
             })
 
         }).then(function () {
-            var xhricon = view.createAppend('div',null,null,'xhr');
-            var w = view.createAppend('div', xhricon);
-            var total=0, ref;
+            var xhricon = view.createAppend('div',null,null,'xhr'),
+            w = view.createAppend('div', xhricon),
+            total=0, ref;
             events.on('instance.xhr','start', function () {
                 if (total === 0 && ! xhricon.parentNode && ! ref) ref=setTimeout(function() { wrapper.appendChild(xhricon) },350);
                 total++;

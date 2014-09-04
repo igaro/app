@@ -1,5 +1,5 @@
 module.requires = [
-    { name: 'route.main.deploy.css' },
+    { name: 'route.main.mobile.css' },
     { name: 'instance.navigation.js' },
     { name: 'core.language.js'}
 ];

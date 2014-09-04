@@ -9,22 +9,24 @@ body >.core-mvc >.location {
 
 		@include pagerestrictwidth;
 		@include pagepadding;
-	
 		color:#4d4e53;
-		font-size:100%;
+		font-size:120%;
 		font-weight:bold;
 		display:table;
+		width:100%;
+		background:none;
+		border:0;
 		
 		>.home {
 			background: inline-image("route.location/home-standard.svg") no-repeat 0 50%;
-			background-size:90%;
-			width:1.5em;
+			background-size:75%;
+			width:2em;
 			height:100%;
 			display:table-cell;
 			vertical-align:middle;
 			&:hover { 
 				background: inline-image("route.location/home-hover.svg") no-repeat 0 50%;
-				background-size:90%;
+				background-size:75%;
 			}
 		}
 		>.path {
@@ -34,7 +36,7 @@ body >.core-mvc >.location {
 			>a, >span {
 				display:table-cell;
 				height:100%;
-				padding:0 0.6em 0 1.2em;
+				padding:0 0.8em 0 1.4em;
 				background: inline-image("route.location/section.svg") no-repeat 0 55%;
 				background-size:0.8em 0.8em;
 			}

@@ -2,16 +2,19 @@ body {
 	position:absolute;
     width:100%;
     height:100%;
-    background:#fdfefd;
+    background-color:rgba(222,220,230, .5);
 
 	>.core-mvc {
 		position:relative;
 		height:100%;
+		width:100%;
+	}
 
-		.core-mvc {
-			display:none;
-		}
-
+	>.core-mvc .hide {
+		position:fixed;
+		visibility:hidden;
+		left:-99999px;
+		top:-999999px;
 	}
 
 	.core-mvc >.wrapper *:first-child { 

@@ -1,6 +1,6 @@
 @import "../sass-global/mixins.scss";
 
-body >.core-mvc >.main >.deploy >.wrapper {
+body >.core-mvc >.main >.mobile >.wrapper {
 
 	@include pagepadding;
 	@include pagerestrictwidth;
@@ -18,7 +18,7 @@ body >.core-mvc >.main >.deploy >.wrapper {
 			width:600px;
 			height:464px;
 			max-width:100%;   
-			background: inline-image("route.main.deploy/ios.jpg") no-repeat;
+			background: inline-image("route.main.mobile/ios.jpg") no-repeat;
 			background-size:100%;  
 		}
 
@@ -26,13 +26,13 @@ body >.core-mvc >.main >.deploy >.wrapper {
 			width:600px;
 			height:554px;
 			max-width:100%;  
-			background: inline-image("route.main.deploy/android.jpg") no-repeat;
+			background: inline-image("route.main.mobile/android.jpg") no-repeat;
 			background-size:100%;  
 		}
 	}
 
 	>.cordova {
-		background: inline-image("route.main.deploy/cordova.png") no-repeat;
+		background: inline-image("route.main.mobile/cordova.png") no-repeat;
         background-size:100%;
         margin:1em 0;
         height:69px;

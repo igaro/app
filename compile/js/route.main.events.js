@@ -26,8 +26,8 @@ module.exports = function(app) {
         });
 
         view.createAppend('p',wrapper,{
-            en : 'Igaro App uses Promises (EC6 specification) to replace callback routines. Promises allow for chainable asynchronous operation with error control.',
-            fr : 'Igaro App utilise promesses (de spécification de EC6) pour remplacer les routines de rappel. Promesses permettent un fonctionnement asynchrone chaîne avec des contrôle d\'erreur.'
+            en : 'Igaro App uses Promises (ES6, A+) to replace callback routines. Promises allow for chainable asynchronous operation with error control.',
+            fr : 'Igaro App utilise promesses (ES6, A+) pour remplacer les routines de rappel. Promesses permettent un fonctionnement asynchrone chaîne avec des contrôle d\'erreur.'
         });
 
         view.createAppend('h1',wrapper,{
@@ -66,8 +66,8 @@ Lors de son inscription pour recevoir un événement de la fonction de rappel fo
         });
 
         view.createAppend('h2',wrapper,{
-            en : 'Partial Automatic Release',
-            fr : 'Partielle de Sortie Automatique'
+            en : 'Semi Automatic Release',
+            fr : 'Semi de Sortie Automatique'
         });
 
         view.createAppend('p',wrapper,{

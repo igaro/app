@@ -12,7 +12,7 @@ module.exports = function(app) {
 
         // load initial models
         mvcrc.add({ list:['header','location','main','footer'] }).then(function(m) {
-            m.forEach(function(x) { var v = x.view; if (v.autoShow) v.show() });
+            m.forEach(function(x) { var v = x.view; if (v.autoShow) v.show(); });
             if (protocol !== 'file:') {
                 var p = window.location.pathname.substr(1);
                 if (p.length) p = '/'+p;
