@@ -2,24 +2,30 @@ window.addEventListener('load', function() {
 
     "use strict";
 
-    var app = new Object();
-    var repo = __igaroapp.cdn;
-    var threads = new Array();
+    var app = [],
+        repo = __igaroapp.cdn,
+        threads = [];
 
     // mandatory modules
-    threads.push(new Array(
+    threads.push([
         { name:'core.events.js' }
-    ));
+    ]);
 
     // cordova additions
     if (document.location.protocol === 'file:') {
         threads[threads.length-1].push(
-            { name:'3rdparty.fastclick.js' },
-            //{ name:'3rdparty.hammer.js' },
+            { name:'3rdparty.fastclick.js' },       
             { name:'3rdparty.cordova.css' }
         );
     }
 
+    // touch screen
+    if ('ontouchstart' in window || navigator.maxTouchPoints || navigator.msMaxTouchPoints) {
+        threads[threads.length-1].push(
+            { name:'3rdparty.hammer.js' }
+        );
+    }
+ 
     // 3rdparty libraries
     /* threads.push(new Array(
        { name:'3rdparty.jquery.1.js' }
@@ -38,7 +44,7 @@ window.addEventListener('load', function() {
     }
 
     // further modules
-    threads.push(new Array(
+    threads.push([
         // services
         { name:'service.errormanagement.js' },
         { name:'service.status.js' },
@@ -46,7 +52,7 @@ window.addEventListener('load', function() {
         // conf
         { name:'conf.internalroutes.js' },
         { name:'conf.initialroutes.js' }
-    ));
+    ]);
 
     var loading = document.createElement('div');
     loading.className='igaro';
@@ -86,13 +92,19 @@ window.addEventListener('load', function() {
         d.innerHTML = t[l];
         wrapper.appendChild(d);
         if (window.console !== 'undefined' && e !== 'undefined') console.log(e);
-    }
+    };
 
-    if (typeof window.XMLHttpRequest === 'undefined') { onError({ incompatible:true, noobject:'XMLHttpRequest' }); return; }
+    if (typeof window.XMLHttpRequest === 'undefined') { 
+        onError({ incompatible:true, noobject:'XMLHttpRequest' }); 
+        return; 
+    }
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState !== 4) return;
-        if (xhr.status !== 200 && ! (xhr.status === 0 && xhr.responseText)) { onError(xhr.status); return; }
+        if (xhr.status !== 200 && ! (xhr.status === 0 && xhr.responseText)) { 
+            onError(xhr.status); 
+            return;
+        }
         // passed by the loading file
         var params = {};
         window.location.search.split('&').forEach( function(o) {
@@ -108,9 +120,12 @@ window.addEventListener('load', function() {
             onError(e); 
             return; 
         }
-        var percentwidth=0, loaded=0, total=threads.map(function(f){ return f.length; }).reduce(function(a,b) { return a+b });
-        var raise = function() {
-            if (! threads.length) return;
+        var percentwidth=0, 
+        loaded=0, 
+        total=threads.map(function(f){ return f.length; }).reduce(function(a,b) { return a+b; }),
+        raise = function() {
+            if (! threads.length) 
+                return;
             var min = (loaded/total)*100;
             var max = ((loaded+1)/total)*100;
             if (percentwidth < min) {
@@ -120,23 +135,23 @@ window.addEventListener('load', function() {
             }
             percent.style.width = percentwidth+'%';
             setTimeout(raise,25);
-        }
-        var amd = new app['instance.amd']({ repo:repo, onProgress: function() { loaded++; } });
-        var amdl = function() {
+        },
+        amd = new app['instance.amd']({ repo:repo, onProgress: function() { loaded++; } }),
+        amdl = function() {
             amd.get({ modules:threads[0] }).then(function() {
                 threads.splice(0,1);
                 if (! threads.length) {
                     clearTimeout(displayloader);
                     if (loading.parentNode) loading.parentNode.removeChild(loading);
-                    app['core.events'].dispatch('core','ready.init',{ onError:onError })
+                    app['core.events'].dispatch('core','ready.init',{ onError:onError });
                 } else {
                     amdl();
                 }
             },onError);
-        }
+        };
         amdl();
         raise();
-    }
+    };
     xhr.open('GET',repo+'/js/instance.amd.js',true);
     xhr.send(null);
 });
