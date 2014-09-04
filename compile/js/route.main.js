@@ -90,7 +90,7 @@ module.exports = function(app) {
                             fr : 'Général'
                         }),
                         view.createAppend('p', null, {
-                            en : 'Yet an other avascript web framework? Not quite. This one uses no HTML!',
+                            en : 'Yet another javascript web framework? Not quite. This one uses no HTML!',
                             fr : 'Pourtant, un autre framework web javascript? Pas tout à fait. Celui-ci n\'utilise pas de HTML!'
                         }),
                         view.createAppend('p', null, {
