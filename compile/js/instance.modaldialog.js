@@ -18,14 +18,12 @@ module.exports = function(app) {
             en : ['Ok','Cancel'],
             fr : ['Ok','Cancel'],
         }
-    };
+    },
 
-    var ho = 99999999;
-
-    var language = app['core.language'];
-    var events = app['core.events'];
-
-    var x = function() {
+    ho = 99999999,
+    language = app['core.language'],
+    events = app['core.events'],
+    x = function() {
         var c = this.container = document.createElement('div');
         c.className = 'instance-modaldialog';
         ho+=1;
@@ -39,13 +37,13 @@ module.exports = function(app) {
         var w2 = document.createElement('div');
         w2.className = 'wrapper';
         w.appendChild(w2);
-    }
+    };
 
     x.prototype.alert = function(o) {
 
-        var c = this.container;
-        var w = c.firstChild.firstChild;
-        var self = this;
+        var c = this.container,
+            w = c.firstChild.firstChild,
+            self = this;
 
         return new Promise(function(resolve) {
             var t = document.createElement('div');

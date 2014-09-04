@@ -12,8 +12,8 @@ module.exports = function(app) {
         var wrapper = view.wrapper;
 
         model.meta.set('title', {
-            en : 'Deploy',
-            fr : 'Communauté'
+            en : 'Mobile',
+            fr : 'Mobile'
         });
 
         var l = {
@@ -29,39 +29,154 @@ module.exports = function(app) {
         };
 
         view.createAppend('p',wrapper,{
-            en : 'Igaro App uses the same codebase for all environments with optional loading of additional components to enhance the user experience.',
-            fr : 'Igaro App utilise le même code de base pour tous les environnements avec charge facultative des composants supplémentaires pour améliorer l\'expérience utilisateur.'
+            en : 'Igaro App loves mobile! It\'s outstanding performance offers users a near native mobile app experience across all platforms.',
+            fr : ''
+        }); 
+
+        view.createAppend('p',wrapper,{
+            en : 'Several additional modules are loaded automatically when Igaro App detects a mobile environment and/or a touch screen. These enhance user experience and provide additional features for developers.',
+            fr : ''
         });
 
         view.createAppend('h1',wrapper,{
-            en : 'Web Server',
+            en : 'Responsive (CSS3)',
             fr : 'Serveur Web'
         });
 
         view.createAppend('p',wrapper,{
-            en : 'Igaro App requires no CGI access - it\'s simply a collection of static files. It serves well through Apache, NGinx, IIS or NodeJS.',
-            fr : 'Igaro App nécessite pas d\'accès CGI - c\'est simplement une collection de fichiers statiques. Il sert bien par Apache, Nginx, IIS ou NodeJS.'
+            en : 'Media queries take into account screens of all sizes. Try changing the size of this window to that of a large screen, tablet and phone. Notice how the footer disappears and how elements such as the header change height as well as width depending on the screen ratio.',
+            fr : ''
         });
 
         view.createAppend('h1',wrapper,{
-            en : 'Removable Media',
-            fr : 'Support Amovible'
+            en : 'Embedded Resources',
+            fr : 'Serveur Web'
         });
 
         view.createAppend('p',wrapper,{
-            en : 'Igaro App is compiled into a single folder which will serve from any web server or a USB stick via it\'s single index.html file.',
-            fr : 'Igaro App est compilé dans un seul dossier qui servira de n\'importe quel serveur web ou une clé USB via son fichier index.html unique.'
+            en : 'Images, fonts and other media are compiled into CSS so that they are available immediately.',
+            fr : ''
+        });
+
+        view.createAppend('input[button]',wrapper,{
+            en : 'Demo',
+            fr : ''
+        }).addEventListener('click', function() {
+            view.createAppend('div',{ insertBefore:this },[
+                document.createElement('div'),
+                function () {
+                    var m = document.createElement('img');
+                    m.src = 'http://www.igaro.com/misc/chinchilla.jpg?x='+ Math.floor((Math.random() * 999) + 1);
+                    return m;
+                }
+            ], 'embeddedresdemo');
+            this.parentNode.removeChild(this);
         });
 
         view.createAppend('h1',wrapper,{
-            en : 'Mobile Platforms',
-            fr : 'Plate-forme Mobile'
+            en : 'Touch Ready (<a href="http://ftlabs.github.io/fastclick/">fastclicks.js</a>)',
+            fr : ''
         });
 
         view.createAppend('p',wrapper,{
-            en : 'Igaro App comes ready to deploy to mobile devices and by default it automatically loads cordova and fastclicks.',
-            fr : 'Igaro App est prêt à déployer des appareils mobiles et par défaut, il charge automatiquement cordova et fastclicks.'
+            en : 'The renown web-app 300ms delay is removed, giving a native app responsiveness. Press and hold on the shapes below to compare the difference.',
+            fr : ''
         });
+
+        view.createAppend('div',wrapper,[
+
+            function() {
+                var touch = document.createElement('div');
+                touch.addEventListener('mousedown', function() {
+                    this.classList.add('touched');
+                });
+                touch.addEventListener('mouseup', function() {
+                    this.classList.remove('touched');
+                });
+                touch.addEventListener('mouseout', function() {
+                    this.classList.remove('touched');
+                });
+                return touch;
+            },
+
+            function() {
+                var touch = document.createElement('div'),
+                    timeout;
+                touch.addEventListener('mousedown', function() {
+                    var self = this;
+                    timeout = setTimeout(function() { self.classList.add('touched'); }, 300);
+                });
+                touch.addEventListener('mouseup', function() {
+                    clearTimeout(timeout);
+                    this.classList.remove('touched');
+                });
+                touch.addEventListener('mouseout', function() {
+                    clearTimeout(timeout);
+                    this.classList.remove('touched');
+                });
+                return touch;
+            }
+
+        ], 'touchdemo');
+
+
+        view.createAppend('h1',wrapper,{
+            en : 'Gestures (<a href="http://hammerjs.github.io/">hammer.js</a>)',
+            fr : ''
+        });
+
+        view.createAppend('p',wrapper,{
+            en : 'Swipe, pinch, tap, doubletap, rotate and pan gesture events are available. If you have a touch screen, try some actions in the box below.',
+            fr : ''
+        });
+
+        if (window.Hammer) {
+
+            var gd = view.createAppend('div',
+                view.createAppend('div', wrapper, null, 'gesturedemo')
+            );
+            var hammertime = new Hammer(gd);
+            hammertime.get('pinch').set({ enable: true });
+            hammertime.get('rotate').set({ enable: true });
+
+            hammertime.on('pan', function(ev) {
+                gd.className = 'pan';
+            });
+            hammertime.on('swipe', function(ev) {
+                gd.className = 'swipe';
+            });
+            hammertime.on('tap', function(ev) {
+                gd.className = 'tap';
+            });
+            hammertime.on('doubletap', function(ev) {
+                gd.className = 'doubletap';
+            });
+            hammertime.on('pinch', function(ev) {
+                gd.className = 'pinch';
+            });
+            hammertime.on('rotate', function(ev) {
+                gd.className = 'rotate';
+            });
+
+        } else {
+            view.instances.add('pagemessage', {
+                container:wrapper,
+                type:'critical',
+                message : { 
+                    en : 'A touch screen has not been detected.',
+                    fr : ''
+                }
+            });
+        }
+
+        view.createAppend('h1',wrapper,{
+            en : 'Device Features'
+        });       
+
+        view.createAppend('p',wrapper,{
+            en : 'Cordova / Phonegap is an API to access mobile device features such as camera, accelerometer and GPS.',
+            fr : ''
+        });        
 
         view.createAppend('div',wrapper,null,'cordova');
 
@@ -73,15 +188,15 @@ module.exports = function(app) {
         var ul = view.createAppend('ul',view.createAppend('p',wrapper));
         [
             {
-                en : 'Within your console, navigate to <b>/igaro/git/phonegap</b>',
-                fr : 'Au sein de votre console, accédez à <b>/igaro/git/phonegap</b>'
+                en : 'Within your console, navigate to <b>/igaro/git/app/phonegap</b>',
+                fr : 'Au sein de votre console, accédez à <b>/igaro/git/app/phonegap</b>'
             },
             {
                 en : 'Install the <a href="http://docs.phonegap.com/en/edge/guide_platforms_index.md.html">platforms</a> that you wish to support.',
                 fr : 'Installez les plates-formes <a href="http://docs.phonegap.com/en/edge/guide_platforms_index.md.html"></a> que vous souhaitez soutenir.'
             },
             {
-                en : 'Deploy onto your device or emulator with <b>phonegap run [ios][android][firefoxos]</b>. Note that by default the www folder contains files symlinked to the output/debug folder. You will want to change to output/deploy when ready to release the app.',
+                en : 'Deploy onto your device or emulator with <b>phonegap run [ios][android][firefoxos]</b>. Note that by default the www folder contains files symlinked to the output/debug folder. You will want to change this to output/deploy when you are ready to release the app.',
                 fr : 'Déployer sur votre appareil ou émulateur avec <b>phonegap terme [ios] [Android] [firefoxos]</b>. Notez que par défaut, le répertoire www contient les fichiers des liens symboliques dans le output/debug de débogage. Vous aurez envie de changer de output/deploy lorsque vous êtes prêt à libérer l\'application.'
             },
             {

@@ -21,29 +21,32 @@
     
     >.default, >.info, >.critical, >.warn, >.ok, >.success, >.error, >.critical {
     	padding:0.5em 0.5em 0.5em 2.1em;
-        @include commonboxshadow;
-    	border-radius:0.5em;
-        border: 1px solid #ddd;
-        color:#fff;
+    	border-radius:6px;
+        border: 2px solid #ddd;
+        color:#333;
     }
 
     >.warn, >.error {
-        background: inline-image("instance.pagemessage/warn.svg") #b97b04 no-repeat 0.5em 50%;
+        border-color: #b97b04;
+        background: inline-image("instance.pagemessage/warn.svg") #fff no-repeat 0.5em 50%;
         background-size:1.4em 1.4em;
     }
 
     >.default, >.info {
-        background: inline-image("instance.pagemessage/info.svg") #0476c6 no-repeat 0.5em 50%;
+        border-color: #0476c6;
+        background: inline-image("instance.pagemessage/info.svg") #fff no-repeat 0.5em 50%;
         background-size:1.4em 1.4em;
     }
 
     >.ok, >.success {
-        background: inline-image("instance.pagemessage/ok.svg") #2e6302 no-repeat 0.5em 50%;
+        border-color: #2e6302;
+        background: inline-image("instance.pagemessage/ok.svg") #fff no-repeat 0.5em 50%;
         background-size:1.4em 1.4em;
     }
 
     >.critical {
-        background: inline-image("instance.pagemessage/critical.svg") #9d0202 no-repeat 0.5em 50%;
+        border-color: #9d0202;
+        background: inline-image("instance.pagemessage/critical.svg") #fff no-repeat 0.5em 50%;
         background-size:1.4em 1.4em;
     }
 

@@ -125,14 +125,29 @@ module.exports = function(app) {
             r.href='';
         }
         if (o) {
-            o.appendChild(r);
+            if (o instanceof HTMLElement) {
+                o.appendChild(r);
+            } else if (typeof o === 'object') {
+                if (o.insertBefore) {
+                    o.insertBefore.parentNode.insertBefore(r, o.insertBefore);
+                } else if (o.insertAfter) {
+                    o.insertAfter.parentNode.insertBefore(r, o.insertAfter.nextSibling);
+                }
+            } 
         }
         if (m) {
             r.className=m;
         }
-        if (c !== null && typeof c !== 'undefined') {
-            if (c instanceof Array) {
-                c.forEach(function (o) { r.appendChild(o); });
+        if (typeof c !== 'undefined' && c !== null) {
+            if (typeof o === 'function') {
+                r.appendChild(o());
+            } else if (c instanceof Array) {
+                c.forEach(function (o) { 
+                    if (typeof o === 'function') {
+                        o = o();
+                    }
+                    r.appendChild(o); 
+                });
             } else if (typeof c === 'object') {
                 if (c instanceof HTMLElement) {
                     r.appendChild(c);

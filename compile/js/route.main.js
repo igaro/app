@@ -156,8 +156,8 @@ module.exports = function(app) {
                             fr : 'Documentation'
                         }),
                         view.createAppend('p', null, {
-                            en : 'Plain Javascript Object Orientated programming, with cutting edge ES6 features. No junk, snake oil or dependencies.',
-                            fr : 'Plaine Javascript Object programmation orienté, avec avant-gardistes fonctionnalités ES6. Aucune ordure, l\'huile de serpent ou des dépendances.'
+                            en : 'Plain javascript object orientated programming, with cutting edge ES6 features. No junk, snake oil or dependencies.',
+                            fr : 'Plaine javascript object programmation orienté, avec avant-gardistes fonctionnalités ES6. Aucune ordure, l\'huile de serpent ou des dépendances.'
                         }),
                         view.createAppend('p', null, { 
                             en : 'Learn how Igaro App works and what makes it the fastest, most efficient framework out there.',
