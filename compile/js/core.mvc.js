@@ -386,13 +386,14 @@ module.exports = function(app) {
                         if (uid !== v) return;
                         self.current = model = m[0];
                         var view = model.view;
-                        if (view.scrollPosition !== false) 
-                            document.body.scrollTop = document.documentElement.scrollTop = view.scrollPosition;
                         view.show();
                         events.dispatch('core.mvc','to.in-progress',model);
                         if (at < ra.length-1) { 
-                            t(at+1); return; 
+                            t(at+1); 
+                            return; 
                         }
+                        if (view.scrollPosition !== false) 
+                            document.body.scrollTop = document.documentElement.scrollTop = view.scrollPosition;
                         if (! nopushstate && history.pushState && document.location.protocol !== 'file:') 
                             history.pushState({},null,'/'+view.path);
                         resolve();
