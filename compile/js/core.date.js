@@ -4,18 +4,20 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var store = app['core.store'];
-    var events = app['core.events'];
+    var store = app['core.store'],
+        events = app['core.events'],
 
-    var date = {
+    date = {
  
         isLeapYear : function(y) {
-            return (new Date(y,1,29).getDate() == 29)? true:false;
+            return (new Date(y,1,29).getDate() === 29)? true:false;
         },
     
         daysInMonth : function (cYear,cMonth) {
-            if (cMonth == 4 || cMonth == 6 || cMonth == 9 || cMonth == 11) return 30;
-            if (cMonth == 2) return (this.isleapyear(cYear))? 29:28;
+            if (cMonth === 4 || cMonth === 6 || cMonth === 9 || cMonth === 11) 
+                return 30;
+            if (cMonth === 2) 
+                return (this.isleapyear(cYear))? 29:28;
             return 31;
         },
 
@@ -33,14 +35,20 @@ module.exports = function(app) {
         offset : {
             minutes : new Date().getTimezoneOffset()*-1,
             set : function(minutes) {
-                if (minutes === 'undefined') minutes = new Date().getTimezoneOffset() * -1;
-                if (minutes === this.minutes) return true;
-                if (!(-840 <= minutes <= 840) || minutes %15) return false;
+                if (minutes === 'undefined') 
+                    minutes = new Date().getTimezoneOffset() * -1;
+                if (minutes === this.minutes) 
+                    return true;
+                if (!(-840 <= minutes <= 840) || minutes %15) 
+                    return false;
                 this.minutes = minutes;
+                console.log(events);
                 events.dispatch('core.date','offset.set', minutes);
                 return true;
             },
-            get : function() { return this.minutes; }
+            get : function() { 
+                return this.minutes; 
+            }
         }
 
     };
@@ -49,7 +57,8 @@ module.exports = function(app) {
 
     // set based on saved value
     var id = store.get('core.date','offset');
-    if (id) date.offset.set(id);
+    if (id) 
+        date.offset.set(id);
 
     // save on modified
     events.on('core.date','offset.set', function(m) {

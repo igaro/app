@@ -1,22 +1,28 @@
 module.exports = function (app,passobj) {
 
-    if (typeof window.XMLHttpRequest === 'undefined') throw new Error({ incompatible:true, noobject:'XMLHttpRequest' });
+    if (typeof window.XMLHttpRequest === 'undefined') 
+        throw new Error({ incompatible:true, noobject:'XMLHttpRequest' });
 
-    var debug = false,
-
+    var debug = passobj && passobj.debug? true : false,
     workers = [({ uid:-1, done:true, module: { name:'instance.amd.js' }})],
     loaded = [],
     head = document.getElementsByTagName('head')[0],
 
     promise = function(self) {
-        if (debug) console.log('instance.amd:'+uid+':'+this.modules.map(function(n) { return n.name }).join(','));
+        if (debug) 
+            console.log('instance.amd:'+self.uid+':'+self.modules.map(function(n) { 
+                return n.name; 
+            }).join(','));
         return new Promise(function(resolve, reject) {
             self.abort = false;
             self.workers = [];
             self.modules.forEach(function (m) {
-                if (typeof m.repo === 'undefined' && repo) m.repo = repo;
-                if (! m.requires) m.requires = [];
-                var wk, n=m.name;
+                if (typeof m.repo === 'undefined' && repo) 
+                    m.repo = repo;
+                if (! m.requires) 
+                    m.requires = [];
+                var wk, 
+                    n=m.name;
                 if (! workers.some(function (w) {
                     if (w.module.name === n) {
                         wk = w;
@@ -34,7 +40,8 @@ module.exports = function (app,passobj) {
                         })) resolve(); 
                     },
                     function(e) {
-                        if (self.abort) return;
+                        if (self.abort) 
+                            return;
                         self.abort = true;
                         reject(e);
                     }
@@ -58,29 +65,28 @@ module.exports = function (app,passobj) {
     },
 
     amd = function(o) {
-        var self = this,
-            repo = this.repo = passobj.repo;
-        if (o) {
+        this.uid = Math.floor((Math.random() * 9999));
+        this.repo = passobj.repo;
+        if (o)
             setBits.call(this,o);
-        }
-        var uid = this.uid = Math.floor((Math.random() * 9999));
     };
  
     amd.prototype.get = function(p) {
-        if(p) setBits.call(this,p);
+        if (p) 
+            setBits.call(this,p);
         return new promise(this);
     };
 
     var worker = function(o) {
+        this.uid = Math.floor((Math.random() * 9999));
         workers.push(this);
-        var self = this,
-        mod = this.module = o.module,
+        var mod = this.module = o.module,
         modname = this.module.name,
         e = /^.+\.([^.]+)$/.exec(modname.toLowerCase()),
         type=this.type = e === null? '' : e[1],
-        file = this.file = mod.repo+(mod.nosub? '' : '/'+type+'/')+modname,
-        uid = this.uid = Math.floor((Math.random() * 9999));
-        if (debug) console.log('instance.amd:worker:'+uid+':'+this.file);
+        file = this.file = mod.repo+(mod.nosub? '' : '/'+type+'/')+modname;
+        if (debug) 
+            console.log('instance.amd:worker:'+this.uid+':'+this.file);
         this.eventHandlers = [];
         this.done = false;
     };
@@ -94,12 +100,12 @@ module.exports = function (app,passobj) {
         }
         this.running = true;
         var events = app['core.events'],
-        xhr = this.xhr = new XMLHttpRequest(),
-        file = this.file,
-        type = this.type,
-        mod = this.module,
-        self = this,
-        fxhr = { xhr:xhr, res:file };
+            xhr = this.xhr = new XMLHttpRequest(),
+            file = this.file,
+            type = this.type,
+            mod = this.module,
+            self = this,
+            fxhr = { xhr:xhr, res:file };
         xhr.onreadystatechange = function() {
             if (xhr.readyState !== 4) {
                 return;
@@ -112,7 +118,7 @@ module.exports = function (app,passobj) {
                     try { 
                         eval(xhr.responseText); 
                     }
-                    catch(e) { 
+                    catch(e) {
                         if (events) {
                             fxhr.jsonError=e;
                             events.dispatch('instance.xhr','error', fxhr);
@@ -122,7 +128,7 @@ module.exports = function (app,passobj) {
                     }
                     self.code = module.exports ? module.exports : null;
                     if (module.requires.length) {
-                        (new amd).get({ 
+                        new amd().get({ 
                             repo:mod.repo, 
                             modules:module.requires,
                         }).then(
@@ -138,16 +144,20 @@ module.exports = function (app,passobj) {
                     head.appendChild(sty);
                     self.loaded();
                 }
-                if (events) events.dispatch('instance.xhr','success', fxhr);
+                if (events) 
+                    events.dispatch('instance.xhr','success', fxhr);
             } else {
                 self.error({ worker:self });
-                if (events) events.dispatch('instance.xhr','error', fxhr);
+                if (events) 
+                    events.dispatch('instance.xhr','error', fxhr);
             }
-            if (events) events.dispatch('instance.xhr','end', fxhr);
+            if (events) 
+                events.dispatch('instance.xhr','end', fxhr);
         };
         xhr.open('GET',file,true);
         xhr.send();
-        if (events) { events.dispatch('instance.xhr','start', fxhr); }
+        if (events)
+            events.dispatch('instance.xhr','start', fxhr);
     };
 
     worker.prototype.appendEventHandlers = function(onSuccess, onError) {
@@ -164,12 +174,19 @@ module.exports = function (app,passobj) {
     worker.prototype.execCode = function() {
         var code = this.code;
         var self = this;
-        if (! code) return this.loaded();
+        if (! code) 
+            return this.loaded();
         try {
-            var f = function() { self.loaded(); },
+            var f = function() { 
+                self.loaded(); 
+            },
             u = code(app,passobj,{
-                onError:function(e) { self.error(e); }, 
-                onCompletion:function() { f(); }
+                onError:function(e) { 
+                    self.error(e); 
+                }, 
+                onCompletion:function() { 
+                    f(); 
+                }
             });
             if (['object','function'].indexOf(typeof u) !== -1) {
                 var m = self.module.name;

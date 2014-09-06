@@ -38,10 +38,10 @@ module.exports = function(app) {
         }
         return new Promise(function(resolve, reject) {
             var name = t.fullname? t.fullname : 'instance.'+t.name,
-            p = { 
-                modules : [{ name: name+'.js' }],
-                repo : t.repo? t.repo : null
-            };
+                p = { 
+                    modules : [{ name: name+'.js' }],
+                    repo : t.repo? t.repo : null
+                };
             new amd().get(p).then(function () {
                 var i = new app[name](o);
                 self.pool.push(i);

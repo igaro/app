@@ -1,10 +1,10 @@
 module.exports = function(app) {
 
-    return function(o) {
+    return new function(o) {
     
-        this.map = new Object().constructor({ handle:null, marker:null });
+        this.map = {}.constructor({ handle:null, marker:null });
     
-        this.coords = new Object().constructor({
+        this.coords = {}.constructor({
             lat:null,
             lng:null,
             callback : function(o) {},
@@ -15,7 +15,7 @@ module.exports = function(app) {
             }
         });
     
-        this.zip = new Object().constructor({ loaded:false });
+        this.zip = {}.constructor({ loaded:false });
     
         this.init = function(o) {
             
@@ -34,7 +34,7 @@ module.exports = function(app) {
                 a1.onclick = function() { return igaro.tabs.toggle(o.container+'_geolocation'); }
                 a1.innerHTML = 'Geolocation';
                 e3.appendChild(a1);
-            e2.appendChild(e3);
+                e2.appendChild(e3);
             }
             
             var e4=document.createElement('li');
@@ -101,11 +101,11 @@ module.exports = function(app) {
                                 s1.selectedIndex = 0;
                                 self.coords.update({ latitude:o.latitude, longitude:o.longitude });
                                 s1.onchange();
-                            }
+                            };
                             aj.requestFile = igaro.url.current({ nosearch:true })+'?i=locationfromzip&country='+s1.options[s1.selectedIndex].value+'&zip='+it1.value;
                             aj.run();
                             return false;
-                        }
+                        };
                         e9.appendChild(ith);
                         it1.oninput = s1.onchange = function() {
                             it1.disabled = (s1.selectedIndex == 0)? true:false;
@@ -114,11 +114,11 @@ module.exports = function(app) {
                         };
                         s1.onchange();
                         self.zip.loaded=true;
-            }
+            };
             aj.run();
                 }
                 return igaro.tabs.toggle(o.container+'_zip');
-            }
+            };
             a2.innerHTML = 'Zip/Postcode';
             e4.appendChild(a2);
             e2.appendChild(e4);
@@ -142,7 +142,7 @@ module.exports = function(app) {
                     });
                 };
                 return false;
-            }
+            };
             a3.innerHTML = 'Map';
             e5.appendChild(a3);
             e2.appendChild(e5);
@@ -189,7 +189,7 @@ module.exports = function(app) {
             c.appendChild(e99);
             
             igaro.tabs.reset(o.container);
-        }
-    }
+        };
+    };
 
 };

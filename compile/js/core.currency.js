@@ -5,53 +5,58 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var events = app['core.events'];
-    var store = app['core.store'];
-    var country = app['core.country'];
+    var events = app['core.events'],
+        store = app['core.store'],
+        country = app['core.country'],
 
-    var currency = new function() {
+    currency = {
 
-        var self = this;
-    
-        this.pool = {
+        pool : {
             list : {},
             set : function(o) {
                 this.list = o;
                 events.dispatch('core.currency','pool.set', o);
-                if (! o[self.code.id]) self.code.id=null;
+                if (! o[currency.code.id]) 
+                    currency.code.id=null;
             },
             get : function(o) {
                 return this.list;
             }
-        };
+        },
         
-        this.code = {
+        code : {
             id : null,
             set : function(o) {
-                if (! self.pool.list[o]) return false;
+                if (! self.pool.list[o]) 
+                    return false;
                 this.id = o;
                 events.dispatch('core.currency','code.set', o);
                 return true;
             },
-            get : function() { return this.id; }
-        };
+            get : function() { 
+                return this.id; 
+            }
+        },
 
-        this.validate = function(s,o) {
-            if (o && o.allowneg) return RegExp(/^-?\d+(\.\d{2})?$/).test(String(s).trim());
+        validate : function(s,o) {
+            if (o && o.allowneg) 
+                return RegExp(/^-?\d+(\.\d{2})?$/).test(String(s).trim());
             return RegExp(/^\d+(\.\d{2})?$/).test(String(s).trim());
-        };
+        },
 
-        this.decimalise = function(o) {
+        decimalise : function(o) {
             o = Math.round(parseFloat(o)*100)/100;
             o = o+'';
-            if (o.indexOf('.') == -1) return o+'.00';
-            if (o.substr(o.length-2,1) == '.') return o+'0';
+            if (o.indexOf('.') == -1) 
+                return o+'.00';
+            if (o.substr(o.length-2,1) == '.') 
+                return o+'0';
             return o;
-        };
+        },
 
-        this.getNameOfId = function(id) {
+        getNameOfId : function(id) {
             return this.pool.list[id].name;
-        };
+        }
     };
 
     // add supported currencies - use ISO 4217

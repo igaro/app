@@ -1,6 +1,5 @@
 module.requires = [
     { name: 'route.main.mobile.css' },
-    { name: 'instance.navigation.js' },
     { name: 'core.language.js'}
 ];
 
@@ -207,10 +206,10 @@ module.exports = function(app) {
 
         var p = view.createAppend('p');
 
-        new app['instance.navigation']({
+        view.instances.add('navigation', {
             container:wrapper,
             type:'tabs',
-            pool: new Array(
+            pool: [
                 {
                     id:'android',
                     title : {
@@ -229,7 +228,7 @@ module.exports = function(app) {
                         en : 'Windows Mobile'
                     }
                 }
-            ).map(function (o) {
+            ].map(function (o) {
                 var d = view.createAppend('div',null,null,o.id);
                 return {
                     title:o.title,
@@ -241,7 +240,10 @@ module.exports = function(app) {
                 };
             })
 
-        }).menu.options[0].li.click();
+        }).then(function(navigation) {
+            navigation.menu.options[0].li.click();
+        });
+
         wrapper.appendChild(p);
     };
 

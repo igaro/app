@@ -7,7 +7,7 @@ module.exports = function(app) {
     var events = app['core.events'];
     var lang = app['core.language'];
 
-    var instances = new Array();
+    var instances = [];
     events.on('core.language','code.set', function(v) {
         instances.forEach(function (o) {
             o.pool.forEach(setOptLang);
@@ -22,7 +22,7 @@ module.exports = function(app) {
         var self = this;
         var c = this.container = document.createElement('ul');
         c.className = 'instance-list';
-        this.pool = new Array();
+        this.pool = [];
         if (o) {
             if (o.options) o.options.forEach(function (o) { self.add(o) });
             if (o.container) o.container.appendChild(c);

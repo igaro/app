@@ -27,10 +27,10 @@ window.addEventListener('load', function() {
     }
  
     // 3rdparty libraries
-    /* threads.push(new Array(
+    /* threads.push([
        { name:'3rdparty.jquery.1.js' }
        { name:'3rdparty.jquery.2.js' }
-    ));
+    ]);
     */
 
     // fonts
@@ -72,8 +72,10 @@ window.addEventListener('load', function() {
     var onError = function(e) {
         clearTimeout(displayloader);
 		progress.parentNode.removeChild(progress);
-        if (! loading.parentNode) document.body.appendChild(loading);
-        while (wrapper.firstChild) wrapper.removeChild(wrapper.firstChild);
+        if (! loading.parentNode) 
+            document.body.appendChild(loading);
+        while (wrapper.firstChild) 
+            wrapper.removeChild(wrapper.firstChild);
         var d = document.createElement('div');
         d.className='error';
         var l;
@@ -85,9 +87,8 @@ window.addEventListener('load', function() {
         }
         var t = e && e.incompatible? __igaroapp.browserincompat : __igaroapp.loaderr;
         if (! t[l]) {
-            var t = l.split('-');
-            if (c[t[0]]) l = c[t[0]];
-            else { l = 'en'; }
+            var c = l.split('-');  
+            l = t[c[0]]? c[0] : 'en';
         }
         d.innerHTML = t[l];
         wrapper.appendChild(d);
@@ -100,7 +101,8 @@ window.addEventListener('load', function() {
     }
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
-        if (xhr.readyState !== 4) return;
+        if (xhr.readyState !== 4) 
+            return;
         if (xhr.status !== 200 && ! (xhr.status === 0 && xhr.responseText)) { 
             onError(xhr.status); 
             return;

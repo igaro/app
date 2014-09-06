@@ -18,11 +18,13 @@ module.exports = function(app) {
         c.className = 'instance-bookmark';
         this.setURL({ url:o.url? o.url : window.location.href, title:o.title });
         if (o.container) o.container.appendChild(c);
-    }
+    };
 
     a.prototype.setURL = function(o) {
         var c = this.container;
-        while(c.firstChild) { c.removeChild(c.firstChild) }
+        while(c.firstChild) { 
+            c.removeChild(c.firstChild); 
+        }
         opts.forEach(function(p) {
             var to = encodeURIComponent(o.url);
             var title = o.title? encodeURIComponent(obj.title) : '';

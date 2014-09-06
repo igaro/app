@@ -1,34 +1,42 @@
 module.exports = function(app) {
 
-    if (typeof window.XMLHttpRequest === 'undefined') throw new Error({ incompatible:true, noobject:'XMLHttpRequest' });
+    if (typeof window.XMLHttpRequest === 'undefined') 
+        throw new Error({ incompatible:true, noobject:'XMLHttpRequest' });
     
-    var events = app['core.events'];
+    var events = app['core.events'],
 
-    var setBits = function(p) {
-      if (p.res) this.res = p.res;
-      if (p.headers) this.headers = p.headers;
-      if (p.vars) this.vars = p.vars;
-      if (p.withCredentials !== undefined) this.withCredentials = p.withCredentials;
-      if (p.form) this.setForm(p.form);
-    }
+    setBits = function(p) {
+      if (p.res) 
+        this.res = p.res;
+      if (p.headers) 
+        this.headers = p.headers;
+      if (p.vars) 
+        this.vars = p.vars;
+      if (p.withCredentials !== undefined) 
+        this.withCredentials = p.withCredentials;
+      if (p.form) 
+        this.setForm(p.form);
+    },
 
-    var y = function(p) {
+    y = function(p) {
         var self = this;
         this.data = null;
         this.res='';
         this.withCredentials=false;
-        this.vars = new Object();
-        this.headers = new Object();
-        this.formdata = new Object();
+        this.vars = {};
+        this.headers = {};
+        this.formdata = {};
         this.id = Math.floor((Math.random()*9999)+1);
         this.xhr = new XMLHttpRequest();
-        if (p) setBits.call(this,p);
+        if (p) 
+            setBits.call(this,p);
     };
 
     y.prototype.exec = function(action, p) {
         this.action = action;
         this.jsonError=null;
-        if (p) setBits.call(this,p);
+        if (p) 
+            setBits.call(this,p);
         var self = this;
         return new Promise(function(resolve, reject) {
             var action = self.action, xhr = self.xhr;
@@ -61,7 +69,7 @@ module.exports = function(app) {
                     events.dispatch('instance.xhr','error', self);
                 }
                 events.dispatch('instance.xhr','end', self);
-            }
+            };
             self.abort();
             var uri = [self.vars,self.formdata].map(function (l) {
                 return Object.keys(l).map(function (k) {
@@ -74,25 +82,41 @@ module.exports = function(app) {
                 t += uri;
             }
             xhr.open(action,t,true);
-            if ("withCredentials" in xhr) xhr.withCredentials = self.withCredentials;
+            if ("withCredentials" in xhr) 
+                xhr.withCredentials = self.withCredentials;
             Object.keys(self.headers).forEach (function (k) {
                 xhr.setRequestHeader(k, self.headers[k]);
             });
             events.dispatch('instance.xhr','start', self);
             xhr.send(action!=='GET'? uri:null);
         });
-    }
+    };
 
-    y.prototype.get = function(p) { return this.exec('GET',p); }
-    y.prototype.post = function(p) { return this.exec('POST',p); }
-    y.prototype.put = function(p) { return this.exec('PUT',p); }
-    y.prototype.trace = function(p) { return this.exec('TRACE',p); }
-    y.prototype.head = function(p) { return this.exec('HEAD',p); }
-    y.prototype.delete = function(p) { return this.exec('DELETE',p); }
-    y.prototype.options = function(p) { return this.exec('OPTIONS',p); }
+    y.prototype.get = function(p) { 
+        return this.exec('GET',p); 
+    };
+    y.prototype.post = function(p) { 
+        return this.exec('POST',p); 
+    };
+    y.prototype.put = function(p) { 
+        return this.exec('PUT',p); 
+    };
+    y.prototype.trace = function(p) { 
+        return this.exec('TRACE',p); 
+    };
+    y.prototype.head = function(p) { 
+        return this.exec('HEAD',p); 
+    };
+    y.prototype.delete = function(p) { 
+        return this.exec('DELETE',p); 
+    };
+    y.prototype.options = function(p) { 
+        return this.exec('OPTIONS',p); 
+    };
 
     y.prototype.abort = function() {
-        if (this.xhr.readState === 0) return;
+        if (this.xhr.readState === 0) 
+            return;
         this.xhr.abort();
         events.dispatch('instance.xhr','aborted', this);
         events.dispatch('instance.xhr','end', this);
@@ -100,7 +124,7 @@ module.exports = function(app) {
 
     y.prototype.destructor = function() {
         this.abort();
-    }
+    };
 
     y.prototype.setHeader = function(name,value) {
         if (value) { 
@@ -119,20 +143,24 @@ module.exports = function(app) {
     };
 
     y.prototype.applyForm = function(form, autorefresh) {
-        var fd = this.formdata = new Object();
+        var fd = this.formdata = {};
         this.setHeader("Content-Type", "application/x-www-form-urlencoded");
         Array.prototype.splice.call(form.elements).forEach(function (l) {
-            if (l.disabled) return;
+            if (l.disabled) 
+                return;
             if (l.type=="checkbox" && l.checked) {
                 fd[l.name] = l.checked? 1:0;
             } else if (l.type=="select-one" && l.selectedIndex > -1) {
-                if (l.options.length) fd[l.name] = l.options[l.selectedIndex].value;
+                if (l.options.length) 
+                    fd[l.name] = l.options[l.selectedIndex].value;
             } else if (l.type=="select-multiple") {
                 var t=l.options.map(function(s) {
-                    if (! s.selected) return;
+                    if (! s.selected) 
+                        return;
                     return s.value;
                 }).join('\n');
-                if (t.length) fd[l.name] = t;
+                if (t.length) 
+                    fd[l.name] = t;
             } else if (['hidden','password','text','radio','textarea'].indexOf(l.type) !== -1) {                  
                 fd[l.name] = l.value.trim();
             }

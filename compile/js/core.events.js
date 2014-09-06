@@ -1,32 +1,39 @@
 module.exports = function(app) {
 
-    return new function() {
+    return {
     
-        var self = this;
-        var pool = this.pool = new Object();
+        pool : {},
 
-        this.on = function(name,event,fn) {
-            if (! pool[name]) pool[name] = {};
-            if (! pool[name][event]) pool[name][event] = new Array();
+        on : function(name,event,fn) {
+            var pool = this.pool;
+            if (! pool[name]) 
+                pool[name] = {};
+            if (! pool[name][event]) 
+                pool[name][event] = [];
             var m = pool[name][event];
-            if (m.indexOf(fn) === -1) m.push(fn);
-            self.dispatch('core.events','on',{ name:name, event:event, fn:fn });
+            if (m.indexOf(fn) === -1) 
+                m.push(fn);
+            this.dispatch('core.events','on',{ name:name, event:event, fn:fn });
             return;
-        };
+        },
 
-        this.remove = function(fn,name,event) {
-            var t = function(name) {
+        remove : function(fn,name,event) {
+            var pool = this.pool,
+            t = function(name) {
                 var h = function(event) {
                     var p = pool[name][event];
                     for (var i=0; i < p.length; i++) {
-                        if (p[i] !== fn) continue;
-                        self.dispatch('core.events','remove',{ name:name, event:event, fn:fn });
+                        if (p[i] !== fn) 
+                            continue;
+                        this.dispatch('core.events','remove',{ name:name, event:event, fn:fn });
                         pool[name][event].splice(i,1);
                         break;
                     }
-                }
+                };
                 if (! name) {
-                    Object.keys(pool).forEach(function() { t(h) });
+                    Object.keys(pool).forEach(
+                        function(h) { t(h); }
+                    );
                 } else if (! event) {
                     Object.keys(pool[name]).forEach(h);
                 } else {
@@ -38,12 +45,15 @@ module.exports = function(app) {
             } else {
                 t(name);
             }
-        };
+        },
 
-        this.dispatch = function(name, event, params, bubble) {
-            var self = this;
-            if (! pool[name] || ! pool[name][event]) return;
-            if (bubble !== false && name !== 'core.events' && event !== 'dispatch') this.dispatch('core.events','dispatch', { name:name, event:event, params: params});
+        dispatch : function(name, event, params, bubble) {
+            var pool = this.pool,
+                self = this;
+            if (! pool[name] || ! pool[name][event]) 
+                return;
+            if (bubble !== false && name !== 'core.events' && event !== 'dispatch') 
+                this.dispatch('core.events','dispatch', { name:name, event:event, params: params});
             pool[name][event].forEach(function(t) { 
                 try {
                     t(params); 

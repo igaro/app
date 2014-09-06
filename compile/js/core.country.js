@@ -4,39 +4,41 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var events = app['core.events'];
-    var store = app['core.store'];
+    var events = app['core.events'],
+        store = app['core.store'],
     
-    var country = new function() {
+    country = {
 
-        var self = this;
-
-        this.pool = {
+        pool : {
             list : {},
             set : function(o) {
                 this.list = o;
                 events.dispatch('core.country','pool.set', o);
-                if (! o[self.code.id]) self.code.id=null;
+                if (! o[country.code.id]) 
+                    country.code.id=null;
             },
             get : function(o) {
                 return this.list;
             }
-        };
+        },
 
-        this.code = {
+        code : {
             id : null,
             set : function(id) {
-                if (! self.pool.list[id]) return false;
+                if (! country.pool.list[id]) 
+                    return false;
                 this.id = id;
                 events.dispatch('core.country','code.set', id);
                 return true;
             },
-            get : function() { return this.id; }
-        };
+            get : function() { 
+                return this.id; 
+            }
+        },
 
-        this.getNameOfId = function(id) {
+        getNameOfId : function(id) {
             return this.pool.list[id].name;
-        };
+        }
 
     };
 

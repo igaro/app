@@ -7,8 +7,8 @@ module.exports = function(app) {
 
     return function(model) {
 
-        var view = model.view;
-        var wrapper = view.wrapper;
+        var view = model.view,
+            wrapper = view.wrapper;
         
         model.meta.set('title', {
             en : 'Events',

@@ -6,42 +6,53 @@ module.requires = [
 
 module.exports = function(app) {
 
-    if (! ('contentEditable' in document.body)) throw new Error({ incompatible:true, noobject:'contentEditable' });
-    if (! ('getSelection' in window)) throw new Error({ incompatible:true, noobject:'getSelection' });
+    if (! ('contentEditable' in document.body)) 
+        throw new Error({ incompatible:true, noobject:'contentEditable' });
+    if (! ('getSelection' in window)) 
+        throw new Error({ incompatible:true, noobject:'getSelection' });
 
-    var events = app['core.events'];
-    var language = app['core.language'];
+    var events = app['core.events'],
+    language = app['core.language'],
 
-    var a = function(o) {
+    a = function(o) {
         var self = this;
         this.hasFocus = false;
         this.savedRange = null;
         this.onChange = o && o.onChange? o.onChange : null;
         var c = this.container = document.createElement('div');
         c.className='instance-rte';
-        if (o && o.container) o.container.appendChild(c);
+        if (o && o.container) 
+            o.container.appendChild(c);
         this.onChangeTimerid = null;
         var rte = this.rte = document.createElement('div');
         rte.className = 'editable';
         rte.contentEditable = true;
-        if (o && o.html) rte.innerHTML = o.html;
+        if (o && o.html) 
+            rte.innerHTML = o.html;
         rte.styleWithCSS=false;
         rte.insertBrOnReturn=false;
 
         var html = this.html = document.createElement('div');
         html.className = 'html';
             var raw = this.raw = document.createElement('textarea');
-            if (o && o.html) raw.value = o.html;
+            if (o && o.html) 
+                raw.value = o.html;
         html.appendChild(raw);
 
         var onChange = function(callback) {
             if (self.onChangeTimerid) clearTimeout(self.onChangeTimerid);
             if (callback) {
-                if (html.parentNode) { rte.innerHTML = raw.value; }
-                else { raw.value = rte.innerHTML; }
-                if (self.onChange) self.onChange(self.getContentLength === 0? '' : raw.value.trim());
+                if (html.parentNode) { 
+                    rte.innerHTML = raw.value; 
+                } else { 
+                    raw.value = rte.innerHTML; 
+                }
+                if (self.onChange) 
+                    self.onChange(self.getContentLength === 0? '' : raw.value.trim());
             } else {
-                self.onChangeTimerid = setTimeout(function() { onChange(true) },300);
+                self.onChangeTimerid = setTimeout(function() { 
+                    onChange(true); 
+                },300);
             }
         };
 
@@ -57,11 +68,13 @@ module.exports = function(app) {
 
         var saveRange = function() {
             self.savedRange = window.getSelection().getRangeAt(0);
-        }
+        };
 
         rte.addEventListener("input", onChange);
         rte.addEventListener("change", onChange);
-        rte.addEventListener("blur", function () { self.hasFocus = false; });
+        rte.addEventListener("blur", function () { 
+            self.hasFocus = false; 
+        });
         /* rte.addEventListener("mousedown", restoreSelection);
         rte.addEventListener("click", restoreSelection);
         rte.addEventListener("focus", restoreSelection); */
@@ -79,7 +92,7 @@ module.exports = function(app) {
                     container: wysiwyg,
                     type:'tabs'
                 }).menu,
-                pool : new Array()
+                pool : []
             };
             panels.container.className = 'panels';
 
@@ -128,13 +141,14 @@ module.exports = function(app) {
         var style = document.createElement('select');
         main.appendChild(style);
         style.addEventListener('change', function() {
-            if (this.selectedIndex === 0) return;
+            if (this.selectedIndex === 0) 
+                return;
             self.execCommand('formatblock', this.options[this.selectedIndex].value);
             this.selectedIndex=0;
         });
 
-        var o = document.createElement('option');
-        o.innerHTML = '[Style]'
+        o = document.createElement('option');
+        o.innerHTML = '[Style]';
         style.appendChild(o);
         var headers = [o];
         headers = headers.concat([1,2,3,4,5,6].map(function (n) {
@@ -147,7 +161,7 @@ module.exports = function(app) {
         o.value='<pre>';
         style.appendChild(o);
         var f = function() {
-            var l = new Array(
+            var l = [
                 {
                     en : '[Style]'
                 },
@@ -179,11 +193,11 @@ module.exports = function(app) {
                     en : '[Formatted]',
                     fr : '[Mise en forme]'
                 }
-            );
+            ];
             headers.forEach(function (o,i) {
                 o.innerHTML = language.mapKey(l[i]);
-            })
-        }
+            });
+        };
         events.on('core.language','code.set', function() {
             f();
         });
@@ -206,15 +220,19 @@ module.exports = function(app) {
             'outdent',
             'indent'
         ];
-        if (document.queryCommandSupported('cut')) f.push('cut','copy','paste');
-        if (document.queryCommandSupported('undo')) f.push('undo','redo');
+        if (document.queryCommandSupported('cut')) 
+            f.push('cut','copy','paste');
+        if (document.queryCommandSupported('undo')) 
+            f.push('undo','redo');
         f.push('removeformat');
 
         f.forEach(function (id) {
             var i = document.createElement('input');
             i.type = 'button';
             i.className = id;
-            i.addEventListener('click', function() { self.execCommand(this.className,''); });
+            i.addEventListener('click', function() { 
+                self.execCommand(this.className,''); 
+            });
             main.appendChild(i);
         });
 
@@ -235,7 +253,7 @@ module.exports = function(app) {
         });
 
         // colors
-        var colors = new Array('FFFFFF','FFCCCC','FFCC99','FFFF99','FFFFCC','99FF99','99FFFF','CCFFFF','CCCCFF','FFCCFF','CCCCCC','FF6666','FF9966','FFFF33','66FF99','33FFFF','66FFFF','9999FF','FF99FF','C0C0C0','FF0000','FF9900','FFCC66','FFFF00','33FF33','66CCCC','33CCFF','6666CC','CC66CC','999999','CC0000','FF6600','FFCC33','FFCC00','33CC00','00CCCC','3366FF','6633FF','CC33CC','666666','990000','CC6600','CC9933','999900','009900','339999','3333FF','6600CC','993399','333333','660000','993300','996633','666600','006600','336666','000099','333399','663366','000000','330000','663300','663333','333300','003300','003333','000066','330099','330033');
+        var colors = ['FFFFFF','FFCCCC','FFCC99','FFFF99','FFFFCC','99FF99','99FFFF','CCFFFF','CCCCFF','FFCCFF','CCCCCC','FF6666','FF9966','FFFF33','66FF99','33FFFF','66FFFF','9999FF','FF99FF','C0C0C0','FF0000','FF9900','FFCC66','FFFF00','33FF33','66CCCC','33CCFF','6666CC','CC66CC','999999','CC0000','FF6600','FFCC33','FFCC00','33CC00','00CCCC','3366FF','6633FF','CC33CC','666666','990000','CC6600','CC9933','999900','009900','339999','3333FF','6600CC','993399','333333','660000','993300','996633','666600','006600','336666','000099','333399','663366','000000','330000','663300','663333','333300','003300','003333','000066','330099','330033'];
         [
             ['backcolor', {
                 en : 'Backcolor',
@@ -258,7 +276,6 @@ module.exports = function(app) {
             colors.forEach(function (color) {
                 var b = document.createElement('div');
                 b.style.backgroundColor = '#'+color;
-                var t = o[0];
                 b.addEventListener('click', function() {
                     self.execCommand(o[0], '#'+color);
                 });
@@ -291,13 +308,15 @@ module.exports = function(app) {
             title:l,
             active:active,
             onClick : function() {
-                if (pc.firstChild) pc.removeChild(pc.firstChild);
+                if (pc.firstChild) 
+                    pc.removeChild(pc.firstChild);
                 pc.appendChild(div);
                 this.setStatus('active');
             }
         });
-        if (active) pc.appendChild(div);
-    }
+        if (active) 
+            pc.appendChild(div);
+    };
 
     return a;
 

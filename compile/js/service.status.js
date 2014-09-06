@@ -19,7 +19,7 @@ module.exports = function (app) {
 
     var cl = app['core.language'];
 
-    var pool = new Array();
+    var pool = [];
     var remove = function(l) {
         if (l) {
             var i = pool.indexOf(l);

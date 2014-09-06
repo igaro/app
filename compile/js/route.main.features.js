@@ -8,9 +8,8 @@ module.exports = function(app) {
 
     return function(model) {
 
-        var view = model.view;
-
-        var wrapper = view.wrapper;
+        var view = model.view,
+            wrapper = view.wrapper;
 
         model.meta.set('title', {
             en : 'Features',
@@ -40,7 +39,7 @@ module.exports = function(app) {
                 insertAfter:d
             },
             {
-                elements:new Array(null,null,null),
+                elements:[null,null,null],
                 effect:'fade'
             }
         );
@@ -60,16 +59,20 @@ module.exports = function(app) {
             view.instances.add('xhr').then(function (xhr) {
                 return xhr.get({
                     res:'http://gdata.youtube.com/feeds/users/JustinBieberVEVO/uploads?alt=json&format=5&max-results=3'
-                })
+                });
             }).then(
                 function(data) {
-                    var playlist = data.feed.entry.map(function(o) { return o.id.$t.substring(38) });
-                    var f = view.createAppend('iframe',null,null,'youtube');
+                    var playlist = data.feed.entry.map(function(o) { 
+                        return o.id.$t.substring(38); 
+                    }),
+                    f = view.createAppend('iframe',null,null,'youtube');
                     wrapper.insertBefore(f,self);
                     wrapper.removeChild(self);
                     f.src = 'http://www.youtube.com/embed/'+playlist[0]+'?wmode=transparent&amp;HD=1&amp;rel=0&amp;showinfo=1&amp;controls=1&amp;autoplay=0;playlist='+playlist.slice(1).join(',');
                 }
-            ).catch(function() { self.disabled = false; });
+            ).catch(function() { 
+                self.disabled = false; 
+            });
             self.disabled = true;
         });
 
@@ -96,23 +99,27 @@ module.exports = function(app) {
         view.instances.add('form.validate',{
             form:f,
             routine: function() {
-                if (ccp) ccp = view.instances.remove(ccp);
+                if (ccp) 
+                    ccp = view.instances.remove(ccp);
                 b.disabled = true;
                 var vg = v.value.trim();
-                if (! vg.length) return { near:v, message: {
-                    en: 'A value is required',
-                    fr: 'Une valeur est requise'
-                }};
-                if (! app['core.currency'].validate(vg)) return { near:v, message: {
-                    en:'Invalid amount',
-                    fr:'Montant invalide'
-                }};
+                if (! vg.length) 
+                    return { near:v, message: {
+                        en: 'A value is required',
+                        fr: 'Une valeur est requise'
+                    }};
+                if (! app['core.currency'].validate(vg)) 
+                    return { near:v, message: {
+                        en:'Invalid amount',
+                        fr:'Montant invalide'
+                    }};
                 b.disabled = false;
             }
         });
         b.addEventListener('click',function() {
             this.disabled = true;
-            if (ccp) ccp = view.instances.remove(ccp);
+            if (ccp) 
+                ccp = view.instances.remove(ccp);
             v.value='';
             view.instances.add('pagemessage',{ 
                 type:'ok',

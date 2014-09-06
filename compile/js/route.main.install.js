@@ -7,9 +7,8 @@ module.exports = function(app) {
 
     return function(model) {
 
-        var view = model.view;
-
-        var wrapper = view.wrapper;
+        var view = model.view,
+            wrapper = view.wrapper;
 
         model.meta.set('title', {
             en : 'Install',
@@ -26,33 +25,35 @@ module.exports = function(app) {
             fr : 'En installant Igaro App vous acceptez la licence sous laquelle ce logiciel est distribué.'
         });
 
-        var inbut = view.createAppend('p',wrapper);
-        new Array(
-            { 
-                'name' : 'source',
-                'value' : {
-                    en : 'Show Source',
-                    fr : 'Afficher Source'
+        view.createAppend('p',wrapper,
+            [
+                { 
+                    'name' : 'source',
+                    'value' : {
+                        en : 'Show Source',
+                        fr : 'Afficher Source'
+                    },
+                    'url' : 'https://github.com/igaro/'
                 },
-                'url' : 'https://github.com/igaro/'
-            },
-            {
-                'name' : 'license',
-                'value' : {
-                    en : 'Show License',
-                    fr : 'Afficher Licence'
-                },
-                'route' : 'license'
-            }
-        ).forEach(function (n) {
-            var i = view.createAppend('input[button]',inbut,n.value);
-            if (n.url) i.addEventListener('click', function() {
-                window.open(n.url);
-            });
-            if (n.route) i.addEventListener('click', function() {
-                 app['core.mvc'].to(model.path+'/'+n.route).then();
-            });
-        });
+                {
+                    'name' : 'license',
+                    'value' : {
+                        en : 'Show License',
+                        fr : 'Afficher Licence'
+                    },
+                    'route' : 'license'
+                }
+            ].map(function (n) {
+                var i = view.createAppend('input[button]',null,n.value);
+                if (n.url) i.addEventListener('click', function() {
+                    window.open(n.url);
+                });
+                if (n.route) i.addEventListener('click', function() {
+                     app['core.mvc'].to(model.path+'/'+n.route).then();
+                });
+                return i;
+            })
+        );
 
         view.createAppend('h1',wrapper,{
             en : 'Git Repository',
@@ -64,19 +65,19 @@ module.exports = function(app) {
             fr : 'Exécutez la commande suivante dans un terminal.'
         });
 
-        var t = view.createAppend('textarea',wrapper,
+        view.createAppend('textarea',wrapper,
 'mkdir /igaro \n\
-git clone https://github.com/igaro/app.git /igaro/git --depth=1'); 
-        t.readOnly=true;
-        t.className='gitcode';
+git clone https://github.com/igaro/app.git /igaro/git --depth=1',
+'gitcode') 
+        .readOnly=true;
 
         view.createAppend('h1',wrapper,{
             en : 'Compile'
         });
 
         view.createAppend('p',wrapper,{
-            en : 'The SCSS sources must be compiled into CSS. Compass and Grunt will do this for you on the fly.',
-            fr : 'Les sources SCSS doivent être compilés en CSS. Compass et Grunt vont le faire pour vous à la volée.'
+            en : 'The SASS sources must be compiled into CSS. Compass and Grunt will do this for you on the fly.',
+            fr : 'Les sources SASS doivent être compilés en CSS. Compass et Grunt vont le faire pour vous à la volée.'
         });
 
         view.createAppend('h2',wrapper,'Compass');
@@ -93,13 +94,13 @@ git clone https://github.com/igaro/app.git /igaro/git --depth=1');
             fr : 'Assurer <a href=\"http://www.npmjs.com\" target=\"_blank\">NPM</a> est installé puis exécutez la commande suivante dans un terminal.'
         });
 
-        var t = view.createAppend('textarea',wrapper, 
+        view.createAppend('textarea',wrapper, 
 'cd /igaro/git/app \n\
 npm install \n\
 compass compile -c compass-debug.rb \n\
-grunt --gruntfile=grunt-debug &');
-        t.readOnly=true;
-        t.className='gruntcode';
+grunt --gruntfile=grunt-debug &',
+        'gruntcode')
+        .readOnly=true;
 
         view.createAppend('h1',wrapper,{
             en : 'Run it!',
@@ -116,9 +117,9 @@ grunt --gruntfile=grunt-debug &');
             fr : 'Igaro App comprend également un serveur NodeJS simple. Choisissez votre saveur de dessous.'
         });
 
-        var p = view.createAppend('p');
-
-        var nav = [0,1].map(function(x) { return document.createDocumentFragment() });
+        var nav = [0,1].map(function(x) { 
+            return document.createDocumentFragment(); 
+        });
 
         view.createAppend('p', nav[0], {
             en : 'Run the following to start a debug server, then navigate to: <a href="http://localhost:3000">http://localhost:3000</a>',
@@ -139,37 +140,43 @@ grunt --gruntfile=grunt-deploy &\n\
 cd /igaro/git/app/nodejs-httpd\n\
 node deploy.js').readOnly=true;
 
-        new app['instance.navigation']({
-            container:wrapper,
-            type:'tabs',
-            pool: new Array(
-                {
-                    id:'debug',
-                    title : {
-                        en : 'Debug'
-                    }
-                },
-                {
-                    id:'deploy',
-                    title : {
-                        en : 'Deploy',
-                        fr : 'Déployer'
-                    }
-                }
-            ).map(function (o, i) {
-                var d = view.createAppend('div',null,null,o.id);
-                d.appendChild(nav[i]);
-                return {
-                    title:o.title,
-                    onClick: function() {
-                        if (p.firstChild) p.removeChild(p.firstChild);
-                        p.appendChild(d);
-                        this.setStatus('active');
-                    }, 
-                };
-            })
+        var p = view.createAppend('p');
 
-        });
+        view.instances.add(
+            'navigation',
+            {
+                container:wrapper,
+                type:'tabs',
+                pool: [
+                    {
+                        id:'debug',
+                        title : {
+                            en : 'Debug'
+                        }
+                    },
+                    {
+                        id:'deploy',
+                        title : {
+                            en : 'Deploy',
+                            fr : 'Déployer'
+                        }
+                    }
+                ].map(function (o, i) {
+                    var d = view.createAppend('div',null,nav[i],o.id);
+                    return {
+                        title:o.title,
+                        id:o.id,
+                        onClick: function() {
+                            while (p.firstChild) 
+                                p.removeChild(p.firstChild);
+                            p.appendChild(d);
+                            this.setStatus('active');
+                        }, 
+                    };
+                })
+
+            }
+        );
         wrapper.appendChild(p);
 
     };

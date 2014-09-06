@@ -1,16 +1,15 @@
 module.requires = [
     { name: 'route.main.support.css' },
-    { name:'core.language.js' }
+    { name: 'core.language.js' }
 ];
 
 module.exports = function(app) {
 
     return function(model) {
 
-        var view = model.view;
-
-        var wrapper = view.wrapper;
-        var events = model.events;
+        var view = model.view,
+            wrapper = view.wrapper,
+            events = model.events;
 
         model.meta.set('title', {
 	        en : 'Support',
@@ -22,27 +21,30 @@ module.exports = function(app) {
             fr : 'Igaro App est soutenue par un nombre restreint mais croissant montant de développeurs qui feront de leur mieux pour répondre à vos questions.'
         });
 
-        var inbut = view.createAppend('p',wrapper);
-        new Array(
-            { 
-                'value' : {
-                    en : 'Report Issue',
-                    fr : 'Rapport émission'
+        view.createAppend('p',wrapper, 
+            [
+                { 
+                    value : {
+                        en : 'Report Issue',
+                        fr : 'Rapport émission'
+                    },
+                    url : 'https://github.com/igaro/igaro/issues'
                 },
-                'url' : 'https://github.com/igaro/igaro/issues'
-            },
-            {
-                'value' : {
-                    en : 'Offer Suggestions',
-                    fr : 'Offrez Suggestions'
-                },
-                'url' : 'https://trello.com/igaro'
-            }
-        ).forEach(function (n) {
-            view.createAppend('button',inbut,n.value).addEventListener('click', function() {
-                window.open(n.url);
-            });
-        });
+                {
+                    value : {
+                        en : 'Offer Suggestions',
+                        fr : 'Offrez Suggestions'
+                    },
+                    url : 'https://trello.com/igaro'
+                }
+            ].forEach(function (n) {
+                var b = view.createAppend('button',null,n.value);
+                b.addEventListener('click', function() {
+                    window.open(n.url);
+                });
+                return b;
+            })
+        );
 
         view.createAppend('h1',wrapper,{
             en : 'Newsgroup / Forum'
@@ -85,6 +87,6 @@ module.exports = function(app) {
             fr : 'Membres prioritaires de services reçoivent une adresse électronique unique et une réponse dans un délai convenu à l\'avance.'
         });
 
-    }
+    };
 
 };

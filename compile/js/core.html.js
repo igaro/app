@@ -3,39 +3,40 @@ module.exports = function(app) {
     return {
 
     	to : function(v) {
-	    	var o = v.replace(/\</g,"\&lt;"); 
-	    	o = o.replace(/\>/g,"\&gt;"); 
-	    	o = o.replace(/\|/g,"\&#124;"); 
-	    	o = o.replace(/  /g," \&nbsp;"); 
-	    	o = o.replace(/'/g,"\&#39;");
-	    	o = o.replace(/"/gi,"\&quot;");
-	    	o = o.replace(/\n\n/gi,"<p>");
-	    	o = o.replace(/\n/gi,"<br>");
-	    	return o;
+	    	return 
+				v.replace(/\</g,"\&lt;")
+	    		.replace(/\>/g,"\&gt;")
+		    	.replace(/\|/g,"\&#124;") 
+		    	.replace(/  /g," \&nbsp;") 
+		    	.replace(/'/g,"\&#39;")
+		    	.replace(/"/gi,"\&quot;")
+		    	.replace(/\n\n/gi,"<p>")
+		    	.replace(/\n/gi,"<br>");
 	    },
 
 		from : function(v) { 
-			var o = t.replace(/\&lt;/g,"\<");
-			o = o.replace(/\&gt;/g,"\>");
-			o = o.replace(/\&#124;/g,"\|");
-			o = o.replace(/ \&nbsp;/g,"  ");
-			o = o.replace(/\&#39;/g,"\'");
-			o = o.replace(/\&#039;/g,"\'");
-			o = o.replace(/\&quot;/g,"\"");
-			return o;
+			return 
+				v.replace(/\&lt;/g,"\<")
+				.replace(/\&gt;/g,"\>")
+				.replace(/\&#124;/g,"\|")
+				.replace(/ \&nbsp;/g,"  ")
+				.replace(/\&#39;/g,"\'")
+				.replace(/\&#039;/g,"\'")
+				.replace(/\&quot;/g,"\"");
 		},
 		
-		strip : function(v) { 
-			var n = v.replace(/(<([^>]+)>)/ig,"");
-			n = n.replace(/\r\n/g,"");
-			n = n.replace(/\n/g,"");
-			n = n.replace(/\r/g,"");
-			n = n.replace("&nbsp;", "");
-			n = n.replace(/^\s+|\s+$/g,"");
-			if (n == '<>' || n == '>' || n == '<') n = '';
+		strip : function(v) {
+			var n = v.replace(/(<([^>]+)>)/ig,"")
+			.replace(/\r\n/g,"")
+			.replace(/\n/g,"")
+			.replace(/\r/g,"")
+			.replace("&nbsp;", "")
+			.replace(/^\s+|\s+$/g,"");
+			if (n === '<>' || n === '>' || n === '<') 
+				return '';
 			return n;
 		}
 
-    }
+    };
 
 };

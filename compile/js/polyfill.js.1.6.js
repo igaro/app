@@ -3,10 +3,12 @@
  if (!Array.prototype.map) {
   Array.prototype.map = function(callback, thisArg) {
     var T, A, k;
-    if ( null === this || 'undefined' === typeof this ) { throw new TypeError(" this is null or not defined"); }
+    if ( null === this || 'undefined' === typeof this )
+        throw new TypeError(" this is null or not defined");
     var O = Object(this);
     var len = O.length >>> 0;
-    if (typeof callback !== "function") throw new TypeError(callback + " is not a function");
+    if (typeof callback !== "function") 
+      throw new TypeError(callback + " is not a function");
     if (thisArg) T = thisArg;
     A = new Array(len);
     k = 0;

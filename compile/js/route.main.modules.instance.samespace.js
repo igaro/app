@@ -10,7 +10,7 @@ module.exports = function(app) {
 
             demo : "view.instances.add('samespace', { \n \
     container:c, \n \
-    elements:new Array(null,null,null), \n \
+    elements:[null,null,null], \n \
     effect:'fade', \n \
     transparent:true \n \
 });",

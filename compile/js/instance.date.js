@@ -6,16 +6,16 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var events = app['core.events'];
-    var date = app['core.date'];
-    var moment = app['3rdparty.moment'];
-    var lang = app['core.language'];
-
-    var instances = new Array();
+    var events = app['core.events'],
+        date = app['core.date'],
+        moment = app['3rdparty.moment'],
+        lang = app['core.language'],
+        instances = [];
 
     events.on('core.date','offset.set', function(v) {
         instances.forEach(function (o) {
-            if (! o._ov) o.offset(v,true);
+            if (! o._ov) 
+                o.offset(v,true);
         });
     });
 
@@ -27,12 +27,13 @@ module.exports = function(app) {
     });
 
     var x = function(o) {
-        var self = this;
-        var m = this.moment = moment(o.date);
-        var e = this.container = document.createElement('span');
-        if (o.container) o.container.appendChild(e);
+        var m = this.moment = moment(o.date),
+            e = this.container = document.createElement('span');
+        if (o.container) 
+            o.container.appendChild(e);
         e.className = 'instance-date';
-        if (o.format) this.f = o.format;
+        if (o.format) 
+            this.f = o.format;
         if (o.offset) {
             this.offset(o.offset);
         } else {
@@ -48,19 +49,20 @@ module.exports = function(app) {
 
     x.prototype.offset = function(offset,nostore) {
         this.moment.zone(offset);
-        if (! nostore) this.ov = offset;
+        if (! nostore) 
+            this.ov = offset;
         this.format();
     };
 
     x.prototype.format = function(f) {
-        if (f) this.f = f;
+        if (f) 
+            this.f = f;
         this.container.innerHTML = this.moment.format(this.f);
     };
 
     return x;
 
-
-}
+};
 
 
 
