@@ -29,37 +29,36 @@ module.exports = function(app) {
 
         view.createAppend('p',wrapper,{
             en : 'Igaro App loves mobile! It\'s outstanding performance offers users a near native mobile app experience across all platforms.',
-            fr : ''
+            fr : 'Igaro App aime mobile! C\'est une performance exceptionnelle offre aux utilisateurs une expérience de près l\'application native mobiles sur toutes les plateformes.'
         }); 
 
         view.createAppend('p',wrapper,{
             en : 'Several additional modules are loaded automatically when Igaro App detects a mobile environment and/or a touch screen. These enhance user experience and provide additional features for developers.',
-            fr : ''
+            fr : 'Plusieurs modules supplémentaires sont chargés automatiquement lorsque Igaro App détecte un environnement mobile et / ou un écran tactile. Ces améliorer l\'expérience utilisateur et offrent des fonctionnalités supplémentaires pour les développeurs.'
         });
 
         view.createAppend('h1',wrapper,{
-            en : 'Responsive (CSS3)',
-            fr : 'Serveur Web'
+            en : 'Responsive (CSS3)'        
         });
 
         view.createAppend('p',wrapper,{
             en : 'Media queries take into account screens of all sizes. Try changing the size of this window to that of a large screen, tablet and phone. Notice how the footer disappears and how elements such as the header change height as well as width depending on the screen ratio.',
-            fr : ''
+            fr : 'Requêtes des médias prennent en compte les écrans de toutes tailles. Essayez de changer la taille de cette fenêtre à celle d\'un grand écran, tablette et téléphone. Remarquez comment le pied disparaît et comment les éléments tels que le changement de hauteur de coupe ainsi que la largeur en fonction du ratio de l\'écran.'
         });
 
         view.createAppend('h1',wrapper,{
             en : 'Embedded Resources',
-            fr : 'Serveur Web'
+            fr : 'Resources embarqués'
         });
 
         view.createAppend('p',wrapper,{
             en : 'Images, fonts and other media are compiled into CSS so that they are available immediately.',
-            fr : ''
+            fr : 'Images, polices et autres médias sont compilées dans CSS de sorte qu\'ils sont disponibles immédiatement.'
         });
 
         view.createAppend('input[button]',wrapper,{
             en : 'Demo',
-            fr : ''
+            fr : 'Démo'
         }).addEventListener('click', function() {
             view.createAppend('div',{ insertBefore:this },[
                 document.createElement('div'),
@@ -74,12 +73,12 @@ module.exports = function(app) {
 
         view.createAppend('h1',wrapper,{
             en : 'Touch Ready (<a href="http://ftlabs.github.io/fastclick/">fastclicks.js</a>)',
-            fr : ''
+            fr : 'Prêt tactile (<a href="http://ftlabs.github.io/fastclick/">fastclicks.js</a>)'
         });
 
         view.createAppend('p',wrapper,{
             en : 'The renown web-app 300ms delay is removed, giving a native app responsiveness. Press and hold on the shapes below to compare the difference.',
-            fr : ''
+            fr : 'La renommée web-app 300ms retard est enlevé, donnant une application native réactivité. Appuyez et maintenez sur les formes ci-dessous pour comparer la différence.'
         });
 
         view.createAppend('div',wrapper,[
@@ -121,12 +120,12 @@ module.exports = function(app) {
 
         view.createAppend('h1',wrapper,{
             en : 'Gestures (<a href="http://hammerjs.github.io/">hammer.js</a>)',
-            fr : ''
+            fr : 'Gestes (<a href="http://hammerjs.github.io/">hammer.js</a>)'
         });
 
         view.createAppend('p',wrapper,{
-            en : 'Swipe, pinch, tap, doubletap, rotate and pan gesture events are available. If you have a touch screen, try some actions in the box below.',
-            fr : ''
+            en : 'Swipe, pinch, tap, double tap, rotate and pan gesture events are available. If you have a touch screen, try some actions in the box below.',
+            fr : 'Balayer, pincer, toucher, double robinet, faire pivoter et les événements de mouvement panoramique sont disponibles. Si vous avez un écran tactile, essayez quelques actions dans la boîte ci-dessous.'
         });
 
         if (window.Hammer) {
@@ -163,18 +162,19 @@ module.exports = function(app) {
                 type:'critical',
                 message : { 
                     en : 'A touch screen has not been detected.',
-                    fr : ''
+                    fr : 'Un écran tactile n\'a pas été détecté.'
                 }
             });
         }
 
         view.createAppend('h1',wrapper,{
-            en : 'Device Features'
+            en : 'Device Features',
+            fr : 'Caractéristiques de l\'appareil'
         });       
 
         view.createAppend('p',wrapper,{
             en : 'Cordova / Phonegap is an API to access mobile device features such as camera, accelerometer and GPS.',
-            fr : ''
+            fr : 'Cordova / Phonegap est une API pour accéder aux fonctionnalités d\'appareils mobiles tels que l\'appareil photo, l\'accéléromètre et le GPS.'
         });        
 
         view.createAppend('div',wrapper,null,'cordova');
