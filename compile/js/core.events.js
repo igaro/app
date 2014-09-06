@@ -19,13 +19,14 @@ module.exports = function(app) {
 
         remove : function(fn,name,event) {
             var pool = this.pool,
+                self = this,
             t = function(name) {
                 var h = function(event) {
                     var p = pool[name][event];
                     for (var i=0; i < p.length; i++) {
                         if (p[i] !== fn) 
                             continue;
-                        this.dispatch('core.events','remove',{ name:name, event:event, fn:fn });
+                        self.dispatch('core.events','remove',{ name:name, event:event, fn:fn });
                         pool[name][event].splice(i,1);
                         break;
                     }

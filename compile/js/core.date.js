@@ -42,7 +42,6 @@ module.exports = function(app) {
                 if (!(-840 <= minutes <= 840) || minutes %15) 
                     return false;
                 this.minutes = minutes;
-                console.log(events);
                 events.dispatch('core.date','offset.set', minutes);
                 return true;
             },

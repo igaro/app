@@ -12,11 +12,11 @@ module.exports = function(app) {
         },
         'confirm' : {
             en : ['Confirm','Cancel'],
-            fr : ['Confirmfras','Ccccc']
+            fr : ['Confirmfras','Annuler']
         },
         'input' : {
             en : ['Ok','Cancel'],
-            fr : ['Ok','Cancel'],
+            fr : ['Ok','Annuler'],
         }
     },
 
@@ -60,29 +60,31 @@ module.exports = function(app) {
             a.appendChild(ok);
             var f = function() {
                 m.innerHTML = language.mapKey(o.message);
-                ok.value = language.mapKey(l['alert'])[0];
+                ok.value = language.mapKey(l.alert)[0];
             };
             f();
             events.on('core.language','code.set', f);
             ok.addEventListener('click', function() {
                 c.parentNode.removeChild(c);
                 document.body.style.overflow = self.bodyOverflowPrevious;
-                while (w.firstChild) w.removeChild(w.firstChild);
+                while (w.firstChild) 
+                    w.removeChild(w.firstChild);
                 events.remove(f,'core.language','code.set');
                 resolve();
             });
             ok.focus();
         });
-    }
+    };
     
     x.prototype.confirm = function(o) {
 
-        var c = this.container;
-        var w = c.firstChild.firstChild;
-        var self = this;
+        var c = this.container,
+            w = c.firstChild.firstChild,
+            self = this;
 
         return new Promise(function(resolve,reject) {
-            while (w.firstChild) w.removeChild(w.firstChild);
+            while (w.firstChild) 
+                w.removeChild(w.firstChild);
             var t = document.createElement('div');
             t.className = 'confirm';
             w.appendChild(t);
@@ -105,8 +107,8 @@ module.exports = function(app) {
             a.appendChild(cancel);
             var f = function() {
                 m.innerHTML = language.mapKey(o.message);
-                ok.value = language.mapKey(l['confirm'])[0];
-                cancel.value = language.mapKey(l['confirm'])[1];
+                ok.value = language.mapKey(l.confirm)[0];
+                cancel.value = language.mapKey(l.confirm)[1];
             };
             f();
             events.on('core.language','code.set', f);
@@ -114,8 +116,9 @@ module.exports = function(app) {
                 c.parentNode.removeChild(c);
                 document.body.style.overflow = self.bodyOverflowPrevious;
                 events.remove(f,'core.language','code.set');
-                while (w.firstChild) w.removeChild(w.firstChild);
-            }
+                while (w.firstChild) 
+                    w.removeChild(w.firstChild);
+            };
             ok.addEventListener('click', function() {
                 cl();
                 resolve({});
@@ -126,7 +129,7 @@ module.exports = function(app) {
             });
             ok.focus();
         });
-    }
+    };
 
     return x;
 

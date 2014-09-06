@@ -47,7 +47,9 @@ module.exports = function(app) {
                         menu.addOptions(Object.keys(mod.pool.get({ sortby:'name' })).map(function (o) {
                             return {
                                 id:o,
-                                onClick: function() { mod.code.set(o) },
+                                onClick: function() { 
+                                    mod.code.set(o);
+                                },
                                 title:mod.getNameOfId(o), 
                                 active:o===cco
                             };
@@ -66,11 +68,11 @@ module.exports = function(app) {
                 var writeTimezone = function(tzmenu) {
                     var tzval = function() {
                         var cti = xcti.offset.get(),
-                        t = language.mapKey({
-                            en : 'GMT [t] [h]h [m]m',
-                            fr : 'GMT [t] [h]h [m]m'
-                        }),
-                        isNeg = cti < 0? true:false;
+                            t = language.mapKey({
+                                en : 'GMT [t] [h]h [m]m',
+                                fr : 'GMT [t] [h]h [m]m'
+                            }),
+                            isNeg = cti < 0? true:false;
                         t = t.replace('[t]',isNeg? '-' : '+');
                         if (cti < 0) cti *= -1;
                         var h = cti > 0? parseInt(cti/60) : 0;
@@ -90,22 +92,28 @@ module.exports = function(app) {
                         }, 
                         onClick:function() {
                             var cti = xcti.offset.get(),
-                            isNeg = cti < 0? true:false,
-                            hrs = cti > 0? parseInt(cti/60) : 0,
-                            min = cti % 60,
-                            frag = document.createDocumentFragment(),
-                            type = view.createAppend('select',frag);
-                            ['+','-'].forEach(function (o) { type.options[type.options.length] = new Option(o); });
-                            if (isNeg) type.options[1].selected = true;
+                                isNeg = cti < 0? true:false,
+                                hrs = cti > 0? parseInt(cti/60) : 0,
+                                min = cti % 60,
+                                i,
+                                frag = document.createDocumentFragment(),
+                                type = view.createAppend('select',frag);
+                            ['+','-'].forEach(function (o) { 
+                                type.options[type.options.length] = new Option(o); 
+                            });
+                            if (isNeg) 
+                                type.options[1].selected = true;
                             var hours = view.createAppend('select',frag);
-                            for (var i=0; i <= 14; i++) {
+                            for (i=0; i <= 14; i++) {
                                 hours.options[hours.options.length] = new Option(i);
-                                if (hrs === i) hours.options[hours.options.length-1].selected = true;
+                                if (hrs === i) 
+                                    hours.options[hours.options.length-1].selected = true;
                             }
                             var minutes = view.createAppend('select',frag);
-                            for (var i=0; i < 60; i+=15) {
+                            for (i=0; i < 60; i+=15) {
                                 minutes.options[minutes.options.length] = new Option(i);
-                                if (min === i) minutes.options[minutes.options.length-1].selected = true;
+                                if (min === i) 
+                                    minutes.options[minutes.options.length-1].selected = true;
                             }
                             view.instances.add('modaldialog').then(function(g) {
                                 g.confirm({
@@ -115,10 +123,12 @@ module.exports = function(app) {
                                     },
                                     inputs : frag
                                 }).then(function(ac) {
-                                    if (ac.cancel) return;
+                                    if (ac.cancel) 
+                                        return;
                                     var m = hours.selectedIndex*60;
                                     m += minutes.selectedIndex*15;
-                                    if (type.selectedIndex === 1) m *= -1;
+                                    if (type.selectedIndex === 1) 
+                                        m *= -1;
                                     xcti.offset.set(m);
                                 });
                             });
@@ -129,18 +139,32 @@ module.exports = function(app) {
                 // draw menu
                 var addOption = function(menu,m) {
                     var c = m.children,
-                        nm = menu.addOption({ id:m.id, title:m.l, onClick:m.onClick? m.onClick : c? function() { this.setStatus('active') } : null });
-                    if (c) addMenu(nm,c);
+                        nm = menu.addOption({ 
+                            id:m.id, 
+                            title:m.l, 
+                            onClick:m.onClick? m.onClick : c? function() { 
+                                this.setStatus('active'); 
+                            } : null 
+                        });
+                    if (c) 
+                        addMenu(nm,c);
                 },
                 addMenu = function(opt, m) {
                     var n = opt.addMenu({ autosort:true });
-                    if (typeof m === 'function') { m(n) }
-                    else { m.forEach(function(o) { addOption(n,o) }) };
+                    if (typeof m === 'function') { 
+                        m(n); 
+                    } else { 
+                        m.forEach(function(o) { 
+                            addOption(n,o); 
+                        }); 
+                    }
                 };
 
                 // locale
                 addOption(sm.menu,{
-                    onClick : function() { this.toggle() }, 
+                    onClick : function() { 
+                        this.toggle();
+                    }, 
                     id:'settings',
                     l : {
                         en : 'Settings',
@@ -178,21 +202,27 @@ module.exports = function(app) {
                     ]
                 });
                 return sm;
-            })
+            });
 
         }).then(function () {
             var xhricon = view.createAppend('div',null,null,'xhr'),
             w = view.createAppend('div', xhricon),
             total=0, ref;
             events.on('instance.xhr','start', function () {
-                if (total === 0 && ! xhricon.parentNode && ! ref) ref=setTimeout(function() { wrapper.appendChild(xhricon) },350);
+                if (total === 0 && ! xhricon.parentNode && ! ref) 
+                    ref=setTimeout(function() { 
+                        wrapper.appendChild(xhricon);
+                    },350);
                 total++;
             });
             events.on('instance.xhr','end', function() {
-                if (total > 0) total--; 
-                if (total !== 0) return;
+                if (total > 0) 
+                    total--; 
+                if (total !== 0) 
+                    return;
                 clearTimeout(ref);ref=null;
-                if (xhricon.parentNode) xhricon.parentNode.removeChild(xhricon);
+                if (xhricon.parentNode) 
+                    xhricon.parentNode.removeChild(xhricon);
             });
         });
     };

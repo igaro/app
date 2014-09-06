@@ -19,14 +19,13 @@ module.exports = function(app) {
                 if (! o[language.code.id]) 
                     language.code.id=null;
             },
-            get : function(o) {
+            get : function() {
                 return this.list;
             }
         },
 
         getNameOfId : function(id) {
-            return 
-                this.pool.list[id];
+            return this.pool.list[id];
         },
 
         code : {

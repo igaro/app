@@ -17,7 +17,7 @@ module.exports = function(app) {
                 if (! o[country.code.id]) 
                     country.code.id=null;
             },
-            get : function(o) {
+            get : function() {
                 return this.list;
             }
         },
