@@ -5,10 +5,12 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var events = app['core.events'], language = app['core.language'], amd = app['instance.amd'];
+    var events = app['core.events'], 
+    language = app['core.language'], 
+    amd = app['instance.amd'],
 
     // MODEL
-    var mvcModel = function(o) {
+    mvcModel = function(o) {
         var self = this;
         this.path = o.path;
         this.name = o.path.substr(o.path.lastIndexOf('/')+1);
@@ -18,10 +20,10 @@ module.exports = function(app) {
         this.view = new mvcView(this);
         this.children = new children(this);
         this.events = new evts();
-    };
+    },
 
     // MODULE INSTANCES
-    var instances = function(model) {
+    instances = function(model) {
         this.pool = [];
     };
     instances.prototype.add = function(g,o) {
@@ -40,7 +42,7 @@ module.exports = function(app) {
                 modules : [{ name: name+'.js' }],
                 repo : t.repo? t.repo : null
             };
-            (new amd).get(p).then(function () {
+            new amd().get(p).then(function () {
                 var i = new app[name](o);
                 self.pool.push(i);
                 if (container) {
@@ -124,10 +126,10 @@ module.exports = function(app) {
         if (t === 'a') {
             r.href='';
         }
-        if (o) {
-            if (o instanceof HTMLElement) {
+        if (o && typeof o === 'object') {
+            if (o instanceof HTMLElement || o instanceof DocumentFragment) {
                 o.appendChild(r);
-            } else if (typeof o === 'object') {
+            } else {
                 if (o.insertBefore) {
                     o.insertBefore.parentNode.insertBefore(r, o.insertBefore);
                 } else if (o.insertAfter) {
@@ -149,10 +151,10 @@ module.exports = function(app) {
                     r.appendChild(o); 
                 });
             } else if (typeof c === 'object') {
-                if (c instanceof HTMLElement) {
+                if (c instanceof HTMLElement || c instanceof DocumentFragment) {
                     r.appendChild(c);
                 } else {
-                    // language literal
+                    // language literal 
                     var f = function() {
                         if (t.substr(0,5) === 'input') {
                             r.value = language.mapKey(c);
@@ -174,7 +176,8 @@ module.exports = function(app) {
             return sequence.then(function() {
                 return cP;
             }).then(function(content) {
-                if (content && content.container) o.container.appendChild(content.container);
+                if (content && content.container) 
+                    o.container.appendChild(content.container);
             }).catch(function(e) {
                 events.dispatch('core.mvc','view.error',e);
             });
