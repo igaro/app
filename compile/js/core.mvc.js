@@ -6,11 +6,11 @@ module.requires = [
 module.exports = function(app) {
 
     var events = app['core.events'], 
-    language = app['core.language'], 
-    amd = app['instance.amd'],
+        language = app['core.language'], 
+        amd = app['instance.amd'];
 
     // MODEL
-    mvcModel = function(o) {
+    var mvcModel = function(o) {
         var self = this;
         this.path = o.path;
         this.name = o.path.substr(o.path.lastIndexOf('/')+1);
@@ -20,10 +20,10 @@ module.exports = function(app) {
         this.view = new mvcView(this);
         this.children = new children(this);
         this.events = new evts();
-    },
+    };
 
     // MODULE INSTANCES
-    instances = function(model) {
+    var instances = function(model) {
         this.pool = [];
     };
     instances.prototype.add = function(g,o) {
@@ -45,17 +45,19 @@ module.exports = function(app) {
             new amd().get(p).then(function () {
                 var i = new app[name](o);
                 self.pool.push(i);
-                if (container) {
-                    container.parentNode.insertBefore(i.container, container);
-                    container.parentNode.removeChild(container);
-                } else if (g.insertAfter) {
-                    if (g.insertAfter.nextElementSibling) {
-                        g.insertAfter.parentNode.insertBefore(i.container, g.insertAfter.nextElementSibling);
-                    } else {
-                        g.insertAfter.parentNode.appendChild(i.container);
+                if (i.container) {
+                    if (container) {
+                        container.parentNode.insertBefore(i.container, container);
+                        container.parentNode.removeChild(container);
+                    } else if (g.insertAfter) {
+                        if (g.insertAfter.nextElementSibling) {
+                            g.insertAfter.parentNode.insertBefore(i.container, g.insertAfter.nextElementSibling);
+                        } else {
+                            g.insertAfter.parentNode.appendChild(i.container);
+                        }
+                    } else if (g.insertBefore) {
+                        g.insertAfter.parentNode.insertBefore(i.container, g.insertBefore);
                     }
-                } else if (g.insertBefore) {
-                    g.insertAfter.parentNode.insertBefore(i.container, g.insertBefore);
                 }
                 resolve(i);
             }).catch(function(e) {
@@ -69,10 +71,8 @@ module.exports = function(app) {
     };
     instances.prototype.remove = function(n) {
         this.pool.splice(this.pool.indexOf(n),1);
-        if (n.container && n.container.parentNode) {
-            n.container.parentNode.removeChild(n.container);
-        }
-        return null;
+        if (n.destroy) 
+            n.destroy();
     };
 
     // VIEW
@@ -116,7 +116,10 @@ module.exports = function(app) {
         events.dispatch('core.mvc','view.shown', this); 
     };
     mvcView.prototype.createAppend = function(t,o,c,m) {
-        var r, type = t.indexOf('[');
+        var r,
+            self = this, 
+            type = t.indexOf('[');
+
         if (type !== -1) {
             r = document.createElement(t.substr(0,type));
             r.type = t.slice(type+1,-1);
@@ -140,15 +143,13 @@ module.exports = function(app) {
         if (m) {
             r.className=m;
         }
-        if (typeof c !== 'undefined' && c !== null) {
-            if (typeof o === 'function') {
-                r.appendChild(o());
-            } else if (c instanceof Array) {
-                c.forEach(function (o) { 
-                    if (typeof o === 'function') {
-                        o = o();
-                    }
-                    r.appendChild(o); 
+
+        var enumerator = function(r,c) {
+            if (typeof c === 'function')
+                c = c();
+            if (c instanceof Array) {
+                c.forEach(function(o) { 
+                    enumerator(r,o);
                 });
             } else if (typeof c === 'object') {
                 if (c instanceof HTMLElement || c instanceof DocumentFragment) {
@@ -162,13 +163,17 @@ module.exports = function(app) {
                             r.innerHTML = language.mapKey(c);
                         }
                     };
-                    this.model.events.on('core.language','code.set', f);
+                    self.model.events.on('core.language','code.set', f);
                     f();
                 }
             } else {
                 r.innerHTML = c;
             }
-        }
+        };
+
+        if (typeof c !== 'undefined' && c !== null)
+            enumerator(r,c);
+
         return r;
     };
     mvcView.prototype.addSequence = function(o) {
