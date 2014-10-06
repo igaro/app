@@ -52,7 +52,7 @@ module.exports = function(app) {
             if (typeof c === 'function') 
                 return c(l);
             if (typeof c !== 'object') 
-                throw new Error('Bad object: '+JSON.stringify(c));
+                return c;
             if (l) {
                 if (c[l]) 
                     return c[l];

@@ -1,26 +1,31 @@
 module.exports = function(app) {
 
-    var events = app['core.events'];
+    var events = app['core.events'],
+        setBits = function(p) {
+            if (p.res) 
+                this.res = p.res;
+            if (p.callbackName) 
+                this.callbackName = p.callbackName;
+        };
 
-    var setBits = function(p) {
-      if (p.res) this.res = p.res;
-      if (p.callbackName) this.callbackName = p.callbackName;
-    }
-
-    var y = function(p) {
+    var jsonpO = function(p) {
         this.res='';
         this.callbackName = 'callback';
         this.uid = 'jsonp'+Math.round(Math.random()*1000001);
         var t = this.jsonp = document.createElement('script');
-        if (p) setBits.call(this,p);
+        if (p) 
+            setBits.call(this,p);
     };
 
-    y.prototype.get = function(p) {
+    jsonpO.prototype.get = function(p) {
         this.abort();
-        if (p) setBits.call(this,p);
-        var self = this, jsonp = this.jsonp, s = this.res;
-        s += s.indexOf('?') === -1? '?' : '&';
-        s += this.callbackName + '=' + this.uid;
+        if (p) 
+            setBits.call(this,p);
+        var self = this, 
+            jsonp = this.jsonp, 
+            s = this.res +
+                s.indexOf('?') === -1? '?' : '&' +
+                this.callbackName + '=' + this.uid;
         return new Promise(function(resolve, reject) {
             window[self.uid] = function(data) {
                 delete window[self.uid];
@@ -34,24 +39,25 @@ module.exports = function(app) {
                 reject(err);
                 events.dispatch('instance.xhr','error', { error:err, jsonp:self });
                 events.dispatch('instance.xhr','end', self);
-            }
+            };
             document.getElementsByTagName('head')[0].appendChild(jsonp);
             events.dispatch('instance.xhr','start', self);
         });
-    }
+    };
 
-    y.prototype.abort = function() {
+    jsonpO.prototype.abort = function() {
         var j = this.jsonp;
-        if (! j.parentNode) return;
+        if (! j.parentNode) 
+            return;
         j.parentNode.removeChild(j);
         events.dispatch('instance.xhr','aborted', this);
         events.dispatch('instance.xhr','end', this);
     };
 
-    y.prototype.destructor = function() {
+    jsonpO.prototype.destroy = function() {
         this.abort();
-    }
+    };
 
-    return y;
+    return jsonpO;
 
 };

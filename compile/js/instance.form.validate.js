@@ -7,9 +7,9 @@ module.exports = function(app) {
 
     var msgonevent,
         events = app['core.events'],
-        language = app['core.language'],
+        language = app['core.language'];
 
-    a = function(o) {
+    var formValidate = function(o) {
         this.form = o.form;
         this.routine = o.routine;
         this.eventListeners = [];
@@ -17,7 +17,7 @@ module.exports = function(app) {
         this.init();
     };
 
-    a.prototype.clear = function() {
+    formValidate.prototype.clear = function() {
         if (msgonevent) 
             events.remove(msgonevent,'core.language','code.set');
         this.messageOutputs.forEach(function (o) {
@@ -25,15 +25,15 @@ module.exports = function(app) {
         });
         this.messageOutputs=[];
         Array.prototype.slice.call(this.form.elements).forEach(function(o) {
-            o.className = o.className.replace(" validation-fail","");
+            o.className = o.classList.remove("validation-fail");
         });
     };
 
-    a.prototype.init = function() {
+    formValidate.prototype.init = function() {
         var self = this,
             form = this.form;
-        if (form.className.indexOf('instance-form-validate') === -1) 
-            form.className += ' instance-form-validate';
+        if (! form.classList.contains('instance-form-validate')) 
+            form.classList.add('instance-form-validate');
         var f = function() {
             self.clear();
             var k = self.routine();
@@ -41,7 +41,7 @@ module.exports = function(app) {
                 return;
             var n = k.near,
                 t = document.createElement('div');
-            n.className += ' validation-fail';
+            n.classList.add('validation-fail');
             n.parentNode.style.position='relative';
             t.className='validation-message';
             t.style.left=n.offsetLeft + 'px';
@@ -70,6 +70,10 @@ module.exports = function(app) {
         this.eventListeners.push(form,'submit',form.addEventListener('submit', function() { f(); }));
     };
 
-    return a;
+    formValidate.prototype.destroy = function() {
+        this.clear();
+    };
+
+    return formValidate;
 
 };

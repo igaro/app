@@ -11,8 +11,8 @@ module.exports = function(app) {
 
     return function(model) {
 
-        var view = model.view;
-        var wrapper = view.wrapper;
+        var view = model.view,
+            wrapper = view.wrapper;
 
         view.autoShow=false;
 
@@ -20,7 +20,10 @@ module.exports = function(app) {
         var home = document.createElement('a');
         home.className = 'home';
         home.href='';
-        home.addEventListener('click', function(evt) { evt.preventDefault(); mvc.to('/main'); } );
+        home.addEventListener('click', function(evt) { 
+            evt.preventDefault(); 
+            mvc.to('/main'); 
+        } );
         wrapper.appendChild(home);
         var path = document.createElement('div');
         path.className = 'path';
@@ -30,7 +33,9 @@ module.exports = function(app) {
             var c = mvc.current;
             if (c.view && c.view.path.length) {
                 view.show({ after:model.parent.children.getByName('header') });
-                while (path.firstChild) { path.removeChild(path.firstChild) }
+                while (path.firstChild) { 
+                    path.removeChild(path.firstChild); 
+                }
                 while (c.view.path.length) {
                     var m = document.createElement(c === mvc.current? 'span' : 'a');
                     m.setAttribute('path',c.path);
@@ -48,12 +53,13 @@ module.exports = function(app) {
             } else {
                 view.hide();
             }
-        }
+        };
 
         events.on('core.mvc','to.in-progress', f),
        // events.on('core.language','code.set', f),
         events.on('core.mvc','meta.set', function (o) {
-            if (o.model === model && o.name === 'title') f();
+            if (o.model === model && o.name === 'title') 
+                f();
         });
 
     };

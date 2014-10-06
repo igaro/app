@@ -22,8 +22,9 @@ module.exports = function(app) {
 
     ho = 99999999,
     language = app['core.language'],
-    events = app['core.events'],
-    x = function() {
+    events = app['core.events'];
+
+    var modal = function() {
         var c = this.container = document.createElement('div');
         c.className = 'instance-modaldialog';
         ho+=1;
@@ -39,7 +40,7 @@ module.exports = function(app) {
         w.appendChild(w2);
     };
 
-    x.prototype.alert = function(o) {
+    modal.prototype.alert = function(o) {
 
         var c = this.container,
             w = c.firstChild.firstChild,
@@ -58,12 +59,12 @@ module.exports = function(app) {
             var ok = document.createElement('input');
             ok.type = 'submit';
             a.appendChild(ok);
-            var f = function() {
+            var evt = self.eventLang = function() {
                 m.innerHTML = language.mapKey(o.message);
                 ok.value = language.mapKey(l.alert)[0];
             };
-            f();
-            events.on('core.language','code.set', f);
+            evt();
+            events.on('core.language','code.set', evt);
             ok.addEventListener('click', function() {
                 c.parentNode.removeChild(c);
                 document.body.style.overflow = self.bodyOverflowPrevious;
@@ -76,12 +77,11 @@ module.exports = function(app) {
         });
     };
     
-    x.prototype.confirm = function(o) {
+    modal.prototype.confirm = function(o) {
 
         var c = this.container,
             w = c.firstChild.firstChild,
             self = this;
-
         return new Promise(function(resolve,reject) {
             while (w.firstChild) 
                 w.removeChild(w.firstChild);
@@ -105,13 +105,13 @@ module.exports = function(app) {
             var cancel = document.createElement('input');
             cancel.type = 'button';
             a.appendChild(cancel);
-            var f = function() {
+            var evt = self.eventLang = function() {
                 m.innerHTML = language.mapKey(o.message);
                 ok.value = language.mapKey(l.confirm)[0];
                 cancel.value = language.mapKey(l.confirm)[1];
             };
-            f();
-            events.on('core.language','code.set', f);
+            evt();
+            events.on('core.language','code.set', evt);
             var cl = function() {
                 c.parentNode.removeChild(c);
                 document.body.style.overflow = self.bodyOverflowPrevious;
@@ -131,6 +131,14 @@ module.exports = function(app) {
         });
     };
 
-    return x;
+    modal.prototype.destroy = function() {
+        var c = this.container;
+        if (c && c.parentNode)
+            c.parentNode.removeChild(c);
+        if (this.eventLang)
+            events.remove(this.eventLang, 'core.language','code.set');
+    };
+
+    return modal;
 
 };

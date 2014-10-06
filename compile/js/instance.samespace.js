@@ -109,6 +109,12 @@ module.exports = function(app) {
         }
     };
 
+    a.prototype.destroy = function() {
+        var c = this.container;
+        if (c && c.parentNode)
+            c.parentNode.removeChild(c);
+    };
+
     return a;
 
 };

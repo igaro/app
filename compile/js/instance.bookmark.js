@@ -13,22 +13,23 @@ module.exports = function(app) {
         { name:'Twitter', url:'http://twitter.com/home?status=<URL>' }
     ];
 
-    var a = function(o) {
+    var bookmark = function(o) {
         var c = this.container = document.createElement('ul');
         c.className = 'instance-bookmark';
         this.setURL({ url:o.url? o.url : window.location.href, title:o.title });
-        if (o.container) o.container.appendChild(c);
+        if (o.container) 
+            o.container.appendChild(c);
     };
 
-    a.prototype.setURL = function(o) {
+    bookmark.prototype.setURL = function(o) {
         var c = this.container;
         while(c.firstChild) { 
             c.removeChild(c.firstChild); 
         }
         opts.forEach(function(p) {
-            var to = encodeURIComponent(o.url);
-            var title = o.title? encodeURIComponent(obj.title) : '';
-            var url = p.url;
+            var to = encodeURIComponent(o.url),
+                title = o.title? encodeURIComponent(obj.title) : '',
+                url = p.url;
             url = url.replace(/\<URL\>/g,to);
             url = url.replace(/\<TITLE\>/g,title);
             var li = document.createElement('li');
@@ -38,8 +39,8 @@ module.exports = function(app) {
             });
             c.appendChild(li);
         });
-    }
+    };
 
-    return a;
+    return bookmark;
 
 };

@@ -13,7 +13,7 @@ module.exports = function(app) {
         var view = model.view,
             wrapper = view.wrapper,
             events = model.events,
-            header = model.store['header'];
+            header = model.store.header;
 
         while (header.firstChild) 
             header.removeChild(header.firstChild);
@@ -23,32 +23,32 @@ module.exports = function(app) {
             {
                 elements: [
                     view.createAppend('span', null, { 
-                        en : 'Your App, on <b>IE</b>, <b>Firefox</b>, <b>Safari</b> and <b>Chrome</b>.',
-                        fr : 'Votre App, sur <b>IE</b>, <b>Firefox</b>, <b>Safari</b> et <b>Chrome</b>.'
+                        en : 'Your App, on <b>IE</b>, <b>Firefox</b>, <b>Safari</b> and <b>Chrome</b>',
+                        fr : 'Votre App, sur <b>IE</b>, <b>Firefox</b>, <b>Safari</b> et <b>Chrome</b>'
                     }),
                     view.createAppend('span', null, { 
-                        en : 'Your App, on <b>IOS</b>, <b>Android</b> and <b>Windows Mobile</b>.',
-                        fr : 'Votre App, sur <b>IOS</b>, <b>Android</b> et <b>Windows Mobile</b>.'
+                        en : 'Your App, on <b>IOS</b>, <b>Android</b> and <b>Windows Mobile</b>',
+                        fr : 'Votre App, sur <b>IOS</b>, <b>Android</b> et <b>Windows Mobile</b>'
                     }),
                     view.createAppend('span', null, { 
-                        en : 'ECMA Standard Javascript with ES6 Promises.',
-                        fr : 'ECMA Javascript avec ES6 Promeses.',
+                        en : 'ECMA Standard Javascript with ES6 Promises',
+                        fr : 'ECMA Javascript avec ES6 Promeses',
                     }),
                     view.createAppend('span', null, { 
-                        en : 'Advanced MVC Framework with Multiple Sources.',
-                        fr : 'MVC Framework avancée avec des sources multiples.',
+                        en : 'Advanced MVC Framework with Multiple Sources',
+                        fr : 'MVC Framework avancée avec des sources multiples',
                     }),
                     view.createAppend('span', null, { 
-                        en : 'AMD Modules, Lazy Loading & Event Management.',
-                        fr : 'Modules AMD, le chargement différé et la gestion d\'événements.',
+                        en : 'Async Modules, Lazy Loading & Event Management',
+                        fr : 'Modules Async, le chargement différé et la gestion d\'événements',
                     }),
                     view.createAppend('span', null, { 
-                        en : 'Multiple Language, Currency, Timezone and Country Support.',
-                        fr : 'En plusieurs langues, devise, fuseau horaire et l\'appui aux pays.',
+                        en : 'Language, Currency, Timezone and Country Support',
+                        fr : 'Langue, la monnaie, le fuseau horaire et l\'appui aux pays',
                     }),
                     view.createAppend('span',null, {
-                        en : 'Welcome to <b>Igaro App</b>. ',
-                        fr : 'Bienvenue à <b>Igaro App</b>. '
+                        en : 'Welcome to <b>Igaro App</b>',
+                        fr : 'Bienvenue à <b>Igaro App</b>'
                     })
                 ],
                 container:header,

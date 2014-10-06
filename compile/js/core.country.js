@@ -70,7 +70,8 @@ module.exports = function(app) {
         ! (__igaroapp.geocountry && country.code.set(__igaroapp.geocountry)) &&
         ! ((function () { // attempt to set using navigator.language
             var n = window.systemLanguage || window.navigator.language;
-            if (n.length > 3) n=n.substr(3).toLowerCase();
+            if (n.length > 3) 
+                n=n.substr(3).toLowerCase();
             return country.code.set(n);
         })()) && 
         ! country.code.set('us')

@@ -12,10 +12,10 @@ module.exports = function(app) {
 
         var view = model.view, 
             wrapper = view.wrapper, 
-            events = model.events;
-
+            events = model.events,
+            header = model.store.header = view.createAppend('div',wrapper,null,'header');
+        
         // header
-        var header = model.store['header'] = view.createAppend('div',wrapper,null,'header');
         view.createAppend('span',header,{
             en : 'Welcome to <b>Igaro App</b>.',
             fr : 'Bienvenue à <b>Igaro App</b>.'
@@ -26,7 +26,7 @@ module.exports = function(app) {
         }).addEventListener('click', function() {
             this.disabled=true;
             var self = this;
-            (new amd).get({ modules:[{ name:'route-ext.main.js' }] }).then(
+            new amd().get({ modules:[{ name:'route-ext.main.js' }] }).then(
                 function() {
                     try {
                         app['route-ext.main'](model);
@@ -42,6 +42,19 @@ module.exports = function(app) {
 
         // sequence
         view.addSequence({ container:wrapper, promises:[
+
+            // code edit
+            view.instances.add('pagemessage',{
+                type:'info',
+                message: {
+                    en : 'Hint: You can see the code behind any page in this app by clicking the icon in the top right corner.',
+                    fr : ''
+                },
+                hideable: {
+                    model:model,
+                    id:'hintcode'
+                }
+            }),
 
             // menu
             view.instances.add('list').then(function (list) {
@@ -66,8 +79,10 @@ module.exports = function(app) {
                         fr : 'Soutien'
                     }]
                 ];
-                l.forEach(function(o) { list.add({ id:o[0] }); });
-                model.store['menu']=list;
+                l.forEach(function(o) { 
+                    list.add({ id:o[0] }); 
+                });
+                model.store.menu=list;
                 var f = function(to,obj) {
                     mvc.to(model.path+'/'+to);
                 },
@@ -80,7 +95,11 @@ module.exports = function(app) {
                     });
                     return view.createAppend('div',v);
                 }),
-                x = function() { as.forEach(function (n,i) { n.innerHTML = language.mapKey(l[i][1]); }); };
+                x = function() { 
+                    as.forEach(function (n,i) { 
+                        n.innerHTML = language.mapKey(l[i][1]); 
+                    }); 
+                };
                 events.on('core.language','code.set', x);
                 x();
                 return {
@@ -132,7 +151,7 @@ module.exports = function(app) {
                 l.forEach(function(o) { 
                     list.add({ id:o[0] }); 
                 });
-                model.store['menu']=list;
+                model.store.menu=list;
                 var f = function(to,obj) {
                     mvc.to(model.path+'/'+to);
                 },
@@ -145,7 +164,11 @@ module.exports = function(app) {
                     });
                     return view.createAppend('div',v);
                 }),
-                x = function() { as.forEach(function (n,i) { n.innerHTML = language.mapKey(l[i][1]); }); };
+                x = function() { 
+                    as.forEach(function (n,i) { 
+                        n.innerHTML = language.mapKey(l[i][1]); 
+                    }); 
+                };
                 events.on('core.language','code.set', x);
                 x();
                 

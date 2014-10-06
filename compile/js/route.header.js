@@ -26,15 +26,25 @@ module.exports = function(app) {
             type:'headermn',
             container:wrapper,
             pool : [
-                { id:'app', active:true }, 
-                { id:'api', onClick:function() { window.location.href='http://api.igaro.com' } }
+                { 
+                    id:'app', 
+                    active:true 
+                }, 
+                { 
+                    id:'api', 
+                    onClick:function() { 
+                        window.location.href='http://api.igaro.com'; 
+                    }
+                }
             ]
         }).then(function() {
     
             return view.instances.add({ name:'navigation' },{
                 type:'drop',
                 container:wrapper,
-                onClick : function() { this.toggle(); }
+                onClick : function() { 
+                    this.toggle(); 
+                }
             }).then(function (sm) {
                 
                 // country/lang/currency
@@ -69,12 +79,12 @@ module.exports = function(app) {
                     var tzval = function() {
                         var cti = xcti.offset.get(),
                             t = language.mapKey({
-                                en : 'GMT [t] [h]h [m]m',
-                                fr : 'GMT [t] [h]h [m]m'
+                                en : 'GMT [t] [h]h [m]m'
                             }),
                             isNeg = cti < 0? true:false;
                         t = t.replace('[t]',isNeg? '-' : '+');
-                        if (cti < 0) cti *= -1;
+                        if (cti < 0) 
+                            cti *= -1;
                         var h = cti > 0? parseInt(cti/60) : 0;
                         t = t.replace('[h]',h);
                         var m = cti % 60;
@@ -83,7 +93,8 @@ module.exports = function(app) {
                     },
                     tzvalueopt = tzmenu.addOption({ title:tzval, active:true });
                     events.on('core.date','offset.set', function() {
-                        tzvalueopt.updateTitle(tzval());
+                        var offset = tzval();
+                        tzvalueopt.updateTitle(offset);
                     });
                     tzmenu.addOption({
                         title:{
@@ -150,7 +161,7 @@ module.exports = function(app) {
                         addMenu(nm,c);
                 },
                 addMenu = function(opt, m) {
-                    var n = opt.addMenu({ autosort:true });
+                    var n = opt.addMenu();
                     if (typeof m === 'function') { 
                         m(n); 
                     } else { 

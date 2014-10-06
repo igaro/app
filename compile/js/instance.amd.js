@@ -4,67 +4,67 @@ module.exports = function (app,passobj) {
         throw new Error({ incompatible:true, noobject:'XMLHttpRequest' });
 
     var debug = passobj && passobj.debug? true : false,
-    workers = [({ uid:-1, done:true, module: { name:'instance.amd.js' }})],
-    loaded = [],
-    head = document.getElementsByTagName('head')[0],
+        workers = [({ uid:-1, done:true, module: { name:'instance.amd.js' }})],
+        loaded = [],
+        head = document.getElementsByTagName('head')[0],
 
-    promise = function(self) {
-        if (debug) 
-            console.log('instance.amd:'+self.uid+':'+self.modules.map(function(n) { 
-                return n.name; 
-            }).join(','));
-        return new Promise(function(resolve, reject) {
-            self.abort = false;
-            self.workers = [];
-            self.modules.forEach(function (m) {
-                if (typeof m.repo === 'undefined' && repo) 
-                    m.repo = repo;
-                if (! m.requires) 
-                    m.requires = [];
-                var wk, 
-                    n=m.name;
-                if (! workers.some(function (w) {
-                    if (w.module.name === n) {
-                        wk = w;
-                        return true;
-                    }
-                })) wk = new worker({ module:m });
-                wk.appendEventHandlers(
-                    function() {
-                        if (self.abort)
-                            return;
-                        if (self.onProgress)
-                            self.onProgress();
-                        if (self.workers.every(function (w) {
-                            return w.done;
-                        })) resolve(); 
-                    },
-                    function(e) {
-                        if (self.abort) 
-                            return;
-                        self.abort = true;
-                        reject(e);
-                    }
-                );
-                self.workers.push(wk);
-                wk.run();
+        promise = function(self) {
+            if (debug) 
+                console.log('instance.amd:'+self.uid+':'+self.modules.map(function(n) { 
+                    return n.name; 
+                }).join(','));
+            return new Promise(function(resolve, reject) {
+                self.abort = false;
+                self.workers = [];
+                self.modules.forEach(function (m) {
+                    if (typeof m.repo === 'undefined' && repo) 
+                        m.repo = repo;
+                    if (! m.requires) 
+                        m.requires = [];
+                    var wk, 
+                        n=m.name;
+                    if (! workers.some(function (w) {
+                        if (w.module.name === n) {
+                            wk = w;
+                            return true;
+                        }
+                    })) wk = new worker({ module:m });
+                    wk.appendEventHandlers(
+                        function() {
+                            if (self.abort)
+                                return;
+                            if (self.onProgress)
+                                self.onProgress();
+                            if (self.workers.every(function (w) {
+                                return w.done;
+                            })) resolve(); 
+                        },
+                        function(e) {
+                            if (self.abort) 
+                                return;
+                            self.abort = true;
+                            reject(e);
+                        }
+                    );
+                    self.workers.push(wk);
+                    wk.run();
+                });
             });
-        });
-    },
+        },
 
-    setBits = function(p) {
-        if (p.modules) {
-            this.modules = p.modules;
-        }
-        if (p.repo) {
-            this.repo = p.repo;
-        }
-        if (p.onProgress) {
-            this.onProgress = p.onProgress;
-        }
-    },
+        setBits = function(p) {
+            if (p.modules) {
+                this.modules = p.modules;
+            }
+            if (p.repo) {
+                this.repo = p.repo;
+            }
+            if (p.onProgress) {
+                this.onProgress = p.onProgress;
+            }
+        };
 
-    amd = function(o) {
+    var amd = function(o) {
         this.uid = Math.floor((Math.random() * 9999));
         this.repo = passobj.repo;
         if (o)
@@ -81,10 +81,10 @@ module.exports = function (app,passobj) {
         this.uid = Math.floor((Math.random() * 9999));
         workers.push(this);
         var mod = this.module = o.module,
-        modname = this.module.name,
-        e = /^.+\.([^.]+)$/.exec(modname.toLowerCase()),
-        type=this.type = e === null? '' : e[1],
-        file = this.file = mod.repo+(mod.nosub? '' : '/'+type+'/')+modname;
+            modname = this.module.name,
+            e = /^.+\.([^.]+)$/.exec(modname.toLowerCase()),
+            type=this.type = e === null? '' : e[1],
+            file = this.file = mod.repo+(mod.nosub? '' : '/'+type+'/')+modname;
         if (debug) 
             console.log('instance.amd:worker:'+this.uid+':'+this.file);
         this.eventHandlers = [];
@@ -132,8 +132,12 @@ module.exports = function (app,passobj) {
                             repo:mod.repo, 
                             modules:module.requires,
                         }).then(
-                            function() { self.execCode(); }, 
-                            function(e) { self.error(e); }
+                            function() { 
+                                self.execCode(); 
+                            }, 
+                            function(e) { 
+                                self.error(e); 
+                            }
                         );
                     } else {
                         self.execCode();

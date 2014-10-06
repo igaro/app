@@ -12,9 +12,9 @@ module.exports = function(app) {
         throw new Error({ incompatible:true, noobject:'getSelection' });
 
     var events = app['core.events'],
-    language = app['core.language'],
+        language = app['core.language'];
 
-    a = function(o) {
+    var rteObj = function(o) {
         var self = this;
         this.hasFocus = false;
         this.savedRange = null;
@@ -245,8 +245,8 @@ module.exports = function(app) {
         },ch);
         ["cent","euro","pound","curren","yen","copy","reg","trade","divide","times","plusmn","frac14","frac12","frac34","deg","sup1","sup2","sup3","micro","laquo","raquo","quot","lsquo","rsquo","lsaquo","rsaquo","sbquo","bdquo","ldquo","rdquo","iexcl","brvbar","sect","not","macr","para","middot","cedil","iquest","fnof","mdash","ndash","bull","hellip","permil","ordf","ordm","szlig","dagger","Dagger","eth","ETH","oslash","Oslash","thorn","THORN","oelig","OElig","scaron","Scaron","acute","circ","tilde","uml","agrave","aacute","acirc","atilde","auml","aring","aelig","Agrave","Aacute","Acirc","Atilde","Auml","Aring","AElig","ccedil","Ccedil","egrave","eacute","ecirc","euml","Egrave","Eacute","Ecirc","Euml","igrave","iacute","icirc","iuml","Igrave","Iacute","Icirc","Iuml","ntilde","Ntilde","ograve","oacute","ocirc","otilde","ouml","Ograve","Oacute","Ocirc","Otilde","Ouml","ugrave","uacute","ucirc","uuml","Ugrave","Uacute","Ucirc","Uuml","yacute","yuml","Yacute","Yuml"].forEach(function(chr) {
             var a = document.createElement('div');
-            a.innerHTML='&'+chr+';';
-            a.addEventListener('click', function() {
+            rteObj.innerHTML='&'+chr+';';
+            rteObj.addEventListener('click', function() {
                 self.insertHTML('&'+chr+';');
             });
             ch.appendChild(a);
@@ -271,7 +271,7 @@ module.exports = function(app) {
             }]
         ].forEach(function (o) {
             var a = document.createElement('div');
-            a.className=o[0];
+            rteObj.className=o[0];
             self.addPanel(o[1],a);
             colors.forEach(function (color) {
                 var b = document.createElement('div');
@@ -279,32 +279,32 @@ module.exports = function(app) {
                 b.addEventListener('click', function() {
                     self.execCommand(o[0], '#'+color);
                 });
-                a.appendChild(b);
+                rteObj.appendChild(b);
             });
 
         });
     };
 
-    a.prototype.execCommand = function(command, option) {
+    rteObj.prototype.execCommand = function(command, option) {
         this.rte.focus();
         document.execCommand(command, false, option);
         //if (! dc) this.onChange();
     };
 
-    a.prototype.insertHTML = function(html) {
+    rteObj.prototype.insertHTML = function(html) {
         this.rte.focus();
         document.execCommand('insertHTML', false, html);
         //this.onChange();
     };
 
-    a.prototype.getHTML = function() {
+    rteObj.prototype.getHTML = function() {
         return this.html.parentNode? this.raw.value.trim() : this.rte.innerHTML.trim();
     };
 
-    a.prototype.addPanel = function(l,div,active) {
-        var panels = this.panels;
-        var pc = panels.container;
-        var o = panels.menu.addOption({
+    rteObj.prototype.addPanel = function(l,div,active) {
+        var panels = this.panels,
+            pc = panels.container,
+            o = panels.menu.addOption({
             title:l,
             active:active,
             onClick : function() {
@@ -318,6 +318,13 @@ module.exports = function(app) {
             pc.appendChild(div);
     };
 
-    return a;
+    rteObj.prototype.destroy = function() {
+        var c = this.container;
+        this.panels.menu.destroy();
+        if (c && c.parentNode)
+            c.parentNode.removeChild(c);
+    };
+
+    return rteObj;
 
 };

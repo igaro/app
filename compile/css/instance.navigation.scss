@@ -30,18 +30,29 @@
         position:relative;
         >ul {
             text-align:left;
-            &:after { content: ""; clear: both; display: block; }
+            &:after { 
+                content: ""; 
+                clear: both; 
+                display: block;
+            }
             >li {
                 cursor:pointer;
                 display:inline-block;
                 padding:0.5em;
-                margin:0.5em;
+                margin:0 0.5em 0.5em 0.5em;
                 font-size:100%;
-                &.tick { background-color:green; }
-                &.cross { background-color:red; }
-                sup { margin-left:2px; }
+                &.tick { 
+                    background-color:green; 
+                }
+                &.cross { 
+                    background-color:red; 
+                }
+                sup { 
+                    margin-left:2px; 
+                }
                 &.active {
                     position:relative;
+                    margin-top:6px;
                     &:after {
                         content: "";
                         display: block;
@@ -55,7 +66,10 @@
                 }
                 &.disabled {
                     color:#ccc;
-                    &:hover { color:#ccc; cursor:default }
+                    &:hover { 
+                        color:#ccc; 
+                        cursor:default;
+                    }
                 }
             }
         }

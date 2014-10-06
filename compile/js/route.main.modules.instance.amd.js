@@ -83,10 +83,14 @@ module.exports = function(app) {
                     attributes: [
                         { 
                             type:'object', 
-                            desc: {
-                                en : 'Any of the instantiated attributes can be passed here to update the instance before executing the Promise, else the default or previously set values will be used.',
-                                fr : 'L\'un des attributs instanciés peut être passé ici pour mettre à jour l\'instance avant d\'exécuter la promesse, sinon le défaut ou les valeurs précédemment définies seront utilisées.'
-                            }
+                            attributes : [
+                                {
+                                    desc: {
+                                        en : 'Any of the instantiated attributes can be passed here to update the instance before executing the Promise, else the default or previously set values will be used.',
+                                        fr : 'L\'un des attributs instanciés peut être passé ici pour mettre à jour l\'instance avant d\'exécuter la promesse, sinon le défaut ou les valeurs précédemment définies seront utilisées.'
+                                    }
+                                }
+                            ]
                         }
                     ],
                     returns : {

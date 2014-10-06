@@ -4,13 +4,13 @@ module.exports = function(app) {
 
         var data = {
 
-            demo : "
+            demo : " \n \
 view.instances.add('pagemessage', { \n \
     container:c, \n \
     type:'error', \n \
     message : { \n \
-        en : 'Example: An error occured.', \n \
-        fr : 'Exemple: Une erreur s'est produite.' \n \
+        en : 'Some sort of error occured.', \n \
+        fr : 'xyz' \n \
     } \n \
 }); \n \
 view.instances.add('pagemessage', { \n \
@@ -79,11 +79,11 @@ view.instances.add('pagemessage', { \n \
             },
             attributes : [
                 { 
-                    name:'remove',
+                    name:'destroy',
                     type:'function',
                     desc: {
-                        en : 'Removes the message from the view.',
-                        fr : 'Supprime le message de la vue.'
+                        en : 'Destroys the instance, removing it from the view and cleaning up any references.',
+                        fr : ''
                     }
                 }
             ]

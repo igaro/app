@@ -536,7 +536,7 @@ module.exports = function(app) {
             { 
                 name:'root',
                 type:'object',
-                'instanceof': function() { return data.objects.model }, 
+                'instanceof': function() { return data.objects.model; }, 
                 desc: {
                     en : 'Set at runtime (path:/). The view\'s container is document.body.',
                     fr : 'Situé à l\'exécution (chemin :/). Le conteneur de la vue est document.body.' 
@@ -545,7 +545,7 @@ module.exports = function(app) {
             {
                 name:'current', 
                 type:'object',
-                'instanceof': function() { return data.objects.model },
+                'instanceof': function() { return data.objects.model; },
                 desc: {
                     en : 'Last loaded model reference for .to().' ,
                     fr : 'Référence de modèle à charger pour .to().'

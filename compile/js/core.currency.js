@@ -1,6 +1,7 @@
 module.requires = [
-    { name:'core.store.js' },
-    { name:'core.country.js' }
+    { name : 'core.currency.css' },
+    { name : 'core.store.js' },
+    { name : 'core.country.js' }
 ];
 
 module.exports = function(app) {
@@ -27,7 +28,7 @@ module.exports = function(app) {
         code : {
             id : null,
             set : function(o) {
-                if (! self.pool.list[o]) 
+                if (! currency.pool.list[o]) 
                     return false;
                 this.id = o;
                 events.dispatch('core.currency','code.set', o);
@@ -39,7 +40,7 @@ module.exports = function(app) {
         },
 
         validate : function(s,o) {
-            if (o && o.allowneg) 
+            if (o && o.allowNeg) 
                 return RegExp(/^-?\d+(\.\d{2})?$/).test(String(s).trim());
             return RegExp(/^\d+(\.\d{2})?$/).test(String(s).trim());
         },
@@ -56,7 +57,41 @@ module.exports = function(app) {
 
         getNameOfId : function(id) {
             return this.pool.list[id].name;
+        },
+
+        commarize : function(v) {
+            v = parseFloat(v);
+            var isNeg = v < 0;
+            if (isNeg)
+                v *= -1;
+            v+= '';
+            var o = v.split('.',2), 
+                t = '';
+            for (var i=o[0].length;i>3;i-=3) { 
+                t += ','+o[0].substr(i-3,3); 
+            } 
+            t = o[0].substr(0,i)+t;
+            if (o.length === 2)
+                t += '.' + o[1]; 
+            return isNeg? '-'+t:t;
+        },
+
+        colorize : function(v, q) {
+            if (v > 0)
+                return '<span class="core-currency-positive">'+q+'</span>';
+            if (v < 0)
+                return '<span class="core-currency-negative">'+q+'</span>';
+        },
+
+        format : function(v,o) {
+            var c = o && o.type? o.type : this.code.id,
+                f = this.pool.list[c].format,
+                q = f? f(v,o) : (v < 0? '-': '') + this.pool.list[c].symbol + this.commarize(v < 0? v*-1: v);
+            if (o && o.colorize)
+                q = this.colorize(v, q);
+            return q;
         }
+
     };
 
     // add supported currencies - use ISO 4217
@@ -80,6 +115,13 @@ module.exports = function(app) {
             name : {
                 en : 'Australian Dollar',
                 fr : 'Dollar Australien'
+            },
+            format : function(v,o) {
+                var x = (v<0?'-':'')+ 'A$'+currency.commarize(v < 0? v*-1: v);
+                if (o && o.colorize) {
+                    x = currency.colorize(v,x);
+                }
+                return x;
             }
         },
         EUR : {
@@ -93,12 +135,13 @@ module.exports = function(app) {
     /* CONFIGURATION */
 
     // set based on saved value
-    /* var id = store.get('core.currency','id');
+    var id = store.get('core.currency','id');
     if (
         ! (id && currency.code.set(id)) &&
         ! ((function () { // set based on country value
             var c = country.code.get();
-            if (c && country.pool.list[c].currency && currency.code.set(country.pool.list[c].currency)) return true;
+            if (c && country.pool.list[c].currency && currency.code.set(country.pool.list[c].currency)) 
+                return true;
         })()) &&
         ! (currency.code.set('USD')) //default to U.S dollar
     ) throw new Error('Currency failed to set');
@@ -108,9 +151,6 @@ module.exports = function(app) {
         store.set('core.currency','id',v);
     });
 
-     */
-
     return currency;
 
-   
 };

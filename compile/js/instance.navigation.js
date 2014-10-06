@@ -6,22 +6,22 @@ module.requires = [
 module.exports = function(app) {
 
     var language = app['core.language'],
-        events = app['core.events'],
+        events = app['core.events'];
 
-    opt = function(e) {
+    var opt = function(e) {
         var li = this.li = document.createElement('li'),
             self = this, 
             parent = this.parent = e.parent;
-        this.id = e.id? e.id : null;
+        this.id = e.id || null;
         this.status = null;
         if (this.id) 
             li.className = this.id;
         if (e.active) 
             e.status = 'active';
-        this.setStatus(e.status? e.status : 'inactive',true);
-        this.onClick = e.onClick ? e.onClick : null;
+        this.setStatus(e.status || 'inactive',true);
+        this.onClick = e.onClick || null;
         if (e.insertBefore) {
-            parent.ul.insertBefore(li,e.insertBefore);
+            parent.ul.insertBefore(li,e.insertBefore.li);
         } else {
             parent.ul.appendChild(li);
         }
@@ -30,15 +30,8 @@ module.exports = function(app) {
         li.appendChild(w);
         var a = this.title = document.createElement('div');
         a.className = 'text';
-        if (e.title) {
-            w.appendChild(a);
-            var f = function() {
-                a.innerHTML = language.mapKey(e.title);
-                parent.sort();
-            };
-            f();
-            events.on('core.language','code.set', f);
-        }
+        if (e.title)
+            this.updateTitle(e.title);
         li.addEventListener('click',function(event) {
             if (self.status ==='disabled' || ('selectable' in e && e.selectable === false)) 
                 return;
@@ -51,36 +44,49 @@ module.exports = function(app) {
         },false);
         var children = e.children;
         if (children && children.pool) 
-            this.menu = this.addMenu({ pool:children.pool, onClick:children.onClick?children.onClick:null });
+            this.menu = this.addMenu({ 
+                pool:children.pool, 
+                onClick:children.onClick || null
+            });
     };
 
     opt.prototype.updateTitle = function(t) {
+        var self = this;
         if (! t) {
             if (this.title.parentNode) 
                 this.wrapper.removeChild(this.title);
+            if (this.eventLang)
+                events.remove(this.eventLang,'core.language','code.set');
         } else {
-            if (! this.title.parentNode) 
+            var f = function() {
+                self.title.innerHTML = language.mapKey(t);
+                self.parent.sort();
+            };
+            if (! this.title.parentNode) {
                 this.wrapper.appendChild(this.title);
-            this.title.innerHTML = t;
+                this.eventLang = events.on('core.language','code.set', f);
+            }
+            f();
         }
     };
 
     opt.prototype.addMenu = function(o) {
         var cc = document.createElement('div');
         cc.className = 'children';
-        return this.children = new menu({ 
-            autosort:o && o.autosort, 
+        var children = this.children = new menu({ 
+            autosort:o && 'autosort' in o || this.parent.autosort, 
             parent:this, 
             container:cc, 
             pool:o && o.pool?o.pool:null, 
             onClick:o && o.onClick? o.onClick:null 
         });
+        return children;
     };
 
     opt.prototype.removeMenu = function() {
         if (! this.children) 
             return;
-        this.children.removeOption();
+        this.children.removeOptions();
         this.children.container.removeChild(this.children.ul);
         this.children = null;
     };
@@ -129,7 +135,7 @@ module.exports = function(app) {
     var menu = function(o) {
         this.parent = o.parent;
         this.onClick = o.onClick? o.onClick : null;
-        this.autosort = !! o.autosort;
+        this.autosort = !! o.autosort;        
         var m = this.container = o.container,
             self = this;
         this.ul = document.createElement('ul');
@@ -140,8 +146,10 @@ module.exports = function(app) {
         }) : [];
     };
 
-    menu.prototype.sort = function() {
-        if (! this.autosort) 
+    menu.prototype.sort = function(sort) {
+        if (typeof sort === 'boolean') 
+            this.autosort = sort;
+        if (! this.autosort || ! this.options) 
             return;
         var ul = this.ul,
             p = this.options.map(function (o) {
@@ -155,6 +163,7 @@ module.exports = function(app) {
                 y = b.title.toLowerCase();
             return x < y ? -1 : x > y ? 1 : 0;
         });
+
         p.forEach(function (o) {
             var li = o.option.li;
             ul.removeChild(li);
@@ -174,13 +183,17 @@ module.exports = function(app) {
         var t = new opt(o);
         this.options.push(t);
         this.sort();
+        this.container.classList.remove('hide');
         return t;
     };
 
     menu.prototype.removeOption = function(o) {
         o.parent.ul.removeChild(o.li);
-        //if (p.onRemove) p.onRemove();
+        if (o.eventLang)
+            events.remove(o.eventLang,'core.language','code.set');
         this.options.pop(this.options.indexOf(o));
+        if (! this.options.length)
+            this.container.classList.add('hide');
     };
 
     menu.prototype.removeOptions = function(o) {
@@ -189,16 +202,17 @@ module.exports = function(app) {
         });
     };
 
-    return function(o) {
+    var navObj = function(o) {
         var div = this.container = document.createElement('div');
         div.className = 'instance-navigation';
         var nav = document.createElement('nav');
         div.appendChild(nav);
         this.menu = new menu({ 
-            autosort:o.autosort, 
+            autosort:'autosort' in o? o.autosort : true, 
             parent:this, 
             container:nav, 
-            pool:o.pool, onClick:o.onClick?o.onClick:null 
+            pool:o.pool, 
+            onClick:o.onClick?o.onClick:null 
         });
         if (o.container) 
             o.container.appendChild(div);
@@ -211,5 +225,14 @@ module.exports = function(app) {
         };
         this.type.set(o.type? o.type : 'default');
     };
+
+    navObj.prototype.destroy = function() {
+        var c = this.container;
+        if (c && c.parentNode)
+            c.parentNode.removeChild(c);
+        this.removeOptions();
+    };
+
+    return navObj;
 
 };

@@ -28,7 +28,7 @@ module.exports = function(app) {
                         en : 'Report Issue',
                         fr : 'Rapport émission'
                     },
-                    url : 'https://github.com/igaro/igaro/issues'
+                    url : 'https://github.com/igaro/app/issues'
                 },
                 {
                     value : {

@@ -38,13 +38,16 @@ module.exports = function(app) {
                 view.instances.add('xhr').then(function (xhr) {
                     xhr.get({ res:'https://api.github.com/orgs/igaro/repos' }).then(
                         function(data) {
+                            data = data.filter(function(x) {
+                                return x.name === 'app';
+                            });
                             var x = view.createAppend('div',null,null,'lastupdate');
                             view.createAppend('span',x, {
                                 en : 'Updated:',
                                 fr : 'Mise à jour:'
                             });
                             var a = view.createAppend('a',x);
-                            a.href = 'https://github.com/igaro/igaro';
+                            a.href = 'https://github.com/igaro/app';
                             view.instances.add('date', {
                                 date:data[0].updated_at,
                                 format:'LLLL',
@@ -63,12 +66,15 @@ module.exports = function(app) {
                 view.instances.add('xhr').then(function (xhr) {
                     xhr.get({ res:'https://api.github.com/orgs/igaro/repos' }).then(
                         function(data) {
+                            data = data.filter(function(x) {
+                                return x.name === 'app';
+                            });
                             var x = view.createAppend('div',null,null,'openissues');
                             view.createAppend('span',x, {
                                 en : 'Open Issues:',
                                 fr : 'Questions en Suspens:'
                             });
-                            view.createAppend('a',x,data[0].open_issues).href='https://github.com/igaro/igaro/issues';
+                            view.createAppend('a',x,data[0].open_issues).href='https://github.com/igaro/app/issues';
                             resolve({ container:x });
                         },
                         resolve

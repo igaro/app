@@ -57,6 +57,13 @@ body >.core-mvc >.main {
             >button { margin-left:0.7em }
         }
 
+        >.instance-pagemessage {
+            @include pagepadding;
+            @include pagerestrictwidth;
+            margin-bottom:0;
+            border-bottom: 1px solid #eee;
+        }
+
         >section {
 
             @include pagepadding;
@@ -67,12 +74,9 @@ body >.core-mvc >.main {
                 margin-bottom:0.3em;
                 font-size:300%;
                 font-weight:200;
-
                 @media (max-width: 440px) {
                     margin-left:5%;
-                }   
-
-
+                }
             }
 
             >p {

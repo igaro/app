@@ -7,15 +7,14 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var language = app['core.language'];
-    var mvc = app['core.mvc'];
+    var language = app['core.language'],
+        mvc = app['core.mvc'];
    
     return function(model) {
 
-        var view = model.view;
-
-        var wrapper = view.wrapper;
-        var events = model.events;
+        var view = model.view,
+            wrapper = view.wrapper,
+            events = model.events;
 
         model.meta.set('title', {
             en : 'Modules',
@@ -23,7 +22,7 @@ module.exports = function(app) {
         });
 
         view.createAppend('h1',wrapper,{
-            en : 'Igaro Repository'
+            en : 'Igaro Reposfitory'
         });
 
         view.createAppend('button',view.createAppend('p',wrapper), { 
@@ -181,10 +180,6 @@ module.exports = function(app) {
                         en : 'Table display with row/column management.',
                         fr : 'Affichage de la table avec la direction de ligne/colonne.'
                     }],
-                    ['instance.userlocation', {
-                        en : 'Obtains the users location by geo, map or postcode (req. API).',
-                        fr : 'Obtient l\'emplacement des utilisateurs par geo, carte ou code postal (API req.).'
-                    }],
                     ['instance.xhr', {
                         en : 'XHR (Ajax) functionality.',
                         fr : 'XHR (Ajax) fonctionnalité.'
@@ -242,12 +237,12 @@ module.exports = function(app) {
                                 lang:o[1]
                             }
                         ]
-                    }
+                    };
                 })
             }
         });
 
-        model.store['childsupport'] = function(data, m) {
+        model.store.childsupport = function(data, m) {
 
             var createTable = function(data,container) {
 
@@ -287,17 +282,24 @@ module.exports = function(app) {
                         ]
                     }
                 }).then(function (tbl) {
-                    var body=tbl.body, brows=body.rows;
+                    var body=tbl.body, 
+                        brows=body.rows;
+                    
                     var makeahref = function(row,sd,td,cc) {
-                        if (sd.instanceof) sd = sd.instanceof();
-                        if (! sd.attributes) return document.createElement('span');
+                        if (sd.instanceof) 
+                            sd = sd.instanceof();
+                        if (! sd.attributes) 
+                            return document.createElement('span');
                         var a = document.createElement('a');
                         a.addEventListener('click', function(evt) {
                             evt.preventDefault();
                             if (td.activeFor) {
                                 td.className=td.activeFor.className='';
                                 for (var i=0; i < brows.length; i++) {
-                                    if (brows[i].belongsTo.indexOf(row) !== -1) { body.deleteRow(brows[i]); i--; }
+                                    if (brows[i].belongsTo.indexOf(row) !== -1) { 
+                                        body.deleteRow(brows[i]); 
+                                        --i;
+                                    }
                                 }
                                 if (td.activeFor === this) {
                                     td.activeFor=null;
@@ -305,13 +307,14 @@ module.exports = function(app) {
                                 }
                             }
                             td.activeFor=this;
-                            g(sd.attributes,row);
+                            g(sd.attributes.reverse(),row);
                             td.className = this.className = 'active' ;
                         });
-                        if (cc) a.innerHTML = cc;
+                        if (cc) 
+                            a.innerHTML = cc;
                         td.appendChild(a);
                         return a;
-                    }
+                    };
                     var g = function(t,at) {
                         t.forEach(function (s) {
                             var row = body.addRow({ 
@@ -323,59 +326,79 @@ module.exports = function(app) {
                             row.belongsTo=[];
                             if (at) {
                                 row.belongsTo = at.belongsTo.concat([at]);
-                                row.setClass('shade'+row.belongsTo.length);
+                                row.element.className = 'shade'+row.belongsTo.length;
                             }
-                            var cc = row.addColumn();
-                            var ce = cc.element;
-                            var rr = row.addColumn({ lang:s.desc?s.desc:null });
+                            var cc = row.addColumn(),
+                                ce = cc.element,
+                                rr = row.addColumn({ lang:s.desc?s.desc:null });
                             if (s.returns && s.type==='function') {
-                                makeahref(row,s.returns,ce, '⊗');
+                                var l,
+                                    returns = s.returns;
+                                if (returns.instanceof) {
+                                    l = returns.instanceof().name;
+                                } else if (returns.type) {
+                                    l = returns.type;
+                                } else {
+                                    l = '⊗';
+                                }
+                                makeahref(row,s.returns,ce, l);
                                 view.createAppend('span',ce,' = ');
                             }
-                            if (s['instanceof']) {
-                                var m=s['instanceof'];
+                            if (s.instanceof) {
+                                var m=s.instanceof;
                                 if (typeof m === 'function') { 
-                                    var mm = m();
-                                    var a = makeahref(row,mm,ce,mm.name);
-                                    var w = function() {
-                                        a.title = language.mapKey(mm.desc); 
-                                    }
+                                    var mm = m(),
+                                        a = makeahref(row,mm,ce,mm.name),
+                                        w = function() {
+                                            a.title = language.mapKey(mm.desc); 
+                                        };
                                     events.on('core.language','code.set', w);
                                     w();
                                     var q = JSON.parse(JSON.stringify(mm.desc));
                                     if (s.desc) {
                                         Object.keys(q).forEach(function(k) {
-                                            if (s.desc[k]) q[k] += ' '+s.desc[k];
-                                        })
+                                            if (s.desc[k]) 
+                                                q[k] += ' '+s.desc[k];
+                                        });
                                     }
                                     rr.setContent({ lang:q });
                                 } else {
                                     var sa = m.name;
-                                    if (m.required) sa += ' *';
+                                    if (m.required) 
+                                        sa += ' *';
                                     var a = view.createAppend('a',ce,sa);
                                     a.href = m.href? m.href : 'https://developer.mozilla.org/en/docs/Web/API/'+m.name;
-                                    if (m.desc) rr.setContent({ lang:m.desc });
+                                    if (m.desc) 
+                                        rr.setContent({ lang:m.desc });
                                 }
-                            } else if (s.attributes && (s.type!=='function' || s['instanceof'])) {
+                            } else if (s.attributes && (s.type!=='function' || s.instanceof)) {
                                 makeahref(row,s,ce,s.type);
                             } else {
                                 view.createAppend('span',ce,s.type);
                             }
-                            if (s.attributes && (s.type==='function' || s['instanceof'])) {
+
+                            if (s.attributes && (s.type==='function' || s.instanceof)) {
                                 view.createAppend('span',ce,' (');
                                 s.attributes.forEach(function (m,i) {
-                                    if (i !== 0) view.createAppend('span',ce,',');
-                                    if (m.attributes) { makeahref(row,m,ce,m['instanceof']? m['instanceof']().name : m.type); }
-                                    else { view.createAppend('span',ce,m.type); }
-                                    if (m.required) view.createAppend('sup',ce,'*');
+                                    if (i !== 0) 
+                                        view.createAppend('span',ce,',');
+                                    //if (m.instanceof) {
+                                    //    makeahref(row,m,ce,m.instanceof().name);
+                                    if (m.instanceof || m.attributes) { 
+                                        makeahref(row,m,ce,m.instanceof? m.instanceof().name : m.type); 
+                                    } else { 
+                                        view.createAppend('span',ce,m.type); 
+                                    }
+                                    if (m.required) 
+                                        view.createAppend('sup',ce,'*');
                                 });
                                 view.createAppend('span',ce,')');
                             }
                         });
-                    }
+                    };
                     g(data);
                 });
-            }
+            };
 
             var v = m.view.wrapper;
             m.meta.set('title', { en : m.name });
@@ -388,7 +411,7 @@ module.exports = function(app) {
             }
 
             if (data.download !== false) {
-                var l = data.download? data.download : 'https://github.com/igaro/igaro/blob/master/app/compile/js/'+m.name+'.js';
+                var l = data.download? data.download : 'https://github.com/igaro/app/blob/master/app/compile/js/'+m.name+'.js';
                 view.createAppend('button',v,{
                     en: 'Download'
                 }).addEventListener('click', function() {
@@ -408,10 +431,13 @@ module.exports = function(app) {
                     } : {
                         en : 'Access <b><MODNAME></b> directly without instantiating.',
                         fr : 'Accès <b><MODNAME></b> sans instancier.'
-                    }
+                    };
                     var n= 'app[\''+m.name+'\']';
-                    if (u.attributes) n += '(o)';
-                    Object.keys(o).forEach(function (p) { o[p]=o[p].replace(/\<MODNAME\>/g,n); });
+                    if (u.attributes) 
+                        n += '(o)';
+                    Object.keys(o).forEach(function (p) { 
+                        o[p]=o[p].replace(/\<MODNAME\>/g,n);
+                    });
                     view.createAppend('p',v,o);
                 } else if (u.direct) {
                     view.createAppend('p',v,{
@@ -433,8 +459,7 @@ module.exports = function(app) {
                     fr : 'Démo'
                 });
                 view.createAppend('h2',v,{
-                    en : 'Code',
-                    fr : ''
+                    en : 'Code'
                 });
 
                 view.createAppend('p',v);
@@ -442,19 +467,20 @@ module.exports = function(app) {
                 var dr = view.createAppend('pre',v, data.demo.trim(), 'democode');
 
                 view.instances.add('pagemessage',{ 
-                    type:'ok',
+                    type:'info',
                     message: {
-                        en : 'Note: In demo code <b>view</b> references model.view and <b>c</b> references view.wrapper.',
-                        fr : ''
+                        en : 'Note: In demo code <b>view</b> references model.view and <b>c</b> references view.wrapper.'
                     },
-                    hideable:true
+                    hideable: {
+                        model:model,
+                        id:'democode'
+                    }
                 }).then(function(cp) {
                     v.insertBefore(cp.container,dr);
                 });
                 
                 view.createAppend('h2',v,{
-                    en : 'Output',
-                    fr : ''
+                    en : 'Output'
                 });
                 var c=view.createAppend('p',v);
                 eval(data.demo);
@@ -485,7 +511,7 @@ module.exports = function(app) {
                     }); 
                     
                 });
-            };
+            }
 
             if (data.related) {
                 view.createAppend('h1',v,{
@@ -503,7 +529,7 @@ module.exports = function(app) {
                         });
                     });
                 });
-            };
+            }
 
             if (data.author) {
                 view.createAppend('h1',v,{
@@ -518,7 +544,7 @@ module.exports = function(app) {
                 } else {
                     view.createAppend('a',view.createAppend('p',v,null),d.name).href = d.link;
                 }
-            };
+            }
 
             if (data.extlinks) {
                 view.createAppend('h1',v,{
@@ -535,7 +561,7 @@ module.exports = function(app) {
                     }
                     view.createAppend('a',view.createAppend('p',v),name).href = href;
                 });
-            };
+            }
 
         };
     };

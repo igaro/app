@@ -122,7 +122,7 @@ module.exports = function(app) {
         events.dispatch('instance.xhr','end', this);
     };
 
-    y.prototype.destructor = function() {
+    y.prototype.destroy = function() {
         this.abort();
     };
 

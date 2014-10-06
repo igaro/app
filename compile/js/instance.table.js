@@ -6,30 +6,7 @@ module.requires = [
 module.exports = function(app) {
 
     var events = app['core.events'],
-    language = app['core.language'],
-    instances = [];
-
-    events.on('core.language','code.set', function(v) {
-        instances.forEach(function (o) {
-            [o.header,o.body,o.footer].forEach( function(q) {
-                q.rows.forEach(function (r) {
-                    r.columns.forEach(function (c) {
-                        if (r.search) 
-                            c.element.firstChild.value=''; 
-                        r.element.style.display='';
-                        var l = c.lang;
-                        if (! l) 
-                            return;
-                        if (typeof l === 'object') { 
-                            c.element.innerHTML = language.mapKey(l); 
-                        } else if (typeof l === 'function') { 
-                            l(); 
-                        }
-                    });
-                });
-            });
-        });
-    });
+        language = app['core.language'];
 
     var column = function(t,o) {
         var element = this.element = document.createElement('td');
@@ -38,18 +15,14 @@ module.exports = function(app) {
             if (o.append || o.lang) 
                 this.setContent({ lang:o.lang, append:o.append });
             if (o.className) 
-                this.setClass(o.className);
-            if (o.search) 
-                this.setSearch(o.search);
+                this.element.classList.add(o.className);
+            if (o.searchable) 
+                this.setSearch(o.searchable);
         }
     };
 
-    column.prototype.setClass = function(c) {
-        this.element.className = c;
-    };
-
     column.prototype.setSearch = function(o) {
-        this.search = o;
+        this.searchable = o;
     };
 
     column.prototype.setContent = function(c) {
@@ -71,26 +44,29 @@ module.exports = function(app) {
     };
 
     var row = function(t,c) {
-        var self = this,
-            element = this.element = document.createElement('tr'),
-            d = c.insertBefore;
-        if (c.insertBefore && (typeof d !== 'number' || d < t.rows.length)) {
-            t.element.insertBefore(element,typeof d === 'number'? t.rows[d].element : d.element);
-        } else {
-            t.element.appendChild(element);
-        }
         this.columns = [];
+        var element = this.element = document.createElement('tr');
         if (c) {
-            if (c.search) { 
-                this.search=true; 
-                this.setClass('searchable'); 
+            var self = this,
+                d = c.insertBefore;
+            if (c.searchable) { 
+                this.searchable=true; 
+                element.classList.add('searchable'); 
             }
             if (c.className) 
-                this.setClass(c.className);
-            if (c.columns) 
+                element.classList.add(c.className);
+            if (c.columns) {
                 c.columns.forEach(function(o) { 
                     self.addColumn(o);
                 });
+            }
+            if (d && (typeof d !== 'number' || d < t.rows.length)) {
+                t.element.insertBefore(element,typeof d === 'number'? t.rows[d].element : d.element);
+            } else {
+                t.element.appendChild(element);
+            }
+        } else {
+            t.element.appendChild(element);
         }
     };
 
@@ -98,10 +74,6 @@ module.exports = function(app) {
         var col = new column(this,o);
         this.columns.push(col);
         return col;
-    };
-
-    row.prototype.setClass = function(c) {
-        this.element.className = c;
     };
 
     var domain = function(c,type) {
@@ -112,7 +84,7 @@ module.exports = function(app) {
 
     domain.prototype.addRow = function(o) {
         var r = new row(this,o);
-        if (o.insertBefore) {
+        if (o && o.insertBefore) {
             this.rows.splice(typeof o.insertBefore === 'number'? o.insertBefore : this.rows.indexOf(o.insertBefore),0,r);
         } else {
             this.rows.push(r);
@@ -126,8 +98,8 @@ module.exports = function(app) {
     };
 
     var searchExec = function(input,x) {
-        var tr = input.parentNode.parentNode;
-        var hcols;
+        var tr = input.parentNode.parentNode,
+            hcols;
         x.header.rows.some(function (o) {
             if (o.element === tr) { 
                 hcols = o.columns; 
@@ -148,7 +120,7 @@ module.exports = function(app) {
         });
     };
 
-    var x = function(o) {
+    var tblObj = function(o) {
         var self = this,
             c = this.container = document.createElement('table'),
             header = this.header = new domain(this,'thead'),
@@ -166,23 +138,27 @@ module.exports = function(app) {
                         domain.addRow(r);
                     });
                 if (opt.className) 
-                    domain.setClass(opt.className);
+                    domain.element.classList.add(opt.className);
             });
 
             if (o.searchable) {
                 var i = header.rows.length;
                 header.addRow({
-                    search:true,
+                    searchable:true,
                     columns : header.rows[0].columns.map(function() {
                         var i = document.createElement('input');
-                        i.addEventListener('input', function() { searchExec(this,self); });
+                        i.addEventListener('input', function() { 
+                            searchExec(this,self); 
+                        });
                         i.type='text';
-                        return { append:i, lang:function() {
-                            i.placeholder = language.mapKey({
-                                en : 'Search',
-                                fr : 'Recherche'
-                            });
-                        }};
+                        return { 
+                            append:i, lang:function() {
+                                i.placeholder = language.mapKey({
+                                    en : 'Search',
+                                    fr : 'Recherche'
+                                });
+                            }
+                        };
                     })
                 });
             }
@@ -192,13 +168,41 @@ module.exports = function(app) {
             if (o.id) 
                 this.setId(o.id);
         }
-        instances.push(this);
+
+        var evt = this.eventLang = function() {
+            [header,body,footer].forEach(function(q) {
+                q.rows.forEach(function (r) {
+                    r.columns.forEach(function(c) {
+                        r.element.style.display='';
+                        var l = c.lang;
+                        if (r.searchable) 
+                            c.element.firstChild.value='';
+                        if (! l) 
+                            return;
+                        if (typeof l === 'object') { 
+                            c.element.innerHTML = language.mapKey(l); 
+                        } else if (typeof l === 'function') { 
+                            l(); 
+                        }
+                    });
+                });
+            });
+        };
+        events.on('core.language','code.set',evt);
     };
 
-    x.prototype.setId = function(id) {
+    tblObj.prototype.setId = function(id) {
         this.id=id;
         this.container.className = 'instance-table'+(id?id : '');
     };
 
-    return x;
+    tblObj.prototype.destroy = function() {
+        var c = this.container,
+            evt = this.eventFunctions;
+        if (c && c.parentNode)
+            c.parentNode.removeChild(c);
+        events.remove(this.eventLang,'core.language','code.set');
+    };
+
+    return tblObj;
 };
