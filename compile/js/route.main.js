@@ -157,7 +157,7 @@ module.exports = function(app) {
                 },
                 as = list.pool.map(function (o) {
                     var v = view.createAppend('a',o.li);
-                    v.href=o.id;
+                    v.href = '#!/' + o.id;
                     v.addEventListener('click', function (evt) { 
                         evt.preventDefault();
                         f(o.id, this);
