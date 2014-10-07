@@ -22,7 +22,7 @@ view.createAppend('button',c,{ \n \
             },
             author : { 
                 name:'Andrew Charnley', 
-                link:'mailto:andrew.charnley@igaro.com' 
+                link:'http://www.andrewcharnley.com' 
             },
             usage : {
                 instantiate : true,

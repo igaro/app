@@ -51,7 +51,7 @@ module.exports = function(app) {
 
             author : { 
                 name:'Andrew Charnley', 
-                link:'mailto:andrew.charnley@igaro.com' 
+                link:'http://www.andrewcharnley.com' 
             },
             attributes : [
                 { 

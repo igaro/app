@@ -17,7 +17,7 @@ En raison de lacunes avec IE8 / 9 (CORS, CSS3, SVG), les deux sont pris en charg
             },
             author : { 
                 name:'Andrew Charnley', 
-                link:'mailto:andrew.charnley@igaro.com' 
+                link:'http://www.andrewcharnley.com' 
             }
         };
 

@@ -223,7 +223,7 @@ module.exports = function(app) {
                 ].map(function (o) {
                     var n = o[0];
                     var a = view.createAppend('a',null,n);
-                    a.href=view.path+'/'+n;
+                    a.href='#!/'+view.path+'/'+n;
                     a.addEventListener('click', function(evt) {
                         evt.preventDefault();
                         mvc.to(model.path+'/'+n);

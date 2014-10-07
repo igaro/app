@@ -22,6 +22,9 @@
             padding:0;
             white-space:nowrap;
             outline:0;
+            >a {
+                display:block;
+            }
         }
     }
 
@@ -114,12 +117,12 @@
                 &.active {
                     background: #393832;
                     &:hover { cursor:pointer; }
-                    >.wrapper >.text {
+                    >a >.text {
                         color:#fff;
                     }
                 }
 
-                >.wrapper {
+                >a {
 
                     >.text {
                         padding:0.6em 1em;
@@ -151,7 +154,7 @@
                                     top:0;
                                     left:100%;
                                 }
-                                >.wrapper {
+                                >a {
                                     >.text {
                                         text-shadow: 0 1px rgba(0,0,0,0.3);
                                         line-height:100%;
@@ -168,7 +171,7 @@
                                     top:0;
                                     right:2em;
 
-                                    >.wrapper {
+                                    >a {
                                         padding:0;
                                         background:none;
                                         border:none;

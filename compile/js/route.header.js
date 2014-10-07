@@ -32,9 +32,7 @@ module.exports = function(app) {
                 }, 
                 { 
                     id:'api', 
-                    onClick:function() { 
-                        window.location.href='http://api.igaro.com'; 
-                    }
+                    href : 'http://api.igaro.com'
                 }
             ]
         }).then(function() {

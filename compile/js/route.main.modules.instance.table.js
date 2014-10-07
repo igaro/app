@@ -49,7 +49,7 @@ view.instances.add('table', {\n \
             },
             author : { 
                 name:'Andrew Charnley', 
-                link:'mailto:andrew.charnley@igaro.com' 
+                link:'http://www.andrewcharnley.com' 
             },
             attributes : [
                 {

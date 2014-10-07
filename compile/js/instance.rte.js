@@ -82,7 +82,7 @@ module.exports = function(app) {
         rte.addEventListener("keyup", saveRange);
         raw.addEventListener("input", onChange);
         raw.addEventListener("change", onChange);
-        
+
         var wysiwyg = document.createElement('div');
         wysiwyg.className = 'wysiwyg';
             var panels = this.panels = {
@@ -243,10 +243,11 @@ module.exports = function(app) {
             en : 'Character',
             fr : 'Caractère'
         },ch);
+
         ["cent","euro","pound","curren","yen","copy","reg","trade","divide","times","plusmn","frac14","frac12","frac34","deg","sup1","sup2","sup3","micro","laquo","raquo","quot","lsquo","rsquo","lsaquo","rsaquo","sbquo","bdquo","ldquo","rdquo","iexcl","brvbar","sect","not","macr","para","middot","cedil","iquest","fnof","mdash","ndash","bull","hellip","permil","ordf","ordm","szlig","dagger","Dagger","eth","ETH","oslash","Oslash","thorn","THORN","oelig","OElig","scaron","Scaron","acute","circ","tilde","uml","agrave","aacute","acirc","atilde","auml","aring","aelig","Agrave","Aacute","Acirc","Atilde","Auml","Aring","AElig","ccedil","Ccedil","egrave","eacute","ecirc","euml","Egrave","Eacute","Ecirc","Euml","igrave","iacute","icirc","iuml","Igrave","Iacute","Icirc","Iuml","ntilde","Ntilde","ograve","oacute","ocirc","otilde","ouml","Ograve","Oacute","Ocirc","Otilde","Ouml","ugrave","uacute","ucirc","uuml","Ugrave","Uacute","Ucirc","Uuml","yacute","yuml","Yacute","Yuml"].forEach(function(chr) {
             var a = document.createElement('div');
-            rteObj.innerHTML='&'+chr+';';
-            rteObj.addEventListener('click', function() {
+            a.innerHTML='&'+chr+';';
+            a.addEventListener('click', function() {
                 self.insertHTML('&'+chr+';');
             });
             ch.appendChild(a);
@@ -271,7 +272,7 @@ module.exports = function(app) {
             }]
         ].forEach(function (o) {
             var a = document.createElement('div');
-            rteObj.className=o[0];
+            a.className=o[0];
             self.addPanel(o[1],a);
             colors.forEach(function (color) {
                 var b = document.createElement('div');
@@ -279,7 +280,7 @@ module.exports = function(app) {
                 b.addEventListener('click', function() {
                     self.execCommand(o[0], '#'+color);
                 });
-                rteObj.appendChild(b);
+                a.appendChild(b);
             });
 
         });

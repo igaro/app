@@ -41,7 +41,7 @@ module.exports = function(app) {
                     m.setAttribute('path',c.path);
                     m.innerHTML = language.mapKey(c.meta.get('title')) || c.name;
                     if (c !== mvc.current) {
-                        m.href=c.view.path;
+                        m.href='#!/'+c.view.path;
                         m.addEventListener('click', function(evt) {
                             evt.preventDefault();
                             mvc.to(this.getAttribute('path')); 

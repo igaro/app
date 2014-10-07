@@ -13,7 +13,7 @@ Ce module est chargé uniquement si nécessaire.'
             },
             author : { 
                 name:'Andrew Charnley', 
-                link:'mailto:andrew.charnley@igaro.com' 
+                link:'http://www.andrewcharnley.com' 
             },
             extlinks : [
                 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise'

@@ -34,7 +34,7 @@ view.instances.add('navigation', {\n \
             },
             author : { 
                 name:'Andrew Charnley', 
-                link:'mailto:andrew.charnley@igaro.com' 
+                link:'http://www.andrewcharnley.com' 
             },
             usage : {
                 instantiate : true,
@@ -113,13 +113,6 @@ view.instances.add('navigation', {\n \
                                 type:'object',
                                 attributes : [
                                     {
-                                        name : 'id',
-                                        type : 'string',
-                                        desc : {
-                                            en : 'An identifier for the option. Will be appended to className.'
-                                        }
-                                    },
-                                    {
                                         name : 'active',
                                         type : 'boolean',
                                         desc : {
@@ -127,10 +120,10 @@ view.instances.add('navigation', {\n \
                                         }
                                     },
                                     {
-                                        name : 'status',
+                                        name : 'id',
                                         type : 'string',
                                         desc : {
-                                            en : 'Default is inactive. Alternatively specify active or disabled.'
+                                            en : 'An identifier for the option. Will be appended to className.'
                                         }
                                     },
                                     {
@@ -141,10 +134,31 @@ view.instances.add('navigation', {\n \
                                         }
                                     },
                                     {
+                                        name : 'href',
+                                        type : 'string',
+                                        desc : {
+                                            en : 'Instead of onClick you can set an href directly. Should be used only or external linking.'
+                                        }
+                                    },
+                                    {
                                         name : 'onClick',
                                         type : 'function',
                                         desc : {
                                             en : 'If specified, will override the menu onClick handler.'
+                                        }
+                                    },
+                                    {
+                                        name : 'seo',
+                                        type : 'string',
+                                        desc : {
+                                            en : 'Appends a Google style #!/ onto the end of the ahref along with the href value. Use with onClick and href.'
+                                        }
+                                    },
+                                    {
+                                        name : 'status',
+                                        type : 'string',
+                                        desc : {
+                                            en : 'Default is inactive. Alternatively specify active or disabled.'
                                         }
                                     },
                                     {

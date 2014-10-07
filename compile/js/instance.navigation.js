@@ -25,14 +25,19 @@ module.exports = function(app) {
         } else {
             parent.ul.appendChild(li);
         }
-        var w = this.wrapper = document.createElement('div');
-        w.className = 'wrapper';
+        var w = this.wrapper = document.createElement('a');
         li.appendChild(w);
-        var a = this.title = document.createElement('div');
-        a.className = 'text';
+        var title = this.title = document.createElement('div');
+        title.className = 'text';
         if (e.title)
             this.updateTitle(e.title);
-        li.addEventListener('click',function(event) {
+        if (e.seo) {
+            w.href = '#!/' + e.seo;
+        } else if (e.href) {
+            w.href = e.href;
+        }
+        if (! e.href) w.addEventListener('click',function(event) {
+            event.preventDefault();
             if (self.status ==='disabled' || ('selectable' in e && e.selectable === false)) 
                 return;
             if (self.onClick) {
