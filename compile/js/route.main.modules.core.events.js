@@ -52,8 +52,7 @@ module.exports = function(app) {
                     ],
                    
                     desc: {
-                        en : 'Triggers registered event callbacks.',
-                        fr : 'Déclenche rappels d\'événements enregistrés.'
+                        en : 'Triggers registered event handlers. Any handler can return { stopPropagation:true } to abort the iteration.',
                     }
                 },
                 { 

@@ -55,9 +55,12 @@ module.exports = function(app) {
                 return;
             if (bubble !== false && name !== 'core.events' && event !== 'dispatch') 
                 this.dispatch('core.events','dispatch', { name:name, event:event, params: params});
-            pool[name][event].forEach(function(t) { 
+            for (var i=0; i < pool[name][event].length; ++i) {
+                var t = pool[name][event][i]; 
                 try {
-                    t(params); 
+                    var r = t(params); 
+                    if (typeof r === 'object' && r.stopPropagation)
+                        return { stopPropagation:true };
                 } catch(e) {
                     var x = { name:name, event:event, params:params, error:e, 'function':t };
                     // as nothing may be defined to handle the error we also try dumping to console
