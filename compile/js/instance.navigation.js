@@ -79,7 +79,7 @@ module.exports = function(app) {
         var cc = document.createElement('div');
         cc.className = 'children';
         var children = this.children = new menu({ 
-            autosort:o && 'autosort' in o || this.parent.autosort, 
+            autosort:o && 'autosort' in o? o.autosort : this.parent.autosort, 
             parent:this, 
             container:cc, 
             pool:o && o.pool?o.pool:null, 
