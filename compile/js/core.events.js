@@ -13,7 +13,11 @@ module.exports = function(app) {
             var m = pool[name][event];
             if (m.indexOf(fn) === -1) 
                 m.push(fn);
-            this.dispatch('core.events','on',{ name:name, event:event, fn:fn });
+            this.dispatch('core.events','on',{ 
+                name:name, 
+                event:event, 
+                fn:fn 
+            });
             return;
         },
 
@@ -26,7 +30,11 @@ module.exports = function(app) {
                     for (var i=0; i < p.length; i++) {
                         if (p[i] !== fn) 
                             continue;
-                        self.dispatch('core.events','remove',{ name:name, event:event, fn:fn });
+                        self.dispatch('core.events','remove',{ 
+                            name:name, 
+                            event:event, 
+                            fn:fn 
+                        });
                         pool[name][event].splice(i,1);
                         break;
                     }
@@ -54,17 +62,28 @@ module.exports = function(app) {
             if (! pool[name] || ! pool[name][event]) 
                 return;
             if (bubble !== false && name !== 'core.events' && event !== 'dispatch') 
-                this.dispatch('core.events','dispatch', { name:name, event:event, params: params});
+                this.dispatch('core.events','dispatch', { 
+                    name:name, 
+                    event:event, 
+                    params: params
+                });
             for (var i=0; i < pool[name][event].length; ++i) {
                 var t = pool[name][event][i]; 
                 try {
-                    var r = t(params); 
+                    var r = t.call(t,params); 
                     if (typeof r === 'object' && r.stopPropagation)
                         return { stopPropagation:true };
                 } catch(e) {
-                    var x = { name:name, event:event, params:params, error:e, 'function':t };
-                    // as nothing may be defined to handle the error we also try dumping to console
-                    if (window.console !== 'undefined') console.log(x);
+                    var x = { 
+                        name:name, 
+                        event:event, 
+                        params:params, 
+                        error:e, 
+                        fn:t 
+                    };
+                    // as nothing may be defined to handle the error we also dump to console
+                    if (window.console !== 'undefined') 
+                        console.error(x);
                     self.dispatch('core.events','dispatch.error', x);
                 }
             });
