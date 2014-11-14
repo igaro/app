@@ -59,6 +59,7 @@ module.exports = function(app) {
                         g.insertAfter.parentNode.insertBefore(i.container, g.insertBefore);
                     }
                 }
+
                 resolve(i);
             }).catch(function(e) {
                 if (container) {
@@ -115,6 +116,22 @@ module.exports = function(app) {
         this.isVisible=true;
         events.dispatch('core.mvc','view.shown', this); 
     };
+    mvcView.prototype.animatedRemoval = function(el,f,d) {
+        if (! el)
+            return;
+        if (!d) 
+            d = 3000;
+        el.classList.add('hide');
+        setTimeout(function() {
+            if (! el)
+                return;
+            el.classList.remove('hide');
+            if (el.parentNode)
+                el.parentNode.removeChild(el);
+            if (f) 
+                f();
+        }, d);
+    };
     mvcView.prototype.createAppend = function(t,o,c,m) {
         var r,
             self = this, 
@@ -140,8 +157,10 @@ module.exports = function(app) {
                 }
             } 
         }
-        if (m) {
+        if (typeof m === 'string') {
             r.className=m;
+        } else if (typeof m === 'function') {
+            m.call(r);
         }
 
         var enumerator = function(r,c) {
@@ -239,13 +258,17 @@ module.exports = function(app) {
     };
     children.prototype.add = function(o) {
         var loaded=this.loaded, 
-        m=this.model, 
-        path=m.path,
-        onEnd = function(g) {
-            events.dispatch('core.mvc','model.load.end',g);
-        },
-        d = function(name) {
-            return new Promise(function(resolve, reject) {
+            m=this.model, 
+            path=m.path,
+            onEnd = function(g) {
+                events.dispatch('core.mvc','model.load.end',g);
+            },
+            arr = [];
+
+        return new Promise(function(resolve,reject) {
+
+            o.list.map(function(name) {
+                
                 var g;
                 if (! loaded.some(function(y) {
                     if (y.name !== name)
@@ -253,50 +276,40 @@ module.exports = function(app) {
                     g = y;
                     return true;
                 })) {
-                    g = new mvcModel({ parent:m, path:(path.substr(-1,1) == '/'? path.substr(0,-1) : path)+'/'+name });
+                    g = new mvcModel({ 
+                        parent:m, 
+                        path:(path.substr(-1,1) == '/'? path.substr(0,-1) : path)+'/'+name 
+                    });
                 } else if (g.cacheLevel === 2) {
                     onEnd(g);
-                    resolve(g);
-                    return;
+                    return Promise.resolve(g);
                 }
-                var onError = function(e) {
-                    events.dispatch('core.mvc','model.load.error', { model:g, error:e });
-                    reject(e);
-                    onEnd(g);
-                },
-                source = mvcCon.source.get(g.path);
-
+                var source = mvcCon.source.get(g.path);
                 if (! source) 
-                    return onError('No MVC source for path!');
+                    throw new Error('No MVC source for path!');
                 g.url = source.url;
                 g.view.path = source.viewPath(g.path);
-                if (typeof g.cacheLevel === 'undefined') g.cacheLevel = source.defaultCacheLevel;
-                source.fetch({ model:g }).then(
+                if (typeof g.cacheLevel === 'undefined') 
+                    g.cacheLevel = source.defaultCacheLevel;
+                return source.fetch({ model:g }).then(
                     function(j) {
-                        try {
-                            if (j.css) {
-                                var e = g.view.cssElement;
-                                e.innerHTML = css;
-                            }
-                            j.js(g);
+                        if (j.css)
+                            g.view.cssElement.innerHTML = css;
+                        return j.js(g).then(function(h) {
                             loaded.push(g);
-                        }
-                        catch(e) {
-                            onError(e);
-                        }
-                        finally {
-                            onEnd(g);
-                            resolve(g);
-                        }
-                    },
-                    onError
-                );
-            });
-        };
-        return new Promise(function(resolve,reject) {
-            var arr = [],
-            p = o.list.map(d);
-            p.reduce(function(sequence, cP) {
+                            return g;
+                        });
+                    }
+                ).catch(function (e) {
+                    events.dispatch('core.mvc','model.children.add.error',{
+                        model:g, 
+                        error:e
+                    });
+                }).then(function() {
+                    onEnd(g);
+                    return g;
+                });
+            }).reduce(function(sequence, cP) {
                 return sequence.then(function() {
                     return cP;
                 }).then(function(model) {
@@ -313,7 +326,7 @@ module.exports = function(app) {
                         }
                     }
                     arr.push(model);
-                    if(arr.length===p.length) 
+                    if(arr.length===o.list.length) 
                         resolve(arr);
                 }).catch(function(e) {
                     events.dispatch('core.mvc','model.children.add.error',e);
@@ -321,7 +334,6 @@ module.exports = function(app) {
                 });
             }, Promise.resolve());
         });
-
     };
     children.prototype.remove = function(model) {
         if (this.loaded.indexOf(model) === -1) 
@@ -353,7 +365,14 @@ module.exports = function(app) {
     var mvcCon = {
         current : null,
         requestId : 0,
-        root : new mvcModel({ path:'/', parent: { view : { container:document.body }} }),
+        root : new mvcModel({ 
+            path:'/', 
+            parent: { 
+                view : { 
+                    container:document.body 
+                }
+            } 
+        }),
         source : {
             pool : [],
             append : function(o) {
@@ -362,13 +381,15 @@ module.exports = function(app) {
             },
             remove : function(source) {
                 var s = this.pool.indexOf(source);
-                if (s===-1) return;
+                if (s===-1) 
+                    return;
                 this.pool.splice(s,1);
                 events.dispatch('core.mvc','source.remove',source);
             },
             get: function(path) {
-                for (var i=this.pool.length-1; i>=0; i--) {
-                    if (this.pool[i].handles(path)) return this.pool[i];
+                for (var i=this.pool.length-1; i>=0; --i) {
+                    if (this.pool[i].handles(path)) 
+                        return this.pool[i];
                 }
             }
         },
@@ -388,7 +409,8 @@ module.exports = function(app) {
                         list:[ra[at]]
                     }).then(function(m) {
                         // abort the load, another request has since came in
-                        if (uid !== v) return;
+                        if (uid !== v) 
+                            return;
                         self.current = model = m[0];
                         var view = model.view;
                         view.show();
@@ -420,7 +442,8 @@ module.exports = function(app) {
 
     window.addEventListener('scroll', function(evt) {
         var s = document.body.scrollTop || document.documentElement.scrollTop;
-        if (s < 0) s=0;
+        if (s < 0) 
+            s=0;
         document.body.setAttribute('scrollposition',s);
     });
     document.body.setAttribute('scrollposition',0);
