@@ -1,16 +1,16 @@
-module.exports = function (app,passobj) {
+module.exports = function (app,params) {
 
     if (typeof window.XMLHttpRequest === 'undefined') 
         throw new Error({ incompatible:true, noobject:'XMLHttpRequest' });
 
-    var debug = passobj && passobj.debug? true : false,
+    var debug = params && params.appconf.debug? true : false,
         workers = [({ uid:-1, done:true, module: { name:'instance.amd.js' }})],
-        loaded = [],
         head = document.getElementsByTagName('head')[0],
+        actors = [],
 
         promise = function(self) {
             if (debug) 
-                console.log('instance.amd:'+self.uid+':'+self.modules.map(function(n) { 
+                console.error('instance.amd:'+self.uid+':'+self.modules.map(function(n) { 
                     return n.name; 
                 }).join(','));
             return new Promise(function(resolve, reject) {
@@ -23,50 +23,67 @@ module.exports = function (app,passobj) {
                         m.requires = [];
                     var wk, 
                         n=m.name;
+                    // if there's already a worker for this module, find it, else create one
                     if (! workers.some(function (w) {
                         if (w.module.name === n) {
                             wk = w;
                             return true;
                         }
-                    })) wk = new worker({ module:m });
-                    wk.appendEventHandlers(
-                        function() {
-                            if (self.abort)
-                                return;
-                            if (self.onProgress)
-                                self.onProgress();
-                            if (self.workers.every(function (w) {
-                                return w.done;
-                            })) resolve(); 
-                        },
-                        function(e) {
-                            if (self.abort) 
-                                return;
-                            self.abort = true;
-                            reject(e);
-                        }
-                    );
+                    })) {
+                        wk = new worker({ module:m });
+                    }
                     self.workers.push(wk);
+                });
+
+                actors.push(
+                    function(worker,e) {
+                        //if (actorsdone.indexOf(this) !== -1)
+                            //return;
+                        if (self.abort)
+                            return;
+                        // are we interested in this worker?
+                        if (self.workers.indexOf(worker) === -1)
+                            return;
+                        // error?
+                        if (e) {
+                            self.abort = true;
+                            actors[actors.indexOf(this)] = null;
+                            return reject(e);
+                        }
+                        // progress made!
+                        if (self.onProgress)
+                            self.onProgress();
+                        // all workers complete?
+                        if (self.workers.every(function (w) {
+                            return w.done;
+                        })) {
+                            if (debug) 
+                                console.error('instance.amd:'+self.uid+':'+self.modules.map(function(n) { 
+                                    return n.name; 
+                                }).join(',')+':resolved');
+                            resolve();
+                            actors[actors.indexOf(this)] = null;
+                        }
+                    }
+                );
+                self.workers.forEach(function(wk) {
                     wk.run();
                 });
             });
         },
 
         setBits = function(p) {
-            if (p.modules) {
+            if (p.modules)
                 this.modules = p.modules;
-            }
-            if (p.repo) {
+            if (p.repo)
                 this.repo = p.repo;
-            }
-            if (p.onProgress) {
+            if (p.onProgress)
                 this.onProgress = p.onProgress;
-            }
         };
 
     var amd = function(o) {
         this.uid = Math.floor((Math.random() * 9999));
-        this.repo = passobj.repo;
+        this.repo = params.repo;
         if (o)
             setBits.call(this,o);
     };
@@ -86,14 +103,13 @@ module.exports = function (app,passobj) {
             type=this.type = e === null? '' : e[1],
             file = this.file = mod.repo+(mod.nosub? '' : '/'+type+'/')+modname;
         if (debug) 
-            console.log('instance.amd:worker:'+this.uid+':'+this.file);
-        this.eventHandlers = [];
+            console.error('instance.amd:worker:'+this.uid+':'+this.file);
         this.done = false;
     };
 
     worker.prototype.run = function() {
         if (this.done) {
-            return this.runHandlers(0);
+            return this.runActors();
         }
         if (this.running) {
             return;
@@ -112,9 +128,10 @@ module.exports = function (app,passobj) {
             }
             if (xhr.status === 200 || (xhr.status === 0 && xhr.responseText)) {
                 if (type === 'js') {
-                    var module = {};
-                    module.requires = [];
-                    module.exports = null;
+                    var module = {
+                        requires:[],
+                        exports:null
+                    };
                     try { 
                         eval(xhr.responseText); 
                     }
@@ -133,10 +150,7 @@ module.exports = function (app,passobj) {
                             modules:module.requires,
                         }).then(
                             function() { 
-                                self.execCode(); 
-                            }, 
-                            function(e) { 
-                                self.error(e); 
+                                return self.execCode(); 
                             }
                         );
                     } else {
@@ -164,61 +178,63 @@ module.exports = function (app,passobj) {
             events.dispatch('instance.xhr','start', fxhr);
     };
 
-    worker.prototype.appendEventHandlers = function(onSuccess, onError) {
-        this.eventHandlers.push([onSuccess, onError]);
-    };
-
-    worker.prototype.runHandlers = function(type,e) {
-        var v;
-        while (v = this.eventHandlers.shift()) {
-            v[type](e);
-        }
+    worker.prototype.runActors = function(e) {
+        var self = this;
+        actors.forEach(function(actor) {
+            if (actor)
+                actor.call(actor, self, e);
+        });
     };
 
     worker.prototype.execCode = function() {
         var code = this.code;
         var self = this;
-        if (! code) 
-            return this.loaded();
-        try {
-            var f = function() { 
-                self.loaded(); 
-            },
-            u = code(app,passobj,{
-                onError:function(e) { 
-                    self.error(e); 
-                }, 
-                onCompletion:function() { 
-                    f(); 
-                }
-            });
-            if (['object','function'].indexOf(typeof u) !== -1) {
-                var m = self.module.name;
-                app[m.substr(0,m.length-3)] = u;
+        if (! code) {
+            this.loaded();
+            return Promise.resolve();
+        }
+        return new Promise(function(resolve) {
+            var u = code(app,params),
+                m = self.module.name,
+                s = m.substr(0,m.length-3);
+            if (typeof u === 'object' && u instanceof Promise) {
+                return u().then(
+                    function(res) {
+                        app[s] = res;
+                        self.loaded();
+                        resolve();
+                    }
+                );
             }
-            if (u !== false) f();
-        }
-        catch(e) {
-            this.error({ error:e, worker:self });
-        }
+            app[s] = u;
+            self.loaded();
+            resolve();
+            //}
+        }).catch(function(e) {
+            self.error({ error:e, worker:self });
+        });
     };
 
     worker.prototype.loaded = function() {
         this.done=true;
         this.running = false;
-        this.runHandlers(0);
+        if (debug) 
+            console.error('instance.amd:worker:'+this.uid+':'+this.file+':loaded');
+        this.runActors();
     };
 
     worker.prototype.error = function(e) {
-        this.runHandlers(1,e);
+        if (debug) 
+            console.error('instance.amd:worker:'+this.uid+':'+this.file+':error');
+        this.runActors(e);
         this.running = false;
     };
 
     if (debug) {
         var dumper = function(o) {
-            console.log('');
+            console.error('');
             workers.forEach(function (a) {
-                console.log('instance.amd:worker:'+a.uid+':'+a.module.name+':'+a.done);
+                console.error('instance.amd:worker:'+a.uid+':'+a.module.name+':'+a.done);
             });
         };
         setTimeout(dumper, 3000);
