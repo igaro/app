@@ -1,0 +1,31 @@
+body >.instance-oauth2 {
+	
+	position:fixed;
+	height:100%;
+	width:100%;
+	background-color:#fff;
+	top:0;
+	left:0;
+	z-index:99999;
+
+	>iframe {
+		height:100%;
+		display:block;
+		border:0;
+		padding:0;
+	}
+
+	>a {
+		background: inline-image("instance.oauth2/back.svg") 50% 50%;
+		background-size:90%;
+		position:absolute;
+		right:1em;
+		top:1em;
+		display:inline-block;
+		padding:2em;
+		&:hover {
+			cursor:pointer;
+		}
+	}
+
+}

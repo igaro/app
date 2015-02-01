@@ -1,3 +1,5 @@
+(function () {
+
 'use strict';
 
 module.requires = [
@@ -8,269 +10,40 @@ module.requires = [
 module.exports = function(app) {
 
     var language = app['core.language'],
-        mvc = app['core.mvc'];
+        router = app['core.router'];
    
     return function(model) {
 
-        var view = model.view,
-            wrapper = view.wrapper,
-            events = model.events;
+        var wrapper = model.wrapper,
+            dom = model.managers.dom;
+            
+        model.setMeta('title', _tr("Modules"));
 
-        model.meta.set('title', {
-            en : 'Modules',
-            fr : 'Modules'
+        dom.mk('h1',wrapper, _tr("Igaro Repository"));
+
+        dom.mk('button',dom.mk('p',wrapper), _tr("View on Github")).addEventListener('click', function() {
+            window.open('https://github.com/igaro/app');
         });
 
-        view.createAppend('h1',wrapper,{
-            en : 'Igaro Reposfitory'
-        });
-
-        view.createAppend('button',view.createAppend('p',wrapper), { 
-            en : 'View on Github',
-            fr : 'Voir sur Github' 
-        }).addEventListener('click', function() {
-            window.open('https://github.com/igaro/');
-        });
-
-        view.instances.add('table',{
-            container:wrapper,
-            searchable:true,
-            header : {
-                rows : [
-                    {
-                        columns : [
-                            {
-                                lang : {
-                                    en : 'Name',
-                                    fr : 'Nom'
-                                }
-                            },
-                            {
-                                lang : {
-                                    en : 'Description'
-                                }
-                            }
-                        ]
-                    }
-                ]
-            },
-            body : {
-                rows : [
-                    ['3rdparty.fastclick', {
-                        en : 'Removes 300ms click delay on mobile platforms. Useful for Cordova/Phonegap.',
-                        fr : 'Supprime 300ms clic retard sur les plateformes mobiles. Utile pour Cordova / PhoneGap.'
-                    }],
-                    ['3rdparty.hammer', {
-                        en : 'Enables Tap, DoubleTap, Swipe, Drag, Pinch, and Rotate gesture events.',
-                        fr : 'Permet Tap, DoubleTap, glisser, glisser, pincer, et les événements de mouvement de rotation.'
-                    }],
-                    ['3rdparty.jquery.2', {
-                        en : 'Non-standard library. Some insist on using it.',
-                        fr : 'Bibliothèque non standard. Certains insistent sur ​​son utilisation.'
-                    }],
-                    ['3rdparty.moment', {
-                        en : 'Date/time formatting using timezone and language.',
-                        fr : 'Formatage à l\'aide fuseau horaire et la langue de date / heure.'
-                    }],
-                    ['3rdparty.observe', {
-                        en : 'Data binding with polyfill for browsers lacking Object.observe.',
-                        fr : 'La liaison de données avec polyfill pour les navigateurs qui n\'ont pas Object.observe.'
-                    }],
-                    ['conf.initialroutes', {
-                        en : 'Initial route definitions.',
-                        fr : 'Définitions route initiale.'
-                    }],
-                    ['conf.internalroutes', {
-                        en : 'MVC source defination using the App\'s relative path.',
-                        fr : 'MVC source defination using the App\'s relative path.'
-                    }],
-                    ['core.country', {
-                        en : 'Country selection, related functionality.',
-                        fr : 'MVC defination source en utilisant le chemin relatif de l\'App.'
-                    }],
-                    ['core.currency', {
-                        en : 'Currency selection, related functionality.',
-                        fr : 'Sélection de la devise, les fonctionnalités associées.'
-                    }],
-                    ['core.date', {
-                        en : 'Timezone selection, date related functionality.',
-                        fr : 'Sélection du fuseau horaire, la date des fonctionnalités liées.'
-                    }],
-                    ['core.debug', {
-                        en : 'Centralised debug management.',
-                        fr : 'Gestion centralisée de débogage.'
-                    }],
-                    ['core.events', {
-                        en : 'Event management, registration and dispatch.',
-                        fr : 'La gestion de l\'événement, l\'enregistrement et l\'envoi.'
-                    }],
-                    ['core.file', {
-                        en : 'Filename parsing.',
-                        fr : 'Nom du fichier analyse.'
-                    }],
-                    ['core.html', {
-                        en : 'HTML parsing, conversion.',
-                        fr : 'Analyse HTML, conversion.'
-                    }],
-                    ['core.language', {
-                        en : 'Language selection, formatting.',
-                        fr : 'Sélection de la langue, le formatage.'
-                    }],
-                    ['core.mvc', {
-                        en : 'Model-view-controller architecture with use of routes.',
-                        fr : 'L\'architecture modèle-vue-contrôleur à l\'utilisation des routes.'
-                    }],
-                    ['core.status', {
-                        en : 'Status management for user feedback.',
-                        fr : 'Gestion de l\'état de la rétroaction des utilisateurs.'
-                    }],
-                    ['core.store', {
-                        en : 'Session, local and cookie store access.',
-                        fr : 'Session, l\'accès au magasin local et biscuit.'
-                    }],
-                    ['core.url', {
-                        en : 'Url parsing, related functionality.',
-                        fr : 'Url analyse, les fonctionnalités associées.'
-                    }],
-                    ['instance.amd', {
-                        en : 'Async loading of resources with requires.',
-                        fr : 'Async chargement des ressources avec l\'exige.'
-                    }],
-                    ['instance.bookmark', {
-                        en : 'Basic social media bookmarks.',
-                        fr : 'Base signets de médias sociaux.'
-                    }],
-                    ['instance.date', {
-                        en : 'Date output with language switching & timezone correction.',
-                        fr : 'Date de sortie avec changement de langue et de fuseau horaire correction.'
-                    }],
-                    ['instance.form.validate', {
-                        en : 'Form element value validation routines.',
-                        fr : 'Former des routines de validation de la valeur de l\'élément.'
-                    }],
-                    ['instance.jsonp', {
-                        en : 'Retrieve JSON data without CORS limitation.',
-                        fr : 'Récupérer des données JSON sans limitation CORS.'
-                    }],
-                    ['instance.list', {
-                        en : 'LI list management with re-ordering functionality.',
-                        fr : 'Gestion de la liste LI avec la fonctionnalité de réorganisation.'
-                    }],
-                    ['instance.modaldialog', {
-                        en : 'Async dialog boxes to replace alert() and confirm().',
-                        fr : 'Boîtes de dialogue Async pour remplacer alert() et confirm().'
-                    }],
-                    ['instance.navigation', {
-                        en : 'Navigation controls (tabs, dropdown etc).',
-                        fr : 'Les contrôles de navigation (onglets, menu déroulant, etc).'
-                    }],
-                    ['instance.pagemessage', {
-                        en : 'Displays formatted message on the page with persistent hide.',
-                        fr : 'Affiche formatés message sur la page de cache persistant.'
-                    }],
-                    ['instance.rte', {
-                        en : 'Rich text data entry and display.',
-                        fr : 'Rich entrée de données de texte et d\'affichage.'
-                    }],
-                    ['instance.samespace', {
-                        en : 'Elements in same space with navigation and animation.',
-                        fr : 'Éléments dans un même espace avec la navigation et de l\'animation.'
-                    }],
-                    ['instance.table', {
-                        en : 'Table display with row/column management.',
-                        fr : 'Affichage de la table avec la direction de ligne/colonne.'
-                    }],
-                    ['instance.xhr', {
-                        en : 'XHR (Ajax) functionality.',
-                        fr : 'XHR (Ajax) fonctionnalité.'
-                    }],
-                    ['polyfill.es6.promises', {
-                        en : 'A+ Promises for async chainable processes.',
-                        fr : 'A+ Promises pour processus pouvant être enchaînées asynchrones.'
-                    }],
-                    ['polyfill.ie.8', {
-                        en : 'Polyfill for Internet Explorer 8.',
-                        fr : 'Polyfill pour Internet Explorer 8.'
-                    }],
-                    ['polyfill.js.1.6', {
-                        en : 'Polyfill very old browsers to Mozilla 1.6 specification.',
-                        fr : 'Polyfill très vieux navigateurs à la spécification Mozilla 1.6.'
-                    }],
-                    ['polyfill.js.1.8.1', {
-                        en : 'Polyfill old browsers to Mozilla 1.8.1 specification.',
-                        fr : 'Polyfill vieux navigateurs à la spécification Mozilla 1.8.1.'
-                    }],
-                    ['polyfill.js.1.8.5', {
-                        en : 'Polyfill old browsers to Mozilla 1.8.5 specification.',
-                        fr : 'Polyfill vieux navigateurs à la spécification Mozilla 1.8.5.'
-                    }],
-                    ['polyfill.js.classList', {
-                        en : 'Polyfill HTML5 classList helpers onto DOM elements.',
-                        fr : 'Polyfill aides HTML5 classList sur ​​les éléments DOM.'
-                    }],
-                    ['service.consoledebug', {
-                        en : 'Routes debug data to the console log.',
-                        fr : 'Routes déboguer données dans le journal de la console.'
-                    }],
-                    ['service.errormanagement', {
-                        en : 'Error management, user feedback, phone home functionality.',
-                        fr : 'La gestion des erreurs, la rétroaction des utilisateurs, la fonctionnalité téléphone à la maison.'
-                    }],
-                    ['service.status', {
-                        en : 'User status update functionality.',
-                        fr : 'Fonctionnalité de mise à jour de statut de l\'utilisateur.'
-                    }]
-                ].map(function (o) {
-                    var n = o[0];
-                    var a = view.createAppend('a',null,n);
-                    a.href='#!/'+view.path+'/'+n;
-                    a.addEventListener('click', function(evt) {
-                        evt.preventDefault();
-                        mvc.to(model.path+'/'+n);
-                    });
-                    return {
-                        columns : [
-                            {
-                                append:a, search:function() { return a.innerHTML; }
-                            },
-                            {
-                                lang:o[1]
-                            }
-                        ]
-                    };
-                })
-            }
-        });
-
-        model.store.childsupport = function(data, m) {
+        model.stash.childsupport = function(data, m) {
 
             var createTable = function(data,container) {
 
-                view.createAppend('p',container,{
-                    en : '* = required',
-                    fr : '* = requis'
-                });
-                view.instances.add('table',{
+                dom.mk('p',container,_tr("* = required"));
+                model.addInstance('table',{
                     container:container,
                     header : {
                         rows : [
                             {
                                 columns : [
                                     {
-                                        lang : {
-                                            en : 'Name',
-                                            fr : 'Nom'
-                                        }
+                                        content : _tr("Name")
                                     },
                                     {
-                                        lang : {
-                                            en : 'Type'
-                                        }
+                                        content : _tr("Type")
                                     },
                                     {
-                                        lang : {
-                                            en : 'Description'
-                                        }
+                                        content : _tr("Description")
                                     }
                                 ]
                             }
@@ -284,7 +57,6 @@ module.exports = function(app) {
                 }).then(function (tbl) {
                     var body=tbl.body, 
                         brows=body.rows;
-                    
                     var makeahref = function(row,sd,td,cc) {
                         if (sd.instanceof) 
                             sd = sd.instanceof();
@@ -320,7 +92,7 @@ module.exports = function(app) {
                             var row = body.addRow({ 
                                 insertBefore:at? brows.indexOf(at)+1: null, 
                                 columns:[
-                                    { lang:s.name? { en: s.name + (s.required? ' *' : '') } : null }
+                                    { content:s.name? { en: s.name + (s.required? ' *' : '') } : null }
                                 ]
                             });
                             row.belongsTo=[];
@@ -330,7 +102,7 @@ module.exports = function(app) {
                             }
                             var cc = row.addColumn(),
                                 ce = cc.element,
-                                rr = row.addColumn({ lang:s.desc?s.desc:null });
+                                rr = row.addColumn({ content:s.desc?s.desc:null });
                             if (s.returns && s.type==='function') {
                                 var l,
                                     returns = s.returns;
@@ -342,7 +114,7 @@ module.exports = function(app) {
                                     l = '⊗';
                                 }
                                 makeahref(row,s.returns,ce, l);
-                                view.createAppend('span',ce,' = ');
+                                dom.mk('span',ce,' = ');
                             }
                             if (s.instanceof) {
                                 var m=s.instanceof;
@@ -361,38 +133,38 @@ module.exports = function(app) {
                                                 q[k] += ' '+s.desc[k];
                                         });
                                     }
-                                    rr.setContent({ lang:q });
+                                    rr.setContent({ content:q });
                                 } else {
                                     var sa = m.name;
                                     if (m.required) 
                                         sa += ' *';
-                                    var a = view.createAppend('a',ce,sa);
+                                    var a = dom.mk('a',ce,sa);
                                     a.href = m.href? m.href : 'https://developer.mozilla.org/en/docs/Web/API/'+m.name;
                                     if (m.desc) 
-                                        rr.setContent({ lang:m.desc });
+                                        rr.setContent({ content:m.desc });
                                 }
                             } else if (s.attributes && (s.type!=='function' || s.instanceof)) {
                                 makeahref(row,s,ce,s.type);
                             } else {
-                                view.createAppend('span',ce,s.type);
+                                dom.mk('span',ce,s.type);
                             }
 
                             if (s.attributes && (s.type==='function' || s.instanceof)) {
-                                view.createAppend('span',ce,' (');
+                                dom.mk('span',ce,' (');
                                 s.attributes.forEach(function (m,i) {
                                     if (i !== 0) 
-                                        view.createAppend('span',ce,',');
+                                        dom.mk('span',ce,',');
                                     //if (m.instanceof) {
                                     //    makeahref(row,m,ce,m.instanceof().name);
                                     if (m.instanceof || m.attributes) { 
                                         makeahref(row,m,ce,m.instanceof? m.instanceof().name : m.type); 
                                     } else { 
-                                        view.createAppend('span',ce,m.type); 
+                                        dom.mk('span',ce,m.type); 
                                     }
                                     if (m.required) 
-                                        view.createAppend('sup',ce,'*');
+                                        dom.mk('sup',ce,'*');
                                 });
-                                view.createAppend('span',ce,')');
+                                dom.mk('span',ce,')');
                             }
                         });
                     };
@@ -400,77 +172,56 @@ module.exports = function(app) {
                 });
             };
 
-            var v = m.view.wrapper;
-            m.meta.set('title', { en : m.name });
+            var v = m.wrapper;
+            m.setMeta('title', { en : m.name });
 
             if (data.desc) {
-                view.createAppend('h1',v,{
-                    en: 'Description'
-                });
-                view.createAppend('p',v,data.desc);
+                dom.mk('h1',v,_tr("Description"));
+                dom.mk('p',v,data.desc);
             }
 
             if (data.download !== false) {
                 var l = data.download? data.download : 'https://github.com/igaro/app/blob/master/app/compile/js/'+m.name+'.js';
-                view.createAppend('button',v,{
-                    en: 'Download'
-                }).addEventListener('click', function() {
+                dom.mk('button',v,_tr("Download")).addEventListener('click', function() {
                     window.open(l);
                 });
             }
 
             if (data.usage) {
                 var u = data.usage;
-                view.createAppend('h1',v,{
-                    en: 'Usage'
-                });
+                dom.mk('h1',v,_tr("Usage"));
                 if (u.instantiate || u.class) {
-                    var o = u.instantiate? {
-                        en : 'Create a new instance using <b>new <MODNAME></b>.',
-                        fr : 'Créer une nouvelle instance en utilisant <b>new <MODNAME></b>.'
-                    } : {
-                        en : 'Access <b><MODNAME></b> directly without instantiating.',
-                        fr : 'Accès <b><MODNAME></b> sans instancier.'
-                    };
+                    var o = u.instantiate? 
+                        _tr("Create a new instance using <b>new <MODNAME></b>.")
+                    :
+                        _tr("Access <b><MODNAME></b> directly without instantiating.")
+                    ;
                     var n= 'app[\''+m.name+'\']';
                     if (u.attributes) 
                         n += '(o)';
                     Object.keys(o).forEach(function (p) { 
                         o[p]=o[p].replace(/\<MODNAME\>/g,n);
                     });
-                    view.createAppend('p',v,o);
+                    dom.mk('p',v,o);
                 } else if (u.direct) {
-                    view.createAppend('p',v,{
-                        en : 'Access the features of this library directly.',
-                        fr : 'Accès aux fonctions de cette bibliothèque directement.'
-                    });
+                    dom.mk('p',v,_tr("Access the features of this library directly."));
                 }
                 if (u.attributes) {
-                    view.createAppend('p',v, {
-                        en : 'Where <b>o</b> is an object containing attributes from the following table.'
-                    });
-                    createTable(u.attributes, view.createAppend('p',v));
+                    dom.mk('p',v, _tr("Where <b>o</b> is an object containing attributes from the following table."));
+                    createTable(u.attributes, dom.mk('p',v));
                 }
             }        
 
             if (data.demo) {
-                view.createAppend('h1',v,{
-                    en : 'Demo',
-                    fr : 'Démo'
-                });
-                view.createAppend('h2',v,{
-                    en : 'Code'
-                });
+                dom.mk('h1',v,_tr("Demo"));
+                dom.mk('h2',v,_tr("code"));
+                dom.mk('p',v);
 
-                view.createAppend('p',v);
+                var dr = dom.mk('pre',v, data.demo.trim(), 'democode');
 
-                var dr = view.createAppend('pre',v, data.demo.trim(), 'democode');
-
-                view.instances.add('pagemessage',{ 
+                model.addInstance('pagemessage',{ 
                     type:'info',
-                    message: {
-                        en : 'Note: In demo code <b>view</b> references model.view and <b>c</b> references view.wrapper.'
-                    },
+                    message: _tr("Note: In demo code <b>c</b> references model.wrapper."),
                     hideable: {
                         model:model,
                         id:'democode'
@@ -479,78 +230,65 @@ module.exports = function(app) {
                     v.insertBefore(cp.container,dr);
                 });
                 
-                view.createAppend('h2',v,{
-                    en : 'Output'
-                });
-                var c=view.createAppend('p',v);
+                dom.mk('h2',v,_tr("Output"));
+                dom.mk('p',v);
                 eval(data.demo);
             }
 
             if (data.attributes) {
-                view.createAppend('h1',v,{
-                    en : 'Attributes',
-                    fr : 'Attributs'
-                });
-                createTable(data.attributes, view.createAppend('p',v));
+                dom.mk('h1',v,_tr("Attributes"));
+                createTable(data.attributes, dom.mk('p',v));
             }
 
             if (data.dependencies) {
-                view.createAppend('h1',v,{
-                    en : 'Dependencies',
-                    fr : 'Dépendances'
-                });
-                var p = view.createAppend('p',v);
-                data.dependencies.forEach(function(o) { 
-                    view.createAppend('button',p,o).addEventListener('click', function(evt) {
-                        evt.preventDefault();
-                        this.disabled = true;
-                        var self= this;
-                        mvc.to(model.path+'/'+this.value).catch().then(function () {
-                            self.disabled = false;
+                dom.mk('h1',v,_tr("Dependencies"));
+                var p = dom.mk('p',v,null,function() {
+                    var s = this;
+                    data.dependencies.forEach(function(o) { 
+                        dom.mk('button',s,o).addEventListener('click', function(evt) {
+                            evt.preventDefault();
+                            this.disabled = true;
+                            var self= this;
+                            router.to(model.path+'/'+this.value).catch().then(function () {
+                                self.disabled = false;
+                            });
                         });
-                    }); 
-                    
+                    });
                 });
             }
 
             if (data.related) {
-                view.createAppend('h1',v,{
-                    en : 'Related',
-                    fr : 'Connexe'
-                });
-                var p = view.createAppend('p',v);
-                data.related.forEach(function(o) { 
-                    view.createAppend('button',p,o).addEventListener('click', function(evt) {
-                        evt.preventDefault();
-                        this.disabled = true;
-                        var self= this;
-                        mvc.to(model.path+'/'+this.value).catch().then(function () {
-                            self.disabled = false;
+                dom.mk('h1',v,_tr("Related"));
+                dom.mk('p',v,null,function() {
+                    var s = this;
+                    data.related.forEach(function(o) { 
+                        dom.mk('button',s,o).addEventListener('click', function(evt) {
+                            evt.preventDefault();
+                            this.disabled = true;
+                            var self= this;
+                            router.to(model.path+'/'+this.value).catch().then(function () {
+                                self.disabled = false;
+                            });
                         });
                     });
                 });
+                
             }
 
             if (data.author) {
-                view.createAppend('h1',v,{
-                    en : 'Author',
-                    fr : 'Auteur'
-                });
+                dom.mk('h1',v,_tr("Author"));
                 var d = data.author;
-                if (typeof d === 'array') {
+                if (d instanceof Array) {
                     d.forEach(function (a) {
-                        view.createAppend('a',view.createAppend('p',v,null),a.name).href = a.link;
+                        dom.mk('a',dom.mk('p',v,null),a.name).href = a.link;
                     });
                 } else {
-                    view.createAppend('a',view.createAppend('p',v,null),d.name).href = d.link;
+                    dom.mk('a',dom.mk('p',v,null),d.name).href = d.link;
                 }
             }
 
             if (data.extlinks) {
-                view.createAppend('h1',v,{
-                    en : 'External Links',
-                    fr : 'Liens Externes'
-                });
+                dom.mk('h1',v,_tr("External Links"));
                 data.extlinks.forEach(function(o) {
                     var name,href;
                     if (typeof o === 'string') {
@@ -559,10 +297,92 @@ module.exports = function(app) {
                         name = o.name;
                         href = o.href;
                     }
-                    view.createAppend('a',view.createAppend('p',v),name).href = href;
+                    dom.mk('a',dom.mk('p',v),name).href = href;
                 });
             }
-
         };
+
+        return model.addInstance('table',{
+            container:wrapper,
+            searchable:true,
+            header : {
+                rows : [
+                    {
+                        columns : [
+                            {
+                                content : _tr("Name")
+                            },
+                            {
+                                content : _tr("Description")
+                            }
+                        ]
+                    }
+                ]
+            },
+            body : {
+                rows : [
+                    ['3rdparty.fastclick', _tr("Removes 300ms click delay on touch platforms.")],
+                    ['3rdparty.hammer', _tr("Enables Tap, DoubleTap, Swipe, Drag, Pinch, and Rotate gesture events.")],
+                    ['3rdparty.jquery.2', _tr("Non-standard library. Some insist on using it.")],
+                    ['3rdparty.moment', _tr("Date/time formatting using timezone and language.")],
+                    ['3rdparty.observe', _tr("Data binding with polyfill for browsers lacking Object.observe.")],
+                    ['conf.app', _tr("Main configuration file.")],
+                    ['core.country', _tr("Country support and related functionality.")],
+                    ['core.currency', _tr("Currency support and related functionality.")],
+                    ['core.date', _tr("Timezone selection, date related functionality.")],
+                    ['core.debug', _tr("Centralised debug management.")],
+                    ['core.dom', _tr("Provides DOM management and helpers.")],
+                    ['core.events', _tr("Event management, registration and dispatcher.")],
+                    ['core.file', _tr("Filename parsing.")],
+                    ['core.html', _tr("HTML parsing, conversion.")],
+                    ['core.language', _tr("Language support, formatting, related functionality.")],
+                    ['core.router', _tr("Router, an MVC alternative using routes to build partials.")],
+                    ['core.status', _tr("Status management for user feedback.")],
+                    ['core.store', _tr("Session, local, cookie and remote store access.")],
+                    ['core.url', _tr("Url parsing, related functionality.")],
+                    ['instance.amd', _tr("Async loading of resources, NodeJS/Require style.")],
+                    ['instance.bookmark', _tr("Basic social media bookmarking.")],
+                    ['instance.date', _tr("Date display with language switching & timezone correction.")],
+                    ['instance.form.validate', _tr("Form element value validation routines.")],
+                    ['instance.jsonp', _tr("Retrieve JSON data without CORS limitation.")],
+                    ['instance.list', _tr("LI list management with re-ordering functionality.")],
+                    ['instance.modaldialog', _tr("Async dialog boxes with alert() and confirm() replacements.")],
+                    ['instance.navigation', _tr("Navigation controls (tabs, dropdown etc).")],
+                    ['instance.pagemessage', _tr("Displays a formatted message.")],
+                    ['instance.rte', _tr("Rich text data entry and display.")],
+                    ['instance.samespace', _tr("Elements in same space with navigation and animation.")],
+                    ['instance.table', _tr("Table display with row/column management.")],
+                    ['instance.toast', _tr("Toast notification popup and auto hide.")],
+                    ['instance.xhr', _tr("XHR (Ajax) functionality.")],
+                    ['polyfill.es6.promises', _tr("A+ Promises for async chainable processes.")],
+                    ['polyfill.ie.8', _tr("Polyfill for Internet Explorer 8.")],
+                    ['polyfill.js.1.6', _tr("Polyfill ancient browsers to Mozilla 1.6 specification.")],
+                    ['polyfill.js.1.8.1', _tr("Polyfill old browsers to Mozilla 1.8.1 specification.")],
+                    ['polyfill.js.1.8.5', _tr("Polyfill deprecated browsers to Mozilla 1.8.5 specification.")],
+                    ['polyfill.js.classList', _tr("Polyfill HTML5 classList helpers onto DOM elements.")],
+                ].map(function (o) {
+                    var n = o[0];
+                    var a = dom.mk('a',null,n);
+                    a.href='#!/'+model.uriPath+'/'+n;
+                    a.addEventListener('click', function(evt) {
+                        evt.preventDefault();
+                        router.to(model.uriPath.concat(n));
+                    });
+                    return {
+                        columns : [
+                            {
+                                content:a, search:function() { return a.innerHTML; }
+                            },
+                            {
+                                content:o[1]
+                            }
+                        ]
+                    };
+                })
+            }
+        });
+
     };
 };
+
+})();

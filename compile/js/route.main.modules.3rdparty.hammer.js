@@ -3,10 +3,7 @@ module.exports = function(app) {
     return function(model) {
 
         var data = {
-            desc : {
-                en : 'This library provides touch events. It is not loaded by default.',
-                fr : 'Cette bibliothèque fournit les événements tactiles. Il n\'est pas chargé par défaut.'
-            },
+            desc : _tr("This library provides touch events and is loaded when a touch screen is detected."),
             usage : {
                 direct : true
             },
@@ -15,7 +12,7 @@ module.exports = function(app) {
             ]
         };
 
-        model.parent.store.childsupport(data,model);
+        model.parent.stash.childsupport(data,model);
 
     };
 

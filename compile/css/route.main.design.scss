@@ -1,6 +1,6 @@
 @import "../sass-global/mixins.scss";
 
-body >.core-mvc >.main >.design >.wrapper {
+body >.core-router >.main >.design >.wrapper {
 
     @include pagepadding;
     @include pagerestrictwidth;
@@ -11,21 +11,25 @@ body >.core-mvc >.main >.design >.wrapper {
 		background: inline-image("route.main.design/classid.png");  
 	}
 
-	>.viewblock {
-		background:#444;
-		display:inline-block;
-		font-weight:bold;
-		color:#fff;
-		>p {
-			padding:1em;
+	>p {
+		>.viewblock {
+			background:#444;
+			display:inline-block;
+			font-weight:bold;
+			color:#fff;			
+			padding:0.5em;
+
 			>div {
 				color:#fff;
-				display:inline-block;
-				margin:1em 1em 0 1em;
-				padding:1em;
+				display:block;
+				margin:0.25em 0.5em;
+				padding:0.1em 0.5em;
 				background:red;
+				>div {
+					background:green;
+				}
 			}
-		}
+		}	
 	}
 
 }

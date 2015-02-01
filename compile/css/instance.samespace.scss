@@ -28,7 +28,6 @@
 100% { opacity: 1; transform: translateX(0); }
 }
 
-
 .instance-samespace {
 
     position:relative;
@@ -46,7 +45,7 @@
             >li {
                 padding:0.5em;
                 margin-right:0.5em;
-                background:#fff;
+                background:#999;
                 border: 1px solid #000;
                 opacity:.8;
                 display:inline-block;
@@ -56,7 +55,7 @@
                 }
                 &:hover { cursor:pointer; opacity:1 }
                 &.active {
-                    background:#999;
+                    background:#fff;
                     &:hover {
                         opacity:.8;
                         cursor:default;

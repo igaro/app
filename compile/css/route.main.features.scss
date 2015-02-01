@@ -1,6 +1,6 @@
 @import "../sass-global/mixins.scss";
 
-body >.core-mvc >.main >.features >.wrapper {
+body >.core-router >.main >.features >.wrapper {
     @include pagepadding;
     @include pagerestrictwidth;
 

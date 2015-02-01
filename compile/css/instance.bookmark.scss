@@ -5,16 +5,20 @@
     >li {    
         display:inline-block;
         margin: 0 1.6em 0 0;
-        padding:16px 16px 0 0;
-        &:hover { cursor:pointer }
-        &.delicious { background: inline-image("instance.bookmark/delicious.png") no-repeat 50% 50% }
-        &.digg { background: inline-image("instance.bookmark/digg.png") no-repeat 50% 50% }
-        &.reddit { background: inline-image("instance.bookmark/reddit.png") no-repeat 50% 50% }
-        &.facebook { background: inline-image("instance.bookmark/facebook.png") no-repeat 50% 50% }
-        &.stumbleupon { background: inline-image("instance.bookmark/stumbleupon.png") no-repeat 50% 50% }
-        &.email { background: inline-image("instance.bookmark/email.png") no-repeat 50% 50% }
-        &.twitter { background: inline-image("instance.bookmark/twitter.png") no-repeat 50% 50% }
-        &:last-child { margin:0; }
+        >a {
+            display:inline-block;
+            padding:16px 16px 0 0;
+            background-repeat:no-repeat !important;
+            background-position:50% 50% !important;
+        }
+        &.delicious >a { background-image: inline-image("instance.bookmark/delicious.png") }
+        &.digg >a { background-image: inline-image("instance.bookmark/digg.png") }
+        &.reddit >a { background-image: inline-image("instance.bookmark/reddit.png") }
+        &.facebook >a { background-image: inline-image("instance.bookmark/facebook.png") }
+        &.stumbleupon >a { background-image: inline-image("instance.bookmark/stumbleupon.png") }
+        &.email >a { background-image: inline-image("instance.bookmark/email.png") }
+        &.twitter >a { background-image: inline-image("instance.bookmark/twitter.png") }
+        &:last-child { margin-right:0; }
     }
 }
 

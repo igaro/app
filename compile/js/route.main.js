@@ -1,3 +1,7 @@
+(function() {
+
+"use strict";
+
 module.requires = [
     { name: 'route.main.css' },
     { name: 'core.language.js' }
@@ -6,27 +10,23 @@ module.requires = [
 module.exports = function(app) {
 
     var language = app['core.language'], 
-        mvc = app['core.mvc'];
+        router = app['core.router'],
+        dom = app['core.dom'],
+        Amd = app['instance.amd'];
 
     return function(model) {
 
         var view = model.view, 
-            wrapper = view.wrapper, 
-            events = model.events,
-            header = model.store.header = view.createAppend('div',wrapper,null,'header');
+            wrapper = model.wrapper, 
+            header = model.stash.header = dom.mk('div',wrapper,null,'header'),
+            main = dom.mk('div',wrapper,null,'main');
         
         // header
-        view.createAppend('span',header,{
-            en : 'Welcome to <b>Igaro App</b>.',
-            fr : 'Bienvenue à <b>Igaro App</b>.'
-        });
-        view.createAppend('button',header,{
-            en : 'Begin',
-            fr : 'Commencer'
-        }).addEventListener('click', function() {
+        dom.mk('span',header,_tr("Welcome to <b>Igaro App</b>"));
+        dom.mk('button',header,_tr("Begin")).addEventListener('click', function() {
             this.disabled=true;
             var self = this;
-            new amd().get({ modules:[{ name:'route-ext.main.js' }] }).then(
+            new Amd().get({ modules:[{ name:'route-ext.main.js' }] }).then(
                 function() {
                     try {
                         app['route-ext.main'](model);
@@ -37,19 +37,18 @@ module.exports = function(app) {
                 function() {
                     self.disabled=false;
                 }
-            );
+            ).catch(function (e) {
+                model.managers.debug.handle(e);
+            });
         });
 
         // sequence
-        view.addSequence({ container:wrapper, promises:[
+        model.addSequence({ container:main, promises:[
 
             // code edit
-            view.instances.add('pagemessage',{
+            model.addInstance('pagemessage',{
                 type:'info',
-                message: {
-                    en : 'Hint: You can see the code behind any page in this app by clicking the icon in the top right corner.',
-                    fr : ''
-                },
+                message: _tr("You can see the code behind any page in this app by clicking the menu icon in the top right corner."),
                 hideable: {
                     model:model,
                     id:'hintcode'
@@ -57,135 +56,75 @@ module.exports = function(app) {
             }),
 
             // menu
-            view.instances.add('list').then(function (list) {
+            model.addInstance('list').then(function (list) {
+
                 var l = [
-                    ['overview', {
-                        en : 'Overview',
-                        fr : 'Propos'
-                    }],
-                    ['features', {
-                        en : 'Features',
-                        fr : 'Traits'
-                    }],
-                    ['install', {
-                        en : 'Install',
-                        fr : 'Installer'
-                    }],
-                    ['faq', {
-                        en : 'FAQ',
-                    }],
-                    ['support', {
-                        en : 'Support',
-                        fr : 'Soutien'
-                    }]
+                    ['overview', _tr("Overview")],
+                    ['features', _tr("Features")],
+                    ['install', _tr("Install")],
+                    ['faq', _tr("FAQ")],
+                    ['support', _tr("Support")]
                 ];
                 l.forEach(function(o) { 
                     list.add({ id:o[0] }); 
                 });
-                model.store.menu=list;
-                var f = function(to,obj) {
-                    mvc.to(model.path+'/'+to);
-                },
-                as = list.pool.map(function (o) {
-                    var v = view.createAppend('a',o.li);
-                    v.href = '#!/' + o.id;
-                    v.addEventListener('click', function (evt) { 
-                        evt.preventDefault();
-                        f(o.id, this);
+                model.stash.menu=list;
+
+                list.pool
+                    .map(function (o) {
+                        var v = dom.mk('a',o.li);
+                        v.href = '#!/' + o.id;
+                        v.addEventListener('click', function (evt) { 
+                            evt.preventDefault();
+                            router.to(model.uriPath.concat(o.id));
+                        });
+                        return dom.mk('div',v);
+                    })
+                    .forEach(function (n,i) { 
+                        list.managers.dom.setContent(n, l[i][1]);
                     });
-                    return view.createAppend('div',v);
-                }),
-                x = function() { 
-                    as.forEach(function (n,i) { 
-                        n.innerHTML = language.mapKey(l[i][1]); 
-                    }); 
-                };
-                events.on('core.language','code.set', x);
-                x();
+                
                 return {
-                    container: view.createAppend('section', null, [
-                        view.createAppend('h1', null, {
-                            en : 'General',
-                            fr : 'Général'
-                        }),
-                        view.createAppend('p', null, {
-                            en : 'Yet another javascript web framework? Not quite. This one uses no HTML!',
-                            fr : 'Pourtant, un autre framework web javascript? Pas tout à fait. Celui-ci n\'utilise pas de HTML!'
-                        }),
-                        view.createAppend('p', null, {
-                            en : 'Igaro App offers tons of features and an amazing architecture on which to build your next SPA or mobile product.',
-                            fr : 'Igaro App propose des tonnes de fonctionnalités et d\'une architecture étonnante sur laquelle bâtir votre prochain SPA ou un produit mobile.'
-                        }),
+                    container: dom.mk('section', null, [
+                        dom.mk('h1', null, _tr('Insight')),
+                        dom.mk('p', null, _tr('An amazing architecture, developed by professionals, loaded with features.')),
                         list.container
                     ])
                 };
             }),
 
-            view.instances.add('list').then(function (list) {
+            model.addInstance('list').then(function (list) {
                 var l = [
-                    ['structure',{
-                        en : 'Structure',
-                        fr : 'Bâtiment'
-                    }],
-                    ['events',{
-                        en : 'Events',
-                        fr : 'Evénements'
-                    }],
-                    ['design',{
-                        en : 'Design',
-                        fr : 'Conception'
-                    }],
-                    ['modules',{
-                        en : 'Modules',
-                        fr : 'Modules'
-                    }],
-                    ['locale', {
-                        en : 'Locale',
-                        fr : 'Vitrine'
-                    }],
-                    ['mobile', {
-                        en : 'Mobile',
-                        fr : 'Mobile'
-                    }]
+                    ['structure',_tr("Structure")],
+                    ['async', _tr("Async")],
+                    ['design', _tr("Design")],
+                    ['modules',_tr("Modules")],
+                    ['locale', _tr("Locale")],
+                    ['mobile', _tr("Mobile")]
                 ];
                 l.forEach(function(o) { 
                     list.add({ id:o[0] }); 
                 });
-                model.store.menu=list;
-                var f = function(to,obj) {
-                    mvc.to(model.path+'/'+to);
-                },
-                as = list.pool.map(function (o) {
-                    var v = view.createAppend('a',o.li);
-                    v.href = '#!/' + o.id;
-                    v.addEventListener('click', function (evt) { 
-                        evt.preventDefault();
-                        f(o.id, this);
-                    });
-                    return view.createAppend('div',v);
-                }),
-                x = function() { 
-                    as.forEach(function (n,i) { 
-                        n.innerHTML = language.mapKey(l[i][1]); 
-                    }); 
-                };
-                events.on('core.language','code.set', x);
-                x();
+                model.stash.menu=list;
                 
+                list.pool
+                    .map(function (o) {
+                        var v = dom.mk('a',o.li);
+                        v.href = '#!/' + o.id;
+                        v.addEventListener('click', function (evt) { 
+                            evt.preventDefault();
+                            router.to(model.uriPath.concat(o.id));
+                        });
+                        return dom.mk('div',v);
+                    })
+                    .forEach(function (n,i) { 
+                        list.managers.dom.setContent(n,l[i][1]); 
+                    }); 
+                    
                 return {
-                    container: view.createAppend('section', null, [
-                        view.createAppend('h1', null, {
-                            en : 'Documentation',
-                            fr : 'Documentation'
-                        }),
-                        view.createAppend('p', null, {
-                            en : 'Plain javascript object orientated programming, with cutting edge ES6 features. No junk, snake oil or dependencies.',
-                            fr : 'Plaine javascript object programmation orienté, avec avant-gardistes fonctionnalités ES6. Aucune ordure, l\'huile de serpent ou des dépendances.'
-                        }),
-                        view.createAppend('p', null, { 
-                            en : 'Learn how Igaro App works and what makes it the fastest, most efficient framework out there.',
-                            fr : 'Apprenez comment Igaro App fonctionne et ce qui le rend le plus rapide cadre, plus efficace là-bas.'
-                        }),
+                    container: dom.mk('section', null, [
+                        dom.mk('h1', null, _tr("Documentation")),
+                        dom.mk('p', null, _tr("Learn, develop and deploy a custom application. All modules are fully documented.")),
                         list.container
                     ])
                 };
@@ -195,3 +134,5 @@ module.exports = function(app) {
         ]});
     };
 };
+
+})();

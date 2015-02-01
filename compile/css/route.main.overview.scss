@@ -1,6 +1,6 @@
 @import "../sass-global/mixins.scss";
 
-body >.core-mvc >.main >.overview >.wrapper {
+body >.core-router >.main >.overview >.wrapper {
     @include pagepadding;
     @include pagerestrictwidth;
 
@@ -8,8 +8,24 @@ body >.core-mvc >.main >.overview >.wrapper {
 		background: inline-image("route.main.overview/viewports.png") no-repeat 0 50%;
        	background-size:100%;
         width:40em;
-        height:20em;
+        height:16em;
         max-width:100%;
+	}
+
+	>p >.instance-table >tbody >tr >td {
+
+		&.green {
+			background-color:green;
+		}
+
+		&.red {
+			background-color:red;
+		}
+
+		&.orange {
+			background-color:orange;
+		}
+
 	}
 
 

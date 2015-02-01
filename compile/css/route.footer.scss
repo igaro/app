@@ -11,7 +11,7 @@
 100% { opacity: 1; transform: translateX(0); }
 }
 
-body >.core-mvc >.footer {
+body >.core-router >.footer {
 
 	background-color: #000;
 	height:4.6em;
@@ -57,7 +57,7 @@ body >.core-mvc >.footer {
 
 }
 
-body:not([scrollposition="0"]) >.core-mvc >.footer >.toTop {
+body:not([scrollposition="0"]) >.core-router >.footer >.toTop {
 	position:fixed;
 	display:inline-block;
 	width:100%;
@@ -74,10 +74,8 @@ body:not([scrollposition="0"]) >.core-mvc >.footer >.toTop {
 		height:3em;
 		width:3em;
 		border-radius: 0.2em 0 0 0.2em;
-		-webkit-animation-name: route-footer-NavTop;
-        animation-name: route-footer-NavTop;
-        -webkit-animation-duration:0.2s;
-        animation-duration:0.2s;
+		transition: all 0.5s; 
+		-webkit-transition: all 0.5s; 
 		>.navTop {
 			height:100%;
 			background: inline-image("route.footer/top.svg") no-repeat 50% 50%;

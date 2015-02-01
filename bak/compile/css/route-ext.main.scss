@@ -1,0 +1,212 @@
+@-webkit-keyframes route-main-spinner-rotateBottomLeft {
+    0% {
+        opacity:0;
+        visibility:visible;
+        -webkit-transform-origin: left bottom;
+        -webkit-transform: rotate(0);
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        opacity:0;
+        -webkit-transform-origin: left bottom;
+        -webkit-transform: rotate(-90deg);
+    }
+}
+
+@keyframes route-main-spinner-rotateBottomLeft {
+    0% {
+        opacity:0;
+        visibility:visible;
+        transform-origin: left bottom;
+        transform: rotate(0);
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        opacity:0;
+        transform-origin: left bottom;
+        transform: rotate(-90deg);
+    }
+}
+
+@-webkit-keyframes route-main-spinner-rotateLeftSide {
+    0% {
+        opacity:0;
+        visibility:visible;
+        -webkit-transform-origin: left center;
+        -webkit-transform: rotate(-30deg);
+    }
+    10% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 0;
+    }
+    100% {
+        opacity:0;
+        -webkit-transform-origin: left center;
+        -webkit-transform: rotate(30deg);
+    }
+}
+
+@keyframes route-main-spinner-rotateLeftSide {
+    0% {
+        opacity:0;
+        visibility:visible;
+        transform-origin: left center;
+        transform: rotate(-30deg);
+    }
+    10% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 0;
+    }
+    100% {
+        opacity:0;
+        transform-origin: left center;
+        transform: rotate(30deg);
+    }
+}
+
+@-webkit-keyframes route-main-spinner-rotateTopRight {
+    0% {
+        opacity:0;
+        visibility:visible;
+        -webkit-transform-origin: right top;
+        -webkit-transform: rotate(-120deg);
+    }
+    60% {
+        opacity: 1;
+    }
+    100% {
+        opacity:0;
+        -webkit-transform-origin: right top;
+        -webkit-transform: rotate(-20deg);
+    }
+}
+
+@keyframes route-main-spinner-rotateTopRight {
+    0% {
+        opacity:0;
+        visibility:visible;
+        transform-origin: right top;
+        transform: rotate(-120deg);
+    }
+    60% {
+        opacity: 1;
+    }
+    100% {
+        opacity:0;
+        transform-origin: right top;
+        transform: rotate(-20deg);
+    }
+}
+
+@import "../sass-global/mixins.scss";
+
+body >.core-mvc >.main {
+    
+    >.wrapper {
+
+        >.header {
+
+            >.instance-samespace {
+
+                >.canvas {
+                    >div {
+                        padding:0.3em 0;
+                        background:#fff;
+                        text-align:center;
+                    }
+                }
+            }
+        }
+   
+        >.spinners {
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            z-index:-1;
+            visibility:hidden;
+            overflow:hidden;
+            >div {
+                position:absolute;
+                visibility:hidden;
+                width:30em;
+                height:30em;
+            }
+
+            >.firefox, >.ie, >.chrome {
+                animation-duration:6s;
+                animation-delay:0.5s;
+                -webkit-animation-delay:0.5s;
+                -webkit-animation-duration:6s;
+            }
+
+            >.android, >.ios, >.wm {
+                animation-duration:6s;
+                animation-delay:5.5s;
+                -webkit-animation-delay:5.5s;
+                -webkit-animation-duration:6s;
+            }
+
+            >.firefox, >.android {
+                bottom:-15em;
+                left:100%;
+                -webkit-animation-name: route-main-spinner-rotateBottomLeft;
+                animation-name: route-main-spinner-rotateBottomLeft;
+            }
+            >.firefox {
+                background:inline-image("route-ext.main/spinners/firefox.svg") no-repeat 50% 50%;
+                background-size:60%;
+            }
+            >.android {
+                background:inline-image("route-ext.main/spinners/android.svg") no-repeat 50% 50%;
+                background-size:60%;
+            }
+
+            >.ie, >.ios {
+                top:28%;
+                left:-13em;
+                -webkit-animation-name: route-main-spinner-rotateLeftSide;
+                animation-name: route-main-spinner-rotateLeftSide;
+            }
+            >.ios {
+                background:inline-image("route-ext.main/spinners/ios.svg") no-repeat 50% 50%;
+                background-size:60%;
+            }
+            >.ie {
+                background:inline-image("route-ext.main/spinners/ie.svg") no-repeat 50% 50%;
+                background-size:60%;
+            }
+
+            >.wm, >.chrome {
+                right:25%;
+                top:-10em;
+                -webkit-animation-name: route-main-spinner-rotateTopRight;
+                animation-name: route-main-spinner-rotateTopRight;
+            }
+            >.wm {
+                background:inline-image("route-ext.main/spinners/wm.svg") no-repeat 0 50%;
+                background-size:60%;
+            }
+            >.chrome {
+                background:inline-image("route-ext.main/spinners/chrome.svg") no-repeat 0 0;
+                background-size:60%;
+            }
+        }
+        
+    }
+}

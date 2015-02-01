@@ -10,8 +10,11 @@
 
 .instance-navigation {
 
-    font-size:80%;
     font-weight:bold;
+
+    @media (min-width:1000px) {
+        font-size:130%;
+    }
 
     ul {
         margin:0;
@@ -24,12 +27,20 @@
             outline:0;
             >a {
                 display:block;
+                color:inherit;
+                text-decoration:none;
+                >span {
+                    display:block;
+                    &:empty {
+                        display:none;
+                    }
+                }
             }
         }
     }
 
     >.tabs {
-        border-bottom:1px solid #aaa;
+        border-bottom:1px solid #444;
         position:relative;
         >ul {
             text-align:left;
@@ -41,9 +52,9 @@
             >li {
                 cursor:pointer;
                 display:inline-block;
-                padding:0.5em;
-                margin:0 0.5em 0.5em 0.5em;
+                padding:0 0.7em;
                 font-size:100%;
+                line-height:180%;
                 &.tick { 
                     background-color:green; 
                 }
@@ -55,17 +66,10 @@
                 }
                 &.active {
                     position:relative;
-                    margin-top:6px;
-                    &:after {
-                        content: "";
-                        display: block;
-                        border: 12px solid transparent;
-                        border-bottom-color: #aaa;
-                        position: absolute;
-                        bottom: -0.5em;
-                        left: 50%;
-                        margin-left: -12px;
-                    }
+                    background-color:#444;
+                    color:#fff;
+                    border-radius:0.2em 0.2em 0 0;
+                    mrgin-left:0.4em;
                 }
                 &.disabled {
                     color:#ccc;
@@ -101,7 +105,9 @@
                 cursor:default;
                 background:inherit;
                 color:#aaa;
-                >.text { color:inherit } 
+                >span { 
+                    color:inherit 
+                } 
                 &:hover {
                     cursor:default;
                 }
@@ -117,14 +123,14 @@
                 &.active {
                     background: #393832;
                     &:hover { cursor:pointer; }
-                    >a >.text {
+                    >a >span {
                         color:#fff;
                     }
                 }
 
                 >a {
 
-                    >.text {
+                    >span {
                         padding:0.6em 1em;
                     }
 
@@ -133,8 +139,8 @@
                         background: #393832;
                         position:absolute;
                         z-index:9999;
-                        width:100%;
-                        left:0;
+                        //width:100%;
+                        right:0;
                         -webkit-animation-name: instance-navigation-fadeInDown;
                         animation-name: instance-navigation-fadeInDown;
                         -webkit-animation-duration:0.5s;
@@ -152,10 +158,11 @@
                                 .children {
                                     position:absolute;
                                     top:0;
-                                    left:100%;
+                                    //right:0;
+                                    //left:100%;
                                 }
                                 >a {
-                                    >.text {
+                                    >span {
                                         text-shadow: 0 1px rgba(0,0,0,0.3);
                                         line-height:100%;
                                         padding:0.7em 1em 0.7em 1em; 

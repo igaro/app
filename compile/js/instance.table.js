@@ -1,3 +1,7 @@
+(function() {
+
+'use strict';
+
 module.requires = [
     { name:'core.language.js'},
     { name:'instance.table.css'}
@@ -5,96 +9,97 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var events = app['core.events'],
-        language = app['core.language'];
+    var dom = app['core.dom'],
+        bless = app['core.bless'];
 
-    var column = function(t,o) {
-        var element = this.element = document.createElement('td');
-        t.element.appendChild(element);
-        if (o) {
-            if (o.append || o.lang) 
-                this.setContent({ lang:o.lang, append:o.append });
-            if (o.className) 
-                this.element.classList.add(o.className);
-            if (o.searchable) 
-                this.setSearch(o.searchable);
-        }
+    var InstanceTableDomainRowColumn = function(o) {
+        bless.call(this,{
+            name:'column',
+            parent:o.parent,
+        });
+        var dom = this.managers.dom,
+            parent = this.parent,
+            element = this.element = dom.mk('td',parent.element,o.content,o.className);
+        parent.element.appendChild(element);
+        if (o && o.searchable) 
+            this.setSearch(o.searchable);
+        this.managers.event.on('destroy', function() {
+            return dom.rm(element);
+        });
     };
-
-    column.prototype.setSearch = function(o) {
+    InstanceTableDomainRowColumn.prototype.setSearch = function(o) {
         this.searchable = o;
     };
 
-    column.prototype.setContent = function(c) {
-        var td = this.element;
-        while (td.firstChild) 
-            td.removeChild(td.firstChild);
-        if (c.append) 
-            td.appendChild(c.append);
-        if (c.lang) {
-            c = this.lang = c.lang;
-            if (typeof c === 'object') {
-                this.element.innerHTML = language.mapKey(c);
-            } else if (typeof c === 'function') {
-                c();
-            }
-        } else {
-            this.lang=null;
+    var InstanceTableDomainRow = function(o) {
+        bless.call(this,{
+            name:'row',
+            parent:o.parent,
+        });
+        var dom = this.managers.dom,
+            columns = this.columns = [],
+            parent = this.parent;
+        this.stash = {};
+        var element = this.element = dom.mk('tr',null,null,o.className),
+            self = this,
+            d = o.insertBefore;
+        if (o.searchable) { 
+            this.searchable=true; 
+            element.classList.add('searchable'); 
         }
-    };
-
-    var row = function(t,c) {
-        this.columns = [];
-        var element = this.element = document.createElement('tr');
-        if (c) {
-            var self = this,
-                d = c.insertBefore;
-            if (c.searchable) { 
-                this.searchable=true; 
-                element.classList.add('searchable'); 
-            }
-            if (c.className) 
-                element.classList.add(c.className);
-            if (c.columns) {
-                c.columns.forEach(function(o) { 
-                    self.addColumn(o);
-                });
-            }
-            if (d && (typeof d !== 'number' || d < t.rows.length)) {
-                t.element.insertBefore(element,typeof d === 'number'? t.rows[d].element : d.element);
-            } else {
-                t.element.appendChild(element);
-            }
-        } else {
-            t.element.appendChild(element);
+        if (o.stash)
+            self.stash = o.stash;
+        if (o.columns) {
+            o.columns.forEach(function(o) { 
+                o.parent = self;
+                self.addColumn(o);
+            });
         }
+        if (typeof d !== 'undefined') {
+            parent.element.insertBefore(element,typeof d === 'number'? t.rows[d].element : d.element);
+        } else {
+            parent.element.appendChild(element);
+        }
+        this.managers.event
+            .on('column.destroy', function(o) {
+                columns.splice(columns.indexOf(o.value,1));
+            });
     };
-
-    row.prototype.addColumn = function(o) {
-        var col = new column(this,o);
+    InstanceTableDomainRow.prototype.addColumn = function(o) {
+        o.parent = this;
+        var col = new InstanceTableDomainRowColumn(o);
         this.columns.push(col);
-        return col;
+        return this.managers.event.dispatch('addColumn',col).then(function() {
+            return col;
+        });
     };
 
-    var domain = function(c,type) {
-        var element = this.element = document.createElement(type);
-        c.container.appendChild(element);
+    var InstanceTableDomain = function(o) {
+        bless.call(this,{
+            name:'domain',
+            parent:o.parent
+        });
         this.rows = [];
+        this.element = dom = this.managers.dom.mk(o.type,o.parent.container);
     };
-
-    domain.prototype.addRow = function(o) {
-        var r = new row(this,o);
+    InstanceTableDomain.prototype.addRow = function(o) {
+        o.parent = this;
+        var r = new InstanceTableDomainRow(o);
         if (o && o.insertBefore) {
             this.rows.splice(typeof o.insertBefore === 'number'? o.insertBefore : this.rows.indexOf(o.insertBefore),0,r);
         } else {
             this.rows.push(r);
         }
-        return r;
+        return this.managers.event.dispatch('addRow',r).then(function () {
+            return r;
+        });
     };
-
-    domain.prototype.deleteRow = function(r) {
-        r.element.parentNode.removeChild(r.element);
-        this.rows.splice(this.rows.indexOf(r),1);
+    InstanceTableDomain.prototype.deleteRows = function() {
+        return Promise.all(
+            this.rows.slice(0).map(function(r) {
+                return r.destroy();
+            })
+        );
     };
 
     var searchExec = function(input,x) {
@@ -120,13 +125,18 @@ module.exports = function(app) {
         });
     };
 
-    var tblObj = function(o) {
-        var self = this,
-            c = this.container = document.createElement('table'),
-            header = this.header = new domain(this,'thead'),
-            body = this.body = new domain(this,'tbody'),
-            footer = this.footer = new domain(this,'tfoot');
-        c.className = 'instance-table';
+    var InstanceTable = function(o) {
+        bless.call(this,{
+            name:'instance.table',
+            parent:o.parent,
+            asRoot:true
+        });
+        var dom = this.managers.dom,
+            container = this.container = dom.mk('table',o.container,null,'instance-table'),
+            self = this,
+            header = this.header = new InstanceTableDomain({ parent:this, type:'thead' }),
+            body = this.body = new InstanceTableDomain({ parent:this, type:'tbody'}),
+            footer = this.footer = new InstanceTableDomain({ parent:this,type:'tfoot'});
         if (o) {
             [[header,o.header],[body,o.body],[footer,o.footer]].forEach( function(o) {
                 var domain = o[0],
@@ -146,63 +156,30 @@ module.exports = function(app) {
                 header.addRow({
                     searchable:true,
                     columns : header.rows[0].columns.map(function() {
-                        var i = document.createElement('input');
-                        i.addEventListener('input', function() { 
-                            searchExec(this,self); 
+                        return dom.mk('input[text]',null,null, function() {
+                            this.addEventListener('input', function() { 
+                                searchExec(this,self);
+                                dom.setPlaceholder(this,_tr('Search'));
+                            });
                         });
-                        i.type='text';
-                        return { 
-                            append:i, lang:function() {
-                                i.placeholder = language.mapKey({
-                                    en : 'Search',
-                                    fr : 'Recherche'
-                                });
-                            }
-                        };
                     })
                 });
             }
-
-            if (o.container) 
-                o.container.appendChild(c);
-            if (o.id) 
-                this.setId(o.id);
         }
-
-        var evt = this.eventLang = function() {
-            [header,body,footer].forEach(function(q) {
-                q.rows.forEach(function (r) {
-                    r.columns.forEach(function(c) {
-                        r.element.style.display='';
-                        var l = c.lang;
-                        if (r.searchable) 
-                            c.element.firstChild.value='';
-                        if (! l) 
-                            return;
-                        if (typeof l === 'object') { 
-                            c.element.innerHTML = language.mapKey(l); 
-                        } else if (typeof l === 'function') { 
-                            l(); 
-                        }
-                    });
-                });
-            });
-        };
-        events.on('core.language','code.set',evt);
+        this.managers.event.on('destroy', function() {
+            return dom.rm(container);
+        });
     };
 
-    tblObj.prototype.setId = function(id) {
-        this.id=id;
-        this.container.className = 'instance-table'+(id?id : '');
+    InstanceTable.prototype.hide = function(v) {
+        this.managers.dom.hide(this.container,v);
     };
 
-    tblObj.prototype.destroy = function() {
-        var c = this.container,
-            evt = this.eventFunctions;
-        if (c && c.parentNode)
-            c.parentNode.removeChild(c);
-        events.remove(this.eventLang,'core.language','code.set');
+    InstanceTable.prototype.show = function() {
+        this.managers.dom.show(this.container);
     };
 
-    return tblObj;
+    return InstanceTable;
 };
+
+})();

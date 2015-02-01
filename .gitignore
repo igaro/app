@@ -7,5 +7,6 @@ console.log
 *.sublime-workspace
 *.sublime-project
 output
+*~
 phonegap/platforms
 node_modules

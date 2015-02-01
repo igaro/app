@@ -1,36 +1,64 @@
+@import "../sass-global/mixins.scss";
+
+
 .instance-modaldialog {
     position:fixed;
-    left:0;
-    top:0;
+	left:0;
+   	top:0;
     height:100%;
     width:100%;
     background-color: rgba(0,0,0,.7);
     text-align:center;
-    display:table;
-	>.wrapper {
-		display:table-cell;
-		vertical-align:middle;
-		>.wrapper {
-			border-radius:.7em;
-			background:#fff;
-			width:60%;
-			max-width:30em;
-			padding:1.6em;
-			border: 0.3em solid #eee;
-			margin:0 auto;
-			>div {
-				>.action {
-					margin-top:1em;
-					text-align:right;
-					input + input, select + select, input + select, select + input { margin-left: 1em }
-				}
-			}
-			>.alert {
-				text-align:center;
-				>.action {
-					text-align:center;
-				}
+    font-size:130%;
+	>div {
+		position:fixed;
+		top: 50%;
+		left: 50%;
+		-webkit-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+		@include corners;
+		background:#fff;
+		width:60%;
+		max-width:30em;
+		padding:1.6em;
+		border: 0.3em solid #eee;
+		margin:0 auto;
+		text-align:center;
+
+		>.message, >.custom {
+			margin-bottom:1em;
+		}
+
+		>.custom {
+			input, select, button {
+				padding:0.7em 1em;
 			}
 		}
+
+		>.action {
+
+			input, select, button {
+				padding:0.7em 1em;
+			}
+
+			input + input, select + select, input + select, select + input, select + button, input + button, button + select, button + input { 
+				margin-left: 1em 
+			}
+
+		}
+
+	    @media screen and (max-width:900px) {
+			input, select, button {
+				margin-top:1em; 
+				&:first-child {
+					margin-top:0; 
+				}
+				margin-left:0;
+				display:block;
+				width:100%;
+				box-sizing: border-box !important;
+			}
+	    }
+
 	}
 }

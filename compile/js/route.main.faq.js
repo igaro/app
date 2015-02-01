@@ -1,88 +1,61 @@
+(function() {
+
+"use strict";
+
 module.requires = [
     { name: 'route.main.faq.css' },
-    { name:'core.language.js' }
+    { name: 'core.language.js' }
 ];
 
 module.exports = function(app) {
 
     return function(model) {
 
-        var view = model.view;
-        var wrapper = view.wrapper;
+        var dom = model.managers.dom,
+            wrapper = model.wrapper;
 
-        model.meta.set('title', {
-            en : 'FAQ'
-        });
+        model.setMeta('title', _tr("FAQ"));
 
-        view.createAppend('h1',wrapper,{
-            en : 'Compatibility',
-            fr : 'Compatibilité'
-        });
+        dom.mk('p',wrapper,_tr("Hopefully the following list will satisfy your query. If not, and you feel an answer should be included for the benefit of other users, hit the button below.")); 
 
-        view.createAppend('h2',wrapper,{
-            en : 'Internet Explorer 8/9'
-        });
+        dom.mk('button',wrapper,_tr("Email Us"), function() {
+            this.addEventListener('click', function() {
+                window.open('mailto:faq-add@igaro.com');
+            });
+        }); 
 
-        view.createAppend('p',wrapper,{
-            en : 'By default Igaro App will work with these browsers but with CSS3/CORS/SVG limitations.',
-            fr : 'Par défaut Igaro App travaillera avec ces navigateurs mais avec des limitations de CSS3/CORS/SVG.'
-        });
+        dom.mk('h1',wrapper,_tr("Browser Compatibility"));
 
-        view.createAppend('h2',wrapper,{
-            en : 'Existing Javascript',
-            fr : 'Javascript Existante'
-        });
+        dom.mk('p',wrapper,_tr("Igaro App includes polyfills to maximise support for older browsers. Where a browser doesn't provide a required feature the user is notified. Modules define there own requirements, which are then enforced by the main loader. Igaro App supports standardized web technology and won't target specific browser types/features."));
 
-        view.createAppend('p',wrapper,{
-            en : 'You can use all your existing Javascript and easily convert your old views and code to use the Igaro App framework.',
-            fr : 'ous pouvez utiliser tout votre Javascript existante et facilement convertir vos vieux vues et code pour utiliser le cadre Igaro App.'
-        });
+        dom.mk('h2',wrapper,_tr("Internet Explorer < 10"));
 
-        view.createAppend('h2',wrapper,{
-            en : 'Existing Libraries',
-            fr : 'Bibliothèques Existantes'
-        });
+        dom.mk('p',wrapper,_tr("Support for older versions of I.E (8/9) is possible but discouraged. You'll need to regress features which can't be polyfilled such as SVG support."));
 
-        view.createAppend('p',wrapper,{
-            en : 'You can use generally use all 3rd party libraries (i.e JQuery, YetAnotherJS) with the Igaro App framework. We\'ve even included a few in the repo.',
-            fr : 'Vous pouvez utiliser généralement utiliser toutes les bibliothèques 3ème partie (c.-à JQuery, YetAnotherJS) avec le cadre Igaro App. Nous avons même inclus quelques-uns dans le dépôt.'
-        });
+        dom.mk('h2',wrapper,_tr("Android < 3"));
 
-        view.createAppend('h1',wrapper,{
-            en : 'Dependencies',
-            fr : 'Dépendances'
-        });
+        dom.mk('p',wrapper,_tr("Due to lack of standard features, support is disabled by default."));
 
-        view.createAppend('p',wrapper,{
-            en : 'Igaro App is free of dependencies.',
-            fr : 'Igaro App est libre de dépendances.'
-        });
+        dom.mk('h1',wrapper,_tr("Existing Javascript Integration"));
 
-        view.createAppend('h1',wrapper,{
-            en : 'Efficiency',
-            fr : 'Efficacité'
-        });
+        dom.mk('p',wrapper,_tr("You can use existing code and rapidly integrate it into the Igaro App framework where you require use of it's advanced features."));
 
-        view.createAppend('h2',wrapper,{
-            en : 'Operational',
-            fr : 'Opérationnel'
-        });
+        dom.mk('p',wrapper,_tr("You can use generally utilize all 3rd party libraries (i.e JQuery, YetAnotherJS) with the Igaro App framework. We've included several of the common ones in the main repository."));
 
-        view.createAppend('p',wrapper,{
-            en : 'Igaro App works directly on the DOM. It removes elements keeping the DOM super clean and organised. You\'ll notice how fast Igaro App is compared to similar frameworks.',
-            fr : 'Igaro App fonctionne directement sur le DOM. Il supprime des éléments de maintien de la DOM super propre et organisé. Vous remarquerez la rapidité Igaro App est comparée à des cadres similaires.'
-        });
+        dom.mk('h1',wrapper,_tr("Dependencies"));
 
-        view.createAppend('h2',wrapper,{
-            en : 'Learning',
-            fr : 'Apprentissage'
-        });
+        dom.mk('p',wrapper,_tr("Igaro App is entirely free of dependencies. It doesn't require JQuery or any other third party library."));
 
-        view.createAppend('p',wrapper,{
-            en : 'Igaro App is pure Javascript. There\'s no templating or methodology to learn. If you know Javascript, then you know Igaro App.',
-            fr : 'Igaro App est pur Javascript. Il n\'y a pas de gabarits ou méthodologie à apprendre. Si vous connaissez Javascript, vous savez Igaro App.'
-        });
+        dom.mk('h1',wrapper,_tr("Efficiency"));
 
-    }
+        dom.mk('p',wrapper,_tr("As everything is built around an astonishingly efficient framework, your derived product, be it big or small, will scale and continue to work over time. And boy will it work fast! Oh, and flickering DOM updates are a thing of lesser frameworks."));
+
+        dom.mk('h1',wrapper,_tr("Learning Overhead"));
+
+        dom.mk('p',wrapper,_tr("Igaro App is pure Javascript! It's one of the only frameworks that treats Javascript as the prototypal language that it is - there's no attempt to classify. If you know Javascript, then you're ready to develop with Igaro App. If not, and you learn Igaro App through studying it's examples and code, you'll learn about the very best of Javascript and cutting edge technique."));
+
+    };
 
 };
+
+})();

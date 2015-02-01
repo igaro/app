@@ -3,10 +3,7 @@ module.exports = function(app) {
     return function(model) {
 
         var data = {
-            desc : {
-                en : 'Observe.js is part of the Polymer suite. It allows for data binding where Object.observe() isn\'t available.',
-                fr : 'Observe.js fait partie de la combinaison polymère pour permettre la liaison de données où Object.observe() n\'est pas disponible.'
-            },
+            desc : _tr("Observe.js is part of the Polymer suite. It allows for data binding where Object.observe() isn't available. At time of writing implementation was buggy."),
             usage : {
                 direct : true
             },
@@ -15,7 +12,7 @@ module.exports = function(app) {
             ]
         };
 
-        model.parent.store.childsupport(data,model);
+        model.parent.stash.childsupport(data,model);
 
     };
 };

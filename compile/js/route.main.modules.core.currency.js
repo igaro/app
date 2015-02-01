@@ -4,10 +4,7 @@ module.exports = function(app) {
 
         var data = {
 
-            desc : {
-                en : 'Provides centralised currency switching and related functionality. Supported currencies are defined at the bottom of the file but may be set via an API or configuration file. Use ISO 4217. If the code isn\'t set core.country will be queried to determine it. This configuration also saves the applied code using core.store.',
-                fr : 'Fournit la commutation de monnaie centralisée et les fonctionnalités associées. Devises prises en charge sont définis à la fin du fichier, mais peuvent être réglés via une API ou un fichier de configuration. Utilisez ISO 4217. Si le code n\'est pas réglé core.country sera demandé de le déterminer. Cette configuration permet également d\'économiser le code appliqué à l\'aide core.store.'
-            },
+            desc : _tr("Provides currency switching and related functionality. Supported currencies are set via an API or configuration file. Uses ISO 4217. Env code is stored."),
             author : { 
                 name:'Andrew Charnley', 
                 link:'http://www.andrewcharnley.com' 
@@ -16,8 +13,7 @@ module.exports = function(app) {
                 class : true
             },
             dependencies : [
-                'core.store',
-                'core.country'
+                'core.store'
             ],
             extlinks : [
                 {
@@ -27,157 +23,104 @@ module.exports = function(app) {
             ],
             attributes : [
                 { 
-                    name:'code',
-                    type:'object',
-                    desc: {
-                        en : 'Application of a permissible currency code.',
-                        fr : 'L\'application d\'un code de monnaie admissible.'
-                    },
-                    attributes : [
-                        {
-                            name:'id',
-                            type:'string',
-                            desc: {
-                                en : 'The currently applied currency code. Use .get() instead.',
-                                fr : 'Le code de monnaie actuellement en vigueur. Utilisez .get() à la place.'
-                            }
-                        },
-                        {
-                            name:'set',
-                            type:'function',
-                            desc: {
-                                en : 'Sets the currently applied currency code. Returns boolean to indicate success.',
-                                fr : 'Définit le code de la monnaie actuellement en vigueur. Retours booléen pour indiquer la réussite.'
-                            },
-                            attributes : [{
-                                type:'string',
-                                required:true,
-                                attributes:[{
-                                    desc: {
-                                        en : 'The code must exist in the current pool and is case sensitive.',
-                                        fr : 'Le code doit exister dans le bassin actuel et est sensible à la casse.'
-                                    }
-                                }]
-
-                            }]
-                        },
-                        {
-                            name:'get',
-                            type:'function',
-                            desc: {
-                                en : 'Returns the currently applied currency code.',
-                                fr : 'Retourne le code de la monnaie actuellement en vigueur.'
-                            }
-                        }
-                    ]
-                },
-                { 
                     name:'decimalise', 
                     type:'function',
                     attributes: [
                         { 
-                            type:'float/number', 
+                            type:['float','number'], 
                             required:true, 
                             attributes : [{
-                                desc: {
-                                    en : 'The value to process.',
-                                    fr : 'La valeur à traiter.'
-                                }
+                                desc: _tr("The value to process.")
                             }]
                         },
                     ],
-                    desc: {
-                        en : 'Takes a denomination and returns it to two decimal places.',
-                        fr : 'Prend une dénomination et la renvoie à deux décimales.' 
-                    }
+                    desc: _tr("Takes a denomination and formats it to two decimal places."),
+                        
                 },
                 { 
                     name:'getNameOfId', 
                     type:'function',
                     attributes: [
-                        { 
+                        {
                             type:'string', 
                             required:true,
                             attributes:[{
-                                desc: {
-                                    en : 'The ID to match.',
-                                    fr : 'Le code de match.'
-                                }
+                                desc: _tr("The code to match."),
                             }]
                         }
                     ],
-                    desc: {
-                        en : 'Returns a currency object for the specified code.',
-                        fr : 'Renvoie un objet de devises pour le code spécifié.'
-                    }
+                    desc: _tr("Returns an object literal from the pool for a specified code.")
                 },
-                { 
+                {
+                    name:'env',
+                    type:'object',
+                    desc: _tr("The currently applied currency code.")
+                },
+                {
                     name:'pool',
                     type:'object',
-                    desc: {
-                        en : 'Management of permissible currency codes.',
-                        fr : 'Gestion des codes de devises admissibles.'
-                    },
-                    attributes : [
-                        {
-                            name:'get',
-                            type:'function',
-                            desc: {
-                                en : 'Returns the list. Use this instead of accessing the list directly.',
-                                fr : 'Renvoie la liste. Utilisez ce lieu d\'accéder à la liste directement.'
-                            }
-                        },
-                        {
-                            name:'list',
-                            type:'object',
-                            desc: {
-                                en : 'Collection of currency codes.',
-                                fr : 'Collection des codes de devises.'
-                            }
-                        },
-                        {
-                            name:'set',
-                            type:'function',
-                            desc: {
-                                en : 'Sets the pool to a new array of codes.',
-                                fr : 'Définit la piscine pour un nouveau tableau de codes.'
-                            }
-                        }
-                    ]
+                    desc: _tr("A literal list of supported currency codes.")
+                },
+                {    
+                    name:'setEnv',
+                    type:'function',
+                    desc: _tr("Sets the currently applied currency code."),
+                    attributes : [{
+                        type:'string',
+                        required:true,
+                        attributes:[{
+                            desc: _tr("The code must exist in the current pool and is case sensitive."),
+                        }]
+                    }]
+                },
+                {    
+                    name:'setPool',
+                    type:'function',
+                    desc: _tr("Sets the supported currency codes."),
+                    attributes : [{
+                        type:'string',
+                        required:true,
+                        attributes:[{
+                            desc: _tr("See conf.app.js for an example."),
+                        }]
+                    }]
+                },
+                {    
+                    name:'substitute',
+                    type:'function',
+                    desc: _tr("Parses and replaces %s with any arguments."),
+                    attributes : [{
+                        instanceof:'Array',
+                        required:true,
+                        attributes:[{
+                            desc: _tr("The first element is the object literal, Further elements correspond to each %s to be switched."),
+                        }]
+                    }]
                 },
                 { 
                     name:'validate', 
                     type:'function',
                     attributes: [
                         { 
-                            type:'float/number', 
+                            type:['float','number'], 
                             required:true, 
                             attributes : [{
-                                desc: {
-                                    en : 'The value to validate.',
-                                    fr : 'La valeur à valider.'
-                                }
+                                desc: _tr("The value to validate."),
                             }]
                         },
                         { 
                             type:'boolean', 
                             required:false, 
                             attributes : [{
-                                desc: {
-                                    en : 'Allow negative values. Default is no.',
-                                    fr : 'Autoriser les valeurs négatives. Défaut est non.'
-                                }
+                                desc: _tr("Allow negative values. Default is false."),
                             }]
                         }
                     ],
-                    desc: {
-                        en : 'Takes a denomination and returns true if the value has no fraction or is of two decimal place.',
-                        fr : 'Prend une dénomination et renvoie true si la valeur n\'a pas de fraction ou est de deux décimale'
-                    }
+                    desc: _tr("Takes a denomination and returns true if the value has no fraction or is of two decimal place.")
                 }
             ]
         };
 
-        model.parent.store.childsupport(data,model);
+        model.parent.stash.childsupport(data,model);
     };
 };

@@ -3,10 +3,7 @@ module.exports = function(app) {
     return function(model) {
 
         var data = {
-            desc : {
-                en : 'This library works around the 300ms browser click delay for a better user experience when deploying Igaro App on mobile devices. This module is included by default.',
-                fr : 'Cette bibliothèque fonctionne dans le navigateur, cliquez 300ms de retard pour une meilleure expérience utilisateur lors du déploiement Igaro App sur les appareils mobiles. Ce module est inclus par défaut.'
-            },
+            desc : _tr("This library works around the 300ms browser click delay. This module is included when running under a local file system / Cordova."),
             usage : {
                 direct : true,
             },
@@ -15,7 +12,7 @@ module.exports = function(app) {
             ]
         };
 
-        model.parent.store.childsupport(data,model);
+        model.parent.stash.childsupport(data,model);
 
     };
 

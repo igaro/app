@@ -9,136 +9,108 @@ module.exports = function(app) {
     return function(model) {
 
         var view = model.view,
-            wrapper = view.wrapper;
+            wrapper = model.wrapper,
+            currency = app['core.currency'];
 
-        model.meta.set('title', {
-            en : 'Features',
-            fr : 'Traits'
+        model.setMeta('title', _tr('Features'));
+
+        dom.mk('p',wrapper,_tr("This framework comes with the kitchen sink! Pick the modules you want to use, all standarized to the same high quality of code."));
+        dom.mk('p',wrapper,_tr("Below is a small selection from the base repository. You'll find a complete list on the module page (see instance.* files)."));
+        dom.mk('h1',wrapper,'instance.samespace');
+        dom.mk('p',wrapper,_tr("This module displays elements in the same space using CSS3 effects to transition between them. It's great for slideshows!"));
+
+        return model.addSequence({
+            container:wrapper,
+            promises:[
+
+                model.addInstance(
+                    'samespace',
+                    {
+                        spaces:[0,1,2].map(function(x,i) { return { id:'a'+i }; }),
+                        effect:'fade'
+                    }
+                ),
+
+                model.addInstance('xhr').then(function(xhr) {
+                    var container = document.createDocumentFragment();
+                    dom.mk('h1',container,'instance.xhr');
+                    dom.mk('p',container,_tr("This example contacts the Youtube API which returns JSON. From it three Justin Bieber videos are loaded. Enjoy the great music!"));
+                    dom.mk('button',container,_tr("Execute")).addEventListener('click', function() {
+                        var self = this;
+                        xhr.get({
+                            res:'http://gdata.youtube.com/feeds/users/JustinBieberVEVO/uploads?alt=json&format=5&max-results=3'
+                        }).then(
+                            function(data) {
+                                dom.mk('iframe',null,null,function() {
+                                    this.className = 'youtube';
+                                    var playlist = data.feed.entry.map(function(o) { 
+                                        return o.id.$t.substring(38); 
+                                    });
+                                    this.src = 'http://www.youtube.com/embed/'+playlist[0]+'?wmode=transparent&amp;HD=1&amp;rel=0&amp;showinfo=1&amp;controls=1&amp;autoplay=0;playlist='+playlist.slice(1).join(',');
+                                    self.parentNode.insertBefore(this,self);
+                                });
+                                dom.rm(self);
+                            }
+                        ).catch(function() { 
+                            model.managers.debug.handle(e);
+                            self.disabled = false; 
+                        });
+                        self.disabled = true;
+                    });
+                    return container;
+                }),
+
+                model.addInstance('form.validate').then(function(formValidate) {
+                    var container = document.createDocumentFragment();
+                    dom.mk('h1',container,'instance.form.validate');
+                    dom.mk('p',container,_tr("Try entering an invalid currency denomination into the box below."));
+                    dom.mk('form',container,null,function() {
+                        this.className = 'currencycheck';
+                        formValidate.setForm(this);
+                        dom.mk('label',this,_tr("Deposit"));
+
+                        var v = dom.mk('input[text]',this,null,function() {
+                                this.placeholder='xx.xx'; 
+                                this.name='amount';
+                                this.required = true;
+                            }),
+                            b = dom.mk('submit',this,_tr("Transfer"), function() {
+                                this.disabled = true;
+                            }),
+                            self = this;
+
+                        formValidate.rules = [
+                            [
+                              'amount', 
+                              function(v) {
+                                  if (! currency.validate(v))  
+                                    return _tr("Invalid amount");
+                                  if (v == 0)
+                                    return _tr("Must be positive.");
+                              }
+                            ]
+                        ];
+
+                        this.addEventListener('submit',function() {
+                            v.value='';
+                            model.addInstance('toast',{
+                                message: _tr("Transaction Successful.")
+                            });
+                        });
+                    });
+                    return container;
+                }),
+
+                model.addInstance('rte').then(function(rte) {
+                    var container = document.createDocumentFragment();
+                    dom.mk('h1',container,'instance.rte');
+                    dom.mk('p',container);
+                    container.appendChild(rte.container);
+                    return container;
+                })
+
+            ]
         });
-
-        view.createAppend('p',wrapper,{
-            en : 'Igaro App comes with everything you need to make an excellent website and mobile application. It\'s easy to develop new modules, to use third party libraries and to import your previous work.',
-            fr : 'Igaro App est livré avec de nombreuses fonctionnalités sur-le-boîte, peut-être tout ce que vous avez besoin de faire un excellent site Web et applications mobiles. Il est facile de développer de nouveaux modules, d\'inclure d\'autres javascript et css, et d\'importer votre travail précédent.'
-        });
-
-        view.createAppend('p',wrapper,{
-            en : 'Below is a selection of modules from the base repetiore.',
-            fr : 'Voici une sélection de modules de la repetiore de base.'
-        });
-
-        view.createAppend('h1',wrapper,'instance.samespace');
-
-        var d = view.createAppend('p',wrapper,{
-            en : 'This module displays an array of HTML elements using CSS3 effects.',
-            fr : 'Ce module affiche un ensemble d\'éléments HTML en utilisant des effets CSS3.'
-        });
-
-        view.instances.add(
-            {
-                name:'samespace',
-                insertAfter:d
-            },
-            {
-                elements:[null,null,null],
-                effect:'fade'
-            }
-        );
-
-        view.createAppend('h1',wrapper,'instance.xhr');
-
-        view.createAppend('p',wrapper,{
-            en : 'This example contacts the Youtube API which returns JSON. It\'s then parsed and from it three Justin Bieber videos are loaded. Enjoy!',
-            fr : 'Cet exemple en contact avec l\'API Youtube qui renvoie JSON. Il est ensuite analysé et de lui trois vidéos de Justin Bieber sont chargés. Profitez!'
-        });
-
-        view.createAppend('input[button]',wrapper,{
-            en : 'Execute',
-            fr : 'Exécuter'
-        }).addEventListener('click', function() {
-            var self = this;
-            view.instances.add('xhr').then(function (xhr) {
-                return xhr.get({
-                    res:'http://gdata.youtube.com/feeds/users/JustinBieberVEVO/uploads?alt=json&format=5&max-results=3'
-                });
-            }).then(
-                function(data) {
-                    var playlist = data.feed.entry.map(function(o) { 
-                        return o.id.$t.substring(38); 
-                    }),
-                    f = view.createAppend('iframe',null,null,'youtube');
-                    wrapper.insertBefore(f,self);
-                    wrapper.removeChild(self);
-                    f.src = 'http://www.youtube.com/embed/'+playlist[0]+'?wmode=transparent&amp;HD=1&amp;rel=0&amp;showinfo=1&amp;controls=1&amp;autoplay=0;playlist='+playlist.slice(1).join(',');
-                }
-            ).catch(function() { 
-                self.disabled = false; 
-            });
-            self.disabled = true;
-        });
-
-        view.createAppend('h1',wrapper,'instance.form.validate');
-
-        view.createAppend('p',wrapper,{
-            en : 'Try entering an invalid currency denomination into the box below.',
-            fr : 'Essayez d\'entrer une valeur nominale de monnaie non valide dans la case ci-dessous.'
-        });
-
-        var f = view.createAppend('form',wrapper,null,'currencycheck');
-        view.createAppend('label',f,{
-            en : 'Deposit',
-            fr : 'Dépôt'
-        });
-        var v = view.createAppend('input[text]',f);
-        v.placeholder='xx.xx';
-        var b = view.createAppend('button',f,{
-            en : 'Transfer',
-            fr : 'Transfert'
-        });
-        b.disabled=true;
-        var ccp;
-        view.instances.add('form.validate',{
-            form:f,
-            routine: function() {
-                if (ccp) 
-                    ccp = view.instances.remove(ccp);
-                b.disabled = true;
-                var vg = v.value.trim();
-                if (! vg.length) 
-                    return { near:v, message: {
-                        en: 'A value is required',
-                        fr: 'Une valeur est requise'
-                    }};
-                if (! app['core.currency'].validate(vg)) 
-                    return { near:v, message: {
-                        en:'Invalid amount',
-                        fr:'Montant invalide'
-                    }};
-                b.disabled = false;
-            }
-        });
-        b.addEventListener('click',function() {
-            this.disabled = true;
-            if (ccp) 
-                ccp = view.instances.remove(ccp);
-            v.value='';
-            view.instances.add('pagemessage',{ 
-                type:'ok',
-                message: {
-                    en : 'The virtual transaction was successful.',
-                    fr : 'L\'opération a été un succès virtuel.'
-                }
-            }).then(function(cp) {
-                ccp=cp;
-                f.insertBefore(ccp.container,f.firstChild);
-            })
-            
-        });
-
-        view.createAppend('h1',wrapper,'instance.rte');
-
-        view.createAppend('p',wrapper);
-
-        view.instances.add('rte',{ container:wrapper });
 
     };
 

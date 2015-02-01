@@ -1,3 +1,29 @@
+
+$PAGE_PADDING_DOUBLE_HEIGHT : 4%;
+$PAGE_PADDING_DOUBLE_WIDTH : 6%;
+$PAGE_PADDING_STANDARD_WIDTH : 3%;
+$PAGE_PADDING_STANDARD_HEIGHT : 2%;
+$PAGE_PADDING_HALF_WIDTH : 1.5%;
+$PAGE_PADDING_HALF_HEIGHT : 1%;
+
+@mixin corners {
+    border-radius:0.2em;
+}
+
+@mixin spacingbottom {
+    margin-bottom:$PAGE_PADDING_STANDARD_HEIGHT;
+    //@media (max-width:500px) {
+    //    margin-bottom:$PAGE_PADDING_STANDARD_HEIGHT;
+    //}
+}
+
+@mixin spacingtop {
+    margin-top:$PAGE_PADDING_STANDARD_HEIGHT;
+    //@media (max-width:500px) {
+    //    margin-top:$PAGE_PADDING_STANDARD_HEIGHT;
+    //}
+}
+
 @mixin commongradient {
     background: linear-gradient(color-stops(#FFF 0%, #F0F0F0 100%));
 }
@@ -10,6 +36,18 @@
     padding:2% 3%;
 }
 
+@mixin layoutStandard {
+
+    height:100%;
+    box-sizing: border-box;
+
+    >.wrapper {
+        padding: $PAGE_PADDING_STANDARD_HEIGHT;
+        height:100%;
+        box-sizing: border-box;
+    }
+}
+
 @mixin pagerestrictwidth {
     margin:0 auto 0 auto;
     max-width:1024px;
@@ -17,7 +55,14 @@
     border: 1px solid #e8e8e8;
     border-top: 0;
     border-bottom: 0;
+    &:after {
+        content:"";
+        clear:both;
+        display:block;
+        font-size:0;
+    }
 }
+
 
 @mixin pagemenu {
 

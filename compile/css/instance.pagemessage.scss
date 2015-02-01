@@ -11,62 +11,74 @@
 }
 
 .instance-pagemessage {
-    
-    margin:0 0 1.5em 0;
 
+    @include spacingbottom;
+
+    &.hide {
+        display:none;
+    }
+
+    background-color:#fff;
+    //background: linear-gradient(color-stops(#fff 0%, #fdfdfd 90%, #fff 100%));
+    
     >div {
         -webkit-animation-name: instance-pagemessage-fadeIn;
         animation-name: instance-pagemessage-fadeIn;
         -webkit-animation-duration:0.5s;
         animation-duration:0.5s;
+
         display:table;
         width:100%;
-        box-sizing: border-box;
-    }
+        box-sizing: border-box !important;
+        border-radius:0.3em;
+        border: 0.15em solid #ddd;
+        color:#111;
+        background-size:1.4em 1.4em !important;
+        background-repeat:no-repeat !important;
+        background-position:0.5em 50% !important;
+        line-height:normal;
 
-    >div >div {
-        display:table-cell;
-    }
-    
-    >.default, >.info, >.critical, >.warn, >.ok, >.success, >.error, >.critical {
-    	padding:0.5em 0.5em 0.5em 2.1em;
-    	border-radius:6px;
-        border: 2px solid #ddd;
-        color:#333;
+        >div {
+            padding:0.4em 0.4em 0.4em 2.3em;
+        }
+
+        >div, >a {
+            display:table-cell;
+        }
+
+        >a {
+            background: inline-image("instance.pagemessage/close.svg") no-repeat 50% 50%;
+            background-size:1.4em 1.4em;
+            width:2em;
+            border-left:0.5em transparent solid;
+            &:hover {
+                cursor:pointer;
+            }
+        }
     }
 
     >.warn, >.error {
-        border-color: #b97b04;
-        background: inline-image("instance.pagemessage/warn.svg") #fff no-repeat 0.5em 50%;
-        background-size:1.4em 1.4em;
+        //border-color: #b97b04;
+        border-color:rgba(185,123,4,.5);
+        background-image: inline-image("instance.pagemessage/warn.svg");
     }
 
     >.default, >.info {
-        border-color: #0476c6;
-        background: inline-image("instance.pagemessage/info.svg") #fff no-repeat 0.5em 50%;
-        background-size:1.4em 1.4em;
+        //border-color: #242c61;
+        border-color:rgba(4,118,198,.5);
+        background-image: inline-image("instance.pagemessage/info.svg");
     }
 
     >.ok, >.success {
-        border-color: #5eb518;
-        background: inline-image("instance.pagemessage/ok.svg") #fff no-repeat 0.5em 50%;
-        background-size:1.4em 1.4em;
+        //border-color: #5eb518;
+        border-color:rgba(94,181,24,.5);
+        background-image: inline-image("instance.pagemessage/ok.svg");
     }
 
     >.critical {
-        border-color: #9d0202;
-        background: inline-image("instance.pagemessage/critical.svg") #fff no-repeat 0.5em 50%;
-        background-size:1.4em 1.4em;
-    }
-
-    >div >.hidethis {
-    	background: inline-image("instance.pagemessage/close.svg") no-repeat 50% 50%;
-		background-size:1.6em 1.6em;
-        width:2em;
-		&:hover { 
-            cursor:pointer; 
-            background-size:1.8em 1.8em;
-        }
+        //border-color: #9d0202;
+        border-color:rgba(157,2,2,.5);
+        background-image: inline-image("instance.pagemessage/critical.svg");
     }
 
 }

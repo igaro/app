@@ -1,6 +1,6 @@
 @import "../sass-global/mixins.scss";
 
-body >.core-mvc >.location {
+body >.core-router >.location {
 
 	border-bottom: 1px solid #eee;
 	background:#fff;
@@ -30,7 +30,6 @@ body >.core-mvc >.location {
 			}
 		}
 		>.path {
-			height:100%;
 			display:table-cell;
 			vertical-align:middle;
 			>a, >span {
@@ -49,7 +48,7 @@ body >.core-mvc >.location {
 	}
 }
 
-body:not([scrollposition="0"]) >.core-mvc >.location {
+body:not([scrollposition="0"]) >.core-router >.location {
 	display:none;
 
 }

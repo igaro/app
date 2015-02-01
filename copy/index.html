@@ -6,20 +6,15 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="msapplication-tap-highlight" content="no" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
-<meta name="description" content="Javscript App framework for Chrome, Firefox, Safari, IE, IOS, Android, Windows Mobile & more">
-<meta name="copyright" content="© igaro.com">
 <script>
 var __igaroapp = {
     cdn : document.location.protocol === 'file:'? document.location.href+'/../cdn' : 'cdn',
-    geocountry : null,
-    browserincompat : {
-        'en' : 'Your Browser is too old to work with this application. Please upgrade.'
-    },
-    loaderr : {
-        'en' : 'An error occurred while loading the application.'
-    }
+    version: 0.1,
+    timestamp : new Date(),
+    debug : true,
+    browserincompat : _tr("Your device or software is too old to work with this application. Please upgrade."),
+    loaderr : _tr("An error has occurred.\n\n If this problem persists please contact us at:\napp-support@igaro.com")
 };
-
 var head = document.getElementsByTagName('head')[0];
 var b = document.createElement('base'), s;
 b.target='_blank';
@@ -88,7 +83,6 @@ head.appendChild(s);
 <body>
 
 <noscript>
-<p>Javascript is not enabled. We can't load this application without it.</p>
 <p>Javascript is disabled. We can't load this application without it.</p>
 <p>Javascript está desactivado. No podemos cargar esta solicitud sin ella.</p>
 <p>تم تعطيل جافا سكريبت، ونحن لا يمكن تحميل هذا التطبيق دون ذلك.</p>

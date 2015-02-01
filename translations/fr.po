@@ -1,0 +1,1785 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+msgid "Andorra"
+msgstr ""
+
+msgid "United Arab Emirates"
+msgstr ""
+
+msgid "Afghanistan"
+msgstr ""
+
+msgid "Antigua and Barbuda"
+msgstr ""
+
+msgid "Anguilla"
+msgstr ""
+
+msgid "Albania"
+msgstr ""
+
+msgid "Armenia"
+msgstr ""
+
+msgid "Angola"
+msgstr ""
+
+msgid "Antarctica"
+msgstr ""
+
+msgid "Argentina"
+msgstr ""
+
+msgid "American Samoa"
+msgstr ""
+
+msgid "Austria"
+msgstr ""
+
+msgid "Australia"
+msgstr ""
+
+msgid "Aruba"
+msgstr ""
+
+msgid "Åland Islands"
+msgstr ""
+
+msgid "Azerbaijan"
+msgstr ""
+
+msgid "Bosnia and Herzegovina"
+msgstr ""
+
+msgid "Barbados"
+msgstr ""
+
+msgid "Bangladesh"
+msgstr ""
+
+msgid "Belgium"
+msgstr ""
+
+msgid "Burkina Faso"
+msgstr ""
+
+msgid "Bulgaria"
+msgstr ""
+
+msgid "Bahrain"
+msgstr ""
+
+msgid "Burundi"
+msgstr ""
+
+msgid "Benin"
+msgstr ""
+
+msgid "Saint Barthélemy"
+msgstr ""
+
+msgid "Bermuda"
+msgstr ""
+
+msgid "Brunei"
+msgstr ""
+
+msgid "Bolivia"
+msgstr ""
+
+msgid "Bonaire"
+msgstr ""
+
+msgid "Brazil"
+msgstr ""
+
+msgid "Bahamas"
+msgstr ""
+
+msgid "Bhutan"
+msgstr ""
+
+msgid "Bouvet Island"
+msgstr ""
+
+msgid "Botswana"
+msgstr ""
+
+msgid "Belarus"
+msgstr ""
+
+msgid "Belize"
+msgstr ""
+
+msgid "Canada"
+msgstr ""
+
+msgid "Cocos (Keeling) Islands"
+msgstr ""
+
+msgid "DR Congo"
+msgstr ""
+
+msgid "Central African Republic"
+msgstr ""
+
+msgid "Republic of the Congo"
+msgstr ""
+
+msgid "Switzerland"
+msgstr ""
+
+msgid "Ivory Coast"
+msgstr ""
+
+msgid "Cook Islands"
+msgstr ""
+
+msgid "Chile"
+msgstr ""
+
+msgid "Cameroon"
+msgstr ""
+
+msgid "China"
+msgstr ""
+
+msgid "Colombia"
+msgstr ""
+
+msgid "Costa Rica"
+msgstr ""
+
+msgid "Cuba"
+msgstr ""
+
+msgid "Cape Verde"
+msgstr ""
+
+msgid "Curaçao"
+msgstr ""
+
+msgid "Christmas Island"
+msgstr ""
+
+msgid "Cyprus"
+msgstr ""
+
+msgid "Czech Republic"
+msgstr ""
+
+msgid "Germany"
+msgstr ""
+
+msgid "Djibouti"
+msgstr ""
+
+msgid "Denmark"
+msgstr ""
+
+msgid "Dominica"
+msgstr ""
+
+msgid "Dominican Republic"
+msgstr ""
+
+msgid "Algeria"
+msgstr ""
+
+msgid "Ecuador"
+msgstr ""
+
+msgid "Estonia"
+msgstr ""
+
+msgid "Egypt"
+msgstr ""
+
+msgid "Western Sahara"
+msgstr ""
+
+msgid "Eritrea"
+msgstr ""
+
+msgid "Spain"
+msgstr ""
+
+msgid "Ethiopia"
+msgstr ""
+
+msgid "Finland"
+msgstr ""
+
+msgid "Fiji"
+msgstr ""
+
+msgid "Falkland Islands"
+msgstr ""
+
+msgid "Micronesia"
+msgstr ""
+
+msgid "Faroe Islands"
+msgstr ""
+
+msgid "France"
+msgstr ""
+
+msgid "Gabon"
+msgstr ""
+
+msgid "United Kingdom"
+msgstr ""
+
+msgid "Grenada"
+msgstr ""
+
+msgid "Georgia"
+msgstr ""
+
+msgid "French Guiana"
+msgstr ""
+
+msgid "Guernsey"
+msgstr ""
+
+msgid "Ghana"
+msgstr ""
+
+msgid "Gibraltar"
+msgstr ""
+
+msgid "Greenland"
+msgstr ""
+
+msgid "Gambia"
+msgstr ""
+
+msgid "Guinea"
+msgstr ""
+
+msgid "Guadeloupe"
+msgstr ""
+
+msgid "Equatorial Guinea"
+msgstr ""
+
+msgid "Greece"
+msgstr ""
+
+msgid "South Georgia"
+msgstr ""
+
+msgid "Guatemala"
+msgstr ""
+
+msgid "Guam"
+msgstr ""
+
+msgid "Guinea-Bissau"
+msgstr ""
+
+msgid "Guyana"
+msgstr ""
+
+msgid "Hong Kong"
+msgstr ""
+
+msgid "Heard Island and McDonald Islands"
+msgstr ""
+
+msgid "Honduras"
+msgstr ""
+
+msgid "Croatia"
+msgstr ""
+
+msgid "Haiti"
+msgstr ""
+
+msgid "Hungary"
+msgstr ""
+
+msgid "Indonesia"
+msgstr ""
+
+msgid "Ireland"
+msgstr ""
+
+msgid "Israel"
+msgstr ""
+
+msgid "Isle of Man"
+msgstr ""
+
+msgid "India"
+msgstr ""
+
+msgid "British Indian Ocean Territory"
+msgstr ""
+
+msgid "Iraq"
+msgstr ""
+
+msgid "Iran"
+msgstr ""
+
+msgid "Iceland"
+msgstr ""
+
+msgid "Italy"
+msgstr ""
+
+msgid "Jersey"
+msgstr ""
+
+msgid "Jamaica"
+msgstr ""
+
+msgid "Jordan"
+msgstr ""
+
+msgid "Japan"
+msgstr ""
+
+msgid "Kenya"
+msgstr ""
+
+msgid "Kyrgyzstan"
+msgstr ""
+
+msgid "Cambodia"
+msgstr ""
+
+msgid "Kiribati"
+msgstr ""
+
+msgid "Comoros"
+msgstr ""
+
+msgid "Saint Kitts and Nevis"
+msgstr ""
+
+msgid "North Korea"
+msgstr ""
+
+msgid "South Korea"
+msgstr ""
+
+msgid "Kuwait"
+msgstr ""
+
+msgid "Cayman Islands"
+msgstr ""
+
+msgid "Kazakhstan"
+msgstr ""
+
+msgid "Laos"
+msgstr ""
+
+msgid "Lebanon"
+msgstr ""
+
+msgid "Saint Lucia"
+msgstr ""
+
+msgid "Liechtenstein"
+msgstr ""
+
+msgid "Sri Lanka"
+msgstr ""
+
+msgid "Liberia"
+msgstr ""
+
+msgid "Lesotho"
+msgstr ""
+
+msgid "Lithuania"
+msgstr ""
+
+msgid "Luxembourg"
+msgstr ""
+
+msgid "Latvia"
+msgstr ""
+
+msgid "Libya"
+msgstr ""
+
+msgid "Morocco"
+msgstr ""
+
+msgid "Monaco"
+msgstr ""
+
+msgid "Moldova"
+msgstr ""
+
+msgid "Montenegro"
+msgstr ""
+
+msgid "Saint Martin"
+msgstr ""
+
+msgid "Madagascar"
+msgstr ""
+
+msgid "Marshall Islands"
+msgstr ""
+
+msgid "Macedonia"
+msgstr ""
+
+msgid "Mali"
+msgstr ""
+
+msgid "Myanmar"
+msgstr ""
+
+msgid "Mongolia"
+msgstr ""
+
+msgid "Macau"
+msgstr ""
+
+msgid "Northern Mariana Islands"
+msgstr ""
+
+msgid "Martinique"
+msgstr ""
+
+msgid "Mauritania"
+msgstr ""
+
+msgid "Montserrat"
+msgstr ""
+
+msgid "Malta"
+msgstr ""
+
+msgid "Mauritius"
+msgstr ""
+
+msgid "Maldives"
+msgstr ""
+
+msgid "Malawi"
+msgstr ""
+
+msgid "Mexico"
+msgstr ""
+
+msgid "Malaysia"
+msgstr ""
+
+msgid "Mozambique"
+msgstr ""
+
+msgid "Namibia"
+msgstr ""
+
+msgid "New Caledonia"
+msgstr ""
+
+msgid "Niger"
+msgstr ""
+
+msgid "Norfolk Island"
+msgstr ""
+
+msgid "Nigeria"
+msgstr ""
+
+msgid "Nicaragua"
+msgstr ""
+
+msgid "Netherlands"
+msgstr ""
+
+msgid "Norway"
+msgstr ""
+
+msgid "Nepal"
+msgstr ""
+
+msgid "Nauru"
+msgstr ""
+
+msgid "Niue"
+msgstr ""
+
+msgid "New Zealand"
+msgstr ""
+
+msgid "Oman"
+msgstr ""
+
+msgid "Panama"
+msgstr ""
+
+msgid "Peru"
+msgstr ""
+
+msgid "French Polynesia"
+msgstr ""
+
+msgid "Papua New Guinea"
+msgstr ""
+
+msgid "Philippines"
+msgstr ""
+
+msgid "Pakistan"
+msgstr ""
+
+msgid "Poland"
+msgstr ""
+
+msgid "Saint Pierre and Miquelon"
+msgstr ""
+
+msgid "Pitcairn Islands"
+msgstr ""
+
+msgid "Puerto Rico"
+msgstr ""
+
+msgid "Palestine"
+msgstr ""
+
+msgid "Portugal"
+msgstr ""
+
+msgid "Palau"
+msgstr ""
+
+msgid "Paraguay"
+msgstr ""
+
+msgid "Qatar"
+msgstr ""
+
+msgid "Réunion"
+msgstr ""
+
+msgid "Romania"
+msgstr ""
+
+msgid "Serbia"
+msgstr ""
+
+msgid "Russia"
+msgstr ""
+
+msgid "Rwanda"
+msgstr ""
+
+msgid "Saudi Arabia"
+msgstr ""
+
+msgid "Solomon Islands"
+msgstr ""
+
+msgid "Seychelles"
+msgstr ""
+
+msgid "Sudan"
+msgstr ""
+
+msgid "Sweden"
+msgstr ""
+
+msgid "Singapore"
+msgstr ""
+
+msgid "Saint Helena, Ascension and Tristan da Cunha"
+msgstr ""
+
+msgid "Slovenia"
+msgstr ""
+
+msgid "Svalbard and Jan Mayen"
+msgstr ""
+
+msgid "Slovakia"
+msgstr ""
+
+msgid "Sierra Leone"
+msgstr ""
+
+msgid "San Marino"
+msgstr ""
+
+msgid "Senegal"
+msgstr ""
+
+msgid "Somalia"
+msgstr ""
+
+msgid "Suriname"
+msgstr ""
+
+msgid "South Sudan"
+msgstr ""
+
+msgid "São Tomé and Príncipe"
+msgstr ""
+
+msgid "El Salvador"
+msgstr ""
+
+msgid "Sint Maarten"
+msgstr ""
+
+msgid "Syria"
+msgstr ""
+
+msgid "Swaziland"
+msgstr ""
+
+msgid "Turks and Caicos Islands"
+msgstr ""
+
+msgid "Chad"
+msgstr ""
+
+msgid "French Southern and Antarctic Lands"
+msgstr ""
+
+msgid "Togo"
+msgstr ""
+
+msgid "Thailand"
+msgstr ""
+
+msgid "Tajikistan"
+msgstr ""
+
+msgid "Tokelau"
+msgstr ""
+
+msgid "Timor-Leste"
+msgstr ""
+
+msgid "Turkmenistan"
+msgstr ""
+
+msgid "Tunisia"
+msgstr ""
+
+msgid "Tonga"
+msgstr ""
+
+msgid "Turkey"
+msgstr ""
+
+msgid "Trinidad and Tobago"
+msgstr ""
+
+msgid "Tuvalu"
+msgstr ""
+
+msgid "Taiwan"
+msgstr ""
+
+msgid "Tanzania"
+msgstr ""
+
+msgid "Ukraine"
+msgstr ""
+
+msgid "Uganda"
+msgstr ""
+
+msgid "United States Minor Outlying Islands"
+msgstr ""
+
+msgid "United States"
+msgstr ""
+
+msgid "Uruguay"
+msgstr ""
+
+msgid "Uzbekistan"
+msgstr ""
+
+msgid "Vatican City"
+msgstr ""
+
+msgid "Saint Vincent and the Grenadines"
+msgstr ""
+
+msgid "Venezuela"
+msgstr ""
+
+msgid "British Virgin Islands"
+msgstr ""
+
+msgid "United States Virgin Islands"
+msgstr ""
+
+msgid "Vietnam"
+msgstr ""
+
+msgid "Vanuatu"
+msgstr ""
+
+msgid "Wallis and Futuna"
+msgstr ""
+
+msgid "Samoa"
+msgstr ""
+
+msgid "Kosovo"
+msgstr ""
+
+msgid "Yemen"
+msgstr ""
+
+msgid "Mayotte"
+msgstr ""
+
+msgid "South Africa"
+msgstr ""
+
+msgid "Zambia"
+msgstr ""
+
+msgid "Zimbabwe"
+msgstr ""
+
+msgid "United States Dollar"
+msgstr ""
+
+msgid "British Sterling"
+msgstr ""
+
+msgid "Australian Dollar"
+msgstr ""
+
+msgid "Euro"
+msgstr ""
+
+msgid "The page you requested does not exist."
+msgstr ""
+
+msgid ""
+"A problem with the URL was detected and loading aborted prematurely.\n"
+"\n"
+"Error: %d"
+msgstr ""
+
+msgid "Invalid Response"
+msgstr ""
+
+msgid "Connection Refused"
+msgstr ""
+
+msgid "%d seconds ago"
+msgstr ""
+
+msgid "%d second"
+msgstr ""
+
+msgid "%d seconds"
+msgstr ""
+
+msgid "Value required"
+msgstr ""
+
+msgid "Invalid value"
+msgstr ""
+
+msgid "Value too low"
+msgstr ""
+
+msgid "Length too small"
+msgstr ""
+
+msgid "Value too high"
+msgstr ""
+
+msgid "Not a number"
+msgstr ""
+
+msgid "Invalid email"
+msgstr ""
+
+msgid "Enter only digits"
+msgstr ""
+
+msgid "Confirm"
+msgstr ""
+
+msgid "Ok"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Your App, on <b>IE</b>, <b>Firefox</b>, <b>Safari</b> and <b>Chrome</b>"
+msgstr ""
+
+msgid "Your App, on <b>IOS</b>, <b>Android</b> and <b>Windows Mobile</b>"
+msgstr ""
+
+msgid "ECMA Standard Javascript with ES6 Promises"
+msgstr ""
+
+msgid "Advanced router Framework with Multiple Sources"
+msgstr ""
+
+msgid "Async Modules, Lazy Loading & Event Management"
+msgstr ""
+
+msgid "Language, Currency, Timezone and Country Support"
+msgstr ""
+
+msgid "Welcome to <b>Igaro App</b>"
+msgstr ""
+
+msgid "Asynchronous"
+msgstr ""
+
+msgid ""
+"Igaro App is an asynchronous framework using Promises and Event Management "
+"to manage delayed notification and value convergence. Callbacks are a thing "
+"of the past, and most functions in Igaro App return Promises rather than "
+"values."
+msgstr ""
+
+msgid "This design choice was made for two reasons;"
+msgstr ""
+
+msgid ""
+"Most functions dispatch an event at the end of execution, which is an async "
+"operation. Step-over execution should only occur once registered handles for "
+"this event complete hence requiring the event Promise to be returned."
+msgstr ""
+
+msgid ""
+"Functions that are later modified to include asynchronous code break callers "
+"that expect a value. For compatibility with future code it is better to "
+"return a Promise even if the operation is not currently asynchronous."
+msgstr ""
+
+msgid "Promises"
+msgstr ""
+
+msgid ""
+"Standard Promises (ES6, A+) are used to replace callback routines. Promises "
+"allow for chainable asynchronous operation with error control and are native "
+"to modern browsers. Older browsers have a polyfill library loaded "
+"automatically."
+msgstr ""
+
+msgid "Event Management"
+msgstr ""
+
+msgid ""
+"Promises are for objects initiating work but not for when the object wishes "
+"to be notified when another object executes the work. To provide this "
+"feature Igaro App uses an event management system. Data and identifiers are "
+"returned to each registered party and are propagated vertically through "
+"parent objects. It works similarily to the native DOM event system, but it's "
+"for objects not elements!"
+msgstr ""
+
+msgid ""
+"Igaro App's event management system is cleaner than Object.observe() and "
+"signficiantly faster than any other framework's implementation. Events are "
+"linked to dependencies, which can be other objects or DOM elements and are "
+"automatically released, avoiding memory leaks by removing circular "
+"references and allowing Javascripts garbage collector to do it's job. The "
+"entire process is automatic."
+msgstr ""
+
+msgid ""
+"Any blessed object (most objects in Igaro App are blessed) gains an event "
+"manager."
+msgstr ""
+
+msgid "Design"
+msgstr ""
+
+msgid ""
+"Igaro App offers a flexible design where everything is customizable, with "
+"structured SASS and folders to bootstrap your product."
+msgstr ""
+
+msgid "Router"
+msgstr ""
+
+msgid ""
+"Igaro App isn't MVC. Traditionally, frameworks start with a view, assign a "
+"controller and this contains a model."
+msgstr ""
+
+msgid ""
+"Igaro App has a router, which begins at root, and loads route files. Route "
+"files encapsulate logic (controller) and are provided with a model template. "
+"They build the content of a view by either writing to the DOM or calling "
+"reuseable instance files."
+msgstr ""
+
+msgid ""
+"Multiple routes can be visible as a route doesn't necessarily have to be a "
+"navable via URL. Thus, the header, main and footer of a page are all routes. "
+"A route has children and events are propagated to parents."
+msgstr ""
+
+msgid ""
+"By default a route's view is appended to the parent route's view and fellow "
+"siblings are hidden. Routes are cached so if the user navigates to a "
+"different view outside of the current hierarchy they can return to it later "
+"with the same state."
+msgstr ""
+
+msgid ""
+"The router can be configured to use multiple sources. This app has routes "
+"defined through routes.* files but routing rules permit loading from a CDN "
+"(i.e close to the user's location) or an API (for dynamic views or secure "
+"content delivery) on a per request basis."
+msgstr ""
+
+msgid "Example"
+msgstr ""
+
+msgid "/news"
+msgstr ""
+
+msgid "Root"
+msgstr ""
+
+msgid "Header"
+msgstr ""
+
+msgid "Main"
+msgstr ""
+
+msgid "News content"
+msgstr ""
+
+msgid "footer"
+msgstr ""
+
+msgid "Templates"
+msgstr ""
+
+msgid ""
+"Igaro App has no template engine, relying instead on reuseable modules and "
+"first-class CSS structure to define layouts. It's a radical way of working, "
+"but you'll love it!"
+msgstr ""
+
+msgid "DOM"
+msgstr ""
+
+msgid ""
+"core.dom provides DOM management, dependency tracking and event linkage. Any "
+"blessed object gains a core.dom manager. This manager works alongside the "
+"native DOM controls, and unlike JQuery it doesn't provide duplicatate "
+"functionality. It helps you to write highly structured, minimal code."
+msgstr ""
+
+msgid ""
+"These slow traversal routines are applicable when references to DOM elements "
+"are sought. With Igaro App references are stored within instances, on router "
+"models, and as dependencies. Subsequently, expect blistering performance "
+"compared to competing frameworks such as Angular and React."
+msgstr ""
+
+msgid "FAQ"
+msgstr ""
+
+msgid ""
+"Hopefully the following list will satisfy your query. If not, and you feel "
+"an answer should be included for the benefit of other users, hit the button "
+"below."
+msgstr ""
+
+msgid "Email Us"
+msgstr ""
+
+msgid "Browser Compatibility"
+msgstr ""
+
+msgid ""
+"Igaro App includes polyfills to maximise support for older browsers. Where a "
+"browser doesn't provide a required feature the user is notified. Modules "
+"define there own requirements, which are then enforced by the main loader. "
+"Igaro App supports standardized web technology and won't target specific "
+"browser types/features."
+msgstr ""
+
+msgid "Internet Explorer < 10"
+msgstr ""
+
+msgid ""
+"Support for older versions of I.E (8/9) is possible but discouraged. You'll "
+"need to regress features which can't be polyfilled such as SVG support."
+msgstr ""
+
+msgid "Android < 3"
+msgstr ""
+
+msgid "Due to lack of standard features, support is disabled by default."
+msgstr ""
+
+msgid "Existing Javascript Integration"
+msgstr ""
+
+msgid ""
+"You can use existing code and rapidly integrate it into the Igaro App "
+"framework where you require use of it's advanced features."
+msgstr ""
+
+msgid ""
+"You can use generally utilize all 3rd party libraries (i.e JQuery, "
+"YetAnotherJS) with the Igaro App framework. We've included several of the "
+"common ones in the main repository."
+msgstr ""
+
+msgid "Dependencies"
+msgstr ""
+
+msgid ""
+"Igaro App is entirely free of dependencies. It doesn't require JQuery or any "
+"other third party library."
+msgstr ""
+
+msgid "Efficiency"
+msgstr ""
+
+msgid ""
+"As everything is built around an astonishingly efficient framework, your "
+"derived product, be it big or small, will scale and continue to work over "
+"time. And boy will it work fast! Oh, and flickering DOM updates are a thing "
+"of lesser frameworks."
+msgstr ""
+
+msgid "Learning Overhead"
+msgstr ""
+
+msgid ""
+"Igaro App is pure Javascript! It's one of the only frameworks that treats "
+"Javascript as the prototypal language that it is - there's no attempt to "
+"classify. If you know Javascript, then you're ready to develop with Igaro "
+"App. If not, and you learn Igaro App through studying it's examples and "
+"code, you'll learn about the very best of Javascript and cutting edge "
+"technique."
+msgstr ""
+
+msgid "Features"
+msgstr ""
+
+msgid ""
+"This framework comes with the kitchen sink! Pick the modules you want to "
+"use, all standarized to the same high quality of code."
+msgstr ""
+
+msgid ""
+"Below is a small selection from the base repository. You'll find a complete "
+"list on the module page (see instance.* files)."
+msgstr ""
+
+msgid ""
+"This module displays elements in the same space using CSS3 effects to "
+"transition between them. It's great for slideshows!"
+msgstr ""
+
+msgid ""
+"This example contacts the Youtube API which returns JSON. From it three "
+"Justin Bieber videos are loaded. Enjoy the great music!"
+msgstr ""
+
+msgid "Execute"
+msgstr ""
+
+msgid "Try entering an invalid currency denomination into the box below."
+msgstr ""
+
+msgid "Deposit"
+msgstr ""
+
+msgid "Transfer"
+msgstr ""
+
+msgid "Invalid amount"
+msgstr ""
+
+msgid "Must be positive."
+msgstr ""
+
+msgid "Transaction Successful."
+msgstr ""
+
+msgid "Install"
+msgstr ""
+
+msgid "The following instructions assume a unix, linux or mac environment."
+msgstr ""
+
+msgid ""
+"By installing Igaro App you are agreeing to the license under which this "
+"software is distributed."
+msgstr ""
+
+msgid "Show Source"
+msgstr ""
+
+msgid "Show License"
+msgstr ""
+
+msgid "Git Repository"
+msgstr ""
+
+msgid "Run the following in a terminal."
+msgstr ""
+
+msgid "Initilize"
+msgstr ""
+
+msgid "Set up the environment to automate development processes."
+msgstr ""
+
+msgid "Ensure %d and %d are installed then run the following in a terminal."
+msgstr ""
+
+msgid ""
+"Choose a mode based on whether you are developing and debugging, readying a "
+"release, or ready to deploy. All modes recompile code as you develop."
+msgstr ""
+
+msgid ""
+"The following code starts a debug server. Sources will be uncompressed for "
+"ease of debugging. Navigate to: %d to see your work."
+msgstr ""
+
+msgid ""
+"The following code starts a deploy-debug server. Sources will be compressed "
+"but source maps will be written for ease of debugging. Navigate to: %d to "
+"see your work."
+msgstr ""
+
+msgid ""
+"The following code starts a deploy server. Sources will be compressed and "
+"protected, ready for release. Navigate to: %d to see your work."
+msgstr ""
+
+msgid "Debug"
+msgstr ""
+
+msgid "Deploy-Debug"
+msgstr ""
+
+msgid "Deploy"
+msgstr ""
+
+msgid "Insight"
+msgstr ""
+
+msgid ""
+"An amazing architecture, developed by professionals, loaded with features."
+msgstr ""
+
+msgid "Begin"
+msgstr ""
+
+msgid ""
+"You can see the code behind any page in this app by clicking the menu icon "
+"in the top right corner."
+msgstr ""
+
+msgid "Overview"
+msgstr ""
+
+msgid "Support"
+msgstr ""
+
+msgid "Structure"
+msgstr ""
+
+msgid "Async"
+msgstr ""
+
+msgid "Modules"
+msgstr ""
+
+msgid "Locale"
+msgstr ""
+
+msgid "Mobile"
+msgstr ""
+
+msgid "Documentation"
+msgstr ""
+
+msgid ""
+"Learn, develop and deploy a custom application. All modules are fully "
+"documented."
+msgstr ""
+
+msgid ""
+"Igaro App is made for mobile, with it's outstanding performance offering a "
+"near native mobile app experience across all platforms."
+msgstr ""
+
+msgid "Responsive Layout"
+msgstr ""
+
+msgid ""
+"Media queries take into account screens of all sizes. Try changing the size "
+"of this window to that of a large screen, tablet and phone. Notice how the "
+"footer disappears and how elements such as the header change height and "
+"width depending on screen ratio."
+msgstr ""
+
+msgid "Embedded Resources"
+msgstr ""
+
+msgid ""
+"Images, fonts and other media are compiled into CSS making them immediately "
+"available."
+msgstr ""
+
+msgid "Demo"
+msgstr ""
+
+msgid "Touch Ready"
+msgstr ""
+
+msgid ""
+"For touch screens the browser 300ms delay is removed. Press and hold on the "
+"shapes below to compare the difference."
+msgstr ""
+
+msgid "Gestures"
+msgstr ""
+
+msgid ""
+"Swipe, pinch, tap, double tap, rotate and pan gesture events are available. "
+"If you have a touch screen, try some actions in the box below."
+msgstr ""
+
+msgid "A touch screen has not been detected."
+msgstr ""
+
+msgid "Device Features"
+msgstr ""
+
+msgid ""
+"%d is utilized to access mobile device features such as camera, "
+"accelerometer and GPS."
+msgstr ""
+
+msgid "Within a terminal run %d"
+msgstr ""
+
+msgid "Install the platforms you wish to support."
+msgstr ""
+
+msgid ""
+"Deploy onto your device or emulator with <b>cordova run [ios][android]"
+"[firefoxos]</b>. Note that by default the www folder contains files "
+"symlinked to the output/debug folder. You will want to change this to output/"
+"deploy when you are ready to release your app."
+msgstr ""
+
+msgid "Customise splashscreens and icons within the same folder."
+msgstr ""
+
+msgid ""
+"This library works around the 300ms browser click delay. This module is "
+"included when running under a local file system / Cordova."
+msgstr ""
+
+msgid ""
+"This library provides touch events and is loaded when a touch screen is "
+"detected."
+msgstr ""
+
+msgid ""
+"JQuery 2 is provided to allow for code written with this library to be easy "
+"imported. It isn't required by Igaro App and isn't loaded by default."
+msgstr ""
+
+msgid ""
+"Moment is a date manipulation and display library. The library has been "
+"slightly modified to allow for exporting the library into the Igaro App "
+"namespace. Ideally you should access the functionality of this module "
+"through instance.date."
+msgstr ""
+
+msgid ""
+"Observe.js is part of the Polymer suite. It allows for data binding where "
+"Object.observe() isn't available. At time of writing implementation was "
+"buggy."
+msgstr ""
+
+msgid ""
+"This file configures other modules such as setting supported locale, links "
+"events, registers route handlers and customizes the Igaro App framework."
+msgstr ""
+
+msgid ""
+"Provides country switching and related functionality. Supported countries "
+"are set via an API or configuration file. Uses ISO 3166-1. Env code is "
+"stored."
+msgstr ""
+
+msgid "The code to match."
+msgstr ""
+
+msgid "Returns a language literal for a specified code."
+msgstr ""
+
+msgid "The currently applied country code."
+msgstr ""
+
+msgid "A literal list of supported language codes."
+msgstr ""
+
+msgid "Sets the currently applied language code."
+msgstr ""
+
+msgid "The code must exist in the current pool and is case sensitive."
+msgstr ""
+
+msgid "Sets the supported language codes."
+msgstr ""
+
+msgid "See conf.app.js for an example."
+msgstr ""
+
+msgid "Igaro Repository"
+msgstr ""
+
+msgid "View on Github"
+msgstr ""
+
+msgid "* = required"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Download"
+msgstr ""
+
+msgid "Usage"
+msgstr ""
+
+msgid "Create a new instance using <b>new <MODNAME></b>."
+msgstr ""
+
+msgid "Access <b><MODNAME></b> directly without instantiating."
+msgstr ""
+
+msgid "Access the features of this library directly."
+msgstr ""
+
+msgid ""
+"Where <b>o</b> is an object containing attributes from the following table."
+msgstr ""
+
+msgid "code"
+msgstr ""
+
+msgid "Note: In demo code <b>c</b> references model.wrapper."
+msgstr ""
+
+msgid "Output"
+msgstr ""
+
+msgid "Attributes"
+msgstr ""
+
+msgid "Related"
+msgstr ""
+
+msgid "Author"
+msgstr ""
+
+msgid "External Links"
+msgstr ""
+
+msgid "Removes 300ms click delay on touch platforms."
+msgstr ""
+
+msgid "Enables Tap, DoubleTap, Swipe, Drag, Pinch, and Rotate gesture events."
+msgstr ""
+
+msgid "Non-standard library. Some insist on using it."
+msgstr ""
+
+msgid "Date/time formatting using timezone and language."
+msgstr ""
+
+msgid "Data binding with polyfill for browsers lacking Object.observe."
+msgstr ""
+
+msgid "Main configuration file."
+msgstr ""
+
+msgid "Country support and related functionality."
+msgstr ""
+
+msgid "Currency support and related functionality."
+msgstr ""
+
+msgid "Timezone selection, date related functionality."
+msgstr ""
+
+msgid "Centralised debug management."
+msgstr ""
+
+msgid "Provides DOM management and helpers."
+msgstr ""
+
+msgid "Event management, registration and dispatcher."
+msgstr ""
+
+msgid "Filename parsing."
+msgstr ""
+
+msgid "HTML parsing, conversion."
+msgstr ""
+
+msgid "Language support, formatting, related functionality."
+msgstr ""
+
+msgid "Router, an MVC alternative using routes to build partials."
+msgstr ""
+
+msgid "Status management for user feedback."
+msgstr ""
+
+msgid "Session, local, cookie and remote store access."
+msgstr ""
+
+msgid "Url parsing, related functionality."
+msgstr ""
+
+msgid "Async loading of resources, NodeJS/Require style."
+msgstr ""
+
+msgid "Basic social media bookmarking."
+msgstr ""
+
+msgid "Date display with language switching & timezone correction."
+msgstr ""
+
+msgid "Form element value validation routines."
+msgstr ""
+
+msgid "Retrieve JSON data without CORS limitation."
+msgstr ""
+
+msgid "LI list management with re-ordering functionality."
+msgstr ""
+
+msgid "Async dialog boxes with alert() and confirm() replacements."
+msgstr ""
+
+msgid "Navigation controls (tabs, dropdown etc)."
+msgstr ""
+
+msgid "Displays a formatted message."
+msgstr ""
+
+msgid "Rich text data entry and display."
+msgstr ""
+
+msgid "Elements in same space with navigation and animation."
+msgstr ""
+
+msgid "Table display with row/column management."
+msgstr ""
+
+msgid "Toast notification popup and auto hide."
+msgstr ""
+
+msgid "XHR (Ajax) functionality."
+msgstr ""
+
+msgid "A+ Promises for async chainable processes."
+msgstr ""
+
+msgid "Polyfill for Internet Explorer 8."
+msgstr ""
+
+msgid "Polyfill ancient browsers to Mozilla 1.6 specification."
+msgstr ""
+
+msgid "Polyfill old browsers to Mozilla 1.8.1 specification."
+msgstr ""
+
+msgid "Polyfill deprecated browsers to Mozilla 1.8.5 specification."
+msgstr ""
+
+msgid "Polyfill HTML5 classList helpers onto DOM elements."
+msgstr ""
+
+msgid ""
+"Igaro App is a Javascript based framework for developing scalable, "
+"responsive and dynamic web and mobile applications."
+msgstr ""
+
+msgid "Promotes best practice - write great code even if you're not an expert."
+msgstr ""
+
+msgid ""
+"Very easy to learn - Igaro App is standard Object Orientated Javascript."
+msgstr ""
+
+msgid "Excellent for teamwork - automates compile, debug and deploy workflows."
+msgstr ""
+
+msgid ""
+"Outperforms other frameworks - cutting edge features, error handling and "
+"smart logic."
+msgstr ""
+
+msgid "Where"
+msgstr ""
+
+msgid ""
+"Igaro App can be served to a web browser, distributed through an app store, "
+"or bundled on removeable media. It works great on monitors, tablets. phones "
+"and everything inbetween."
+msgstr ""
+
+msgid "Goals"
+msgstr ""
+
+msgid "Domain"
+msgstr ""
+
+msgid "Details"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Security"
+msgstr ""
+
+msgid ""
+"No public variables. Military-grade security. No memory leaks. Automatic "
+"oAuth initilization with Promise replay."
+msgstr ""
+
+msgid ""
+"Multi-language support via PO files. Realtime language switching. Multi-"
+"currency, date w/offset, and country functionality."
+msgstr ""
+
+msgid "Testing"
+msgstr ""
+
+msgid ""
+"Automated test suite exhaustively testing all features across all modules."
+msgstr ""
+
+msgid ""
+"The git repository contains three main folders; <b>compile</b>, <b>cordova</"
+"b> and <b>build</b>."
+msgstr ""
+
+msgid "View"
+msgstr ""
+
+msgid ""
+"This folder contains three folders, /deploy, which contains code ready for "
+"inclusion on a web server and CDN, and /debug, which contains the raw js "
+"sources required for testing and debugging. Inside these folders is a cdn "
+"folder, which can live anywhere, and a file index.html. This file defines "
+"the cdn folder location, loads polyfill libraries and the main loader."
+msgstr ""
+
+msgid "Grunt and Compass compress code into these folders."
+msgstr ""
+
+msgid ""
+"Within this folder are several subfolders, the important two being <b>js</b> "
+"and <b>css</b>."
+msgstr ""
+
+msgid "This folder contains the framework and modules."
+msgstr ""
+
+msgid ""
+"This file begins by including built-in core modules (debug,amd,dom,xhr,"
+"events). It then loads required modules from an editable list. A module may "
+"have its own dependencies."
+msgstr ""
+
+msgid ""
+"Errors are trapped, handed, potentially reported, and the user is notified."
+msgstr ""
+
+msgid ""
+"A module typically exports a function into <b>module.exports</b>. The "
+"function is passed a reference to the app's root and a configuration literal "
+"and typically returns a function or literal which is then added to a "
+"corresponding namespace. Optionally, it may return a Promise while it "
+"carries out an asynchronous operation such as fetching data from an API."
+msgstr ""
+
+msgid "A module may define dependencies using <b>module.requires</b>."
+msgstr ""
+
+msgid ""
+"Core files are libraries, not to be instantiated, and provide global "
+"functionality. Modifying these files is discouraged. Core files are usually "
+"required by other modules but several are built in. They shouldn't contain "
+"language or output to the DOM."
+msgstr ""
+
+msgid ""
+"These files configure the app, modules, and may bridge events to one "
+"another. Conf files don't provide functionality or output to the DOM."
+msgstr ""
+
+msgid "These files provide router model data and build a view."
+msgstr ""
+
+msgid ""
+"These files return an instantable function. The instance may be a DOM "
+"feature or functionality such as an XHR."
+msgstr ""
+
+msgid ""
+"These files prototype missing Javascript functionality for older web "
+"browsers. They are loaded by index.html file not the AMD loader."
+msgstr ""
+
+msgid ""
+"These allow utilization of non Igaro code in the app. An example is JQuery. "
+"Some modules provide additional functionality by targeting bespoke system "
+"features such as Touch."
+msgstr ""
+
+msgid ""
+"This folder contains stylesheets, the name of which corresponds to a module "
+"name. Images from the /images folder are base64 encoded into these css "
+"files. igaro.scss contains an initial style base. It doesn't necessarily "
+"style the app, which will load further stylesheets depending on the modules "
+"employed."
+msgstr ""
+
+msgid ""
+"There's an Apache cordova project in this folder. Igaro App comes ready to "
+"deploy to mobile devices."
+msgstr ""
+
+msgid ""
+"Igaro App is supported by a small but growing amount of developers. You can "
+"open and view issues on the github tracker or offer suggestions on the "
+"trello board."
+msgstr ""
+
+msgid "Report Issue"
+msgstr ""
+
+msgid "Offer Suggestion"
+msgstr ""
+
+msgid "Community"
+msgstr ""
+
+msgid ""
+"Until Igaro API is up and running we've set up a forum. This is the best "
+"place to ask questions. Stackoverflow is also a good source for help - be "
+"sure to include 'Igaro App' in your title!."
+msgstr ""
+
+msgid "Forum"
+msgstr ""
+
+msgid "StackOverflow"
+msgstr ""
+
+msgid ""
+"The <b>Freenode #igaro</b> channel is used by the developers to bounce "
+"around new ideas."
+msgstr ""
+
+msgid "If nobody is around ask your question and check back later for a reply."
+msgstr ""
+
+msgid "Priority Service"
+msgstr ""
+
+msgid ""
+"The priority service is offered to those requiring a guaranteed service "
+"level."
+msgstr ""
+
+msgid ""
+"Members receive a unique email address and a response within a pre-agreed "
+"time frame."
+msgstr ""
+
+msgid "Enquire"
+msgstr ""
+
+# Generated by grunt-xgettext on Fri Nov 21 2014 10:48:21 GMT+1300 (NZDT)
+#, fuzzy
+#~ msgid ""
+#~ "Your device or software is too old to work with this application. Please "
+#~ "upgrade."
+#~ msgstr ""
+#~ "Your Browser is too old to work with this application. Please upgrade."
+
+#, fuzzy
+#~ msgid ""
+#~ "An error occured while updating your account.\n"
+#~ "\n"
+#~ "%d"
+#~ msgstr "Something here"
+
+#, fuzzy
+#~ msgid ""
+#~ "An error occured while creating your real account.\n"
+#~ "\n"
+#~ "%d"
+#~ msgstr "Something here"
+
+#, fuzzy
+#~ msgid ""
+#~ "An error occured while creating your virtual account.\n"
+#~ "\n"
+#~ "%d"
+#~ msgstr "Something here"
+
+#, fuzzy
+#~ msgid "An error occurred while loading the application."
+#~ msgstr "Something here"
+
+#, fuzzy
+#~ msgid "An error occured while creating your account(s)."
+#~ msgstr "Something here"

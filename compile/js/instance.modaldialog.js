@@ -1,3 +1,7 @@
+(function() {
+
+'use strict';
+
 module.requires = [
     { name:'instance.modaldialog.css' },
     { name:'core.language.js' }
@@ -6,139 +10,153 @@ module.requires = [
 module.exports = function(app) {
 
     var l = {
-        'alert' : {
-            en : ['Ok'],
-            fr : ['Okfraz']
-        },
-        'confirm' : {
-            en : ['Confirm','Cancel'],
-            fr : ['Confirmfras','Annuler']
-        },
-        'input' : {
-            en : ['Ok','Cancel'],
-            fr : ['Ok','Annuler'],
-        }
+        confirm : _tr('Confirm'),
+        ok : _tr('Ok'),
+        cancel : _tr('Cancel')
     },
+    zIndexAt = 999999,
+    body = document.body,
+    bodyStyle = body.style;
 
-    ho = 99999999,
-    language = app['core.language'],
-    events = app['core.events'];
-
-    var modal = function() {
-        var c = this.container = document.createElement('div');
-        c.className = 'instance-modaldialog';
-        ho+=1;
-        c.style.zIndex = ho;
-        document.body.appendChild(c);
-        this.bodyOverflowPrevious = document.body.style.overflow;
-        document.body.style.overflow = 'hidden';
-        var w = document.createElement('div');
-        w.className = 'wrapper';
-        c.appendChild(w);
-        var w2 = document.createElement('div');
-        w2.className = 'wrapper';
-        w.appendChild(w2);
+    var InstanceModalDialog = function(o) {
+        bless.call(this,{
+            name:'instance.modaldialog',
+            parent:o && o.parent? o.parent : null,
+            asRoot:true
+        });
+        this.bodyOverflowPrevious = bodyStyle.overflow;
+        bodyStyle.overflow = 'hidden';
     };
 
-    modal.prototype.alert = function(o) {
+    InstanceModalDialog.prototype.custom = function(o) {
+        var dom = this.managers.dom,
+            container = this.container = dom.mk('div',body,null, function() {
+                this.className = 'instance-modaldialog';
+                this.style.zIndex = zIndexAt;
+            }),
+            wrapper = dom.mk('div',container,null,function() {
+                this.className = o.type || 'custom';
+                this.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                });
+            }),
+            self = this,
+            canCancel = !!! o.noCancel,
+            myActions = o.actions;
 
-        var c = this.container,
-            w = c.firstChild.firstChild,
-            self = this;
+        zIndexAt+=1;
 
         return new Promise(function(resolve) {
-            var t = document.createElement('div');
-            t.className = 'alert';
-            w.appendChild(t);
-            var m = document.createElement('div');
-            m.className = 'message';
-            t.appendChild(m);
-            var a = document.createElement('div');
-            a.className = 'action';
-            t.appendChild(a);
-            var ok = document.createElement('input');
-            ok.type = 'submit';
-            a.appendChild(ok);
-            var evt = self.eventLang = function() {
-                m.innerHTML = language.mapKey(o.message);
-                ok.value = language.mapKey(l.alert)[0];
+
+            var msg = o.message;
+            if (msg) {
+                if (typeof msg === 'object') {
+                    Object.keys(msg).forEach(function (k) {
+                        msg[k] = msg[k].replace(/\\n/g,"<br>");
+                    });
+                }
+                dom.mk('div',wrapper,msg,'message');
+            }
+
+            if (o.custom) // custom elements
+                dom.mk('div',wrapper,o.custom,'custom');
+
+            self.resolve = function(action) {
+                bodyStyle.overflow = self.bodyOverflowPrevious;
+                resolve(action);
+                return self.destroy();
             };
-            evt();
-            events.on('core.language','code.set', evt);
-            ok.addEventListener('click', function() {
-                c.parentNode.removeChild(c);
-                document.body.style.overflow = self.bodyOverflowPrevious;
-                while (w.firstChild) 
-                    w.removeChild(w.firstChild);
-                events.remove(f,'core.language','code.set');
-                resolve();
-            });
-            ok.focus();
+
+            // actions
+            if (myActions || canCancel) {
+                var actionDiv = dom.mk('div',wrapper,null,'action');
+                if (myActions) {
+                    myActions = myActions.map(function (action) {
+                        return action.element = dom.mk('button',actionDiv,action.l,function() {
+                            if (action.id)
+                                this.className = action.id;
+                            if (action.onClick)
+                                this.addEventListener('click', function(event) {
+                                    if (action.onClick(event) === false)
+                                        event.stopImmediatePropagation();
+                                });
+                            this.addEventListener('click', function() {
+                                self.resolve(action).catch(function (e) {
+                                    self.managers.debug.handle(e);
+                                });
+                            });
+                        });         
+                    });
+                }
+                if (canCancel) {
+                    var r = function() {
+                        self.resolve();
+                    };
+                    dom.mk('button',actionDiv,l.cancel,function() {
+                        this.addEventListener('click', r);
+                        this.focus();
+                        container.addEventListener('click', function(event) {
+                            event.stopPropagation();
+                            r();
+                        });
+                    });
+                }
+            }
+
+            // give dom 35ms to display
+            setTimeout(function() {
+                // focus singular button
+                if (myActions.length === 1)
+                    myActions[0].focus();
+                // setup, usually used for custom focusing
+                if (o.setup)    
+                    o.setup();
+            },35);
+
         });
+    };
+
+    InstanceModalDialog.prototype.action = function(o) {
+        return this.custom(
+            {
+                type : 'action',
+                message : o.message,
+                actions : o.actions
+            }
+        );
+    };
+
+    InstanceModalDialog.prototype.alert = function(o) {
+        return this.custom(
+            {
+                type : 'alert',
+                noCancel : true,
+                message : o.message,
+                actions : [
+                    {
+                        l : l.ok
+                    }
+                ]
+            }
+        );
     };
     
-    modal.prototype.confirm = function(o) {
-
-        var c = this.container,
-            w = c.firstChild.firstChild,
-            self = this;
-        return new Promise(function(resolve,reject) {
-            while (w.firstChild) 
-                w.removeChild(w.firstChild);
-            var t = document.createElement('div');
-            t.className = 'confirm';
-            w.appendChild(t);
-            var m = document.createElement('p');
-            t.appendChild(m);
-            if (o.inputs) {
-                var k = document.createElement('div');
-                k.className = 'inputs';
-                k.appendChild(o.inputs);
-                t.appendChild(k);
+    InstanceModalDialog.prototype.confirm = function(o) {
+        return this.custom(
+            {
+                type : 'confirm',
+                message : o.message,
+                actions : [
+                    {
+                        l : l.confirm
+                    }
+                ]
             }
-            var a = document.createElement('div');
-            a.className = 'action';
-            t.appendChild(a);
-            var ok = document.createElement('input');
-            ok.type = 'submit';
-            a.appendChild(ok);
-            var cancel = document.createElement('input');
-            cancel.type = 'button';
-            a.appendChild(cancel);
-            var evt = self.eventLang = function() {
-                m.innerHTML = language.mapKey(o.message);
-                ok.value = language.mapKey(l.confirm)[0];
-                cancel.value = language.mapKey(l.confirm)[1];
-            };
-            evt();
-            events.on('core.language','code.set', evt);
-            var cl = function() {
-                c.parentNode.removeChild(c);
-                document.body.style.overflow = self.bodyOverflowPrevious;
-                events.remove(f,'core.language','code.set');
-                while (w.firstChild) 
-                    w.removeChild(w.firstChild);
-            };
-            ok.addEventListener('click', function() {
-                cl();
-                resolve({});
-            });
-            cancel.addEventListener('click', function() {
-                cl();
-                resolve({ cancel:true });
-            });
-            ok.focus();
-        });
+        );
     };
 
-    modal.prototype.destroy = function() {
-        var c = this.container;
-        if (c && c.parentNode)
-            c.parentNode.removeChild(c);
-        if (this.eventLang)
-            events.remove(this.eventLang, 'core.language','code.set');
-    };
-
-    return modal;
+    return InstanceModalDialog;
 
 };
+
+})();
