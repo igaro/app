@@ -12,25 +12,25 @@ module.exports = function(app) {
 
         var wrapper = model.wrapper;
 
-        model.setMeta('title', {"fr":"","en":"Overview"});
+        model.setMeta('title', {"en":"Overview"});
 
-        dom.mk('p',wrapper,{"fr":"","en":"Igaro App is a Javascript based framework for developing scalable, responsive and dynamic web and mobile applications."});
+        dom.mk('p',wrapper,{"en":"Igaro App is a Javascript based framework for developing scalable, responsive and dynamic web and mobile applications."});
 
-        dom.mk('li',wrapper,{"fr":"","en":"Promotes best practice - write great code even if you're not an expert."});
+        dom.mk('li',wrapper,{"en":"Promotes best practice - write great code even if you're not an expert."});
 
-        dom.mk('li',wrapper,{"fr":"","en":"Very easy to learn - Igaro App is standard Object Orientated Javascript."});
+        dom.mk('li',wrapper,{"en":"Very easy to learn - Igaro App is standard Object Orientated Javascript."});
 
-        dom.mk('li',wrapper,{"fr":"","en":"Excellent for teamwork - automates compile, debug and deploy workflows."});
+        dom.mk('li',wrapper,{"en":"Excellent for teamwork - automates compile, debug and deploy workflows."});
 
-        dom.mk('li',wrapper,{"fr":"","en":"Outperforms other frameworks - cutting edge features, error handling and smart logic."});
+        dom.mk('li',wrapper,{"en":"Outperforms other frameworks - cutting edge features, error handling and smart logic."});
 
-        dom.mk('h1',wrapper,{"fr":"","en":"Where"});
+        dom.mk('h1',wrapper,{"en":"Where"});
 
-        dom.mk('p',wrapper,{"fr":"","en":"Igaro App can be served to a web browser, distributed through an app store, or bundled on removeable media. It works great on monitors, tablets. phones and everything inbetween."});
+        dom.mk('p',wrapper,{"en":"Igaro App can be served to a web browser, distributed through an app store, or bundled on removeable media. It works great on monitors, tablets. phones and everything inbetween."});
   
         dom.mk('div',wrapper,null,'viewport');
 
-        dom.mk('h1',wrapper,{"fr":"","en":"Goals"});
+        dom.mk('h1',wrapper,{"en":"Goals"});
 
         return model.addInstance('table', { 
             container:dom.mk('p',wrapper),
@@ -39,13 +39,13 @@ module.exports = function(app) {
                     {
                         columns : [
                             {
-                                content : {"fr":"","en":"Domain"}
+                                content : {"en":"Domain"}
                             },
                             {
-                                content : {"fr":"","en":"Details"}
+                                content : {"en":"Details"}
                             },
                             {
-                                content : {"fr":"","en":"Status"}
+                                content : {"en":"Status"}
                             }
                         ]
                     }
@@ -56,23 +56,10 @@ module.exports = function(app) {
                     {
                         columns : [
                             {
-                                content : {"fr":"","en":"Security"}
+                                content : {"en":"Security"}
                             },
                             {
-                                content : {"fr":"","en":"No public variables. Military-grade security. No memory leaks. Automatic oAuth initilization with Promise replay."}
-                            },
-                            {
-                                className : 'green'
-                            }
-                        ]
-                    },
-                    {
-                        columns : [
-                            {
-                                content : {"fr":"","en":"Locale"}
-                            },
-                            {
-                                content : {"fr":"","en":"Multi-language support via PO files. Realtime language switching. Multi-currency, date w/offset, and country functionality."}
+                                content : {"en":"No public variables. Military-grade security. No memory leaks. Automatic oAuth initilization with Promise replay."}
                             },
                             {
                                 className : 'green'
@@ -82,10 +69,23 @@ module.exports = function(app) {
                     {
                         columns : [
                             {
-                                content : {"fr":"","en":"Testing"}
+                                content : {"en":"Locale"}
                             },
                             {
-                                content : {"fr":"","en":"Automated test suite exhaustively testing all features across all modules."}
+                                content : {"en":"Multi-language support via PO files. Realtime language switching. Multi-currency, date w/offset, and country functionality."}
+                            },
+                            {
+                                className : 'green'
+                            }
+                        ]
+                    },
+                    {
+                        columns : [
+                            {
+                                content : {"en":"Testing"}
+                            },
+                            {
+                                content : {"en":"Automated test suite exhaustively testing all features across all modules."}
                             },
                             {
                                 className : 'red'

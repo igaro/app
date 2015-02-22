@@ -9,4 +9,7 @@ console.log
 output
 *~
 phonegap/platforms
+build/*
+bak
+.staging
 node_modules

@@ -13,14 +13,14 @@ module.exports = function(app) {
         bless = app['core.bless'];
 
     var l = {
-        required : {"fr":"","en":"Value required"},
-        pattern : {"fr":"","en":"Invalid value"},
-        min : {"fr":"","en":"Value too low"},
-        minLength : {"fr":"","en":"Length too small"},
-        max : {"fr":"","en":"Value too high"},
-        isNaN : {"fr":"","en":"Not a number"},
-        email : {"fr":"","en":"Invalid email"},
-        tel : {"fr":"","en":"Enter only digits"}
+        required : {"en":"Value required"},
+        pattern : {"en":"Invalid value"},
+        min : {"en":"Value too low"},
+        minLength : {"en":"Length too small"},
+        max : {"en":"Value too high"},
+        isNaN : {"en":"Not a number"},
+        email : {"en":"Invalid email"},
+        tel : {"en":"Enter only digits"}
     };
 
     var InstanceFormValidate = function(o) {

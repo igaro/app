@@ -10,9 +10,9 @@ module.requires = [
 module.exports = function(app) {
 
     var l = {
-        confirm : {"fr":"","en":"Confirm"},
-        ok : {"fr":"","en":"Ok"},
-        cancel : {"fr":"","en":"Cancel"}
+        confirm : {"en":"Confirm"},
+        ok : {"en":"Ok"},
+        cancel : {"en":"Cancel"}
     },
     zIndexAt = 999999,
     body = document.body,

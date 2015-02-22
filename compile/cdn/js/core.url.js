@@ -11,20 +11,16 @@ module.exports = function(app) {
                 separator = '?';
             if (! url) 
                 url = window.location.href;
-
             var vars = {};
             var regexp = new RegExp("["+separator+"&]+([^=&]+)=([^&]*)", "gi");
-
             var parts = url.replace(regexp, function(m,key,value) {
                 vars[key] = value;
             });
-
             return vars;
         },
 
         getParam : function(name,url) {
-            var vars = this.getParams(url);
-            return vars[name];
+            return this.getParams(url)[name];
         },
 
         getHashParams : function(url) {
@@ -37,7 +33,8 @@ module.exports = function(app) {
         },
 
         replaceParam : function(param,value,url) {
-            if (! url) url = window.location.href;
+            if (! url) 
+                url = window.location.href;
             if (url.indexOf(param + "=") >= 0) {
                 var prefix = url.substring(0, url.indexOf(param)),
                     suffix = url.substring(url.indexOf(param)).

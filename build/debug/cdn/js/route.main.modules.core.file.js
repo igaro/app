@@ -3,10 +3,7 @@ module.exports = function(app) {
     return function(model) {
 
         var data = {
-            desc : {
-                en : 'Provides file related functionality and formatting.',
-                fr : 'Fournit des fonctionnalités de fichiers liés et mise en forme.'
-            },
+            desc : {"en":"Provides file related functionality and formatting."},
             author : { 
                 name:'Andrew Charnley', 
                 link:'http://www.andrewcharnley.com' 
@@ -14,7 +11,6 @@ module.exports = function(app) {
             usage : {
                 class : true
             },
-
             attributes : [
                 { 
                     name:'getExtension',
@@ -24,17 +20,11 @@ module.exports = function(app) {
                             type:'string', 
                             required:true, 
                             attributes : [{
-                                desc: {
-                                    en : 'The filename to process.',
-                                    fr : 'Le nom du fichier à traiter.'
-                                }
+                                desc: {"en":"The filename to process."}
                             }]
                         }
                     ],
-                    desc: {
-                        en : 'Returns a filename extension.',
-                        fr : 'Retourne une extension de nom de fichier.'
-                    }
+                    desc: {"en":"Returns a filename extension."}
                 },
                 { 
                     name:'formatSize', 
@@ -44,23 +34,15 @@ module.exports = function(app) {
                             type:'number', 
                             required:true,
                             attributes : [{
-                                desc: {
-                                    en : 'The filesize in bytes.',
-                                    fr : 'La taille du fichier en octets.'
-                                }
+                                desc: {"en":"The filesize in bytes."}
                             }]
                         }
                     ],
-                    desc: {
-                        en : 'Returns a string containing a formatted file size.',
-                        fr : 'Retourne une chaîne contenant une taille de fichier formaté.'
-                    }
+                    desc: {"en":"Returns a string containing a formatted file size."}
                 }
             ]
-
         };
 
         model.parent.stash.childsupport(data,model);
-
     };
 };

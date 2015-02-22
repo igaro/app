@@ -3,7 +3,7 @@ module.exports = function(app) {
     return function(model) {
 
         var data = {
-            desc : {"fr":"","en":"This file configures other modules such as setting supported locale, links events, registers route handlers and customizes the Igaro App framework."},
+            desc : {"en":"This file configures other modules such as setting supported locale, links events, registers route handlers and customizes the Igaro App framework."},
             author : { 
                 name:'Andrew Charnley', 
                 link:'http://www.andrewcharnley.com' 

@@ -3,14 +3,7 @@ module.exports = function(app) {
     return function(model) {
 
         var data = {
-            desc : {
-                en : 'This library prototypes missing IE8 functionality. \
-Due to deficiencies with IE8/9 (CORS,CSS3,SVG), both are unsupported by Igaro App and probably won\'t work well out the box. \
-<p></p>The following are provided;<p></p><ul></ul>',
-                fr : 'Cette bibliothèque prototypes manquants fonctionnalité IE8. \
-En raison de lacunes avec IE8 / 9 (CORS, CSS3, SVG), les deux sont pris en charge par Igaro App et probablement ne fonctionnera pas bien sur la boîte. \
-<p></p>Les éléments suivants sont fournis;<p></p><ul></ul>'
-            },
+            desc : {"en":"This library prototypes missing IE8 functionality. Due to deficiencies with IE8/9 (CORS,CSS3,SVG), both are unsupported by Igaro App and probably won't work well out the box."},
             author : { 
                 name:'Andrew Charnley', 
                 link:'http://www.andrewcharnley.com' 

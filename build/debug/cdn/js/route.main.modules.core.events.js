@@ -4,10 +4,7 @@ module.exports = function(app) {
 
         var data = {
 
-            desc : {
-                en : 'Dispatches events and manages handles to functions.',
-                fr : 'Distribue des événements et gère poignées de fonctions.'
-            },
+            desc : {"en":"Dispatches events and manages handles to functions."},
             author : { 
                 name:'Andrew Charnley', 
                 link:'http://www.andrewcharnley.com' 
@@ -15,7 +12,23 @@ module.exports = function(app) {
             usage : {
                 class : true
             },
+            providesManager:true,
+            embedded:true,
             attributes : [
+                {
+                    name:'clean',
+                    type:'function',
+                    desc: {"en":"Removes an event linked to a dependency (object). This function is called automatically via the manager exposed via core.bless when any blessed object is destroyed."},
+                    attributes : [
+                        { 
+                            type:'object', 
+                            required:true,
+                            attributes : [{
+                                desc: {"en":"The dependency."}
+                            }]
+                        },
+                    ]
+                },
                 { 
                     name:'dispatch', 
                     type:'function',
@@ -24,62 +37,44 @@ module.exports = function(app) {
                             type:'string', 
                             required:true,
                             attributes : [{
-                                desc: {
-                                    en : 'Module name.',
-                                    fr : 'Nom du module.'
-                                }
+                                desc: {"en":"Module name."}
                             }]
                         },
                         { 
-                            type:'string', 
+                            type:['string','object'], 
                             required:true,
                             attributes : [{
-                                desc: {
-                                    en : 'Event name.',
-                                    fr : 'Nom de l\'événement.'
-                                }
+                                desc: {"en":"If string, it is the event name. If array, the first value is the string name and the second is the target for the event. If a target is supplied, only registered agents which have no target or which match this target will be executed."}
                             }]
                         },
                         { 
-                            type:'object',
+                            type:'*',
                             attributes : [{
-                                desc: {
-                                    en : 'An object to pass to the function. Other data types are also possible.',
-                                    fr : 'Un objet à passer à la fonction. D\'autres types de données sont également possibles.'
-                                }
+                                desc: {"en":"An object or value to pass on to the registered function."}
                             }]
                         }
                     ],
-                   
-                    desc: {
-                        en : 'Triggers registered event handlers. Any handler can return { stopPropagation:true } to abort the iteration.',
-                    }
+                    desc: {"en":"Triggers registered event handlers. Any handler can return { stopPropagation:true } to abort the iteration."}
                 },
                 { 
                     name:'on', 
                     type:'function',
                     attributes: [
                         { 
-                            type:'string', 
+                            type:['string','array'], 
                             required:true, 
                             attributes: [ 
                                 {
-                                    desc: {
-                                        en : 'The module name.',
-                                        fr : 'Le nom du module.'
-                                    }
+                                    desc: {"en":"If string, it is the module name. If array, the function will iterate for each string within it allowing you to register the same function for multiple event names."}
                                 }
                             ]
                         },
                         { 
-                            type:'string', 
+                            type:['string','object'],
                             required:true,
                             attributes: [ 
                                 {
-                                    desc: {
-                                        en : 'The event name.',
-                                        fr : 'Le nom de l\'événement.'
-                                    }
+                                    desc: {"en":"If string, it is the event name. If array, the first value is the string name, the second is a target in which the event applies to (this is automatically registered as a dependency) and the third is any additional dependencies."}
                                 }
                             ]
                         },
@@ -88,18 +83,12 @@ module.exports = function(app) {
                             required:true,
                             attributes: [ 
                                 {
-                                    desc: {
-                                        en : 'Function to execute on event trigger.',
-                                        fr : 'Fonction à exécuter sur l\'événement déclencheur.'
-                                    }
+                                    desc: {"en":"Function to execute on event trigger."}
                                 }
                             ]
                         }
                     ],
-                    desc: {
-                        en : 'Registers a callback using the module name and event.',
-                        fr : 'Enregistre un rappel à l\'aide du nom du module et l\'événement.'
-                    }
+                    desc: {"en":"Registers a callback using the module name and event."}
                 },
                 { 
                     name:'remove', 
@@ -109,35 +98,23 @@ module.exports = function(app) {
                             type:'function',
                             required:true,
                             attributes : [{
-                                desc: {
-                                    en : 'The function that was previously registered.',
-                                    fr : 'La fonction qui a été précédemment enregistré.'
-                                }
+                                desc: {"en":"The function that was previously registered."}
                             }]
                         },
                         {
                             type:'string',
                             attributes : [{
-                                desc: {
-                                    en : 'The module name to be used to lookup the function. This makes the lookup faster and prevents the function being deregistered from all module names.',
-                                    fr : 'Le nom du module à utiliser pour rechercher la fonction. Cela rend la recherche plus rapidement et empêche la fonction est radié de tous les noms de modules.'
-                                }
+                                desc: {"en":"The module name to be used to lookup the function. This makes the lookup faster and prevents the function being deregistered from all module names."}
                             }]
                         },
                         { 
                             type:'string',
                             attributes : [{
-                                desc: {
-                                    en : 'The event name to be used to lookup the function. This makes the lookup faster and prevents the function being deregistered from all event names.',
-                                    fr : 'Le nom de l\'événement à être utilisé pour rechercher la fonction. Cela rend la recherche plus rapidement et empêche la fonction est radié de tous les noms d\'événements.'
-                                }
+                                desc: {"en":"The event name to be used to lookup the function. This makes the lookup faster and prevents the function being deregistered from all event names."}
                             }]
                         }
                     ],
-                    desc: {
-                        en : 'Deregisters a function from the event pool.',
-                        fr : 'Radie une fonction dans la piscine de l\'événement.'
-                    }
+                    desc: {"en":"Unregisters a function from the event pool."}
                 }
             ]
         };

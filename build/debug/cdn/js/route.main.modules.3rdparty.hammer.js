@@ -3,7 +3,7 @@ module.exports = function(app) {
     return function(model) {
 
         var data = {
-            desc : {"fr":"","en":"This library provides touch events and is loaded when a touch screen is detected."},
+            desc : {"en":"This library provides touch events and is loaded when a touch screen is detected."},
             usage : {
                 direct : true
             },

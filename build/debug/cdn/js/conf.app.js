@@ -57,7 +57,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Andorra"}
+          "name": {"en":"Andorra"}
         },
         "AE": {
           "callingCode": [
@@ -66,7 +66,7 @@ module.exports = function(app, params) {
           "currency": [
             "AED"
           ],
-          "name": {"fr":"","en":"United Arab Emirates"},
+          "name": {"en":"United Arab Emirates"},
         },
         "AF": {
           "callingCode": [
@@ -75,7 +75,7 @@ module.exports = function(app, params) {
           "currency": [
             "AFN"
           ],
-          "name": {"fr":"","en":"Afghanistan"}
+          "name": {"en":"Afghanistan"}
         },
         "AG": {
           "callingCode": [
@@ -84,7 +84,7 @@ module.exports = function(app, params) {
           "currency": [
             "XCD"
           ],
-          "name": {"fr":"","en":"Antigua and Barbuda"}
+          "name": {"en":"Antigua and Barbuda"}
         },
         "AI": {
           "callingCode": [
@@ -93,7 +93,7 @@ module.exports = function(app, params) {
           "currency": [
             "XCD"
           ],
-          "name": {"fr":"","en":"Anguilla"},
+          "name": {"en":"Anguilla"},
         },
         "AL": {
           "callingCode": [
@@ -102,7 +102,7 @@ module.exports = function(app, params) {
           "currency": [
             "ALL"
           ],
-          "name": {"fr":"","en":"Albania"}
+          "name": {"en":"Albania"}
         },
         "AM": {
           "callingCode": [
@@ -111,7 +111,7 @@ module.exports = function(app, params) {
           "currency": [
             "AMD"
           ],
-          "name": {"fr":"","en":"Armenia"}
+          "name": {"en":"Armenia"}
         },
         "AO": {
           "callingCode": [
@@ -120,10 +120,10 @@ module.exports = function(app, params) {
           "currency": [
             "AOA"
           ],
-          "name": {"fr":"","en":"Angola"}
+          "name": {"en":"Angola"}
         },
         "AQ": {
-          "name": {"fr":"","en":"Antarctica"}
+          "name": {"en":"Antarctica"}
         },
         "AR": {
           "callingCode": [
@@ -132,7 +132,7 @@ module.exports = function(app, params) {
           "currency": [
             "ARS"
           ],
-          "name": {"fr":"","en":"Argentina"},
+          "name": {"en":"Argentina"},
         },
         "AS": {
           "callingCode": [
@@ -141,7 +141,7 @@ module.exports = function(app, params) {
           "currency": [
             "USD"
           ],
-          "name": {"fr":"","en":"American Samoa"}
+          "name": {"en":"American Samoa"}
         },
         "AT": {
           "callingCode": [
@@ -150,7 +150,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Austria"}
+          "name": {"en":"Austria"}
         },
         "AU": {
           "callingCode": [
@@ -159,7 +159,7 @@ module.exports = function(app, params) {
           "currency": [
             "AUD"
           ],
-          "name": {"fr":"","en":"Australia"}
+          "name": {"en":"Australia"}
         },
         "AW": {
           "callingCode": [
@@ -168,7 +168,7 @@ module.exports = function(app, params) {
           "currency": [
             "AWG"
           ],
-          "name": {"fr":"","en":"Aruba"}
+          "name": {"en":"Aruba"}
         },
         "AX": {
           "callingCode": [
@@ -177,7 +177,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Åland Islands"}
+          "name": {"en":"Åland Islands"}
         },
         "AZ": {
           "callingCode": [
@@ -186,7 +186,7 @@ module.exports = function(app, params) {
           "currency": [
             "AZN"
           ],
-          "name": {"fr":"","en":"Azerbaijan"}
+          "name": {"en":"Azerbaijan"}
         },
         "BA": {
           "callingCode": [
@@ -195,7 +195,7 @@ module.exports = function(app, params) {
           "currency": [
             "BAM"
           ],
-          "name": {"fr":"","en":"Bosnia and Herzegovina"}
+          "name": {"en":"Bosnia and Herzegovina"}
         },
         "BB": {
           "callingCode": [
@@ -204,7 +204,7 @@ module.exports = function(app, params) {
           "currency": [
             "BBD"
           ],
-          "name": {"fr":"","en":"Barbados"}
+          "name": {"en":"Barbados"}
         },
         "BD": {
           "callingCode": [
@@ -213,7 +213,7 @@ module.exports = function(app, params) {
           "currency": [
             "BDT"
           ],
-          "name": {"fr":"","en":"Bangladesh"}
+          "name": {"en":"Bangladesh"}
         },
         "BE": {
           "callingCode": [
@@ -222,7 +222,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Belgium"}
+          "name": {"en":"Belgium"}
         },
         "BF": {
           "callingCode": [
@@ -231,7 +231,7 @@ module.exports = function(app, params) {
           "currency": [
             "XOF"
           ],
-          "name": {"fr":"","en":"Burkina Faso"}
+          "name": {"en":"Burkina Faso"}
         },
         "BG": {
           "callingCode": [
@@ -240,7 +240,7 @@ module.exports = function(app, params) {
           "currency": [
             "BGN"
           ],
-          "name": {"fr":"","en":"Bulgaria"}
+          "name": {"en":"Bulgaria"}
         },
         "BH": {
           "callingCode": [
@@ -249,7 +249,7 @@ module.exports = function(app, params) {
           "currency": [
             "BHD"
           ],
-          "name": {"fr":"","en":"Bahrain"}
+          "name": {"en":"Bahrain"}
         },
         "BI": {
           "callingCode": [
@@ -258,7 +258,7 @@ module.exports = function(app, params) {
           "currency": [
             "BIF"
           ],
-          "name": {"fr":"","en":"Burundi"}
+          "name": {"en":"Burundi"}
         },
         "BJ": {
           "callingCode": [
@@ -267,7 +267,7 @@ module.exports = function(app, params) {
           "currency": [
             "XOF"
           ],
-          "name": {"fr":"","en":"Benin"}
+          "name": {"en":"Benin"}
         },
         "BL": {
           "callingCode": [
@@ -276,7 +276,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Saint Barthélemy"}
+          "name": {"en":"Saint Barthélemy"}
         },
         "BM": {
           "callingCode": [
@@ -285,7 +285,7 @@ module.exports = function(app, params) {
           "currency": [
             "BMD"
           ],
-          "name": {"fr":"","en":"Bermuda"}
+          "name": {"en":"Bermuda"}
         },
         "BN": {
           "callingCode": [
@@ -294,7 +294,7 @@ module.exports = function(app, params) {
           "currency": [
             "BND"
           ],
-          "name": {"fr":"","en":"Brunei"}
+          "name": {"en":"Brunei"}
         },
         "BO": {
           "callingCode": [
@@ -304,7 +304,7 @@ module.exports = function(app, params) {
             "BOB",
             "BOV"
           ],
-          "name": {"fr":"","en":"Bolivia"}
+          "name": {"en":"Bolivia"}
         },
         "BQ": {
           "callingCode": [
@@ -313,7 +313,7 @@ module.exports = function(app, params) {
           "currency": [
             "USD"
           ],
-          "name": {"fr":"","en":"Bonaire"}
+          "name": {"en":"Bonaire"}
         },
         "BR": {
           "callingCode": [
@@ -322,7 +322,7 @@ module.exports = function(app, params) {
           "currency": [
             "BRL"
           ],
-          "name": {"fr":"","en":"Brazil"}
+          "name": {"en":"Brazil"}
         },
         "BS": {
           "callingCode": [
@@ -331,7 +331,7 @@ module.exports = function(app, params) {
           "currency": [
             "BSD"
           ],
-          "name": {"fr":"","en":"Bahamas"},
+          "name": {"en":"Bahamas"},
         },
         "BT": {
           "callingCode": [
@@ -341,13 +341,13 @@ module.exports = function(app, params) {
             "BTN",
             "INR"
           ],
-          "name": {"fr":"","en":"Bhutan"}
+          "name": {"en":"Bhutan"}
         },
         "BV": {
           "currency": [
             "NOK"
           ],
-          "name": {"fr":"","en":"Bouvet Island"}
+          "name": {"en":"Bouvet Island"}
         },
         "BW": {
           "callingCode": [
@@ -356,7 +356,7 @@ module.exports = function(app, params) {
           "currency": [
             "BWP"
           ],
-          "name": {"fr":"","en":"Botswana"}
+          "name": {"en":"Botswana"}
         },
         "BY": {
           "callingCode": [
@@ -365,7 +365,7 @@ module.exports = function(app, params) {
           "currency": [
             "BYR"
           ],
-          "name": {"fr":"","en":"Belarus"}
+          "name": {"en":"Belarus"}
         },
         "BZ": {
           "callingCode": [
@@ -374,7 +374,7 @@ module.exports = function(app, params) {
           "currency": [
             "BZD"
           ],
-          "name": {"fr":"","en":"Belize"}
+          "name": {"en":"Belize"}
         },
         "CA": {
           "callingCode": [
@@ -383,7 +383,7 @@ module.exports = function(app, params) {
           "currency": [
             "CAD"
           ],
-          "name": {"fr":"","en":"Canada"}
+          "name": {"en":"Canada"}
         },
         "CC": {
           "callingCode": [
@@ -392,7 +392,7 @@ module.exports = function(app, params) {
           "currency": [
             "AUD"
           ],
-          "name": {"fr":"","en":"Cocos (Keeling) Islands"}
+          "name": {"en":"Cocos (Keeling) Islands"}
         },
         "CD": {
           "callingCode": [
@@ -401,7 +401,7 @@ module.exports = function(app, params) {
           "currency": [
             "CDF"
           ],
-          "name": {"fr":"","en":"DR Congo"}
+          "name": {"en":"DR Congo"}
         },
         "CF": {
           "callingCode": [
@@ -410,7 +410,7 @@ module.exports = function(app, params) {
           "currency": [
             "XAF"
           ],
-          "name": {"fr":"","en":"Central African Republic"}
+          "name": {"en":"Central African Republic"}
         },
         "CG": {
           "callingCode": [
@@ -419,7 +419,7 @@ module.exports = function(app, params) {
           "currency": [
             "XAF"
           ],
-          "name": {"fr":"","en":"Republic of the Congo"}
+          "name": {"en":"Republic of the Congo"}
         },
         "CH": {
           "callingCode": [
@@ -430,7 +430,7 @@ module.exports = function(app, params) {
             "CHF",
             "CHW"
           ],
-          "name": {"fr":"","en":"Switzerland"}
+          "name": {"en":"Switzerland"}
         },
         "CI": {
           "callingCode": [
@@ -439,7 +439,7 @@ module.exports = function(app, params) {
           "currency": [
             "XOF"
           ],
-          "name": {"fr":"","en":"Ivory Coast"}
+          "name": {"en":"Ivory Coast"}
         },
         "CK": {
           "callingCode": [
@@ -448,7 +448,7 @@ module.exports = function(app, params) {
           "currency": [
             "NZD"
           ],
-          "name": {"fr":"","en":"Cook Islands"}
+          "name": {"en":"Cook Islands"}
         },
         "CL": {
           "callingCode": [
@@ -458,7 +458,7 @@ module.exports = function(app, params) {
             "CLF",
             "CLP"
           ],
-          "name": {"fr":"","en":"Chile"}
+          "name": {"en":"Chile"}
         },
         "CM": {
           "callingCode": [
@@ -467,7 +467,7 @@ module.exports = function(app, params) {
           "currency": [
             "XAF"
           ],
-          "name": {"fr":"","en":"Cameroon"}
+          "name": {"en":"Cameroon"}
         },
         "CN": {
           "callingCode": [
@@ -476,7 +476,7 @@ module.exports = function(app, params) {
           "currency": [
             "CNY"
           ],
-          "name": {"fr":"","en":"China"}
+          "name": {"en":"China"}
         },
         "CO": {
           "callingCode": [
@@ -485,7 +485,7 @@ module.exports = function(app, params) {
           "currency": [
             "COP"
           ],
-          "name": {"fr":"","en":"Colombia"}
+          "name": {"en":"Colombia"}
         },
         "CR": {
           "callingCode": [
@@ -494,7 +494,7 @@ module.exports = function(app, params) {
           "currency": [
             "CRC"
           ],
-          "name": {"fr":"","en":"Costa Rica"}
+          "name": {"en":"Costa Rica"}
         },
         "CU": {
           "callingCode": [
@@ -504,7 +504,7 @@ module.exports = function(app, params) {
             "CUC",
             "CUP"
           ],
-          "name": {"fr":"","en":"Cuba"}
+          "name": {"en":"Cuba"}
         },
         "CV": {
           "callingCode": [
@@ -513,7 +513,7 @@ module.exports = function(app, params) {
           "currency": [
             "CVE"
           ],
-          "name": {"fr":"","en":"Cape Verde"}
+          "name": {"en":"Cape Verde"}
         },
         "CW": {
           "callingCode": [
@@ -522,7 +522,7 @@ module.exports = function(app, params) {
           "currency": [
             "ANG"
           ],
-          "name": {"fr":"","en":"Curaçao"}
+          "name": {"en":"Curaçao"}
         },
         "CX": {
           "callingCode": [
@@ -531,7 +531,7 @@ module.exports = function(app, params) {
           "currency": [
             "AUD"
           ],
-          "name": {"fr":"","en":"Christmas Island"}
+          "name": {"en":"Christmas Island"}
         },
         "CY": {
           "callingCode": [
@@ -540,7 +540,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Cyprus"}
+          "name": {"en":"Cyprus"}
         },
         "CZ": {
           "callingCode": [
@@ -549,7 +549,7 @@ module.exports = function(app, params) {
           "currency": [
             "CZK"
           ],
-          "name": {"fr":"","en":"Czech Republic"}
+          "name": {"en":"Czech Republic"}
         },
         "DE": {
           "callingCode": [
@@ -558,7 +558,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Germany"}
+          "name": {"en":"Germany"}
         },
         "DJ": {
           "callingCode": [
@@ -567,7 +567,7 @@ module.exports = function(app, params) {
           "currency": [
             "DJF"
           ],
-          "name": {"fr":"","en":"Djibouti"}
+          "name": {"en":"Djibouti"}
         },
         "DK": {
           "callingCode": [
@@ -576,7 +576,7 @@ module.exports = function(app, params) {
           "currency": [
             "DKK"
           ],
-          "name": {"fr":"","en":"Denmark"}
+          "name": {"en":"Denmark"}
         },
         "DM": {
           "callingCode": [
@@ -585,7 +585,7 @@ module.exports = function(app, params) {
           "currency": [
             "XCD"
           ],
-          "name": {"fr":"","en":"Dominica"}
+          "name": {"en":"Dominica"}
         },
         "DO": {
           "callingCode": [
@@ -596,7 +596,7 @@ module.exports = function(app, params) {
           "currency": [
             "DOP"
           ],
-          "name": {"fr":"","en":"Dominican Republic"}
+          "name": {"en":"Dominican Republic"}
         },
         "DZ": {
           "callingCode": [
@@ -605,7 +605,7 @@ module.exports = function(app, params) {
           "currency": [
             "DZD"
           ],
-          "name": {"fr":"","en":"Algeria"}
+          "name": {"en":"Algeria"}
         },
         "EC": {
           "callingCode": [
@@ -614,7 +614,7 @@ module.exports = function(app, params) {
           "currency": [
             "USD"
           ],
-          "name": {"fr":"","en":"Ecuador"}
+          "name": {"en":"Ecuador"}
         },
         "EE": {
           "callingCode": [
@@ -623,7 +623,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Estonia"}
+          "name": {"en":"Estonia"}
         },
         "EG": {
           "callingCode": [
@@ -632,7 +632,7 @@ module.exports = function(app, params) {
           "currency": [
             "EGP"
           ],
-          "name": {"fr":"","en":"Egypt"}
+          "name": {"en":"Egypt"}
         },
         "EH": {
           "callingCode": [
@@ -643,7 +643,7 @@ module.exports = function(app, params) {
             "DZD",
             "MRO"
           ],
-          "name": {"fr":"","en":"Western Sahara"}
+          "name": {"en":"Western Sahara"}
         },
         "ER": {
           "callingCode": [
@@ -652,7 +652,7 @@ module.exports = function(app, params) {
           "currency": [
             "ERN"
           ],
-          "name": {"fr":"","en":"Eritrea"}
+          "name": {"en":"Eritrea"}
         },
         "ES": {
           "callingCode": [
@@ -661,7 +661,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Spain"}
+          "name": {"en":"Spain"}
         },
         "ET": {
           "callingCode": [
@@ -670,7 +670,7 @@ module.exports = function(app, params) {
           "currency": [
             "ETB"
           ],
-          "name": {"fr":"","en":"Ethiopia"}
+          "name": {"en":"Ethiopia"}
         },
         "FI": {
           "callingCode": [
@@ -679,7 +679,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Finland"}
+          "name": {"en":"Finland"}
         },
         "FJ": {
           "callingCode": [
@@ -688,7 +688,7 @@ module.exports = function(app, params) {
           "currency": [
             "FJD"
           ],
-          "name": {"fr":"","en":"Fiji"}
+          "name": {"en":"Fiji"}
         },
         "FK": {
           "callingCode": [
@@ -697,7 +697,7 @@ module.exports = function(app, params) {
           "currency": [
             "FKP"
           ],
-          "name": {"fr":"","en":"Falkland Islands"}
+          "name": {"en":"Falkland Islands"}
         },
         "FM": {
           "callingCode": [
@@ -706,7 +706,7 @@ module.exports = function(app, params) {
           "currency": [
             "USD"
           ],
-          "name": {"fr":"","en":"Micronesia"}
+          "name": {"en":"Micronesia"}
         },
         "FO": {
           "callingCode": [
@@ -715,7 +715,7 @@ module.exports = function(app, params) {
           "currency": [
             "DKK"
           ],
-          "name": {"fr":"","en":"Faroe Islands"}
+          "name": {"en":"Faroe Islands"}
         },
         "FR": {
           "callingCode": [
@@ -724,7 +724,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"France"}
+          "name": {"en":"France"}
         },
         "GA": {
           "callingCode": [
@@ -733,7 +733,7 @@ module.exports = function(app, params) {
           "currency": [
             "XAF"
           ],
-          "name": {"fr":"","en":"Gabon"}
+          "name": {"en":"Gabon"}
         },
         "GB": {
           "callingCode": [
@@ -742,7 +742,7 @@ module.exports = function(app, params) {
           "currency": [
             "GBP"
           ],
-          "name": {"fr":"","en":"United Kingdom"}
+          "name": {"en":"United Kingdom"}
         },
         "GD": {
           "callingCode": [
@@ -751,7 +751,7 @@ module.exports = function(app, params) {
           "currency": [
             "XCD"
           ],
-          "name": {"fr":"","en":"Grenada"}
+          "name": {"en":"Grenada"}
         },
         "GE": {
           "callingCode": [
@@ -760,7 +760,7 @@ module.exports = function(app, params) {
           "currency": [
             "GEL"
           ],
-          "name": {"fr":"","en":"Georgia"}
+          "name": {"en":"Georgia"}
         },
         "GF": {
           "callingCode": [
@@ -769,7 +769,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"French Guiana"}
+          "name": {"en":"French Guiana"}
         },
         "GG": {
           "callingCode": [
@@ -778,7 +778,7 @@ module.exports = function(app, params) {
           "currency": [
             "GBP"
           ],
-          "name": {"fr":"","en":"Guernsey"}
+          "name": {"en":"Guernsey"}
         },
         "GH": {
           "callingCode": [
@@ -787,7 +787,7 @@ module.exports = function(app, params) {
           "currency": [
             "GHS"
           ],
-          "name": {"fr":"","en":"Ghana"}
+          "name": {"en":"Ghana"}
         },
         "GI": {
           "callingCode": [
@@ -796,7 +796,7 @@ module.exports = function(app, params) {
           "currency": [
             "GIP"
           ],
-          "name": {"fr":"","en":"Gibraltar"}
+          "name": {"en":"Gibraltar"}
         },
         "GL": {
           "callingCode": [
@@ -805,7 +805,7 @@ module.exports = function(app, params) {
           "currency": [
             "DKK"
           ],
-          "name": {"fr":"","en":"Greenland"}
+          "name": {"en":"Greenland"}
         },
         "GM": {
           "callingCode": [
@@ -814,7 +814,7 @@ module.exports = function(app, params) {
           "currency": [
             "GMD"
           ],
-          "name": {"fr":"","en":"Gambia"}
+          "name": {"en":"Gambia"}
         },
         "GN": {
           "callingCode": [
@@ -823,7 +823,7 @@ module.exports = function(app, params) {
           "currency": [
             "GNF"
           ],
-          "name": {"fr":"","en":"Guinea"}
+          "name": {"en":"Guinea"}
         },
         "GP": {
           "callingCode": [
@@ -832,7 +832,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Guadeloupe"}
+          "name": {"en":"Guadeloupe"}
         },
         "GQ": {
           "callingCode": [
@@ -841,7 +841,7 @@ module.exports = function(app, params) {
           "currency": [
             "XAF"
           ],
-          "name": {"fr":"","en":"Equatorial Guinea"}
+          "name": {"en":"Equatorial Guinea"}
         },
         "GR": {
           "callingCode": [
@@ -850,7 +850,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Greece"}
+          "name": {"en":"Greece"}
         },
         "GS": {
           "callingCode": [
@@ -859,7 +859,7 @@ module.exports = function(app, params) {
           "currency": [
             "GBP"
           ],
-          "name": {"fr":"","en":"South Georgia"}
+          "name": {"en":"South Georgia"}
         },
         "GT": {
           "callingCode": [
@@ -868,7 +868,7 @@ module.exports = function(app, params) {
           "currency": [
             "GTQ"
           ],
-          "name": {"fr":"","en":"Guatemala"}
+          "name": {"en":"Guatemala"}
         },
         "GU": {
           "callingCode": [
@@ -877,7 +877,7 @@ module.exports = function(app, params) {
           "currency": [
             "USD"
           ],
-          "name": {"fr":"","en":"Guam"}
+          "name": {"en":"Guam"}
         },
         "GW": {
           "callingCode": [
@@ -886,7 +886,7 @@ module.exports = function(app, params) {
           "currency": [
             "XOF"
           ],
-          "name": {"fr":"","en":"Guinea-Bissau"}
+          "name": {"en":"Guinea-Bissau"}
         },
         "GY": {
           "callingCode": [
@@ -895,7 +895,7 @@ module.exports = function(app, params) {
           "currency": [
             "GYD"
           ],
-          "name": {"fr":"","en":"Guyana"}
+          "name": {"en":"Guyana"}
         },
         "HK": {
           "callingCode": [
@@ -904,13 +904,13 @@ module.exports = function(app, params) {
           "currency": [
             "HKD"
           ],
-          "name": {"fr":"","en":"Hong Kong"}
+          "name": {"en":"Hong Kong"}
         },
         "HM": {
           "currency": [
             "AUD"
           ],
-          "name": {"fr":"","en":"Heard Island and McDonald Islands"}
+          "name": {"en":"Heard Island and McDonald Islands"}
         },
         "HN": {
           "callingCode": [
@@ -919,7 +919,7 @@ module.exports = function(app, params) {
           "currency": [
             "HNL"
           ],
-          "name": {"fr":"","en":"Honduras"}
+          "name": {"en":"Honduras"}
         },
         "HR": {
           "callingCode": [
@@ -928,7 +928,7 @@ module.exports = function(app, params) {
           "currency": [
             "HRK"
           ],
-          "name": {"fr":"","en":"Croatia"}
+          "name": {"en":"Croatia"}
         },
         "HT": {
           "callingCode": [
@@ -938,7 +938,7 @@ module.exports = function(app, params) {
             "HTG",
             "USD"
           ],
-          "name": {"fr":"","en":"Haiti"}
+          "name": {"en":"Haiti"}
         },
         "HU": {
           "callingCode": [
@@ -947,7 +947,7 @@ module.exports = function(app, params) {
           "currency": [
             "HUF"
           ],
-          "name": {"fr":"","en":"Hungary"}
+          "name": {"en":"Hungary"}
         },
         "ID": {
           "callingCode": [
@@ -956,7 +956,7 @@ module.exports = function(app, params) {
           "currency": [
             "IDR"
           ],
-          "name": {"fr":"","en":"Indonesia"}
+          "name": {"en":"Indonesia"}
         },
         "IE": {
           "callingCode": [
@@ -965,7 +965,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Ireland"}
+          "name": {"en":"Ireland"}
         },
         "IL": {
           "callingCode": [
@@ -974,7 +974,7 @@ module.exports = function(app, params) {
           "currency": [
             "ILS"
           ],
-          "name": {"fr":"","en":"Israel"}
+          "name": {"en":"Israel"}
         },
         "IM": {
           "callingCode": [
@@ -983,7 +983,7 @@ module.exports = function(app, params) {
           "currency": [
             "GBP"
           ],
-          "name": {"fr":"","en":"Isle of Man"}
+          "name": {"en":"Isle of Man"}
         },
         "IN": {
           "callingCode": [
@@ -992,7 +992,7 @@ module.exports = function(app, params) {
           "currency": [
             "INR"
           ],
-          "name": {"fr":"","en":"India"}
+          "name": {"en":"India"}
         },
         "IO": {
           "callingCode": [
@@ -1001,7 +1001,7 @@ module.exports = function(app, params) {
           "currency": [
             "USD"
           ],
-          "name": {"fr":"","en":"British Indian Ocean Territory"}
+          "name": {"en":"British Indian Ocean Territory"}
         },
         "IQ": {
           "callingCode": [
@@ -1010,7 +1010,7 @@ module.exports = function(app, params) {
           "currency": [
             "IQD"
           ],
-          "name": {"fr":"","en":"Iraq"}
+          "name": {"en":"Iraq"}
         },
         "IR": {
           "callingCode": [
@@ -1019,7 +1019,7 @@ module.exports = function(app, params) {
           "currency": [
             "IRR"
           ],
-          "name": {"fr":"","en":"Iran"}
+          "name": {"en":"Iran"}
         },
         "IS": {
           "callingCode": [
@@ -1028,7 +1028,7 @@ module.exports = function(app, params) {
           "currency": [
             "ISK"
           ],
-          "name": {"fr":"","en":"Iceland"}
+          "name": {"en":"Iceland"}
         },
         "IT": {
           "callingCode": [
@@ -1037,7 +1037,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Italy"}
+          "name": {"en":"Italy"}
         },
         "JE": {
           "callingCode": [
@@ -1046,7 +1046,7 @@ module.exports = function(app, params) {
           "currency": [
             "GBP"
           ],
-          "name": {"fr":"","en":"Jersey"}
+          "name": {"en":"Jersey"}
         },
         "JM": {
           "callingCode": [
@@ -1055,7 +1055,7 @@ module.exports = function(app, params) {
           "currency": [
             "JMD"
           ],
-          "name": {"fr":"","en":"Jamaica"}
+          "name": {"en":"Jamaica"}
         },
         "JO": {
           "callingCode": [
@@ -1064,7 +1064,7 @@ module.exports = function(app, params) {
           "currency": [
             "JOD"
           ],
-          "name": {"fr":"","en":"Jordan"}
+          "name": {"en":"Jordan"}
         },
         "JP": {
           "callingCode": [
@@ -1073,7 +1073,7 @@ module.exports = function(app, params) {
           "currency": [
             "JPY"
           ],
-          "name": {"fr":"","en":"Japan"}
+          "name": {"en":"Japan"}
         },
         "KE": {
           "callingCode": [
@@ -1082,7 +1082,7 @@ module.exports = function(app, params) {
           "currency": [
             "KES"
           ],
-          "name": {"fr":"","en":"Kenya"}
+          "name": {"en":"Kenya"}
         },
         "KG": {
           "callingCode": [
@@ -1091,7 +1091,7 @@ module.exports = function(app, params) {
           "currency": [
             "KGS"
           ],
-          "name": {"fr":"","en":"Kyrgyzstan"}
+          "name": {"en":"Kyrgyzstan"}
         },
         "KH": {
           "callingCode": [
@@ -1100,7 +1100,7 @@ module.exports = function(app, params) {
           "currency": [
             "KHR"
           ],
-          "name": {"fr":"","en":"Cambodia"}
+          "name": {"en":"Cambodia"}
         },
         "KI": {
           "callingCode": [
@@ -1109,7 +1109,7 @@ module.exports = function(app, params) {
           "currency": [
             "AUD"
           ],
-          "name": {"fr":"","en":"Kiribati"}
+          "name": {"en":"Kiribati"}
         },
         "KM": {
           "callingCode": [
@@ -1118,7 +1118,7 @@ module.exports = function(app, params) {
           "currency": [
             "KMF"
           ],
-          "name": {"fr":"","en":"Comoros"}
+          "name": {"en":"Comoros"}
         },
         "KN": {
           "callingCode": [
@@ -1127,7 +1127,7 @@ module.exports = function(app, params) {
           "currency": [
             "XCD"
           ],
-          "name": {"fr":"","en":"Saint Kitts and Nevis"},
+          "name": {"en":"Saint Kitts and Nevis"},
         },
         "KP": {
           "callingCode": [
@@ -1136,7 +1136,7 @@ module.exports = function(app, params) {
           "currency": [
             "KPW"
           ],
-          "name": {"fr":"","en":"North Korea"},
+          "name": {"en":"North Korea"},
         },
         "KR": {
           "callingCode": [
@@ -1145,7 +1145,7 @@ module.exports = function(app, params) {
           "currency": [
             "KRW"
           ],
-          "name": {"fr":"","en":"South Korea"}
+          "name": {"en":"South Korea"}
         },
         "KW": {
           "callingCode": [
@@ -1154,7 +1154,7 @@ module.exports = function(app, params) {
           "currency": [
             "KWD"
           ],
-          "name": {"fr":"","en":"Kuwait"}
+          "name": {"en":"Kuwait"}
         },
         "KY": {
           "callingCode": [
@@ -1163,7 +1163,7 @@ module.exports = function(app, params) {
           "currency": [
             "KYD"
           ],
-          "name": {"fr":"","en":"Cayman Islands"}
+          "name": {"en":"Cayman Islands"}
         },
         "KZ": {
           "callingCode": [
@@ -1173,7 +1173,7 @@ module.exports = function(app, params) {
           "currency": [
             "KZT"
           ],
-          "name": {"fr":"","en":"Kazakhstan"}
+          "name": {"en":"Kazakhstan"}
         },
         "LA": {
           "callingCode": [
@@ -1182,7 +1182,7 @@ module.exports = function(app, params) {
           "currency": [
             "LAK"
           ],
-          "name": {"fr":"","en":"Laos"}
+          "name": {"en":"Laos"}
         },
         "LB": {
           "callingCode": [
@@ -1191,7 +1191,7 @@ module.exports = function(app, params) {
           "currency": [
             "LBP"
           ],
-          "name": {"fr":"","en":"Lebanon"}
+          "name": {"en":"Lebanon"}
         },
         "LC": {
           "callingCode": [
@@ -1200,7 +1200,7 @@ module.exports = function(app, params) {
           "currency": [
             "XCD"
           ],
-          "name": {"fr":"","en":"Saint Lucia"}
+          "name": {"en":"Saint Lucia"}
         },
         "LI": {
           "callingCode": [
@@ -1209,7 +1209,7 @@ module.exports = function(app, params) {
           "currency": [
             "CHF"
           ],
-          "name": {"fr":"","en":"Liechtenstein"}
+          "name": {"en":"Liechtenstein"}
         },
         "LK": {
           "callingCode": [
@@ -1218,7 +1218,7 @@ module.exports = function(app, params) {
           "currency": [
             "LKR"
           ],
-          "name": {"fr":"","en":"Sri Lanka"}
+          "name": {"en":"Sri Lanka"}
         },
         "LR": {
           "callingCode": [
@@ -1227,7 +1227,7 @@ module.exports = function(app, params) {
           "currency": [
             "LRD"
           ],
-          "name": {"fr":"","en":"Liberia"}
+          "name": {"en":"Liberia"}
         },
         "LS": {
           "callingCode": [
@@ -1237,7 +1237,7 @@ module.exports = function(app, params) {
             "LSL",
             "ZAR"
           ],
-          "name": {"fr":"","en":"Lesotho"}
+          "name": {"en":"Lesotho"}
         },
         "LT": {
           "callingCode": [
@@ -1246,7 +1246,7 @@ module.exports = function(app, params) {
           "currency": [
             "LTL"
           ],
-          "name": {"fr":"","en":"Lithuania"}
+          "name": {"en":"Lithuania"}
         },
         "LU": {
           "callingCode": [
@@ -1255,7 +1255,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Luxembourg"}
+          "name": {"en":"Luxembourg"}
         },
         "LV": {
           "callingCode": [
@@ -1264,7 +1264,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Latvia"}
+          "name": {"en":"Latvia"}
         },
         "LY": {
           "callingCode": [
@@ -1273,7 +1273,7 @@ module.exports = function(app, params) {
           "currency": [
             "LYD"
           ],
-          "name": {"fr":"","en":"Libya"}
+          "name": {"en":"Libya"}
         },
         "MA": {
           "callingCode": [
@@ -1282,7 +1282,7 @@ module.exports = function(app, params) {
           "currency": [
             "MAD"
           ],
-          "name": {"fr":"","en":"Morocco"}
+          "name": {"en":"Morocco"}
         },
         "MC": {
           "callingCode": [
@@ -1291,7 +1291,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Monaco"}
+          "name": {"en":"Monaco"}
         },
         "MD": {
           "callingCode": [
@@ -1300,7 +1300,7 @@ module.exports = function(app, params) {
           "currency": [
             "MDL"
           ],
-          "name": {"fr":"","en":"Moldova"}
+          "name": {"en":"Moldova"}
         },
         "ME": {
           "callingCode": [
@@ -1309,7 +1309,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Montenegro"}
+          "name": {"en":"Montenegro"}
         },
         "MF": {
           "callingCode": [
@@ -1318,7 +1318,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Saint Martin"}
+          "name": {"en":"Saint Martin"}
         },
         "MG": {
           "callingCode": [
@@ -1327,7 +1327,7 @@ module.exports = function(app, params) {
           "currency": [
             "MGA"
           ],
-          "name": {"fr":"","en":"Madagascar"}
+          "name": {"en":"Madagascar"}
         },
         "MH": {
           "callingCode": [
@@ -1336,7 +1336,7 @@ module.exports = function(app, params) {
           "currency": [
             "USD"
           ],
-          "name": {"fr":"","en":"Marshall Islands"}
+          "name": {"en":"Marshall Islands"}
         },
         "MK": {
           "callingCode": [
@@ -1345,7 +1345,7 @@ module.exports = function(app, params) {
           "currency": [
             "MKD"
           ],
-          "name": {"fr":"","en":"Macedonia"}
+          "name": {"en":"Macedonia"}
         },
         "ML": {
           "callingCode": [
@@ -1354,7 +1354,7 @@ module.exports = function(app, params) {
           "currency": [
             "XOF"
           ],
-          "name": {"fr":"","en":"Mali"}
+          "name": {"en":"Mali"}
         },
         "MM": {
           "callingCode": [
@@ -1363,7 +1363,7 @@ module.exports = function(app, params) {
           "currency": [
             "MMK"
           ],
-          "name": {"fr":"","en":"Myanmar"}
+          "name": {"en":"Myanmar"}
         },
         "MN": {
           "callingCode": [
@@ -1372,7 +1372,7 @@ module.exports = function(app, params) {
           "currency": [
             "MNT"
           ],
-          "name": {"fr":"","en":"Mongolia"}
+          "name": {"en":"Mongolia"}
         },
         "MO": {
           "callingCode": [
@@ -1381,7 +1381,7 @@ module.exports = function(app, params) {
           "currency": [
             "MOP"
           ],
-          "name": {"fr":"","en":"Macau"}
+          "name": {"en":"Macau"}
         },
         "MP": {
           "callingCode": [
@@ -1390,7 +1390,7 @@ module.exports = function(app, params) {
           "currency": [
             "USD"
           ],
-          "name": {"fr":"","en":"Northern Mariana Islands"}
+          "name": {"en":"Northern Mariana Islands"}
         },
         "MQ": {
           "callingCode": [
@@ -1399,7 +1399,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Martinique"}
+          "name": {"en":"Martinique"}
         },
         "MR": {
           "callingCode": [
@@ -1408,7 +1408,7 @@ module.exports = function(app, params) {
           "currency": [
             "MRO"
           ],
-          "name": {"fr":"","en":"Mauritania"}
+          "name": {"en":"Mauritania"}
         },
         "MS": {
           "callingCode": [
@@ -1417,7 +1417,7 @@ module.exports = function(app, params) {
           "currency": [
             "XCD"
           ],
-          "name": {"fr":"","en":"Montserrat"}
+          "name": {"en":"Montserrat"}
         },
         "MT": {
           "callingCode": [
@@ -1426,7 +1426,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Malta"}
+          "name": {"en":"Malta"}
         },
         "MU": {
           "callingCode": [
@@ -1435,7 +1435,7 @@ module.exports = function(app, params) {
           "currency": [
             "MUR"
           ],
-          "name": {"fr":"","en":"Mauritius"}
+          "name": {"en":"Mauritius"}
         },
         "MV": {
           "callingCode": [
@@ -1444,7 +1444,7 @@ module.exports = function(app, params) {
           "currency": [
             "MVR"
           ],
-          "name": {"fr":"","en":"Maldives"}
+          "name": {"en":"Maldives"}
         },
         "MW": {
           "callingCode": [
@@ -1453,7 +1453,7 @@ module.exports = function(app, params) {
           "currency": [
             "MWK"
           ],
-          "name": {"fr":"","en":"Malawi"}
+          "name": {"en":"Malawi"}
         },
         "MX": {
           "callingCode": [
@@ -1462,7 +1462,7 @@ module.exports = function(app, params) {
           "currency": [
             "MXN"
           ],
-          "name": {"fr":"","en":"Mexico"}
+          "name": {"en":"Mexico"}
         },
         "MY": {
           "callingCode": [
@@ -1471,7 +1471,7 @@ module.exports = function(app, params) {
           "currency": [
             "MYR"
           ],
-          "name": {"fr":"","en":"Malaysia"}
+          "name": {"en":"Malaysia"}
         },
         "MZ": {
           "callingCode": [
@@ -1480,7 +1480,7 @@ module.exports = function(app, params) {
           "currency": [
             "MZN"
           ],
-          "name": {"fr":"","en":"Mozambique"}
+          "name": {"en":"Mozambique"}
         },
         "NA": {
           "callingCode": [
@@ -1490,7 +1490,7 @@ module.exports = function(app, params) {
             "NAD",
             "ZAR"
           ],
-          "name": {"fr":"","en":"Namibia"}
+          "name": {"en":"Namibia"}
         },
         "NC": {
           "callingCode": [
@@ -1499,7 +1499,7 @@ module.exports = function(app, params) {
           "currency": [
             "XPF"
           ],
-          "name": {"fr":"","en":"New Caledonia"}
+          "name": {"en":"New Caledonia"}
         },
         "NE": {
           "callingCode": [
@@ -1508,7 +1508,7 @@ module.exports = function(app, params) {
           "currency": [
             "XOF"
           ],
-          "name": {"fr":"","en":"Niger"}
+          "name": {"en":"Niger"}
         },
         "NF": {
           "callingCode": [
@@ -1517,7 +1517,7 @@ module.exports = function(app, params) {
           "currency": [
             "AUD"
           ],
-          "name": {"fr":"","en":"Norfolk Island"}
+          "name": {"en":"Norfolk Island"}
         },
         "NG": {
           "callingCode": [
@@ -1526,7 +1526,7 @@ module.exports = function(app, params) {
           "currency": [
             "NGN"
           ],
-          "name": {"fr":"","en":"Nigeria"}
+          "name": {"en":"Nigeria"}
         },
         "NI": {
           "callingCode": [
@@ -1535,7 +1535,7 @@ module.exports = function(app, params) {
           "currency": [
             "NIO"
           ],
-          "name": {"fr":"","en":"Nicaragua"}
+          "name": {"en":"Nicaragua"}
         },
         "NL": {
           "callingCode": [
@@ -1544,7 +1544,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Netherlands"}
+          "name": {"en":"Netherlands"}
         },
         "NO": {
           "callingCode": [
@@ -1553,7 +1553,7 @@ module.exports = function(app, params) {
           "currency": [
             "NOK"
           ],
-          "name": {"fr":"","en":"Norway"}
+          "name": {"en":"Norway"}
         },
         "NP": {
           "callingCode": [
@@ -1562,7 +1562,7 @@ module.exports = function(app, params) {
           "currency": [
             "NPR"
           ],
-          "name": {"fr":"","en":"Nepal"}
+          "name": {"en":"Nepal"}
         },
         "NR": {
           "callingCode": [
@@ -1571,7 +1571,7 @@ module.exports = function(app, params) {
           "currency": [
             "AUD"
           ],
-          "name": {"fr":"","en":"Nauru"}
+          "name": {"en":"Nauru"}
         },
         "NU": {
           "callingCode": [
@@ -1580,7 +1580,7 @@ module.exports = function(app, params) {
           "currency": [
             "NZD"
           ],
-          "name": {"fr":"","en":"Niue"}
+          "name": {"en":"Niue"}
         },
         "NZ": {
           "callingCode": [
@@ -1589,7 +1589,7 @@ module.exports = function(app, params) {
           "currency": [
             "NZD"
           ],
-          "name": {"fr":"","en":"New Zealand"}
+          "name": {"en":"New Zealand"}
         },
         "OM": {
           "callingCode": [
@@ -1598,7 +1598,7 @@ module.exports = function(app, params) {
           "currency": [
             "OMR"
           ],
-          "name": {"fr":"","en":"Oman"}
+          "name": {"en":"Oman"}
         },
         "PA": {
           "callingCode": [
@@ -1608,7 +1608,7 @@ module.exports = function(app, params) {
             "PAB",
             "USD"
           ],
-          "name": {"fr":"","en":"Panama"}
+          "name": {"en":"Panama"}
         },
         "PE": {
           "callingCode": [
@@ -1617,7 +1617,7 @@ module.exports = function(app, params) {
           "currency": [
             "PEN"
           ],
-          "name": {"fr":"","en":"Peru"}
+          "name": {"en":"Peru"}
         },
         "PF": {
           "callingCode": [
@@ -1626,7 +1626,7 @@ module.exports = function(app, params) {
           "currency": [
             "XPF"
           ],
-          "name": {"fr":"","en":"French Polynesia"}
+          "name": {"en":"French Polynesia"}
         },
         "PG": {
           "callingCode": [
@@ -1635,7 +1635,7 @@ module.exports = function(app, params) {
           "currency": [
             "PGK"
           ],
-          "name": {"fr":"","en":"Papua New Guinea"}
+          "name": {"en":"Papua New Guinea"}
         },
         "PH": {
           "callingCode": [
@@ -1644,7 +1644,7 @@ module.exports = function(app, params) {
           "currency": [
             "PHP"
           ],
-          "name": {"fr":"","en":"Philippines"}
+          "name": {"en":"Philippines"}
         },
         "PK": {
           "callingCode": [
@@ -1653,7 +1653,7 @@ module.exports = function(app, params) {
           "currency": [
             "PKR"
           ],
-          "name": {"fr":"","en":"Pakistan"}
+          "name": {"en":"Pakistan"}
         },
         "PL": {
           "callingCode": [
@@ -1662,7 +1662,7 @@ module.exports = function(app, params) {
           "currency": [
             "PLN"
           ],
-          "name": {"fr":"","en":"Poland"}
+          "name": {"en":"Poland"}
         },
         "PM": {
           "callingCode": [
@@ -1671,7 +1671,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Saint Pierre and Miquelon"}
+          "name": {"en":"Saint Pierre and Miquelon"}
         },
         "PN": {
           "callingCode": [
@@ -1680,7 +1680,7 @@ module.exports = function(app, params) {
           "currency": [
             "NZD"
           ],
-          "name": {"fr":"","en":"Pitcairn Islands"}
+          "name": {"en":"Pitcairn Islands"}
         },
         "PR": {
           "callingCode": [
@@ -1690,7 +1690,7 @@ module.exports = function(app, params) {
           "currency": [
             "USD"
           ],
-          "name": {"fr":"","en":"Puerto Rico"}
+          "name": {"en":"Puerto Rico"}
         },
         "PS": {
           "callingCode": [
@@ -1699,7 +1699,7 @@ module.exports = function(app, params) {
           "currency": [
             "ILS"
           ],
-          "name": {"fr":"","en":"Palestine"}
+          "name": {"en":"Palestine"}
         },
         "PT": {
           "callingCode": [
@@ -1708,7 +1708,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Portugal"}
+          "name": {"en":"Portugal"}
         },
         "PW": {
           "callingCode": [
@@ -1717,7 +1717,7 @@ module.exports = function(app, params) {
           "currency": [
             "USD"
           ],
-          "name": {"fr":"","en":"Palau"}
+          "name": {"en":"Palau"}
         },
         "PY": {
           "callingCode": [
@@ -1726,7 +1726,7 @@ module.exports = function(app, params) {
           "currency": [
             "PYG"
           ],
-          "name": {"fr":"","en":"Paraguay"}
+          "name": {"en":"Paraguay"}
         },
         "QA": {
           "callingCode": [
@@ -1735,7 +1735,7 @@ module.exports = function(app, params) {
           "currency": [
             "QAR"
           ],
-          "name": {"fr":"","en":"Qatar"}
+          "name": {"en":"Qatar"}
         },
         "RE": {
           "callingCode": [
@@ -1744,7 +1744,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Réunion"}
+          "name": {"en":"Réunion"}
         },
         "RO": {
           "callingCode": [
@@ -1753,7 +1753,7 @@ module.exports = function(app, params) {
           "currency": [
             "RON"
           ],
-          "name": {"fr":"","en":"Romania"}
+          "name": {"en":"Romania"}
         },
         "RS": {
           "callingCode": [
@@ -1762,7 +1762,7 @@ module.exports = function(app, params) {
           "currency": [
             "RSD"
           ],
-          "name": {"fr":"","en":"Serbia"}
+          "name": {"en":"Serbia"}
         },
         "RU": {
           "callingCode": [
@@ -1771,7 +1771,7 @@ module.exports = function(app, params) {
           "currency": [
             "RUB"
           ],
-          "name": {"fr":"","en":"Russia"}
+          "name": {"en":"Russia"}
         },
         "RW": {
           "callingCode": [
@@ -1780,7 +1780,7 @@ module.exports = function(app, params) {
           "currency": [
             "RWF"
           ],
-          "name": {"fr":"","en":"Rwanda"}
+          "name": {"en":"Rwanda"}
         },
         "SA": {
           "callingCode": [
@@ -1789,7 +1789,7 @@ module.exports = function(app, params) {
           "currency": [
             "SAR"
           ],
-          "name": {"fr":"","en":"Saudi Arabia"}
+          "name": {"en":"Saudi Arabia"}
         },
         "SB": {
           "callingCode": [
@@ -1798,7 +1798,7 @@ module.exports = function(app, params) {
           "currency": [
             "SDB"
           ],
-          "name": {"fr":"","en":"Solomon Islands"}
+          "name": {"en":"Solomon Islands"}
         },
         "SC": {
           "callingCode": [
@@ -1807,7 +1807,7 @@ module.exports = function(app, params) {
           "currency": [
             "SCR"
           ],
-          "name": {"fr":"","en":"Seychelles"}
+          "name": {"en":"Seychelles"}
         },
         "SD": {
           "callingCode": [
@@ -1816,7 +1816,7 @@ module.exports = function(app, params) {
           "currency": [
             "SDG"
           ],
-          "name": {"fr":"","en":"Sudan"}
+          "name": {"en":"Sudan"}
         },
         "SE": {
           "callingCode": [
@@ -1825,7 +1825,7 @@ module.exports = function(app, params) {
           "currency": [
             "SEK"
           ],
-          "name": {"fr":"","en":"Sweden"}
+          "name": {"en":"Sweden"}
         },
         "SG": {
           "callingCode": [
@@ -1834,7 +1834,7 @@ module.exports = function(app, params) {
           "currency": [
             "SGD"
           ],
-          "name": {"fr":"","en":"Singapore"}
+          "name": {"en":"Singapore"}
         },
         "SH": {
           "callingCode": [
@@ -1843,7 +1843,7 @@ module.exports = function(app, params) {
           "currency": [
             "SHP"
           ],
-          "name": {"fr":"","en":"Saint Helena, Ascension and Tristan da Cunha"}
+          "name": {"en":"Saint Helena, Ascension and Tristan da Cunha"}
         },
         "SI": {
           "callingCode": [
@@ -1852,7 +1852,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Slovenia"}
+          "name": {"en":"Slovenia"}
         },
         "SJ": {
           "callingCode": [
@@ -1861,7 +1861,7 @@ module.exports = function(app, params) {
           "currency": [
             "NOK"
           ],
-          "name": {"fr":"","en":"Svalbard and Jan Mayen"}
+          "name": {"en":"Svalbard and Jan Mayen"}
         },
         "SK": {
           "callingCode": [
@@ -1870,7 +1870,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Slovakia"}
+          "name": {"en":"Slovakia"}
         },
         "SL": {
           "callingCode": [
@@ -1879,7 +1879,7 @@ module.exports = function(app, params) {
           "currency": [
             "SLL"
           ],
-          "name": {"fr":"","en":"Sierra Leone"}
+          "name": {"en":"Sierra Leone"}
         },
         "SM": {
           "callingCode": [
@@ -1888,7 +1888,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"San Marino"}
+          "name": {"en":"San Marino"}
         },
         "SN": {
           "callingCode": [
@@ -1897,7 +1897,7 @@ module.exports = function(app, params) {
           "currency": [
             "XOF"
           ],
-          "name": {"fr":"","en":"Senegal"}
+          "name": {"en":"Senegal"}
         },
         "SO": {
           "callingCode": [
@@ -1906,7 +1906,7 @@ module.exports = function(app, params) {
           "currency": [
             "SOS"
           ],
-          "name": {"fr":"","en":"Somalia"}
+          "name": {"en":"Somalia"}
         },
         "SR": {
           "callingCode": [
@@ -1915,7 +1915,7 @@ module.exports = function(app, params) {
           "currency": [
             "SRD"
           ],
-          "name": {"fr":"","en":"Suriname"}
+          "name": {"en":"Suriname"}
         },
         "SS": {
           "callingCode": [
@@ -1924,7 +1924,7 @@ module.exports = function(app, params) {
           "currency": [
             "SSP"
           ],
-          "name": {"fr":"","en":"South Sudan"}
+          "name": {"en":"South Sudan"}
         },
         "ST": {
           "callingCode": [
@@ -1933,7 +1933,7 @@ module.exports = function(app, params) {
           "currency": [
             "STD"
           ],
-          "name": {"fr":"","en":"São Tomé and Príncipe"}
+          "name": {"en":"São Tomé and Príncipe"}
         },
         "SV": {
           "callingCode": [
@@ -1943,7 +1943,7 @@ module.exports = function(app, params) {
             "SVC",
             "USD"
           ],
-          "name": {"fr":"","en":"El Salvador"}
+          "name": {"en":"El Salvador"}
         },
         "SX": {
           "callingCode": [
@@ -1952,7 +1952,7 @@ module.exports = function(app, params) {
           "currency": [
             "ANG"
           ],
-          "name": {"fr":"","en":"Sint Maarten"}
+          "name": {"en":"Sint Maarten"}
         },
         "SY": {
           "callingCode": [
@@ -1961,7 +1961,7 @@ module.exports = function(app, params) {
           "currency": [
             "SYP"
           ],
-          "name": {"fr":"","en":"Syria"}
+          "name": {"en":"Syria"}
         },
         "SZ": {
           "callingCode": [
@@ -1970,7 +1970,7 @@ module.exports = function(app, params) {
           "currency": [
             "SZL"
           ],
-          "name": {"fr":"","en":"Swaziland"}
+          "name": {"en":"Swaziland"}
         },
         "TC": {
           "callingCode": [
@@ -1979,7 +1979,7 @@ module.exports = function(app, params) {
           "currency": [
             "USD"
           ],
-          "name": {"fr":"","en":"Turks and Caicos Islands"}
+          "name": {"en":"Turks and Caicos Islands"}
         },
         "TD": {
           "callingCode": [
@@ -1988,13 +1988,13 @@ module.exports = function(app, params) {
           "currency": [
             "XAF"
           ],
-          "name": {"fr":"","en":"Chad"}
+          "name": {"en":"Chad"}
         },
         "TF": {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"French Southern and Antarctic Lands"}
+          "name": {"en":"French Southern and Antarctic Lands"}
         },
         "TG": {
           "callingCode": [
@@ -2003,7 +2003,7 @@ module.exports = function(app, params) {
           "currency": [
             "XOF"
           ],
-          "name": {"fr":"","en":"Togo"}
+          "name": {"en":"Togo"}
         },
         "TH": {
           "callingCode": [
@@ -2012,7 +2012,7 @@ module.exports = function(app, params) {
           "currency": [
             "THB"
           ],
-          "name": {"fr":"","en":"Thailand"}
+          "name": {"en":"Thailand"}
         },
         "TJ": {
           "callingCode": [
@@ -2021,7 +2021,7 @@ module.exports = function(app, params) {
           "currency": [
             "TJS"
           ],
-          "name": {"fr":"","en":"Tajikistan"}
+          "name": {"en":"Tajikistan"}
         },
         "TK": {
           "callingCode": [
@@ -2030,7 +2030,7 @@ module.exports = function(app, params) {
           "currency": [
             "NZD"
           ],
-          "name": {"fr":"","en":"Tokelau"}
+          "name": {"en":"Tokelau"}
         },
         "TL": {
           "callingCode": [
@@ -2039,7 +2039,7 @@ module.exports = function(app, params) {
           "currency": [
             "USD"
           ],
-          "name": {"fr":"","en":"Timor-Leste"}
+          "name": {"en":"Timor-Leste"}
         },
         "TM": {
           "callingCode": [
@@ -2048,7 +2048,7 @@ module.exports = function(app, params) {
           "currency": [
             "TMT"
           ],
-          "name": {"fr":"","en":"Turkmenistan"}
+          "name": {"en":"Turkmenistan"}
         },
         "TN": {
           "callingCode": [
@@ -2057,7 +2057,7 @@ module.exports = function(app, params) {
           "currency": [
             "TND"
           ],
-          "name": {"fr":"","en":"Tunisia"}
+          "name": {"en":"Tunisia"}
         },
         "TO": {
           "callingCode": [
@@ -2066,7 +2066,7 @@ module.exports = function(app, params) {
           "currency": [
             "TOP"
           ],
-          "name": {"fr":"","en":"Tonga"}
+          "name": {"en":"Tonga"}
         },
         "TR": {
           "callingCode": [
@@ -2075,7 +2075,7 @@ module.exports = function(app, params) {
           "currency": [
             "TRY"
           ],
-          "name": {"fr":"","en":"Turkey"}
+          "name": {"en":"Turkey"}
         },
         "TT": {
           "callingCode": [
@@ -2084,7 +2084,7 @@ module.exports = function(app, params) {
           "currency": [
             "TTD"
           ],
-          "name": {"fr":"","en":"Trinidad and Tobago"}
+          "name": {"en":"Trinidad and Tobago"}
         },
         "TV": {
           "callingCode": [
@@ -2093,7 +2093,7 @@ module.exports = function(app, params) {
           "currency": [
             "AUD"
           ],
-          "name": {"fr":"","en":"Tuvalu"}
+          "name": {"en":"Tuvalu"}
         },
         "TW": {
           "callingCode": [
@@ -2102,7 +2102,7 @@ module.exports = function(app, params) {
           "currency": [
             "TWD"
           ],
-          "name": {"fr":"","en":"Taiwan"}
+          "name": {"en":"Taiwan"}
         },
         "TZ": {
           "callingCode": [
@@ -2111,7 +2111,7 @@ module.exports = function(app, params) {
           "currency": [
             "TZS"
           ],
-          "name": {"fr":"","en":"Tanzania"}
+          "name": {"en":"Tanzania"}
         },
         "UA": {
           "callingCode": [
@@ -2120,7 +2120,7 @@ module.exports = function(app, params) {
           "currency": [
             "UAH"
           ],
-          "name": {"fr":"","en":"Ukraine"}
+          "name": {"en":"Ukraine"}
         },
         "UG": {
           "callingCode": [
@@ -2129,13 +2129,13 @@ module.exports = function(app, params) {
           "currency": [
             "UGX"
           ],
-          "name": {"fr":"","en":"Uganda"}
+          "name": {"en":"Uganda"}
         },
         "UM": {
           "currency": [
             "USD"
           ],
-          "name": {"fr":"","en":"United States Minor Outlying Islands"}
+          "name": {"en":"United States Minor Outlying Islands"}
         },
         "US": {
           "callingCode": [
@@ -2146,7 +2146,7 @@ module.exports = function(app, params) {
             "USN",
             "USS"
           ],
-          "name": {"fr":"","en":"United States"}
+          "name": {"en":"United States"}
         },
         "UY": {
           "callingCode": [
@@ -2156,7 +2156,7 @@ module.exports = function(app, params) {
             "UYI",
             "UYU"
           ],
-          "name": {"fr":"","en":"Uruguay"}
+          "name": {"en":"Uruguay"}
         },
         "UZ": {
           "callingCode": [
@@ -2165,7 +2165,7 @@ module.exports = function(app, params) {
           "currency": [
             "UZS"
           ],
-          "name": {"fr":"","en":"Uzbekistan"}
+          "name": {"en":"Uzbekistan"}
         },
         "VA": {
           "callingCode": [
@@ -2175,7 +2175,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Vatican City"}
+          "name": {"en":"Vatican City"}
         },
         "VC": {
           "callingCode": [
@@ -2184,7 +2184,7 @@ module.exports = function(app, params) {
           "currency": [
             "XCD"
           ],
-          "name": {"fr":"","en":"Saint Vincent and the Grenadines"}
+          "name": {"en":"Saint Vincent and the Grenadines"}
         },
         "VE": {
           "callingCode": [
@@ -2193,7 +2193,7 @@ module.exports = function(app, params) {
           "currency": [
             "VEF"
           ],
-          "name": {"fr":"","en":"Venezuela"}
+          "name": {"en":"Venezuela"}
         },
         "VG": {
           "callingCode": [
@@ -2202,7 +2202,7 @@ module.exports = function(app, params) {
           "currency": [
             "USD"
           ],
-          "name": {"fr":"","en":"British Virgin Islands"}
+          "name": {"en":"British Virgin Islands"}
         },
         "VI": {
           "callingCode": [
@@ -2211,7 +2211,7 @@ module.exports = function(app, params) {
           "currency": [
             "USD"
           ],
-          "name": {"fr":"","en":"United States Virgin Islands"}
+          "name": {"en":"United States Virgin Islands"}
         },
         "VN": {
           "callingCode": [
@@ -2220,7 +2220,7 @@ module.exports = function(app, params) {
           "currency": [
             "VND"
           ],
-          "name": {"fr":"","en":"Vietnam"}
+          "name": {"en":"Vietnam"}
         },
         "VU": {
           "callingCode": [
@@ -2229,7 +2229,7 @@ module.exports = function(app, params) {
           "currency": [
             "VUV"
           ],
-          "name": {"fr":"","en":"Vanuatu"}
+          "name": {"en":"Vanuatu"}
         },
         "WF": {
           "callingCode": [
@@ -2238,7 +2238,7 @@ module.exports = function(app, params) {
           "currency": [
             "XPF"
           ],
-          "name": {"fr":"","en":"Wallis and Futuna"}
+          "name": {"en":"Wallis and Futuna"}
         },
         "WS": {
           "callingCode": [
@@ -2247,7 +2247,7 @@ module.exports = function(app, params) {
           "currency": [
             "WST"
           ],
-          "name": {"fr":"","en":"Samoa"}
+          "name": {"en":"Samoa"}
         },
         "XK": {
           "callingCode": [
@@ -2258,7 +2258,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Kosovo"}
+          "name": {"en":"Kosovo"}
         },
         "YE": {
           "callingCode": [
@@ -2267,7 +2267,7 @@ module.exports = function(app, params) {
           "currency": [
             "YER"
           ],
-          "name": {"fr":"","en":"Yemen"}
+          "name": {"en":"Yemen"}
         },
         "YT": {
           "callingCode": [
@@ -2276,7 +2276,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR"
           ],
-          "name": {"fr":"","en":"Mayotte"}
+          "name": {"en":"Mayotte"}
         },
         "ZA": {
           "callingCode": [
@@ -2285,7 +2285,7 @@ module.exports = function(app, params) {
           "currency": [
             "ZAR"
           ],
-          "name": {"fr":"","en":"South Africa"}
+          "name": {"en":"South Africa"}
         },
         "ZM": {
           "callingCode": [
@@ -2294,7 +2294,7 @@ module.exports = function(app, params) {
           "currency": [
             "ZMK"
           ],
-          "name": {"fr":"","en":"Zambia"}
+          "name": {"en":"Zambia"}
         },
         "ZW": {
           "callingCode": [
@@ -2303,7 +2303,7 @@ module.exports = function(app, params) {
           "currency": [
             "ZWL"
           ],
-          "name": {"fr":"","en":"Zimbabwe"}
+          "name": {"en":"Zimbabwe"}
         }
       })
 
@@ -2313,15 +2313,15 @@ module.exports = function(app, params) {
       return currency.setPool({
           USD : {
               symbol : '$',
-              name : {"fr":"","en":"United States Dollar"}
+              name : {"en":"United States Dollar"}
           },
           GBP : {
               symbol : '£',
-              name : {"fr":"","en":"British Sterling"}
+              name : {"en":"British Sterling"}
           },
           AUD : {
               symbol : '$',
-              name : {"fr":"","en":"Australian Dollar"},
+              name : {"en":"Australian Dollar"},
               format : function(v,o) {
                   var x = (v<0?'-':'')+ 'A$'+currency.commarize(v < 0? v*-1: v);
                   if (o && o.colorize) {
@@ -2332,7 +2332,7 @@ module.exports = function(app, params) {
           },
           EUR : {
               symbol : '€',
-              name : {"fr":"","en":"Euro"}
+              name : {"en":"Euro"}
           }
       }).then(function() {
 
@@ -2340,9 +2340,8 @@ module.exports = function(app, params) {
         if (navigator.notification && navigator.notification.alert)
             window.alert = navigator.notification.alert;
 
-        // adds route.* files as a router source
-        router.source.append({
-            defaultCacheLevel:2,
+        // adds route.* files as a route provider
+        router.addProvider({
             handles:function(path) { 
                 return true; 
             },
@@ -2394,7 +2393,7 @@ module.exports = function(app, params) {
             //invalid route
             if (v.error === 404)
                 return new ModalDialog().alert({
-                    message: {"fr":"","en":"The page you requested does not exist."}
+                    message: {"en":"The page you requested does not exist."}
                 });
             // invalid url
             if (v.uri)
@@ -2445,12 +2444,12 @@ module.exports = function(app, params) {
                 c = xhr.getResponseHeader("Content-Type");
             if (self.expectedContentType && c && c.indexOf('/'+o.expectedContentType) === -1) {
                 new Toast({
-                    message:{"fr":"","en":"Invalid Response"}
+                    message:{"en":"Invalid Response"}
                 });
                 return;
             }
             new Toast({
-                message:xhr.status === 0 && xhr.responseText.length === 0? {"fr":"","en":"Connection Refused"} : xhr.statusText
+                message:xhr.status === 0 && xhr.responseText.length === 0? {"en":"Connection Refused"} : xhr.statusText
             });
         });
 

@@ -22,8 +22,8 @@ module.exports = function(app) {
             main = dom.mk('div',wrapper,null,'main');
         
         // header
-        dom.mk('span',header,{"fr":"","en":"Welcome to <b>Igaro App</b>"});
-        dom.mk('button',header,{"fr":"","en":"Begin"}).addEventListener('click', function() {
+        dom.mk('span',header,{"en":"Welcome to <b>Igaro App</b>"});
+        dom.mk('button',header,{"en":"Begin"}).addEventListener('click', function() {
             this.disabled=true;
             var self = this;
             new Amd().get({ modules:[{ name:'route-ext.main.js' }] }).then(
@@ -48,7 +48,7 @@ module.exports = function(app) {
             // code edit
             model.addInstance('pagemessage',{
                 type:'info',
-                message: {"fr":"","en":"You can see the code behind any page in this app by clicking the menu icon in the top right corner."},
+                message: {"en":"You can see the code behind any page in this app by clicking the menu icon in the top right corner."},
                 hideable: {
                     model:model,
                     id:'hintcode'
@@ -59,11 +59,11 @@ module.exports = function(app) {
             model.addInstance('list').then(function (list) {
 
                 var l = [
-                    ['overview', {"fr":"","en":"Overview"}],
-                    ['features', {"fr":"","en":"Features"}],
-                    ['install', {"fr":"","en":"Install"}],
-                    ['faq', {"fr":"","en":"FAQ"}],
-                    ['support', {"fr":"","en":"Support"}]
+                    ['overview', {"en":"Overview"}],
+                    ['features', {"en":"Features"}],
+                    ['install', {"en":"Install"}],
+                    ['faq', {"en":"FAQ"}],
+                    ['support', {"en":"Support"}]
                 ];
                 l.forEach(function(o) { 
                     list.add({ id:o[0] }); 
@@ -86,8 +86,8 @@ module.exports = function(app) {
                 
                 return {
                     container: dom.mk('section', null, [
-                        dom.mk('h1', null, {"fr":"","en":"Insight"}),
-                        dom.mk('p', null, {"fr":"","en":"An amazing architecture, developed by professionals, loaded with features."}),
+                        dom.mk('h1', null, {"en":"Insight"}),
+                        dom.mk('p', null, {"en":"An amazing architecture, developed by professionals, loaded with features."}),
                         list.container
                     ])
                 };
@@ -95,12 +95,12 @@ module.exports = function(app) {
 
             model.addInstance('list').then(function (list) {
                 var l = [
-                    ['structure',{"fr":"","en":"Structure"}],
-                    ['async', {"fr":"","en":"Async"}],
-                    ['design', {"fr":"","en":"Design"}],
-                    ['modules',{"fr":"","en":"Modules"}],
-                    ['locale', {"fr":"","en":"Locale"}],
-                    ['mobile', {"fr":"","en":"Mobile"}]
+                    ['structure',{"en":"Structure"}],
+                    ['async', {"en":"Async"}],
+                    ['design', {"en":"Design"}],
+                    ['modules',{"en":"Modules"}],
+                    ['locale', {"en":"Locale"}],
+                    ['mobile', {"en":"Mobile"}]
                 ];
                 l.forEach(function(o) { 
                     list.add({ id:o[0] }); 
@@ -123,8 +123,8 @@ module.exports = function(app) {
                     
                 return {
                     container: dom.mk('section', null, [
-                        dom.mk('h1', null, {"fr":"","en":"Documentation"}),
-                        dom.mk('p', null, {"fr":"","en":"Learn, develop and deploy a custom application. All modules are fully documented."}),
+                        dom.mk('h1', null, {"en":"Documentation"}),
+                        dom.mk('p', null, {"en":"Learn, develop and deploy a custom application. All modules are fully documented."}),
                         list.container
                     ])
                 };

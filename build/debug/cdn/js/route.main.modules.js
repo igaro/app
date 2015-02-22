@@ -17,11 +17,11 @@ module.exports = function(app) {
         var wrapper = model.wrapper,
             dom = model.managers.dom;
             
-        model.setMeta('title', {"fr":"","en":"Modules"});
+        model.setMeta('title', {"en":"Modules"});
 
-        dom.mk('h1',wrapper, {"fr":"","en":"Igaro Repository"});
+        dom.mk('h1',wrapper, {"en":"Igaro Repository"});
 
-        dom.mk('button',dom.mk('p',wrapper), {"fr":"","en":"View on Github"}).addEventListener('click', function() {
+        dom.mk('button',dom.mk('p',wrapper), {"en":"View on Github"}).addEventListener('click', function() {
             window.open('https://github.com/igaro/app');
         });
 
@@ -29,7 +29,7 @@ module.exports = function(app) {
 
             var createTable = function(data,container) {
 
-                dom.mk('p',container,{"fr":"","en":"* = required"});
+                dom.mk('p',container,{"en":"* = required"});
                 model.addInstance('table',{
                     container:container,
                     header : {
@@ -37,13 +37,13 @@ module.exports = function(app) {
                             {
                                 columns : [
                                     {
-                                        content : {"fr":"","en":"Name"}
+                                        content : {"en":"Name"}
                                     },
                                     {
-                                        content : {"fr":"","en":"Type"}
+                                        content : {"en":"Type"}
                                     },
                                     {
-                                        content : {"fr":"","en":"Description"}
+                                        content : {"en":"Description"}
                                     }
                                 ]
                             }
@@ -176,25 +176,25 @@ module.exports = function(app) {
             m.setMeta('title', { en : m.name });
 
             if (data.desc) {
-                dom.mk('h1',v,{"fr":"","en":"Description"});
+                dom.mk('h1',v,{"en":"Description"});
                 dom.mk('p',v,data.desc);
             }
 
             if (data.download !== false) {
                 var l = data.download? data.download : 'https://github.com/igaro/app/blob/master/app/compile/js/'+m.name+'.js';
-                dom.mk('button',v,{"fr":"","en":"Download"}).addEventListener('click', function() {
+                dom.mk('button',v,{"en":"Download"}).addEventListener('click', function() {
                     window.open(l);
                 });
             }
 
             if (data.usage) {
                 var u = data.usage;
-                dom.mk('h1',v,{"fr":"","en":"Usage"});
+                dom.mk('h1',v,{"en":"Usage"});
                 if (u.instantiate || u.class) {
                     var o = u.instantiate? 
-                        {"fr":"","en":"Create a new instance using <b>new <MODNAME></b>."}
+                        {"en":"Create a new instance using <b>new <MODNAME></b>."}
                     :
-                        {"fr":"","en":"Access <b><MODNAME></b> directly without instantiating."}
+                        {"en":"Access <b><MODNAME></b> directly without instantiating."}
                     ;
                     var n= 'app[\''+m.name+'\']';
                     if (u.attributes) 
@@ -204,24 +204,24 @@ module.exports = function(app) {
                     });
                     dom.mk('p',v,o);
                 } else if (u.direct) {
-                    dom.mk('p',v,{"fr":"","en":"Access the features of this library directly."});
+                    dom.mk('p',v,{"en":"Access the features of this library directly."});
                 }
                 if (u.attributes) {
-                    dom.mk('p',v, {"fr":"","en":"Where <b>o</b> is an object containing attributes from the following table."});
+                    dom.mk('p',v, {"en":"Where <b>o</b> is an object containing attributes from the following table."});
                     createTable(u.attributes, dom.mk('p',v));
                 }
             }        
 
             if (data.demo) {
-                dom.mk('h1',v,{"fr":"","en":"Demo"});
-                dom.mk('h2',v,{"fr":"","en":"code"});
+                dom.mk('h1',v,{"en":"Demo"});
+                dom.mk('h2',v,{"en":"code"});
                 dom.mk('p',v);
 
                 var dr = dom.mk('pre',v, data.demo.trim(), 'democode');
 
                 model.addInstance('pagemessage',{ 
                     type:'info',
-                    message: {"fr":"","en":"Note: In demo code <b>c</b> references model.wrapper."},
+                    message: {"en":"Note: In demo code <b>c</b> references model.wrapper."},
                     hideable: {
                         model:model,
                         id:'democode'
@@ -230,18 +230,18 @@ module.exports = function(app) {
                     v.insertBefore(cp.container,dr);
                 });
                 
-                dom.mk('h2',v,{"fr":"","en":"Output"});
+                dom.mk('h2',v,{"en":"Output"});
                 dom.mk('p',v);
                 eval(data.demo);
             }
 
             if (data.attributes) {
-                dom.mk('h1',v,{"fr":"","en":"Attributes"});
+                dom.mk('h1',v,{"en":"Attributes"});
                 createTable(data.attributes, dom.mk('p',v));
             }
 
             if (data.dependencies) {
-                dom.mk('h1',v,{"fr":"","en":"Dependencies"});
+                dom.mk('h1',v,{"en":"Dependencies"});
                 var p = dom.mk('p',v,null,function() {
                     var s = this;
                     data.dependencies.forEach(function(o) { 
@@ -258,7 +258,7 @@ module.exports = function(app) {
             }
 
             if (data.related) {
-                dom.mk('h1',v,{"fr":"","en":"Related"});
+                dom.mk('h1',v,{"en":"Related"});
                 dom.mk('p',v,null,function() {
                     var s = this;
                     data.related.forEach(function(o) { 
@@ -276,7 +276,7 @@ module.exports = function(app) {
             }
 
             if (data.author) {
-                dom.mk('h1',v,{"fr":"","en":"Author"});
+                dom.mk('h1',v,{"en":"Author"});
                 var d = data.author;
                 if (d instanceof Array) {
                     d.forEach(function (a) {
@@ -288,7 +288,7 @@ module.exports = function(app) {
             }
 
             if (data.extlinks) {
-                dom.mk('h1',v,{"fr":"","en":"External Links"});
+                dom.mk('h1',v,{"en":"External Links"});
                 data.extlinks.forEach(function(o) {
                     var name,href;
                     if (typeof o === 'string') {
@@ -310,10 +310,10 @@ module.exports = function(app) {
                     {
                         columns : [
                             {
-                                content : {"fr":"","en":"Name"}
+                                content : {"en":"Name"}
                             },
                             {
-                                content : {"fr":"","en":"Description"}
+                                content : {"en":"Description"}
                             }
                         ]
                     }
@@ -321,45 +321,45 @@ module.exports = function(app) {
             },
             body : {
                 rows : [
-                    ['3rdparty.fastclick', {"fr":"","en":"Removes 300ms click delay on touch platforms."}],
-                    ['3rdparty.hammer', {"fr":"","en":"Enables Tap, DoubleTap, Swipe, Drag, Pinch, and Rotate gesture events."}],
-                    ['3rdparty.jquery.2', {"fr":"","en":"Non-standard library. Some insist on using it."}],
-                    ['3rdparty.moment', {"fr":"","en":"Date/time formatting using timezone and language."}],
-                    ['3rdparty.observe', {"fr":"","en":"Data binding with polyfill for browsers lacking Object.observe."}],
-                    ['conf.app', {"fr":"","en":"Main configuration file."}],
-                    ['core.country', {"fr":"","en":"Country support and related functionality."}],
-                    ['core.currency', {"fr":"","en":"Currency support and related functionality."}],
-                    ['core.date', {"fr":"","en":"Timezone selection, date related functionality."}],
-                    ['core.debug', {"fr":"","en":"Centralised debug management."}],
-                    ['core.dom', {"fr":"","en":"Provides DOM management and helpers."}],
-                    ['core.events', {"fr":"","en":"Event management, registration and dispatcher."}],
-                    ['core.file', {"fr":"","en":"Filename parsing."}],
-                    ['core.html', {"fr":"","en":"HTML parsing, conversion."}],
-                    ['core.language', {"fr":"","en":"Language support, formatting, related functionality."}],
-                    ['core.router', {"fr":"","en":"Router, an MVC alternative using routes to build partials."}],
-                    ['core.status', {"fr":"","en":"Status management for user feedback."}],
-                    ['core.store', {"fr":"","en":"Session, local, cookie and remote store access."}],
-                    ['core.url', {"fr":"","en":"Url parsing, related functionality."}],
-                    ['instance.amd', {"fr":"","en":"Async loading of resources, NodeJS/Require style."}],
-                    ['instance.bookmark', {"fr":"","en":"Basic social media bookmarking."}],
-                    ['instance.date', {"fr":"","en":"Date display with language switching & timezone correction."}],
-                    ['instance.form.validate', {"fr":"","en":"Form element value validation routines."}],
-                    ['instance.jsonp', {"fr":"","en":"Retrieve JSON data without CORS limitation."}],
-                    ['instance.list', {"fr":"","en":"LI list management with re-ordering functionality."}],
-                    ['instance.modaldialog', {"fr":"","en":"Async dialog boxes with alert() and confirm() replacements."}],
-                    ['instance.navigation', {"fr":"","en":"Navigation controls (tabs, dropdown etc)."}],
-                    ['instance.pagemessage', {"fr":"","en":"Displays a formatted message."}],
-                    ['instance.rte', {"fr":"","en":"Rich text data entry and display."}],
-                    ['instance.samespace', {"fr":"","en":"Elements in same space with navigation and animation."}],
-                    ['instance.table', {"fr":"","en":"Table display with row/column management."}],
-                    ['instance.toast', {"fr":"","en":"Toast notification popup and auto hide."}],
-                    ['instance.xhr', {"fr":"","en":"XHR (Ajax) functionality."}],
-                    ['polyfill.es6.promises', {"fr":"","en":"A+ Promises for async chainable processes."}],
-                    ['polyfill.ie.8', {"fr":"","en":"Polyfill for Internet Explorer 8."}],
-                    ['polyfill.js.1.6', {"fr":"","en":"Polyfill ancient browsers to Mozilla 1.6 specification."}],
-                    ['polyfill.js.1.8.1', {"fr":"","en":"Polyfill old browsers to Mozilla 1.8.1 specification."}],
-                    ['polyfill.js.1.8.5', {"fr":"","en":"Polyfill deprecated browsers to Mozilla 1.8.5 specification."}],
-                    ['polyfill.js.classList', {"fr":"","en":"Polyfill HTML5 classList helpers onto DOM elements."}],
+                    ['3rdparty.fastclick', {"en":"Removes 300ms click delay on touch platforms."}],
+                    ['3rdparty.hammer', {"en":"Enables Tap, DoubleTap, Swipe, Drag, Pinch, and Rotate gesture events."}],
+                    ['3rdparty.jquery.2', {"en":"Non-standard library. Some insist on using it."}],
+                    ['3rdparty.moment', {"en":"Date/time formatting using timezone and language."}],
+                    ['3rdparty.observe', {"en":"Data binding with polyfill for browsers lacking Object.observe."}],
+                    ['conf.app', {"en":"Main configuration file."}],
+                    ['core.country', {"en":"Country support and related functionality."}],
+                    ['core.currency', {"en":"Currency support and related functionality."}],
+                    ['core.date', {"en":"Timezone selection, date related functionality."}],
+                    ['core.debug', {"en":"Centralised debug management."}],
+                    ['core.dom', {"en":"Provides DOM management and helpers."}],
+                    ['core.events', {"en":"Event management, registration and dispatcher."}],
+                    ['core.file', {"en":"Filename parsing."}],
+                    ['core.html', {"en":"HTML parsing, conversion."}],
+                    ['core.language', {"en":"Language support, formatting, related functionality."}],
+                    ['core.router', {"en":"Router, an MVC alternative using routes to build partials."}],
+                    ['core.status', {"en":"Status management for user feedback."}],
+                    ['core.store', {"en":"Session, local, cookie and remote store access."}],
+                    ['core.url', {"en":"Url parsing, related functionality."}],
+                    ['instance.amd', {"en":"Async loading of resources, NodeJS/Require style."}],
+                    ['instance.bookmark', {"en":"Basic social media bookmarking."}],
+                    ['instance.date', {"en":"Date display with language switching & timezone correction."}],
+                    ['instance.form.validate', {"en":"Form element value validation routines."}],
+                    ['instance.jsonp', {"en":"Retrieve JSON data without CORS limitation."}],
+                    ['instance.list', {"en":"LI list management with re-ordering functionality."}],
+                    ['instance.modaldialog', {"en":"Async dialog boxes with alert() and confirm() replacements."}],
+                    ['instance.navigation', {"en":"Navigation controls (tabs, dropdown etc)."}],
+                    ['instance.pagemessage', {"en":"Displays a formatted message."}],
+                    ['instance.rte', {"en":"Rich text data entry and display."}],
+                    ['instance.samespace', {"en":"Elements in same space with navigation and animation."}],
+                    ['instance.table', {"en":"Table display with row/column management."}],
+                    ['instance.toast', {"en":"Toast notification popup and auto hide."}],
+                    ['instance.xhr', {"en":"XHR (Ajax) functionality."}],
+                    ['polyfill.es6.promises', {"en":"A+ Promises for async chainable processes."}],
+                    ['polyfill.ie.8', {"en":"Polyfill for Internet Explorer 8."}],
+                    ['polyfill.js.1.6', {"en":"Polyfill ancient browsers to Mozilla 1.6 specification."}],
+                    ['polyfill.js.1.8.1', {"en":"Polyfill old browsers to Mozilla 1.8.1 specification."}],
+                    ['polyfill.js.1.8.5', {"en":"Polyfill deprecated browsers to Mozilla 1.8.5 specification."}],
+                    ['polyfill.js.classList', {"en":"Polyfill HTML5 classList helpers onto DOM elements."}],
                 ].map(function (o) {
                     var n = o[0];
                     var a = dom.mk('a',null,n);

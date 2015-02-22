@@ -27,7 +27,7 @@ module.exports = function(app) {
         var self = this,
             name = this.name,
             parent = this.parent;
-        this.meta = [];
+        this.meta = {};
         this.uriPath = name.length?
             parent? parent.uriPath.slice(0).concat(name) : [name]
             :
@@ -172,10 +172,6 @@ module.exports = function(app) {
         return this.managers.event.dispatch('setMeta', { name:n, value:v });
     };
 
-    CoreRouterRoute.prototype.getMeta = function(n) {
-        return this.meta[n]? this.meta[n] : null;
-    };
-
     CoreRouterRoute.prototype.isBase = function() {
         return this === router.base;
     };
@@ -209,11 +205,11 @@ module.exports = function(app) {
                         parent:self, 
                         name:name
                     });
-                    var source = router.source.get(g.path);
-                    if (! source) 
-                        throw new Error('No Router source for path!');
-                    g.url = source.url;
-                    doAction = [source.fetch(g).then(
+                    var provider = router.getProvider(g.path);
+                    if (! provider) 
+                        throw new Error('No Route provider for path!');
+                    g.url = provider.url;
+                    doAction = [provider.fetch(g).then(
                         function(j) {
                             if (j.css)
                                 g.cssElement.innerHTML = css;
@@ -295,23 +291,24 @@ module.exports = function(app) {
         isAtBase : function() {
             return this.current === this.base;
         },
-        source : {
-            pool : [],
-            append : function(o) {
-                this.pool.push(o);
-            },
-            remove : function(source) {
-                var s = this.pool.indexOf(source);
-                if (s===-1) 
-                    return;
-                this.pool.splice(s,1);
-            },
-            get: function(path) {
-                for (var i=this.pool.length-1; i>=0; --i) {
-                    if (this.pool[i].handles(path)) 
-                        return this.pool[i];
-                }
+        providers : [],
+        getProvider : function(path) {
+            var providers = this.providers;
+            for (var i=providers.length-1; i>=0; --i) {
+                if (providers[i].handles(path)) 
+                    return providers[i];
             }
+        },
+        addProvider : function(o) {
+            o.parent = this;
+            var providers = this.providers;
+            bless.call(o, {
+                name:'provider'
+            });
+            o.managers.event.on('destroy', function() {
+                providers.splice(providers.indexOf(o), 1);
+            });
+            providers.push(o);
         },
         to : function(path, search, hash, state) {
             this.requestId++;
@@ -328,7 +325,6 @@ module.exports = function(app) {
                     c.scrollPosition = document.body.scrollTop || document.documentElement.scrollTop;
                 action = [c.managers.event.dispatch('leave')];
             }
-
             return Promise.all(action).then(function() {
                 var putHistory = function() {
                     var model = router.current;
@@ -403,6 +399,8 @@ module.exports = function(app) {
         name:'route'
     });
     router.managers = router.root.managers;
+
+    // remove 
 
     // default current to root
     var mrv = router.current = router.root;

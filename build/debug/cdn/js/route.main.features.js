@@ -12,12 +12,12 @@ module.exports = function(app) {
             wrapper = model.wrapper,
             currency = app['core.currency'];
 
-        model.setMeta('title', {"fr":"","en":"Features"});
+        model.setMeta('title', {"en":"Features"});
 
-        dom.mk('p',wrapper,{"fr":"","en":"This framework comes with the kitchen sink! Pick the modules you want to use, all standarized to the same high quality of code."});
-        dom.mk('p',wrapper,{"fr":"","en":"Below is a small selection from the base repository. You'll find a complete list on the module page (see instance.* files)."});
+        dom.mk('p',wrapper,{"en":"This framework comes with the kitchen sink! Pick the modules you want to use, all standarized to the same high quality of code."});
+        dom.mk('p',wrapper,{"en":"Below is a small selection from the base repository. You'll find a complete list on the module page (see instance.* files)."});
         dom.mk('h1',wrapper,'instance.samespace');
-        dom.mk('p',wrapper,{"fr":"","en":"This module displays elements in the same space using CSS3 effects to transition between them. It's great for slideshows!"});
+        dom.mk('p',wrapper,{"en":"This module displays elements in the same space using CSS3 effects to transition between them. It's great for slideshows!"});
 
         return model.addSequence({
             container:wrapper,
@@ -34,8 +34,8 @@ module.exports = function(app) {
                 model.addInstance('xhr').then(function(xhr) {
                     var container = document.createDocumentFragment();
                     dom.mk('h1',container,'instance.xhr');
-                    dom.mk('p',container,{"fr":"","en":"This example contacts the Youtube API which returns JSON. From it three Justin Bieber videos are loaded. Enjoy the great music!"});
-                    dom.mk('button',container,{"fr":"","en":"Execute"}).addEventListener('click', function() {
+                    dom.mk('p',container,{"en":"This example contacts the Youtube API which returns JSON. From it three Justin Bieber videos are loaded. Enjoy the great music!"});
+                    dom.mk('button',container,{"en":"Execute"}).addEventListener('click', function() {
                         var self = this;
                         xhr.get({
                             res:'http://gdata.youtube.com/feeds/users/JustinBieberVEVO/uploads?alt=json&format=5&max-results=3'
@@ -63,18 +63,18 @@ module.exports = function(app) {
                 model.addInstance('form.validate').then(function(formValidate) {
                     var container = document.createDocumentFragment();
                     dom.mk('h1',container,'instance.form.validate');
-                    dom.mk('p',container,{"fr":"","en":"Try entering an invalid currency denomination into the box below."});
+                    dom.mk('p',container,{"en":"Try entering an invalid currency denomination into the box below."});
                     dom.mk('form',container,null,function() {
                         this.className = 'currencycheck';
                         formValidate.setForm(this);
-                        dom.mk('label',this,{"fr":"","en":"Deposit"});
+                        dom.mk('label',this,{"en":"Deposit"});
 
                         var v = dom.mk('input[text]',this,null,function() {
                                 this.placeholder='xx.xx'; 
                                 this.name='amount';
                                 this.required = true;
                             }),
-                            b = dom.mk('submit',this,{"fr":"","en":"Transfer"}, function() {
+                            b = dom.mk('submit',this,{"en":"Transfer"}, function() {
                                 this.disabled = true;
                             }),
                             self = this;
@@ -84,9 +84,9 @@ module.exports = function(app) {
                               'amount', 
                               function(v) {
                                   if (! currency.validate(v))  
-                                    return {"fr":"","en":"Invalid amount"};
+                                    return {"en":"Invalid amount"};
                                   if (v == 0)
-                                    return {"fr":"","en":"Must be positive."};
+                                    return {"en":"Must be positive."};
                               }
                             ]
                         ];
@@ -94,7 +94,7 @@ module.exports = function(app) {
                         this.addEventListener('submit',function() {
                             v.value='';
                             model.addInstance('toast',{
-                                message: {"fr":"","en":"Transaction Successful."}
+                                message: {"en":"Transaction Successful."}
                             });
                         });
                     });

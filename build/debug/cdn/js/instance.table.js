@@ -159,7 +159,7 @@ module.exports = function(app) {
                         return dom.mk('input[text]',null,null, function() {
                             this.addEventListener('input', function() { 
                                 searchExec(this,self);
-                                dom.setPlaceholder(this,{"fr":"","en":"Search"});
+                                dom.setPlaceholder(this,{"en":"Search"});
                             });
                         });
                     })

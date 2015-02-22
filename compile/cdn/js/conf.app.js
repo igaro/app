@@ -2340,15 +2340,14 @@ module.exports = function(app, params) {
         if (navigator.notification && navigator.notification.alert)
             window.alert = navigator.notification.alert;
 
-        // adds route.* files as a router source
-        router.source.append({
-            defaultCacheLevel:2,
+        // adds route.* files as a route provider
+        router.addProvider({
             handles:function(path) { 
                 return true; 
             },
             url : params.repo,
             fetch:function(o) {
-                var name = 'route.'+ o.path.join('.');
+                var name = o.path.join('.');
                 return new Amd().get({ 
                     modules:[{ name: name+'.js' }]
                 }).then(function() {
@@ -2385,42 +2384,37 @@ module.exports = function(app, params) {
         });
 
         // handle router errors
-        routerEventMgr.on('to-error', function (o) {
+        router.managers.event.on('to-error', function (o) {
             var v = o.value;
+            if (typeof v === 'object' && v.value)
+              v = v.value;
             if (! v) 
               return;
             //invalid route
-            if (v.value === 404) {
-                new ModalDialog().alert({
+            if (v.error === 404)
+                return new ModalDialog().alert({
                     message: _tr("The page you requested does not exist.")
                 });
-                return;
-            }
             // invalid url
-            if (v.uri) {
-                new ModalDialog().alert({
+            if (v.uri)
+                return new ModalDialog().alert({
                     message: language.substitute(_tr("A problem with the URL was detected and loading aborted prematurely.\n\nError: %d"),o.uri)
                 });
-                return;
-            }
-            return router.debugMgr.handle(o);
+            return router.managers.debug.handle(o);
         });
 
         // capture 401 xhr errors (unauthorized) and begin oauth if for account
-        /* var replay = [];
+        var replay = [];
 
         events.on('instance.xhr','response', function(p) {
             var o = p.x;
             if (o.xhr.status !== 401 || ! o.stash || ! o.stash.account)
                 return;
             replay.push(o);
-
             var acc = o.stash.account,
                 oauth = acc.oauth2;
-
             // token is bad, wipe
             acc.setToken();
-            
             // begin oauth if not in progress
             if (! oauth.inProgress) {
                 oauth.exec().then(function (o) {
@@ -2439,11 +2433,10 @@ module.exports = function(app, params) {
                     });
                 });
             }
-
             return {
                 stopImmediatePropagation:true
             };
-        },{ prepend:true }); */
+        },{ prepend:true });
 
         // route XHR errors (404 etc) to Toast
         events.on('instance.xhr','error', function (o) {
@@ -2470,15 +2463,16 @@ module.exports = function(app, params) {
                     if (v.autoShow) 
                         v.show(); 
                 });
-                router.current = router.base = m[1];
+                router.current = router.base = m[2];
                 // handle error here
-                events.dispatch('','state.base').then(function() {
-                  return bcaccounts.loadState().then(function() {
-                    return events.dispatch('','state.root');
-                  }).catch(function (e) {
-                    debug.handle(e);
-                  });
+                return events.dispatch('','state.base').then(function() {
+                  
+                  return events.dispatch('','state.root');
+                }).catch(function (e) {
+                  if (e !== 0) // connection issues are handled by a pageMessage
+                    return debug.handle(e);
                 });
+                
             });
         });
 

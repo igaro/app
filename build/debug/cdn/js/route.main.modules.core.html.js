@@ -4,10 +4,7 @@ module.exports = function(app) {
 
         var data = {
 
-            desc : {
-                en : 'Provides HTML related functionality and formatting.',
-                fr : 'Fournit les fonctionnalités et le formatage HTML liés.'
-            },
+            desc : {"en":"Provides HTML related functionality and formatting."},
             author : { 
                 name:'Andrew Charnley', 
                 link:'http://www.andrewcharnley.com' 
@@ -24,17 +21,11 @@ module.exports = function(app) {
                             type:'string', 
                             required:true, 
                             attributes : [{
-                                desc: {
-                                    en : 'The value to process.',
-                                    fr : 'La valeur à traiter.'
-                                }
+                                desc: {"en":"The value to process."}
                             }]
                         }
                     ],
-                    desc: {
-                        en : 'Converts HTML special characters into print code.',
-                        fr : 'Convertit les caractères spéciaux HTML dans le code d\'impression.' 
-                    }
+                    desc: {"en":"Converts HTML special characters into print code."}
                 },
                 { 
                     name:'to', 
@@ -44,17 +35,11 @@ module.exports = function(app) {
                             type:'string', 
                             required:true, 
                             attributes : [{
-                                desc: {
-                                    en : 'The value to process.',
-                                    fr : 'La valeur à traiter.'
-                                }
+                                desc: {"en":"The value to process."}
                             }]
                         }
                     ],
-                    desc: {
-                        en : 'Formats special characters into HTML code.',
-                        fr : 'Formats des caractères spéciaux en code HTML.'
-                    }
+                    desc: {"en":"Formats special characters into HTML code."}
                 },
                 { 
                     name:'strip',
@@ -64,17 +49,11 @@ module.exports = function(app) {
                             type:'string', 
                             required:true,
                             attributes : [{
-                                desc: {
-                                    en : 'The value to process.',
-                                    fr : 'La valeur à traiter.'
-                                }
+                                desc: {"en":"The value to process."}
                             }]
                         }
                     ],
-                    desc: {
-                        en : 'Strips HTML from a string.',
-                        fr : 'Bandes HTML à partir d\'une chaîne.'
-                    }
+                    desc: {"en":"Strips HTML from a string."}
                 }
             ]
 

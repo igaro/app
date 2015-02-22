@@ -3,7 +3,7 @@ module.exports = function(app) {
     return function(model) {
 
         var data = {
-            desc : {"fr":"","en":"This library works around the 300ms browser click delay. This module is included when running under a local file system / Cordova."},
+            desc : {"en":"This library works around the 300ms browser click delay. This module is included when running under a local file system / Cordova."},
             usage : {
                 direct : true,
             },

@@ -14,18 +14,18 @@ module.exports = function(app) {
         var dom = model.managers.dom,
             wrapper = model.wrapper;
 
-        model.setMeta('title', {"fr":"","en":"Support"});
+        model.setMeta('title', {"en":"Support"});
 
-        dom.mk('p',wrapper,{"fr":"","en":"Igaro App is supported by a small but growing amount of developers. You can open and view issues on the github tracker or offer suggestions on the trello board."});
+        dom.mk('p',wrapper,{"en":"Igaro App is supported by a small but growing amount of developers. You can open and view issues on the github tracker or offer suggestions on the trello board."});
 
         dom.mk('p',wrapper, 
             [
                 [ 
-                    {"fr":"","en":"Report Issue"},
+                    {"en":"Report Issue"},
                     'https://github.com/igaro/app/issues'
                 ],
                 [
-                    {"fr":"","en":"Offer Suggestion"},
+                    {"en":"Offer Suggestion"},
                     'https://trello.com/igaro'
                 ]
             ].map(function (n) {
@@ -37,18 +37,18 @@ module.exports = function(app) {
             })
         );
 
-        dom.mk('h1',wrapper,{"fr":"","en":"Community"});
+        dom.mk('h1',wrapper,{"en":"Community"});
 
-        dom.mk('p',wrapper,{"fr":"","en":"Until Igaro API is up and running we've set up a forum. This is the best place to ask questions. Stackoverflow is also a good source for help - be sure to include 'Igaro App' in your title!."});
+        dom.mk('p',wrapper,{"en":"Until Igaro API is up and running we've set up a forum. This is the best place to ask questions. Stackoverflow is also a good source for help - be sure to include 'Igaro App' in your title!."});
 
         dom.mk('p',wrapper, 
             [
                 [ 
-                    {"fr":"","en":"Forum"},
+                    {"en":"Forum"},
                     'http://forum.igaro.com'
                 ],
                 [
-                    {"fr":"","en":"StackOverflow"},
+                    {"en":"StackOverflow"},
                     'https://stackoverflow.com'
                 ]
             ].map(function (n) {
@@ -62,17 +62,17 @@ module.exports = function(app) {
 
         dom.mk('h1',wrapper,'IRC');
 
-        dom.mk('p',wrapper,{"fr":"","en":"The <b>Freenode #igaro</b> channel is used by the developers to bounce around new ideas."});
+        dom.mk('p',wrapper,{"en":"The <b>Freenode #igaro</b> channel is used by the developers to bounce around new ideas."});
 
-        dom.mk('p',wrapper,{"fr":"","en":"If nobody is around ask your question and check back later for a reply."});
+        dom.mk('p',wrapper,{"en":"If nobody is around ask your question and check back later for a reply."});
 
-        dom.mk('h1',wrapper,{"fr":"","en":"Priority Service"});
+        dom.mk('h1',wrapper,{"en":"Priority Service"});
         
-        dom.mk('p',wrapper,{"fr":"","en":"The priority service is offered to those requiring a guaranteed service level."});
+        dom.mk('p',wrapper,{"en":"The priority service is offered to those requiring a guaranteed service level."});
 
-        dom.mk('p',wrapper,{"fr":"","en":"Members receive a unique email address and a response within a pre-agreed time frame."});
+        dom.mk('p',wrapper,{"en":"Members receive a unique email address and a response within a pre-agreed time frame."});
         
-        dom.mk('button',wrapper,{"fr":"","en":"Enquire"}, function() {
+        dom.mk('button',wrapper,{"en":"Enquire"}, function() {
             this.addEventListener('click', function() {
                 window.open('mailto:support@igaro.com');
             });

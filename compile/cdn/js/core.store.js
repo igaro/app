@@ -48,7 +48,7 @@ module.exports = function(app) {
             return new CoreStoreMgr(name);
         },
 
-        installProvider : function (name,o) {
+        installProvider : function(name,o) {
             this.providers[name] = o;
         }
     };
@@ -100,7 +100,6 @@ module.exports = function(app) {
         'local',
         { 
             get : function(id) {
-
                 return new Promise(function (resolve) {
                     var v = localStorage.getItem(id);
                     if (v) 

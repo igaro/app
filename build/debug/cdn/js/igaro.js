@@ -88,7 +88,7 @@ window.addEventListener('load', function() {
                 return debug.log.append({ error:e, x:this.x },this.path,evt);
             };
             CoreDebugMgr.prototype.handle = function(e,evt) {
-                return debug.handle({ error:e, x:this.x },this.path,evt);
+                return debug.handle({ error:e, x:this },this.path,evt);
             };
             CoreDebugMgr.prototype.destroy = function() {
                 this.x = null;

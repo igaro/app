@@ -3,10 +3,10 @@
 # Set this to the root of your project when deployed:
 http_path = "/"
 
-css_dir = "build/debug/cdn/css"
-sass_dir = "compile/css"
-images_dir = "compile/images"
-fonts_dir = "compile/fonts"
+css_dir = ".staging/cdn/css"
+sass_dir = "sass/scss"
+images_dir = "sass/images"
+fonts_dir = "sass/fonts"
 
 # You can select your preferred output style here (can be overridden via the command line):
 output_style = :compressed

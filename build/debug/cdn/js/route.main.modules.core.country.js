@@ -4,7 +4,7 @@ module.exports = function(app) {
 
         var data = {
 
-            desc : {"fr":"","en":"Provides country switching and related functionality. Supported countries are set via an API or configuration file. Uses ISO 3166-1. Env code is stored."},
+            desc : {"en":"Provides country switching and related functionality. Supported countries are set via an API or configuration file. Uses ISO 3166-1. Env code is stored."},
             author : { 
                 name:'Andrew Charnley', 
                 link:'http://www.andrewcharnley.com' 
@@ -30,43 +30,43 @@ module.exports = function(app) {
                             type:'string', 
                             required:true,
                             attributes:[{
-                                desc: {"fr":"","en":"The code to match."},
+                                desc: {"en":"The code to match."},
                             }]
                         }
                     ],
-                    desc: {"fr":"","en":"Returns a language literal for a specified code."}
+                    desc: {"en":"Returns an object literal from the pool for a specified code."}
                 },
                 {
                     name:'env',
                     type:'object',
-                    desc: {"fr":"","en":"The currently applied country code."}
+                    desc: {"en":"The currently applied country code."}
                 },
                 {
                     name:'pool',
                     type:'object',
-                    desc: {"fr":"","en":"A literal list of supported language codes."}
+                    desc: {"en":"A literal list of supported country codes."}
                 },
                 {    
                     name:'setEnv',
                     type:'function',
-                    desc: {"fr":"","en":"Sets the currently applied language code."},
+                    desc: {"en":"Sets the currently applied country code."},
                     attributes : [{
                         type:'string',
                         required:true,
                         attributes:[{
-                            desc: {"fr":"","en":"The code must exist in the current pool and is case sensitive."},
+                            desc: {"en":"The code must exist in the current pool and is case sensitive."},
                         }]
                     }]
                 },
                 {    
                     name:'setPool',
                     type:'function',
-                    desc: {"fr":"","en":"Sets the supported language codes."},
+                    desc: {"en":"Sets the supported country codes."},
                     attributes : [{
                         type:'string',
                         required:true,
                         attributes:[{
-                            desc: {"fr":"","en":"See conf.app.js for an example."},
+                            desc: {"en":"See conf.app.js for an example."},
                         }]
                     }]
                 }

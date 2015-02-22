@@ -80,7 +80,7 @@ module.exports = function(app) {
             var date = self.date,
                 diff = parseInt((date.getTime()-(new Date()).getTime()) / 1000);
             self.container.innerHTML = self.countUp !== self.countDown && self.countUp <= diff && diff <= self.countDown?
-                language.mapKey(language.substitute(diff === 1? (diff < 0? {"fr":"","en":"%d seconds ago"} : {"fr":"","en":"%d second"}) : (diff < 0? {"fr":"","en":"%d seconds ago"} : {"fr":"","en":"%d seconds"}),diff))
+                language.mapKey(language.substitute(diff === 1? (diff < 0? {"en":"%d seconds ago"} : {"en":"%d second"}) : (diff < 0? {"en":"%d seconds ago"} : {"en":"%d seconds"}),diff))
             :
                 self.moment.fromNow()
             ;

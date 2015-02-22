@@ -53,7 +53,7 @@ module.exports = function(app) {
                             }]
                         }
                     ],
-                    desc: _tr("Returns the value of a function or steps into the object using the current language code and returns what\'s there.")
+                    desc: _tr("Returns the value of a function or steps into the object using the current language code and returns what's there.")
                 },
                 {
                     name:'pool',
