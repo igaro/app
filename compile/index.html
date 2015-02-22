@@ -8,17 +8,17 @@
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
 <script>
 var __igaroapp = {
-    cdn : document.location.protocol === 'file:'? document.location.href+'/../cdn' : 'cdn',
+    cdn : location.protocol === 'file:'? location.href+'/../cdn' : 'cdn',
     version: 0.1,
     timestamp : new Date(),
-    debug : true,
+    debug : new RegExp("^(3006|3007)$").test(location.port),
     browserincompat : _tr("Your device or software is too old to work with this application. Please upgrade."),
     loaderr : _tr("An error has occurred.\n\n If this problem persists please contact us at:\napp-support@igaro.com")
 };
 var head = document.getElementsByTagName('head')[0];
 var b = document.createElement('base'), s;
 b.target='_blank';
-if (document.location.protocol !== 'file:') {
+if (location.protocol !== 'file:') {
     b.href='/';
     head.appendChild(b);
 } else {

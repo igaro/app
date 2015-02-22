@@ -12,4 +12,5 @@ phonegap/platforms
 build/*
 bak
 .staging
+*.swp
 node_modules
