@@ -49,7 +49,7 @@ module.exports = function(app, params) {
                 n[k] = n[k].replace(/\%d/g,function() {
                     if (! args.length)
                         throw new Error('Argument length error', n);
-                    var l = args.pop();
+                    var l = args.shift();
                     if (typeof l === 'object') 
                         return l[k];
                     return l;
