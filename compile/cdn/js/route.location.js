@@ -14,9 +14,9 @@ module.exports = function(app) {
 
     return function(model) {
 
-        var wrapper = model.wrapper,
-            dom = model.managers.dom;
-
+        var dom = model.managers.dom,
+            wrapper = dom.mk('div',model.wrapper);
+            
         //model.autoShow=false;
 
         dom.mk('a',wrapper,null,function() {
@@ -34,33 +34,34 @@ module.exports = function(app) {
                 paths = dom.mk('div',this,null,'paths'),
                 params = dom.mk('div',this,null,'params'),
                 paramsw = dom.mk('div',params);
-            this.className = 'path';
+
+            this.className = 'location';
             dom.hide(params);
             router.managers.event
                 .on('to-start', function() {
-                    params.classList.add('hide');
+                    dom.hide(params);
                 })
                 .on('to-in-progress', function() {
-                    var c = router.current;
-                    if (! c.isBase()) {
+                    if (! router.isAtBase()) {
                         model.show();
                         dom.empty(paths);
                         dom.empty(paramsw);
+                        var c = router.current;
                         while (! c.isBase()) {
-                            var m = dom.mk(c === router.current? 'span':'a',null, c.getMeta('title') || c.name);
-                            var f = c.path;
+                            var m = dom.mk(c === router.current? 'span':'a',null, c.meta.title || c.name);
                             if (c !== router.current) {
                                 m.href='#!/'+c.getUrl();
+                                var b = c.uriPath;
                                 m.addEventListener('click', function(evt) {
                                     evt.preventDefault();
-                                    router.to(f); 
+                                    router.to(b); 
                                 });
                             }
-                            var acc = c.getMeta('account');
-                            if (acc) {
-                                dom.show(params);
-                                dom.mk('span', paramsw, acc.id);
-                            }
+                            //var acc = c.meta.account;
+                            //if (acc) {
+                            //    dom.show(params);
+                            //    dom.mk('span', paramsw, acc.id);
+                            //}
                             paths.insertBefore(m,paths.firstChild);
                             c = c.parent;
                         }

@@ -11,7 +11,7 @@ module.exports = function(grunt) {
     
         watch : {
             changes: {
-                files: ['compile/**/*','copy/**/*','translations/*.po'],
+                files: ['sass/**/*','compile/**/*','copy/**/*','translations/*.po'],
                 tasks: ['build']
             }
         },
@@ -41,7 +41,8 @@ module.exports = function(grunt) {
             app: {
                 files: [{
                     expand: true,
-                    cwd: 'compile', src: ['**/*.js'],
+                    cwd: stagingDir, 
+                    src: ['**/*.js'],
                     dest: stagingDir
                 }]
             }
@@ -53,7 +54,8 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: 'compile', src: ['**'],
+                        cwd: 'compile', 
+                        src: ['**'],
                         dest: stagingDir
                     }
                 ]
@@ -63,7 +65,8 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: stagingDir, src: ['**'],
+                        cwd: stagingDir, 
+                        src: ['**'],
                         dest: buildDirs[0]
                     }
                 ]
@@ -73,12 +76,14 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: stagingDir, src: ['**'],
+                        cwd: stagingDir, 
+                        src: ['**'],
                         dest: buildDirs[1]
                     },
                     {
                         expand: true,
-                        cwd: stagingDir, src: ['**'], // not .map!
+                        cwd: stagingDir, 
+                        src: ['**', '!**/*.map'],
                         dest: buildDirs[2]
                     }
                 ]

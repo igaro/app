@@ -1161,49 +1161,15 @@ msgstr ""
 msgid "Show License"
 msgstr ""
 
-msgid "Git Repository"
-msgstr ""
-
 msgid "Run the following in a terminal."
 msgstr ""
 
-msgid "Initilize"
-msgstr ""
-
-msgid "Set up the environment to automate development processes."
-msgstr ""
-
-msgid "Ensure %d and %d are installed then run the following in a terminal."
+msgid "View"
 msgstr ""
 
 msgid ""
-"Choose a mode based on whether you are developing and debugging, readying a "
-"release, or ready to deploy. All modes recompile code as you develop."
-msgstr ""
-
-msgid ""
-"The following code starts a debug server. Sources will be uncompressed for "
-"ease of debugging. Navigate to: %d to see your work."
-msgstr ""
-
-msgid ""
-"The following code starts a deploy-debug server. Sources will be compressed "
-"but source maps will be written for ease of debugging. Navigate to: %d to "
-"see your work."
-msgstr ""
-
-msgid ""
-"The following code starts a deploy server. Sources will be compressed and "
-"protected, ready for release. Navigate to: %d to see your work."
-msgstr ""
-
-msgid "Debug"
-msgstr ""
-
-msgid "Deploy-Debug"
-msgstr ""
-
-msgid "Deploy"
+"Igaro compiles into three modes; debug, deploy-debug and deploy. You'll find "
+"a web server for each of these modes on ports %d, %d and %d."
 msgstr ""
 
 msgid "Insight"
@@ -2153,9 +2119,6 @@ msgstr ""
 msgid ""
 "The git repository contains three main folders; <b>compile</b>, <b>cordova</"
 "b> and <b>build</b>."
-msgstr ""
-
-msgid "View"
 msgstr ""
 
 msgid ""

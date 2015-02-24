@@ -9,42 +9,84 @@ body >.core-router >.location {
 
 		@include pagerestrictwidth;
 		@include pagepadding;
-		color:#4d4e53;
-		font-size:120%;
-		font-weight:bold;
-		display:table;
-		width:100%;
-		background:none;
-		border:0;
-		
-		>.home {
-			background: inline-image("route.location/home-standard.svg") no-repeat 0 50%;
-			background-size:75%;
-			width:2em;
-			height:100%;
-			display:table-cell;
-			vertical-align:middle;
-			&:hover { 
-				background: inline-image("route.location/home-hover.svg") no-repeat 0 50%;
-				background-size:75%;
-			}
-		}
-		>.path {
-			display:table-cell;
-			vertical-align:middle;
-			>a, >span {
-				display:table-cell;
-				height:100%;
-				padding:0 0.8em 0 1.4em;
-				background: inline-image("route.location/section.svg") no-repeat 0 55%;
-				background-size:0.8em 0.8em;
-			}
+        overflow-x:auto;
+        border:none;
 
-			>a:hover {
-				text-decoration:none;
-			}
-		}
+        >div {
+            color:#4d4e53;
+            font-size:120%;
+            font-weight:bold;
+            display:table;
+            background:none;
+            border:0;
+        
+            >* {
+                display:table-cell;
+                vertical-align:middle;
+            }
+            
+            >.home {
+                background: inline-image("route.location/home-standard.svg") no-repeat 0 50%;
+                background-size:75%;
+                width:2em;
+                height:100%;
+                &:hover { 
+                    background: inline-image("route.location/home-hover.svg") no-repeat 0 50%;
+                    background-size:75%;
+                }
+            }
 
+
+            >.location {
+
+                line-height:1;
+                
+                >.paths {
+                    font-weight:200;
+                    display:table;
+                    vertical-align:middle;
+                    >* {
+                        display:table-cell;
+                        padding-left:0.4em;
+                        padding-right:0.7em;	
+                        &:first-child {
+                            padding-left:0;
+                        }
+                        background: inline-image("route.location/section.svg") 100% 50% no-repeat;
+                        background-size: 0.4em 70%;
+                        &:last-child {
+                            background:none;
+                        }
+                        &:hover {
+                            text-decoration:none;
+                        }
+                    }
+                }
+
+                >.params {
+                    font-size:65%;
+                    font-weight:bold;
+                    overflow:hidden;
+                    text-overflow: ellipsis;
+                    >div {
+                        overflow:hidden;
+                        text-overflow: ellipsis;
+                        >span {
+                            position:relative;
+                            margin-right:0.3em;
+                            &:after {
+                                content:'|';
+                                margin-left:0.3em;
+                            }
+                            &:last-child:after {
+                                content:'';
+                                margin-left:0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 	}
 }
 
