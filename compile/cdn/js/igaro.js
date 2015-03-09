@@ -414,16 +414,19 @@ window.addEventListener('load', function() {
             };
             CoreDom.prototype.hide = function(r,v) {
                 if (! r)
-                    return;
-                if (typeof v === 'boolean' && v === false) {
-                    this.show(r);
-                } else {
-                    r.classList.add('core-dom-hide');
-                }
+                    throw new Error('No DOM element supplied');
+                if (typeof v === 'boolean' && v === false)
+                    return this.show(r);
+                r.classList.add('core-dom-hide');
             };
+            CoreDom.prototype.toggleVisibility = function(r) {
+                if (! r)
+                    throw new Error('No DOM element supplied');
+                return this.hide(r,! r.classList.contains('core-dom-hide'));
+            }
             CoreDom.prototype.show = function(r) {
                 if (! r)
-                    return;
+                    throw new Error('No DOM element supplied');
                 r.classList.remove('core-dom-hide');
             };
             CoreDom.prototype.setContent = function(r,c,o) {
@@ -493,6 +496,7 @@ window.addEventListener('load', function() {
                     managers = o.managers || [],
                     parent = this.parent = o.parent,
                     path = this.path = [name],
+                    domElement = o.domElement,
                     thisManagers = this.managers = {},
                     asRoot = this.__asRoot = o.asRoot;
                 this.stash = {};
@@ -519,13 +523,52 @@ window.addEventListener('load', function() {
                     parent.managers.event.on('destroy', function() {
                         return self.destroy();
                     });
+                var thisMgrsEvt = thisManagers.event;
                 this.destroy = function() {
-                    return thisManagers.event.dispatch('destroy').then(function() {
+                    return thisMgrsEvt.dispatch('destroy').then(function() {
                         delete self.parent;
                         delete self.stash;
                         return events.clean(self);
                     });
                 };
+                this.disable = function() {
+                    this.disabled = true;
+                    return thisMgrsEvt.dispatch('disabled');
+                };
+                this.enable = function() {
+                    this.disabled = false;
+                    return thisMgrsEvt.dispatch('enabled');
+                };
+                if (domElement) {
+                    var dom = this.managers.dom;
+                    domElement = self.domElement = domElement(dom);                   
+                    this.hide = function(v) {
+                        dom.hide(domElement,v);
+                    };
+                    thisMgrsEvt
+                        .on('disabled',function() {
+                            domElement.setAttribute('disabled',true);
+                        })
+                        .on('enabled',function() {
+                            domElement.setAttribute('disabled',false);
+                        });
+                    this.show = function() {
+                        if (self.disabled)
+                            return;
+                        dom.show(domElement);
+                        return thisMgrsEvt.dispatch('show');
+                    };
+                    this.toggleVisibility = function() {
+                        dom.toggleVisibility(domElement);
+                    };
+                    thisManagers.event.on('destroy',function() {
+                        dom.rm(domElement);
+                    });
+                    if (o.hidden)
+                        this.hide();
+                }
+                if (o.disabled)
+                    this.disable();
             };
         })();
 

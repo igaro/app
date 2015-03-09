@@ -42,6 +42,18 @@ body >.core-router >.header {
 		    }
 		}
 
+        >.instance-accordion {
+            position:fixed;
+            top:0;
+            left:0;
+            height:100%;
+            overflow:auto;
+            background-color:rgba(0,0,0,.9);
+            width:30%;
+            z-index:1000;
+            padding:0.8em;
+        }
+
 		>.instance-navigation {
 
 			display:inline-block;
@@ -90,42 +102,16 @@ body >.core-router >.header {
 
 				}
 			}
-
-			>.drop {
-				background:none;
-				width:auto;
-				position:inherit;
-				left:auto;
-				height:100%;
-				top:auto;
-				display:table;
-				margin:-0.6em 0 0 0.6em;
-		    	>ul {
-		    		display:table-cell;
-		    		vertical-align:bottom;
-		    		margin:auto;
-		    		bottom:0;
-		    		height:100%;
-				    >.disabled {
-				    	opacity:0.6;
-				    }
-					>.settings {
-						>a {
-							>.text { display:none }
-							padding:3em 3em 0 0;
-							background: inline-image("route.header/settings.svg") no-repeat 50% 50%;
-					    	background-size:2.2em 2.2em;
-					    }
-					    &.active {
-					    	>.wrapper {
-					    		background: inline-image("route.header/settings-active.svg") no-repeat 50% 50%;
-					    		background-size:2.2em 2.2em;
-					    	}
-					    }
-					}
-				}
-			}
 		}
+
+        >.settings {
+            width:2.8em;
+            height:3.4em;
+            background: inline-image("route.header/settings.svg") no-repeat 50% 50%;
+            background-size:70%;
+            display:inline-block;
+            position:relative;
+        }
 
 		>.xhr {
 		  	position:relative;

@@ -21,6 +21,7 @@ module.exports = function(app) {
             w = this.wrapper = dom.mk('a',li),
             self = this, 
             parent = this.parent = o.parent,
+            ul = parent.ul,
             children = o.children;
         this.id = o.id || null;
         this.status = null;
@@ -32,9 +33,9 @@ module.exports = function(app) {
         this.setStatus(o.status || 'inactive',true);
         this.onClick = o.onClick || null;
         if (o && o.insertBefore) {
-            parent.ul.insertBefore(li,o.insertBefore.li);
+            ul.insertBefore(li,o.insertBefore.li);
         } else {
-            parent.ul.appendChild(li);
+            ul.appendChild(li);
         }
         if (o.hide)
             this.hide();
@@ -49,12 +50,17 @@ module.exports = function(app) {
                 if (self.status ==='disabled' || ('selectable' in o && o.selectable === false)) 
                     return event.stopPropagation();
                 if (self.onClick)
-                    self.onClick(event);
+                    self.onClick.call(self,event);
+                if (parent.onClick)
+                    parent.onClick.call(self,event);
             });
         if (children && children.pool) 
-            this.menu = this.addMenu({ 
+            this.addMenu({ 
                 pool:children.pool, 
                 onClick:children.onClick || null
+            }).then(function(menu) {
+                self.menu = menu;
+                //li.appendChild(menu.container);
             });
         this.managers.event.on('destroy', function() {
             return dom.rm(li);
@@ -68,7 +74,7 @@ module.exports = function(app) {
             pool:o && o.pool?o.pool:null, 
             onClick:o && o.onClick? o.onClick:null 
         });
-        this.managers.event.dispatch('addMenu',menu).then(function() {
+        return this.managers.event.dispatch('addMenu',menu).then(function() {
             return menu;
         });
     };
@@ -129,17 +135,20 @@ module.exports = function(app) {
             parent:o.parent
         });
         this.onClick = o.onClick? o.onClick : null;
-        this.autosort = !! o.autosort;        
+        this.autosort = !! o.autosort;
+        var pool = o.pool;
+        if (typeof pool === 'function') 
+            pool = pool(this);        
         var m = this.container = o.container,
             dom = this.managers.dom,
             self = this,
             ul = this.ul = dom.mk('ul',m, null, function() {
-                this.addEventListener('click',function(event) {
-                    if (self.onClick)
-                        self.onClick.call(self,event);
-                });
+                //this.addEventListener('click',function(event) {
+                //    if (self.onClick)
+                //        self.onClick.call(self,event);
+                //});
             }),
-            opts = this.options = o.pool? o.pool.map(function(x) {
+            opts = this.options = pool? pool.map(function(x) {
                 x.parent = self;
                 return new InstanceNavigationMenuOption(x);
             }) : [];

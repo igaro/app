@@ -4,6 +4,8 @@ module.requires = [
 
 module.exports = function(app) {
 
+    var bless = app['core.bless'];
+    
     var opts = [
         { name:'Delicious', url:'http://del.icio.us/post?url=<URL>&title=<TITLE>' },
         { name:'Digg', url:'http://digg.com/submit?url=<URL>&title=<TITLE>' },
@@ -14,31 +16,37 @@ module.exports = function(app) {
     ];
 
     var bookmark = function(o) {
-        var c = this.container = document.createElement('ul');
-        c.className = 'instance-bookmark';
-        this.setURL({ url:o.url? o.url : window.location.href, title:o.title });
-        if (o.container) 
-            o.container.appendChild(c);
+        bless.call(this,{
+            name:'instance.bookmark',
+            parent:o.parent,
+            asRoot:true,
+            domElement:function(dom) { 
+                return dom.mk('ul',o.container,null,'instance-bookmark');
+            }
+        });
+        this.setURL({ 
+            url:o.url? o.url : window.location.href, title:o.title 
+        });
     };
 
     bookmark.prototype.setURL = function(o) {
-        var c = this.container;
-        while(c.firstChild) { 
-            c.removeChild(c.firstChild); 
-        }
+        var c = this.domElement,
+            dom = this.managers.dom;
+        dom.empty(c);
         opts.forEach(function(p) {
             var to = encodeURIComponent(o.url),
                 title = o.title? encodeURIComponent(obj.title) : '',
-                url = p.url;
-            url = url.replace(/\<URL\>/g,to);
-            url = url.replace(/\<TITLE\>/g,title);
-            var li = document.createElement('li');
-            li.className = p.name.toLowerCase();
-            li.addEventListener('click', function() {
-                window.open(url);
+                url = p.url
+                        .replace(/\<URL\>/g,to)
+                        .replace(/\<TITLE\>/g,title);
+            dom.mk('li',c,null, function() {
+                this.className = p.name.toLowerCase();
+                this.addEventListener('click', function() {
+                    window.open(url);
+                });
             });
-            c.appendChild(li);
         });
+        return this.managers.event.dispatch('setURL',o);
     };
 
     return bookmark;

@@ -19,20 +19,17 @@ module.exports = function(app) {
         languageEventMgr = language.managers.event;
 
     var InstanceDate = function(o) {
-
         bless.call(this,{
             name:'instance.date',
             parent:o.parent,
-            asRoot:true
+            asRoot:true,
+            domElement:function(dom) {
+                return dom.mk('span',o.container,null,'instance-date');
+            }
         });
-
-        var dom = this.managers.dom;
-
         this.date = o.date;
-        this.container = dom.mk('span',o.container,null,'instance-date');
         this.countDown = 60;
         this.countUp = 0;
-
         var self = this,
             m = self.moment = moment(o.date),
                 erf = {
@@ -65,6 +62,7 @@ module.exports = function(app) {
         this.date = date;
         this.moment = moment(date);
         this.format();
+        return this.managers.event.dispatch('set',date);
     };
 
     InstanceDate.prototype.offset = function(offset,nostore) {

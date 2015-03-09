@@ -868,6 +868,18 @@ msgstr ""
 msgid "Welcome to <b>Igaro App</b>"
 msgstr ""
 
+msgid "Language"
+msgstr ""
+
+msgid "Timezone"
+msgstr ""
+
+msgid "Currency"
+msgstr ""
+
+msgid "Country"
+msgstr ""
+
 msgid "Asynchronous"
 msgstr ""
 

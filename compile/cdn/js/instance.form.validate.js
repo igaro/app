@@ -237,6 +237,7 @@ module.exports = function(app) {
             return dom.rm(element);
         })).then(function () {
             self.messages = [];
+            return self.managers.event.dispatch('clear');
         });
     };
 

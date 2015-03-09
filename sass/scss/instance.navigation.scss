@@ -1,13 +1,3 @@
-@-webkit-keyframes instance-navigation-fadeInDown {
-0% { opacity: 0; -webkit-transform: translateY(-2em); }
-100% { opacity: 1; -webkit-transform: translateY(0); }
-}
-
-@keyframes instance-navigation-fadeInDown {
-0% { opacity: 0; transform: translateY(-2em); }
-100% { opacity: 1; transform: translateX(0); }
-}
-
 .instance-navigation {
 
     font-weight:bold;
@@ -86,7 +76,6 @@
     >.drop {
 
         white-space:nowrap;
-        
         text-align:left;
         ul {
 
@@ -119,32 +108,27 @@
             margin-left:-0.9em;
             >li {
                 float:left;
-
+                position:relative;
                 &.active {
-                    background: #393832;
+                    background: #730909;
+                    border-bottom:0;
+                    border-radius:0.2em 0.2em 0 0;
                     &:hover { cursor:pointer; }
                     >a >span {
                         color:#fff;
                     }
                 }
-
                 >a {
-
+                    margin-top:-1px;
                     >span {
                         padding:0.6em 1em;
                     }
-
                     >.children {
-                        box-shadow: 0 20px 15px #ccc;
-                        background: #393832;
+                        border-radius:0.2em 0 0.2em 0.2em;
+                        background: #730909;
                         position:absolute;
-                        z-index:9999;
-                        //width:100%;
-                        right:0;
-                        -webkit-animation-name: instance-navigation-fadeInDown;
-                        animation-name: instance-navigation-fadeInDown;
-                        -webkit-animation-duration:0.5s;
-                        animation-duration:0.5s;
+                        z-index:9998;
+                        right:-1px;
                         &:hover {
                             cursor:default;
                         }
@@ -172,23 +156,6 @@
                                 }
                                 &.tick { background-color:green; }
                                 &.cross { background-color:red; }
-                                
-                                >.service-xhrstatus {
-                                    position:absolute;
-                                    top:0;
-                                    right:2em;
-
-                                    >a {
-                                        padding:0;
-                                        background:none;
-                                        border:none;
-                                        position:absolute;
-                                        top:0.7em;
-                                        left:auto;
-                                        >.error { width:100%; height:100%; }
-                                        >.loading { padding:20%; width:100%; height:100%; border-width:5px; border-color:#fff; border-right-color: transparent; }
-                                    }
-                                }
                             }
                         }
                     }
