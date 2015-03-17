@@ -13,9 +13,43 @@ module.exports = function(app, params) {
         url = app['core.url'],
         bless = app['core.bless'];
 
+    var detect = function() {
+        var n = window.navigator.userLanguage || window.navigator.language;
+        if (n.length > 3) 
+            n=n.substr(3);
+        return country.managers.store.get('env').then(function (stored) {
+            return [
+                stored,
+                params.appconf.localeCountry,
+                url.getParam('localeCountry'),
+                n,
+                'US'
+            ].reduce(
+                function(a,b,i) {
+                    return a.then(function() {
+                        country.isAuto = i === 0;
+                        return country.setEnv(b,true).then(
+                            function() {
+                                throw null;
+                            },
+                            function () {}
+                        );
+                    }); 
+                },
+                Promise.resolve()
+            ).then(
+                function () {
+                    throw new Error('Country failed to set');
+                },
+                function() { }
+            );
+        });
+    }
+
     var country = {
 
         env : null,
+        isAuto : null,
         pool : {},
 
         setPool : function(o) {
@@ -23,16 +57,22 @@ module.exports = function(app, params) {
             return this.managers.event.dispatch('setPool');
         },
 
-        setEnv : function(id) {
+        setEnv : function(id,noStore) {
             var self = this,
-                managers = this.managers;
+                managers = self.managers;
             return new Promise(function (resolve) {
-                if (! self.pool[id])
-                    throw { error:'Code is not in country pool.', value:id, pool:self.pool };
+                if (! self.pool[id]) 
+                    throw new Error('Code is not in pool.');
                 self.env = id;
-                return managers.store.set('env',id).then(function() {
+                return Promise.all([ noStore? null : managers.store.set('env',id)]).then(function() {
                     return managers.event.dispatch('setEnv',id);
                 }).then(resolve);
+            });
+        },
+
+        reset : function() {
+            return this.managers.store.set('env').then(function() {
+                return detect();
             });
         },
 
@@ -48,27 +88,8 @@ module.exports = function(app, params) {
         }
     });
 
-    var managers = country.managers;
-
-    managers.event.on('setPool', function() {
-        return managers.store.get('env').then(function(id) {
-            return Promise.all(id? [country.setEnv(id)] : []).catch(function() {}).then(function() {
-                var parId = params.appconf.localeCountry;
-                return Promise.all(parId? [country.setEnv(parId)] : []).catch(function() {}).then(function() {
-                    var uriId = url.getParam('localeCountry');
-                    return Promise.all(uriId? [country.setEnv(uriId)] : []).catch(function() {}).then(function() {
-                        var n = window.navigator.userLanguage || window.navigator.language;
-                        if (n.length > 3) 
-                            n=n.substr(3);
-                        return country.setEnv(n).catch(function() {}).then(function() {
-                            return country.setEnv('US').catch(function() {
-                                throw new Error('Country failed to set');
-                            });
-                        });
-                    });
-                });
-            });
-        });
+    country.managers.event.on('setPool', function() {
+        return detect();
     });
 
     return country;

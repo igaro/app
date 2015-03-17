@@ -835,13 +835,16 @@ msgstr ""
 msgid "Enter only digits"
 msgstr ""
 
-msgid "Confirm"
+msgid "Cancel"
+msgstr ""
+
+msgid "Close"
 msgstr ""
 
 msgid "Ok"
 msgstr ""
 
-msgid "Cancel"
+msgid "Confirm"
 msgstr ""
 
 msgid "Search"
@@ -868,6 +871,18 @@ msgstr ""
 msgid "Welcome to <b>Igaro App</b>"
 msgstr ""
 
+msgid "License: GNUv2"
+msgstr ""
+
+msgid "Updated:"
+msgstr ""
+
+msgid "Open Issues:"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
 msgid "Language"
 msgstr ""
 
@@ -878,6 +893,9 @@ msgid "Currency"
 msgstr ""
 
 msgid "Country"
+msgstr ""
+
+msgid "Locale"
 msgstr ""
 
 msgid "Asynchronous"
@@ -1212,9 +1230,6 @@ msgid "Async"
 msgstr ""
 
 msgid "Modules"
-msgstr ""
-
-msgid "Locale"
 msgstr ""
 
 msgid "Mobile"

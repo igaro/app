@@ -9,14 +9,9 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var l = {
-        confirm : _tr('Confirm'),
-        ok : _tr('Ok'),
-        cancel : _tr('Cancel')
-    },
-    zIndexAt = 999999,
-    body = document.body,
-    bodyStyle = body.style;
+    var zIndexAt = 999999,
+        body = document.body,
+        bodyStyle = body.style;
 
     var InstanceModalDialog = function(o) {
         bless.call(this,{
@@ -29,10 +24,18 @@ module.exports = function(app) {
     };
 
     InstanceModalDialog.prototype.custom = function(o) {
+        if (! o) 
+            o = {};
         var dom = this.managers.dom,
+            self = this,
             container = this.container = dom.mk('div',body,null, function() {
                 this.className = 'instance-modaldialog';
                 this.style.zIndex = zIndexAt;
+                if (! o.noClose) {
+                    this.addEventListener('click', function(event) {
+                        return self.resolve();
+                    });
+                }
             }),
             wrapper = dom.mk('div',container,null,function() {
                 this.className = o.type || 'custom';
@@ -40,13 +43,16 @@ module.exports = function(app) {
                     event.stopPropagation();
                 });
             }),
-            self = this,
-            canCancel = !!! o.noCancel,
-            myActions = o.actions;
+            myActions = o.actions || [];
 
         zIndexAt+=1;
 
         return new Promise(function(resolve) {
+
+            if (o.title) 
+                o.header = dom.mk('h1',null,o.title);
+            if (o.header)
+                dom.mk('div',wrapper,o.header,'header')
 
             var msg = o.message;
             if (msg) {
@@ -67,51 +73,43 @@ module.exports = function(app) {
                 return self.destroy();
             };
 
-            // actions
-            if (myActions || canCancel) {
-                var actionDiv = dom.mk('div',wrapper,null,'action');
-                if (myActions) {
-                    myActions = myActions.map(function (action) {
-                        return action.element = dom.mk('button',actionDiv,action.l,function() {
-                            if (action.id)
-                                this.className = action.id;
-                            if (action.onClick)
-                                this.addEventListener('click', function(event) {
-                                    if (action.onClick(event) === false)
-                                        event.stopImmediatePropagation();
-                                });
-                            this.addEventListener('click', function() {
-                                self.resolve(action).catch(function (e) {
-                                    self.managers.debug.handle(e);
-                                });
-                            });
-                        });         
-                    });
-                }
-                if (canCancel) {
-                    var r = function() {
-                        self.resolve();
-                    };
-                    dom.mk('button',actionDiv,l.cancel,function() {
-                        this.addEventListener('click', r);
-                        this.focus();
-                        container.addEventListener('click', function(event) {
-                            event.stopPropagation();
-                            r();
-                        });
-                    });
-                }
+            // add cancel or close
+            if (o.addCancel || ! myActions.length) {
+               myActions.push({
+                    l:o.addCancel? _tr("Cancel") : _tr("Close")
+               }); 
             }
 
-            // give dom 35ms to display
+            dom.mk('div',wrapper,null,function() {
+                this.className = 'action';
+                var actDiv = this;
+                myActions = myActions.map(function (action) {
+                    return action.element = dom.mk('button',actDiv,action.l,function() {
+                        if (action.id)
+                            this.className = action.id;
+                        if (action.onClick)
+                            this.addEventListener('click', function(event) {
+                                if (action.onClick(event) === false)
+                                    event.stopImmediatePropagation();
+                            });
+                        this.addEventListener('click', function() {
+                            self.resolve(action).catch(function (e) {
+                                self.managers.debug.handle(e);
+                            });
+                        });
+                    });         
+                });
+            });
+
+            // give dom time to update
             setTimeout(function() {
                 // focus singular button
-                if (myActions.length === 1)
+                if (myActions && myActions.length === 1)
                     myActions[0].focus();
                 // setup, usually used for custom focusing
                 if (o.setup)    
                     o.setup();
-            },35);
+            },50);
 
         });
     };
@@ -121,6 +119,7 @@ module.exports = function(app) {
             {
                 type : 'action',
                 message : o.message,
+                title: o.title,
                 actions : o.actions
             }
         );
@@ -130,11 +129,11 @@ module.exports = function(app) {
         return this.custom(
             {
                 type : 'alert',
-                noCancel : true,
                 message : o.message,
+                title : o.title,
                 actions : [
                     {
-                        l : l.ok
+                        l : _tr("Ok")
                     }
                 ]
             }
@@ -142,17 +141,18 @@ module.exports = function(app) {
     };
     
     InstanceModalDialog.prototype.confirm = function(o) {
-        return this.custom(
-            {
-                type : 'confirm',
-                message : o.message,
-                actions : [
-                    {
-                        l : l.confirm
-                    }
-                ]
-            }
-        );
+        var confirmAction = {
+            l : _tr("Confirm")
+        };
+        return this.custom({
+            type : 'confirm',
+            message : o.message,
+            title: o.title,
+            actions : [confirmAction],
+            addCancel : true
+        }).then(function(action) {
+            return action === confirmAction;
+        });
     };
 
     return InstanceModalDialog;

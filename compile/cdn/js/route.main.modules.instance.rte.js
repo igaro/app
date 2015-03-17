@@ -4,7 +4,7 @@ module.exports = function(app) {
 
         var data = {
 
-            demo : "model.addInstance('rte', { container:c })",
+            demo : "model.managers.object.create('rte', { container:c })",
             desc : {
                 en : 'Provides data input via a rich text formatted display and html conversion.',
                 fr : 'Fournit entrée de données par l\'intermédiaire d\'un texte formaté riche affichage et la conversion de html.'

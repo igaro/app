@@ -4,7 +4,7 @@ module.exports = function(app) {
 
         var data = {
 
-            demo : "model.addInstance('bookmark', { container:c }) ",
+            demo : "model.managers.object.create('bookmark', { container:c }) ",
             desc : {
                 en : 'Provides a simple bookmark toolbar for the major social platforms.',
                 fr : 'Fournit une barre de signets simple pour les principales plates-formes sociales.'

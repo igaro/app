@@ -13,9 +13,41 @@ module.exports = function(app, params) {
         url = app['core.url'],
         bless = app['core.bless'];
 
+    var detect = function() {
+        return language.managers.store.get('env').then(function (stored) {
+            return [
+                stored,
+                params.appconf.localeLanguage,
+                url.getParam('localeLanguage'),
+                window.navigator.userLanguage || window.navigator.language,
+                'en-US',
+                'en'
+            ].reduce(
+                function(a,b,i) {
+                    return a.then(function() {
+                        language.isAuto = i === 0;
+                        return language.setEnv(b,true).then(
+                            function() {
+                                throw null;
+                            },
+                            function () {}
+                        );
+                    }); 
+                },
+                Promise.resolve()
+            ).then(
+                function () {
+                    throw new Error('Language failed to set');
+                },
+                function() { }
+            );
+        });
+    }
+
     var language = {
 
         env : null,
+        isAuto : null,
         pool : {},
 
         setPool : function(o) {
@@ -23,18 +55,24 @@ module.exports = function(app, params) {
             return this.managers.event.dispatch('setPool');
         },
         
-        setEnv : function(id) {
+        reset : function() {
+            return this.managers.store.set('env').then(function() {
+                return detect();
+            });
+        },
+
+        setEnv : function(id,noStore) {
             var self = this,
                 managers = this.managers;
             return new Promise(function (resolve) {
                 if (id.length > 2) 
                     id = id.substr(0,3)+id.substr(3).toUpperCase();
                 if (! self.pool[id]) 
-                    throw { error:'Code is not in language pool.', value:id, pool:self.pool };
+                    throw { error:'Code is not in pool.', value:id, pool:self.pool };
                 self.env = id;
-                return self.managers.store.set('env',id).then(function() {
-                    return self.managers.event.dispatch('setEnv',id).then(resolve);
-                });
+                return Promise.all([ noStore? null : managers.store.set('env',id)]).then(function() {
+                    return managers.event.dispatch('setEnv',id);
+                }).then(resolve);
             });
         },
 
@@ -86,26 +124,8 @@ module.exports = function(app, params) {
         }
     });
 
-    var managers = language.managers;
-
-    managers.event.on('setPool', function() {
-        return managers.store.get('env').then(function(id) {
-            return Promise.all(id? [language.setEnv(id)] : []).catch(function() {}).then(function() {
-                var parId = params.appconf.localeLanguage;
-                return Promise.all(parId? [language.setEnv(parId)] : []).catch(function() {}).then(function() {
-                    var uriId = url.getParam('localeLanguage');
-                    return Promise.all(uriId? [language.setEnv(uriId)] : []).catch(function() {}).then(function() {
-                        return language.setEnv(window.navigator.userLanguage || window.navigator.language).catch(function() {}).then(function() {
-                            return language.setEnv('en-US').catch(function() {}).then(function() {
-                                return language.setEnv('en').catch(function(e) {
-                                    throw new Error('Language failed to set');
-                                });
-                            });
-                        });
-                    });
-                });
-            });
-        });
+    language.managers.event.on('setPool', function() {
+        return detect();
     });
 
     return language;

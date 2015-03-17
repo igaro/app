@@ -46,7 +46,7 @@ module.exports = function(app) {
         model.addSequence({ container:main, promises:[
 
             // code edit
-            model.addInstance('pagemessage',{
+            model.managers.object.create('pagemessage',{
                 type:'info',
                 message: _tr("You can see the code behind any page in this app by clicking the menu icon in the top right corner."),
                 hideable: {
@@ -56,7 +56,7 @@ module.exports = function(app) {
             }),
 
             // menu
-            model.addInstance('list').then(function (list) {
+            model.managers.object.create('list').then(function (list) {
 
                 var l = [
                     ['overview', _tr("Overview")],
@@ -93,7 +93,7 @@ module.exports = function(app) {
                 };
             }),
 
-            model.addInstance('list').then(function (list) {
+            model.managers.object.create('list').then(function (list) {
                 var l = [
                     ['structure',_tr("Structure")],
                     ['async', _tr("Async")],

@@ -14,7 +14,7 @@ module.exports = function(app) {
             demo : "
 var b = dom.mk('button', c, { en: 'Get JSON', fr: 'Obtenez JSON' }); \n \
 b.addEventListener('click', function () { \n \
-    model.addInstance('xhr').then(function (xhr) { \n \
+    model.managers.object.create('xhr').then(function (xhr) { \n \
         return xhr.get({ res:'http://www.igaro.com/misc/demo.json' }).then( \n \
             function(data) { \n \
                 c.insertBefore(dom.mk('div',null,JSON.stringify(data)), b); \n \

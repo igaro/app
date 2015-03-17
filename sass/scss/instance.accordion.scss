@@ -5,44 +5,38 @@
 		margin:0;
 
 		>dt {
-			border-bottom:1px solid #444;
-			padding-bottom:0.2em;
+			border-bottom:.05em solid rgba(0,0,0,.6);
+			padding-bottom:.2em;
 			font-weight:bold;
-			margin-bottom:0.5em;
+			margin-bottom:.5em;
 			position:relative;
-			font-size:120%;
+			font-size:100%;
 			&:hover {
 				cursor:pointer;
 				text-decoration:none;
 			}
 			>span {
 				display:inline-block;
-				&:nth-child(2) {
+				&:last-child {
 					&:empty {
 						display:none;
 					}
 					font-size:75%;
 					font-weight:bold;
-					margin-left:0.4em;
+					margin-left:.4em;
 					vertical-align: super;
-					&:before {
-						content:'['
-					}
-					&:after {
-						content:']'
-					}
 				}
 			}
 			>div {
 				position:absolute;
 				right:0;
 				width:1em;
-				top:0.25em;
+				top:.25em;
 				height:1em;
 				background: inline-image("instance.accordion/arrow.svg") no-repeat 100% 50%;
             	background-size: 100%;
-            	-webkit-transition: all 0.5s ease-in-out;                 
-				transition: all 0.5s ease-in-out;
+            	-webkit-transition: all .5s ease-in-out;                 
+				transition: all .5s ease-in-out;
 			}
 		}
 
@@ -50,8 +44,8 @@
 			max-height:0;
 			overflow:hidden;
 			margin:0;
-			-webkit-transition: all 0.6s;                 
-			transition: all 0.6s;
+			-webkit-transition: all .6s;                 
+			transition: all .6s;
 			opacity:0;
 		}
 
@@ -59,13 +53,13 @@
 			>dd {
 				max-height:999px;
 				opacity:1;
-				margin-bottom:0.5em;
+				margin-bottom:.5em;
 			}
 			>dt {
 				>div {
 					transform: rotate(-90deg);
 				}
-				>span:nth-child(2) {
+				>span:last-child {
 					display:none;
 				}
 			}

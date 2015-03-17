@@ -4,7 +4,7 @@ module.exports = function(app) {
 
         var data = {
 
-            demo : "model.addInstance('date', { container:c, date:new Date(), format:'LLLL', })",
+            demo : "model.managers.object.create('date', { container:c, date:new Date(), format:'LLLL', })",
             desc : {
                 en : 'Provides a managed date with automatic display and timezone conversion. By default uses 3rdparty.moment.js for formatting to the user locale.',
                 fr : 'Fournit une date géré avec affichage automatique et la conversion de fuseau horaire. Par défaut utilise 3rdparty.moment.js de mise en forme à l\'utilisateur locale.'

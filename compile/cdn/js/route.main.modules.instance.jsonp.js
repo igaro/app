@@ -14,7 +14,7 @@ module.exports = function(app) {
             demo : " \
 var b = dom.mk('button', c, { en: 'Get JSON', fr: 'Obtenez JSON' }); \n \
 b.addEventListener('click', function () { \n \
-    model.addInstance('jsonp').then(function (jsonp) { \n \
+    model.managers.object.create('jsonp').then(function (jsonp) { \n \
         return jsonp.get({ res:'http://en.wikipedia.org/w/api.php?format=json&action=query&titles=India&prop=revisions&rvprop=content' }).then( \n \
             function(data) { \n \
                 c.insertBefore(dom.mk('div',null,JSON.stringify(data)), b); \n \

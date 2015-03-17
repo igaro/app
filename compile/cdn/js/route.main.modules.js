@@ -30,7 +30,7 @@ module.exports = function(app) {
             var createTable = function(data,container) {
 
                 dom.mk('p',container,_tr("* = required"));
-                model.addInstance('table',{
+                model.managers.object.create('table',{
                     container:container,
                     header : {
                         rows : [
@@ -219,7 +219,7 @@ module.exports = function(app) {
 
                 var dr = dom.mk('pre',v, data.demo.trim(), 'democode');
 
-                model.addInstance('pagemessage',{ 
+                model.managers.object.create('pagemessage',{ 
                     type:'info',
                     message: _tr("Note: In demo code <b>c</b> references model.wrapper."),
                     hideable: {
@@ -302,7 +302,7 @@ module.exports = function(app) {
             }
         };
 
-        return model.addInstance('table',{
+        return model.managers.object.create('table',{
             container:wrapper,
             searchable:true,
             header : {

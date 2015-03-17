@@ -5,7 +5,7 @@ module.exports = function(app) {
         var data = {
 
             demo : " \n \
-model.addInstance('pagemessage', { \n \
+model.managers.object.create('pagemessage', { \n \
     container:c, \n \
     type:'error', \n \
     message : { \n \
@@ -13,7 +13,7 @@ model.addInstance('pagemessage', { \n \
         fr : 'xyz' \n \
     } \n \
 }); \n \
-model.addInstance('pagemessage', { \n \
+model.managers.object.create('pagemessage', { \n \
     container:c, \n \
     type:'success', \n \
     id:'7x4d', \n \

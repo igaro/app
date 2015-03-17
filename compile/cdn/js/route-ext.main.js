@@ -20,7 +20,7 @@ module.exports = function(app) {
 
         model.managers.dom.empty(header);
 
-        model.addInstance(
+        model.managers.object.create(
             'samespace',
             {
                 spaces: [

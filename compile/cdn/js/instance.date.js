@@ -23,7 +23,7 @@ module.exports = function(app) {
             name:'instance.date',
             parent:o.parent,
             asRoot:true,
-            domElement:function(dom) {
+            container:function(dom) {
                 return dom.mk('span',o.container,null,'instance-date');
             }
         });

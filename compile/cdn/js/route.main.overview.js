@@ -32,7 +32,7 @@ module.exports = function(app) {
 
         dom.mk('h1',wrapper,_tr("Goals"));
 
-        return model.addInstance('table', { 
+        return model.managers.object.create('table', { 
             container:dom.mk('p',wrapper),
             header : {
                 rows : [

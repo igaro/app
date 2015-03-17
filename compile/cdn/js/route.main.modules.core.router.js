@@ -20,7 +20,7 @@ module.exports = function(app) {
                 desc: _tr("Logic and data for managing a route."),
                 attributes : [
                     { 
-                        name:'addInstance', 
+                        name:'managers.object.create', 
                         type:'function',
                         desc : _tr("Adds an instance module, instantiates and optionally inserts any returning element into the wrapper. Lazy loads the module if unloaded."),
                         attributes: [

@@ -169,7 +169,7 @@ module.exports = function(app) {
 
                 v.placeholder='xx.xx';
 
-                model.addInstance('form.validate',{
+                model.managers.object.create('form.validate',{
                     form:f,
                     routine:routine
                 });
@@ -202,7 +202,7 @@ module.exports = function(app) {
 
         Promise.all(
             ['LLLL', 'LL', 'L'].map(function(c) {
-                return model.addInstance('date', { 
+                return model.managers.object.create('date', { 
                     container:dt, 
                     date:new Date(), 
                     format:c

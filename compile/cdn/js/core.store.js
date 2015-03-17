@@ -4,12 +4,12 @@
 
 module.exports = function(app) {
 
-    var CoreStoreMgr = function(name) {
-        this.name = name;
+    var CoreStoreMgr = function(parent) {
+        this.parent = parent;
     };
     CoreStoreMgr.prototype.get = function(id,o) {
         var self = this,
-        name = this.name;
+            name = this.parent.name;
         return new Promise(function (resolve, reject) {
             var type = o && o.type? store.providers[o.type] : store.defaultProvider;
             if (! type)
@@ -23,7 +23,7 @@ module.exports = function(app) {
         });
     };
     CoreStoreMgr.prototype.set = function(id,value,o) {
-        var name = this.name;
+        var name = this.parent.name;
         return new Promise(function (resolve, reject) {
             var type = o && o.type? store.providers[o.type] : store.defaultProvider;
             if (! type)
@@ -44,8 +44,8 @@ module.exports = function(app) {
 
         providers : [],
 
-        createMgr : function(name) {
-            return new CoreStoreMgr(name);
+        createMgr : function(parent) {
+            return new CoreStoreMgr(parent);
         },
 
         installProvider : function(name,o) {

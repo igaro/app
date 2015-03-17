@@ -7,8 +7,8 @@
    	top:0;
     height:100%;
     width:100%;
+    box-sizing: border-box !important;
     background-color: rgba(0,0,0,.7);
-    text-align:center;
     font-size:130%;
 	>div {
 		position:fixed;
@@ -17,34 +17,43 @@
 		-webkit-transform: translate(-50%, -50%);
 		transform: translate(-50%, -50%);
 		@include corners;
+        box-sizing: border-box !important;
 		background:#fff;
 		width:60%;
 		max-width:30em;
-		padding:1.6em;
-		border: 0.3em solid #eee;
+        max-height:100%;
+        overflow:auto;
+		border: .3em solid #eee;
 		margin:0 auto;
-		text-align:center;
-
+        >.header {
+            background:#eee;
+            >h1 {
+               padding:.7em; 
+            }
+        }
+        >.message, >.action, >.custom {
+            margin:1.6em;
+        }
+        >.message, >.action {
+            text-align:center;
+        }
 		>.message, >.custom {
 			margin-bottom:1em;
 		}
-
 		>.custom {
 			input, select, button {
-				padding:0.7em 1em;
+				padding:.7em 1em;
 			}
 		}
 
 		>.action {
-
 			input, select, button {
-				padding:0.7em 1em;
+				padding:.7em 1em;
 			}
 
 			input + input, select + select, input + select, select + input, select + button, input + button, button + select, button + input { 
 				margin-left: 1em 
 			}
-
 		}
 
 	    @media screen and (max-width:900px) {
@@ -58,6 +67,13 @@
 				width:100%;
 				box-sizing: border-box !important;
 			}
+	        width:90%;   
+            >.message, >.action, >.custom {
+                margin:.7em;
+            }
+            >.header >h1 {
+                padding:.3em;
+            }
 	    }
 
 	}

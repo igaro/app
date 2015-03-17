@@ -22,10 +22,7 @@ module.exports = function(app) {
     	'toTop');
 
 		dom.mk('div',wrapper,[
-    		dom.mk('span', null, {
-    			en : 'License: GNUv2',
-    			fr : 'Licence: GNUv2'
-    		}),
+    		dom.mk('span', null, _tr("License: GNUv2"))
     	],'license');
 
     	dom.mk('div',wrapper,[
@@ -35,59 +32,51 @@ module.exports = function(app) {
         model.addSequence({ container:wrapper, promises:[
 
             // last update
-            new Promise(function(resolve) {
-                model.addInstance('xhr').then(function (xhr) {
-                    xhr.get({ res:'https://api.github.com/orgs/igaro/repos' }).then(
-                        function(data) {
-                            data = data.filter(function(x) {
-                                return x.name === 'app';
-                            });
-                            var x = dom.mk('div',null,null,'lastupdate');
-                            dom.mk('span',x, {
-                                en : 'Updated:',
-                                fr : 'Mise à jour:'
-                            });
-                            var a = dom.mk('a',x);
-                            a.href = 'https://github.com/igaro/app';
-                            model.addInstance('date', {
-                                date:data[0].updated_at,
-                                format:'LLLL',
-                                container:a
-                            }).then(function() {
-                            	resolve({ container:x });	
-                            });
-                        },
-                        resolve
-                    );
-                });
+            model.managers.object.create('xhr').then(function (xhr) {
+                return xhr.get({ 
+                    silent:true,
+                    res:'https://api.github.com/orgs/igaro/repos',
+                }).then(
+                    function(data) {
+                        data = data.filter(function(x) {
+                            return x.name === 'app';
+                        });
+                        var x = dom.mk('div',null,null,'lastupdate');
+                        dom.mk('span',x, _tr("Updated:"));
+                        return model.managers.object.create('date', {
+                            date:data[0].updated_at,
+                            format:'LLLL',
+                            container: dom.mk('a',x,null,function() {
+                                this.href = 'https://github.com/igaro/app';
+                            })
+                        }).then(function() {
+                            return x;	
+                        });
+                    }
+                ).catch(function () {});
             }),
 
             // open issues
-            new Promise(function(resolve) {
-                model.addInstance('xhr').then(function (xhr) {
-                    xhr.get({ res:'https://api.github.com/orgs/igaro/repos' }).then(
-                        function(data) {
-                            data = data.filter(function(x) {
-                                return x.name === 'app';
-                            });
-                            var x = dom.mk('div',null,null,'openissues');
-                            dom.mk('span',x, {
-                                en : 'Open Issues:',
-                                fr : 'Questions en Suspens:'
-                            });
-                            dom.mk('a',x,data[0].open_issues).href='https://github.com/igaro/app/issues';
-                            resolve({ container:x });
-                        },
-                        resolve
-                    );
-                });
+            model.managers.object.create('xhr').then(function (xhr) {
+                return xhr.get({
+                    silent:true, 
+                    res:'https://api.github.com/orgs/igaro/repos',
+                }).then(
+                    function(data) {
+                        data = data.filter(function(x) {
+                            return x.name === 'app';
+                        });
+                        var x = dom.mk('div',null,null,'openissues');
+                        dom.mk('span',x, _tr("Open Issues:"));
+                        dom.mk('a',x,data[0].open_issues).href='https://github.com/igaro/app/issues';
+                        return x;
+                    }
+                ).catch(function () {});
             }),
 
             // bookmark
-            model.addInstance('bookmark', { url:'http://app.igaro.com' }).then (function(bookmark) {
-                return { 
-                    container: dom.mk('div',null,bookmark.container, 'bookmarks') 
-                };
+            model.managers.object.create('bookmark', { url:'http://app.igaro.com' }).then (function(bookmark) {
+                return dom.mk('div',null,bookmark.container, 'bookmarks');
             })
             
         ] });

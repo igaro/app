@@ -81,46 +81,6 @@ module.exports = function(app) {
         events.on(name,[t,target,deps],fn);
     };
 
-    CoreRouterRoute.prototype.addInstance = function(g,o) {
-        if (! o)
-            o = {};
-        var self=this,
-            t = typeof g === 'string'? { name:g } : g,
-            container = o.container? o.container : null;
-        if (container)
-            container = dom.mk('div',container);
-        var name = t.fullname? t.fullname : 'instance.'+t.name,
-            p = { 
-                modules : [{ name: name+'.js' }],
-                repo : t.repo? t.repo : null
-            };
-        return new Amd().get(p).then(function () {
-            o.parent = self;
-            var i = new app[name](o);
-            if (i.container) {
-                if (container) {
-                    var cp = container.parentNode;
-                    cp.insertBefore(i.container, container);
-                    cp.removeChild(container);
-                } else if (g.insertAfter) {
-                    var p = g.insertAfter.parentNode;
-                    if (g.insertAfter.nextElementSibling) {
-                        p.insertBefore(i.container, g.insertAfter.nextElementSibling);
-                    } else {
-                        p.appendChild(i.container);
-                    }
-                } else if (g.insertBefore) {
-                    g.insertBefore.parentNode.insertBefore(i.container, g.insertBefore);
-                }
-            }
-            return i;
-        }).catch(function(e) {
-            if (! o.silent) 
-                return self.managers.debug.handle(e);
-            throw e;
-        });
-    };
-
     CoreRouterRoute.prototype.getUrl = function() {
         return this.uriPath.map(function (o) {
             return encodeURIComponent(o);

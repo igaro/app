@@ -14,6 +14,7 @@ module.exports = function(app) {
     var coreDate = {
 
         envOffset : new Date().getTimezoneOffset()*-1,
+        envOffsetAuto : null,
 
         isLeapYear : function(y) {
             return (new Date(y,1,29).getDate() === 29)? true:false;
@@ -38,18 +39,29 @@ module.exports = function(app) {
             return str.replace(/[^0-9]/g, ''); 
         },
             
-        setEnvOffset : function(minutes) {
+        resetEnvOffset : function() {
+            var self = this;
+            return this.managers.store.set('envOffset').then(function() {
+                return self.setEnvOffset(null,true);
+            });
+        },
+
+        setEnvOffset : function(minutes, noStore) {
             var self = this,
                 managers = this.managers;
             return new Promise(function(resolve) {
-                if (typeof minutes !== 'number') 
+                if (typeof minutes !== 'number') {
                     minutes = new Date().getTimezoneOffset() * -1;
-                if (minutes === self.envOffset) 
-                    return resolve();
+                    self.envOffsetAuto = true;
+                } else {
+                    self.envOffsetAuto = false;
+                }
+                //if (minutes === self.envOffset) 
+                //    return resolve();
                 if (!((-840 <= minutes <= 840) || minutes %15)) 
                     throw new Error('Timezone offset must be between +-840 and divide exactly by 15.');
                 self.envOffset = minutes;
-                return managers.store.set('envOffset',minutes).then(function() {
+                return Promise.all([ noStore? null : managers.store.set('envOffset',minutes)]).then(function() {
                     return managers.event.dispatch('setEnvOffset', minutes);    
                 }).then(resolve);
             });
@@ -64,12 +76,9 @@ module.exports = function(app) {
     });
 
     return coreDate.managers.store.get('envOffset').then(function(minutes) {
-        if (minutes !== null) {
-            return coreDate.setEnvOffset(minutes).then(function() {
-                return coreDate;
-            });
-        }
-        return coreDate;
+        return coreDate.setEnvOffset(minutes,true).then(function() {
+            return coreDate;
+        });
     });
 
 };

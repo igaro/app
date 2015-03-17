@@ -34,18 +34,38 @@ module.exports = function(app, params) {
 
     return Promise.all([
 
-      // add supported languages - IETF
-      language.setPool({
-        en : "English",
-        fr : "Français",
-        de : "Deutsch",
-        id : "Bahasa Indonesia",
-        "zh-CN" : "简体中文",
-        ar : "Arabic",
-        pl : "Polish",
-        ru : "Русский",
-        pt : "Português",
-        es : "Español"
+    // add supported languages - IETF
+    language.setPool({
+        en : { 
+            name:"English"
+        },
+        fr : {
+            name:"Français"
+        },
+        de : {
+            name:"Deutsch"
+        },
+        id : {
+            name:"Bahasa Indonesia"
+        },
+        "zh-CN" : {
+            name:"简体中文"
+        },
+        ar : {
+            name:"Arabic"
+        },
+        pl : {
+            name:"Polish"
+        },
+        ru : {
+            name: "Русский"
+        },
+        pt : {
+            name: "Português"
+        },
+        es : {
+            name: "Español"
+        }
       }),
 
       // add supported countries - iso 3166-2

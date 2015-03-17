@@ -20,7 +20,7 @@ module.exports = function(app) {
             name:'instance.bookmark',
             parent:o.parent,
             asRoot:true,
-            domElement:function(dom) { 
+            container:function(dom) { 
                 return dom.mk('ul',o.container,null,'instance-bookmark');
             }
         });
@@ -30,7 +30,7 @@ module.exports = function(app) {
     };
 
     bookmark.prototype.setURL = function(o) {
-        var c = this.domElement,
+        var c = this.container,
             dom = this.managers.dom;
         dom.empty(c);
         opts.forEach(function(p) {

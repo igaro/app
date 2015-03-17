@@ -16,14 +16,14 @@ module.exports = function(app) {
         bless.call(this,{
             name:'section',
             parent:o.parent,
-            domElement:function(dom) { 
+            container:function(dom) { 
                 return dom.mk('dl',null,null,o.className); 
             },
             disabled:o.disabled,
             hidden:o.hidden
         });
         var self = this,
-            dl = this.domElement,
+            dl = this.container,
             dom = this.managers.dom,
             dt = this.header = dom.mk('dt',dl,dom.mk('div'));
         this.content = dom.mk('dd',dl,o.content);
@@ -46,12 +46,12 @@ module.exports = function(app) {
         var p = this.parent;
         if (! p.multiExpand)
             p.collapseAll();
-        this.domElement.classList.add('expand');
+        this.container.classList.add('expand');
         this.expanded = true;
         return this.managers.event.dispatch('expand');
     };
     InstanceAccordionSection.prototype.collapse = function() {
-        this.domElement.classList.remove('expand');
+        this.container.classList.remove('expand');
         this.expanded = false;
         return this.managers.event.dispatch('collapse');
     };
@@ -66,7 +66,7 @@ module.exports = function(app) {
             name:'instance.accordion',
             parent:o.parent,
             asRoot:true,
-            domElement:function(dom) { 
+            container:function(dom) { 
                 return dom.mk('div',o.container,null,'instance-accordion');
             }
         });
@@ -86,14 +86,14 @@ module.exports = function(app) {
     InstanceAccordion.prototype.addSection = function(o) {
         o.parent = this;
         var s = new InstanceAccordionSection(o),
-            c = this.domElement,
+            c = this.container,
             insertBefore = o.insertBefore;
         if (insertBefore) { 
             if (!(insertBefore instanceof InstanceAccordionSection))
                 throw Error('insertBefore is not instanceof InstanceAccordionSection');
-            c.insertBefore(s.domElement, insertBefore.domElement);
+            c.insertBefore(s.container, insertBefore.container);
         } else {
-            c.appendChild(s.domElement);
+            c.appendChild(s.container);
         }
         this.sections.push(s);
         return this.managers.event.dispatch('addSection',s);

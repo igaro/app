@@ -5,7 +5,7 @@ module.exports = function(app) {
         var data = {
 
             demo : " \n \
-model.addInstance('table', {\n \
+model.managers.object.create('table', {\n \
     container:c, \n \
     header: {\n \
         rows : [ \n \

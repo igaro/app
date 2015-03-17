@@ -17,9 +17,40 @@ module.exports = function(app, params) {
         url = app['core.url'],
         bless = app['core.bless'];
 
+    var detect = function() {
+        return currency.managers.store.get('env').then(function (stored) {
+            return [
+                stored,
+                params.appconf.localeCurrency,
+                url.getParam('localeCurrency'),
+                country.env? country.pool[country.env].currency[0] : null,
+                'USD'
+            ].reduce(
+                function(a,b,i) {
+                    return a.then(function() {
+                        currency.isAuto = i === 0;
+                        return currency.setEnv(b,true).then(
+                            function() {
+                                throw null;
+                            },
+                            function () {}
+                        );
+                    }); 
+                },
+                Promise.resolve()
+            ).then(
+                function () {
+                    throw new Error('Currency failed to set');
+                },
+                function() { }
+            );
+        });
+    }
+
     var currency = {
 
         env : null,
+        isAuto : null,
         pool : {},
 
         setPool : function(o) {
@@ -27,16 +58,22 @@ module.exports = function(app, params) {
             return this.managers.event.dispatch('setPool');
         },
 
-        setEnv : function(id) {
+        setEnv : function(id,noStore) {
             var self = this,
                 managers = self.managers;
             return new Promise(function (resolve) {
                 if (! self.pool[id]) 
                     throw new Error('Code is not in pool.');
                 self.env = id;
-                return managers.store.set('env',id).then(function() {
+                return Promise.all([ noStore? null : managers.store.set('env',id)]).then(function() {
                     return managers.event.dispatch('setEnv',id);
                 }).then(resolve);
+            });
+        },
+
+        reset : function() {
+            return this.managers.store.set('env').then(function() {
+                return detect();
             });
         },
 
@@ -96,25 +133,8 @@ module.exports = function(app, params) {
         }
     });
 
-    var managers = currency.managers;
-
-    managers.event.on('setPool', function() {
-        return managers.store.get('env').then(function(id) {
-            return Promise.all(id? [currency.setEnv(id)] : []).catch(function() {}).then(function() {
-                var parId = params.appconf.localeLanguage;
-                return Promise.all(parId? [currency.setEnv(parId)] : []).catch(function() {}).then(function() {
-                    var uriId = url.getParam('localeLanguage');
-                    return Promise.all(uriId? [currency.setEnv(uriId)] : []).catch(function() {}).then(function() {
-                        var c = country.env;
-                        return currency.setEnv(c && country.pool[c].currency? country.pool[c].currency[0] : null).catch(function() {}).then(function() {
-                            return currency.setEnv('USD').catch(function() {
-                                throw new Error('Currency failed to set');
-                            });
-                        });
-                    });
-                });
-            });
-        });
+    currency.managers.event.on('setPool', function() {
+        return detect();
     });
 
     return currency;

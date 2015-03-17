@@ -8,7 +8,7 @@ module.exports = function(app) {
 
         var data = {
 
-            demo : "model.addInstance('samespace', { \n \
+            demo : "model.managers.object.create('samespace', { \n \
     container:c, \n \
     elements:[null,null,null], \n \
     effect:'fade', \n \

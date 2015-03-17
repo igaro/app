@@ -6,7 +6,7 @@ module.exports = function(app) {
 
             demo : "var f = dom.mk('form',c), v = dom.mk('input[text]',f); \n \
 v.placeholder='Currency amount'; \n \
-model.addInstance('form.validate',{ \n \
+model.managers.object.create('form.validate',{ \n \
     form:f, \n \
     routine: function() { \n \
         var vg = v.value.trim(); \n \

@@ -9,7 +9,7 @@ dom.mk('button',c,{ \n \
     en : 'Alert Me!', \n \
     fr : 'Alertez-moi!' \n \
 }).addEventListener('click', function() { \n \
-    model.addInstance('modaldialog').then(function(l) { \n \
+    model.managers.object.create('modaldialog').then(function(l) { \n \
         l.alert({ message:{ \n \
             en : 'Nothing to see here.', \n \
             fr : 'Rien à voir ici.' \n \

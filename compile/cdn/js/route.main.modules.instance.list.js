@@ -5,7 +5,7 @@ module.exports = function(app) {
         var data = {
 
             demo : " \n \
-model.addInstance('list',{ \n \
+model.managers.object.create('list',{ \n \
     container:c, \n \
     options : [ \n \
         { text:{ en : '1' }}, \n \

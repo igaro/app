@@ -81,17 +81,17 @@ window.addEventListener('load', function() {
 
         // core.debug: built-in
         (function() {
-            var CoreDebugMgr = function(x) {
-                this.x = x;
+            var CoreDebugMgr = function(parent) {
+                this.parent = parent;
             };
             CoreDebugMgr.prototype.log = function(e,evt) {
-                return debug.log.append({ error:e, x:this.x },this.path,evt);
+                return debug.log.append({ error:e, parent:this.parent },this.path,evt);
             };
             CoreDebugMgr.prototype.handle = function(e,evt) {
                 return debug.handle({ error:e, x:this },this.path,evt);
             };
             CoreDebugMgr.prototype.destroy = function() {
-                this.x = null;
+                this.parent = null;
                 return Promise.resolve();
             };
             var debug = app['core.debug'] = {
@@ -109,8 +109,8 @@ window.addEventListener('load', function() {
                 handle : function(value,path,event) {
                     return events.dispatch('core.debug','handle', { path:path, value:value, event:event });
                 },
-                createMgr : function(obj) {
-                    return new CoreDebugMgr(obj);
+                createMgr : function(parent) {
+                    return new CoreDebugMgr(parent);
                 }
             };
         })();
@@ -496,7 +496,7 @@ window.addEventListener('load', function() {
                     managers = o.managers || [],
                     parent = this.parent = o.parent,
                     path = this.path = [name],
-                    domElement = o.domElement,
+                    container = o.container,
                     thisManagers = this.managers = {},
                     asRoot = this.__asRoot = o.asRoot;
                 this.stash = {};
@@ -518,7 +518,48 @@ window.addEventListener('load', function() {
                 }))
                 .forEach(function (o) {
                     thisManagers[o[0]] = o[1].createMgr(self);
-                });  
+                }); 
+                // add object manager
+                thisManagers.object = {
+                    create : function(g,o) {
+                        if (! o)
+                            o = {};
+                            var t = typeof g === 'string'? { name:g } : g,
+                            container = o.container? o.container : null;
+                        if (container)
+                            container = dom.mk('div',container);
+                        var name = t.fullname? t.fullname : 'instance.'+t.name,
+                            p = { 
+                                modules : [{ name: name+'.js' }],
+                                repo : t.repo? t.repo : null
+                            };
+                        return new app['instance.amd']({ parent:self }).get(p).then(function () {
+                            o.parent = self;
+                            var i = new app[name](o);
+                            if (i.container) {
+                                if (container) {
+                                    var cp = container.parentNode;
+                                    cp.insertBefore(i.container, container);
+                                    cp.removeChild(container);
+                                } else if (g.insertAfter) {
+                                    var p = g.insertAfter.parentNode;
+                                    if (g.insertAfter.nextElementSibling) {
+                                        p.insertBefore(i.container, g.insertAfter.nextElementSibling);
+                                    } else {
+                                        p.appendChild(i.container);
+                                    }
+                                } else if (g.insertBefore) {
+                                    g.insertBefore.parentNode.insertBefore(i.container, g.insertBefore);
+                                }
+                            }
+                            return i;
+                        }).catch(function(e) {
+                            if (! o.silent) 
+                                return thisManagers.debug.handle(e);
+                            throw e;
+                        });
+                    }
+                }
                 if (parent)
                     parent.managers.event.on('destroy', function() {
                         return self.destroy();
@@ -539,30 +580,30 @@ window.addEventListener('load', function() {
                     this.disabled = false;
                     return thisMgrsEvt.dispatch('enabled');
                 };
-                if (domElement) {
+                if (container) {
                     var dom = this.managers.dom;
-                    domElement = self.domElement = domElement(dom);                   
+                    container = self.container = container(dom);                   
                     this.hide = function(v) {
-                        dom.hide(domElement,v);
+                        dom.hide(container,v);
                     };
                     thisMgrsEvt
                         .on('disabled',function() {
-                            domElement.setAttribute('disabled',true);
+                            container.setAttribute('disabled',true);
                         })
                         .on('enabled',function() {
-                            domElement.setAttribute('disabled',false);
+                            container.setAttribute('disabled',false);
                         });
                     this.show = function() {
                         if (self.disabled)
                             return;
-                        dom.show(domElement);
+                        dom.show(container);
                         return thisMgrsEvt.dispatch('show');
                     };
                     this.toggleVisibility = function() {
-                        dom.toggleVisibility(domElement);
+                        dom.toggleVisibility(container);
                     };
                     thisManagers.event.on('destroy',function() {
-                        dom.rm(domElement);
+                        dom.rm(container);
                     });
                     if (o.hidden)
                         this.hide();

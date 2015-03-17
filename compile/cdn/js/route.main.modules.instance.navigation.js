@@ -5,7 +5,7 @@ module.exports = function(app) {
         var data = {
 
             demo : " \n \
-model.addInstance('navigation', {\n \
+model.managers.object.create('navigation', {\n \
     container:c, \n \
     type:'tabs',\n \
     pool: [\n \

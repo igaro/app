@@ -23,7 +23,7 @@ module.exports = function(app) {
             container:wrapper,
             promises:[
 
-                model.addInstance(
+                model.managers.object.create(
                     'samespace',
                     {
                         spaces:[0,1,2].map(function(x,i) { return { id:'a'+i }; }),
@@ -31,7 +31,7 @@ module.exports = function(app) {
                     }
                 ),
 
-                model.addInstance('xhr').then(function(xhr) {
+                model.managers.object.create('xhr').then(function(xhr) {
                     var container = document.createDocumentFragment();
                     dom.mk('h1',container,'instance.xhr');
                     dom.mk('p',container,_tr("This example contacts the Youtube API which returns JSON. From it three Justin Bieber videos are loaded. Enjoy the great music!"));
@@ -60,7 +60,7 @@ module.exports = function(app) {
                     return container;
                 }),
 
-                model.addInstance('form.validate').then(function(formValidate) {
+                model.managers.object.create('form.validate').then(function(formValidate) {
                     var container = document.createDocumentFragment();
                     dom.mk('h1',container,'instance.form.validate');
                     dom.mk('p',container,_tr("Try entering an invalid currency denomination into the box below."));
@@ -93,7 +93,7 @@ module.exports = function(app) {
 
                         this.addEventListener('submit',function() {
                             v.value='';
-                            model.addInstance('toast',{
+                            model.managers.object.create('toast',{
                                 message: _tr("Transaction Successful.")
                             });
                         });
@@ -101,7 +101,7 @@ module.exports = function(app) {
                     return container;
                 }),
 
-                model.addInstance('rte').then(function(rte) {
+                model.managers.object.create('rte').then(function(rte) {
                     var container = document.createDocumentFragment();
                     dom.mk('h1',container,'instance.rte');
                     dom.mk('p',container);

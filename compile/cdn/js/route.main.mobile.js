@@ -109,13 +109,13 @@ module.exports = function(app) {
                             });
                         });
                     }
-                    return model.addInstance('pagemessage', {
+                    return model.managers.object.create('pagemessage', {
                         type:'critical',
                         message : _tr("A touch screen has not been detected.")
                     });
                 })(),
 
-                model.addInstance(
+                model.managers.object.create(
                     'navigation',
                     {
                         type:'tabs'
