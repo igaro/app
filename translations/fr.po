@@ -847,6 +847,48 @@ msgstr ""
 msgid "Confirm"
 msgstr ""
 
+msgid "Main"
+msgstr ""
+
+msgid "Style"
+msgstr ""
+
+msgid "Paragraph"
+msgstr ""
+
+msgid "Heading 1"
+msgstr ""
+
+msgid "Heading 2"
+msgstr ""
+
+msgid "Heading 3"
+msgstr ""
+
+msgid "Heading 4"
+msgstr ""
+
+msgid "Heading 5"
+msgstr ""
+
+msgid "Heading 6"
+msgstr ""
+
+msgid "Formatted"
+msgstr ""
+
+msgid "Character"
+msgstr ""
+
+msgid "Backcolor"
+msgstr ""
+
+msgid "Forecolor"
+msgstr ""
+
+msgid "Highlight"
+msgstr ""
+
 msgid "Search"
 msgstr ""
 
@@ -880,19 +922,19 @@ msgstr ""
 msgid "Open Issues:"
 msgstr ""
 
-msgid "Auto"
+msgid "Automatic"
 msgstr ""
 
 msgid "Language"
 msgstr ""
 
-msgid "Timezone"
+msgid "Country"
 msgstr ""
 
 msgid "Currency"
 msgstr ""
 
-msgid "Country"
+msgid "Timezone"
 msgstr ""
 
 msgid "Locale"
@@ -908,19 +950,17 @@ msgid ""
 "values."
 msgstr ""
 
-msgid "This design choice was made for two reasons;"
+msgid ""
+"Most functions dispatch an event at the end of execution which while "
+"sychronous in terms of a chain may contain asynchronous operations. Step-"
+"over execution should only occur once registered handles for the event "
+"complete hence requiring a Promise to be returned."
 msgstr ""
 
 msgid ""
-"Most functions dispatch an event at the end of execution, which is an async "
-"operation. Step-over execution should only occur once registered handles for "
-"this event complete hence requiring the event Promise to be returned."
-msgstr ""
-
-msgid ""
-"Functions that are later modified to include asynchronous code break callers "
-"that expect a value. For compatibility with future code it is better to "
-"return a Promise even if the operation is not currently asynchronous."
+"Functions modified at a later date to include asynchronous code break "
+"callers that expect a value. For compatibility with future code it is better "
+"to return a Promise even if the operation is not currently asynchronous."
 msgstr ""
 
 msgid "Promises"
@@ -937,12 +977,12 @@ msgid "Event Management"
 msgstr ""
 
 msgid ""
-"Promises are for objects initiating work but not for when the object wishes "
-"to be notified when another object executes the work. To provide this "
-"feature Igaro App uses an event management system. Data and identifiers are "
-"returned to each registered party and are propagated vertically through "
-"parent objects. It works similarily to the native DOM event system, but it's "
-"for objects not elements!"
+"Promises are for objects initiating work, not for objects wishing to be "
+"notified when the state of the work has changed. To provide this feature "
+"Igaro App uses a complex and powerful event management system. Data and "
+"identifiers are returned to each registered party and are propagated "
+"vertically through parent objects. It works similarily to the native DOM "
+"event system, but it's for objects not elements!"
 msgstr ""
 
 msgid ""
@@ -954,17 +994,12 @@ msgid ""
 "entire process is automatic."
 msgstr ""
 
-msgid ""
-"Any blessed object (most objects in Igaro App are blessed) gains an event "
-"manager."
-msgstr ""
-
 msgid "Design"
 msgstr ""
 
 msgid ""
-"Igaro App offers a flexible design where everything is customizable, with "
-"structured SASS and folders to bootstrap your product."
+"Igaro App design principles are a little different from the norm. There's no "
+"templates or html to edit and the router doesn't accept a predefined ruleset."
 msgstr ""
 
 msgid "Router"
@@ -1014,9 +1049,6 @@ msgstr ""
 msgid "Header"
 msgstr ""
 
-msgid "Main"
-msgstr ""
-
 msgid "News content"
 msgstr ""
 
@@ -1053,9 +1085,8 @@ msgid "FAQ"
 msgstr ""
 
 msgid ""
-"Hopefully the following list will satisfy your query. If not, and you feel "
-"an answer should be included for the benefit of other users, hit the button "
-"below."
+"If on reading this FAQ you feel a question and answer is missing please "
+"contact us."
 msgstr ""
 
 msgid "Email Us"
@@ -1086,74 +1117,185 @@ msgstr ""
 msgid "Due to lack of standard features, support is disabled by default."
 msgstr ""
 
-msgid "Existing Javascript Integration"
+msgid "3rd Party Javascript Integration"
+msgstr ""
+
+msgid "Existing code can be rapidly integrated into the Igaro App framework."
 msgstr ""
 
 msgid ""
-"You can use existing code and rapidly integrate it into the Igaro App "
-"framework where you require use of it's advanced features."
-msgstr ""
-
-msgid ""
-"You can use generally utilize all 3rd party libraries (i.e JQuery, "
-"YetAnotherJS) with the Igaro App framework. We've included several of the "
-"common ones in the main repository."
+"Generally speaking you may utilize all 3rd party libraries (i.e JQuery) with "
+"the Igaro App framework. We've included several of the common ones in the "
+"main repository."
 msgstr ""
 
 msgid "Dependencies"
 msgstr ""
 
 msgid ""
-"Igaro App is entirely free of dependencies. It doesn't require JQuery or any "
-"other third party library."
+"Zero. Ziltch. Igaro App is entirely free of dependencies. It doesn't require "
+"JQuery or any other third party library."
 msgstr ""
 
-msgid "Efficiency"
-msgstr ""
-
-msgid ""
-"As everything is built around an astonishingly efficient framework, your "
-"derived product, be it big or small, will scale and continue to work over "
-"time. And boy will it work fast! Oh, and flickering DOM updates are a thing "
-"of lesser frameworks."
-msgstr ""
-
-msgid "Learning Overhead"
+msgid "Prototype or Classes?"
 msgstr ""
 
 msgid ""
-"Igaro App is pure Javascript! It's one of the only frameworks that treats "
-"Javascript as the prototypal language that it is - there's no attempt to "
-"classify. If you know Javascript, then you're ready to develop with Igaro "
-"App. If not, and you learn Igaro App through studying it's examples and "
-"code, you'll learn about the very best of Javascript and cutting edge "
-"technique."
+"Neither. Igaro App blesses Javascript Objects. See the core.bless module."
+msgstr ""
+
+msgid "Is Igaro App like x,y,z?"
+msgstr ""
+
+msgid ""
+"No. Frameworks like Angular, Backbone and React use HTML, data binding and "
+"are inefficient. They appear powerful and easy to learn but fall flat when "
+"you try to make a real App with them, and that's because they have been "
+"designed to sell, not to do things right. There's a reason why Angular "
+"'sponsored by Google' isn't used in any of Googles products."
 msgstr ""
 
 msgid "Features"
 msgstr ""
 
 msgid ""
-"This framework comes with the kitchen sink! Pick the modules you want to "
-"use, all standarized to the same high quality of code."
+"Igaro's biggest feature is its architecture. Build around several core "
+"principles, these provide a layer on which everything else is built;"
 msgstr ""
 
 msgid ""
-"Below is a small selection from the base repository. You'll find a complete "
-"list on the module page (see instance.* files)."
+"Javascript is a prototypal language. It is not Java and shouldn't attempt to "
+"mimick it."
 msgstr ""
 
 msgid ""
-"This module displays elements in the same space using CSS3 effects to "
-"transition between them. It's great for slideshows!"
+"HTML is a weak design language ill suited for dynamic operation. Therefore, "
+"use no HTML."
 msgstr ""
 
 msgid ""
-"This example contacts the Youtube API which returns JSON. From it three "
-"Justin Bieber videos are loaded. Enjoy the great music!"
+"Child objects should report to parents. Events should fire up the chain."
 msgstr ""
 
-msgid "Execute"
+msgid ""
+"The Javascript specification must be adhered to. No functional duplicity or "
+"prototyping onto internal objects."
+msgstr ""
+
+msgid ""
+"Functions have the potential to be asynchronous, or emit an event which may "
+"be so, therefore they should return Promises."
+msgstr ""
+
+msgid "These principles result in;"
+msgstr ""
+
+msgid "Flexability - expand on functions without rewriting them."
+msgstr ""
+
+msgid "Design - built on DOM manipulation, not HTML and hackwork."
+msgstr ""
+
+msgid "Encapsulation - code is compartmentalized."
+msgstr ""
+
+msgid "Security - no memory leaks or public variables."
+msgstr ""
+
+msgid "Resilience - smart error control, reporting, debugging and recovery."
+msgstr ""
+
+msgid "Goals"
+msgstr ""
+
+msgid "Domain"
+msgstr ""
+
+msgid "Details"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Security"
+msgstr ""
+
+msgid ""
+"No public variables. Military-grade security. No memory leaks. Automatic "
+"oAuth initilization with Promise replay."
+msgstr ""
+
+msgid ""
+"Multi-language support via PO files. Realtime language switching. Multi-"
+"currency, date w/offset, and country functionality."
+msgstr ""
+
+msgid "Testing"
+msgstr ""
+
+msgid ""
+"Automated test suite exhaustively testing all features across all modules."
+msgstr ""
+
+msgid "Performance"
+msgstr ""
+
+msgid ""
+"Zero DOM parsing, reliance on third party code. Latest Javascript techniques."
+msgstr ""
+
+msgid "Dynamic"
+msgstr ""
+
+msgid "Expandable with modules. Decoupled architecture based on events."
+msgstr ""
+
+msgid "Multtasking"
+msgstr ""
+
+msgid "Fully asychronous using Promises and no callbacks."
+msgstr ""
+
+msgid "Lazy Loading"
+msgstr ""
+
+msgid "Modules and API data can be preloaded or loaded on demand."
+msgstr ""
+
+msgid "Debugging"
+msgstr ""
+
+msgid "Dumps data and stacktrace in debug mode. Reports Home in deploy mode."
+msgstr ""
+
+msgid "Widgets"
+msgstr ""
+
+msgid "This framework comes with the kitchen sink!"
+msgstr ""
+
+msgid ""
+"Below is  a sample, you'll find a complete list on the module page (instance."
+"* files)."
+msgstr ""
+
+msgid "Same Space"
+msgstr ""
+
+msgid ""
+"This example displays elements in the same space using CSS3 effects to "
+"transition between each space. It's great for slideshows!"
+msgstr ""
+
+msgid ""
+"This example contacts the Youtube API, which returns JSON. From it three "
+"videos are loaded. Enjoy the great music!"
+msgstr ""
+
+msgid "Fetch"
+msgstr ""
+
+msgid "Form Validation"
 msgstr ""
 
 msgid "Try entering an invalid currency denomination into the box below."
@@ -1168,10 +1310,38 @@ msgstr ""
 msgid "Invalid amount"
 msgstr ""
 
-msgid "Must be positive."
+msgid "Must be positive"
 msgstr ""
 
-msgid "Transaction Successful."
+msgid "Transaction Successful"
+msgstr ""
+
+msgid "Rich Text Editor"
+msgstr ""
+
+msgid "Suppliers"
+msgstr ""
+
+msgid "Acme Ltd is bankrupt."
+msgstr ""
+
+msgid "Contractors"
+msgstr ""
+
+msgid "Don is off sick, again."
+msgstr ""
+
+msgid "Materials"
+msgstr ""
+
+msgid "Were stolen yesterday evening."
+msgstr ""
+
+msgid "Accordion"
+msgstr ""
+
+msgid ""
+"Accordions are a great way to condense information into a navigatable form."
 msgstr ""
 
 msgid "Install"
@@ -1194,12 +1364,17 @@ msgstr ""
 msgid "Run the following in a terminal."
 msgstr ""
 
-msgid "View"
+msgid "Boom!"
 msgstr ""
 
 msgid ""
-"Igaro compiles into three modes; debug, deploy-debug and deploy. You'll find "
-"a web server for each of these modes on ports %d, %d and %d."
+"Igaro compiles into three modes; debug, deploy-debug and deploy. A web "
+"server for each can be found on ports %d, %d and %d."
+msgstr ""
+
+msgid ""
+"That's it. Now read a bit of the documentation, code hack, and create "
+"something cool."
 msgstr ""
 
 msgid "Insight"
@@ -1229,6 +1404,9 @@ msgstr ""
 msgid "Async"
 msgstr ""
 
+msgid "Bless"
+msgstr ""
+
 msgid "Modules"
 msgstr ""
 
@@ -1244,26 +1422,27 @@ msgid ""
 msgstr ""
 
 msgid ""
-"Igaro App is made for mobile, with it's outstanding performance offering a "
-"near native mobile app experience across all platforms."
+"Igaro App is mobile friendly with outstanding performance and a near native "
+"mobile app experience across all platforms."
 msgstr ""
 
 msgid "Responsive Layout"
 msgstr ""
 
 msgid ""
-"Media queries take into account screens of all sizes. Try changing the size "
-"of this window to that of a large screen, tablet and phone. Notice how the "
-"footer disappears and how elements such as the header change height and "
-"width depending on screen ratio."
+"CSS3 Media queries take into account screens of all sizes. Try changing the "
+"size of this window to that of a large screen, tablet and phone. Notice how "
+"the footer disappears and how elements such as the header change height and "
+"width depending on screen ratio? While much of the work has been done you "
+"can customize the CSS to suit your own design."
 msgstr ""
 
 msgid "Embedded Resources"
 msgstr ""
 
 msgid ""
-"Images, fonts and other media are compiled into CSS making them immediately "
-"available."
+"Images and fonts are compiled into CSS making them available immediately. "
+"You can choose to load resources traditionally by editing the SASS files."
 msgstr ""
 
 msgid "Demo"
@@ -1281,14 +1460,14 @@ msgid "Gestures"
 msgstr ""
 
 msgid ""
-"Swipe, pinch, tap, double tap, rotate and pan gesture events are available. "
-"If you have a touch screen, try some actions in the box below."
+"Gesture events are available via the 3rdparty.hammer library. If you have a "
+"touch screen, try some actions in the box below."
 msgstr ""
 
 msgid "A touch screen has not been detected."
 msgstr ""
 
-msgid "Device Features"
+msgid "Mobile Features"
 msgstr ""
 
 msgid ""
@@ -2087,19 +2266,64 @@ msgid ""
 "responsive and dynamic web and mobile applications."
 msgstr ""
 
-msgid "Promotes best practice - write great code even if you're not an expert."
+msgid "Benefits"
+msgstr ""
+
+msgid "Promotes best practice, enforcing structured coding for beginners."
+msgstr ""
+
+msgid "Very easy to learn, just standard Object Orientated Javascript."
+msgstr ""
+
+msgid "Excellent for teamwork with workflows that recompile as you work."
+msgstr ""
+
+msgid "Cutting edge features, error handling and techniques."
+msgstr ""
+
+msgid "Completely dynamic with an event driven architecture."
+msgstr ""
+
+msgid "Users"
 msgstr ""
 
 msgid ""
-"Very easy to learn - Igaro App is standard Object Orientated Javascript."
+"Igaro App offers something for everyone. It goes about things a different "
+"way, integrating stake holders and cutting down on the time required to role "
+"a request out the door."
 msgstr ""
 
-msgid "Excellent for teamwork - automates compile, debug and deploy workflows."
+msgid "Managers"
 msgstr ""
 
 msgid ""
-"Outperforms other frameworks - cutting edge features, error handling and "
-"smart logic."
+"Tired of delays and unexpected issues causing time-frame overruns? Tired of "
+"user hate mail? Tired of choosing a solution of the hour and investing "
+"resources in your employees only to have that knowledge devalued in three "
+"months time?"
+msgstr ""
+
+msgid "Developers"
+msgstr ""
+
+msgid ""
+"Tired of frameworks that promise the world but which later on you discover "
+"aren't dynamic enough to emcompass the changes you are asked to make? Tired "
+"of hacky irritating code, memory leaks and random problems you can't debug?"
+msgstr ""
+
+msgid "Designers"
+msgstr ""
+
+msgid ""
+"Want to rapidly build on the bess written SASS->CSS3 code out there? Want to "
+"do away with HTML and integrate with your developers?"
+msgstr ""
+
+msgid "Cost"
+msgstr ""
+
+msgid "100% Free. No lock-ins, tie downs, advertising or premium product."
 msgstr ""
 
 msgid "Where"
@@ -2107,74 +2331,42 @@ msgstr ""
 
 msgid ""
 "Igaro App can be served to a web browser, distributed through an app store, "
-"or bundled on removeable media. It works great on monitors, tablets. phones "
-"and everything inbetween."
+"or bundled on removeable media."
 msgstr ""
 
-msgid "Goals"
-msgstr ""
-
-msgid "Domain"
-msgstr ""
-
-msgid "Details"
-msgstr ""
-
-msgid "Status"
-msgstr ""
-
-msgid "Security"
+msgid "It works great on monitors, tablets. phones and everything inbetween."
 msgstr ""
 
 msgid ""
-"No public variables. Military-grade security. No memory leaks. Automatic "
-"oAuth initilization with Promise replay."
+"This page documents folders and files within them that make up Igaro App."
+msgstr ""
+
+msgid "View"
 msgstr ""
 
 msgid ""
-"Multi-language support via PO files. Realtime language switching. Multi-"
-"currency, date w/offset, and country functionality."
-msgstr ""
-
-msgid "Testing"
+"This folder contains javascript and html files that should be compiled (and "
+"optionally compressed) into the build folder."
 msgstr ""
 
 msgid ""
-"Automated test suite exhaustively testing all features across all modules."
+"This file defines the location of the cdn folder, loads polyfill libraries, "
+"defines a loading screen, and defines a container for the App."
 msgstr ""
 
 msgid ""
-"The git repository contains three main folders; <b>compile</b>, <b>cordova</"
-"b> and <b>build</b>."
-msgstr ""
-
-msgid ""
-"This folder contains three folders, /deploy, which contains code ready for "
-"inclusion on a web server and CDN, and /debug, which contains the raw js "
-"sources required for testing and debugging. Inside these folders is a cdn "
-"folder, which can live anywhere, and a file index.html. This file defines "
-"the cdn folder location, loads polyfill libraries and the main loader."
-msgstr ""
-
-msgid "Grunt and Compass compress code into these folders."
-msgstr ""
-
-msgid ""
-"Within this folder are several subfolders, the important two being <b>js</b> "
-"and <b>css</b>."
+"The cdn folder contains common files which may be moved to server(s) close "
+"to users. The location off the cdn folder can change once user locale is "
+"established."
 msgstr ""
 
 msgid "This folder contains the framework and modules."
 msgstr ""
 
 msgid ""
-"This file begins by including built-in core modules (debug,amd,dom,xhr,"
-"events). It then loads required modules from an editable list. A module may "
-"have its own dependencies."
-msgstr ""
-
-msgid ""
-"Errors are trapped, handed, potentially reported, and the user is notified."
+"This file begins by including built-in core modules (debug,amd,domMgr,xhr,"
+"events). It then loads required modules from an editable list.  Loading "
+"errors are trapped, handed, potentially reported, and the user is notified."
 msgstr ""
 
 msgid ""
@@ -2189,7 +2381,7 @@ msgid "A module may define dependencies using <b>module.requires</b>."
 msgstr ""
 
 msgid ""
-"Core files are libraries, not to be instantiated, and provide global "
+"These files are libraries, not to be instantiated, and provide global "
 "functionality. Modifying these files is discouraged. Core files are usually "
 "required by other modules but several are built in. They shouldn't contain "
 "language or output to the DOM."
@@ -2220,16 +2412,46 @@ msgid ""
 msgstr ""
 
 msgid ""
-"This folder contains stylesheets, the name of which corresponds to a module "
-"name. Images from the /images folder are base64 encoded into these css "
-"files. igaro.scss contains an initial style base. It doesn't necessarily "
-"style the app, which will load further stylesheets depending on the modules "
-"employed."
+"This folder contains the compiled output in various forms as defined by "
+"gruntFile.js."
 msgstr ""
 
 msgid ""
-"There's an Apache cordova project in this folder. Igaro App comes ready to "
-"deploy to mobile devices."
+"Contains code ready for inclusion on a web server. No information will go to "
+"the console. Code commments are removed. Code is compressed."
+msgstr ""
+
+msgid ""
+"Contains code that prints data to the console. Code remains uncompressed. "
+"This code is used for development and shouldn't be released."
+msgstr ""
+
+msgid ""
+"Same as deploy but uncompressed. This is for dealing with problems "
+"introduced by the compile cycle."
+msgstr ""
+
+msgid ""
+"Any files/folders in here will be copied over to the build folder after "
+"compilation."
+msgstr ""
+
+msgid ""
+"This folder contains translation files produced by the compilation process "
+"and translation files generated by translators."
+msgstr ""
+
+msgid ""
+"This folder contains scss files and resources. Typically the filename "
+"corresponds to a javascript file of the same name. Images are base64 encoded "
+"into the css files. igaro.scss contains an initial style base but doesn't "
+"necessarily style the app, which will load further stylesheets depending on "
+"the modules employed."
+msgstr ""
+
+msgid ""
+"An Apache cordova project lives here, ready to deploy the App onto to mobile "
+"devices."
 msgstr ""
 
 msgid ""

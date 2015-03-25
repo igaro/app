@@ -49,10 +49,13 @@ module.exports = function(app) {
                 event.preventDefault();
                 if (self.status ==='disabled' || ('selectable' in o && o.selectable === false)) 
                     return event.stopPropagation();
-                if (self.onClick)
-                    self.onClick.call(self,event);
-                if (parent.onClick)
-                    parent.onClick.call(self,event);
+                return (self.onClick? self.onClick.call(self,event) : Promise.resolve()).then(function() {
+                    return (parent.onClick? parent.onClick.call(parent,event) : Promise.resolve()).then(function() {
+                        self.setActive();
+                    });
+                }).catch(function() {
+                    return event.stopPropagation();
+                });
             });
         if (children && children.pool) 
             this.addMenu({ 

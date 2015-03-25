@@ -53,8 +53,8 @@ module.exports = function(app) {
         } else {
             this.offset(date.envOffset,true);
         }
-        dateEventMgr.createMgr(this).on('setEnvOffset',erf.tzoffset);
-        languageEventMgr.createMgr(this).on('setEnv',erf.lang);
+        dateEventMgr.extend(this).on('setEnvOffset',erf.tzoffset);
+        languageEventMgr.extend(this).on('setEnv',erf.lang);
         erf.lang();
     };
     

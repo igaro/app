@@ -4,6 +4,22 @@ body >.core-router >.main >.features >.wrapper {
     @include pagepadding;
     @include pagerestrictwidth;
 
+	>p >.instance-table >tbody >tr >td {
+
+		&.green {
+			background-color:green;
+		}
+
+		&.red {
+			background-color:red;
+		}
+
+		&.orange {
+			background-color:orange;
+		}
+
+    }
+
     .youtube {
     	width:500px;
     	height:350px;

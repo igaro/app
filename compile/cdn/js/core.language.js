@@ -25,9 +25,9 @@ module.exports = function(app, params) {
             ].reduce(
                 function(a,b,i) {
                     return a.then(function() {
-                        language.isAuto = i === 0;
                         return language.setEnv(b,true).then(
                             function() {
+                                language.isAuto = i !== 0;
                                 throw null;
                             },
                             function () {}
@@ -56,7 +56,9 @@ module.exports = function(app, params) {
         },
         
         reset : function() {
+            var self = this;
             return this.managers.store.set('env').then(function() {
+                self.isAuto = false;
                 return detect();
             });
         },
@@ -70,6 +72,8 @@ module.exports = function(app, params) {
                 if (! self.pool[id]) 
                     throw { error:'Code is not in pool.', value:id, pool:self.pool };
                 self.env = id;
+                if (! noStore)
+                    self.isAuto = false;
                 return Promise.all([ noStore? null : managers.store.set('env',id)]).then(function() {
                     return managers.event.dispatch('setEnv',id);
                 }).then(resolve);

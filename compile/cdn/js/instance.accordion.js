@@ -17,7 +17,7 @@ module.exports = function(app) {
             name:'section',
             parent:o.parent,
             container:function(dom) { 
-                return dom.mk('dl',null,null,o.className); 
+                return dom.mk('dl',null,null,'instance-accordion '+o.className); 
             },
             disabled:o.disabled,
             hidden:o.hidden

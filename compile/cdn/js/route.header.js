@@ -60,7 +60,7 @@ module.exports = function(app) {
                                         debugMgr = managers.debug,
                                         eventMgr = managers.event;
 
-                                     // country/lang/currency
+                                    // country/lang/currency
                                     var writeModuleOptions = function(select,name) {
                                         name = 'core.'+name;
                                         var mod = app[name];
@@ -71,127 +71,111 @@ module.exports = function(app) {
                                         });
                                         var write = function() {
                                             select.options.length = 0;
-                                            domMgr.mk('option',select,_tr("Auto"),'auto');
+                                            domMgr.mk('option',select,_tr("Automatic"));
+                                            domMgr.mk('option',select).disabled = true;
                                             Object.keys(mod.pool).forEach(function (o) {
-                                                domMgr.mk('option',select,mod.pool[o].name, function() {
-                                                    this.value = o;
-                                                    this.selected = ! mod.isAuto && o===mod.env;
-                                                });
+                                                domMgr.mk('option',select,mod.pool[o].name).value = o;
                                             });
                                         };
-                                        eventMgr.on(name,'code.set', function(c) {
-                                            select.options.forEach(function(o) {
-                                                o.selected = o.id === c;
+                                        var sel = function() {
+                                            if (mod.isAuto) {
+                                                select.selectedIndex = 0;
+                                            } else {
+                                                var env = mod.env;
+                                                Array.prototype.slice.call(select.options).some(function(o) {
+                                                    if (o.value === env) {
+                                                        o.selected = true;
+                                                        return true;
+                                                    } 
+                                                });
+                                            }
+                                        };
+                                        var sort = function() {
+                                            domMgr.sort({ 
+                                                nodes:select.options,
+                                                slice:[2]
                                             });
-                                        });
-                                        eventMgr.on(name,'pool.set', write);
+                                        };
+                                        mod.managers.event.extend(accordion)
+                                            .on('setEnv', sel)
+                                            .on('setPool', write);
+                                        app['core.language'].managers.event.extend(accordion)
+                                            .on('setEnv', sort);
                                         write();
+                                        sel();
+                                        sort();
                                     };
 
-                                    // timezone
-                                    var writeTimezone = function(tzmenu) {
-                                        var tzval = function() {
-                                            var cti = xcti.offset.get(),
-                                                t = language.mapKey({
-                                                    en : 'GMT [t] [h]h [m]m'
-                                                }),
-                                                isNeg = cti < 0? true:false;
-                                            t = t.replace('[t]',isNeg? '-' : '+');
-                                            if (cti < 0) 
-                                                cti *= -1;
-                                            var h = cti > 0? parseInt(cti/60) : 0;
-                                            t = t.replace('[h]',h);
-                                            var m = cti % 60;
-                                            t = t.replace('[m]',m);
-                                            return t;
-                                        },
-                                        tzvalueopt = tzmenu.addOption({ title:tzval, active:true });
-                                        events.on('core.date','offset.set', function() {
-                                            var offset = tzval();
-                                            tzvalueopt.updateTitle(offset);
+                                    [
+                                        [
+                                            'language',
+                                            _tr("Language")
+                                        ],
+                                        [
+                                            'country',
+                                            _tr("Country")
+                                        ],
+                                        [
+                                            'currency',
+                                            _tr("Currency")
+                                        ]
+                                    ].forEach(function(o) {
+                                        accordion.addSection({ 
+                                            title:o[1], 
+                                            content:domMgr.mk('select',null,null, function() {
+                                                writeModuleOptions(this,o[0]);
+                                            })
                                         });
-                                        tzmenu.addOption({
-                                            title:{
-                                                en : 'Set',
-                                                fr : 'Spécifier'
-                                            }, 
-                                            onClick:function() {
-                                                var cti = xcti.offset.get(),
-                                                    isNeg = cti < 0? true:false,
-                                                    hrs = cti > 0? parseInt(cti/60) : 0,
-                                                    min = cti % 60,
-                                                    i,
-                                                    frag = document.createDocumentFragment(),
-                                                    type = domMgr.mk('select',frag);
-                                                ['+','-'].forEach(function (o) { 
-                                                    type.options[type.options.length] = new Option(o); 
-                                                });
-                                                if (isNeg) 
-                                                    type.options[1].selected = true;
-                                                var hours = domMgr.mk('select',frag);
-                                                for (i=0; i <= 14; i++) {
-                                                    hours.options[hours.options.length] = new Option(i);
-                                                    if (hrs === i) 
-                                                        hours.options[hours.options.length-1].selected = true;
-                                                }
-                                                var minutes = domMgr.mk('select',frag);
-                                                for (i=0; i < 60; i+=15) {
-                                                    minutes.options[minutes.options.length] = new Option(i);
-                                                    if (min === i) 
-                                                        minutes.options[minutes.options.length-1].selected = true;
-                                                }
-                                                model.managers.object.create('modaldialog').then(function(g) {
-                                                    g.confirm({
-                                                        message: {
-                                                            en : 'Please specify your timezone offset in terms of hours and minutes.',
-                                                            fr : 'S\'il vous plaît indiquer décalage en termes d\'heures et de minutes de votre fuseau horaire.'
-                                                        },
-                                                        inputs : frag
-                                                    }).then(function(ac) {
-                                                        if (ac.cancel) 
-                                                            return;
-                                                        var m = hours.selectedIndex*60;
-                                                        m += minutes.selectedIndex*15;
-                                                        if (type.selectedIndex === 1) 
-                                                            m *= -1;
-                                                        xcti.offset.set(m);
-                                                    });
-                                                });
-                                            } 
-                                        });
-                                    };
-
-                                    accordion.addSection({ 
-                                        title:_tr("Language"), 
-                                        content:domMgr.mk('select',null,null, function() {
-                                            writeModuleOptions(this,'language');
-                                        })
                                     });
                                     accordion.addSection({ 
                                         title:_tr("Timezone"), 
                                         content:domMgr.mk('select',null,null, function() {
-
-                                         //   writeModuleOptions(this,'language');
+                                            var self = this,
+                                                date = app['core.date'],
+                                                offset = date.envOffsetAuto? null : date.envOffset;
+                                            domMgr.mk('option',self,_tr("Automatic"));
+                                            domMgr.mk('option',self).disabled = true;
+                                            for (var h=14; h >= 0; h--) {
+                                                var v = (h < 10? '0'+h : h);
+                                                for (var m=45; m >= 0 && (h > 0 || m !== 0); m-=15) {
+                                                    domMgr.mk('option',self,'GMT - '+v+':'+(m === 0? '00':m), function() {
+                                                        var y = this.value = (h*60+m)*-1;
+                                                        if (y === offset)
+                                                            this.selected = true;
+                                                    });
+                                                }
+                                            }
+                                            for (var h=0; h <= 14; h++) {
+                                                var v = h < 10? '0'+h : h;
+                                                for (var m=0; m <= 45; m+=15) {
+                                                    domMgr.mk('option',self,'GMT +'+v+':'+(m === 0? '00':m), function() {
+                                                        var y = this.value = (h*60+m);
+                                                        if (y === offset)
+                                                            this.selected = true;
+                                                    });
+                                                }
+                                            }
+                                            eventMgr.on('core.date','setEnvOffset', function() {
+                                                if (date.envOffsetAuto) {
+                                                    self.selectedIndex = 0;
+                                                } else {
+                                                    offset = date.envOffset;
+                                                    self.options.some(function (o) {
+                                                        if (o.value === offset) {
+                                                            o.selected = true;
+                                                            return true;
+                                                        }
+                                                    });        
+                                                }
+                                            });
+                                            this.addEventListener('change', function() {
+                                                (this.selectedIndex === 0? date.resetEnvOffset() : date.setEnvOffset(parseInt(this.options[this.selectedIndex].value))).catch(function(e) {
+                                                    return debugMgr.handle(e);
+                                                });
+                                            });
 
                                         })
                                     });
-                                    accordion.addSection({ 
-                                        title:_tr("Currency"), 
-                                        content:domMgr.mk('select',null,null, function() {
-
-                                            writeModuleOptions(this,'currency');
-
-                                        })
-                                    });
-                                    accordion.addSection({ 
-                                        title:_tr("Country"), 
-                                        content:domMgr.mk('select',null,null, function() {
-
-                                            writeModuleOptions(this,'country');
-
-                                        })
-                                    });
-
                                     return modal.custom({
                                         noCancel:true,
                                         title:_tr("Locale"),

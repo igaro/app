@@ -11,48 +11,48 @@ module.exports = function(app) {
 
     return function(model) {
 
-        var dom = model.managers.dom,
+        var domMgr = model.managers.dom,
             wrapper = model.wrapper;
 
         model.setMeta('title', _tr("FAQ"));
 
-        dom.mk('p',wrapper,_tr("Hopefully the following list will satisfy your query. If not, and you feel an answer should be included for the benefit of other users, hit the button below.")); 
+        domMgr.mk('p',wrapper,_tr("If on reading this FAQ you feel a question and answer is missing please contact us.")); 
 
-        dom.mk('button',wrapper,_tr("Email Us"), function() {
+        domMgr.mk('button',wrapper,_tr("Email Us"), function() {
             this.addEventListener('click', function() {
-                window.open('mailto:faq-add@igaro.com');
+                window.open('mailto:faq-app@igaro.com');
             });
         }); 
 
-        dom.mk('h1',wrapper,_tr("Browser Compatibility"));
+        domMgr.mk('h1',wrapper,_tr("Browser Compatibility"));
 
-        dom.mk('p',wrapper,_tr("Igaro App includes polyfills to maximise support for older browsers. Where a browser doesn't provide a required feature the user is notified. Modules define there own requirements, which are then enforced by the main loader. Igaro App supports standardized web technology and won't target specific browser types/features."));
+        domMgr.mk('p',wrapper,_tr("Igaro App includes polyfills to maximise support for older browsers. Where a browser doesn't provide a required feature the user is notified. Modules define there own requirements, which are then enforced by the main loader. Igaro App supports standardized web technology and won't target specific browser types/features."));
 
-        dom.mk('h2',wrapper,_tr("Internet Explorer < 10"));
+        domMgr.mk('h2',wrapper,_tr("Internet Explorer < 10"));
 
-        dom.mk('p',wrapper,_tr("Support for older versions of I.E (8/9) is possible but discouraged. You'll need to regress features which can't be polyfilled such as SVG support."));
+        domMgr.mk('p',wrapper,_tr("Support for older versions of I.E (8/9) is possible but discouraged. You'll need to regress features which can't be polyfilled such as SVG support."));
 
-        dom.mk('h2',wrapper,_tr("Android < 3"));
+        domMgr.mk('h2',wrapper,_tr("Android < 3"));
 
-        dom.mk('p',wrapper,_tr("Due to lack of standard features, support is disabled by default."));
+        domMgr.mk('p',wrapper,_tr("Due to lack of standard features, support is disabled by default."));
 
-        dom.mk('h1',wrapper,_tr("Existing Javascript Integration"));
+        domMgr.mk('h1',wrapper,_tr("3rd Party Javascript Integration"));
 
-        dom.mk('p',wrapper,_tr("You can use existing code and rapidly integrate it into the Igaro App framework where you require use of it's advanced features."));
+        domMgr.mk('p',wrapper,_tr("Existing code can be rapidly integrated into the Igaro App framework."));
 
-        dom.mk('p',wrapper,_tr("You can use generally utilize all 3rd party libraries (i.e JQuery, YetAnotherJS) with the Igaro App framework. We've included several of the common ones in the main repository."));
+        domMgr.mk('p',wrapper,_tr("Generally speaking you may utilize all 3rd party libraries (i.e JQuery) with the Igaro App framework. We've included several of the common ones in the main repository."));
 
-        dom.mk('h1',wrapper,_tr("Dependencies"));
+        domMgr.mk('h1',wrapper,_tr("Dependencies"));
 
-        dom.mk('p',wrapper,_tr("Igaro App is entirely free of dependencies. It doesn't require JQuery or any other third party library."));
+        domMgr.mk('p',wrapper,_tr("Zero. Ziltch. Igaro App is entirely free of dependencies. It doesn't require JQuery or any other third party library."));
 
-        dom.mk('h1',wrapper,_tr("Efficiency"));
+        domMgr.mk('h1',wrapper,_tr("Prototype or Classes?"));
 
-        dom.mk('p',wrapper,_tr("As everything is built around an astonishingly efficient framework, your derived product, be it big or small, will scale and continue to work over time. And boy will it work fast! Oh, and flickering DOM updates are a thing of lesser frameworks."));
+        domMgr.mk('p',wrapper,_tr("Neither. Igaro App blesses Javascript Objects. See the core.bless module."));
 
-        dom.mk('h1',wrapper,_tr("Learning Overhead"));
+        domMgr.mk('h1',wrapper,_tr("Is Igaro App like x,y,z?"));
 
-        dom.mk('p',wrapper,_tr("Igaro App is pure Javascript! It's one of the only frameworks that treats Javascript as the prototypal language that it is - there's no attempt to classify. If you know Javascript, then you're ready to develop with Igaro App. If not, and you learn Igaro App through studying it's examples and code, you'll learn about the very best of Javascript and cutting edge technique."));
+        domMgr.mk('p',wrapper,_tr("No. Frameworks like Angular, Backbone and React use HTML, data binding and are inefficient. They appear powerful and easy to learn but fall flat when you try to make a real App with them, and that's because they have been designed to sell, not to do things right. There's a reason why Angular 'sponsored by Google' isn't used in any of Googles products."));
 
     };
 

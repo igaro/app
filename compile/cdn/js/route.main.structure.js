@@ -12,96 +12,100 @@ module.exports = function(app) {
     return function(model) {
 
         var wrapper = model.wrapper,
-            dom = model.managers.dom,
+            domMgr = model.managers.dom,
             language = app['core.language'];
 
         model.setMeta('title', _tr("Structure"));
 
-        dom.mk('p',wrapper,_tr("The git repository contains three main folders; <b>compile</b>, <b>cordova</b> and <b>build</b>."));
+        domMgr.mk('p',wrapper,_tr("This page documents folders and files within them that make up Igaro App."));
 
-        dom.mk('button',wrapper,_tr("View"), function() {
-            this.addEventListener('click', function() {
-                window.open('https://github.com/igaro/app');
-            });
-        }); 
-
-        dom.mk('h1',wrapper,'build');
-
-        dom.mk('p',wrapper,_tr("This folder contains three folders, /deploy, which contains code ready for inclusion on a web server and CDN, and /debug, which contains the raw js sources required for testing and debugging. Inside these folders is a cdn folder, which can live anywhere, and a file index.html. This file defines the cdn folder location, loads polyfill libraries and the main loader."));
-
-        dom.mk('button',wrapper,_tr("View"), function() {
-            this.addEventListener('click', function() {
-                window.open('https://github.com/igaro/app/build');
-            });
-        }); 
-
-        dom.mk('h2',wrapper,'js, css');
-
-        dom.mk('p',wrapper,_tr("Grunt and Compass compress code into these folders."));
-
-        dom.mk('h1',wrapper,'compile');
-
-        dom.mk('p',wrapper,_tr("Within this folder are several subfolders, the important two being <b>js</b> and <b>css</b>."));
-
-        dom.mk('h2',wrapper,'js');
-
-        dom.mk('p',wrapper,_tr("This folder contains the framework and modules."));
-
-        dom.mk('button',wrapper,_tr("View"), function() {
-            this.addEventListener('click', function() {
-                window.open('https://github.com/igaro/app/compile/js');
-            });
-        }); 
-
-        dom.mk('h3',wrapper,'igaro.js');
-
-        dom.mk('p',wrapper,_tr("This file begins by including built-in core modules (debug,amd,dom,xhr,events). It then loads required modules from an editable list. A module may have its own dependencies."));
-        
-        dom.mk('p',wrapper,_tr("Errors are trapped, handed, potentially reported, and the user is notified."));
-
-        dom.mk('h3',wrapper,'*.js');        
-
-        dom.mk('p',wrapper,_tr("A module typically exports a function into <b>module.exports</b>. The function is passed a reference to the app's root and a configuration literal and typically returns a function or literal which is then added to a corresponding namespace. Optionally, it may return a Promise while it carries out an asynchronous operation such as fetching data from an API."));
-
-        dom.mk('p',wrapper,_tr("A module may define dependencies using <b>module.requires</b>."));
-
-        dom.mk('h3',wrapper,'core.*');
-
-        dom.mk('p',wrapper,_tr("Core files are libraries, not to be instantiated, and provide global functionality. Modifying these files is discouraged. Core files are usually required by other modules but several are built in. They shouldn't contain language or output to the DOM."));
-
-        dom.mk('h3',wrapper,'conf.*');
-
-        dom.mk('p',wrapper,_tr("These files configure the app, modules, and may bridge events to one another. Conf files don't provide functionality or output to the DOM."));
-
-        dom.mk('h3',wrapper,'route.*');
-
-        dom.mk('p',wrapper,_tr("These files provide router model data and build a view."));
-
-        dom.mk('h3',wrapper,'instance.*');
-
-        dom.mk('p',wrapper,_tr("These files return an instantable function. The instance may be a DOM feature or functionality such as an XHR."));
-
-        dom.mk('h3',wrapper,'polyfix.*');
-
-        dom.mk('p',wrapper,_tr("These files prototype missing Javascript functionality for older web browsers. They are loaded by index.html file not the AMD loader."));
-
-        dom.mk('h3',wrapper,'3rdparty.*');
-
-        dom.mk('p',wrapper, _tr("These allow utilization of non Igaro code in the app. An example is JQuery. Some modules provide additional functionality by targeting bespoke system features such as Touch."));
-
-        dom.mk('h2',wrapper,'css');
-
-        dom.mk('p',wrapper,_tr("This folder contains stylesheets, the name of which corresponds to a module name. Images from the /images folder are base64 encoded into these css files. igaro.scss contains an initial style base. It doesn't necessarily style the app, which will load further stylesheets depending on the modules employed."));
-
-        dom.mk('button',wrapper,_tr("View"), function() {
+        domMgr.mk('button',wrapper,_tr("View"), function() {
             this.addEventListener('click', function() {
                 window.open('https://github.com/igaro/app/compile/css');
             });
         });
 
-        dom.mk('h1',wrapper,'cordova');
+        domMgr.mk('h1',wrapper,'compile');
 
-        dom.mk('p',wrapper,_tr("There's an Apache cordova project in this folder. Igaro App comes ready to deploy to mobile devices."));
+        domMgr.mk('p',wrapper,_tr("This folder contains javascript and html files that should be compiled (and optionally compressed) into the build folder."));
+
+        domMgr.mk('h2',wrapper,'index.html');
+        
+        domMgr.mk('p',wrapper,_tr("This file defines the location of the cdn folder, loads polyfill libraries, defines a loading screen, and defines a container for the App."));
+
+        domMgr.mk('h2',wrapper,'cdn');
+        
+        domMgr.mk('p',wrapper,_tr("The cdn folder contains common files which may be moved to server(s) close to users. The location off the cdn folder can change once user locale is established."));
+
+        domMgr.mk('h3',wrapper,'js');
+
+        domMgr.mk('p',wrapper,_tr("This folder contains the framework and modules."));
+
+        domMgr.mk('h4',wrapper,'igaro.js');
+
+        domMgr.mk('p',wrapper,_tr("This file begins by including built-in core modules (debug,amd,domMgr,xhr,events). It then loads required modules from an editable list.  Loading errors are trapped, handed, potentially reported, and the user is notified."));
+
+        domMgr.mk('h4',wrapper,'*.js');        
+
+        domMgr.mk('p',wrapper,_tr("A module typically exports a function into <b>module.exports</b>. The function is passed a reference to the app's root and a configuration literal and typically returns a function or literal which is then added to a corresponding namespace. Optionally, it may return a Promise while it carries out an asynchronous operation such as fetching data from an API."));
+
+        domMgr.mk('p',wrapper,_tr("A module may define dependencies using <b>module.requires</b>."));
+
+        domMgr.mk('h4',wrapper,'core.*');
+
+        domMgr.mk('p',wrapper,_tr("These files are libraries, not to be instantiated, and provide global functionality. Modifying these files is discouraged. Core files are usually required by other modules but several are built in. They shouldn't contain language or output to the DOM."));
+
+        domMgr.mk('h4',wrapper,'conf.*');
+
+        domMgr.mk('p',wrapper,_tr("These files configure the app, modules, and may bridge events to one another. Conf files don't provide functionality or output to the DOM."));
+
+        domMgr.mk('h4',wrapper,'route.*');
+
+        domMgr.mk('p',wrapper,_tr("These files provide router model data and build a view."));
+
+        domMgr.mk('h4',wrapper,'instance.*');
+
+        domMgr.mk('p',wrapper,_tr("These files return an instantable function. The instance may be a DOM feature or functionality such as an XHR."));
+
+        domMgr.mk('h4',wrapper,'polyfix.*');
+
+        domMgr.mk('p',wrapper,_tr("These files prototype missing Javascript functionality for older web browsers. They are loaded by index.html file not the AMD loader."));
+
+        domMgr.mk('h4',wrapper,'3rdparty.*');
+
+        domMgr.mk('p',wrapper, _tr("These allow utilization of non Igaro code in the app. An example is JQuery. Some modules provide additional functionality by targeting bespoke system features such as Touch."));
+        
+        domMgr.mk('h1',wrapper,'build');
+
+        domMgr.mk('p',wrapper,_tr("This folder contains the compiled output in various forms as defined by gruntFile.js.")); 
+
+        domMgr.mk('h2',wrapper,'deploy');
+        
+        domMgr.mk('p',wrapper,_tr("Contains code ready for inclusion on a web server. No information will go to the console. Code commments are removed. Code is compressed."));
+
+        domMgr.mk('h2',wrapper,'debug');
+        
+        domMgr.mk('p',wrapper,_tr("Contains code that prints data to the console. Code remains uncompressed. This code is used for development and shouldn't be released."));
+
+        domMgr.mk('h2',wrapper,'deploy-debug');
+        
+        domMgr.mk('p',wrapper,_tr("Same as deploy but uncompressed. This is for dealing with problems introduced by the compile cycle."));
+
+        domMgr.mk('h1',wrapper,'copy');
+
+        domMgr.mk('p',wrapper,_tr("Any files/folders in here will be copied over to the build folder after compilation."));
+
+        domMgr.mk('h1',wrapper,'translations');
+
+        domMgr.mk('p',wrapper,_tr("This folder contains translation files produced by the compilation process and translation files generated by translators.")); 
+
+        domMgr.mk('h1',wrapper,'sass');
+
+        domMgr.mk('p',wrapper,_tr("This folder contains scss files and resources. Typically the filename corresponds to a javascript file of the same name. Images are base64 encoded into the css files. igaro.scss contains an initial style base but doesn't necessarily style the app, which will load further stylesheets depending on the modules employed."));
+
+        domMgr.mk('h1',wrapper,'cordova');
+
+        domMgr.mk('p',wrapper,_tr("An Apache cordova project lives here, ready to deploy the App onto to mobile devices."));
 
     };
 

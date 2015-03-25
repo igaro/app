@@ -42,6 +42,7 @@ module.exports = function(app) {
         resetEnvOffset : function() {
             var self = this;
             return this.managers.store.set('envOffset').then(function() {
+                self.envOffsetAuto = true;
                 return self.setEnvOffset(null,true);
             });
         },
@@ -52,8 +53,7 @@ module.exports = function(app) {
             return new Promise(function(resolve) {
                 if (typeof minutes !== 'number') {
                     minutes = new Date().getTimezoneOffset() * -1;
-                    self.envOffsetAuto = true;
-                } else {
+                } else if (! noStore) {
                     self.envOffsetAuto = false;
                 }
                 //if (minutes === self.envOffset) 
@@ -76,6 +76,7 @@ module.exports = function(app) {
     });
 
     return coreDate.managers.store.get('envOffset').then(function(minutes) {
+        coreDate.envOffsetAuto = typeof minutes !== 'number';
         return coreDate.setEnvOffset(minutes,true).then(function() {
             return coreDate;
         });

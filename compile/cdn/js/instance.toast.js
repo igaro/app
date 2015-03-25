@@ -19,6 +19,7 @@ module.exports = function(app) {
 
     var container = dom.mk('div',document.body,null,'instance-toast'),
         wrapper = dom.mk('div',container);
+    dom.hide(container);
 
     var recentInstanceToastMessages = [];
 
@@ -28,7 +29,7 @@ module.exports = function(app) {
             parent:o.parent,
             asRoot:true
         });
-        var dom = this.managers.dom,
+        var domMgr = this.managers.dom,
             duration = o.duration || 'short',
             position = o.position,
             txt = o.message,
@@ -47,13 +48,13 @@ module.exports = function(app) {
             return window.plugins.toast.show(typeof txt === 'object'? language.mapKey(txt) : txt,duration,position);
         
         // html InstanceToast
-        var c = this.container = dom.mk('div',wrapper,txt,duration);
-        container.style.display = 'table';
+        var c = this.container = domMgr.mk('div',wrapper,txt,duration);
+        domMgr.show(container);
         var self = this;
         setTimeout(function() {
-            dom.rm(c);
+            domMgr.rm(c);
             if (! wrapper.hasChildNodes())
-                container.style.display = '';
+                domMgr.hide(container);
         }, showTime[duration]+200);
     };
 

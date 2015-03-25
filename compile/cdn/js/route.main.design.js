@@ -15,7 +15,7 @@ module.exports = function(app) {
 
         model.setMeta('title', _tr("Design"));
 
-        dom.mk('p',wrapper,_tr("Igaro App offers a flexible design where everything is customizable, with structured SASS and folders to bootstrap your product."));
+        dom.mk('p',wrapper,_tr("Igaro App design principles are a little different from the norm. There's no templates or html to edit and the router doesn't accept a predefined ruleset."));
 
         dom.mk('h1',wrapper, _tr("Router"));
 

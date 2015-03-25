@@ -1,11 +1,10 @@
 .instance-rte {
-    height:auto;
-    overflow:auto;
     border: 1px solid #eee;
-
     >.html {
-        margin:0.5em;
+        padding:0.5em 0.5em 0 0.5em;
         >textarea {
+            margin:0;
+            box-sizing: border-box !important;
             height:21em;
             width:100%;
         }
@@ -24,78 +23,65 @@
         }
     
         >.panels {
-
             padding:0.5em;
             background:#E5E5E5;
-            font-size:80%;
-
+            margin:0;
+            font-size:90%;
+            line-height:0;
+            >div >button {
+                margin:0.2em;
+                min-width:0;
+                min-height:0;
+            }
             >.main {
-                >select { padding:0; margin:0.2em 0.2em 0 0; float:left; }
-                >.bold { background:inline-image('instance.rte/bold.gif') }
-                >.italic { background:inline-image('instance.rte/italic.gif') }
-                >.underline { background:inline-image('instance.rte/underline.gif') }
-                >.strikethrough { background:inline-image('instance.rte/strikethrough.gif') }
-                >.subscript { background:inline-image('instance.rte/subscript.gif') }
-                >.superscript { background:inline-image('instance.rte/superscript.gif') }
-                >.justifyleft { background:inline-image('instance.rte/justifyleft.gif') }
-                >.justifycenter { background:inline-image('instance.rte/justifycentre.gif') }
-                >.justifyright { background:inline-image('instance.rte/justifyright.gif') }
-                >.justifyfull { background:inline-image('instance.rte/justifyfull.gif') }
-                >.inserthorizontalrule { background:inline-image('instance.rte/inserthorizontalrule.gif') }
-                >.insertorderedlist { background:inline-image('instance.rte/insertorderedlist.gif') }
-                >.insertunorderedlist { background:inline-image('instance.rte/insertunorderedlist.gif') }
-                >.outdent { background:inline-image('instance.rte/outdent.gif') }
-                >.indent { background:inline-image('instance.rte/indent.gif') }
-                >.cut { background:inline-image('instance.rte/cut.gif'); margin-left:0.6em; }
-                >.copy { background:inline-image('instance.rte/copy.gif') }
-                >.paste { background:inline-image('instance.rte/paste.gif') }
-                >.undo { background:inline-image('instance.rte/undo.gif'); margin-left:0.6em; }
-                >.redo { background:inline-image('instance.rte/redo.gif') }
-                >.removeformat { background:inline-image('instance.rte/removeformat.gif') }
-                input[type="button"] {
+                >select { 
+                    padding:0; 
+                    margin:0.2em 0.2em 0 0; 
+                    float:left; 
+                }
+                >.bold { background-image:inline-image('instance.rte/bold.gif') }
+                >.italic { background-image:inline-image('instance.rte/italic.gif') }
+                >.underline { background-image:inline-image('instance.rte/underline.gif') }
+                >.strikethrough { background-image:inline-image('instance.rte/strikethrough.gif') }
+                >.subscript { background-image:inline-image('instance.rte/subscript.gif') }
+                >.superscript { background-image:inline-image('instance.rte/superscript.gif') }
+                >.justifyleft { background-image:inline-image('instance.rte/justifyleft.gif') }
+                >.justifycenter { background-image:inline-image('instance.rte/justifycentre.gif') }
+                >.justifyright { background-image:inline-image('instance.rte/justifyright.gif') }
+                >.justifyfull { background-image:inline-image('instance.rte/justifyfull.gif') }
+                >.inserthorizontalrule { background-image:inline-image('instance.rte/inserthorizontalrule.gif') }
+                >.insertorderedlist { background-image:inline-image('instance.rte/insertorderedlist.gif') }
+                >.insertunorderedlist { background-image:inline-image('instance.rte/insertunorderedlist.gif') }
+                >.outdent { background-image:inline-image('instance.rte/outdent.gif') }
+                >.indent { background-image:inline-image('instance.rte/indent.gif') }
+                >.cut { background-image:inline-image('instance.rte/cut.gif'); margin-left:0.6em; }
+                >.copy { background-image:inline-image('instance.rte/copy.gif') }
+                >.paste { background-image:inline-image('instance.rte/paste.gif') }
+                >.undo { background-image:inline-image('instance.rte/undo.gif'); margin-left:0.6em; }
+                >.redo { background-image:inline-image('instance.rte/redo.gif') }
+                >.removeformat { background-image:inline-image('instance.rte/removeformat.gif') }
+                button {
                     padding:0;
                     width:23px;
-                    min-width:0;
                     height:22px;
-                    min-height:0;
-                    border:0;
                     margin:0;
                 }
             }
-            >.character >div { 
-                display:inline-block;
-                margin:0.3em;
-                padding:0.2em;
-                border: 1px solid transparent;
-                &:hover {
-                    border-color: #000;
-                    cursor:pointer;
-                }
-
+            >.character >button { 
+                padding:0.3em 0.4em;
             }
             >.forecolor, >.backcolor, >.hilitecolor {
-                >div { 
-                    display:inline-block; 
-                    height:1.5em;
-                    width:1.5em; 
-                    border: 1px solid transparent;
-                    &:hover {
-                        cursor:pointer;
-                        border-color: #000;
-                    }
+                >button { 
+                    background:none;
+                    padding:0.65em;
                 }
             }
-
         }
 
         >.editable {
             height:13em;
             overflow:auto;
             margin:0.5em;
-            //border:0;
-            //border-top:1px solid #D0D0D0;
         }
-
     }
-
 }

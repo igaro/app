@@ -1,7 +1,7 @@
 module.requires = [
-    { name:'instance.navigation.js' },
     { name:'instance.rte.css' },
-    { name:'core.language.js' }
+    { name:'core.language.js' },
+    { name:'instance.navigation.js' }
 ];
 
 module.exports = function(app) {
@@ -12,49 +12,104 @@ module.exports = function(app) {
         throw new Error({ incompatible:true, noobject:'getSelection' });
 
     var events = app['core.events'],
-        language = app['core.language'];
+        language = app['core.language'],
+        bless = app['core.bless'],
+        navigation = app['instance.navigation'];
 
     var rteObj = function(o) {
-        var self = this;
+        bless.call(this,{
+            name:'instance.rte',
+            parent:o.parent,
+            container:function(dom) { 
+                return dom.mk('div',null,null,'instance-rte'); 
+            },
+            disabled:o.disabled,
+            hidden:o.hidden
+        });
+        var self = this,
+            managers = this.managers,   
+            eventMgr = managers.event,
+            domMgr = managers.dom;
         this.hasFocus = false;
         this.savedRange = null;
-        this.onChange = o && o.onChange? o.onChange : null;
-        var c = this.container = document.createElement('div');
-        c.className='instance-rte';
-        if (o && o.container) 
-            o.container.appendChild(c);
         this.onChangeTimerid = null;
-        var rte = this.rte = document.createElement('div');
-        rte.className = 'editable';
-        rte.contentEditable = true;
-        if (o && o.html) 
-            rte.innerHTML = o.html;
-        rte.styleWithCSS=false;
-        rte.insertBrOnReturn=false;
-
-        var html = this.html = document.createElement('div');
-        html.className = 'html';
-            var raw = this.raw = document.createElement('textarea');
-            if (o && o.html) 
-                raw.value = o.html;
-        html.appendChild(raw);
-
-        var onChange = function(callback) {
-            if (self.onChangeTimerid) clearTimeout(self.onChangeTimerid);
-            if (callback) {
-                if (html.parentNode) { 
-                    rte.innerHTML = raw.value; 
-                } else { 
-                    raw.value = rte.innerHTML; 
-                }
-                if (self.onChange) 
-                    self.onChange(self.getContentLength === 0? '' : raw.value.trim());
-            } else {
-                self.onChangeTimerid = setTimeout(function() { 
-                    onChange(true); 
-                },300);
-            }
+        this.wysiwyg = true;
+        var container = this.container;
+        var saveRange = function() {
+            self.savedRange = window.getSelection().getRangeAt(0);
         };
+        var rte = self.rte = domMgr.mk('div',null,null,function() {
+            this.className = 'editable';
+            this.contentEditable = true;
+            this.styleWithCSS=false;
+            this.insertBrOnReturn=false;
+            if (o.html) 
+                this.innerHTML = o.html;
+            this.addEventListener("blur", function () { 
+                self.hasFocus = false; 
+            });
+            /* rte.addEventListener("mousedown", restoreSelection);
+            this.addEventListener("click", restoreSelection);
+            this.addEventListener("focus", restoreSelection); */
+            this.addEventListener("mouseup", saveRange);
+            this.addEventListener("keyup", saveRange);
+        });
+        var html = this.html = domMgr.mk('div',null,null,'html');
+        domMgr.hide(html);
+        var onChange = function(dispatch) {
+            clearTimeout(self.onChangeTimerid);
+            if (self.wysiwyg) { 
+                raw.value = rte.innerHTML; 
+            } else { 
+                rte.innerHTML = raw.value; 
+            }
+            if (dispatch) 
+                return eventMgr.dispatch('change', self.getHTML());
+            self.onChangeTimerid = setTimeout(function() { 
+                onChange(true); 
+            },300);
+            
+        };
+        var raw = this.raw = domMgr.mk('textarea',html,null,function() {
+            if (o.html) 
+                this.value = o.html;
+        });
+
+        rte.addEventListener("input", onChange);
+        rte.addEventListener("change", onChange);
+        raw.addEventListener("input", onChange);
+        raw.addEventListener("change", onChange);
+
+        new navigation({
+            container: container,
+            parent:this,
+            type:'tabs',
+            pool:[
+                { 
+                    title: 'WYSIWYG',
+                    active:true,
+                    onClick : function() {
+                        domMgr.show(wysiwyg);
+                        domMgr.hide(html);
+                        self.wysiwyg = true;
+                        rte.focus();
+                        return Promise.resolve();
+                    }
+                }, 
+                { 
+                    title: 'HTML',
+                    onClick : function() {
+                        domMgr.show(html);
+                        domMgr.hide(wysiwyg);
+                        self.wysiwyg = false;
+                        raw.focus();
+                        return Promise.resolve();
+                    }
+                },
+            ]
+        });
+
+        container.appendChild(html);
 
         /* var restoreSelection = function() {
             if (self.hasFocus === true) return;
@@ -66,266 +121,136 @@ module.exports = function(app) {
             //s.addRange(self.savedRange);
         }; */
 
-        var saveRange = function() {
-            self.savedRange = window.getSelection().getRangeAt(0);
-        };
 
-        rte.addEventListener("input", onChange);
-        rte.addEventListener("change", onChange);
-        rte.addEventListener("blur", function () { 
-            self.hasFocus = false; 
-        });
-        /* rte.addEventListener("mousedown", restoreSelection);
-        rte.addEventListener("click", restoreSelection);
-        rte.addEventListener("focus", restoreSelection); */
-        rte.addEventListener("mouseup", saveRange);
-        rte.addEventListener("keyup", saveRange);
-        raw.addEventListener("input", onChange);
-        raw.addEventListener("change", onChange);
-
-        var wysiwyg = document.createElement('div');
-        wysiwyg.className = 'wysiwyg';
-            var panels = this.panels = {
-                container: document.createElement('div'),
-                wrapper : document.createElement('div'),
-                menu : new app['instance.navigation']({
-                    container: wysiwyg,
+        var wysiwyg = domMgr.mk('div',container,null,function() {
+            var s = this;
+            this.className = 'wysiwyg';
+            self.panels = {
+                menu : new navigation({
+                    parent:self,
+                    container: s,
                     type:'tabs'
                 }).menu,
+                container: domMgr.mk('div',s,null,'panels'),
                 pool : []
             };
-            panels.container.className = 'panels';
-
-        new app['instance.navigation']({
-            container: c,
-            type:'tabs',
-            pool:[
-                { 
-                    title: {
-                        en : 'WYSIWYG'
-                    },
-                    active:true,
-                    onClick : function() {
-                        if (wysiwyg.parentNode) return;
-                        c.appendChild(wysiwyg);
-                        c.removeChild(html);
-                        this.toggle();
-                        rte.focus();
-                    }
-                }, { 
-                    title: {
-                        en : 'HTML'
-                    },
-                    onClick : function() {
-                        if (html.parentNode) return;
-                        c.appendChild(html);
-                        c.removeChild(wysiwyg);
-                        this.toggle();
-                        raw.focus();
-                    }
-                }
-            ]
+            this.appendChild(rte);
         });
 
-        c.appendChild(wysiwyg);
-        wysiwyg.appendChild(panels.container);
-        wysiwyg.appendChild(rte);
-
-        // main formatting panel
-        var main = document.createElement('div');
-        main.className='main';
-        this.addPanel({
-            en : 'Main',
-            fr : 'Principal'
-        },main,true);
-        var style = document.createElement('select');
-        main.appendChild(style);
-        style.addEventListener('change', function() {
-            if (this.selectedIndex === 0) 
-                return;
-            self.execCommand('formatblock', this.options[this.selectedIndex].value);
-            this.selectedIndex=0;
-        });
-
-        o = document.createElement('option');
-        o.innerHTML = '[Style]';
-        style.appendChild(o);
-        var headers = [o];
-        headers = headers.concat([1,2,3,4,5,6].map(function (n) {
-            o = document.createElement('option');
-            o.value = '<h'+n+'>';
-            style.appendChild(o);
-            return o;
-        }));
-        headers.push(o = document.createElement('option'));
-        o.value='<pre>';
-        style.appendChild(o);
-        var f = function() {
-            var l = [
-                {
-                    en : '[Style]'
-                },
-                {
-                    en : 'Heading 1',
-                    fr : 'Titre 1'
-                },
-                {
-                    en : 'Heading 2',
-                    fr : 'Titre 2'
-                },
-                {
-                    en : 'Heading 3',
-                    fr : 'Titre 3'
-                },
-                {
-                    en : 'Heading 4',
-                    fr : 'Titre 4'
-                },
-                {
-                    en : 'Heading 5',
-                    fr : 'Titre 5'
-                },
-                {
-                    en : 'Heading 6',
-                    fr : 'Titre 6'
-                },
-                {
-                    en : '[Formatted]',
-                    fr : '[Mise en forme]'
-                }
+        // main panel
+        this.addPanel(_tr("Main"),domMgr.mk('div',null,null,function() {
+            this.className = 'main';
+            domMgr.mk('select',this,null,function() {
+                this.addEventListener('change', function() {
+                    if (this.selectedIndex === 0) 
+                        return;
+                    self.execCommand('formatblock', this.options[this.selectedIndex].value);
+                    this.selectedIndex=0;
+                });
+                domMgr.mk('option',this,_tr("Style"));
+                domMgr.mk('option',this,_tr("Paragraph")).value = 'p';
+                domMgr.mk('option',this,_tr("Heading 1")).value = 'h1';
+                domMgr.mk('option',this,_tr("Heading 2")).value = 'h2';
+                domMgr.mk('option',this,_tr("Heading 3")).value = 'h3';
+                domMgr.mk('option',this,_tr("Heading 4")).value = 'h4';
+                domMgr.mk('option',this,_tr("Heading 5")).value = 'h5';
+                domMgr.mk('option',this,_tr("Heading 6")).value = 'h6';
+                domMgr.mk('option',this,_tr("Formatted")).value = 'pre';
+            });
+            var s = this,
+                f = [
+                'bold',
+                'italic',
+                'underline',
+                'strikethrough',
+                'subscript',
+                'superscript',
+                'justifyleft',
+                'justifycenter',
+                'justifyright',
+                'justifyfull',
+                'inserthorizontalrule',
+                'insertorderedlist',
+                'insertunorderedlist',
+                'outdent',
+                'indent'
             ];
-            headers.forEach(function (o,i) {
-                o.innerHTML = language.mapKey(l[i]);
+            if (document.queryCommandSupported('cut')) 
+                f.push('cut','copy','paste');
+            if (document.queryCommandSupported('undo')) 
+                f.push('undo','redo');
+            f.push('removeformat');
+            f.forEach(function (id) {
+                domMgr.mk('button',s,null,function() {
+                    this.className = id;
+                    this.addEventListener('click', function() { 
+                        self.execCommand(id,''); 
+                    });
+                });
             });
-        };
-        events.on('core.language','code.set', function() {
-            f();
-        });
-        f();
-
-        f = [
-            'bold',
-            'italic',
-            'underline',
-            'strikethrough',
-            'subscript',
-            'superscript',
-            'justifyleft',
-            'justifycenter',
-            'justifyright',
-            'justifyfull',
-            'inserthorizontalrule',
-            'insertorderedlist',
-            'insertunorderedlist',
-            'outdent',
-            'indent'
-        ];
-        if (document.queryCommandSupported('cut')) 
-            f.push('cut','copy','paste');
-        if (document.queryCommandSupported('undo')) 
-            f.push('undo','redo');
-        f.push('removeformat');
-
-        f.forEach(function (id) {
-            var i = document.createElement('input');
-            i.type = 'button';
-            i.className = id;
-            i.addEventListener('click', function() { 
-                self.execCommand(this.className,''); 
-            });
-            main.appendChild(i);
-        });
+        }),true);
 
         // character
-        var ch = document.createElement('div');
-        ch.className='character';
-        this.addPanel({
-            en : 'Character',
-            fr : 'Caractère'
-        },ch);
-
-        ["cent","euro","pound","curren","yen","copy","reg","trade","divide","times","plusmn","frac14","frac12","frac34","deg","sup1","sup2","sup3","micro","laquo","raquo","quot","lsquo","rsquo","lsaquo","rsaquo","sbquo","bdquo","ldquo","rdquo","iexcl","brvbar","sect","not","macr","para","middot","cedil","iquest","fnof","mdash","ndash","bull","hellip","permil","ordf","ordm","szlig","dagger","Dagger","eth","ETH","oslash","Oslash","thorn","THORN","oelig","OElig","scaron","Scaron","acute","circ","tilde","uml","agrave","aacute","acirc","atilde","auml","aring","aelig","Agrave","Aacute","Acirc","Atilde","Auml","Aring","AElig","ccedil","Ccedil","egrave","eacute","ecirc","euml","Egrave","Eacute","Ecirc","Euml","igrave","iacute","icirc","iuml","Igrave","Iacute","Icirc","Iuml","ntilde","Ntilde","ograve","oacute","ocirc","otilde","ouml","Ograve","Oacute","Ocirc","Otilde","Ouml","ugrave","uacute","ucirc","uuml","Ugrave","Uacute","Ucirc","Uuml","yacute","yuml","Yacute","Yuml"].forEach(function(chr) {
-            var a = document.createElement('div');
-            a.innerHTML='&'+chr+';';
-            a.addEventListener('click', function() {
-                self.insertHTML('&'+chr+';');
+        this.addPanel(_tr("Character"),domMgr.mk('div',null,null,function() {
+            this.className='character';
+            var s = this;
+            ["cent","euro","pound","curren","yen","copy","reg","trade","divide","times","plusmn","frac14","frac12","frac34","deg","sup1","sup2","sup3","micro","laquo","raquo","quot","lsquo","rsquo","lsaquo","rsaquo","sbquo","bdquo","ldquo","rdquo","iexcl","brvbar","sect","not","macr","para","middot","cedil","iquest","fnof","mdash","ndash","bull","hellip","permil","ordf","ordm","szlig","dagger","Dagger","eth","ETH","oslash","Oslash","thorn","THORN","oelig","OElig","scaron","Scaron","acute","circ","tilde","uml","agrave","aacute","acirc","atilde","auml","aring","aelig","Agrave","Aacute","Acirc","Atilde","Auml","Aring","AElig","ccedil","Ccedil","egrave","eacute","ecirc","euml","Egrave","Eacute","Ecirc","Euml","igrave","iacute","icirc","iuml","Igrave","Iacute","Icirc","Iuml","ntilde","Ntilde","ograve","oacute","ocirc","otilde","ouml","Ograve","Oacute","Ocirc","Otilde","Ouml","ugrave","uacute","ucirc","uuml","Ugrave","Uacute","Ucirc","Uuml","yacute","yuml","Yacute","Yuml"].forEach(function(chr) {
+                domMgr.mk('button',s,'&'+chr+';').addEventListener('click', function() {
+                    self.insertHTML('&'+chr+';');
+                });
             });
-            ch.appendChild(a);
-        });
+        }));
 
         // colors
-        var colors = ['FFFFFF','FFCCCC','FFCC99','FFFF99','FFFFCC','99FF99','99FFFF','CCFFFF','CCCCFF','FFCCFF','CCCCCC','FF6666','FF9966','FFFF33','66FF99','33FFFF','66FFFF','9999FF','FF99FF','C0C0C0','FF0000','FF9900','FFCC66','FFFF00','33FF33','66CCCC','33CCFF','6666CC','CC66CC','999999','CC0000','FF6600','FFCC33','FFCC00','33CC00','00CCCC','3366FF','6633FF','CC33CC','666666','990000','CC6600','CC9933','999900','009900','339999','3333FF','6600CC','993399','333333','660000','993300','996633','666600','006600','336666','000099','333399','663366','000000','330000','663300','663333','333300','003300','003333','000066','330099','330033'];
         [
-            ['backcolor', {
-                en : 'Backcolor',
-                'en-GB' : 'Backcolour',
-                fr : 'Couleur Retour'
-            }],
-            ['forecolor', {
-                en : 'Forecolor',
-                'en-GB' : 'Forecolour',
-                fr : 'Couleur de Fore'
-            }],
-            ['hilitecolor', {
-                en : 'Highlight',
-                fr : 'Surligner'
-            }]
+            ['backcolor', _tr("Backcolor")],
+            ['forecolor', _tr("Forecolor")],
+            ['hilitecolor', _tr("Highlight")]
         ].forEach(function (o) {
-            var a = document.createElement('div');
-            a.className=o[0];
-            self.addPanel(o[1],a);
-            colors.forEach(function (color) {
-                var b = document.createElement('div');
-                b.style.backgroundColor = '#'+color;
-                b.addEventListener('click', function() {
-                    self.execCommand(o[0], '#'+color);
+            self.addPanel(o[1],domMgr.mk('div',null,null,function() {
+                this.className=o[0];
+                var s = this;
+                ['FFFFFF','FFCCCC','FFCC99','FFFF99','FFFFCC','99FF99','99FFFF','CCFFFF','CCCCFF','FFCCFF','CCCCCC','FF6666','FF9966','FFFF33','66FF99','33FFFF','66FFFF','9999FF','FF99FF','C0C0C0','FF0000','FF9900','FFCC66','FFFF00','33FF33','66CCCC','33CCFF','6666CC','CC66CC','999999','CC0000','FF6600','FFCC33','FFCC00','33CC00','00CCCC','3366FF','6633FF','CC33CC','666666','990000','CC6600','CC9933','999900','009900','339999','3333FF','6600CC','993399','333333','660000','993300','996633','666600','006600','336666','000099','333399','663366','000000','330000','663300','663333','333300','003300','003333','000066','330099','330033'].forEach(function (color) {
+                    domMgr.mk('button',s,null,function() {
+                        this.style.backgroundColor = '#'+color;
+                        this.addEventListener('click', function() {
+                            self.execCommand(o[0], '#'+color);
+                        });
+                    });
                 });
-                a.appendChild(b);
-            });
-
+            }));
         });
     };
 
     rteObj.prototype.execCommand = function(command, option) {
         this.rte.focus();
         document.execCommand(command, false, option);
-        //if (! dc) this.onChange();
     };
 
     rteObj.prototype.insertHTML = function(html) {
         this.rte.focus();
         document.execCommand('insertHTML', false, html);
-        //this.onChange();
     };
 
     rteObj.prototype.getHTML = function() {
-        return this.html.parentNode? this.raw.value.trim() : this.rte.innerHTML.trim();
+        return (this.wysiwyg? this.rte.innerHTML : this.raw.value).trim();
     };
 
     rteObj.prototype.addPanel = function(l,div,active) {
+        var self = this;
         var panels = this.panels,
             pc = panels.container,
             o = panels.menu.addOption({
             title:l,
             active:active,
             onClick : function() {
-                if (pc.firstChild) 
-                    pc.removeChild(pc.firstChild);
-                pc.appendChild(div);
-                this.setStatus('active');
+                self.managers.dom.setContent(pc,div,true);
+                return Promise.resolve();
             }
         });
         if (active) 
             pc.appendChild(div);
     };
 
-    rteObj.prototype.destroy = function() {
-        var c = this.container;
-        this.panels.menu.destroy();
-        if (c && c.parentNode)
-            c.parentNode.removeChild(c);
-    };
-
     return rteObj;
-
 };

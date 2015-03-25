@@ -148,6 +148,12 @@ body >.core-router >.main {
                             background-size:60%;
                         }
                     }
+                    >.bless {
+                        >a:after {
+                            background: inline-image("route.main/bless.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
                     >.features {
                         >a:after {
                             background: inline-image("route.main/features.svg") no-repeat 50% 65%;

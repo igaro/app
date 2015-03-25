@@ -25,25 +25,22 @@ module.exports = function(app) {
 
     var InstanceFormValidate = function(o) {
         bless.call(this,{
-            name:'instance.form.navigation',
+            name:'instance.form.validation',
             parent:o.parent,
             asRoot:true
         });
-        var dom = this.managers.dom,
-            self = this;
+        var self = this;
         if (o.form)
             this.setForm(form);
         this.inRealTime = typeof o.inRealTime === 'boolean'? o.inRealTime : true;
         this.rules = o.rules || [];
-        this.onFail = o.onFail;
         this.errorDisplayAmount = 'errorDisplayAmount' in o? o.errorDisplayAmount : 1;
-        this.onOk = o.onOk;
         this.runOnChange = 'runOnChange' in o? o.runOnChange : true;
         this.messages = [];
         this.resizeHooks = [];
-        this.managers.event.on('destroy', function() {
-            return self.clear();
-        });
+        //this.managers.event.on('destroy', function() {
+            //return self.clear();
+        //});
     };
 
     InstanceFormValidate.prototype.setForm = function(form) {
@@ -53,10 +50,9 @@ module.exports = function(app) {
         form.classList.add('instance-form-validate');
         form.addEventListener('submit', function(event) {
             event.preventDefault();
-            if (self.check().then(function(v) {
-                if (! v)
-                    event.stopImmediatePropagation();
-            }));
+            return self.check().catch(function() {
+                event.stopImmediatePropagation();
+            });
         });
         form.addEventListener('change', function() {
             self.onFormModify();
@@ -71,9 +67,7 @@ module.exports = function(app) {
         var self = this;
         if (this.inRealTime && ! this.__checkingInSitu) {
             this.__checkingInSitu = true;
-            this.check().catch(function (e) {
-                self.managers.debug.handle(e);
-            }).then(function() {
+            this.check().catch(function() {}).then(function() {
                 self.__checkingInSitu = false;
             });
         }
@@ -102,34 +96,42 @@ module.exports = function(app) {
         });
     };
 
+    InstanceFormValidate.prototype.displayError = function(n, msg) {
+        if (! this.errorDisplayAmount || this.errorDisplayAmount > this.messages.length) {
+            var self = this,
+                domMgr = this.managers.dom,
+                pn = n.parentNode;
+            pn.style.position='relative';
+            this.messages.push(domMgr.mk('div',pn,msg, function() {
+                this.className = 'validation-message';
+                var me = this;
+                var pos = function() {
+                    me.style.left=n.offsetLeft + 'px';
+                    me.style.top= (n.clientHeight+n.offsetTop) + 'px';
+                };
+                self.resizeHooks.push(window.addEventListener('resize',pos));
+                pos();
+            }));
+            var cl = n.classList;
+            cl.remove("validation-ok");
+            cl.add('validation-fail');
+        }
+    };
+
     InstanceFormValidate.prototype.check = function() {
         var self = this,
-            dom = this.managers.dom;
-        return this.clear().then(function () {
-            var addMsg = function(n, msg) {
-                if (! self.errorDisplayAmount || self.errorDisplayAmount > self.messages.length) {
-                    var pn = n.parentNode;
-                    pn.style.position='relative';
-                    self.messages.push(dom.mk('div',pn,msg, function() {
-                        this.className = 'validation-message';
-                        var me = this;
-                        var pos = function() {
-                            me.style.left=n.offsetLeft + 'px';
-                            me.style.top= (n.clientHeight+n.offsetTop) + 'px';
-                        };
-                        self.resizeHooks.push(window.addEventListener('resize',pos));
-                        pos();
-                    }));
-                    var cl = n.classList;
-                    cl.remove("validation-ok");
-                    cl.add('validation-fail');
-                }
+            domMgr = this.managers.dom,
+            eventMgr = self.managers.event,
+            addMsg = function(n,l) {
+                self.displayError(n,l);
+                return Promise.reject();
             };
+        return this.clear().then(function () {
 
-            var p = self.getFormElements().map(function(element) {
+            return Promise.all(self.getFormElements().map(function(element) {
 
-                if (['submit','button'].indexOf(element.type.toLowerCase()) !== -1 || element.getAttribute('no-validate'))
-                    return;
+                if (element.getAttribute('no-validate'))
+                    return Promise.resolve();
 
                 element.classList.add('validation-ok');
 
@@ -157,11 +159,8 @@ module.exports = function(app) {
                 }
                 if (typeof element.min !== 'undefined' && value.length < element.min) 
                     return addMsg(element, l.minLength);
-                if (element.pattern) {
-                    var r = new RegExp(element.pattern);
-                    if (! r.test(value))
-                        return addMsg(element, l.pattern);
-                }
+                if (element.pattern && ! new RegExp(element.pattern).test(value))
+                    return addMsg(element, l.pattern);
 
                 // custom rules
                 var elementRules = [];
@@ -170,51 +169,27 @@ module.exports = function(app) {
                         elementRules.push(o[1](value));
                 });
 
-                if (! elementRules.length)
-                    return Promise.resolve(true);
-
-                // handle async/sync values
-                return new Promise(function (resolve) {
-                    var at=0;
-                    var doNext = function() {
-                        var s = elementRules[at];
-                        if (at === elementRules.length)
-                            return resolve(true);
-                        if (s instanceof Promise) {
-                            s.then(function(v) {
-                                if (! v) {
-                                    addMsg(element,v);
-                                    resolve();
-                                } else {
-                                    at++;
-                                    doNext();
-                                }
+                // reduce promises
+                return elementRules.reduce(function(a,b) {
+                    return a.then(function() {
+                        if (b instanceof Promise) {
+                            return b.then(function(v) {
+                                if (v)
+                                    return addMsg(element,v);
                             });
-                        } else if (s) {
-                            addMsg(element,s);
-                            resolve();
-                        } else {
-                            at++;
-                            doNext();
-                        }
-                    };
-                    doNext();
+                        } 
+                        if (b)
+                            return addMsg(element,b);
+                    }); 
+                }, Promise.resolve());
+
+            })).then(function() {   
+                return eventMgr.dispatch('validated',true);
+            }).catch(function (e) {
+                return eventMgr.dispatch('validated',false).then(function() {
+                    throw e;
                 });
-
-            });
-
-            return Promise.all(p).then(function(o) {
-                if (o.every(function(x) {
-                    return x;
-                })) {
-                    if (self.onOk)
-                        self.onOk();
-                    return true;
-                }
-                if (self.onFail)
-                    self.onFail();
-                return false;
-            });
+            }); 
 
         });
        
@@ -232,9 +207,9 @@ module.exports = function(app) {
             cl.remove("validation-ok");
         });
         var self = this,
-            dom = this.managers.dom;
+            domMgr = this.managers.dom;
         return Promise.all(this.messages.map(function (element) {
-            return dom.rm(element);
+            return domMgr.rm(element);
         })).then(function () {
             self.messages = [];
             return self.managers.event.dispatch('clear');

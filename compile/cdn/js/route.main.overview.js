@@ -12,89 +12,60 @@ module.exports = function(app) {
 
         var wrapper = model.wrapper;
 
+        var managers = model.managers,
+            domMgr = managers.dom;
+
         model.setMeta('title', _tr("Overview"));
 
-        dom.mk('p',wrapper,_tr("Igaro App is a Javascript based framework for developing scalable, responsive and dynamic web and mobile applications."));
+        domMgr.mk('p',wrapper,_tr("Igaro App is a Javascript based framework for developing scalable, responsive and dynamic web and mobile applications."));
 
-        dom.mk('li',wrapper,_tr("Promotes best practice - write great code even if you're not an expert."));
+        domMgr.mk('h1',wrapper,_tr("Benefits"));
 
-        dom.mk('li',wrapper,_tr("Very easy to learn - Igaro App is standard Object Orientated Javascript."));
+        domMgr.mk('p',wrapper,domMgr.mk('ul',null,null, function() {
 
-        dom.mk('li',wrapper,_tr("Excellent for teamwork - automates compile, debug and deploy workflows."));
+            domMgr.mk('li',this,_tr("Promotes best practice, enforcing structured coding for beginners."));
 
-        dom.mk('li',wrapper,_tr("Outperforms other frameworks - cutting edge features, error handling and smart logic."));
+            domMgr.mk('li',this,_tr("Very easy to learn, just standard Object Orientated Javascript."));
 
-        dom.mk('h1',wrapper,_tr("Where"));
+            domMgr.mk('li',this,_tr("Excellent for teamwork with workflows that recompile as you work."));
 
-        dom.mk('p',wrapper,_tr("Igaro App can be served to a web browser, distributed through an app store, or bundled on removeable media. It works great on monitors, tablets. phones and everything inbetween."));
+            domMgr.mk('li',this,_tr("Cutting edge features, error handling and techniques."));
+            
+            domMgr.mk('li',this,_tr("Completely dynamic with an event driven architecture."));
+
+            domMgr.mk('li',this,_tr("Cutting edge features, error handling and techniques."));
+
+        }));
+
+
+        domMgr.mk('h1',wrapper,_tr("Users"));
+
+        domMgr.mk('p',wrapper,_tr("Igaro App offers something for everyone. It goes about things a different way, integrating stake holders and cutting down on the time required to role a request out the door."));
+
+        domMgr.mk('h2',wrapper,_tr("Managers"));
+
+        domMgr.mk('p',wrapper,_tr("Tired of delays and unexpected issues causing time-frame overruns? Tired of user hate mail? Tired of choosing a solution of the hour and investing resources in your employees only to have that knowledge devalued in three months time?"));
+
+        domMgr.mk('h2',wrapper,_tr("Developers"));
+
+        domMgr.mk('p',wrapper,_tr("Tired of frameworks that promise the world but which later on you discover aren't dynamic enough to emcompass the changes you are asked to make? Tired of hacky irritating code, memory leaks and random problems you can't debug?"));
+
+        domMgr.mk('h2',wrapper,_tr("Designers"));
+
+        domMgr.mk('p',wrapper,_tr("Want to rapidly build on the bess written SASS->CSS3 code out there? Want to do away with HTML and integrate with your developers?"));
+        
+        domMgr.mk('h1',wrapper,_tr("Cost"));
+
+        domMgr.mk('p',wrapper,_tr("100% Free. No lock-ins, tie downs, advertising or premium product."));
+
+        domMgr.mk('h1',wrapper,_tr("Where"));
+
+        domMgr.mk('p',wrapper,_tr("Igaro App can be served to a web browser, distributed through an app store, or bundled on removeable media."));
+
+        domMgr.mk('p',wrapper,_tr("It works great on monitors, tablets. phones and everything inbetween."));
   
-        dom.mk('div',wrapper,null,'viewport');
+        domMgr.mk('div',wrapper,null,'viewport');
 
-        dom.mk('h1',wrapper,_tr("Goals"));
-
-        return model.managers.object.create('table', { 
-            container:dom.mk('p',wrapper),
-            header : {
-                rows : [
-                    {
-                        columns : [
-                            {
-                                content : _tr("Domain")
-                            },
-                            {
-                                content : _tr("Details")
-                            },
-                            {
-                                content : _tr("Status")
-                            }
-                        ]
-                    }
-                ]
-            },
-            body : {
-                rows : [
-                    {
-                        columns : [
-                            {
-                                content : _tr("Security")
-                            },
-                            {
-                                content : _tr("No public variables. Military-grade security. No memory leaks. Automatic oAuth initilization with Promise replay.")
-                            },
-                            {
-                                className : 'green'
-                            }
-                        ]
-                    },
-                    {
-                        columns : [
-                            {
-                                content : _tr("Locale")
-                            },
-                            {
-                                content : _tr("Multi-language support via PO files. Realtime language switching. Multi-currency, date w/offset, and country functionality.")
-                            },
-                            {
-                                className : 'green'
-                            }
-                        ]
-                    },
-                    {
-                        columns : [
-                            {
-                                content : _tr("Testing")
-                            },
-                            {
-                                content : _tr("Automated test suite exhaustively testing all features across all modules.")
-                            },
-                            {
-                                className : 'red'
-                            }
-                        ]
-                    }
-                ]
-            }
-        });
     };
 };
 

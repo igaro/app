@@ -276,12 +276,7 @@ window.addEventListener('load', function() {
                     throw new Error('Event Manager must represent an object.');
                 this.x = x;
             };
-            CoreEventMgr.prototype.createMgr = function(x) {
-                var eMgr = new CoreEventMgr(x);
-                eMgr.appendDeps(this.x);
-                return eMgr;
-            };
-            CoreEventMgr.prototype.appendDeps = function() {
+            var appendDeps = function() {
                 var selfdeps = this.deps;
                 Array.prototype.slice.call(arguments).forEach(function (arg) {
                     if (arg instanceof CoreEventMgr) {
@@ -293,6 +288,16 @@ window.addEventListener('load', function() {
                     }
                 });
                 return this;
+            };
+            CoreEventMgr.prototype.extend = function(deps) {
+                var c = new CoreEventMgr(this.x);
+                appendDeps.call(c,this.deps);
+                appendDeps.call(c,deps);
+                return c;
+            };
+            CoreEventMgr.prototype.createMgr = function(x) {
+                var c = new CoreEventMgr(x);
+                return appendDeps.call(c,this.x);
             };
             CoreEventMgr.prototype.on = function(evt,fn,o) {
                 if (! (evt instanceof Array))
@@ -312,8 +317,6 @@ window.addEventListener('load', function() {
                 return this;
             };
             CoreEventMgr.prototype.dispatch = function(evt,value,child) {
-                if (! this.x)
-                    throw new Error('Event Manager has no representation.');
                 var obj = this.x,
                     self = this,
                     parent = obj.parent,
@@ -419,6 +422,10 @@ window.addEventListener('load', function() {
                     return this.show(r);
                 r.classList.add('core-dom-hide');
             };
+            CoreDom.prototype.isHidden = function(r) {
+                var s = r.style;
+                return s.visibility === 'hidden' || s.display === 'none';
+            };
             CoreDom.prototype.toggleVisibility = function(r) {
                 if (! r)
                     throw new Error('No DOM element supplied');
@@ -430,7 +437,7 @@ window.addEventListener('load', function() {
                 r.classList.remove('core-dom-hide');
             };
             CoreDom.prototype.setContent = function(r,c,o) {
-                if (o && o.noEmpty) {
+                if (o) {
                     r.innerHTML = '';
                 } else {
                     this.empty(r);
@@ -449,13 +456,14 @@ window.addEventListener('load', function() {
                         if (! language) 
                             throw new Error('core.dom -> core.language is not loaded.');
                         var f = r.igaroLangFn = function() {
-                            if ('innerHTML' in r) {
+                            var isSubmit = r.nodeName === 'INPUT' && r.type && r.type === 'submit';
+                            if (! isSubmit && 'innerHTML' in r) {
                                 r.innerHTML = language.mapKey(c);
                             } else if ('value' in r) {
                                 r.value = language.mapKey(c);
                             }
                         };
-                        language.managers.event.createMgr(r).on('setEnv', f);
+                        language.managers.event.extend(r).on('setEnv', f);
                         f();
                     }
                 } else {
@@ -481,9 +489,27 @@ window.addEventListener('load', function() {
                     p.removeChild(element);
                 return self.empty(element);
             };
+            CoreDom.prototype.sort = function(o) {
+                var slice = o.slice,
+                    on = o.on || function(o) { return o.innerHTML; },
+                    root = o.root || o.nodes[0].parentNode,
+                    nodes = Array.prototype.slice.call(o.nodes || o.root.childNodes);  
+                if (slice) 
+                    nodes = nodes.slice(slice[0],slice[1],slice[2]);
+                var insertBefore = nodes[nodes.length-1].nextElementSibling;
+                nodes = nodes.sort(function(a, b) {
+                    a = on(a);
+                    b = on(b);
+                    return a == b? 0: (a > b ? 1 : -1);
+                });
+                if (o.reverse)
+                    nodes = nodes.reverse();
+                nodes.forEach(function (o) {
+                    root.insertBefore(o,insertBefore); 
+                });
+            };
             CoreDom.prototype.createMgr = function(self) {
-                var domMgr = new CoreDom(self);
-                return domMgr;
+                return new CoreDom(self);
             };
             app['core.dom'] = new CoreDom();
         })();
@@ -527,7 +553,7 @@ window.addEventListener('load', function() {
                             var t = typeof g === 'string'? { name:g } : g,
                             container = o.container? o.container : null;
                         if (container)
-                            container = dom.mk('div',container);
+                            container = thisManagers.dom.mk('div',container);
                         var name = t.fullname? t.fullname : 'instance.'+t.name,
                             p = { 
                                 modules : [{ name: name+'.js' }],
@@ -553,10 +579,10 @@ window.addEventListener('load', function() {
                                 }
                             }
                             return i;
-                        }).catch(function(e) {
-                            if (! o.silent) 
-                                return thisManagers.debug.handle(e);
-                            throw e;
+                        //}).catch(function(e) {
+                        //    if (! o.silent) 
+                        //        return thisManagers.debug.handle(e);
+                        //    throw e;
                         });
                     }
                 }

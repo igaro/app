@@ -12,21 +12,4 @@ body >.core-router >.main >.overview >.wrapper {
         max-width:100%;
 	}
 
-	>p >.instance-table >tbody >tr >td {
-
-		&.green {
-			background-color:green;
-		}
-
-		&.red {
-			background-color:red;
-		}
-
-		&.orange {
-			background-color:orange;
-		}
-
-	}
-
-
 }
