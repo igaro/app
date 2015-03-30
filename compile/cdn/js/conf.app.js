@@ -2380,6 +2380,11 @@ module.exports = function(app, params) {
                         js: app[name] 
                     };
                 });
+            },
+            getUriPath : function(model) {
+                var name = model.name,
+                    parent = model.parent;
+                return parent.originalUri.slice(2).concat(name);
             }
         });
 
@@ -2489,8 +2494,9 @@ module.exports = function(app, params) {
                   
                   return events.dispatch('','state.root');
                 }).catch(function (e) {
-                  if (e !== 0) // connection issues are handled by a pageMessage
-                    return debug.handle(e);
+                    // don't return the handle - doing so will prevent the parent model from displaying and will show the generic load error.
+                    if (e !== 0) // connection issues are handled by a pageMessage
+                        debug.handle(e);
                 });
                 
             });

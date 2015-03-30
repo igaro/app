@@ -994,65 +994,77 @@ msgid ""
 "entire process is automatic."
 msgstr ""
 
+msgid "Bless"
+msgstr ""
+
+msgid ""
+"An integral feature of Igaro App is how it can decorate standard objects to "
+"enhance the parent-child relationship, to aid in dependency tracking, and to "
+"cut down on duplicate code."
+msgstr ""
+
+msgid ""
+"An object is responsible for blessing itself and does so via the core.bless "
+"module. Note: no prototypes are added onto the object."
+msgstr ""
+
+msgid "Parent"
+msgstr ""
+
+msgid ""
+"A reference to the parent is stored on the child (while this introduces a "
+"circular dependency, it's taken care of when the object destructs)."
+msgstr ""
+
+msgid "Name & Path"
+msgstr ""
+
+msgid ""
+"An object is given a name which can be used to uniquely identify it or it's "
+"type."
+msgstr ""
+
+msgid ""
+"A path is used to identify the objects location by way of it's hierarchical "
+"position."
+msgstr ""
+
+msgid "Managers"
+msgstr ""
+
+msgid ""
+"A manager is a module that uses the blessed decorations to enhance the way "
+"the original routines work. For example when an object throws an error it is "
+"passed all up the hierarchy by way it's parent. Events then fire an error "
+"for each parental object but change the name/path. A parent can thus watch "
+"for child errors, even for a particular child."
+msgstr ""
+
+msgid ""
+"Common managers include events, debugging, object creation and dom. "
+"Additional managers can be supplied at time of blessing, i.e if the module "
+"requires a store. Any module can be a manager."
+msgstr ""
+
+msgid "Destructor"
+msgstr ""
+
+msgid ""
+"A blessed object gains a universal destructor which when called will wipe "
+"out dependencies, circular references, children, dom elements and events."
+msgstr ""
+
 msgid "Design"
 msgstr ""
 
 msgid ""
-"Igaro App design principles are a little different from the norm. There's no "
-"templates or html to edit and the router doesn't accept a predefined ruleset."
-msgstr ""
-
-msgid "Router"
+"This page explains a little bit about the design principles employed in "
+"Igaro App (by Design, we're talking about what you see on a page)."
 msgstr ""
 
 msgid ""
-"Igaro App isn't MVC. Traditionally, frameworks start with a view, assign a "
-"controller and this contains a model."
-msgstr ""
-
-msgid ""
-"Igaro App has a router, which begins at root, and loads route files. Route "
-"files encapsulate logic (controller) and are provided with a model template. "
-"They build the content of a view by either writing to the DOM or calling "
-"reuseable instance files."
-msgstr ""
-
-msgid ""
-"Multiple routes can be visible as a route doesn't necessarily have to be a "
-"navable via URL. Thus, the header, main and footer of a page are all routes. "
-"A route has children and events are propagated to parents."
-msgstr ""
-
-msgid ""
-"By default a route's view is appended to the parent route's view and fellow "
-"siblings are hidden. Routes are cached so if the user navigates to a "
-"different view outside of the current hierarchy they can return to it later "
-"with the same state."
-msgstr ""
-
-msgid ""
-"The router can be configured to use multiple sources. This app has routes "
-"defined through routes.* files but routing rules permit loading from a CDN "
-"(i.e close to the user's location) or an API (for dynamic views or secure "
-"content delivery) on a per request basis."
-msgstr ""
-
-msgid "Example"
-msgstr ""
-
-msgid "/news"
-msgstr ""
-
-msgid "Root"
-msgstr ""
-
-msgid "Header"
-msgstr ""
-
-msgid "News content"
-msgstr ""
-
-msgid "footer"
+"After reading this information we strongly recommend looking at the code "
+"used to generate this page."
 msgstr ""
 
 msgid "Templates"
@@ -1060,25 +1072,50 @@ msgstr ""
 
 msgid ""
 "Igaro App has no template engine, relying instead on reuseable modules and "
-"first-class CSS structure to define layouts. It's a radical way of working, "
-"but you'll love it!"
+"first-class CSS to define layout, not just design."
 msgstr ""
 
-msgid "DOM"
-msgstr ""
-
-msgid ""
-"core.dom provides DOM management, dependency tracking and event linkage. Any "
-"blessed object gains a core.dom manager. This manager works alongside the "
-"native DOM controls, and unlike JQuery it doesn't provide duplicatate "
-"functionality. It helps you to write highly structured, minimal code."
+msgid "Why?"
 msgstr ""
 
 msgid ""
-"These slow traversal routines are applicable when references to DOM elements "
-"are sought. With Igaro App references are stored within instances, on router "
-"models, and as dependencies. Subsequently, expect blistering performance "
-"compared to competing frameworks such as Angular and React."
+"Separating designers and developers by having designers generate HTML and "
+"CSS and developers insert the logic is nothing new, but in reality designers "
+"end up producing questionable code which doesn't work well with logic, and "
+"developers playing catch up while overly frustrated at the way the design "
+"doesn't cater for logic they need to stick in."
+msgstr ""
+
+msgid ""
+"With Igaro App designers write routes, style it in CSS and hand it over for "
+"logic insertion. In other words, both use the same technology. Both are "
+"literally, on the same page."
+msgstr ""
+
+msgid ""
+"For widgets, or reusable code, developers write the code and designers style "
+"it."
+msgstr ""
+
+msgid ""
+"Finally, this method renders much faster. It's one of the reasons why Igaro "
+"App is so fast."
+msgstr ""
+
+msgid "core.dom"
+msgstr ""
+
+msgid ""
+"Shorthand DOM element creation and appendation are provided by core.dom. "
+"Blessed objects gain a core.dom manager which handles dependency tracking (i."
+"e .destroy() your model and the dom elements disappear)."
+msgstr ""
+
+msgid ""
+"The DOM is only used for output, it isn't traversed. These functions are "
+"used when references to DOM elements are sought. Instead, references are "
+"stored within instances, on routes, and as dependencies. Don't use these "
+"slow routines - they are designed for HTML."
 msgstr ""
 
 msgid "FAQ"
@@ -1404,13 +1441,13 @@ msgstr ""
 msgid "Async"
 msgstr ""
 
-msgid "Bless"
-msgstr ""
-
-msgid "Modules"
+msgid "Routes"
 msgstr ""
 
 msgid "Mobile"
+msgstr ""
+
+msgid "Modules"
 msgstr ""
 
 msgid "Documentation"
@@ -2293,9 +2330,6 @@ msgid ""
 "a request out the door."
 msgstr ""
 
-msgid "Managers"
-msgstr ""
-
 msgid ""
 "Tired of delays and unexpected issues causing time-frame overruns? Tired of "
 "user hate mail? Tired of choosing a solution of the hour and investing "
@@ -2335,6 +2369,91 @@ msgid ""
 msgstr ""
 
 msgid "It works great on monitors, tablets. phones and everything inbetween."
+msgstr ""
+
+msgid "Igaro App isn't MVC. This article explains how pages are built."
+msgstr ""
+
+msgid "core.router"
+msgstr ""
+
+msgid ""
+"The router begins at root and loads further routes. Routes encapsulate logic "
+"(controller and a model). They build the content of a view by either writing "
+"to the DOM or calling instance files (widgets) for common features."
+msgstr ""
+
+msgid ""
+"By default a route's view is appended into the parent route's view and "
+"fellow siblings are hidden. Routes are cached so that if the user navigates "
+"to a route outside of the current hierarchy and return later it will have "
+"retained state."
+msgstr ""
+
+msgid ""
+"The following example demonstrates a small portion of this app. Each box is "
+"a route."
+msgstr ""
+
+msgid "Root"
+msgstr ""
+
+msgid "Header"
+msgstr ""
+
+msgid "footer"
+msgstr ""
+
+msgid "URL"
+msgstr ""
+
+msgid ""
+"The URL contains route and URI data. A route tells the router to capture URI "
+"data, which is then returned and stored on the route."
+msgstr ""
+
+msgid "Example"
+msgstr ""
+
+msgid ""
+"For the URL below 'books' and 'pages' are routes. The book route must "
+"capture the book id and show details of the book. The router then ignores "
+"this id and knows that pages is also a route. This does the same, and so on."
+msgstr ""
+
+msgid ""
+"The router doesn't load routes directly. Instead it asks a provider which "
+"has preregistered itself as a handle for particular (or all) routes, and "
+"which when called returns the location of the route. Thus, the books route "
+"could be loaded from a web server in one location, while pages could load "
+"from an API in another. This is transparent to the user and forms the basis "
+"of Igaro App's ability to serve dynamic content from an API."
+msgstr ""
+
+msgid ""
+"The url and uri data for a route are stored as .uriPath. This allows for "
+"quick navigation to child routes."
+msgstr ""
+
+msgid "Route Data [Files/API]"
+msgstr ""
+
+msgid ""
+"Simple routes print data to a page (see the code behind this one). More "
+"complicated routes may contain an init function that runs the first time the "
+"route is loaded, and an enter function that runs when the route is viewed."
+msgstr ""
+
+msgid "By default routes save state (aka are cached) but this is overrideable."
+msgstr ""
+
+msgid "Finally..."
+msgstr ""
+
+msgid ""
+"A route doesn't need to load via the URL. A route can load children without "
+"using the router. This can be useful for embedding multiple view/panes, "
+"especially when they are shared among routes."
 msgstr ""
 
 msgid ""

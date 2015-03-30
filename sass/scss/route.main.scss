@@ -166,6 +166,12 @@ body >.core-router >.main {
                             background-size:60%;
                         }
                     }
+                    >.routes {
+                        >a:after {
+                            background: inline-image("route.main/routes.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
                     >.showcase {
                         >a:after {
                             background: inline-image("route.main/showcase.svg") no-repeat 50% 65%;

@@ -73,10 +73,11 @@ module.exports = function(app) {
                     ).then(function() {
                         list.pool.forEach(function (o,i) {
                             domMgr.mk('a',o.li,null,function() {
-                                this.href = '#!/' + o.id;
+                                var a = model.uriPath.concat(o.id);
+                                this.href = '/' + a.join('/');
                                 this.addEventListener('click', function (evt) { 
                                     evt.preventDefault();
-                                    router.to(model.uriPath.concat(o.id));
+                                    router.to(a);
                                 });
                                 domMgr.mk('div',this,l[i][1]);
                             });
@@ -98,9 +99,10 @@ module.exports = function(app) {
                         ['async', _tr("Async")],
                         ['bless', _tr("Bless")],
                         ['design', _tr("Design")],
-                        ['modules',_tr("Modules")],
+                        ['routes', _tr("Routes")],
                         ['locale', _tr("Locale")],
-                        ['mobile', _tr("Mobile")]
+                        ['mobile', _tr("Mobile")],
+                        ['modules',_tr("Modules")]
                     ]
                     return Promise.all(
                         l.map(function(o) { 
@@ -109,10 +111,11 @@ module.exports = function(app) {
                     ).then(function() {
                         list.pool.forEach(function (o,i) {
                             domMgr.mk('a',o.li,null,function() {
-                                this.href = '#!/' + o.id;
+                                var a = model.uriPath.concat(o.id);
+                                this.href = '/' + a.join('/');
                                 this.addEventListener('click', function (evt) { 
                                     evt.preventDefault();
-                                    router.to(model.uriPath.concat(o.id));
+                                    router.to(a);
                                 });
                                 domMgr.mk('div',this,l[i][1]);
                             });

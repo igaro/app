@@ -28,10 +28,12 @@ module.exports = function(app) {
             name = this.name,
             parent = this.parent;
         this.meta = {};
-        this.uriPath = name.length?
-            parent? parent.uriPath.slice(0).concat(name) : [name]
-            :
-            []
+        this.uriPath = [];
+
+            name.length?
+                parent? parent.uriPath.slice(0).concat(name) : [name]
+                :
+                []
         ;
         this.children = [];
         this.uriPieces = [];

@@ -10,54 +10,37 @@ module.exports = function(app) {
 
     return function(model) {
 
-        var view = model.view;
-        var wrapper = model.wrapper;
+        var view = model.view,
+            wrapper = model.wrapper,
+            domMgr = model.managers.dom;
 
         model.setMeta('title', _tr("Design"));
 
-        dom.mk('p',wrapper,_tr("Igaro App design principles are a little different from the norm. There's no templates or html to edit and the router doesn't accept a predefined ruleset."));
+        domMgr.mk('p',wrapper,_tr("This page explains a little bit about the design principles employed in Igaro App (by Design, we're talking about what you see on a page)."));
 
-        dom.mk('h1',wrapper, _tr("Router"));
+        domMgr.mk('p',wrapper,_tr("After reading this information we strongly recommend looking at the code used to generate this page."));
 
-        dom.mk('p',wrapper,_tr("Igaro App isn't MVC. Traditionally, frameworks start with a view, assign a controller and this contains a model."));
-
-        dom.mk('p',wrapper,_tr("Igaro App has a router, which begins at root, and loads route files. Route files encapsulate logic (controller) and are provided with a model template. They build the content of a view by either writing to the DOM or calling reuseable instance files."));
-
-        dom.mk('p',wrapper,_tr("Multiple routes can be visible as a route doesn't necessarily have to be a navable via URL. Thus, the header, main and footer of a page are all routes. A route has children and events are propagated to parents."));
-
-        dom.mk('p',wrapper,_tr("By default a route's view is appended to the parent route's view and fellow siblings are hidden. Routes are cached so if the user navigates to a different view outside of the current hierarchy they can return to it later with the same state."));
-
-        dom.mk('p',wrapper,_tr("The router can be configured to use multiple sources. This app has routes defined through routes.* files but routing rules permit loading from a CDN (i.e close to the user's location) or an API (for dynamic views or secure content delivery) on a per request basis."));
-
-        dom.mk('h2', wrapper,_tr("Example"));
-
-        dom.mk('p',wrapper,null, function() {
-
-            dom.mk('h3',this,_tr("/news"));
-            
-            dom.mk('div',this,null,function() {
-                this.className = 'viewblock';
-                dom.mk('span',this,_tr("Root"));
-                dom.mk('div',this,_tr("Header"));
-                dom.mk('div',this,null, function() {
-                    dom.mk('span',this,_tr("Main"));
-                    dom.mk('div',this,_tr("News content"));
-                });
-                dom.mk('div',this,_tr("footer"));
-            });
-        });
-
-        dom.mk('h1',wrapper,dom.mk('s',null,_tr("Templates")));
+        domMgr.mk('h1',wrapper,_tr("Templates"));
          
-        dom.mk('p',wrapper, _tr("Igaro App has no template engine, relying instead on reuseable modules and first-class CSS structure to define layouts. It's a radical way of working, but you'll love it!"));
+        domMgr.mk('p',wrapper, _tr("Igaro App has no template engine, relying instead on reuseable modules and first-class CSS to define layout, not just design."));
 
-        dom.mk('h1',wrapper,_tr("DOM"));
+        domMgr.mk('h2',wrapper,_tr("Why?"));
 
-        dom.mk('p',wrapper,_tr("core.dom provides DOM management, dependency tracking and event linkage. Any blessed object gains a core.dom manager. This manager works alongside the native DOM controls, and unlike JQuery it doesn't provide duplicatate functionality. It helps you to write highly structured, minimal code."));
+        domMgr.mk('p',wrapper, _tr("Separating designers and developers by having designers generate HTML and CSS and developers insert the logic is nothing new, but in reality designers end up producing questionable code which doesn't work well with logic, and developers playing catch up while overly frustrated at the way the design doesn't cater for logic they need to stick in."));
 
-        dom.mk('h2',wrapper, '<s>.getElementById, .getElementsByClassName, .getElementsByTagName and .querySelector[all]</s>');
+        domMgr.mk('p',wrapper, _tr("With Igaro App designers write routes, style it in CSS and hand it over for logic insertion. In other words, both use the same technology. Both are literally, on the same page."));
 
-        dom.mk('p',wrapper,_tr("These slow traversal routines are applicable when references to DOM elements are sought. With Igaro App references are stored within instances, on router models, and as dependencies. Subsequently, expect blistering performance compared to competing frameworks such as Angular and React."));
+        domMgr.mk('p',wrapper, _tr("For widgets, or reusable code, developers write the code and designers style it."));
+
+        domMgr.mk('p',wrapper, _tr("Finally, this method renders much faster. It's one of the reasons why Igaro App is so fast."));
+
+        domMgr.mk('h1',wrapper,_tr("core.dom"));
+
+        domMgr.mk('p',wrapper,_tr("Shorthand DOM element creation and appendation are provided by core.dom. Blessed objects gain a core.dom manager which handles dependency tracking (i.e .destroy() your model and the dom elements disappear).")); 
+
+        domMgr.mk('h2',wrapper, '<s>.getElementById, .getElementsByClassName, .getElementsByTagName, .querySelector[all]</s>');
+
+        domMgr.mk('p',wrapper,_tr("The DOM is only used for output, it isn't traversed. These functions are used when references to DOM elements are sought. Instead, references are stored within instances, on routes, and as dependencies. Don't use these slow routines - they are designed for HTML."));
 
     };
 
