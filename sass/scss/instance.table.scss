@@ -16,6 +16,7 @@
 			background:#777;
 			>td >input { 
 				width:100%;
+                box-sizing: border-box !important;
 				border:0;
 				background:#fafafa;
 				color:#222

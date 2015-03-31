@@ -9,8 +9,7 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var dom = app['core.dom'],
-        bless = app['core.bless'];
+    var bless = app['core.bless'];
 
     var InstanceTableDomainRowColumn = function(o) {
         bless.call(this,{
@@ -20,12 +19,8 @@ module.exports = function(app) {
         var dom = this.managers.dom,
             parent = this.parent,
             element = this.element = dom.mk('td',parent.element,o.content,o.className);
-        parent.element.appendChild(element);
         if (o && o.searchable) 
             this.setSearch(o.searchable);
-        this.managers.event.on('destroy', function() {
-            return dom.rm(element);
-        });
     };
     InstanceTableDomainRowColumn.prototype.setSearch = function(o) {
         this.searchable = o;
@@ -39,7 +34,6 @@ module.exports = function(app) {
         var dom = this.managers.dom,
             columns = this.columns = [],
             parent = this.parent;
-        this.stash = {};
         var element = this.element = dom.mk('tr',null,null,o.className),
             self = this,
             d = o.insertBefore;
@@ -156,12 +150,14 @@ module.exports = function(app) {
                 header.addRow({
                     searchable:true,
                     columns : header.rows[0].columns.map(function() {
-                        return dom.mk('input[text]',null,null, function() {
-                            this.addEventListener('input', function() { 
-                                searchExec(this,self);
-                                dom.setPlaceholder(this,_tr('Search'));
-                            });
-                        });
+                        return {
+                            content: dom.mk('input[text]',null,null, function() {
+                                this.addEventListener('input', function() { 
+                                    searchExec(this,self);
+                                    dom.setPlaceholder(this,_tr('Search'));
+                                });
+                            })
+                        };
                     })
                 });
             }

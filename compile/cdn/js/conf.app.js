@@ -2380,11 +2380,6 @@ module.exports = function(app, params) {
                         js: app[name] 
                     };
                 });
-            },
-            getUriPath : function(model) {
-                var name = model.name,
-                    parent = model.parent;
-                return parent.originalUri.slice(2).concat(name);
             }
         });
 

@@ -19,12 +19,12 @@ module.exports = function(app) {
             debugMgr = managers.debug,
             objectMgr = managers.object;
         
-        domMgr.mk('p',wrapper,_tr("Igaro's biggest feature is its architecture. Build around several core principles, these provide a layer on which everything else is built;"));
+        domMgr.mk('p',wrapper,_tr("Igaro's architecture is build around several core principles, these provide a layer on which everything else is built;"));
 
         domMgr.mk('p',wrapper,domMgr.mk('ul',null,[
-           domMgr.mk('li',null,_tr("Javascript is a prototypal language. It is not Java and shouldn't attempt to mimick it.")), 
+           domMgr.mk('li',null,_tr("Javascript is a prototypal language. It's not Java and shouldn't be written to mimick it.")), 
            domMgr.mk('li',null,_tr("HTML is a weak design language ill suited for dynamic operation. Therefore, use no HTML.")), 
-           domMgr.mk('li',null,_tr("Child objects should report to parents. Events should fire up the chain.")),
+           domMgr.mk('li',null,_tr("Child objects should report to parents. Events should fire up a chain.")),
            domMgr.mk('li',null,_tr("The Javascript specification must be adhered to. No functional duplicity or prototyping onto internal objects.")), 
            domMgr.mk('li',null,_tr("Functions have the potential to be asynchronous, or emit an event which may be so, therefore they should return Promises.")) 
         ]));

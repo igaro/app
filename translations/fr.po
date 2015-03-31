@@ -1196,13 +1196,13 @@ msgid "Features"
 msgstr ""
 
 msgid ""
-"Igaro's biggest feature is its architecture. Build around several core "
-"principles, these provide a layer on which everything else is built;"
+"Igaro's architecture is build around several core principles, these provide "
+"a layer on which everything else is built;"
 msgstr ""
 
 msgid ""
-"Javascript is a prototypal language. It is not Java and shouldn't attempt to "
-"mimick it."
+"Javascript is a prototypal language. It's not Java and shouldn't be written "
+"to mimick it."
 msgstr ""
 
 msgid ""
@@ -1210,8 +1210,7 @@ msgid ""
 "use no HTML."
 msgstr ""
 
-msgid ""
-"Child objects should report to parents. Events should fire up the chain."
+msgid "Child objects should report to parents. Events should fire up a chain."
 msgstr ""
 
 msgid ""
@@ -2431,8 +2430,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"The url and uri data for a route are stored as .uriPath. This allows for "
-"quick navigation to child routes."
+"Uri data for a route is stored under .uriPath. This allows for quick "
+"hyperlinking to child routes."
 msgstr ""
 
 msgid "Route Data [Files/API]"

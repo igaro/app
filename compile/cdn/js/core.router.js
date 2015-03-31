@@ -29,12 +29,6 @@ module.exports = function(app) {
             parent = this.parent;
         this.meta = {};
         this.uriPath = [];
-
-            name.length?
-                parent? parent.uriPath.slice(0).concat(name) : [name]
-                :
-                []
-        ;
         this.children = [];
         this.uriPieces = [];
         this.originalUri = [];
@@ -44,7 +38,6 @@ module.exports = function(app) {
         this.isVisible=false;
         this.autoShow=true;
         this.scrollPosition=0;
-        this.displayPath=[];
         this.container = dom.mk('div',null,null,function() {
             this.className = 'route';
             if (o.name)

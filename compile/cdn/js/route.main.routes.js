@@ -54,7 +54,7 @@ module.exports = function(app) {
 
         domMgr.mk('p',wrapper,_tr("The router doesn't load routes directly. Instead it asks a provider which has preregistered itself as a handle for particular (or all) routes, and which when called returns the location of the route. Thus, the books route could be loaded from a web server in one location, while pages could load from an API in another. This is transparent to the user and forms the basis of Igaro App's ability to serve dynamic content from an API."));
 
-        domMgr.mk('p',wrapper,_tr("The url and uri data for a route are stored as .uriPath. This allows for quick navigation to child routes."));
+        domMgr.mk('p',wrapper,_tr("Uri data for a route is stored under .uriPath. This allows for quick hyperlinking to child routes."));
 
         domMgr.mk('h1', wrapper,_tr("Route Data [Files/API]"));
 
