@@ -55,6 +55,7 @@ module.exports = function(app) {
                         ]
                     }
                 }).then(function (tbl) {
+
                     var body=tbl.body, 
                         brows=body.rows;
                     var makeahref = function(row,sd,td,cc) {
@@ -85,7 +86,15 @@ module.exports = function(app) {
                         if (cc) 
                             a.innerHTML = cc;
                         td.appendChild(a);
-                        return a;
+
+
+                        return Promise.all([
+                            tbl.addSearchColumn('text'),
+                            tbl.addSearchColumn('text')
+                        ]).then(function() {
+                            return a;
+                        });
+
                     };
                     var g = function(t,at) {
                         t.forEach(function (s) {
@@ -380,6 +389,13 @@ module.exports = function(app) {
                     };
                 })
             }
+        }).then(function(tbl) {
+            return Promise.all([
+                tbl.addSearchColumn('text'),
+                tbl.addSearchColumn('text')
+            ]).then(function() {
+                return tbl;
+            });
         });
 
     };

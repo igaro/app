@@ -20,8 +20,9 @@ module.exports = function(app) {
             name:'instance.bookmark',
             parent:o.parent,
             asRoot:true,
+            stash:o.stash,
             container:function(dom) { 
-                return dom.mk('ul',o.container,null,'instance-bookmark');
+                return dom.mk('ul',o.container,null,o.className);
             }
         });
         this.setURL({ 
@@ -31,15 +32,15 @@ module.exports = function(app) {
 
     bookmark.prototype.setURL = function(o) {
         var c = this.container,
-            dom = this.managers.dom;
-        dom.empty(c);
+            domMgr = this.managers.dom;
+        domMgr.empty(c);
         opts.forEach(function(p) {
             var to = encodeURIComponent(o.url),
                 title = o.title? encodeURIComponent(obj.title) : '',
                 url = p.url
                         .replace(/\<URL\>/g,to)
                         .replace(/\<TITLE\>/g,title);
-            dom.mk('li',c,null, function() {
+            domMgr.mk('li',c,null,function() {
                 this.className = p.name.toLowerCase();
                 this.addEventListener('click', function() {
                     window.open(url);

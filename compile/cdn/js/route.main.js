@@ -43,6 +43,28 @@ module.exports = function(app) {
             });
         });
 
+        var writeList = function(pool,list) {
+            return pool.reduce(function(a,b) { 
+                return a.then(function() {
+                    var id = b[0];
+                    return list.add({ 
+                        className:id,
+                        content:function(dom) {
+                            return dom.mk('a',null,null,function() {
+                                var a = model.uriPath.concat(id);
+                                this.href = '/' + a.join('/');
+                                this.addEventListener('click', function (evt) { 
+                                    evt.preventDefault();
+                                    router.to(a);
+                                });
+                                dom.mk('div',this,b[1]);
+                            });
+                        } 
+                    });
+                }); 
+            },Promise.resolve());
+        };
+
         // sequence
         model.addSequence({ 
             container:domMgr.mk('div',wrapper,null,'main'), 
@@ -58,30 +80,14 @@ module.exports = function(app) {
                 }),
 
                 model.managers.object.create('list').then(function (list) {
-                    var domMgr = list.managers.dom;
-                    var l = [
+                    return writeList([
                         ['overview', _tr("Overview")],
                         ['features', _tr("Features")],
                         ['install', _tr("Install")],
                         ['faq', _tr("FAQ")],
                         ['support', _tr("Support")]
-                    ];
-                    return Promise.all(
-                        l.map(function(o) { 
-                            return list.add({ id:o[0] }); 
-                        })
-                    ).then(function() {
-                        list.pool.forEach(function (o,i) {
-                            domMgr.mk('a',o.li,null,function() {
-                                var a = model.uriPath.concat(o.id);
-                                this.href = '/' + a.join('/');
-                                this.addEventListener('click', function (evt) { 
-                                    evt.preventDefault();
-                                    router.to(a);
-                                });
-                                domMgr.mk('div',this,l[i][1]);
-                            });
-                        });
+                    ],list).then(function() {
+                        var domMgr = list.managers.dom;
                         return {
                             container: domMgr.mk('section', null, [
                                 domMgr.mk('h1', null, _tr('Insight')),
@@ -93,8 +99,7 @@ module.exports = function(app) {
                 }),
 
                 model.managers.object.create('list').then(function (list) {
-                    var domMgr = list.managers.dom;
-                    var l = [
+                    return writeList([
                         ['structure',_tr("Structure")],
                         ['async', _tr("Async")],
                         ['bless', _tr("Bless")],
@@ -103,23 +108,8 @@ module.exports = function(app) {
                         ['locale', _tr("Locale")],
                         ['mobile', _tr("Mobile")],
                         ['modules',_tr("Modules")]
-                    ]
-                    return Promise.all(
-                        l.map(function(o) { 
-                            return list.add({ id:o[0] }); 
-                        })
-                    ).then(function() {
-                        list.pool.forEach(function (o,i) {
-                            domMgr.mk('a',o.li,null,function() {
-                                var a = model.uriPath.concat(o.id);
-                                this.href = '/' + a.join('/');
-                                this.addEventListener('click', function (evt) { 
-                                    evt.preventDefault();
-                                    router.to(a);
-                                });
-                                domMgr.mk('div',this,l[i][1]);
-                            });
-                        });
+                    ],list).then(function() {
+                        var domMgr = list.managers.dom;
                         return {
                             container: domMgr.mk('section', null, [
                                 domMgr.mk('h1', null, _tr("Documentation")),

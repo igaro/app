@@ -9,15 +9,15 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var bless = app['core.bless'],
-        dom = app['core.dom'];
+    var bless = app['core.bless'];
 
     var InstanceAccordionSection = function(o) {
         bless.call(this,{
             name:'section',
             parent:o.parent,
+            stash:o.stash,
             container:function(dom) { 
-                return dom.mk('dl',null,null,'instance-accordion '+o.className); 
+                return dom.mk('dl'); 
             },
             disabled:o.disabled,
             hidden:o.hidden
@@ -66,8 +66,9 @@ module.exports = function(app) {
             name:'instance.accordion',
             parent:o.parent,
             asRoot:true,
+            stash:o.stash,
             container:function(dom) { 
-                return dom.mk('div',o.container,null,'instance-accordion');
+                return dom.mk('div',o.container,null,o.className);
             }
         });
         var sections = this.sections = [];
@@ -76,25 +77,24 @@ module.exports = function(app) {
             .on('section.destroy', function(s) {
                 sections.splice(sections.indexOf(s),1);
             });
+    };
+
+    InstanceAccordion.prototype.init = function(o) {
         if (o.sections) {
             var self = this;
-            o.sections.forEach(function(s) {
-                self.addSection(s);
-            });
+            return o.sections.reduce(function(a,b) {
+                return a.then(function() {
+                    return self.addSection(b);
+                });
+            }, Promise.resolve());
         }
+        return Promise.resolve();
     };
+
     InstanceAccordion.prototype.addSection = function(o) {
         o.parent = this;
-        var s = new InstanceAccordionSection(o),
-            c = this.container,
-            insertBefore = o.insertBefore;
-        if (insertBefore) { 
-            if (!(insertBefore instanceof InstanceAccordionSection))
-                throw Error('insertBefore is not instanceof InstanceAccordionSection');
-            c.insertBefore(s.container, insertBefore.container);
-        } else {
-            c.appendChild(s.container);
-        }
+        var s = new InstanceAccordionSection(o);
+        this.managers.dom.addElement(this,s,o);
         this.sections.push(s);
         return this.managers.event.dispatch('addSection',s);
     };

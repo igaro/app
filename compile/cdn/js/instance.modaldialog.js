@@ -14,9 +14,12 @@ module.exports = function(app) {
         bodyStyle = body.style;
 
     var InstanceModalDialog = function(o) {
+        if (!o)
+            o = {};
         bless.call(this,{
             name:'instance.modaldialog',
-            parent:o && o.parent? o.parent : null,
+            parent:o.parent,
+            stash:o.stash,
             asRoot:true
         });
         this.bodyOverflowPrevious = bodyStyle.overflow;
@@ -26,9 +29,9 @@ module.exports = function(app) {
     InstanceModalDialog.prototype.custom = function(o) {
         if (! o) 
             o = {};
-        var dom = this.managers.dom,
+        var domMgr = this.managers.dom,
             self = this,
-            container = this.container = dom.mk('div',body,null, function() {
+            container = this.container = domMgr.mk('div',body,null, function() {
                 this.className = 'instance-modaldialog';
                 this.style.zIndex = zIndexAt;
                 if (! o.noClose) {
@@ -37,7 +40,7 @@ module.exports = function(app) {
                     });
                 }
             }),
-            wrapper = dom.mk('div',container,null,function() {
+            wrapper = domMgr.mk('div',container,null,function() {
                 this.className = o.type || 'custom';
                 this.addEventListener('click', function(event) {
                     event.stopPropagation();
@@ -50,9 +53,9 @@ module.exports = function(app) {
         return new Promise(function(resolve) {
 
             if (o.title) 
-                o.header = dom.mk('h1',null,o.title);
+                o.header = domMgr.mk('h1',null,o.title);
             if (o.header)
-                dom.mk('div',wrapper,o.header,'header')
+                domMgr.mk('div',wrapper,o.header,'header')
 
             var msg = o.message;
             if (msg) {
@@ -61,11 +64,11 @@ module.exports = function(app) {
                         msg[k] = msg[k].replace(/\\n/g,"<br>");
                     });
                 }
-                dom.mk('div',wrapper,msg,'message');
+                domMgr.mk('div',wrapper,msg,'message');
             }
 
             if (o.custom) // custom elements
-                dom.mk('div',wrapper,o.custom,'custom');
+                domMgr.mk('div',wrapper,o.custom,'custom');
 
             self.resolve = function(action) {
                 bodyStyle.overflow = self.bodyOverflowPrevious;
@@ -80,11 +83,11 @@ module.exports = function(app) {
                }); 
             }
 
-            dom.mk('div',wrapper,null,function() {
+            domMgr.mk('div',wrapper,null,function() {
                 this.className = 'action';
                 var actDiv = this;
                 myActions = myActions.map(function (action) {
-                    return action.element = dom.mk('button',actDiv,action.l,function() {
+                    return action.element = domMgr.mk('button',actDiv,action.l,function() {
                         if (action.id)
                             this.className = action.id;
                         if (action.onClick)

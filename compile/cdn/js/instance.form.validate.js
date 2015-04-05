@@ -27,6 +27,7 @@ module.exports = function(app) {
         bless.call(this,{
             name:'instance.form.validation',
             parent:o.parent,
+            stash:o.stash,
             asRoot:true
         });
         var self = this;
@@ -38,9 +39,6 @@ module.exports = function(app) {
         this.runOnChange = 'runOnChange' in o? o.runOnChange : true;
         this.messages = [];
         this.resizeHooks = [];
-        //this.managers.event.on('destroy', function() {
-            //return self.clear();
-        //});
     };
 
     InstanceFormValidate.prototype.setForm = function(form) {

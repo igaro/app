@@ -22,9 +22,10 @@ module.exports = function(app) {
         bless.call(this,{
             name:'instance.date',
             parent:o.parent,
+            stash:o.stash,
             asRoot:true,
             container:function(dom) {
-                return dom.mk('span',o.container,null,'instance-date');
+                return dom.mk('span',o.container,null,o.className);
             }
         });
         this.date = o.date;
@@ -73,15 +74,18 @@ module.exports = function(app) {
     };
 
     InstanceDate.prototype.relative = function() {
-        var self = this;
+        var self = this,
+            domMgr = this.managers.dom;
         var f = function() {
             var date = self.date,
                 diff = parseInt((date.getTime()-(new Date()).getTime()) / 1000);
-            self.container.innerHTML = self.countUp !== self.countDown && self.countUp <= diff && diff <= self.countDown?
-                language.mapKey(language.substitute(diff === 1? (diff < 0? _tr("%d seconds ago") : _tr("%d second")) : (diff < 0? _tr("%d seconds ago") : _tr("%d seconds")),diff))
-            :
-                self.moment.fromNow()
-            ;
+            domMgr.setContent(
+                self.countUp !== self.countDown && self.countUp <= diff && diff <= self.countDown
+                ?
+                    language.mapKey(language.substitute(diff === 1? (diff < 0? _tr("%d seconds ago") : _tr("%d second")) : (diff < 0? _tr("%d seconds ago") : _tr("%d seconds")),diff))
+                :
+                    self.moment.fromNow()
+            );
         };
         f();
         return setInterval(f,1000);

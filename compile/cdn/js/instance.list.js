@@ -15,12 +15,12 @@ module.exports = function(app) {
     var InstanceListItem = function(o) {
         bless.call(this,{
             name:'item',
+            stash:o.stash,
             parent:o.parent,
+            container:function(dom) {
+                return dom.mk('li',null,o.content,o.className);
+            }
         });
-        var dom = this.managers.dom,
-            li = this.li = dom.mk('li',null,o.content,o.id);
-        if (o.id)
-            this.id = o.id;
     };
 
     var InstanceList = function(o) {
@@ -29,18 +29,20 @@ module.exports = function(app) {
         bless.call(this,{
             name:'instance.list',
             parent:o.parent,
-            asRoot:true
+            stash:o.stash,
+            asRoot:true,
+            container:function(dom) {
+                return dom.mk('ol',o.container,null,o.className);
+            }
         });
-        if (! o) 
-            o = {};
-        var dom = this.managers.dom,
-            c = this.container = dom.mk('ul',o.container,null,'instance-list'),
-            pool = this.pool = [],
+        var pool = this.pool = [],
             self = this;
         if (o.options) 
-            o.options.forEach(function (q) {
-                self.add(q); 
-            });
+            o.options.reduce(function (a,b) {
+                return a.then(function() {
+                    return self.add(b);
+                }); 
+            }, Promise.resolve());
         this.managers.event
             .on('item.destroy',function(i) {
                 pool.splice(pool.indexOf(i),1);
@@ -53,17 +55,11 @@ module.exports = function(app) {
         if (shift) { 
             this.shift(t,shift); 
         } else { 
-            this.container.appendChild(t.li); 
+            this.container.appendChild(t.container); 
         }
         return this.managers.event.dispatch('add',t).then(function() {
             return t;
         });
-    };
-    InstanceList.prototype.hide = function(v) {
-        this.managers.dom.hide(this.container,v);
-    };
-    InstanceList.prototype.show = function() {
-        this.managers.dom.show(this.container);
     };
     InstanceList.prototype.clear = function() {
         return Promise.all([
@@ -76,7 +72,7 @@ module.exports = function(app) {
     InstanceList.prototype.shift = function(o,places) {
         var pool = this.pool,
             c = this.container,
-            li = o.li,
+            li = o.container,
             i = pool.indexOf(o);
         if (places+i >= pool.length) {
             places = places+i;

@@ -349,6 +349,11 @@ window.addEventListener('load', function() {
                 CoreDom = function(parent) {
                     this.parent = parent;
                     this.head = document.getElementsByTagName('head')[0];
+                },
+                pQ = function(o) {
+                    if (!(o instanceof HTMLElement || o instanceof DocumentFragment) && o.container)
+                        return o.container
+                    return o;
                 };
             CoreDom.prototype.mk = function(t,o,c,m) {
                 var r,
@@ -365,12 +370,18 @@ window.addEventListener('load', function() {
                 if (o && typeof o === 'object') {
                     if (o instanceof HTMLElement || o instanceof DocumentFragment) {
                         o.appendChild(r);
-                    } else {
-                        if (o.insertBefore) {
-                            o.insertBefore.parentNode.insertBefore(r, o.insertBefore);
-                        } else if (o.insertAfter) {
-                            o.insertAfter.parentNode.insertBefore(r, o.insertAfter.nextSibling);
-                        }
+                    } else if (o.container) {
+                        o.container.appendChild(r);
+                    } else if (o.insertBefore) {
+                        var i = o.insertBefore;
+                        if (!(i instanceof HTMLElement))
+                            i = i.container;
+                        i.parentNode.insertBefore(r,i);
+                    } else if (o.insertAfter) {
+                        var i = o.insertAfter;
+                        if (!(i instanceof HTMLElement))
+                            i = i.container;
+                        i.parentNode.insertBefore(r,i.nextSibling);
                     } 
                 }
                 switch (typeof m) {
@@ -383,7 +394,7 @@ window.addEventListener('load', function() {
                 }
                 if (typeof c !== 'undefined' && c !== null) {
                     if (typeof c === 'function') {
-                        c = c();
+                        c = c(self);
                     } else if (c instanceof Array) {
                         var d = document.createDocumentFragment();
                         c.forEach(function(k) {
@@ -391,7 +402,8 @@ window.addEventListener('load', function() {
                         });
                         c=d;   
                     }
-                    self.setContent(r,c);
+                    if (c)
+                        self.setContent(r,c);
                 }
                 // is manager?
                 var parent = this.parent;
@@ -412,7 +424,7 @@ window.addEventListener('load', function() {
                 f = r.igaroPlaceholderFn = function() {
                     r.placeholder = language.mapKey(l);
                 };
-                xMgr.clone(r).on('setEnv', f);
+                xMgr.extend(r).on('setEnv', f);
                 f();
             };
             CoreDom.prototype.hide = function(r,v) {
@@ -436,6 +448,24 @@ window.addEventListener('load', function() {
                     throw new Error('No DOM element supplied');
                 r.classList.remove('core-dom-hide');
             };
+
+            CoreDom.prototype.addElement = function(r,c,o) {
+                r = pQ(r);
+                c = pQ(c);
+                if (o && o.insertBefore) {
+                    r.insertBefore(c,pQ(o.insertBefore));
+                } else if (o && o.insertAfter) {
+                    var insertAfter = pQ(o.insertAfter);
+                    if (insertAfter.nextElementSibling) {
+                        r.insertBefore(c, insertAfter.nextElementSibling);
+                    } else {
+                        r.appendChild(c);
+                    }
+                } else {
+                    r.appendChild(c);
+                }
+            };
+
             CoreDom.prototype.setContent = function(r,c,o) {
                 if (o) {
                     r.innerHTML = '';
@@ -546,43 +576,42 @@ window.addEventListener('load', function() {
                     thisManagers[o[0]] = o[1].createMgr(self);
                 }); 
                 // add object manager
+                var amd = app['instance.amd'];
                 thisManagers.object = {
                     create : function(g,o) {
                         if (! o)
                             o = {};
-                            var t = typeof g === 'string'? { name:g } : g,
-                            container = o.container? o.container : null;
+                        var t = typeof g === 'string'? { name:g } : g,
+                            container = o.container? o.container : null,
+                            name = t.fullname? t.fullname : 'instance.'+t.name;
                         if (container)
                             container = thisManagers.dom.mk('div',container);
-                        var name = t.fullname? t.fullname : 'instance.'+t.name,
-                            p = { 
+                        var p = { 
                                 modules : [{ name: name+'.js' }],
                                 repo : t.repo? t.repo : null
                             };
-                        return new app['instance.amd']({ parent:self }).get(p).then(function () {
+                        return new amd({ parent:self }).get(p).then(function () {
                             o.parent = self;
                             var i = new app[name](o);
-                            if (i.container) {
-                                if (container) {
-                                    var cp = container.parentNode;
-                                    cp.insertBefore(i.container, container);
-                                    cp.removeChild(container);
-                                } else if (g.insertAfter) {
-                                    var p = g.insertAfter.parentNode;
-                                    if (g.insertAfter.nextElementSibling) {
-                                        p.insertBefore(i.container, g.insertAfter.nextElementSibling);
-                                    } else {
-                                        p.appendChild(i.container);
+                            return Promise.all([typeof i.init === 'function'? i.init(o) : Promise.resolve()]).then(function() {
+                                if (i.container) {
+                                    if (container) {
+                                        var cp = container.parentNode;
+                                        cp.insertBefore(i.container, container);
+                                        cp.removeChild(container);
+                                    } else if (g.insertAfter) {
+                                        var p = g.insertAfter.parentNode;
+                                        if (g.insertAfter.nextElementSibling) {
+                                            p.insertBefore(i.container, g.insertAfter.nextElementSibling);
+                                        } else {
+                                            p.appendChild(i.container);
+                                        }
+                                    } else if (g.insertBefore) {
+                                        g.insertBefore.parentNode.insertBefore(i.container, g.insertBefore);
                                     }
-                                } else if (g.insertBefore) {
-                                    g.insertBefore.parentNode.insertBefore(i.container, g.insertBefore);
                                 }
-                            }
-                            return i;
-                        //}).catch(function(e) {
-                        //    if (! o.silent) 
-                        //        return thisManagers.debug.handle(e);
-                        //    throw e;
+                                return i;
+                            });
                         });
                     }
                 }
@@ -608,7 +637,11 @@ window.addEventListener('load', function() {
                 };
                 if (container) {
                     var dom = this.managers.dom;
-                    container = self.container = container(dom);                   
+                    if (typeof container === 'function') 
+                        container = container(dom);
+                    self.container = container;                   
+                    if (asRoot)
+                        container.classList.add(name.replace(/\./g,'-'));
                     this.hide = function(v) {
                         dom.hide(container,v);
                     };
