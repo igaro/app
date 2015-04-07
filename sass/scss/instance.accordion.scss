@@ -3,6 +3,9 @@
 	>dl {
 
 		margin:0;
+        &[inert='true'] {
+            opacity:.3;
+        }
 
 		>dt {
 			border-bottom:.05em solid rgba(0,0,0,.6);
@@ -11,6 +14,7 @@
 			margin-bottom:.5em;
 			position:relative;
 			font-size:100%;
+            text-align:left;
 			&:hover {
 				cursor:pointer;
 				text-decoration:none;
@@ -38,6 +42,7 @@
             	-webkit-transition: all .5s ease-in-out;                 
 				transition: all .5s ease-in-out;
 			}
+
 		}
 
 		>dd {

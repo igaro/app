@@ -1373,11 +1373,10 @@ msgstr ""
 msgid "Were stolen yesterday evening."
 msgstr ""
 
-msgid "Accordion"
+msgid "Accounts"
 msgstr ""
 
-msgid ""
-"Accordions are a great way to condense information into a navigatable form."
+msgid "Accordion"
 msgstr ""
 
 msgid "Install"

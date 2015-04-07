@@ -12,190 +12,104 @@ module.exports = function(app) {
     var bless = app['core.bless'];
 
     var InstanceNavigationMenuOption = function(o) {
+        var self = this;
+        this.onClick = o.onClick;
+        this.status = 0;
         bless.call(this,{
             name:'option',
+            stash:o.stash,
             parent:o.parent,
-        });
-        var dom = this.managers.dom,
-            li = this.li = dom.mk('li',null,null,o.className),
-            w = this.wrapper = dom.mk('a',li),
-            self = this, 
-            parent = this.parent = o.parent,
-            ul = parent.ul,
-            children = o.children;
-        this.id = o.id || null;
-        this.status = null;
-        this.title = dom.mk('span',w,o.title);
-        if (this.id) 
-            li.classList.add(this.id);
-        if (o.active) 
-            o.status = 'active';
-        this.setStatus(o.status || 'inactive',true);
-        this.onClick = o.onClick || null;
-        if (o && o.insertBefore) {
-            ul.insertBefore(li,o.insertBefore.li);
-        } else {
-            ul.appendChild(li);
-        }
-        if (o.hide)
-            this.hide();
-        if (o.seo) {
-            w.href = '#!/' + o.seo;
-        } else if (o.href) {
-            w.href = o.href;
-        }
-        if (! o.href) 
-            w.addEventListener('click',function(event) {
-                event.preventDefault();
-                if (self.status ==='disabled' || ('selectable' in o && o.selectable === false)) 
-                    return event.stopPropagation();
-                return (self.onClick? self.onClick.call(self,event) : Promise.resolve()).then(function() {
-                    return (parent.onClick? parent.onClick.call(parent,event) : Promise.resolve()).then(function() {
-                        self.setActive();
+            disabled:o.disabled,
+            hidden:o.hidden,
+            container:function (dom) {
+                return dom.mk('li',o.parent.container,null,function() {
+                    if (o.className)
+                        this.classList.add(o.className);
+                    dom.mk('a',this,null,function() {
+                        dom.mk('span',this,o.title);
+                        if (o.href)
+                            this.href = o.href;
+                        this.addEventListener('click',function(event) {
+                            event.preventDefault();
+                            if (self.disabled) 
+                                return event.stopImmediatePropagation();
+                            return (self.onClick? self.onClick.call(self,event) : Promise.resolve()).then(function() {
+                                return (parent.onClick? parent.onClick.call(parent,event) : Promise.resolve()).then(function() {
+                                    self.setActive();
+                                });
+                            }).catch(function(e) {
+                                event.stopImmediatePropagation();
+                                return self.managers.debug.handle(e);
+                            });
+                        });
                     });
-                }).catch(function() {
-                    return event.stopPropagation();
                 });
-            });
-        if (children && children.pool) 
-            this.addMenu({ 
-                pool:children.pool, 
-                onClick:children.onClick || null
-            }).then(function(menu) {
-                self.menu = menu;
-                //li.appendChild(menu.container);
-            });
-        this.managers.event.on('destroy', function() {
-            return dom.rm(li);
-        });
-    };
-    InstanceNavigationMenuOption.prototype.addMenu = function(o) {
-        var menu = this.children = new InstanceNavigationMenu({ 
-            autosort:o && 'autosort' in o? o.autosort : this.parent.autosort, 
-            parent:this, 
-            container:dom.mk('div',null,null,'children'), 
-            pool:o && o.pool?o.pool:null, 
-            onClick:o && o.onClick? o.onClick:null 
-        });
-        return this.managers.event.dispatch('addMenu',menu).then(function() {
-            return menu;
-        });
-    };
-    InstanceNavigationMenuOption.prototype.hide = function(v) {
-        this.managers.dom.hide(this.li,v);
-    };
-    InstanceNavigationMenuOption.prototype.show = function() {
-        this.managers.dom.show(this.li);
-    };
-    InstanceNavigationMenuOption.prototype.setActive = function() {
-        return this.setStatus('active');
-    };
-    InstanceNavigationMenuOption.prototype.setInactive = function() {
-        return this.setStatus('inactive');
-    };
-    InstanceNavigationMenuOption.prototype.setStatus = function(s,nodeact) {
-        if (s === this.status) 
-            return;
-        var li = this.li,
-            self = this,
-            cl = li.classList,
-            wrapper = this.wrapper,
-            children = this.children;
-
-        this.status = s;
-        if (s === 'active') {
-            cl.remove('inactive');
-            cl.add('active');
-        } else {
-            cl.add('inactive');
-            cl.remove('active');
-        }
-        // show children
-        if (children) {
-            if (s === 'active') {
-                wrapper.appendChild(children.container);
-            } else {
-                wrapper.removeChild(children.container);
             }
-        }
-        // deactivate all parent siblings
-        if (nodeact || ! this.parent || ! this.parent.options) 
-            return;
-        this.parent.options.forEach(function (o) {
-            if (o !== self && o.status !== 'disabled') 
-                o.setStatus('inactive',true);
         });
+        this.managers.event.on('disabled', function() {
+            self.setActive(false);
+        });
+        if (o.active) 
+            this.setActive();
     };
-    InstanceNavigationMenuOption.prototype.toggle = function() {
-        if (this.status === 'disabled') 
+
+    InstanceNavigationMenuOption.prototype.setActive = function(s,nodeact) {
+        if (this.disabled) 
             return;
-        this.setStatus(this.status === 'active'? 'inactive' : 'active');
+        s = typeof s !== 'boolean' || s;
+        if (this.active === s)
+            return;
+        this.active = s;
+        var li = this.container,
+            self = this,
+            cl = li.classList;
+        cl.remove('active');
+        if (s)
+            cl.add('active');
+        if (! nodeact) 
+            this.parent.pool.forEach(function (o) {
+                if (o !== self) 
+                    o.setActive(false,true);
+            });
     };
 
     var InstanceNavigationMenu = function(o) {
+        var self = this;
+        this.onClick = o.onClick;
         bless.call(this,{
             name:'menu',
-            parent:o.parent
+            parent:o.parent,
+            stash:o.stash,
+            container:function(dom) {
+                return dom.mk('ul',o.parent.container, null, function() {
+                });
+            }
         });
-        this.onClick = o.onClick? o.onClick : null;
-        this.autosort = !! o.autosort;
-        var pool = o.pool;
-        if (typeof pool === 'function') 
-            pool = pool(this);        
-        var m = this.container = o.container,
-            dom = this.managers.dom,
-            self = this,
-            ul = this.ul = dom.mk('ul',m, null, function() {
-                //this.addEventListener('click',function(event) {
-                //    if (self.onClick)
-                //        self.onClick.call(self,event);
-                //});
-            }),
-            opts = this.options = pool? pool.map(function(x) {
-                x.parent = self;
-                return new InstanceNavigationMenuOption(x);
-            }) : [];
+        var pool = this.pool = [];
         this.managers.event
             .on('option.destroy', function(o) {
-                opts.splice(opts.indexOf(o.value, 1));
+                pool.splice(pool.indexOf(o.value, 1));
             });
     };
-    InstanceNavigationMenu.prototype.sort = function(sort) {
-        if (typeof sort === 'boolean') 
-            this.autosort = sort;
-        if (! this.autosort || ! this.options) 
-            return;
-        var ul = this.ul,
-            p = this.options.map(function (o) {
-                return {
-                    option:o,
-                    title:o.title.innerHTML
-                };
-            });
-        p.sort(function(a,b) {
-            var x = a.title.toLowerCase(),
-                y = b.title.toLowerCase();
-            return x < y ? -1 : x > y ? 1 : 0;
-        });
-        p.forEach(function (o) {
-            var li = o.option.li;
-            ul.removeChild(li);
-            ul.appendChild(li);
-        });
-    };
+
     InstanceNavigationMenu.prototype.addOptions = function(o) {
         var self = this;
-        return o.map(function (a) { 
-            return self.addOption(a); 
-        });
+        return o.reduce(function(a,b) {
+            return a.then(function() {
+                return self.addOption(b);
+            });
+        }, Promise.resolve());
     };
     InstanceNavigationMenu.prototype.addOption = function(o) {
         o.parent = this;
         var t = new InstanceNavigationMenuOption(o);
-        this.options.push(t);
-        this.sort();
-        dom.show(this.container);
+        this.pool.push(t);
         return this.managers.event.dispatch('addOption',t).then(function() {
+            if (o.menu) {
+                return t.addMenu(o.menu).then(function() {
+                    return t;
+                });
+            }
             return t;
         });
     };
@@ -209,35 +123,22 @@ module.exports = function(app) {
         bless.call(this,{
             name:'instance.navigation',
             parent:o.parent,
-            asRoot:true
+            stash:o.stash,
+            asRoot:true,
+            container:function(dom) {
+                return dom.mk('nav',o.container,null,o.className);
+            }
         });
-        var managers = this.managers,
-            eventMgr = managers.event,
-            dom = this.managers.dom,
-            container = this.container = dom.mk('div',o.container,null,'instance-navigation'),
-            nav = dom.mk('nav',container),
-            self = this;
+        var self = this;
         this.menu = new InstanceNavigationMenu({ 
-            autosort:'autosort' in o? o.autosort : true, 
             parent:this, 
-            container:nav, 
-            pool:o.pool, 
             onClick:o.onClick?o.onClick:null 
         });
-        this.type = {
-            value : null,
-            set : function(type) {
-                this.value=type;
-                nav.className=type;
-            }
-        };
-        this.type.set(o.type? o.type : 'default');
     };
-    InstanceNavigation.prototype.hide = function(v) {
-        this.managers.dom.hide(this.container,v);
-    };
-    InstanceNavigation.prototype.show = function() {
-        this.managers.dom.show(this.container);
+    InstanceNavigation.prototype.init = function(o) {
+        if (o.pool)
+            return this.menu.addOptions(o.pool);
+        return Promise.resolve();
     };
 
     return InstanceNavigation;

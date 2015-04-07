@@ -52,7 +52,8 @@ module.exports = function(app, params) {
             name:"简体中文"
         },
         ar : {
-            name:"Arabic"
+            name:"Arabic",
+            rtl:true
         },
         pl : {
             name:"Polish"

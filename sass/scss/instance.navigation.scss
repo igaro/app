@@ -6,15 +6,38 @@
         font-size:130%;
     }
 
-    ul {
+    >ul {
         margin:0;
-        padding:0;
-        li {
+        padding:0 10px;
+        font-size:100%;
+        position:relative;
+        font-size:100%;
+        background-color:#444;
+        color:#ccc;
+        &:after { 
+            content: ""; 
+            clear: both; 
+            display: block;
+        }
+        >li {
+            padding:0 0.7em;
+            font-size:90%;
+            line-height:180%;
+            float:left;
+            &.tick { 
+                background-color:green; 
+            }
+            &.cross { 
+                background-color:red; 
+            }
+            sup { 
+                margin-left:2px; 
+            }
             list-style:none;
             margin:0;
-            padding:0;
             white-space:nowrap;
             outline:0;
+            display:inline-block;
             >a {
                 display:block;
                 color:inherit;
@@ -26,139 +49,17 @@
                     }
                 }
             }
-        }
-    }
-
-    >.tabs {
-        border-bottom:1px solid #444;
-        position:relative;
-        >ul {
-            text-align:left;
-            &:after { 
-                content: ""; 
-                clear: both; 
-                display: block;
+            &[inert='true'] {
+                opacity:.3;
+                cursor:default;
+                &:hover, >a { 
+                    color:inherit; 
+                    cursor:default;
+                }
             }
-            >li {
-                cursor:pointer;
-                display:inline-block;
-                padding:0 0.7em;
-                font-size:100%;
-                line-height:180%;
-                &.tick { 
-                    background-color:green; 
-                }
-                &.cross { 
-                    background-color:red; 
-                }
-                sup { 
-                    margin-left:2px; 
-                }
-                &.active {
-                    position:relative;
-                    background-color:#444;
+            &.active {
+                >a >span {
                     color:#fff;
-                    border-radius:0.2em 0.2em 0 0;
-                    mrgin-left:0.4em;
-                }
-                &.disabled {
-                    color:#ccc;
-                    &:hover { 
-                        color:#ccc; 
-                        cursor:default;
-                    }
-                }
-            }
-        }
-    }
-
-
-    >.drop {
-
-        white-space:nowrap;
-        text-align:left;
-        ul {
-
-            >li.inactive:hover {
-                cursor:pointer;
-            }
-
-            >li.active {
-                background:#444;
-                cursor:default;
-                &:hover {
-                    cursor:default;
-                }
-            }
-            >li.disabled {
-                cursor:default;
-                background:inherit;
-                color:#aaa;
-                >span { 
-                    color:inherit 
-                } 
-                &:hover {
-                    cursor:default;
-                }
-            }
-        }
-
-        >ul {
-            display:block;
-            margin-left:-0.9em;
-            >li {
-                float:left;
-                position:relative;
-                &.active {
-                    background: #730909;
-                    border-bottom:0;
-                    border-radius:0.2em 0.2em 0 0;
-                    &:hover { cursor:pointer; }
-                    >a >span {
-                        color:#fff;
-                    }
-                }
-                >a {
-                    margin-top:-1px;
-                    >span {
-                        padding:0.6em 1em;
-                    }
-                    >.children {
-                        border-radius:0.2em 0 0.2em 0.2em;
-                        background: #730909;
-                        position:absolute;
-                        z-index:9998;
-                        right:-1px;
-                        &:hover {
-                            cursor:default;
-                        }
-                        >ul {
-                            display:inline-block;
-                            position:relative;
-                            li {
-                                margin:0.7em;
-                                padding:0 2em 0 0;
-                                display:block;
-                                .children {
-                                    position:absolute;
-                                    top:0;
-                                    //right:0;
-                                    //left:100%;
-                                }
-                                >a {
-                                    >span {
-                                        text-shadow: 0 1px rgba(0,0,0,0.3);
-                                        line-height:100%;
-                                        padding:0.7em 1em 0.7em 1em; 
-                                        color:#fff; 
-                                        text-decoration: none;
-                                    }
-                                }
-                                &.tick { background-color:green; }
-                                &.cross { background-color:red; }
-                            }
-                        }
-                    }
                 }
             }
         }

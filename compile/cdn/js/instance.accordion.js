@@ -94,7 +94,7 @@ module.exports = function(app) {
     InstanceAccordion.prototype.addSection = function(o) {
         o.parent = this;
         var s = new InstanceAccordionSection(o);
-        this.managers.dom.addElement(this,s,o);
+        this.managers.dom.append(this,s,o);
         this.sections.push(s);
         return this.managers.event.dispatch('addSection',s);
     };

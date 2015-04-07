@@ -34,15 +34,19 @@ module.exports = function(app) {
             promises : [
 
                 managers.object.create({ name:'navigation'},{
-                    type:'headermn',
+                    className:'headermn',
                     pool : [
                         { 
-                            id:'app', 
+                            className:'app', 
                             active:true 
                         }, 
                         { 
-                            id:'api', 
-                            href : 'http://api.igaro.com'
+                            className:'api', 
+                            href : 'http://api.igaro.com',
+                            onClick : function() {
+                                window.open(this.href);
+                                return Promise.resolve();
+                            }
                         }
                     ]
                 }),

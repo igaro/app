@@ -47,6 +47,7 @@ module.exports = function(app, params) {
     var language = {
 
         env : null,
+        rtl:false,
         isAuto : null,
         pool : {},
 
@@ -69,9 +70,12 @@ module.exports = function(app, params) {
             return new Promise(function (resolve) {
                 if (id.length > 2) 
                     id = id.substr(0,3)+id.substr(3).toUpperCase();
-                if (! self.pool[id]) 
+                var o = self.pool[id];
+                if (! o)
                     throw { error:'Code is not in pool.', value:id, pool:self.pool };
                 self.env = id;
+                document.body.style.textAlign = o.rL? 'right' : 'left';
+                self.rtl = o.rtl === true;
                 if (! noStore)
                     self.isAuto = false;
                 return Promise.all([ noStore? null : managers.store.set('env',id)]).then(function() {

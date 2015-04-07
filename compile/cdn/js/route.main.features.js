@@ -269,7 +269,7 @@ module.exports = function(app) {
                         domMgr = rte.managers.dom;
                     domMgr.mk('h2',container,_tr("Rich Text Editor"));
                     domMgr.mk('p',container);
-                    container.appendChild(rte.container);
+                    domMgr.append(container,rte);
                     return container;
                 }),
 
@@ -286,23 +286,22 @@ module.exports = function(app) {
                         {
                             title:_tr("Materials"),
                             content:_tr("Were stolen yesterday evening.")
+                        },
+                        {
+                            title:_tr("Accounts"),
+                            disabled:true
                         }
                     ]
                 }).then(function(accordion) {
                     var container = document.createDocumentFragment(),
-                        managers = accordion.managers,
-                        domMgr = managers.dom,
-                        eventMgr = managers.event;
+                        domMgr = accordion.managers.dom;
                     domMgr.mk('h2',container,_tr("Accordion"));
-                    domMgr.mk('p',container,_tr("Accordions are a great way to condense information into a navigatable form."));
                     domMgr.mk('p',container);
-                    container.appendChild(accordion.container);
+                    domMgr.append(container,accordion);
                     return container; 
-                }),
-
+                })
             ]
+
         });
-
     };
-
 };

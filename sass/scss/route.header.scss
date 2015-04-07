@@ -18,6 +18,7 @@ body >.core-router >.header {
 	height:13%;
 	min-height:4.2em;
 	max-height:7em;
+    text-align:left;
 
 	>.wrapper {
 
@@ -59,15 +60,17 @@ body >.core-router >.header {
 			display:inline-block;
 			height:100%;
 
-			>.headermn {
+			&.headermn {
 				height:100%;
 				margin-left:1em;
 				width:6em;
+                border:none;
 
 		    	>ul {
 		    		margin:0;
 		    		height:100%;
 		    		padding:0;
+                    border:none;
 
 				    >li { 
 				    	display:inline-block; 
@@ -75,11 +78,12 @@ body >.core-router >.header {
 				    	margin:0; 
 				    	height:100%; 
 				    	padding:0;
+                        border:none;
 				    	>a { height:100%; }
 				    }
 
 					>.app {
-					    background: #FFF;
+					    background:#FFF;
 					    padding-top:1px;
 					    >a {
 							background: inline-image("route.header/app.svg") no-repeat 50% 50%;

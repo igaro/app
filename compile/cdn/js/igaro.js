@@ -449,7 +449,12 @@ window.addEventListener('load', function() {
                 r.classList.remove('core-dom-hide');
             };
 
-            CoreDom.prototype.addElement = function(r,c,o) {
+            CoreDom.prototype.append = function(r,c,o) {
+                var self = this;
+                if (c instanceof Array)
+                    return c.forEach(function(a) {
+                        self.append(r,a,o);
+                    });
                 r = pQ(r);
                 c = pQ(c);
                 if (o && o.insertBefore) {
@@ -648,9 +653,11 @@ window.addEventListener('load', function() {
                     thisMgrsEvt
                         .on('disabled',function() {
                             container.setAttribute('disabled',true);
+                            container.setAttribute('inert',true);
                         })
                         .on('enabled',function() {
                             container.setAttribute('disabled',false);
+                            container.setAttribute('inert',false);
                         });
                     this.show = function() {
                         if (self.disabled)
