@@ -13,60 +13,60 @@ module.exports = function(app) {
     var bless = app['core.bless'];
 
     var InstancePageMessage = function(o) {
-        
+        var self = this; 
         bless.call(this,{
             name:'instance.pagemessage',
             parent:o.parent,
             asRoot:true,
             managers: {
                 store:app['core.store']
-            }
-        });
-        var managers = this.managers,
-            storeMgr = managers.store,
-            eventMgr = managers.event,
-            debugMgr = managers.debug,
-            dom = managers.dom;
-
-        this.id = o.id? o.id : null;
-        var self = this;
-        var hideable = o && o.hideable? o.hideable : null,
-            id = hideable && hideable.model? hideable.model.path+this.id : this.id;
-        return Promise.all(hideable? [storeMgr.get(id)] : []).then(function(d) {
-            if (d.length && d[0] && d[0].hidden)
-                return self.destroy();
-            var container = self.container = dom.mk('div',o.container,null,'instance-pagemessage'),
-                wrapper = dom.mk('div',container,null,o.type || 'default');
-                if (o.hide)
-                    self.hide();
-            dom.mk('div',wrapper,o.message);
-            if (self.id) 
-                container.classList.add(self.id);
-            if (hideable) {
-                dom.mk('a',wrapper,null,function() {
-                    this.addEventListener('click', function(event) {
-                        event.preventDefault();
-                        self.destroy();
-                        storeMgr.set(id, { hidden:true }).catch(function(e) {
-                            debugMgr.handle(e);
+            },
+            container: function(dom) {
+                return dom.mk('div',o.container,null,function() {
+                    if (o.className)
+                        this.classList.add(o.className);
+                    dom.mk('div',this,null,function() {
+                        if (o.type)
+                            this.className = o.type;
+                        dom.mk('div',this,o.message);
+                        dom.mk('a',this,null,function() {
+                            this.addEventListener('click', function(event) {
+                                event.preventDefault();
+                                return self.managers.store.set(self.id, { hidden:true }).then(function() {
+                                    return self.destroy();
+                                }).catch(function(e) {
+                                    return self.managers.debug.handle(e);
+                                });
+                            });
                         });
                     });
                 });
             }
-            return self;
         });
     };
 
-    InstancePageMessage.prototype.hide = function(v) {
-        this.managers.dom.hide(this.container,v);
-    };
-    
-    InstancePageMessage.prototype.show = function() {
-        this.managers.dom.show(this.container);
+    InstancePageMessage.prototype.init = function(o) {
+        this.id = o.id;
+        var self = this,
+            hideable = o.hideable;
+        if (hideable)
+            this.container.firstChild.classList.add('hideable');
+        return (
+                hideable
+                ? 
+                self.managers.store.get(self.id).then(function(d) {
+                    if (d && d.hidden)
+                        return self.destroy();
+                }) 
+                : 
+                Promise.resolve()
+        ).then(function() {
+            return self.managers.event.dispatch('init');
+        });
     };
 
     return InstancePageMessage;
 
-};
+}
 
 })();

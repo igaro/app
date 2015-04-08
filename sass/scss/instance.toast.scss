@@ -22,6 +22,8 @@ body >.instance-toast {
     right:0;
 	bottom:10%;
     margin:0 auto;
+    text-align:center;
+    padding-bottom:1em;
 	-webkit-user-select: none;   
     -moz-user-select: none;
     -ms-user-select: none;
@@ -29,31 +31,28 @@ body >.instance-toast {
     &:hover {
         cursor:default;
     }
-	>div {
-
-		text-align:center;
-		padding-bottom:1em;
-		>div {
-            -webkit-animation-name: instance-toast-fade;
-            animation-name: instance-toast-fade;
-            &.short {
-            	-webkit-animation-duration:2s;
-        		animation-duration:2s;
-            }
-            &.long {
-            	-webkit-animation-duration:4s;
-        		animation-duration:4s;
-            }
-			padding:0.2em 1em;
-			background-color:#000;
-			color:#fff;
-			opacity:0;
-			font-weight:bold;
-			font-size:130%;
-			display:inline-block;
-			@include corners;
-			margin:0 0.5em 1em 0.5em;
-		}
-
-	}
+    &:empty {
+        display:none;
+    }
+    >div {
+        -webkit-animation-name: instance-toast-fade;
+        animation-name: instance-toast-fade;
+        &.short {
+            -webkit-animation-duration:2s;
+            animation-duration:2s;
+        }
+        &.long {
+            -webkit-animation-duration:4s;
+            animation-duration:4s;
+        }
+        padding:0.2em 1em;
+        background-color:#000;
+        color:#fff;
+        opacity:0;
+        font-weight:bold;
+        font-size:130%;
+        display:inline-block;
+        @include corners;
+        margin:0 0.5em 1em 0.5em;
+    }
 }

@@ -29,28 +29,37 @@ module.exports = function(app) {
     };
 
 	var InstanceOauth2 = function(o) {
-		bless.call(this,{
+		var self = this;
+        bless.call(this,{
             name:'instance.oauth2',
             parent:o.parent,
-            asRoot:true
+            stash:o.stash,
+            asRoot:true,
+            container:function(dom) {
+                return dom.mk('div',null,null,function() {
+                    if (o.className)
+                        this.classList.add(o.className);
+                    self.win = dom.mk('iframe',this);
+                    dom.mk('a',this,null,function() {
+                        this.addEventListener('click',function(event) {
+                            event.preventDefault();
+                            self._resolve({ cancel:true });
+                        });
+                    });
+                });
+            }
         });
 		this.inProgress = false;
 		if (o) 
             setBits.call(this,o);
-        var dom = this.managers.dom,
-        	container = this.container = dom.mk('div',null,null,'instance-oauth2'),
-        	self = this;
-		this.win = dom.mk('iframe',container);
 		window.addEventListener('message', function(event) {
             self._resolve({ token:url.getHashParam(self.tokenName,event.data) });
         });
-        dom.mk('a',container,null,function() {
-        	this.addEventListener('click',function(event) {
-        		event.preventDefault();
-        		self._resolve({ cancel:true });
-        	});
-        });
 	};
+
+    InstanceOAuth2.prototype.init = function(o) {
+        return this.managers.event.dispatch('init');
+    };
 
 	InstanceOauth2.prototype.exec = function(o) {
 		if (o) 
@@ -67,7 +76,6 @@ module.exports = function(app) {
 		return new Promise(function(resolve) {
 			self._resolve = function(o) {
 				self.inProgress =  false;
-				var p = self.container.parentNode;
 				try {
 					body.removeChild(self.container);
 				} catch(e) {}

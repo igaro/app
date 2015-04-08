@@ -30,15 +30,19 @@ module.exports = function(app) {
             stash:o.stash,
             asRoot:true
         });
-        var self = this;
-        if (o.form)
-            this.setForm(form);
         this.inRealTime = typeof o.inRealTime === 'boolean'? o.inRealTime : true;
         this.rules = o.rules || [];
         this.errorDisplayAmount = 'errorDisplayAmount' in o? o.errorDisplayAmount : 1;
         this.runOnChange = 'runOnChange' in o? o.runOnChange : true;
         this.messages = [];
         this.resizeHooks = [];
+        if (o.form)
+            this.setForm(form);
+        this.onValidSubmit = o.onValidSubmit;
+    };
+
+    InstanceFormValidate.prototype.init = function() {
+        return this.managers.event.dispatch('init');
     };
 
     InstanceFormValidate.prototype.setForm = function(form) {
@@ -46,10 +50,21 @@ module.exports = function(app) {
         this.form = form;
         form.setAttribute('novalidate',true);
         form.classList.add('instance-form-validate');
+        this.__allowThrough = false;
         form.addEventListener('submit', function(event) {
             event.preventDefault();
-            return self.check().catch(function() {
-                event.stopImmediatePropagation();
+            if (self.__allowThough) {
+                self.__allowThrough= false;
+                return false;
+            }
+            event.stopImmediatePropagation();
+            return self.check().then(function(valid) {
+                if (valid) {
+                    self.__allowThrough = true;
+                    return self.onValidSubmit.call(self);
+                }
+            }).catch(function() {
+                return self.managers.debug.handle(e);
             });
         });
         form.addEventListener('change', function() {
@@ -65,7 +80,9 @@ module.exports = function(app) {
         var self = this;
         if (this.inRealTime && ! this.__checkingInSitu) {
             this.__checkingInSitu = true;
-            this.check().catch(function() {}).then(function() {
+            this.check().catch(function (e) {
+                return self.managers.debug.handle(e);
+            }).then(function() {
                 self.__checkingInSitu = false;
             });
         }
@@ -122,7 +139,7 @@ module.exports = function(app) {
             eventMgr = self.managers.event,
             addMsg = function(n,l) {
                 self.displayError(n,l);
-                return Promise.reject();
+                return Promise.resolve(true);
             };
         return this.clear().then(function () {
 
@@ -181,13 +198,14 @@ module.exports = function(app) {
                     }); 
                 }, Promise.resolve());
 
-            })).then(function() {   
-                return eventMgr.dispatch('validated',true);
-            }).catch(function (e) {
-                return eventMgr.dispatch('validated',false).then(function() {
-                    throw e;
+            })).then(function(results) {
+                var valid = results.every(function(o) {
+                    return !o; 
                 });
-            }); 
+                return eventMgr.dispatch('validated',valid).then(function() {
+                    return valid;
+                });
+            });
 
         });
        

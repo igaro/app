@@ -74,8 +74,7 @@ module.exports = function(app) {
                     type:'info',
                     message: _tr("You can see the code behind any page in this app by clicking the menu icon in the top right corner."),
                     hideable: {
-                        model:model,
-                        id:'hintcode'
+                        id:model.path.join('.')+'.hintcode'
                     }
                 }),
 

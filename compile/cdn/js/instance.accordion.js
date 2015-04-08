@@ -80,15 +80,19 @@ module.exports = function(app) {
     };
 
     InstanceAccordion.prototype.init = function(o) {
-        if (o.sections) {
-            var self = this;
-            return o.sections.reduce(function(a,b) {
+        var self = this;
+        return (o.sections
+            ? 
+            o.sections.reduce(function(a,b) {
                 return a.then(function() {
                     return self.addSection(b);
                 });
-            }, Promise.resolve());
-        }
-        return Promise.resolve();
+            }, Promise.resolve())
+            :
+            Promise.resolve()
+        ).then(function() {
+            return self.managers.event.dispatch('init');
+        });
     };
 
     InstanceAccordion.prototype.addSection = function(o) {

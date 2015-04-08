@@ -26,6 +26,10 @@ module.exports = function(app) {
         bodyStyle.overflow = 'hidden';
     };
 
+    InstanceModalDialog.prototype.init = function(o) {
+        return this.managers.event.dispatch('init');
+    }
+
     InstanceModalDialog.prototype.custom = function(o) {
         if (! o) 
             o = {};

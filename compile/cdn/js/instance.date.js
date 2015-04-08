@@ -58,6 +58,10 @@ module.exports = function(app) {
         languageEventMgr.extend(this).on('setEnv',erf.lang);
         erf.lang();
     };
+
+    InstanceDate.prototype.init = function() {
+        return this.managers.event.dispatch('init');
+    };
     
     InstanceDate.prototype.set = function(date) {
         this.date = date;

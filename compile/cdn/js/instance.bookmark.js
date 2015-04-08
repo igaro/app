@@ -30,6 +30,10 @@ module.exports = function(app) {
         });
     };
 
+    bookmark.prototype.init = function() {
+        return this.managers.event.dispatch('init');
+    };
+
     bookmark.prototype.setURL = function(o) {
         var c = this.container,
             domMgr = this.managers.dom;

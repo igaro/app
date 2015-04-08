@@ -189,8 +189,9 @@ module.exports = function(app) {
                 objectMgr.create(
                     'samespace',
                     {
-                        spaces:[0,1,2].map(function(x,i) { return { id:'a'+i }; }),
-                        effect:'fade'
+                        spaces:[0,1,2].map(function(x,i) { return { className:'a'+i }; }),
+                        effect:'fade',
+                        start:true
                     }
                 ),
 
@@ -252,14 +253,14 @@ module.exports = function(app) {
                               }
                             ]
                         ];
-                        this.addEventListener('submit',function() {
+                        formValidate.onValidSubmit = function() {
                             v.value='';
                             return objectMgr.create('toast',{
                                 message: _tr("Transaction Successful")
                             }).catch(function (e) {
                                 return debugMgr.handle(e);
                             });
-                        });
+                        };
                     });
                     return container;
                 }),

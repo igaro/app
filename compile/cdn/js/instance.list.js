@@ -37,17 +37,28 @@ module.exports = function(app) {
         });
         var pool = this.pool = [],
             self = this;
-        if (o.options) 
-            o.options.reduce(function (a,b) {
-                return a.then(function() {
-                    return self.add(b);
-                }); 
-            }, Promise.resolve());
         this.managers.event
             .on('item.destroy',function(i) {
                 pool.splice(pool.indexOf(i),1);
             });
     };
+
+    InstanceList.prototype.init = function(o) {
+        var self = this;
+        return (o.options
+            ? 
+            o.options.reduce(function (a,b) {
+                return a.then(function() {
+                    return self.add(b);
+                }); 
+            }, Promise.resolve())
+            :
+            Promise.resolve()
+        ).then(function() {
+            return self.managers.event.dispatch('init');
+        });
+    };
+
     InstanceList.prototype.add = function(o,shift) {
         o.parent = this;
         var t = new InstanceListItem(o);

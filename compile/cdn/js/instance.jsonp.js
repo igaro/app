@@ -30,6 +30,10 @@ module.exports = function(app) {
         });
     };
 
+    InstanceJsonP.prototype.init = function() {
+        return this.managers.event.dispatch('init');
+    };
+
     InstanceJsonP.prototype.get = function(p) {
         this.abort();
         if (p) 

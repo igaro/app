@@ -120,6 +120,10 @@ $PAGE_PADDING_HALF_HEIGHT : 1%;
                 cursor:pointer;
             }
 
+            &:focus {
+                border-color:#4988ef;
+            }
+
             &:after {
                     content:'';
                     width:100%;

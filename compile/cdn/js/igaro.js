@@ -598,7 +598,9 @@ window.addEventListener('load', function() {
                         return new amd({ parent:self }).get(p).then(function () {
                             o.parent = self;
                             var i = new app[name](o);
-                            return Promise.all([typeof i.init === 'function'? i.init(o) : Promise.resolve()]).then(function() {
+                            if (! i.init)
+                                throw { module:name, error:'No init() constructor' };
+                            return i.init(o).then(function() {
                                 if (i.container) {
                                     if (container) {
                                         var cp = container.parentNode;
@@ -757,6 +759,9 @@ window.addEventListener('load', function() {
                         eventMgr.dispatch('end'); 
                     });
                 };
+            };
+            InstanceXhr.prototype.init = function() {
+                return Promise.resolve();
             };
             InstanceXhr.prototype.send = function() {
                 var self = this,

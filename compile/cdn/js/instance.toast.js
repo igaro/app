@@ -18,10 +18,7 @@ module.exports = function(app) {
     };
 
     var container = dom.mk('div',document.body,null,'instance-toast'),
-        wrapper = dom.mk('div',container);
-    dom.hide(container);
-
-    var recentInstanceToastMessages = [];
+        recentInstanceToastMessages = [];
 
     var InstanceToast = function(o) {
         bless.call(this,{
@@ -34,6 +31,12 @@ module.exports = function(app) {
             position = o.position,
             txt = o.message,
             str = JSON.stringify(txt);
+
+        // self destruct
+        var self = this;
+        setTimeout(function() {
+            self.destroy();
+        }, showTime[duration]+200);
 
         // prevent toasting of same message within limited period
         if (recentInstanceToastMessages.indexOf(str) > -1)
@@ -48,14 +51,11 @@ module.exports = function(app) {
             return window.plugins.toast.show(typeof txt === 'object'? language.mapKey(txt) : txt,duration,position);
         
         // html InstanceToast
-        var c = this.container = domMgr.mk('div',wrapper,txt,duration);
-        domMgr.show(container);
-        var self = this;
-        setTimeout(function() {
-            domMgr.rm(c);
-            if (! wrapper.hasChildNodes())
-                domMgr.hide(container);
-        }, showTime[duration]+200);
+        domMgr.mk('div',container,txt,duration);
+    };
+
+    InstanceToast.prototype.init = function() {
+        return Promise.resolve();
     };
 
     return InstanceToast;
