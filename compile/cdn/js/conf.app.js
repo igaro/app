@@ -2400,8 +2400,8 @@ module.exports = function(app, params) {
             } catch (e) {
                 alert(msg['en-US']);
                 displaying = false;
-            } 
-            return debug.log.append(o.value,o.name,o.event);
+            }
+            return debug.log.append(o.value,o.path,o.event);
         });
 
         // handle router errors

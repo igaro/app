@@ -85,10 +85,10 @@ window.addEventListener('load', function() {
                 this.parent = parent;
             };
             CoreDebugMgr.prototype.log = function(e,evt) {
-                return debug.log.append({ error:e, parent:this.parent },this.path,evt);
+                return debug.log.append({ error:e, scope:this.parent }, this.parent.path, evt);
             };
-            CoreDebugMgr.prototype.handle = function(e,evt) {
-                return debug.handle({ error:e, x:this },this.path,evt);
+            CoreDebugMgr.prototype.handle = function(e) {
+                return debug.handle({ error:e, scope:this.parent }, this.parent.path);
             };
             CoreDebugMgr.prototype.destroy = function() {
                 this.parent = null;
@@ -97,13 +97,14 @@ window.addEventListener('load', function() {
             var debug = app['core.debug'] = {
                 developer : __igaroapp.debug,
                 log : {
-                    data : [],
                     append : function(value,path,event) {
-                        var p = { path:path, event:event, value:value };
-                        this.data.push(p);
-                        if (window.console && debug.developer)
-                            console.error(path,event,value);
-                        return events.dispatch('core.debug','log.append', p);
+                        if (window.console && debug.developer) {
+                            var p = path instanceof Array? path.join('.') : path;
+                            if (event)
+                                p += ':'+event;
+                            console.error(p,value);
+                        }
+                        return events.dispatch('core.debug','log.append',{ path:path, event:event, value:value });
                     }
                 },
                 handle : function(value,path,event) {
