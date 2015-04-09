@@ -473,11 +473,9 @@ window.addEventListener('load', function() {
             };
 
             CoreDom.prototype.setContent = function(r,c,o) {
-                if (o) {
-                    r.innerHTML = '';
-                } else {
-                    this.empty(r);
-                }
+                if (! o)
+                    this.nuke(r,true);
+                r.innerHTML = '';
                 var lf = r.igaroLangFn;
                 if (lf) {
                     app['core.language'].managers.event.clean(r);
@@ -506,24 +504,27 @@ window.addEventListener('load', function() {
                     r.innerHTML = c;
                 }
             };
-            CoreDom.prototype.empty = function(element) {
-                return Promise.all(Array.prototype.slice.call(element.childNodes).map(function (node) {
-                    return dom.rm(node);
-                })); 
+            CoreDom.prototype.nuke = function(element,leaveRoot) {
+                var self = this,
+                    node;
+                while (node = element.lastChild) {
+                    self.nuke(node);
+                    events.clean(node);
+                }
+                if (! leaveRoot) {
+                    self.rm(element);
+                    events.clean(element);
+                }
             };
-            CoreDom.prototype.destroy = function() {
-                delete this.parent;
-                return Promise.resolve();
+            CoreDom.prototype.empty = function(element) {
+                while (element.firstChild)
+                    element.removeChild(element.firstChild);
+                element.innerHTML = '';
             };
             CoreDom.prototype.rm = function(element) {
-                if (! element)
-                    return Promise.resolve();
-                var self = this;
-                events.clean(element);    
                 var p = element.parentNode;
                 if (p)
                     p.removeChild(element);
-                return self.empty(element);
             };
             CoreDom.prototype.sort = function(o) {
                 var slice = o.slice,
@@ -550,6 +551,7 @@ window.addEventListener('load', function() {
             app['core.dom'] = new CoreDom();
         })();
 
+        // core.bless: built in
         (function() {
             var events = app['core.events'];
             app['core.bless'] = function(o) {
@@ -566,8 +568,10 @@ window.addEventListener('load', function() {
                 if (! asRoot) {
                     var x = this;
                     while (x.parent) {
-                        this.path.unshift(x.parent.name);
+                        path.unshift(x.parent.name);
                         x = x.parent;
+                        if (x.__asRoot)
+                            break;
                     }
                 }
                 // append managers
@@ -588,36 +592,20 @@ window.addEventListener('load', function() {
                         if (! o)
                             o = {};
                         var t = typeof g === 'string'? { name:g } : g,
-                            container = o.container? o.container : null,
-                            name = t.fullname? t.fullname : 'instance.'+t.name;
-                        if (container)
-                            container = thisManagers.dom.mk('div',container);
-                        var p = { 
+                            container = o.container,
+                            name = t.fullname? t.fullname : 'instance.'+t.name,
+                            p = { 
                                 modules : [{ name: name+'.js' }],
                                 repo : t.repo? t.repo : null
                             };
+                        if (container)
+                            container = thisManagers.dom.mk('div',container);
                         return new amd({ parent:self }).get(p).then(function () {
                             o.parent = self;
                             var i = new app[name](o);
                             if (! i.init)
                                 throw { module:name, error:'No init() constructor' };
                             return i.init(o).then(function() {
-                                if (i.container) {
-                                    if (container) {
-                                        var cp = container.parentNode;
-                                        cp.insertBefore(i.container, container);
-                                        cp.removeChild(container);
-                                    } else if (g.insertAfter) {
-                                        var p = g.insertAfter.parentNode;
-                                        if (g.insertAfter.nextElementSibling) {
-                                            p.insertBefore(i.container, g.insertAfter.nextElementSibling);
-                                        } else {
-                                            p.appendChild(i.container);
-                                        }
-                                    } else if (g.insertBefore) {
-                                        g.insertBefore.parentNode.insertBefore(i.container, g.insertBefore);
-                                    }
-                                }
                                 return i;
                             });
                         });
@@ -630,8 +618,10 @@ window.addEventListener('load', function() {
                 var thisMgrsEvt = thisManagers.event;
                 this.destroy = function() {
                     return thisMgrsEvt.dispatch('destroy').then(function() {
-                        delete self.parent;
-                        delete self.stash;
+                        Object.keys(self).forEach(function(k) {
+                            delete self[k];
+                        });
+                        self.__destroyed = true;
                         return events.clean(self);
                     });
                 };
@@ -672,7 +662,7 @@ window.addEventListener('load', function() {
                         dom.toggleVisibility(container);
                     };
                     thisManagers.event.on('destroy',function() {
-                        dom.rm(container);
+                        dom.nuke(container);
                     });
                     if (o.hidden)
                         this.hide();
@@ -755,11 +745,16 @@ window.addEventListener('load', function() {
                     }).catch(function (e) {
                         self._promise.reject({ error:e, x:self });
                         if (! self.silent)
-                            eventMgr.dispatch('error', e);
+                            return eventMgr.dispatch('error', e);
                     }).then(function() {
-                        eventMgr.dispatch('end'); 
+                        return eventMgr.dispatch('end'); 
+                    }).catch(function (e) {
+                        return self.managers.debug.handle(e);
                     });
                 };
+                eventMgr.on('destroy',function() {
+                    return self.abort();
+                });
             };
             InstanceXhr.prototype.init = function() {
                 return Promise.resolve();
@@ -847,9 +842,6 @@ window.addEventListener('load', function() {
                     return eventMgr.dispatch('end');    
                 });
             };
-            InstanceXhr.prototype.destroy = function() {
-                return this.abort();
-            };
             InstanceXhr.prototype.applyForm = function(form, autorefresh) {
                 var fd = this.formdata = {};
                 this.headers["Content-Type"] = "application/x-www-form-urlencoded";
@@ -881,18 +873,20 @@ window.addEventListener('load', function() {
         (function() {
             var repo = __igaroapp.cdn,
                 InstanceXhr = app['instance.xhr'],
-                debug = app['core.debug'].developer,
                 events = app['core.events'],
                 bless = app['core.bless'],
                 dom = app['core.dom'],
                 head = dom.head,
                 workers = [
-                    { uid:-1, done:true, module: { name:'core.events.js' }},
-                    { uid:-2, done:true, module: { name:'core.debug.js' }},
-                    { uid:-3, done:true, module: { name:'core.dom.js' }},
-                    { uid:-4, done:true, module: { name:'instance.xhr.js' }},
-                    { uid:-5, done:true, module: { name:'instance.amd.js' }}
-                ],
+                    'core.events',
+                    'core.bless',
+                    'core.debug',
+                    'core.dom',
+                    'instance.xhr',
+                    'instance.amd'
+                ].map(function(m,i) {
+                    return { uid:i*-1-1, done:true, module: { name:m+'.js' }}
+                }),
                 setBits = function(p) {
                     if (p.modules)
                         this.modules = p.modules;
@@ -924,7 +918,6 @@ window.addEventListener('load', function() {
                         });
                     };
                     var sucEvt = events.on('instance.amd','worker.success', function(o) {
-                     
                         if (swrks.indexOf(o.x) === -1)
                             return;
                         if (self.onProgress)
@@ -933,7 +926,6 @@ window.addEventListener('load', function() {
                             end();
                     });
                     var errEvt = events.on('instance.amd','worker.error', function(o) {
-
                         if (swrks.indexOf(o.x) !== -1)
                             end(o);
                     });
@@ -972,16 +964,13 @@ window.addEventListener('load', function() {
                             self.onProgress();
                         }
                     });
-
                     if (chk()) 
                         end();
                 });
             };
             var InstanceAmdWorker = function(o) {
-                //this.eventMgr = p.eventMgr.createMgr(this, { localName:'worker' });
                 bless.call(this,{
                     name:'instance.amd'
-                    //parent:o.parent
                 });
                 this.uid = Math.floor((Math.random() * 9999));
                 var mod = this.module = o.module,
@@ -1057,20 +1046,13 @@ window.addEventListener('load', function() {
         // external modules
         var InstanceAmd = app['instance.amd'],
             dom = app['core.dom'],
-            debug = app['core.debug'],
             events = app['core.events'];
-
         var x = [],
             m = threads.map(function(modules) {
                 var y = new InstanceAmd().get({ modules:modules });
                 x.push({ p:y, m:modules });
                 return y;
             });
-        /* if (__igaroapp.debug) { // for debugging hung promises
-            setTimeout(function() {
-                console.error(x);
-            },3000);
-        } */
         return Promise.all(m).then(
             function() {
                 return events.dispatch('','state.init').then(function() {

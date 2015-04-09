@@ -11,24 +11,21 @@ body >.core-router >.main >.mobile >.wrapper {
 		height:7em;
 	}
 
-	>p {
+    >.ios {
+        width:600px;
+        height:464px;
+        max-width:100%;   
+        background: inline-image("route.main.mobile/ios.jpg") no-repeat;
+        background-size:100%;  
+    }
 
-		>.ios {
-			width:600px;
-			height:464px;
-			max-width:100%;   
-			background: inline-image("route.main.mobile/ios.jpg") no-repeat;
-			background-size:100%;  
-		}
-
-		>.android {
-			width:600px;
-			height:554px;
-			max-width:100%;  
-			background: inline-image("route.main.mobile/android.jpg") no-repeat;
-			background-size:100%;  
-		}
-	}
+    >.android {
+        width:600px;
+        height:554px;
+        max-width:100%;  
+        background: inline-image("route.main.mobile/android.jpg") no-repeat;
+        background-size:100%;  
+    }
 
 	>.embeddedresdemo {
 

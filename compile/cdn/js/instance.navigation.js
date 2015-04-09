@@ -33,9 +33,11 @@ module.exports = function(app) {
                             event.preventDefault();
                             if (self.disabled) 
                                 return event.stopImmediatePropagation();
-                            return (self.onClick? self.onClick.call(self,event) : Promise.resolve()).then(function() {
-                                return (parent.onClick? parent.onClick.call(parent,event) : Promise.resolve()).then(function() {
-                                    self.setActive();
+                            return Promise.resolve().then(function() {
+                                return (self.onClick? self.onClick.call(self,event) : Promise.resolve()).then(function() {
+                                    return (parent.onClick? parent.onClick.call(parent,event) : Promise.resolve()).then(function() {
+                                        self.setActive();
+                                    });
                                 });
                             }).catch(function(e) {
                                 event.stopImmediatePropagation();
@@ -47,7 +49,7 @@ module.exports = function(app) {
             }
         });
         this.managers.event.on('disabled', function() {
-            self.setActive(false);
+           self.setActive(false);
         });
         if (o.active) 
             this.setActive();
@@ -114,7 +116,7 @@ module.exports = function(app) {
         });
     };
     InstanceNavigationMenu.prototype.clear = function(o) {
-        return Promise.all((o? o:this.options).map(function (p) {
+        return Promise.all((o? o:this.pool).map(function (p) {
             return p.destroy(); 
         }));
     };
@@ -132,7 +134,7 @@ module.exports = function(app) {
         var self = this;
         this.menu = new InstanceNavigationMenu({ 
             parent:this, 
-            onClick:o.onClick?o.onClick:null 
+            onClick:o.onClick 
         });
     };
     InstanceNavigation.prototype.init = function(o) {

@@ -1457,6 +1457,62 @@ msgid ""
 msgstr ""
 
 msgid ""
+"Igaro App includes core support for country, language, currency, timezone "
+"offset and dates."
+msgstr ""
+
+msgid "Standards"
+msgstr ""
+
+msgid "ISO 3166.1, IETF and ISO 4217 are supported."
+msgstr ""
+
+msgid "Selection"
+msgstr ""
+
+msgid ""
+"The user's country data is sourced from the OS/browser. From this country, "
+"the most likely language and currency is derived and selected."
+msgstr ""
+
+msgid ""
+"When a language context is unavailable the root (if available) is tried, "
+"followed by the app default, and then the fallback, en."
+msgstr ""
+
+msgid ""
+"All dates are formatted into the user's timezone. By default this is set to "
+"the user's system timezone."
+msgstr ""
+
+msgid ""
+"All selections can be set manually and upon change update the app in "
+"realtime. There's no need to restart it."
+msgstr ""
+
+msgid "Translation"
+msgstr ""
+
+msgid ""
+"Standard .po files are created automatically as code is edited. The "
+"applicable string is pulled at runtime."
+msgstr ""
+
+msgid "core.language includes a parsing routine for embedding %s variables."
+msgstr ""
+
+msgid "Extras"
+msgstr ""
+
+msgid ""
+"A css based library <i>lib.iso.3166.1.flags</i> provides SVG flags for all "
+"countries."
+msgstr ""
+
+msgid "Currencies can be validated and formatted with per currency rules."
+msgstr ""
+
+msgid ""
 "Igaro App is mobile friendly with outstanding performance and a near native "
 "mobile app experience across all platforms."
 msgstr ""

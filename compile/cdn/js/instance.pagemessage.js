@@ -43,25 +43,20 @@ module.exports = function(app) {
                 });
             }
         });
+        this.id = o.id;
     };
 
     InstancePageMessage.prototype.init = function(o) {
-        this.id = o.id;
         var self = this,
             hideable = o.hideable;
         if (hideable)
             this.container.firstChild.classList.add('hideable');
-        return (
-                hideable
-                ? 
-                self.managers.store.get(self.id).then(function(d) {
+        return self.managers.event.dispatch('init').then(function() {
+            if (hideable)
+                return self.managers.store.get(self.id).then(function(d) {
                     if (d && d.hidden)
                         return self.destroy();
-                }) 
-                : 
-                Promise.resolve()
-        ).then(function() {
-            return self.managers.event.dispatch('init');
+                });
         });
     };
 

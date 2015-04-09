@@ -108,16 +108,12 @@ module.exports = function(app) {
                     self.managers.debug.handle(e);
                 throw e;
             }).then(function(container) {
-                if (! container)
+                if (typeof container !== 'object')
                     return;
-                if (typeof container === 'object' && (! (container instanceof Node))) {
-                    if (! container.container)
-                        throw { error:'Promise returned an object without a container element.', sequence:sequence, value:container };
+                if ((!(container instanceof Node)) && container.container instanceof Node)
                     container = container.container;
-                }
-                if (! (container instanceof Node)) 
-                    throw { error:'Promise container is not a DOM element.', sequence:sequence, value:container };
-                o.container.appendChild(container);
+                if (container instanceof Node)
+                    o.container.appendChild(container);
             });
         }, Promise.resolve());
     };
@@ -286,17 +282,22 @@ module.exports = function(app) {
                     if (typeof state === 'boolean' && state === false) {
                         history.replaceState({ initial:true },null);
                     } else {
-                        var urlPath = model.path.slice(router.base.path.length).map(function(f) {
+                        var urlPath = path.map(function(f) {
                             return encodeURIComponent(f);
                         }).join('/');
                         if (search) {
+                            if (typeof search === 'function')
+                                search = search();
                             urlPath += '?' + search.map(function (f) {
                                 return encodeURIComponent(f[0]) + '=' + encodeURIComponent(f[1]);
                             });
                         }
-                        if (hash)
+                        if (hash) {
+                            if (typeof hash === 'function')
+                                hash = hash();
                             urlPath += '#'+hash;
-                        history.pushState(state || {},null,urlPath);
+                        }
+                        history.pushState(state || {},null,'/'+urlPath);
                     }
                 };
                 return routerEventMgr.dispatch('to-begin').then(function (evt) {

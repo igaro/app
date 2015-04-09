@@ -3,23 +3,21 @@
 "use strict";
 
 module.requires = [
-    { name:'route.location.css' },
-    { name:'core.language.js' }
+    { name:'route.location.css' }
 ];
 
 module.exports = function(app) {
 
-    var language = app['core.language'],
-        router = app['core.router'];
+    var router = app['core.router'];
 
     return function(model) {
 
-        var dom = model.managers.dom,
-            wrapper = dom.mk('div',model.wrapper);
+        var domMgr = model.managers.dom,
+            wrapper = domMgr.mk('div',model.wrapper);
             
         //model.autoShow=false;
 
-        dom.mk('a',wrapper,null,function() {
+        domMgr.mk('a',wrapper,null,function() {
             this.className = 'home';
             this.href = '';
             this.addEventListener('click', function(evt) { 
@@ -29,26 +27,26 @@ module.exports = function(app) {
         });
 
         // location
-        dom.mk('div',wrapper,null, function() {
+        domMgr.mk('div',wrapper,null, function() {
             var self = this,
-                paths = dom.mk('div',this,null,'paths'),
-                params = dom.mk('div',this,null,'params'),
-                paramsw = dom.mk('div',params);
+                paths = domMgr.mk('div',this,null,'paths'),
+                params = domMgr.mk('div',this,null,'params'),
+                paramsw = domMgr.mk('div',params);
 
             this.className = 'location';
-            dom.hide(params);
+            domMgr.hide(params);
             router.managers.event
                 .on('to-start', function() {
-                    dom.hide(params);
+                    domMgr.hide(params);
                 })
                 .on('to-in-progress', function() {
                     if (! router.isAtBase()) {
                         model.show();
-                        dom.empty(paths);
-                        dom.empty(paramsw);
+                        domMgr.empty(paths);
+                        domMgr.empty(paramsw);
                         var c = router.current;
                         while (! c.isBase()) {
-                            var m = dom.mk(c === router.current? 'span':'a',null, c.meta.title || c.name);
+                            var m = domMgr.mk(c === router.current? 'span':'a',null, c.meta.title || c.name);
                             if (c !== router.current) {
                                 m.href='#!/'+c.getUrl();
                                 var b = c.uriPath;
@@ -57,11 +55,6 @@ module.exports = function(app) {
                                     router.to(b); 
                                 });
                             }
-                            //var acc = c.meta.account;
-                            //if (acc) {
-                            //    dom.show(params);
-                            //    dom.mk('span', paramsw, acc.id);
-                            //}
                             paths.insertBefore(m,paths.firstChild);
                             c = c.parent;
                         }

@@ -117,12 +117,7 @@ module.exports = function(app) {
                     });
                 })(),
 
-                objMgr.create(
-                    'navigation',
-                    {
-                        type:'tabs'
-                    }
-                ).then(function(navigation) {
+                objMgr.create('navigation').then(function(navigation) {
                     var c = document.createDocumentFragment();
                     domMgr.mk('h1',c,_tr("Mobile Features"));
                     domMgr.mk('p',c,language.substitute(_tr("%d is utilized to access mobile device features such as camera, accelerometer and GPS."),'<a href="http://cordova.apache.org">Apache Cordova</a>'));
@@ -135,40 +130,28 @@ module.exports = function(app) {
                         });
                     });
                     c.appendChild(navigation.container);
-                    var p = domMgr.mk('p', c);
-                    [
+                    domMgr.mk('p',c);
+                    var ss = domMgr.mk('div',c,null,'android');
+                    return navigation.menu.addOptions([
                         {
                             id:'android',
-                            title : 'Android'
-                            
+                            title : 'Android',
+                            active:true
                         },
                         {
                             id:'ios',
                             title : 'IOS'
-                            
-                        },
-                        {
-                            id:'wm',
-                            title : 'Windows Mobile'
                         }
-                    ].forEach(function (o,i) {
-                        var div = domMgr.mk('div',null,null,o.id);
-                        navigation.menu.addOption({
-                            title:o.title,
-                            id:o.id,
-                            onClick: function() {
-                                domMgr.setContent(p,div,{ noEmpty:true });
-                                this.setActive();
-                            }
-                        }).then(function(opt) {
-                            if (! i) {
-                                domMgr.setContent(p,div,{ noEmpty:true });
-                                opt.setActive();
-                            }
-                        });
-                    });
-                    navigation.menu.options[0].setActive();
-                    return c;
+                    ].map(function (o) {
+                        o.onClick = function() { 
+                            ss.className = o.id;
+                            this.setActive();
+                            return Promise.resolve();
+                        }
+                        return o;
+                    })).then(function() {
+                        return c;
+                    });;
                 })
 
             ]
