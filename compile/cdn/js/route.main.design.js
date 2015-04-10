@@ -14,7 +14,7 @@ module.exports = function(app) {
             wrapper = model.wrapper,
             domMgr = model.managers.dom;
 
-        model.setMeta('title', _tr("Design"));
+        model.stash.title=_tr("Design");
 
         domMgr.mk('p',wrapper,_tr("This page explains a little bit about the design principles employed in Igaro App (by Design, we're talking about what you see on a page)."));
 

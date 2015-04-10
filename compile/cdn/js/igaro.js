@@ -429,7 +429,7 @@ window.addEventListener('load', function() {
                 f();
             };
             CoreDom.prototype.hide = function(r,v) {
-                if (! r)
+                if (! (r instanceof Node))
                     throw new Error('No DOM element supplied');
                 if (typeof v === 'boolean' && v === false)
                     return this.show(r);
@@ -440,12 +440,12 @@ window.addEventListener('load', function() {
                 return s.visibility === 'hidden' || s.display === 'none';
             };
             CoreDom.prototype.toggleVisibility = function(r) {
-                if (! r)
+                if (! (r instanceof Node))
                     throw new Error('No DOM element supplied');
                 return this.hide(r,! r.classList.contains('core-dom-hide'));
             }
             CoreDom.prototype.show = function(r) {
-                if (! r)
+                if (! (r instanceof Node))
                     throw new Error('No DOM element supplied');
                 r.classList.remove('core-dom-hide');
             };
@@ -490,8 +490,9 @@ window.addEventListener('load', function() {
                         if (! language) 
                             throw new Error('core.dom -> core.language is not loaded.');
                         var f = r.igaroLangFn = function() {
-                            var isSubmit = r.nodeName === 'INPUT' && r.type && r.type === 'submit';
-                            if (! isSubmit && 'innerHTML' in r) {
+                            if (r.nodeName === 'META') {
+                                r.content = language.mapKey(c); 
+                            } else if (! (r.nodeName === 'INPUT' && r.type && r.type === 'submit') && 'innerHTML' in r) {
                                 r.innerHTML = language.mapKey(c);
                             } else if ('value' in r) {
                                 r.value = language.mapKey(c);
@@ -656,10 +657,6 @@ window.addEventListener('load', function() {
                         if (self.disabled)
                             return;
                         dom.show(container);
-                        return thisMgrsEvt.dispatch('show');
-                    };
-                    this.toggleVisibility = function() {
-                        dom.toggleVisibility(container);
                     };
                     thisManagers.event.on('destroy',function() {
                         dom.nuke(container);

@@ -3,8 +3,7 @@
 'use strict';
 
 module.requires = [
-    { name: 'route.main.modules.css' },
-    { name: 'core.language.js' }
+    { name: 'route.main.modules.css' }
 ];
 
 module.exports = function(app) {
@@ -15,13 +14,13 @@ module.exports = function(app) {
     return function(model) {
 
         var wrapper = model.wrapper,
-            dom = model.managers.dom;
+            domMgr = model.managers.dom;
             
-        model.setMeta('title', _tr("Modules"));
+        model.stash.title=_tr("Modules");
 
-        dom.mk('h1',wrapper, _tr("Igaro Repository"));
+        domMgr.mk('h1',wrapper, _tr("Igaro Repository"));
 
-        dom.mk('button',dom.mk('p',wrapper), _tr("View on Github")).addEventListener('click', function() {
+        domMgr.mk('button',domMgr.mk('p',wrapper), _tr("View on Github")).addEventListener('click', function() {
             window.open('https://github.com/igaro/app');
         });
 
@@ -29,7 +28,7 @@ module.exports = function(app) {
 
             var createTable = function(data,container) {
 
-                dom.mk('p',container,_tr("* = required"));
+                domMgr.mk('p',container,_tr("* = required"));
                 model.managers.object.create('table',{
                     container:container,
                     header : {
@@ -123,7 +122,7 @@ module.exports = function(app) {
                                     l = '⊗';
                                 }
                                 makeahref(row,s.returns,ce, l);
-                                dom.mk('span',ce,' = ');
+                                domMgr.mk('span',ce,' = ');
                             }
                             if (s.instanceof) {
                                 var m=s.instanceof;
@@ -147,7 +146,7 @@ module.exports = function(app) {
                                     var sa = m.name;
                                     if (m.required) 
                                         sa += ' *';
-                                    var a = dom.mk('a',ce,sa);
+                                    var a = domMgr.mk('a',ce,sa);
                                     a.href = m.href? m.href : 'https://developer.mozilla.org/en/docs/Web/API/'+m.name;
                                     if (m.desc) 
                                         rr.setContent({ content:m.desc });
@@ -155,25 +154,25 @@ module.exports = function(app) {
                             } else if (s.attributes && (s.type!=='function' || s.instanceof)) {
                                 makeahref(row,s,ce,s.type);
                             } else {
-                                dom.mk('span',ce,s.type);
+                                domMgr.mk('span',ce,s.type);
                             }
 
                             if (s.attributes && (s.type==='function' || s.instanceof)) {
-                                dom.mk('span',ce,' (');
+                                domMgr.mk('span',ce,' (');
                                 s.attributes.forEach(function (m,i) {
                                     if (i !== 0) 
-                                        dom.mk('span',ce,',');
+                                        domMgr.mk('span',ce,',');
                                     //if (m.instanceof) {
                                     //    makeahref(row,m,ce,m.instanceof().name);
                                     if (m.instanceof || m.attributes) { 
                                         makeahref(row,m,ce,m.instanceof? m.instanceof().name : m.type); 
                                     } else { 
-                                        dom.mk('span',ce,m.type); 
+                                        domMgr.mk('span',ce,m.type); 
                                     }
                                     if (m.required) 
-                                        dom.mk('sup',ce,'*');
+                                        domMgr.mk('sup',ce,'*');
                                 });
-                                dom.mk('span',ce,')');
+                                domMgr.mk('span',ce,')');
                             }
                         });
                     };
@@ -182,23 +181,23 @@ module.exports = function(app) {
             };
 
             var v = m.wrapper;
-            m.setMeta('title', { en : m.name });
+            m.stash.title= { en : m.name };
 
             if (data.desc) {
-                dom.mk('h1',v,_tr("Description"));
-                dom.mk('p',v,data.desc);
+                domMgr.mk('h1',v,_tr("Description"));
+                domMgr.mk('p',v,data.desc);
             }
 
             if (data.download !== false) {
                 var l = data.download? data.download : 'https://github.com/igaro/app/blob/master/app/compile/js/'+m.name+'.js';
-                dom.mk('button',v,_tr("Download")).addEventListener('click', function() {
+                domMgr.mk('button',v,_tr("Download")).addEventListener('click', function() {
                     window.open(l);
                 });
             }
 
             if (data.usage) {
                 var u = data.usage;
-                dom.mk('h1',v,_tr("Usage"));
+                domMgr.mk('h1',v,_tr("Usage"));
                 if (u.instantiate || u.class) {
                     var o = u.instantiate? 
                         _tr("Create a new instance using <b>new <MODNAME></b>.")
@@ -211,22 +210,22 @@ module.exports = function(app) {
                     Object.keys(o).forEach(function (p) { 
                         o[p]=o[p].replace(/\<MODNAME\>/g,n);
                     });
-                    dom.mk('p',v,o);
+                    domMgr.mk('p',v,o);
                 } else if (u.direct) {
-                    dom.mk('p',v,_tr("Access the features of this library directly."));
+                    domMgr.mk('p',v,_tr("Access the features of this library directly."));
                 }
                 if (u.attributes) {
-                    dom.mk('p',v, _tr("Where <b>o</b> is an object containing attributes from the following table."));
-                    createTable(u.attributes, dom.mk('p',v));
+                    domMgr.mk('p',v, _tr("Where <b>o</b> is an object containing attributes from the following table."));
+                    createTable(u.attributes, domMgr.mk('p',v));
                 }
             }        
 
             if (data.demo) {
-                dom.mk('h1',v,_tr("Demo"));
-                dom.mk('h2',v,_tr("code"));
-                dom.mk('p',v);
+                domMgr.mk('h1',v,_tr("Demo"));
+                domMgr.mk('h2',v,_tr("code"));
+                domMgr.mk('p',v);
 
-                var dr = dom.mk('pre',v, data.demo.trim(), 'democode');
+                var dr = domMgr.mk('pre',v, data.demo.trim(), 'democode');
 
                 model.managers.object.create('pagemessage',{ 
                     type:'info',
@@ -239,22 +238,22 @@ module.exports = function(app) {
                     v.insertBefore(cp.container,dr);
                 });
                 
-                dom.mk('h2',v,_tr("Output"));
-                dom.mk('p',v);
+                domMgr.mk('h2',v,_tr("Output"));
+                domMgr.mk('p',v);
                 eval(data.demo);
             }
 
             if (data.attributes) {
-                dom.mk('h1',v,_tr("Attributes"));
-                createTable(data.attributes, dom.mk('p',v));
+                domMgr.mk('h1',v,_tr("Attributes"));
+                createTable(data.attributes, domMgr.mk('p',v));
             }
 
             if (data.dependencies) {
-                dom.mk('h1',v,_tr("Dependencies"));
-                var p = dom.mk('p',v,null,function() {
+                domMgr.mk('h1',v,_tr("Dependencies"));
+                var p = domMgr.mk('p',v,null,function() {
                     var s = this;
                     data.dependencies.forEach(function(o) { 
-                        dom.mk('button',s,o).addEventListener('click', function(evt) {
+                        domMgr.mk('button',s,o).addEventListener('click', function(evt) {
                             evt.preventDefault();
                             this.disabled = true;
                             var self= this;
@@ -267,11 +266,11 @@ module.exports = function(app) {
             }
 
             if (data.related) {
-                dom.mk('h1',v,_tr("Related"));
-                dom.mk('p',v,null,function() {
+                domMgr.mk('h1',v,_tr("Related"));
+                domMgr.mk('p',v,null,function() {
                     var s = this;
                     data.related.forEach(function(o) { 
-                        dom.mk('button',s,o).addEventListener('click', function(evt) {
+                        domMgr.mk('button',s,o).addEventListener('click', function(evt) {
                             evt.preventDefault();
                             this.disabled = true;
                             var self= this;
@@ -285,19 +284,19 @@ module.exports = function(app) {
             }
 
             if (data.author) {
-                dom.mk('h1',v,_tr("Author"));
+                domMgr.mk('h1',v,_tr("Author"));
                 var d = data.author;
                 if (d instanceof Array) {
                     d.forEach(function (a) {
-                        dom.mk('a',dom.mk('p',v,null),a.name).href = a.link;
+                        domMgr.mk('a',domMgr.mk('p',v,null),a.name).href = a.link;
                     });
                 } else {
-                    dom.mk('a',dom.mk('p',v,null),d.name).href = d.link;
+                    domMgr.mk('a',domMgr.mk('p',v,null),d.name).href = d.link;
                 }
             }
 
             if (data.extlinks) {
-                dom.mk('h1',v,_tr("External Links"));
+                domMgr.mk('h1',v,_tr("External Links"));
                 data.extlinks.forEach(function(o) {
                     var name,href;
                     if (typeof o === 'string') {
@@ -306,7 +305,7 @@ module.exports = function(app) {
                         name = o.name;
                         href = o.href;
                     }
-                    dom.mk('a',dom.mk('p',v),name).href = href;
+                    domMgr.mk('a',domMgr.mk('p',v),name).href = href;
                 });
             }
         };
@@ -340,7 +339,7 @@ module.exports = function(app) {
                     ['core.currency', _tr("Currency support and related functionality.")],
                     ['core.date', _tr("Timezone selection, date related functionality.")],
                     ['core.debug', _tr("Centralised debug management.")],
-                    ['core.dom', _tr("Provides DOM management and helpers.")],
+                    ['core.domMgr', _tr("Provides DOM management and helpers.")],
                     ['core.events', _tr("Event management, registration and dispatcher.")],
                     ['core.file', _tr("Filename parsing.")],
                     ['core.html', _tr("HTML parsing, conversion.")],
@@ -371,16 +370,17 @@ module.exports = function(app) {
                     ['polyfill.js.classList', _tr("Polyfill HTML5 classList helpers onto DOM elements.")],
                 ].map(function (o) {
                     var n = o[0];
-                    var a = dom.mk('a',null,n);
-                    a.href='#!/'+model.uriPath+'/'+n;
-                    a.addEventListener('click', function(evt) {
-                        evt.preventDefault();
-                        router.to(model.uriPath.concat(n));
+                    var a = domMgr.mk('a',null,n,function() {
+                        this.href=n;
+                        this.addEventListener('click', function(evt) {
+                            evt.preventDefault();
+                            router.to(model.uriPath.concat(n));
+                        });
                     });
                     return {
                         columns : [
                             {
-                                content:a, search:function() { return a.innerHTML; }
+                                content:a
                             },
                             {
                                 content:o[1]

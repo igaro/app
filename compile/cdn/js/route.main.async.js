@@ -3,8 +3,7 @@
 "use strict";
 
 module.requires = [
-    { name: 'route.main.async.css' },
-    { name: 'core.language.js' }
+    { name: 'route.main.async.css' }
 ];
 
 module.exports = function(app) {
@@ -15,7 +14,7 @@ module.exports = function(app) {
             domMgr = model.managers.dom,
             router = app['core.router'];
         
-        model.setMeta('title', _tr("Asynchronous"));
+        model.stash.title= _tr("Asynchronous");
 
         domMgr.mk('p',wrapper,_tr("Igaro App is an asynchronous framework using Promises and Event Management to manage delayed notification and value convergence. Callbacks are a thing of the past, and most functions in Igaro App return Promises rather than values."));
 

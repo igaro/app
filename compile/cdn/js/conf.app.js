@@ -2474,6 +2474,22 @@ module.exports = function(app, params) {
             });
         });
 
+        // write page meta title & desc on route change (SEO)
+        ['title','desc','keywords'].forEach(function(n) {
+            dom.mk('meta',null,null,function() {
+                var self = this;
+                this.name = n;
+                router.managers.event.on('to-in-progress', function() {
+                    var c = router.current.stash[n];
+                    if (! c) 
+                        return dom.rm(self);
+                    dom.setContent(self,c);
+                    dom.head.appendChild(self);
+                });
+            });
+        });
+
+        // setup page with core routes
         events.on('','state.init', function() {      
             events.remove(this);
             // load initial routes

@@ -11,7 +11,10 @@ module.exports = function(app) {
     return function(model) {
 
     	var wrapper = model.wrapper,
-            domMgr = model.managers.dom;
+            managers = model.managers,
+            domMgr = managers.dom,
+            objectMgr = managers.object,
+            router = app['core.router'];
 
     	var navTop = domMgr.mk('div',null,null,'navTop');
     	navTop.addEventListener('click', function() {
@@ -32,7 +35,7 @@ module.exports = function(app) {
         model.addSequence({ container:wrapper, promises:[
 
             // last update
-            model.managers.object.create('xhr').then(function (xhr) {
+            objectMgr.create('xhr').then(function (xhr) {
                 return xhr.get({ 
                     silent:true,
                     res:'https://api.github.com/orgs/igaro/repos',
@@ -57,7 +60,7 @@ module.exports = function(app) {
             }),
 
             // open issues
-            model.managers.object.create('xhr').then(function (xhr) {
+            objectMgr.create('xhr').then(function (xhr) {
                 return xhr.get({
                     silent:true, 
                     res:'https://api.github.com/orgs/igaro/repos',
@@ -66,17 +69,22 @@ module.exports = function(app) {
                         data = data.filter(function(x) {
                             return x.name === 'app';
                         });
-                        var x = domMgr.mk('div',null,null,'openissues');
-                        domMgr.mk('span',x, _tr("Open Issues:"));
-                        domMgr.mk('a',x,data[0].open_issues).href='https://github.com/igaro/app/issues';
-                        return x;
+                        return domMgr.mk('div',null,null,function() {
+                            this.className = 'openissues';
+                            domMgr.mk('span',this, _tr("Open Issues:"));
+                            domMgr.mk('a',this,data[0].open_issues).href='https://github.com/igaro/app/issues';
+                        });
                     }
                 ).catch(function () {});
             }),
 
             // bookmark
-            model.managers.object.create('bookmark', { url:'http://app.igaro.com' }).then (function(bookmark) {
-                return domMgr.mk('div',null,bookmark.container, 'bookmarks');
+            objectMgr.create('bookmark', { 
+                url:'http://app.igaro.com',
+                title:router.current.stash.title 
+            }).then (function(bookmark) {
+                // on route change
+                return domMgr.mk('div',null,bookmark.container,'bookmarks');
             })
             
         ] });

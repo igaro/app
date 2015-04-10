@@ -3,8 +3,7 @@
 "use strict";
 
 module.requires = [
-    { name: 'route.main.faq.css' },
-    { name: 'core.language.js' }
+    { name: 'route.main.faq.css' }
 ];
 
 module.exports = function(app) {
@@ -14,7 +13,7 @@ module.exports = function(app) {
         var domMgr = model.managers.dom,
             wrapper = model.wrapper;
 
-        model.setMeta('title', _tr("FAQ"));
+        model.stash.title= _tr("FAQ");
 
         domMgr.mk('p',wrapper,_tr("If on reading this FAQ you feel a question and answer is missing please contact us.")); 
 

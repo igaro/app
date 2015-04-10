@@ -14,12 +14,10 @@ module.exports = function(app) {
 
         var domMgr = model.managers.dom,
             wrapper = domMgr.mk('div',model.wrapper);
-            
-        //model.autoShow=false;
 
         domMgr.mk('a',wrapper,null,function() {
             this.className = 'home';
-            this.href = '';
+            this.href = '/';
             this.addEventListener('click', function(evt) { 
                 evt.preventDefault(); 
                 router.to([]); 
@@ -35,7 +33,7 @@ module.exports = function(app) {
 
             this.className = 'location';
             domMgr.hide(params);
-            router.managers.event
+            router.managers.event.extend(model)
                 .on('to-start', function() {
                     domMgr.hide(params);
                 })
@@ -46,9 +44,9 @@ module.exports = function(app) {
                         domMgr.empty(paramsw);
                         var c = router.current;
                         while (! c.isBase()) {
-                            var m = domMgr.mk(c === router.current? 'span':'a',null, c.meta.title || c.name);
+                            var m = domMgr.mk(c === router.current? 'span':'a',null, c.stash.title || c.name);
                             if (c !== router.current) {
-                                m.href='#!/'+c.getUrl();
+                                m.href=c.getUrl();
                                 var b = c.uriPath;
                                 m.addEventListener('click', function(evt) {
                                     evt.preventDefault();

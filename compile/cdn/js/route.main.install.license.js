@@ -1,22 +1,17 @@
 module.requires = [
-    { name:'route.main.install.license.css' },
-    { name:'core.language.js' }
+    { name:'route.main.install.license.css' }
 ];
 
 module.exports = function(app) {
 
     return function(model) {
 
-        var view = model.view;
+        var wrapper = model.wrapper,
+            domMgr = model.managers.dom;
 
-        var wrapper = model.wrapper;
+        model.stash.title=_tr("License");
 
-        model.setMeta('title', {
-            en : 'License'
-        });
-
-        dom.mk('p',wrapper, {
-            en : 'Igaro App is licensed under the GNU General Public License V3.</p>\
+        domMgr.mk('p',wrapper, 'Igaro App is licensed under the GNU General Public License V3.</p>\
 <p>By installing or using any part of this software you agree to accept the terms of this license.</p>\
 \
 <h1>TERMS AND CONDITIONS</h1>\
@@ -573,9 +568,7 @@ above cannot be given local legal effect according to their terms,\
 reviewing courts shall apply local law that most closely approximates\
 an absolute waiver of all civil liability in connection with the\
 Program, unless a warranty or assumption of liability accompanies a\
-copy of the Program in return for a fee.</p>'
-
-        });
+copy of the Program in return for a fee.</p>');
 
     };
 

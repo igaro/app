@@ -1,6 +1,5 @@
 module.requires = [
     { name: 'route.main.features.css' },
-    { name: 'core.language.js' },
     { name: 'core.currency.js' }
 ];
 
@@ -12,7 +11,7 @@ module.exports = function(app) {
             wrapper = model.wrapper,
             currency = app['core.currency'];
 
-        model.setMeta('title', _tr('Features'));
+        model.stash.title = _tr("Features");
 
         var managers = model.managers,
             domMgr= managers.dom,

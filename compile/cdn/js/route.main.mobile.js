@@ -3,8 +3,7 @@
 "use strict";
 
 module.requires = [
-    { name: 'route.main.mobile.css' },
-    { name: 'core.language.js'}
+    { name: 'route.main.mobile.css' }
 ];
 
 module.exports = function(app) {
@@ -17,7 +16,7 @@ module.exports = function(app) {
             objMgr = managers.object,
             language = app['core.language'];
 
-        model.setMeta('title', _tr("Mobile"));
+        model.stash.title=_tr("Mobile");
 
         domMgr.mk('p',wrapper,_tr("Igaro App is mobile friendly with outstanding performance and a near native mobile app experience across all platforms."));
 

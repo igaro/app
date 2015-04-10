@@ -1412,6 +1412,9 @@ msgid ""
 "something cool."
 msgstr ""
 
+msgid "License"
+msgstr ""
+
 msgid "Insight"
 msgstr ""
 

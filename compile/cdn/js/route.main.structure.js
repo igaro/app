@@ -3,8 +3,7 @@
 "use strict";
 
 module.requires = [
-    { name:'route.main.structure.css' },
-    { name:'core.language.js' }
+    { name:'route.main.structure.css' }
 ];
 
 module.exports = function(app) {
@@ -15,7 +14,7 @@ module.exports = function(app) {
             domMgr = model.managers.dom,
             language = app['core.language'];
 
-        model.setMeta('title', _tr("Structure"));
+        model.stash.title=_tr("Structure");
 
         domMgr.mk('p',wrapper,_tr("This page documents folders and files within them that make up Igaro App."));
 

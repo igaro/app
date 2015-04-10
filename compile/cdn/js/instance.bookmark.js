@@ -40,14 +40,18 @@ module.exports = function(app) {
         domMgr.empty(c);
         opts.forEach(function(p) {
             var to = encodeURIComponent(o.url),
-                title = o.title? encodeURIComponent(obj.title) : '',
+                title = o.title? encodeURIComponent(o.title) : '',
                 url = p.url
                         .replace(/\<URL\>/g,to)
                         .replace(/\<TITLE\>/g,title);
             domMgr.mk('li',c,null,function() {
                 this.className = p.name.toLowerCase();
-                this.addEventListener('click', function() {
-                    window.open(url);
+                domMgr.mk('a',this,null,function() {
+                    this.addEventListener('click', function(event) {
+                        event.preventDefault();
+                        window.open(url);
+                    });
+                    this.href = url;
                 });
             });
         });

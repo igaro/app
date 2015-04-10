@@ -20,35 +20,29 @@ module.exports = function(app) {
 
     // ROUTE
     var CoreRouterRoute = function(o) {
+        var self = this;
         bless.call(this,{
             name:o.name,
-            parent:o.parent? o.parent : null
+            parent:o.parent,
+            container : function(dom) {
+                return dom.mk('div',o.container,null,function() {
+                    this.className = 'route';
+                    self.wrapper = dom.mk('div',this,null,'wrapper');
+                    if (typeof o.name === 'string')
+                        this.classList.add(o.name.replace(/\./g,'--'));
+                });
+            }
         });
-        var self = this,
-            name = this.name,
-            parent = this.parent;
-        this.meta = {};
         this.uriPath = [];
         this.children = [];
         this.uriPieces = [];
         this.originalUri = [];
-        this.displayCount=0;
         this.defaultHideChildren=true;
         this.defaultHideParentViewWrapper=true;
-        this.isVisible=false;
-        this.autoShow=true;
+        this.defaultShowWrapper=true;
         this.scrollPosition=0;
-        this.container = dom.mk('div',null,null,function() {
-            this.className = 'route';
-            if (o.name)
-                this.classList.add(o.name);
-            self.wrapper = dom.mk('div',this,null,'wrapper');
-            dom.hide(this);
-            this.setAttribute('displaycount',0);
-            if (typeof name === 'string' && name.length)
-                this.classList.add(name.replace(/\./g,'--'));
-        });
         this.cssElement=dom.mk('style',dom.head);
+        //this.hide();
     };
     
     CoreRouterRoute.prototype.captureUri = function(c) {
@@ -77,25 +71,9 @@ module.exports = function(app) {
     };
 
     CoreRouterRoute.prototype.getUrl = function() {
-        return this.uriPath.map(function (o) {
+        return '/'+this.uriPath.map(function (o) {
             return encodeURIComponent(o);
         }).join('/');
-    };
-
-    CoreRouterRoute.prototype.hide = function() {
-        this.managers.dom.hide(this.container);
-        this.isVisible=false;
-        return this.managers.event.dispatch('hide');
-    };
-
-    CoreRouterRoute.prototype.show = function(o) {
-        var c=this.container;
-        this.managers.dom.show(c);
-        c.setAttribute('displaycount',this.displayCount);
-        this.displayCount++;
-        this.managers.dom.show(this.wrapper);
-        this.isVisible=true;
-        return this.managers.event.dispatch('show'); 
     };
 
     CoreRouterRoute.prototype.addSequence = function(o) {
@@ -116,11 +94,6 @@ module.exports = function(app) {
                     o.container.appendChild(container);
             });
         }, Promise.resolve());
-    };
-
-    CoreRouterRoute.prototype.setMeta = function(n,v) {
-        this.meta[n] = v;
-        return this.managers.event.dispatch('setMeta', { name:n, value:v });
     };
 
     CoreRouterRoute.prototype.isBase = function() {
@@ -153,7 +126,8 @@ module.exports = function(app) {
                     }
                 })) {
                     g = new CoreRouterRoute({ 
-                        parent:self, 
+                        parent:self,
+                        container:self.container, 
                         name:name
                     });
                     var provider = router.getProvider(g.path);
@@ -175,22 +149,28 @@ module.exports = function(app) {
                         }
                     ).then(function() {
                         pool.push(g);
-                        g.managers.event.on('destroy', function() {
-                            pool.splice(pool.indexOf(g), 1);
-                        });
+                        g.managers.event
+                            .on('destroy', function() {
+                                pool.splice(pool.indexOf(g), 1);
+                            });
                         return self.managers.event.dispatch('addChildren',g);
                     })];
                 }
                 return Promise.all(doAction).then(function() {
                     g.originalUri = o.uri;
                     return g.managers.event.dispatch('enter').then(function() {
-                        var act = g._initilized? [] : [g.managers.event.dispatch('init')];
-                        return Promise.all(act).then(
-                            function() {
+                        if (!g._initilized)
+                            return g.managers.event.dispatch('init').then(function() {
                                 g._initilized = true;
-                                return g;
-                            }
-                        );
+                            });
+                    }).then(function() {
+                        if (g.defaultShowWrapper)
+                            g.managers.dom.show(g.wrapper);
+                        if (g.defaultHideChildren) 
+                            g.hideChildren();
+                        if (g.defaultHideParentViewWrapper) 
+                            g.managers.dom.hide(g.parent.wrapper);
+                        return g;
                     });
                 }).catch(function (e) {
                     g.destroy();
@@ -200,18 +180,6 @@ module.exports = function(app) {
                 return sequence.then(function() {
                     return cP;
                 }).then(function(model) {
-                    if (model.defaultHideChildren) 
-                        model.hideChildren();
-                    if (model.defaultHideParentViewWrapper) 
-                        dom.hide(model.parent.wrapper);
-                    if (! model.container.parentNode) {
-                        var p = model.parent.container;
-                        if (o.before) {
-                            p.insertBefore(model.container,o.before.container);
-                        } else {
-                            p.appendChild(model.container);
-                        }
-                    }
                     arr.push(model);
                     if(arr.length===o.list.length) 
                         resolve(arr);

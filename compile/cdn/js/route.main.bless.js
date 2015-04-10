@@ -4,8 +4,7 @@
 "use strict";
 
 module.requires = [
-    { name: 'route.main.bless.css' },
-    { name: 'core.language.js' }
+    { name: 'route.main.bless.css' }
 ];
 
 module.exports = function(app) {
@@ -16,7 +15,7 @@ module.exports = function(app) {
             domMgr = model.managers.dom,
             router = app['core.router'];
         
-        model.setMeta('title', _tr("Bless"));
+        model.stash.title=_tr("Bless");
 
         domMgr.mk('p',wrapper,_tr("An integral feature of Igaro App is how it can decorate standard objects to enhance the parent-child relationship, to aid in dependency tracking, and to cut down on duplicate code."));
         

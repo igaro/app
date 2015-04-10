@@ -15,7 +15,7 @@ module.exports = function(app) {
         var managers = model.managers,
             domMgr = managers.dom;
 
-        model.setMeta('title', _tr("Overview"));
+        model.stash.title=_tr("Overview");
 
         domMgr.mk('p',wrapper,_tr("Igaro App is a Javascript based framework for developing scalable, responsive and dynamic web and mobile applications."));
 
@@ -36,7 +36,6 @@ module.exports = function(app) {
             domMgr.mk('li',this,_tr("Cutting edge features, error handling and techniques."));
 
         }));
-
 
         domMgr.mk('h1',wrapper,_tr("Users"));
 

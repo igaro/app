@@ -3,8 +3,7 @@
 "use strict";
 
 module.requires = [
-    { name: 'route.main.install.css' },
-    { name: 'core.language.js' }
+    { name: 'route.main.install.css' }
 ];
 
 module.exports = function(app) {
@@ -17,7 +16,7 @@ module.exports = function(app) {
             domMgr = model.managers.dom,
             router = app['core.router'];
 
-        model.setMeta('title', _tr("Install"));
+        model.stash.title=_tr("Install");
         
         domMgr.mk('p',wrapper,_tr("The following instructions assume a unix, linux or mac environment."));
 

@@ -10,7 +10,7 @@ module.exports = function(app) {
             managers = model.managers,
             domMgr = managers.dom;
 
-        model.setMeta('title', _tr("Locale"));
+        model.stash.title=_tr("Locale");
 
         domMgr.mk('p',wrapper,_tr("Igaro App includes core support for country, language, currency, timezone offset and dates."));
 

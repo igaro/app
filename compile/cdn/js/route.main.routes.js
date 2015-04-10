@@ -14,7 +14,7 @@ module.exports = function(app) {
             wrapper = model.wrapper,
             domMgr = model.managers.dom;
 
-        model.setMeta('title', _tr("Routes"));
+        model.stash.title=_tr("Routes");
 
         domMgr.mk('p',wrapper,_tr("Igaro App isn't MVC. This article explains how pages are built."));
 
