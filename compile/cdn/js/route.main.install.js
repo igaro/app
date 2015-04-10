@@ -37,7 +37,7 @@ module.exports = function(app) {
 
         domMgr.mk('textarea',wrapper,"mkdir igaro \n\
 git clone https://github.com/igaro/app.git igaro/git --depth=1 \n\
-sudo npm install -g grunt-cli \n\
+sudo npm install grunt-cli \n\
 sudo gem update --system \n\
 sudo gem install compass \n\
 cd igaro/git \n\
