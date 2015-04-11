@@ -72,7 +72,7 @@ module.exports = function(app) {
 
                 model.managers.object.create('pagemessage',{
                     type:'info',
-                    message: _tr("You can see the code behind any page in this app by clicking the menu icon in the top right corner."),
+                    message: _tr("You can view the code behind any page in this app by clicking the parenthesis icon in the header."),
                     hideable: {
                         id:model.path.join('.')+'.hintcode'
                     }

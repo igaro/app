@@ -50,8 +50,8 @@ module.exports = function(app) {
                     ]
                 }),
 
-                new Promise(function(resolve) {
-                    return resolve(domMgr.mk('a',null,null, function() {
+                Promise.resolve(
+                    domMgr.mk('a',null,null, function() {
                         this.className = 'settings';
                         this.addEventListener('click', function(event) {
                             event.preventDefault();
@@ -189,17 +189,31 @@ module.exports = function(app) {
                                 return managers.debug.handle(e);
                             }); 
                         });    
-                    }));
-                }),
+                    })
+                ),
 
-                new Promise(function(resolve) {
-                     var xhricon = domMgr.mk('div',null,null,'xhr'),
-                        w = domMgr.mk('div', xhricon),
-                        total=0, ref;
+                Promise.resolve(
+                    domMgr.mk('a',null,null,function() {
+                        this.className = 'code';
+                        this.addEventListener('click',function(event) {
+                            event.preventDefault();
+                            window.open('https://github.com/igaro/app/blob/master/compile/js/'+router.current.path.join('.')+'.js')
+                        });
+                    })
+                ),
+
+                Promise.resolve(
+                    domMgr.mk('div',null,null,function() {
+                        this.className = 'xhr';
+                        domMgr.hide(this);
+                        var total=0, 
+                            ref,
+                            self = this;
+                        domMgr.mk('div', self),
                         model.on('instance.xhr','start', function () {
-                            if (total === 0 && ! xhricon.parentNode && ! ref) 
+                            if (total === 0 && ! ref) 
                                 ref=setTimeout(function() { 
-                                    wrapper.appendChild(xhricon);
+                                    domMgr.show(self);
                                 },350);
                             total++;
                         });
@@ -208,12 +222,12 @@ module.exports = function(app) {
                                 total--; 
                             if (total !== 0) 
                                 return;
-                            clearTimeout(ref);ref=null;
-                            if (xhricon.parentNode) 
-                                xhricon.parentNode.removeChild(xhricon);
+                            clearTimeout(ref);
+                            ref=null;
+                            domMgr.hide(self)
                         });
-                    return resolve(w);
-                })
+                    })
+                )
             ]
         });
 

@@ -1426,8 +1426,8 @@ msgid "Begin"
 msgstr ""
 
 msgid ""
-"You can see the code behind any page in this app by clicking the menu icon "
-"in the top right corner."
+"You can view the code behind any page in this app by clicking the "
+"parenthesis icon in the header."
 msgstr ""
 
 msgid "Overview"
