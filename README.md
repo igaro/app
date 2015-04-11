@@ -11,7 +11,7 @@ Igaro App is fast, secure, modular and featured. It's designed for developers an
 
 ## Igaro 1.00 Preview!
 
-It's coming soon. The bulk of the work is complete with just the documentation to go. Massive amount of updates, enhancemments and features. The most complete and best written SPA framework available? Probaably! Check it out! 
+It's coming soon. The bulk of the work is complete with just the documentation to go. Massive amount of updates, enhancemments and features. The most complete and best written SPA framework available? Probably! Check it out! 
 
 mkdir igaro  
 git clone https://github.com/igaro/app.git igaro/git  
