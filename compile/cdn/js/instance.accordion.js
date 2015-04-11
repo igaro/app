@@ -17,7 +17,7 @@ module.exports = function(app) {
             parent:o.parent,
             stash:o.stash,
             container:function(dom) { 
-                return dom.mk('dl'); 
+                return dom.mk('dl',o.parent); 
             },
             disabled:o.disabled,
             hidden:o.hidden
@@ -35,7 +35,7 @@ module.exports = function(app) {
             self.toggle();
         });
         this.managers.event.on('disabled', function() {
-            self.collapse();
+            return self.collapse();
         });
         if (o.expand)
             this.expand();
@@ -75,7 +75,7 @@ module.exports = function(app) {
         this.multiExpand = o.multiExpand;
         this.managers.event
             .on('section.destroy', function(s) {
-                sections.splice(sections.indexOf(s),1);
+                sections.splice(sections.indexOf(s.value),1);
             });
     };
 
@@ -98,7 +98,6 @@ module.exports = function(app) {
     InstanceAccordion.prototype.addSection = function(o) {
         o.parent = this;
         var s = new InstanceAccordionSection(o);
-        this.managers.dom.append(this,s,o);
         this.sections.push(s);
         return this.managers.event.dispatch('addSection',s);
     };

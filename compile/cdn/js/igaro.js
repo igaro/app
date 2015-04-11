@@ -593,14 +593,11 @@ window.addEventListener('load', function() {
                         if (! o)
                             o = {};
                         var t = typeof g === 'string'? { name:g } : g,
-                            container = o.container,
                             name = t.fullname? t.fullname : 'instance.'+t.name,
                             p = { 
                                 modules : [{ name: name+'.js' }],
                                 repo : t.repo? t.repo : null
                             };
-                        if (container)
-                            container = thisManagers.dom.mk('div',container);
                         return new amd({ parent:self }).get(p).then(function () {
                             o.parent = self;
                             var i = new app[name](o);

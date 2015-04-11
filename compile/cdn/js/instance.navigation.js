@@ -83,8 +83,7 @@ module.exports = function(app) {
             parent:o.parent,
             stash:o.stash,
             container:function(dom) {
-                return dom.mk('ul',o.parent.container, null, function() {
-                });
+                return dom.mk('ul',o.parent.container);
             }
         });
         var pool = this.pool = [];
@@ -131,7 +130,6 @@ module.exports = function(app) {
                 return dom.mk('nav',o.container,null,o.className);
             }
         });
-        var self = this;
         this.menu = new InstanceNavigationMenu({ 
             parent:this, 
             onClick:o.onClick 
