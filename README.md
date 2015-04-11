@@ -9,7 +9,20 @@ Igaro App is fast, secure, modular and featured. It's designed for developers an
 * Object Orientated with no global variables. 
 * Event Driven, Async with A+ Promises.
 
-Igaro App can't be compared to frameworks like Angular, which take HTML and attempt to integrate Javascript around it. Igaro App is more comparible to a Java app made with Javascript. 
+## Igaro 1.00 Preview!
+
+It's coming soon. The bulk of the work is complete with just the documentation to go. Massive amount of updates, enhancemments and features. The most complete and best written SPA framework available? Probaably! Check it out! 
+
+mkdir igaro 
+git clone https://github.com/igaro/app.git igaro/git
+sudo npm install grunt-cli 
+sudo gem update --system 
+sudo gem install compass 
+cd igaro/git
+git checkout -b igaro100 origin/igaro100
+npm install 
+compass compile -c compass.rb 
+grunt
 
 ## Overview
 
