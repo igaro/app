@@ -1422,7 +1422,19 @@ msgid ""
 "An amazing architecture, developed by professionals, loaded with features."
 msgstr ""
 
-msgid "Begin"
+msgid "Igaro App Javascript Framework"
+msgstr ""
+
+msgid ""
+"Igaro App is a powerful Javascript framework for developing single page "
+"application websites (web-apps). Zero HTML, zero dependencies and "
+"beautifully engineered."
+msgstr ""
+
+msgid "javascript, spa, app, html5, framework"
+msgstr ""
+
+msgid "Welcome to <b>Igaro App</b> Javascript Framework"
 msgstr ""
 
 msgid ""
@@ -1454,9 +1466,7 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
-msgid ""
-"Learn, develop and deploy a custom application. All modules are fully "
-"documented."
+msgid "Learn, develop and deploy an app. All modules are fully documented."
 msgstr ""
 
 msgid ""

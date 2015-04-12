@@ -19,29 +19,22 @@ module.exports = function(app) {
             domMgr = managers.dom,
             debugMgr = managers.debug;
 
+        model.stash.title = _tr("Igaro App Javascript Framework");
+        model.stash.description = _tr("Igaro App is a powerful Javascript framework for developing single page application websites (web-apps). Zero HTML, zero dependencies and beautifully engineered.");
+        model.stash.keywords = _tr("javascript, spa, app, html5, framework");        
+
         var wrapper = model.wrapper, 
-            header = model.stash.header = domMgr.mk('div',wrapper,null,'header');
-        
+            header = domMgr.mk('div',wrapper,null,'header');
+       
+        // spinners
+        domMgr.mk('div',wrapper,
+            ['firefox','chrome','ie','android','ios','wm'].map(function(o) {
+                return domMgr.mk('div',null,null,o);
+            }),
+            'spinners');
+ 
         // header
-        domMgr.mk('span',header,_tr("Welcome to <b>Igaro App</b>"));
-        domMgr.mk('button',header,_tr("Begin")).addEventListener('click', function() {
-            this.disabled=true;
-            var self = this;
-            new Amd().get({ modules:[{ name:'route-ext.main.js' }] }).then(
-                function() {
-                    try {
-                        app['route-ext.main'](model);
-                    } catch(e) {
-                        throw new Error(e);
-                    }
-                },
-                function() {
-                    self.disabled=false;
-                }
-            ).catch(function (e) {
-                debugMgr.handle(e);
-            });
-        });
+        domMgr.mk('span',header,_tr("Welcome to <b>Igaro App</b> Javascript Framework"));
 
         var writeList = function(pool,list) {
             return pool.reduce(function(a,b) { 
@@ -112,7 +105,7 @@ module.exports = function(app) {
                         return {
                             container: domMgr.mk('section', null, [
                                 domMgr.mk('h1', null, _tr("Documentation")),
-                                domMgr.mk('p', null, _tr("Learn, develop and deploy a custom application. All modules are fully documented.")),
+                                domMgr.mk('p', null, _tr("Learn, develop and deploy an app. All modules are fully documented.")),
                                 list.container
                             ])
                         };

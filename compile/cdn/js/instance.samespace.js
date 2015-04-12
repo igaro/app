@@ -51,12 +51,11 @@ module.exports = function(app) {
                 })
             }
         });
-        var container = this.container,
-            domMgr = this.managers.dom,
+        var domMgr = this.managers.dom,
             spaces = this.spaces = [];
         this.current = -1;
         this.delay = o.delay || 5000;
-        this.nav = domMgr.mk('nav',container,domMgr.mk('ul'));
+        this.nav = domMgr.mk('nav',this,domMgr.mk('ul'));
         if (! o.transparent) 
             this.canvas.style.backgroundColor = 'black';
         this.loop = typeof o.loop === 'boolean'? o.loop : true;

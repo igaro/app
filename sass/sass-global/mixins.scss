@@ -111,13 +111,20 @@ $PAGE_PADDING_HALF_HEIGHT : 1%;
         >a {
 
             color:#000;
+            @include commongradient;
             &:hover, &:active {
-                color:#000;
-                text-decoration:none;
-                @include commongradient;
-                border-color:#E4E4E4;
-                border-radius:1em;
+                color:inherit;
+                text-decoration:inherit;
+                border-color:#bbb;
                 cursor:pointer;
+            }
+
+            &:hover {
+                background: linear-gradient(color-stops(#F9F9F9 0%, #E0E0E0 100%));
+                border-top-color:#ccc;
+                border-left-color:#c5c5c5;
+                border-right-color:#c5c5c5;
+                border-bottom-color:#bbb;
             }
 
             &:focus {
@@ -133,14 +140,19 @@ $PAGE_PADDING_HALF_HEIGHT : 1%;
                     top:0;
             }
 
-            border: 1px solid #E9E9E9;
-            background:#fff;
+            border: 1px solid #ccc;
+            border-top-color:#ddd;
+            border-left-color:#d5d5d5;
+            border-right-color:#d5d5d5;
             width:8em; 
             height:7.5em;
             overflow: auto;
             margin: auto;
             position: absolute;
-            top:0; left:0; bottom:0; right:0;
+            top:0;
+            left:0; 
+            bottom:0; 
+            right:0;
             border-radius:1em;
             text-align:center;
             font-size:120%;

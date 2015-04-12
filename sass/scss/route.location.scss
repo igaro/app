@@ -2,7 +2,7 @@
 
 body >.core-router >.location {
 
-	border-bottom: 1px solid #eee;
+	border-bottom: 1px solid #dadadf;
 	background:#fff;
 
 	>.wrapper {
@@ -13,12 +13,11 @@ body >.core-router >.location {
         border:none;
 
         >div {
-            color:#4d4e53;
             font-size:120%;
             font-weight:bold;
             display:table;
             background:none;
-            border:0;
+            border:none;
         
             >* {
                 display:table-cell;

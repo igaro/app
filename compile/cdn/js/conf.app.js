@@ -2475,7 +2475,7 @@ module.exports = function(app, params) {
         });
 
         // write page meta title & desc on route change (SEO)
-        ['title','desc','keywords'].forEach(function(n) {
+        ['title','description','keywords'].forEach(function(n) {
             dom.mk('meta',null,null,function() {
                 var self = this;
                 this.name = n;

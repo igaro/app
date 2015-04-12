@@ -34,10 +34,10 @@ module.exports = function(app) {
                 ],
                 container:header,
                 effect:'slowswipe',
-                navOff:true,
+                navigation:false,
                 loop:false,
                 delay:4500,
-                autostart:true,
+                start:true,
                 transparent:true
             }
         ).then(function() {

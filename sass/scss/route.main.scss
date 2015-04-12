@@ -50,13 +50,11 @@ body >.core-router >.main {
             padding-left:0;
             padding-right:0;
             background:#fff;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #dadadf;
             @media (min-width:650px) {
                 font-size:150%;
             }
-            >button { margin-left:0.7em }
         }
-
 
         >.spinners {
             position:fixed;
