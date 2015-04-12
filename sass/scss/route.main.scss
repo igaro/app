@@ -57,13 +57,89 @@ body >.core-router >.main {
             >button { margin-left:0.7em }
         }
 
+
+        >.spinners {
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            z-index:-1;
+            visibility:hidden;
+            overflow:hidden;
+            >div {
+                position:absolute;
+                visibility:hidden;
+                width:30em;
+                height:30em;
+                animation-duration:6s;
+                -webkit-animation-duration:6s;
+            }
+
+            >.firefox, >.android {
+                bottom:-15em;
+                left:100%;
+                -webkit-animation-name: route-main-spinner-rotateBottomLeft;
+                animation-name: route-main-spinner-rotateBottomLeft;
+            }
+            >.firefox {
+                background:inline-image("route.main/spinners/firefox.svg") no-repeat 50% 50%;
+                background-size:60%;
+                animation-delay:2s;
+                -webkit-animation-delay:2s;
+            }
+            >.android {
+                background:inline-image("route.main/spinners/android.svg") no-repeat 50% 50%;
+                background-size:60%;
+                animation-delay:19s;
+                -webkit-animation-delay:19s;
+            }
+
+            >.ie, >.ios {
+                top:28%;
+                left:-13em;
+                -webkit-animation-name: route-main-spinner-rotateLeftSide;
+                animation-name: route-main-spinner-rotateLeftSide;
+            }
+            >.ios {
+                background:inline-image("route.main/spinners/ios.svg") no-repeat 50% 50%;
+                background-size:60%;
+                animation-delay:15s;
+                -webkit-animation-delay:15s;
+            }
+            >.ie {
+                background:inline-image("route.main/spinners/ie.svg") no-repeat 50% 50%;
+                background-size:60%;
+                animation-delay:7s;
+                -webkit-animation-delay:7s;
+            }
+
+            >.wm, >.chrome {
+                right:25%;
+                top:-10em;
+                -webkit-animation-name: route-main-spinner-rotateTopRight;
+                animation-name: route-main-spinner-rotateTopRight;
+            }
+            >.wm {
+                background:inline-image("route.main/spinners/wm.svg") no-repeat 0 50%;
+                background-size:60%;
+                animation-delay:24s;
+                -webkit-animation-delay:24s;
+            }
+            >.chrome {
+                background:inline-image("route.main/spinners/chrome.svg") no-repeat 0 0;
+                background-size:60%;
+                animation-delay:11s;
+                -webkit-animation-delay:11s;
+            }
+        }
+
         >.main {
 
             @include pagepadding;
             @include pagerestrictwidth;
 
             >section {
-
                 >h1 {
                     margin-left: 10%;
                     margin-bottom:0.3em;
@@ -73,25 +149,20 @@ body >.core-router >.main {
                         margin-left:5%;
                     }
                 }
-
                 >p {
                     margin:0;
                 }
-
                 &:not(:last-child) {
                     border-bottom: 1px solid #eee;
                     @include spacingbottom;
                 }
-
                 >.instance-list {
-
                     @include pagemenu;
                     >li {
                         -webkit-animation-name: route-main-list-bounce;
                         animation-name: route-main-list-bounce;
                         -webkit-animation-duration:1.3s;
                         animation-duration:1.3s;
-
                         &:nth-child(2) {
                             animation-delay:0.1s;
                             -webkit-animation-delay:0.1s;
@@ -243,7 +314,7 @@ body >.core-router >.main {
 
                 >.instance-bookmark, >.stats {
                     @media (max-width:1300px) {
-                        //display:none;
+                        display:none;
                     }
                 }
 
