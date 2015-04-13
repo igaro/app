@@ -89,16 +89,15 @@ module.exports = function(app, params) {
         },
     
         substitute : function() {
-            var args = Array.prototype.slice.call(arguments,0);
-            var n = JSON.parse(JSON.stringify(args.shift()));
-            Object.keys(n).forEach(function (k) {
-                n[k] = n[k].replace(/\%d/g,function() {
-                    if (! args.length)
-                        throw new Error('Argument length error', n);
-                    var l = args.shift();
-                    if (typeof l === 'object') 
-                        return l[k];
-                    return l;
+            var args = Array.prototype.slice.call(arguments,0),
+                orig = args.shift(),
+                n = {};
+            Object.keys(orig).forEach(function (k) {
+                n[k] = orig[k].replace(/\%[\d]/g, function(m,v) {
+                    v = args[parseInt(m.substr(1))];
+                    if (typeof v === 'object') 
+                        return v[k] || m;
+                    return v || m;
                 });
             });
             return n;
