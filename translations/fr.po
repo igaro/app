@@ -1154,7 +1154,7 @@ msgstr ""
 msgid "Due to lack of standard features, support is disabled by default."
 msgstr ""
 
-msgid "3rd Party Javascript Integration"
+msgid "3rd Party Integration"
 msgstr ""
 
 msgid "Existing code can be rapidly integrated into the Igaro App framework."
@@ -1170,75 +1170,68 @@ msgid "Dependencies"
 msgstr ""
 
 msgid ""
-"Zero. Ziltch. Igaro App is entirely free of dependencies. It doesn't require "
-"JQuery or any other third party library."
-msgstr ""
-
-msgid "Prototype or Classes?"
-msgstr ""
-
-msgid ""
-"Neither. Igaro App blesses Javascript Objects. See the core.bless module."
+"Igaro App is entirely free of dependencies. It doesn't require JQuery or any "
+"other third party library."
 msgstr ""
 
 msgid "Is Igaro App like x,y,z?"
 msgstr ""
 
 msgid ""
-"No. Frameworks like Angular, Backbone and React use HTML, data binding and "
-"are inefficient. They appear powerful and easy to learn but fall flat when "
-"you try to make a real App with them, and that's because they have been "
-"designed to sell, not to do things right. There's a reason why Angular "
-"'sponsored by Google' isn't used in any of Googles products."
+"Probably not. Frameworks like Angular, Backbone and React use HTML and data "
+"binding and hence are inheritly inefficient. On the face of it they appear "
+"easy to learn but fall flat on large scale App development. If you need glue "
+"to stick a mess together, they work well. Igaro App is simply better "
+"engineered - it doesn't need a digest cycle or virtual DOM. There must be a "
+"reason why Angular 'sponsored by Google' isn't used in any of Googles "
+"products?"
 msgstr ""
 
 msgid "Features"
 msgstr ""
 
-msgid ""
-"Igaro's architecture is build around several core principles, these provide "
-"a layer on which everything else is built;"
+msgid "Igaro's architecture is build on several core principles;"
 msgstr ""
 
 msgid ""
-"Javascript is a prototypal language. It's not Java and shouldn't be written "
-"to mimick it."
+"The Javascript specification must be adhered to. No duplicity and always use "
+"standards."
 msgstr ""
 
 msgid ""
-"HTML is a weak design language ill suited for dynamic operation. Therefore, "
-"use no HTML."
-msgstr ""
-
-msgid "Child objects should report to parents. Events should fire up a chain."
+"HTML is a design language ill suited for dynamic operation. Therefore, use "
+"no HTML."
 msgstr ""
 
 msgid ""
-"The Javascript specification must be adhered to. No functional duplicity or "
-"prototyping onto internal objects."
+"Child objects should be able to communicate with parent objects and thus "
+"events should fire up a hierarchy."
 msgstr ""
 
 msgid ""
-"Functions have the potential to be asynchronous, or emit an event which may "
-"be so, therefore they should return Promises."
+"Most functions have a potential to be asynchronous, or emit an event which "
+"may be so, therefore they should return Promises."
 msgstr ""
 
-msgid "These principles result in;"
+msgid "From these the foundation on which your app is built will feature;"
 msgstr ""
 
-msgid "Flexability - expand on functions without rewriting them."
+msgid "Flexability - expand functions without appending code into them."
 msgstr ""
 
-msgid "Design - built on DOM manipulation, not HTML and hackwork."
+msgid "Design - built on DOM, not HTML templating and slow parsing."
 msgstr ""
 
-msgid "Encapsulation - code is compartmentalized."
+msgid "Encapsulation - code is compartmentalized and abstracted."
 msgstr ""
 
 msgid "Security - no memory leaks or public variables."
 msgstr ""
 
 msgid "Resilience - smart error control, reporting, debugging and recovery."
+msgstr ""
+
+msgid "Compatibility - works in any modern web browser and across all devices."
 msgstr ""
 
 msgid "Goals"
@@ -1277,7 +1270,8 @@ msgid "Performance"
 msgstr ""
 
 msgid ""
-"Zero DOM parsing, reliance on third party code. Latest Javascript techniques."
+"No reliance on third party code, Javascript animation (use CSS3), template "
+"parsing, digest cycle or polling."
 msgstr ""
 
 msgid "Dynamic"
@@ -1404,12 +1398,13 @@ msgstr ""
 
 msgid ""
 "Igaro compiles into three modes; debug, deploy-debug and deploy. A web "
-"server for each can be found on ports %d, %d and %d."
+"server for each can be found on ports %d, %d and %d. These will reload "
+"automatically as you work."
 msgstr ""
 
 msgid ""
-"That's it. Now read a bit of the documentation, code hack, and create "
-"something cool."
+"That's it. Now read as much of the documentation as you need, hack the code "
+"behind this app, and create!"
 msgstr ""
 
 msgid "License"
@@ -1419,7 +1414,8 @@ msgid "Insight"
 msgstr ""
 
 msgid ""
-"An amazing architecture, developed by professionals, loaded with features."
+"An amazing SPA architecture, developed by professionals, loaded with "
+"features."
 msgstr ""
 
 msgid "Igaro App Javascript Framework"
@@ -1445,9 +1441,6 @@ msgstr ""
 msgid "Overview"
 msgstr ""
 
-msgid "Support"
-msgstr ""
-
 msgid "Structure"
 msgstr ""
 
@@ -1460,13 +1453,34 @@ msgstr ""
 msgid "Mobile"
 msgstr ""
 
+msgid "Compatibility"
+msgstr ""
+
 msgid "Modules"
 msgstr ""
 
 msgid "Documentation"
 msgstr ""
 
-msgid "Learn, develop and deploy an app. All modules are fully documented."
+msgid ""
+"Learn, develop and deploy an app in a web browser or on a mobile device/"
+"emulator."
+msgstr ""
+
+msgid "Forum"
+msgstr ""
+
+msgid "Report"
+msgstr ""
+
+msgid "Contact"
+msgstr ""
+
+msgid "Support"
+msgstr ""
+
+msgid ""
+"Discuss with others, get involved with Igaro App development, or seek help."
 msgstr ""
 
 msgid ""
@@ -2366,59 +2380,23 @@ msgid ""
 msgstr ""
 
 msgid ""
-"Igaro App is a Javascript based framework for developing scalable, "
-"responsive and dynamic web and mobile applications."
+"Igaro App is a Javascript framework for developing scalable, responsive and "
+"dynamic web and mobile apps."
 msgstr ""
 
-msgid "Benefits"
+msgid "High quality structured coding throughout."
 msgstr ""
 
-msgid "Promotes best practice, enforcing structured coding for beginners."
-msgstr ""
-
-msgid "Very easy to learn, just standard Object Orientated Javascript."
-msgstr ""
-
-msgid "Excellent for teamwork with workflows that recompile as you work."
+msgid "Standard Object Orientated Javascript."
 msgstr ""
 
 msgid "Cutting edge features, error handling and techniques."
 msgstr ""
 
-msgid "Completely dynamic with an event driven architecture."
+msgid "Dynamic with an event driven architecture and modular plugins."
 msgstr ""
 
-msgid "Users"
-msgstr ""
-
-msgid ""
-"Igaro App offers something for everyone. It goes about things a different "
-"way, integrating stake holders and cutting down on the time required to role "
-"a request out the door."
-msgstr ""
-
-msgid ""
-"Tired of delays and unexpected issues causing time-frame overruns? Tired of "
-"user hate mail? Tired of choosing a solution of the hour and investing "
-"resources in your employees only to have that knowledge devalued in three "
-"months time?"
-msgstr ""
-
-msgid "Developers"
-msgstr ""
-
-msgid ""
-"Tired of frameworks that promise the world but which later on you discover "
-"aren't dynamic enough to emcompass the changes you are asked to make? Tired "
-"of hacky irritating code, memory leaks and random problems you can't debug?"
-msgstr ""
-
-msgid "Designers"
-msgstr ""
-
-msgid ""
-"Want to rapidly build on the bess written SASS->CSS3 code out there? Want to "
-"do away with HTML and integrate with your developers?"
+msgid "Extreme performance and efficiency."
 msgstr ""
 
 msgid "Cost"
@@ -2659,9 +2637,6 @@ msgid ""
 "Until Igaro API is up and running we've set up a forum. This is the best "
 "place to ask questions. Stackoverflow is also a good source for help - be "
 "sure to include 'Igaro App' in your title!."
-msgstr ""
-
-msgid "Forum"
 msgstr ""
 
 msgid "StackOverflow"

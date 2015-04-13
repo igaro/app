@@ -18,24 +18,24 @@ module.exports = function(app) {
             debugMgr = managers.debug,
             objectMgr = managers.object;
         
-        domMgr.mk('p',wrapper,_tr("Igaro's architecture is build around several core principles, these provide a layer on which everything else is built;"));
+        domMgr.mk('p',wrapper,_tr("Igaro's architecture is build on several core principles;"));
 
         domMgr.mk('p',wrapper,domMgr.mk('ul',null,[
-           domMgr.mk('li',null,_tr("Javascript is a prototypal language. It's not Java and shouldn't be written to mimick it.")), 
-           domMgr.mk('li',null,_tr("HTML is a weak design language ill suited for dynamic operation. Therefore, use no HTML.")), 
-           domMgr.mk('li',null,_tr("Child objects should report to parents. Events should fire up a chain.")),
-           domMgr.mk('li',null,_tr("The Javascript specification must be adhered to. No functional duplicity or prototyping onto internal objects.")), 
-           domMgr.mk('li',null,_tr("Functions have the potential to be asynchronous, or emit an event which may be so, therefore they should return Promises.")) 
+           domMgr.mk('li',null,_tr("The Javascript specification must be adhered to. No duplicity and always use standards.")), 
+           domMgr.mk('li',null,_tr("HTML is a design language ill suited for dynamic operation. Therefore, use no HTML.")), 
+           domMgr.mk('li',null,_tr("Child objects should be able to communicate with parent objects and thus events should fire up a hierarchy.")),
+           domMgr.mk('li',null,_tr("Most functions have a potential to be asynchronous, or emit an event which may be so, therefore they should return Promises.")) 
         ]));
 
-        domMgr.mk('p',wrapper,_tr("These principles result in;"));
+        domMgr.mk('p',wrapper,_tr("From these the foundation on which your app is built will feature;"));
 
         domMgr.mk('p',wrapper,domMgr.mk('ul',null,[
-           domMgr.mk('li',null,_tr("Flexability - expand on functions without rewriting them.")), 
-           domMgr.mk('li',null,_tr("Design - built on DOM manipulation, not HTML and hackwork.")), 
-           domMgr.mk('li',null,_tr("Encapsulation - code is compartmentalized.")),
+           domMgr.mk('li',null,_tr("Flexability - expand functions without appending code into them.")), 
+           domMgr.mk('li',null,_tr("Design - built on DOM, not HTML templating and slow parsing.")), 
+           domMgr.mk('li',null,_tr("Encapsulation - code is compartmentalized and abstracted.")),
            domMgr.mk('li',null,_tr("Security - no memory leaks or public variables.")), 
            domMgr.mk('li',null,_tr("Resilience - smart error control, reporting, debugging and recovery.")),
+           domMgr.mk('li',null,_tr("Compatibility - works in any modern web browser and across all devices.")),
         ]));
 
         domMgr.mk('h1',wrapper,_tr("Goals"));
@@ -108,7 +108,7 @@ module.exports = function(app) {
                                     content : _tr("Performance")
                                 },
                                 {
-                                    content : _tr("Zero DOM parsing, reliance on third party code. Latest Javascript techniques.")
+                                    content : _tr("No reliance on third party code, Javascript animation (use CSS3), template parsing, digest cycle or polling.")
                                 },
                                 {
                                     className : 'green'

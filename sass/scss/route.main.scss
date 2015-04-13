@@ -247,34 +247,33 @@ body >.core-router >.main {
                             background-size:60%;
                         }
                     }
+                    >.forum {
+                        >a:after {
+                            background: inline-image("route.main/forum.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.contact {
+                        >a:after {
+                            background: inline-image("route.main/contact.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.report {
+                        >a:after {
+                            background: inline-image("route.main/report.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
                     >.support {
                         >a:after {
                             background: inline-image("route.main/support.svg") no-repeat 50% 65%;
                             background-size:60%;
                         }
                     }
-                    >.license {
-                        >a:after {
-                            background: inline-image("route.main/license.svg") no-repeat 50% 65%;
-                            background-size:60%;
-                        }
-                    }
                     >.mobile {
                         >a:after {
                             background: inline-image("route.main/mobile.svg") no-repeat 50% 65%;
-                            background-size:60%;
-                        }
-                    }
-                    >.faq {
-                        >a:after {
-                            background: inline-image("route.main/faq.svg") no-repeat 50% 65%;
-                            background-size:60%;
-                        }
-                    }
-                    >.compare {
-                        opacity:.3;
-                        >a:after {
-                            background: inline-image("route.main/compare.svg") no-repeat 50% 65%;
                             background-size:60%;
                         }
                     }
@@ -293,6 +292,12 @@ body >.core-router >.main {
                     >.modules {
                         >a:after {
                             background: inline-image("route.main/modules.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.compatibility {
+                        >a:after {
+                            background: inline-image("route.main/compatibility.svg") no-repeat 50% 65%;
                             background-size:60%;
                         }
                     }

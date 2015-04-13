@@ -44,12 +44,21 @@ module.exports = function(app) {
                         className:id,
                         content:function(dom) {
                             return dom.mk('a',null,null,function() {
-                                var a = model.uriPath.concat(id);
-                                this.href = '/' + a.join('/');
-                                this.addEventListener('click', function (evt) { 
-                                    evt.preventDefault();
-                                    router.to(a);
-                                });
+                                var url = b[2];
+                                if (url) {
+                                    this.href = url;
+                                    this.addEventListener('click', function (evt) { 
+                                        evt.preventDefault();
+                                        window.open(url);
+                                    });
+                                } else {
+                                    var a = model.uriPath.concat(id);
+                                    this.href = '/' + a.join('/');
+                                    this.addEventListener('click', function (evt) { 
+                                        evt.preventDefault();
+                                        router.to(a);
+                                    });
+                                }
                                 dom.mk('div',this,b[1]);
                             });
                         } 
@@ -75,18 +84,14 @@ module.exports = function(app) {
                     return writeList([
                         ['overview', _tr("Overview")],
                         ['features', _tr("Features")],
-                        ['install', _tr("Install")],
-                        ['faq', _tr("FAQ")],
-                        ['support', _tr("Support")]
+                        ['install', _tr("Install")]
                     ],list).then(function() {
                         var domMgr = list.managers.dom;
-                        return {
-                            container: domMgr.mk('section', null, [
-                                domMgr.mk('h1', null, _tr('Insight')),
-                                domMgr.mk('p', null, _tr('An amazing architecture, developed by professionals, loaded with features.')),
-                                list.container
-                            ])
-                        };
+                        return domMgr.mk('section', null, [
+                            domMgr.mk('h1', null, _tr('Insight')),
+                            domMgr.mk('p', null, _tr('An amazing SPA architecture, developed by professionals, loaded with features.')),
+                            list.container
+                        ]);
                     });
                 }),
 
@@ -99,16 +104,30 @@ module.exports = function(app) {
                         ['routes', _tr("Routes")],
                         ['locale', _tr("Locale")],
                         ['mobile', _tr("Mobile")],
+                        ['compatibility',_tr("Compatibility")],
                         ['modules',_tr("Modules")]
                     ],list).then(function() {
                         var domMgr = list.managers.dom;
-                        return {
-                            container: domMgr.mk('section', null, [
-                                domMgr.mk('h1', null, _tr("Documentation")),
-                                domMgr.mk('p', null, _tr("Learn, develop and deploy an app. All modules are fully documented.")),
-                                list.container
-                            ])
-                        };
+                        return domMgr.mk('section', null, [
+                            domMgr.mk('h1', null, _tr("Documentation")),
+                            domMgr.mk('p', null, _tr("Learn, develop and deploy an app in a web browser or on a mobile device/emulator.")),
+                            list.container
+                        ]);
+                    });
+                }),
+
+                model.managers.object.create('list').then(function (list) {
+                    return writeList([
+                        ['forum',_tr("Forum"),'http://forum.igaro.com'],
+                        ['report', _tr("Report"),'https://github.com/igaro/app/issues'],
+                        ['contact', _tr("Contact")],
+                    ],list).then(function() {
+                        var domMgr = list.managers.dom;
+                        return domMgr.mk('section', null, [
+                            domMgr.mk('h1', null, _tr("Support")),
+                            domMgr.mk('p', null, _tr("Discuss with others, get involved with Igaro App development, or seek help.")),
+                            list.container
+                        ]);
                     });
                 })
             ]

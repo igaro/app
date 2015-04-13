@@ -35,7 +35,7 @@ module.exports = function(app) {
 
         domMgr.mk('p',wrapper,_tr("Due to lack of standard features, support is disabled by default."));
 
-        domMgr.mk('h1',wrapper,_tr("3rd Party Javascript Integration"));
+        domMgr.mk('h1',wrapper,_tr("3rd Party Integration"));
 
         domMgr.mk('p',wrapper,_tr("Existing code can be rapidly integrated into the Igaro App framework."));
 
@@ -43,15 +43,11 @@ module.exports = function(app) {
 
         domMgr.mk('h1',wrapper,_tr("Dependencies"));
 
-        domMgr.mk('p',wrapper,_tr("Zero. Ziltch. Igaro App is entirely free of dependencies. It doesn't require JQuery or any other third party library."));
-
-        domMgr.mk('h1',wrapper,_tr("Prototype or Classes?"));
-
-        domMgr.mk('p',wrapper,_tr("Neither. Igaro App blesses Javascript Objects. See the core.bless module."));
+        domMgr.mk('p',wrapper,_tr("Igaro App is entirely free of dependencies. It doesn't require JQuery or any other third party library."));
 
         domMgr.mk('h1',wrapper,_tr("Is Igaro App like x,y,z?"));
 
-        domMgr.mk('p',wrapper,_tr("No. Frameworks like Angular, Backbone and React use HTML, data binding and are inefficient. They appear powerful and easy to learn but fall flat when you try to make a real App with them, and that's because they have been designed to sell, not to do things right. There's a reason why Angular 'sponsored by Google' isn't used in any of Googles products."));
+        domMgr.mk('p',wrapper,_tr("Probably not. Frameworks like Angular, Backbone and React use HTML and data binding and hence are inheritly inefficient. On the face of it they appear easy to learn but fall flat on large scale App development. If you need glue to stick a mess together, they work well. Igaro App is simply better engineered - it doesn't need a digest cycle or virtual DOM. There must be a reason why Angular 'sponsored by Google' isn't used in any of Googles products?"));
 
     };
 
