@@ -16,33 +16,25 @@ module.exports = function(app) {
         
         model.stash.title= _tr("Asynchronous");
 
-        domMgr.mk('p',wrapper,_tr("Igaro App is an asynchronous framework using Promises and Event Management to manage delayed notification and value convergence. Callbacks are a thing of the past, and most functions in Igaro App return Promises rather than values."));
+        domMgr.mk('p',wrapper,_tr("Igaro App is a <b>100%</b> asynchronous framework using Promises throughout."));
 
-        domMgr.mk('p', wrapper, _tr("Most functions dispatch an event at the end of execution which while sychronous in terms of a chain may contain asynchronous operations. Step-over execution should only occur once registered handles for the event complete hence requiring a Promise to be returned."));
+        domMgr.mk('p', wrapper, _tr("In Igaro App most functions dispatch an event at the end of execution which includes a reference to itself and a value. While events are synchronous in chain and hierarchy, each event may contain asynchronous code. This is why most functions in Igaro App return a Promise."));
 
-        domMgr.mk('p', wrapper, _tr("Functions modified at a later date to include asynchronous code break callers that expect a value. For compatibility with future code it is better to return a Promise even if the operation is not currently asynchronous."));
+        domMgr.mk('h1',wrapper,_tr("Promise Standard"));
 
-        domMgr.mk('h1',wrapper,_tr("Promises"));
+        domMgr.mk('p',wrapper,_tr("Standard Promises (ES6, A+) are used throughout."));
 
-        domMgr.mk('p',wrapper,_tr("Standard Promises (ES6, A+) are used to replace callback routines. Promises allow for chainable asynchronous operation with error control and are native to modern browsers. Older browsers have a polyfill library loaded automatically."));
-
-        domMgr.mk('button',wrapper,_tr("Promises"), function() {
+        domMgr.mk('button',wrapper,_tr("Learn More"), function() {
             this.addEventListener('click', function() {
                 window.open("https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise");
             });
         });
 
-        domMgr.mk('h1',wrapper,_tr("Event Management"));
+        domMgr.mk('h1',wrapper,_tr("Events"));
 
-        domMgr.mk('p',wrapper,_tr("Promises are for objects initiating work, not for objects wishing to be notified when the state of the work has changed. To provide this feature Igaro App uses a complex and powerful event management system. Data and identifiers are returned to each registered party and are propagated vertically through parent objects. It works similarily to the native DOM event system, but it's for objects not elements!"));
+        domMgr.mk('p',wrapper,_tr("Promises are for objects initiating work, not for object notification when the state of said work has changed. To provide this, Igaro App uses a powerful event management system. Data and identifiers are returned to each registered party and are propagated vertically through parent objects."));
 
         domMgr.mk('p', wrapper, _tr("Igaro App's event management system is cleaner than Object.observe() and signficiantly faster than any other framework's implementation. Events are linked to dependencies, which can be other objects or DOM elements and are automatically released, avoiding memory leaks by removing circular references and allowing Javascripts garbage collector to do it's job. The entire process is automatic."));
-   
-        domMgr.mk('button',wrapper,'core.events', function() {
-            this.addEventListener('click', function() {            
-                router.to(['modules','core.events']);
-            });
-        });
 
     };
 

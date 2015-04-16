@@ -20,142 +20,166 @@ module.exports = function(app) {
 
         domMgr.mk('p',wrapper,_tr("This may be your first introduction to Igaro App, and if it is, welcome!"));
 
-        return objectMgr.create('accordion').then(function(accordion) {
-            domMgr = accordion.managers.dom;
-            domMgr.mk('h1',wrapper,_tr("Files & Folders"));
-            domMgr.mk('p',wrapper);
-            domMgr.append(wrapper,accordion);
+        return model.addSequence({
+            container:wrapper,
+            promises:[
 
-            // build
-            return accordion.addSection({
-                title:'build'
-            }).then(function(section) {
-                var managers = section.managers;
-                managers.dom.mk('p',section.content,_tr("Contains javascript and html files that should be compiled (and optionally compressed) into the build folder."));
-                return managers.object.create('accordion', {
-                    container:section.content,
-                    sections : [
-                        {
-                            title:_tr("debug"),
-                            content:_tr("Defines the location of the cdn folder, loads polyfill libraries, provides a loading screen, and defines a container for the app.")
-                        },
-                        {
-                            title:_tr("deploy"),
-                            content:_tr("Contains code that prints data to the console. Code remains uncompressed. Used for development and shouldn't be released.")
-                        },
-                        {
-                            title:_tr("deploy-debug"),
-                            content:_tr("As deploy, but uncompressed. Assists with debugging problems introduced by the compile cycle.")
-                        }
-                    ]
-                });
-                
-            }).then(function() {
+                objectMgr.create('accordion').then(function(accordion) {
+                    var domMgr = accordion.managers.dom;
+                    domMgr.mk('h1',wrapper,_tr("Files & Folders"));
+                    domMgr.mk('p',wrapper);
+                    domMgr.append(wrapper,accordion);
 
-                // compile
-                return accordion.addSection({
-                    title:'compile' 
-                }).then(function(section) {
-                    var managers = section.managers;
-                    managers.dom.mk('p',section.content,_tr("Contains javascript and html files that should be compiled (and optionally compressed) into the build folder."));
-                    return managers.object.create('accordion', {
-                        container:section.content,
-                        sections : [
-                            {
-                                title:_tr("index.html"),
-                                content:_tr("Defines the location of the cdn folder, loads polyfill libraries, provides a loading screen, and defines a container for the app.")
-                            }
-                        ]
-                    }).then(function(accordion) {
-                        // cdn
-                        return accordion.addSection(
-                            {
-                                title:_tr("cdn")
-                            }
-                        ).then(function(section) {
+                    // build
+                    return accordion.addSection({
+                        title:'build'
+                    }).then(function(section) {
+                        var managers = section.managers;
+                        managers.dom.mk('p',section.content,_tr("Contains javascript and html files that should be compiled (and optionally compressed) into the build folder."));
+                        return managers.object.create('accordion', {
+                            container:section.content,
+                            sections : [
+                                {
+                                    title:_tr("debug"),
+                                    content:_tr("Defines the location of the cdn folder, loads polyfill libraries, provides a loading screen, and defines a container for the app.")
+                                },
+                                {
+                                    title:_tr("deploy"),
+                                    content:_tr("Contains code that prints data to the console. Code remains uncompressed. Used for development and shouldn't be released.")
+                                },
+                                {
+                                    title:_tr("deploy-debug"),
+                                    content:_tr("As deploy, but uncompressed. Assists with debugging problems introduced by the compile cycle.")
+                                }
+                            ]
+                        });
+                        
+                    }).then(function() {
+
+                        // compile
+                        return accordion.addSection({
+                            title:'compile' 
+                        }).then(function(section) {
                             var managers = section.managers;
-                            managers.dom.mk('p',section.content,_tr("Contains files for relative path serving or a cdn server."));
+                            managers.dom.mk('p',section.content,_tr("Contains javascript and html files that should be compiled (and optionally compressed) into the build folder."));
                             return managers.object.create('accordion', {
-                                container:section.content
-                            }).then(function (accordion) {
-                                // js
-                                return accordion.addSection({
-                                    title:'js'
-                                }).then(function(section) {
+                                container:section.content,
+                                sections : [
+                                    {
+                                        title:_tr("index.html"),
+                                        content:_tr("Defines the location of the cdn folder, loads polyfill libraries, provides a loading screen, and defines a container for the app.")
+                                    }
+                                ]
+                            }).then(function(accordion) {
+                                // cdn
+                                return accordion.addSection(
+                                    {
+                                        title:_tr("cdn")
+                                    }
+                                ).then(function(section) {
                                     var managers = section.managers;
-                                    managers.dom.mk('p',section.content,_tr("Contains the framework and modules."));
+                                    managers.dom.mk('p',section.content,_tr("Contains files for relative path serving or a cdn server."));
                                     return managers.object.create('accordion', {
-                                        container:section.content,
-                                        sections : [
-                                            {
-                                                title:'3rdparty.*.js',
-                                                content:_tr("Provide third party code in a structured format. An example is JQuery. Some provide an interface to system features such as touch.")
-                                            },
-                                            {
-                                                title:'igaro.js',
-                                                content:_tr("Provides built-in modules and loads any additional modules. Errors are trapped, handed, potentially reported to an API, and the user is notified.")
-                                            },
-                                            {
-                                                title:'*.js',
-                                                content:_tr("Typically exports a function into module.exports. This is passed a reference to the app root and config data, and typically returns a function or object literal which is added to a corresponding namespace. Additionally dependencies can be defined using module.requires. Typically used for a corresponding CSS file as javascript files can be lazy loaded at point of request.")
-                                            },
-                                            {
-                                                title:'conf.*.js',
-                                                content:_tr("Configures the app, modules, and bridge events. They don't provide functionality or output to the DOM.")
-                                            },
-                                            {
-                                                title:'core.*.js',
-                                                content:_tr("Libraries, not instantiable, which provide global functionality. Typically required by other modules via module.requires. Don't contain language or output to the DOM.")
-                                            },
-                                            {
-                                                title:'instance.*.js',
-                                                content:_tr("Returns an instantable function. May provide a DOM feature in form of a widget or provide functionality such as AJAX. Instantiated, used once, then destroyed.")
-                                            },
-                                            {
-                                                title:'polyfix.*.js',
-                                                content:_tr("Prototypes missing Javascript functionality for older web browsers. Loaded by index.html if required. Modern browsers don't require them.")
-                                            },
-                                            {
-                                                title:'route.*.js',
-                                                content:_tr("Provides router model data which is used to build and manage a view. Returns a single function which is used as a singleton.")
-                                            }
-                                       ]
+                                        container:section.content
+                                    }).then(function (accordion) {
+                                        // js
+                                        return accordion.addSection({
+                                            title:'js'
+                                        }).then(function(section) {
+                                            var managers = section.managers;
+                                            managers.dom.mk('p',section.content,_tr("Contains the framework and modules."));
+                                            return managers.object.create('accordion', {
+                                                container:section.content,
+                                                sections : [
+                                                    {
+                                                        title:'3rdparty.*.js',
+                                                        content:_tr("Provide third party code in a structured format. An example is JQuery. Some provide an interface to system features such as touch.")
+                                                    },
+                                                    {
+                                                        title:'igaro.js',
+                                                        content:_tr("Provides built-in modules and loads any additional modules. Errors are trapped, handed, potentially reported to an API, and the user is notified.")
+                                                    },
+                                                    {
+                                                        title:'conf.*.js',
+                                                        content:_tr("Configures the app, modules, and bridge events. They don't provide functionality or output to the DOM.")
+                                                    },
+                                                    {
+                                                        title:'core.*.js',
+                                                        content:_tr("Libraries, not instantiable, which provide global functionality. Typically required by other modules via module.requires. Don't contain language or output to the DOM.")
+                                                    },
+                                                    {
+                                                        title:'instance.*.js',
+                                                        content:_tr("Returns an instantable function. May provide a DOM feature in form of a widget or provide functionality such as AJAX. Instantiated, used once, then destroyed.")
+                                                    },
+                                                    {
+                                                        title:'polyfix.*.js',
+                                                        content:_tr("Prototypes missing Javascript functionality for older web browsers. Loaded by index.html if required. Modern browsers don't require them.")
+                                                    },
+                                                    {
+                                                        title:'route.*.js',
+                                                        content:_tr("Provides router model data which is used to build and manage a view. Returns a single function which is used as a singleton.")
+                                                    }
+                                               ]
+                                            });
+                                        });
                                     });
                                 });
                             });
                         });
+
+                    }).then(function() {
+
+                        return [
+                            {
+                                title:'copy',
+                                content:_tr("Any files/folders here are copied over to the build folder after compilation.")
+                            },
+                            {
+                                title:'cordova',
+                                content:_tr("Contains an Apache cordova project for deploying the app onto mobile devices.")
+                            },
+                            {
+                                title:'sass',
+                                content:_tr("Scss files are compiled into css. Typically a file corresponds to a javascript module of the same name. igaro.scss contains an initial style base but doesn't necessarily style the app, which will load further stylesheets.")
+                            },
+                            {
+                                title:'translations',
+                                content:_tr("Translation files produced by the compiler and translation files generated by translators are stored here and merged upon the build process.")
+                            }
+                        ].reduce(function(a,b) {
+                            return a.then(function() {
+                                return accordion.addSection(b);
+                            });
+                        }, Promise.resolve());
+
+                    }).then(function() {
+                        return accordion;
                     });
-                });
+                }),
+            
+                Promise.resolve(domMgr.mk('h1',null,_tr("Module Layout"))),
+                Promise.resolve(domMgr.mk('p',null,_tr("Igaro modules export code via module.export while 3rd party code (i.e JQuery) may not. All have access to the app (private) and global settings (public) variable, so only load modules from locations you trust."))),
+                Promise.resolve(domMgr.mk('p',null,_tr("The name of the module dicatates its namespace in the app, i.e for type.name.js, what is exported will be available in app['type.name']."))),
+                Promise.resolve(domMgr.mk('p',null,_tr("Dependencies can be added to the requires list. Instance modules can be lazy loaded (initial load speed -v- possible lag later on, your call) and don't need to be added. A custom server/cdn can be supplied along with the module name (not shown)."))),
+                Promise.resolve(domMgr.mk('pre',null,"(function() {\n\
+'use strict';\n\
+module.requires = [\n\
+    { name : 'type.name.css' },\n\
+];\n\
+module.exports = function(app, params) {\n\
+    // return - usually a function or literal \n\
+};\n\
+})();")),
 
-            }).then(function() {
+                Promise.resolve(domMgr.mk('h1',null,_tr("Instances"))),
+                Promise.resolve(domMgr.mk('p',null,_tr("Instances (also know as widgets) can be called anything, but Igaro supplied instances are denoted by an instance.* filename."))),
+                Promise.resolve(domMgr.mk('p',null,_tr("An instance module exports a function which is instantiated upon need. Although you can use the Javascript <b>new</b> keyword to do this, core.bless (covered in the next chapter) provides a helper to lazy load the module, call <b>new</b> and then call a second constructor, .init(). Unlike <b>new</b>, .init() is asynchronous."))),
+                Promise.resolve(domMgr.mk('p',null,_tr("View the code behind this page to understand how the three accordions are created. Notice how instances can be children of instances?"))),
+            ]
 
-                return [
-                    {
-                        title:'copy',
-                        content:_tr("Any files/folders here are copied over to the build folder after compilation.")
-                    },
-                    {
-                        title:'cordova',
-                        content:_tr("Contains an Apache cordova project for deploying the app onto mobile devices.")
-                    },
-                    {
-                        title:'sass',
-                        content:_tr("Scss files are compiled into css. Typically a file corresponds to a javascript module of the same name. igaro.scss contains an initial style base but doesn't necessarily style the app, which will load further stylesheets.")
-                    },
-                    {
-                        title:'translations',
-                        content:_tr("Translation files produced by the compiler and translation files generated by translators are stored here and merged upon the build process.")
-                    }
-                ].reduce(function(a,b) {
-                    return a.then(function() {
-                        return accordion.addSection(b);
-                    });
-                }, Promise.resolve());
-
-            });
         });
 
-    };
+    }
 
 };
 

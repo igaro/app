@@ -640,7 +640,11 @@ window.addEventListener('load', function() {
                 };
                 this.disable = function(v) {
                     v = this.disabled = ! (typeof v === 'boolean' && ! v);
-                    return thisMgrsEvt.dispatch('disabled', v);
+                    var container = self.container;
+                    if (container) {
+                        container.setAttribute('disabled',v);
+                        container.setAttribute('inert',v);
+                    };
                 };
                 if (container) {
                     var dom = this.managers.dom;
@@ -651,14 +655,7 @@ window.addEventListener('load', function() {
                     this.hide = function(v) {
                         dom.hide(container,v);
                     };
-                    thisMgrsEvt
-                        .on('disabled',function(v) {
-                            container.setAttribute('disabled',v);
-                            container.setAttribute('inert',v);
-                        });
                     this.show = function() {
-                        if (self.disabled)
-                            return;
                         dom.show(container);
                     };
                     thisManagers.event.on('destroy',function() {

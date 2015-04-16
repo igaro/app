@@ -18,22 +18,24 @@ module.exports = function(app) {
         
         model.stash.title=_tr("Bless");
 
-        domMgr.mk('p',wrapper,_tr("Igaro App decorates standard javascript objects to provide a two-way parent-child relationship, to aid in dependency tracking, and to cut down on duplicate code. It provides a level of abstraction and the ability for objects to communicate and become dynamically extendable."));
+        domMgr.mk('p',wrapper,_tr("Igaro App's bless decorates standard javascript objects providing two-way parent-child event management, managers, dependency tracking, abstraction, shared routines and dynamic functions."));
+        domMgr.mk('p',wrapper,_tr("Most objects bless themselves, and most objects in Igaro are blessed."));
 
-        domMgr.mk('h1',wrapper,_tr("Example Code"));
-        domMgr.mk('p',wrapper,_tr("Most objects self bless (route files are the omission). Core files may require little or no blessing, while instance modules (which supply the DOM work and parent-child relationships) use it the most. The following code is typical for an instance module, but not exhaustive. See the core.bless module for what is possible."));
+        domMgr.mk('h1',wrapper,_tr("Usage"));
 
-        domMgr.mk('pre',wrapper,"app['core.bless'].call(this,{\
-\n    name:'instance.mycreation', \
-\n    parent:o.parent,\
-\n    asRoot:true,\
-\n    hidden:o.hidden,\
-\n    disabled:o.disabled,\
-\n    stash:o.stash,\
-\n    container:function(dom) {\
+        domMgr.mk('p',wrapper,_tr("As the following code demonstrates, blessing an object is simple. Many attributes are within the <b>o</b> literal and are passed through. See the core.bless module for what this literal may contain."));
+        
+        domMgr.mk('pre',wrapper,"var InstanceMyWidget = function(o) {\
+\n   this.name = 'instance.mywidget';\
+\n   this.asRoot = true;\
+\n   this.container = function(dom) {\
 \n        return dom.mk('div',o.container,null,o.className);\
-\n    }\
-\n})");
+\n   };\
+\n   o.parent = this;\
+\n   app['core.bless'].call(this,o);\
+\n}");
+
+        domMgr.mk('p',wrapper,_tr("The .asRoot flag will be covered in the next chapter."));
 
         return objectMgr.create('accordion', {
             sections : [
@@ -47,7 +49,7 @@ module.exports = function(app) {
                 },
                 {
                     title:_tr("Path"),
-                    content:_tr("A path is used to identify the objects location by way of it's hierarchical position. It's built using the name. Although an object may belong to another it's path may stop at the child, it doesn't necessarily have to resolve all the way to root. How this is used is covered later.")
+                    content:_tr("A path is used to identify the objects location by way of it's hierarchical position. It's built using the name. Although an object may belong to another it's path may stop at the child, it doesn't necessarily have to resolve all the way to root. This is one usage of the .asRoot flag.")
                 },
                 {
                     title:_tr("Stash"),
@@ -59,7 +61,7 @@ module.exports = function(app) {
                 },
                 {
                     title:_tr("Helpers"),
-                    content:_tr("If a container is provided DOM helpers will be added to the object. These include show, hide, disable and enable.")
+                    content:_tr("If a container is provided, helpers will be added to the object. These include show/hide and disable/inert.")
                 },
                 {
                     title:_tr("Destructor"),
@@ -69,11 +71,9 @@ module.exports = function(app) {
         }).then(function(accordion) {
             domMgr = accordion.managers.dom;
             domMgr.mk('h1',wrapper,_tr("Provides"));
-            domMgr.mk('p',wrapper);
+            domMgr.mk('p',wrapper,_tr("What bless provides for an object depends on what was available and passed to it at the point of blessing."));
             domMgr.append(wrapper,accordion);
         });
-
-
 
     };
 
