@@ -16,15 +16,12 @@ module.exports = function(app) {
     ];
 
     var bookmark = function(o) {
-        bless.call(this,{
-            name:'instance.bookmark',
-            parent:o.parent,
-            asRoot:true,
-            stash:o.stash,
-            container:function(dom) { 
-                return dom.mk('ul',o.container,null,o.className);
-            }
-        });
+        this.name='instance.bookmark';
+        this.asRoot=true;
+        this.container = function(dom) { 
+            return dom.mk('ul',o.container,null,o.className);
+        };
+        bless.call(this,o);
         this.setURL({ 
             url:o.url? o.url : window.location.href, title:o.title 
         });

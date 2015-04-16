@@ -46,6 +46,10 @@ module.exports = function(app, params) {
 
     var language = {
 
+        name:'core.language',
+        managers : {
+            store : store
+        },
         env : null,
         rtl:false,
         isAuto : null,
@@ -124,12 +128,7 @@ module.exports = function(app, params) {
         }
     };
 
-    bless.call(language,{
-        name:'core.language',
-        managers : {
-            store : store
-        }
-    });
+    bless.call(language);
 
     language.managers.event.on('setPool', function() {
         return detect();

@@ -12,17 +12,12 @@ module.exports = function(app) {
     var bless = app['core.bless'];
 
     var InstanceRTE = function(o) {
-        bless.call(this,{
-            name:'instance.rte',
-            parent:o.parent,
-            container:function(dom) { 
-                return dom.mk('div',o.container,null,o.className); 
-            },
-            asRoot:true,
-            disabled:o.disabled,
-            stash:o.stash,
-            hidden:o.hidden
-        });
+        this.name = 'instance.rte';
+        this.asRoot = true;
+        this.container = function(dom) { 
+            return dom.mk('div',o.container,null,o.className); 
+        };
+        bless.call(this,o);
         this.hasFocus = false;
         this.savedRange = null;
         this.onChangeTimerid = null;

@@ -52,6 +52,9 @@
 			-webkit-transition: all .6s;                 
 			transition: all .6s;
 			opacity:0;
+            >.instance-accordion {
+                margin:0 1em;
+            }
 		}
 
 		&.expand {

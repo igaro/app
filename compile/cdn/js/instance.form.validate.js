@@ -24,12 +24,9 @@ module.exports = function(app) {
     };
 
     var InstanceFormValidate = function(o) {
-        bless.call(this,{
-            name:'instance.form.validation',
-            parent:o.parent,
-            stash:o.stash,
-            asRoot:true
-        });
+        this.name = 'instance.form.validation';
+        this.asRoot = true;
+        bless.call(this,o);
         this.inRealTime = typeof o.inRealTime === 'boolean'? o.inRealTime : true;
         this.rules = o.rules || [];
         this.errorDisplayAmount = 'errorDisplayAmount' in o? o.errorDisplayAmount : 1;

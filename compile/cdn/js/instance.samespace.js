@@ -11,16 +11,11 @@ module.exports = function(app) {
     var bless = app['core.bless'];
 
     var InstanceSameSpaceArea = function(o) {
-        bless.call(this,{
-            name:'space',
-            stash:o.stash,
-            hidden:o.hidden,
-            disabled:o.disabled,
-            parent:o.parent,
-            container:function(dom) {
-                return dom.mk('div',null,o.content,o.className);
-            }
-        });
+        this.name='space';
+        this.container=function(dom) {
+            return dom.mk('div',null,o.content,o.className);
+        };
+        bless.call(this,o);
         var parent = this.parent,
             self = this;
         this.li = this.managers.dom.mk('li',parent.nav.firstChild,null,function() {
@@ -36,32 +31,26 @@ module.exports = function(app) {
 
     var InstanceSameSpace = function (o)  {
         var self = this;
-        bless.call(this,{
-            name:'instance.samespace',
-            parent:o.parent,
-            stash:o.stash,
-            hidden:o.hidden,
-            disabled:o.disabled,
-            asRoot:true,
-            container : function(dom) {
-                return dom.mk('div',o.container,null,function() {
-                    if (o.className)
-                        this.classList.add(o.className);
-                    self.canvas = dom.mk('div',this,null,o.effect);
-                })
-            }
-        });
-        var domMgr = this.managers.dom,
-            spaces = this.spaces = [];
+        this.name='instance.samespace';
+        this.asRoot=true;
+        this.children = {
+            spaces:'space'
+        };
+        this.container = function(dom) {
+            return dom.mk('div',o.container,null,function() {
+                if (o.className)
+                    this.classList.add(o.className);
+                self.canvas = dom.mk('div',this,null,o.effect);
+            })
+        }
+        bless.call(this,o);
+        var domMgr = this.managers.dom;
         this.current = -1;
         this.delay = o.delay || 5000;
         this.nav = domMgr.mk('nav',this,domMgr.mk('ul'));
         if (! o.transparent) 
             this.canvas.style.backgroundColor = 'black';
         this.loop = typeof o.loop === 'boolean'? o.loop : true;
-        this.managers.event.on('space.destroy', function(space) {
-            spaces.splice(spaces.indexOf(space),1);
-        });
     };
 
     InstanceSameSpace.prototype.init = function(o) {

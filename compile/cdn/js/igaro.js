@@ -556,22 +556,25 @@ window.addEventListener('load', function() {
         (function() {
             var events = app['core.events'];
             app['core.bless'] = function(o) {
+                if (!o) 
+                    o = {};
                 var self = this,
-                    name = this.name = o.name,
-                    managers = o.managers || [],
+                    name = this.name,
+                    managers = this.managers || [],
                     parent = this.parent = o.parent,
                     path = this.path = [name],
-                    container = o.container,
+                    container = this.container,
                     thisManagers = this.managers = {},
-                    asRoot = this.__asRoot = o.asRoot;
-                this.stash = {};
+                    children = this.children,
+                    asRoot = this.asRoot;
+                this.stash = o.stash || {};
                 // build path using parents?
                 if (! asRoot) {
                     var x = this;
                     while (x.parent) {
                         path.unshift(x.parent.name);
                         x = x.parent;
-                        if (x.__asRoot)
+                        if (x.asRoot)
                             break;
                     }
                 }
@@ -609,6 +612,18 @@ window.addEventListener('load', function() {
                         });
                     }
                 }
+                // create child arrays
+                if (children) {
+                    Object.keys(children).forEach(function (k) {
+                        var child = children[k],
+                            a = self[k] = [];       
+                        self.managers.event.on(child+'.destroy', function(s) {
+                            a.splice(a.indexOf(s.value),1);
+                        });
+                    });
+                    delete this.children;
+                }
+                // parent->child autodestroy
                 if (parent)
                     parent.managers.event.on('destroy', function() {
                         return self.destroy();
@@ -623,32 +638,23 @@ window.addEventListener('load', function() {
                         return events.clean(self);
                     });
                 };
-                this.disable = function() {
-                    this.disabled = true;
-                    return thisMgrsEvt.dispatch('disabled');
-                };
-                this.enable = function() {
-                    this.disabled = false;
-                    return thisMgrsEvt.dispatch('enabled');
+                this.disable = function(v) {
+                    v = this.disabled = ! (typeof v === 'boolean' && ! v);
+                    return thisMgrsEvt.dispatch('disabled', v);
                 };
                 if (container) {
                     var dom = this.managers.dom;
                     if (typeof container === 'function') 
-                        container = container(dom);
-                    self.container = container;                   
+                        self.container = container = container(dom);
                     if (asRoot)
                         container.classList.add(name.replace(/\./g,'-'));
                     this.hide = function(v) {
                         dom.hide(container,v);
                     };
                     thisMgrsEvt
-                        .on('disabled',function() {
-                            container.setAttribute('disabled',true);
-                            container.setAttribute('inert',true);
-                        })
-                        .on('enabled',function() {
-                            container.setAttribute('disabled',false);
-                            container.setAttribute('inert',false);
+                        .on('disabled',function(v) {
+                            container.setAttribute('disabled',v);
+                            container.setAttribute('inert',v);
                         });
                     this.show = function() {
                         if (self.disabled)
@@ -696,12 +702,9 @@ window.addEventListener('load', function() {
             };
             var bless = app['core.bless'];
             var InstanceXhr = function(o) {
-                bless.call(this,{
-                    name:'instance.xhr',
-                    parent:o && o.parent? o.parent : null,
-                    asRoot:true
-                });
-
+                this.name = 'instance.xhr';
+                this.asRoot = true;
+                bless.call(this,o);
                 var self = this,
                     xhr = this.xhr = new XMLHttpRequest(),
                     eventMgr = this.managers.event;
@@ -715,7 +718,7 @@ window.addEventListener('load', function() {
                 this.formdata = {};
                 this.expectedContentType = null;
                 this.id = Math.floor((Math.random()*9999)+1);
-                if (o) 
+                if (o)
                     setBits.call(this,o);
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState !== 4)
@@ -890,11 +893,9 @@ window.addEventListener('load', function() {
                         this.onProgress = p.onProgress;
                 };
             var InstanceAmd = app['instance.amd'] = function(o) {
-                bless.call(this,{
-                    name:'instance.amd',
-                    parent:o && o.parent?  o.parent:null,
-                    asRoot:true
-                });
+                this.name='instance.amd';
+                this.asRoot = true;
+                bless.call(this,o);
                 this.uid = Math.floor((Math.random() * 9999));
                 this.repo = repo;
                 if (o)
@@ -963,9 +964,8 @@ window.addEventListener('load', function() {
                 });
             };
             var InstanceAmdWorker = function(o) {
-                bless.call(this,{
-                    name:'instance.amd'
-                });
+                this.name = 'instance.amd';
+                bless.call(this,o);
                 this.uid = Math.floor((Math.random() * 9999));
                 var mod = this.module = o.module,
                     modname = this.module.name,

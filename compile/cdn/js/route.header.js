@@ -34,7 +34,7 @@ module.exports = function(app) {
 
                 managers.object.create({ name:'navigation'},{
                     className:'headermn',
-                    pool : [
+                    options : [
                         { 
                             className:'app', 
                             active:true 

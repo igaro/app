@@ -12,19 +12,16 @@ module.exports = function(app) {
                 this.callbackName = p.callbackName;
         };
 
-    var InstanceJsonP = function(p) {
-        bless.call(this,{
-            name:'instance.jsonp',
-            parent:o.parent,
-            asRoot:true
-        });
+    var InstanceJsonP = function(o) {
+        this.name = 'instance.jsonp';
+        this.asRoot = true;
+        bless.call(this,o);
         this.res='';
         this.callbackName = 'callback';
         this.uid = 'jsonp'+Math.round(Math.random()*1000001);
-        var t = this.jsonp = document.createElement('script'),
-            self = this;
-        if (p) 
-            setBits.call(this,p);
+        this.jsonp = document.createElement('script');
+        var self = this;
+        setBits.call(this,o);
         this.managers.event.on('destroy', function() {
             return self.abort();
         });
@@ -34,10 +31,10 @@ module.exports = function(app) {
         return this.managers.event.dispatch('init');
     };
 
-    InstanceJsonP.prototype.get = function(p) {
+    InstanceJsonP.prototype.get = function(o) {
         this.abort();
-        if (p) 
-            setBits.call(this,p);
+        if (o) 
+            setBits.call(this,o);
         var self = this, 
             eventMgr = this.managers.event,
             dom = this.managers.dom,

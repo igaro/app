@@ -49,6 +49,10 @@ module.exports = function(app, params) {
 
     var currency = {
 
+        name:'core.currency',
+        managers : {
+            store : store
+        },
         env : null,
         isAuto : null,
         pool : {},
@@ -130,12 +134,7 @@ module.exports = function(app, params) {
 
     };
 
-    bless.call(currency,{
-        name:'core.currency',
-        managers : {
-            store : store
-        }
-    });
+    bless.call(currency);
 
     currency.managers.event.on('setPool', function() {
         return detect();

@@ -21,18 +21,16 @@ module.exports = function(app) {
     // ROUTE
     var CoreRouterRoute = function(o) {
         var self = this;
-        bless.call(this,{
-            name:o.name,
-            parent:o.parent,
-            container : function(dom) {
-                return dom.mk('div',o.container,null,function() {
-                    this.className = 'route';
-                    self.wrapper = dom.mk('div',this,null,'wrapper');
-                    if (typeof o.name === 'string')
-                        this.classList.add(o.name.replace(/\./g,'--'));
-                });
-            }
-        });
+        this.name = o.name,
+        this.container =  function(dom) {
+            return dom.mk('div',o.container,null,function() {
+                this.className = 'route';
+                self.wrapper = dom.mk('div',this,null,'wrapper');
+                if (typeof o.name === 'string')
+                    this.classList.add(o.name.replace(/\./g,'--'));
+            });
+        }
+        bless.call(this,o);
         this.uriPath = [];
         this.children = [];
         this.uriPieces = [];
@@ -130,7 +128,7 @@ module.exports = function(app) {
                         container:self.container, 
                         name:name
                     });
-                    var provider = router.getProvider(g.path);
+                    var provider = router.getProviderForPath(g.path);
                     if (! provider) 
                         throw new Error('No Route provider for path!');
                     g.url = provider.url;
@@ -202,16 +200,25 @@ module.exports = function(app) {
         });
     };
 
+    // PROVIDER
+    var routerProvider = function(o) {
+
+
+    };
+
     // CONTROLLER
     var router = {
+        name:'core.router',
         requestId : 0,
         base:null,
         current:null,
         isAtBase : function() {
             return this.current === this.base;
         },
-        providers : [],
-        getProvider : function(path) {
+        children : {
+            providers : 'provider' 
+        },
+        getProviderForPath : function(path) {
             var providers = this.providers;
             for (var i=providers.length-1; i>=0; --i) {
                 if (providers[i].handles(path)) 
@@ -219,15 +226,11 @@ module.exports = function(app) {
             }
         },
         addProvider : function(o) {
-            o.parent = this;
-            var providers = this.providers;
+            o.name = 'provider';
             bless.call(o, {
-                name:'provider'
+                parent:this
             });
-            o.managers.event.on('destroy', function() {
-                providers.splice(providers.indexOf(o), 1);
-            });
-            providers.push(o);
+            this.providers.push(o);
         },
         to : function(path, search, hash, state) {
             this.requestId++;
@@ -315,16 +318,12 @@ module.exports = function(app) {
         }
     };
 
-    bless.call(router, {
-        name:'core.router'
-    });
+    bless.call(router);
     
     router.root = new CoreRouterRoute({
         name:'route'
     });
     router.managers = router.root.managers;
-
-    // remove 
 
     // default current to root
     var mrv = router.current = router.root;

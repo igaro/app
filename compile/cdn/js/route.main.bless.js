@@ -12,40 +12,68 @@ module.exports = function(app) {
     return function(model) {
 
         var wrapper = model.wrapper,
-            domMgr = model.managers.dom,
-            router = app['core.router'];
+            managers = model.managers,
+            objectMgr = managers.object,
+            domMgr = managers.dom;
         
         model.stash.title=_tr("Bless");
 
-        domMgr.mk('p',wrapper,_tr("An integral feature of Igaro App is how it can decorate standard objects to enhance the parent-child relationship, to aid in dependency tracking, and to cut down on duplicate code."));
-        
-        domMgr.mk('p', wrapper, _tr("An object is responsible for blessing itself and does so via the core.bless module. Note: no prototypes are added onto the object."));
+        domMgr.mk('p',wrapper,_tr("Igaro App decorates standard javascript objects to provide a two-way parent-child relationship, to aid in dependency tracking, and to cut down on duplicate code. It provides a level of abstraction and the ability for objects to communicate and become dynamically extendable."));
 
-        domMgr.mk('h1',wrapper,_tr("Parent"));
+        domMgr.mk('h1',wrapper,_tr("Example Code"));
+        domMgr.mk('p',wrapper,_tr("Most objects self bless (route files are the omission). Core files may require little or no blessing, while instance modules (which supply the DOM work and parent-child relationships) use it the most. The following code is typical for an instance module, but not exhaustive. See the core.bless module for what is possible."));
 
-        domMgr.mk('p', wrapper, _tr("A reference to the parent is stored on the child (while this introduces a circular dependency, it's taken care of when the object destructs)."));
+        domMgr.mk('pre',wrapper,"app['core.bless'].call(this,{\
+\n    name:'instance.mycreation', \
+\n    parent:o.parent,\
+\n    asRoot:true,\
+\n    hidden:o.hidden,\
+\n    disabled:o.disabled,\
+\n    stash:o.stash,\
+\n    container:function(dom) {\
+\n        return dom.mk('div',o.container,null,o.className);\
+\n    }\
+\n})");
 
-        domMgr.mk('h1',wrapper,_tr("Name & Path"));
-
-        domMgr.mk('p', wrapper, _tr("An object is given a name which can be used to uniquely identify it or it's type."));
-
-        domMgr.mk('p', wrapper, _tr("A path is used to identify the objects location by way of it's hierarchical position."));
-
-        domMgr.mk('h1',wrapper,_tr("Managers"));
-
-        domMgr.mk('p', wrapper, _tr("A manager is a module that uses the blessed decorations to enhance the way the original routines work. For example when an object throws an error it is passed all up the hierarchy by way it's parent. Events then fire an error for each parental object but change the name/path. A parent can thus watch for child errors, even for a particular child."));
-
-        domMgr.mk('p', wrapper, _tr("Common managers include events, debugging, object creation and dom. Additional managers can be supplied at time of blessing, i.e if the module requires a store. Any module can be a manager."));
-
-        domMgr.mk('h1',wrapper,_tr("Destructor"));
-
-        domMgr.mk('p', wrapper, _tr("A blessed object gains a universal destructor which when called will wipe out dependencies, circular references, children, dom elements and events."));
-   
-        domMgr.mk('button',wrapper,'core.bless', function() {
-            this.addEventListener('click', function() {            
-                router.to(['modules','core.bless']);
-            });
+        return objectMgr.create('accordion', {
+            sections : [
+                {
+                    title:_tr("Parent"),
+                    content:_tr("A reference to a parent object is stored on the child (while this introduces a circular dependency, it's taken care of when the object destructs).")
+                },
+                {
+                    title:_tr("Name"),
+                    content:_tr("An object is given a name which can be used to uniquely identify it or it's type. Not to be confused with instanceof!")
+                },
+                {
+                    title:_tr("Path"),
+                    content:_tr("A path is used to identify the objects location by way of it's hierarchical position. It's built using the name. Although an object may belong to another it's path may stop at the child, it doesn't necessarily have to resolve all the way to root. How this is used is covered later.")
+                },
+                {
+                    title:_tr("Stash"),
+                    content:_tr("Holds data that may not be attributes of the object.")
+                },
+                {
+                    title:_tr("Managers"),
+                    content:_tr("A manager is a module that uses the blessed decorations to enhance the way the original routines work. Common managers include events, debugging, object creation and dom. Additional managers can be supplied at time of blessing, i.e if the module requires a store. Any module can be a manager.")
+                },
+                {
+                    title:_tr("Helpers"),
+                    content:_tr("If a container is provided DOM helpers will be added to the object. These include show, hide, disable and enable.")
+                },
+                {
+                    title:_tr("Destructor"),
+                    content:_tr("A destructor is appended which when called will wipe dependencies, circular references, children, dom elements and events and will fire an event allowing dependents to do the same.")
+                }
+            ]
+        }).then(function(accordion) {
+            domMgr = accordion.managers.dom;
+            domMgr.mk('h1',wrapper,_tr("Provides"));
+            domMgr.mk('p',wrapper);
+            domMgr.append(wrapper,accordion);
         });
+
+
 
     };
 

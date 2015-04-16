@@ -48,6 +48,10 @@ module.exports = function(app, params) {
 
     var country = {
 
+        name:'core.country',
+        managers : {
+            store : store
+        },
         env : null,
         isAuto : null,
         pool : {},
@@ -85,12 +89,7 @@ module.exports = function(app, params) {
         }
     };
 
-    bless.call(country,{
-        name:'core.country',
-        managers : {
-            store : store
-        }
-    });
+    bless.call(country);
 
     country.managers.event.on('setPool', function() {
         return detect();

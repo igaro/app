@@ -12,16 +12,11 @@ module.exports = function(app) {
     var bless = app['core.bless'];
 
     var InstanceAccordionSection = function(o) {
-        bless.call(this,{
-            name:'section',
-            parent:o.parent,
-            stash:o.stash,
-            container:function(dom) { 
-                return dom.mk('dl',o.parent); 
-            },
-            disabled:o.disabled,
-            hidden:o.hidden
-        });
+        this.name = 'section';
+        this.container = function(dom) { 
+            return dom.mk('dl',o.parent); 
+        };
+        bless.call(this,o);
         var self = this,
             dl = this.container,
             dom = this.managers.dom,
@@ -62,32 +57,23 @@ module.exports = function(app) {
     };
 
     var InstanceAccordion = function(o) {
-        bless.call(this,{
-            name:'instance.accordion',
-            parent:o.parent,
-            asRoot:true,
-            stash:o.stash,
-            container:function(dom) { 
-                return dom.mk('div',o.container,null,o.className);
-            }
-        });
-        var sections = this.sections = [];
+        this.name = 'instance.accordion';
+        this.asRoot = true;
+        this.children = {
+            sections:'section'
+        };
+        this.container = function(dom) { 
+            return dom.mk('div',o.container,null,o.className);
+        };
+        bless.call(this,o);
         this.multiExpand = o.multiExpand;
-        this.managers.event
-            .on('section.destroy', function(s) {
-                sections.splice(sections.indexOf(s.value),1);
-            });
     };
 
     InstanceAccordion.prototype.init = function(o) {
         var self = this;
         return (o.sections
-            ? 
-            o.sections.reduce(function(a,b) {
-                return a.then(function() {
-                    return self.addSection(b);
-                });
-            }, Promise.resolve())
+            ?
+            self.addSections(o.sections) 
             :
             Promise.resolve()
         ).then(function() {
@@ -95,11 +81,32 @@ module.exports = function(app) {
         });
     };
 
+    InstanceAccordion.prototype.addSections = function(o) {
+        var self = this;
+        return o.reduce(function(a,b) {
+            return a.then(function() {
+                return self.addSection(b);
+            });
+        }, Promise.resolve());
+    };
+
     InstanceAccordion.prototype.addSection = function(o) {
         o.parent = this;
-        var s = new InstanceAccordionSection(o);
-        this.sections.push(s);
-        return this.managers.event.dispatch('addSection',s);
+        var sections = this.sections,
+            s = new InstanceAccordionSection(o),
+            insertBefore = o.insertBefore,
+            insertAfter = o.insertAfter;
+        if (insertBefore || insertAfter) {
+            var pos = sections.indexOf(insertBefore || insertAfter);
+            if (insertAfter)
+                pos++;
+            sections.slice(0,pos).concat(s).concat(sections.slice(pos));
+        } else {
+            sections.push(s);
+        }
+        return this.managers.event.dispatch('addSection',s).then(function() {
+            return s;
+        });
     };
     InstanceAccordion.prototype.collapseAll = function() {
         var self = this;

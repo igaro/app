@@ -40,7 +40,7 @@ module.exports = function(app) {
             return pool.reduce(function(a,b) { 
                 return a.then(function() {
                     var id = b[0];
-                    return list.add({ 
+                    return list.addItem({ 
                         className:id,
                         content:function(dom) {
                             return dom.mk('a',null,null,function() {
@@ -84,6 +84,8 @@ module.exports = function(app) {
                     return writeList([
                         ['overview', _tr("Overview")],
                         ['features', _tr("Features")],
+                        ['mobile', _tr("Mobile")],
+                        ['compatibility',_tr("Compatibility")],
                         ['install', _tr("Install")]
                     ],list).then(function() {
                         var domMgr = list.managers.dom;
@@ -98,13 +100,11 @@ module.exports = function(app) {
                 model.managers.object.create('list').then(function (list) {
                     return writeList([
                         ['structure',_tr("Structure")],
-                        ['async', _tr("Async")],
                         ['bless', _tr("Bless")],
+                        ['async', _tr("Async")],
                         ['design', _tr("Design")],
                         ['routes', _tr("Routes")],
                         ['locale', _tr("Locale")],
-                        ['mobile', _tr("Mobile")],
-                        ['compatibility',_tr("Compatibility")],
                         ['modules',_tr("Modules")]
                     ],list).then(function() {
                         var domMgr = list.managers.dom;

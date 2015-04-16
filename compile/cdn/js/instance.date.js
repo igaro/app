@@ -19,15 +19,12 @@ module.exports = function(app) {
         languageEventMgr = language.managers.event;
 
     var InstanceDate = function(o) {
-        bless.call(this,{
-            name:'instance.date',
-            parent:o.parent,
-            stash:o.stash,
-            asRoot:true,
-            container:function(dom) {
-                return dom.mk('span',o.container,null,o.className);
-            }
-        });
+        this.name='instance.date';
+        this.asRoot=true;
+        this.container=function(dom) {
+            return dom.mk('span',o.container,null,o.className);
+        };
+        bless.call(this,o);
         this.date = o.date;
         this.countDown = 60;
         this.countUp = 0;

@@ -13,6 +13,10 @@ module.exports = function(app) {
 
     var coreDate = {
 
+        name:'core.date',
+        managers : {
+            store : store
+        },
         envOffset : new Date().getTimezoneOffset()*-1,
         envOffsetAuto : null,
 
@@ -68,12 +72,7 @@ module.exports = function(app) {
         }
     };
 
-    bless.call(coreDate,{
-        name:'core.date',
-        managers : {
-            store : store
-        }
-    });
+    bless.call(coreDate);
 
     return coreDate.managers.store.get('envOffset').then(function(minutes) {
         coreDate.envOffsetAuto = typeof minutes !== 'number';

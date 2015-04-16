@@ -11,17 +11,13 @@ module.exports = function(app) {
 
     var zIndexAt = 999999,
         body = document.body,
-        bodyStyle = body.style;
+        bodyStyle = body.style,
+        bless = app['core.bless'];
 
     var InstanceModalDialog = function(o) {
-        if (!o)
-            o = {};
-        bless.call(this,{
-            name:'instance.modaldialog',
-            parent:o.parent,
-            stash:o.stash,
-            asRoot:true
-        });
+        this.name='instance.modaldialog';
+        this.asRoot=true;
+        bless.call(this,o);
         this.bodyOverflowPrevious = bodyStyle.overflow;
         bodyStyle.overflow = 'hidden';
     };
