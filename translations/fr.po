@@ -1241,7 +1241,7 @@ msgstr ""
 msgid "The Dispatch"
 msgstr ""
 
-msgid "Parent-Child Events"
+msgid "Parent & Children"
 msgstr ""
 
 msgid ""

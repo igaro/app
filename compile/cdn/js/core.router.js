@@ -40,7 +40,6 @@ module.exports = function(app) {
         this.defaultShowWrapper=true;
         this.scrollPosition=0;
         this.cssElement=dom.mk('style',dom.head);
-        //this.hide();
     };
     
     CoreRouterRoute.prototype.captureUri = function(c) {
@@ -232,6 +231,7 @@ module.exports = function(app) {
             });
             this.providers.push(o);
         },
+        
         to : function(path, search, hash, state) {
             this.requestId++;
             var base = router.base.path.slice(1),
@@ -240,76 +240,67 @@ module.exports = function(app) {
                 self = this, 
                 c=this.current, 
                 v = this.requestId,
-                routerEventMgr = router.managers.event,
-                action=[];
-            if (c) {
-                if (c.scrollPosition !== false) 
-                    c.scrollPosition = document.body.scrollTop || document.documentElement.scrollTop;
-                action = [c.managers.event.dispatch('leave')];
-            }
-            return Promise.all(action).then(function() {
-                var putHistory = function() {
-                    var model = router.current;
-                    if (typeof state === 'boolean' && state === false) {
-                        history.replaceState({ initial:true },null);
-                    } else {
-                        var urlPath = path.map(function(f) {
-                            return encodeURIComponent(f);
-                        }).join('/');
-                        if (search) {
-                            if (typeof search === 'function')
-                                search = search();
-                            urlPath += '?' + search.map(function (f) {
-                                return encodeURIComponent(f[0]) + '=' + encodeURIComponent(f[1]);
-                            });
-                        }
-                        if (hash) {
-                            if (typeof hash === 'function')
-                                hash = hash();
-                            urlPath += '#'+hash;
-                        }
-                        history.pushState(state || {},null,'/'+urlPath);
-                    }
-                };
+                routerEventMgr = router.managers.event;
+               // action=[];
+            //if (c) {
+                //if (c.scrollPosition !== false) 
+                //    c.scrollPosition = document.body.scrollTop || document.documentElement.scrollTop;
+            var putHistory = function() {
+            };
+            return (c
+                ?
+                c.managers.event.dispatch('leave')
+                :
+                Promise.resolve()
+            ).then(function() {
                 return routerEventMgr.dispatch('to-begin').then(function (evt) {
-                    if (evt && evt.stopImmediatePropagation)
-                        return;
-                    return new Promise(function(resolve) {
-                        var uid = self.requestId,
-                            t = function (at) {
-                                model.addChildren({ 
-                                    list:[ra[at]],
-                                    uri : ra.slice(at+1),
+                    return ra.reduce(function(a,b,i) {
+                        return a.then(function() {
+                            return model.addChildren({
+                                    list:[ra[i]],
+                                    uri : ra.slice(i+1),
                                     silent : true
-                                }).then(
-                                    function(m) {
-                                        // abort the load, another request has since came in
-                                        if (uid !== v) 
-                                            return;
-                                        self.current = model = m[0];
-                                        at += model.uriPieces.length;
-                                        model.uriPath = ra.slice(base.length,at+1);
-                                        model.show();
-                                        return routerEventMgr.dispatch('to-in-progress',model).then(function() {
-                                            if (at < ra.length-1) { 
-                                                t(at+1); 
-                                                return; 
-                                            }
-                                            if (model.scrollPosition !== false) 
-                                                document.body.scrollTop = document.documentElement.scrollTop = model.scrollPosition;
-                                            resolve();
-                                            putHistory();
-                                            return routerEventMgr.dispatch('to-loaded');
-                                        });
-                                    }, 
-                                    function(e) {
-                                        putHistory();
-                                        resolve(e);
-                                        return routerEventMgr.dispatch('to-error', { error:e, child:ra[at] });
-                                    }
-                                );
-                            };
-                        t(0);
+                            }).then(function(m) {
+                                    // abort the load, another request has since came in
+                                    if (self.requestId !== v) 
+                                        throw -1600;
+                                    c = self.current = model = m[0];
+                                    i += model.uriPieces.length;
+                                    model.uriPath = ra.slice(base.length,i+1);
+                                    model.show();
+                                    return routerEventMgr.dispatch('to-in-progress',model);
+                            });
+                        });
+                    }, Promise.resolve()).then(function() {
+                        if (c.scrollPosition !== false)
+                            document.body.scrollTop = document.documentElement.scrollTop = c.scrollPosition;
+                        if (typeof state === 'boolean' && state === false) {
+                            history.replaceState({ initial:true },null);
+                        } else {
+                            var urlPath = path.map(function(f) {
+                                return encodeURIComponent(f);
+                            }).join('/');
+                            if (search) {
+                                if (typeof search === 'function')
+                                    search = search();
+                                urlPath += '?' + search.map(function (f) {
+                                    return encodeURIComponent(f[0]) + '=' + encodeURIComponent(f[1]);
+                                });
+                            }
+                            if (hash) {
+                                if (typeof hash === 'function')
+                                    hash = hash();
+                                urlPath += '#'+hash;
+                            }
+                            history.pushState(state || {},null,'/'+urlPath);
+                        }
+                        return routerEventMgr.dispatch('to-loaded');
+                    }).catch(function (e) {
+                        if (typeof e === 'boolean' && e === -1600)
+                            return;
+                        return routerEventMgr.dispatch('to-error', e).then(function() {
+                            throw e;
+                        });
                     });
                 });
 
@@ -335,6 +326,8 @@ module.exports = function(app) {
         var s = document.body.scrollTop || document.documentElement.scrollTop;
         if (s < 0) 
             s=0;
+        if (router.current) 
+            router.current.scrollPosition = s;
         document.body.setAttribute('scrollposition',s);
     });
     document.body.setAttribute('scrollposition',0);
