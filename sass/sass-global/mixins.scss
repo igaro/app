@@ -37,28 +37,29 @@ $PAGE_PADDING_HALF_HEIGHT : 1%;
 }
 
 @mixin layoutStandard {
-
-    height:100%;
-    box-sizing: border-box;
-
-    >.wrapper {
-        padding: $PAGE_PADDING_STANDARD_HEIGHT;
-        height:100%;
-        box-sizing: border-box;
-    }
+    background-color:rgba(255,255,255, .8);
+    border:none;
+    border-left:1px solid #e0e0e0;
+    border-right:1px solid #e0e0e0;
+    @include pagerestrictwidth;
+    @include pagepadding;
+    //height:100%;
+    //box-sizing: border-box;
+    //>.wrapper {
+    //    padding: $PAGE_PADDING_STANDARD_HEIGHT;
+    //    height:100%;
+    //    box-sizing: border-box;
+    //}
 }
 
 @mixin pagerestrictwidth {
     margin:0 auto 0 auto;
-    max-width:1024px;
-    background-color:rgba(255,255,255, .8);
-    border: 1px solid #e8e8e8;
-    border-top: 0;
-    border-bottom: 0;
+    max-width:1200px;
+    box-sizing: border-box;
     &:after {
         content:"";
         clear:both;
-        display:block;
+        display:none;
         font-size:0;
     }
 }

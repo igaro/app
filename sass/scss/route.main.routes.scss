@@ -2,8 +2,7 @@
 
 body >.core-router >.main >.routes >.wrapper {
 
-    @include pagepadding;
-    @include pagerestrictwidth;
+    @include layoutStandard;
 
 	>p {
 		>.viewblock {

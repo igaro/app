@@ -84,8 +84,6 @@ module.exports = function(app) {
                     return writeList([
                         ['overview', _tr("Overview")],
                         ['features', _tr("Features")],
-                        ['mobile', _tr("Mobile")],
-                        ['compatibility',_tr("Compatibility")],
                         ['install', _tr("Install")]
                     ],list).then(function() {
                         var domMgr = list.managers.dom;
@@ -102,9 +100,12 @@ module.exports = function(app) {
                         ['structure',_tr("Structure")],
                         ['bless', _tr("Bless")],
                         ['async', _tr("Async")],
+                        ['events',_tr("Events")],
                         ['design', _tr("Design")],
                         ['routes', _tr("Routes")],
                         ['locale', _tr("Locale")],
+                        ['mobile', _tr("Mobile")],
+                        ['compat',_tr("Compatibility")],
                         ['modules',_tr("Modules")]
                     ],list).then(function() {
                         var domMgr = list.managers.dom;

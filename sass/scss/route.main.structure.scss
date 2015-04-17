@@ -2,8 +2,7 @@
 
 body >.core-router >.main >.structure >.wrapper {
 
-	@include pagepadding;
-    @include pagerestrictwidth;
+    @include layoutStandard;
 
 	>.root {
 		width:291px;

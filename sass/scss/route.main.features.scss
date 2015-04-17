@@ -1,8 +1,7 @@
 @import "../sass-global/mixins.scss";
 
 body >.core-router >.main >.features >.wrapper {
-    @include pagepadding;
-    @include pagerestrictwidth;
+    @include layoutStandard;
 
 	>p >.instance-table >tbody >tr >td {
 

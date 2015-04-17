@@ -1,8 +1,7 @@
 @import "../sass-global/mixins.scss";
 
 body >.core-router >.main >.overview >.wrapper {
-    @include pagepadding;
-    @include pagerestrictwidth;
+    @include layoutStandard;
 
 	.viewport {
 		background: inline-image("route.main.overview/viewports.png") no-repeat 0 50%;

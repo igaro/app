@@ -963,14 +963,19 @@ msgstr ""
 msgid "Learn More"
 msgstr ""
 
-msgid "Events"
+msgid "Sequencing"
 msgstr ""
 
 msgid ""
-"Promises are for objects initiating work, not for object notification when "
-"the state of said work has changed. To provide this, Igaro App uses a "
-"powerful event management system. Data and identifiers are returned to each "
-"registered party and are propagated vertically through parent objects."
+"Unfortunately Promises can become verbose, especially for sequencing "
+"(applying the output from multiple Promises in the order they were supplied "
+"in). While future versions of Javascript attempt to address this, a standard "
+"is many years away."
+msgstr ""
+
+msgid ""
+"To assist, many instance modules provide pluralized creation functions, i.e ."
+"addItem() and addItems(), and core.router provides .addSequence()."
 msgstr ""
 
 msgid ""
@@ -1073,6 +1078,61 @@ msgid ""
 "to it at the point of blessing."
 msgstr ""
 
+msgid "Compatibiity"
+msgstr ""
+
+msgid ""
+"Igaro App is compatible with all modern web browsers and mobile devices."
+msgstr ""
+
+msgid ""
+"Modules are responsible for verifying requirements upon load. Upon an error "
+"a message is displayed to the user."
+msgstr ""
+
+msgid "Company"
+msgstr ""
+
+msgid "Software"
+msgstr ""
+
+msgid "Version"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Remarks"
+msgstr ""
+
+msgid ""
+"Some modules lack support, especially router's .pushState. Can be made to "
+"work with some overhead."
+msgstr ""
+
+msgid ""
+"Many modules lack workaround support for missing features that can't be "
+"prototyped. Can be made to work with significant overhead."
+msgstr ""
+
+msgid "Tested as far back as version 10, but may work with earlier versions."
+msgstr ""
+
+msgid "Tested as far back as version 15, but may work with earlier versions."
+msgstr ""
+
+msgid "Mainly CSS related limitations."
+msgstr ""
+
+msgid "Missing support for many features, especially for CSS."
+msgstr ""
+
+msgid "Tested as far back as version 5, but may work with earlier versions."
+msgstr ""
+
+msgid "Some missing features and many CSS issues. Not recommended."
+msgstr ""
+
 msgid "Design"
 msgstr ""
 
@@ -1137,73 +1197,95 @@ msgid ""
 "slow routines - they are designed for HTML."
 msgstr ""
 
-msgid "FAQ"
+msgid "Events"
+msgstr ""
+
+msgid "Igaro App is <b>100%</b> event driven."
 msgstr ""
 
 msgid ""
-"If on reading this FAQ you feel a question and answer is missing please "
-"contact us."
-msgstr ""
-
-msgid "Email Us"
-msgstr ""
-
-msgid "Browser Compatibility"
+"core.events is responsible for event management. It provides a manager to "
+"core.bless, and this is used extensively throughout the Igaro App framework."
 msgstr ""
 
 msgid ""
-"Igaro App includes polyfills to maximise support for older browsers. Where a "
-"browser doesn't provide a required feature the user is notified. Modules "
-"define there own requirements, which are then enforced by the main loader. "
-"Igaro App supports standardized web technology and won't target specific "
-"browser types/features."
+"Typically taken from the object path attribute, as defined by core.bless."
 msgstr ""
 
-msgid "Internet Explorer < 10"
+msgid "Typically matches the name of the executing function."
 msgstr ""
 
-msgid ""
-"Support for older versions of I.E (8/9) is possible but discouraged. You'll "
-"need to regress features which can't be polyfilled such as SVG support."
-msgstr ""
-
-msgid "Android < 3"
-msgstr ""
-
-msgid "Due to lack of standard features, support is disabled by default."
-msgstr ""
-
-msgid "3rd Party Integration"
-msgstr ""
-
-msgid "Existing code can be rapidly integrated into the Igaro App framework."
+msgid "Target"
 msgstr ""
 
 msgid ""
-"Generally speaking you may utilize all 3rd party libraries (i.e JQuery) with "
-"the Igaro App framework. We've included several of the common ones in the "
-"main repository."
+"Defines if any event is for a particular object. Using the event manager "
+"provided by core.bless sets this automatically to the object."
 msgstr ""
 
 msgid "Dependencies"
 msgstr ""
 
 msgid ""
-"Igaro App is entirely free of dependencies. It doesn't require JQuery or any "
-"other third party library."
+"Allows the event to be cleaned/deregistered when any of the dependencies are "
+"destroyed."
 msgstr ""
 
-msgid "Is Igaro App like x,y,z?"
+msgid "Value"
 msgstr ""
 
 msgid ""
-"Probably not. Frameworks like Angular, Backbone and React use HTML and data "
-"binding and hence are inheritly inefficient. On the face of it they appear "
-"easy to learn but fall flat on large scale App development. If you need glue "
-"to stick a mess together, they work well. Igaro App is simply better "
-"engineered - it doesn't need a digest cycle or virtual DOM. There must be a "
-"reason why Angular 'sponsored by Google' isn't used in any of Googles "
-"products?"
+"Any value passed to the event and a reference to the target if applicable."
+msgstr ""
+
+msgid "The Dispatch"
+msgstr ""
+
+msgid "Parent-Child Events"
+msgstr ""
+
+msgid ""
+"When an event dispatches on a child it propagates up through the parent. A "
+"rejected Promise or a literal containing stopPropagation can abort this."
+msgstr ""
+
+msgid ""
+"As the event propagates the path and name change. This allows parents to "
+"listen for child events. For example an object with parent 'materials' of "
+"name 'metal' which dispatches an event of 'cut' of value true, will also "
+"dispatch an event on 'materials' called 'metal.cut'. The value will be "
+"replaced with a child reference and original value."
+msgstr ""
+
+msgid "By Instance/Singleton"
+msgstr ""
+
+msgid ""
+"Listening to events on modules is accomplished by accessing the event "
+"manager on the object and calling extend on it. This adds your object as a "
+"dependency (should it later be destroyed the event will be cleaned up "
+"automatically)."
+msgstr ""
+
+msgid "(object).managers.event.extend(this).on('eventName',fn);"
+msgstr ""
+
+msgid "By Path/Type"
+msgstr ""
+
+msgid ""
+"Listening to the event manager on an instance will only provide events for "
+"that particular instance, not the instance type."
+msgstr ""
+
+msgid ""
+"In this App, each time an instance.r start and end event fire we keep a "
+"tally and display an icon in the header. This is an example of monitoring by "
+"type and is accomplished via core.events, not through a manager. View route."
+"header.js and take a look at the code used to do this."
+msgstr ""
+
+msgid "app['core.events'].on('instance.xhr','start',fn);"
 msgstr ""
 
 msgid "Features"
@@ -1260,9 +1342,6 @@ msgid "Domain"
 msgstr ""
 
 msgid "Details"
-msgstr ""
-
-msgid "Status"
 msgstr ""
 
 msgid "Security"
@@ -1460,12 +1539,6 @@ msgstr ""
 msgid "Overview"
 msgstr ""
 
-msgid "Mobile"
-msgstr ""
-
-msgid "Compatibility"
-msgstr ""
-
 msgid "Structure"
 msgstr ""
 
@@ -1473,6 +1546,12 @@ msgid "Async"
 msgstr ""
 
 msgid "Routes"
+msgstr ""
+
+msgid "Mobile"
+msgstr ""
+
+msgid "Compatibility"
 msgstr ""
 
 msgid "Modules"

@@ -63,7 +63,7 @@ module.exports = function(app) {
             sections:'section'
         };
         this.container = function(dom) { 
-            return dom.mk('div',o.container,null,o.className);
+            return dom.mk('div',o,null,o.className);
         };
         bless.call(this,o);
         this.multiExpand = o.multiExpand;

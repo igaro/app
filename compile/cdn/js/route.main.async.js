@@ -30,9 +30,11 @@ module.exports = function(app) {
             });
         });
 
-        domMgr.mk('h1',wrapper,_tr("Events"));
+        domMgr.mk('h1',wrapper,_tr("Sequencing"));
 
-        domMgr.mk('p',wrapper,_tr("Promises are for objects initiating work, not for object notification when the state of said work has changed. To provide this, Igaro App uses a powerful event management system. Data and identifiers are returned to each registered party and are propagated vertically through parent objects."));
+        domMgr.mk('p',wrapper,_tr("Unfortunately Promises can become verbose, especially for sequencing (applying the output from multiple Promises in the order they were supplied in). While future versions of Javascript attempt to address this, a standard is many years away."));
+
+        domMgr.mk('p',wrapper,_tr("To assist, many instance modules provide pluralized creation functions, i.e .addItem() and addItems(), and core.router provides .addSequence()."));
 
         domMgr.mk('p', wrapper, _tr("Igaro App's event management system is cleaner than Object.observe() and signficiantly faster than any other framework's implementation. Events are linked to dependencies, which can be other objects or DOM elements and are automatically released, avoiding memory leaks by removing circular references and allowing Javascripts garbage collector to do it's job. The entire process is automatic."));
 

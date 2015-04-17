@@ -2,15 +2,14 @@
 
 body >.core-router >.location {
 
-	border-bottom: 1px solid #dadadf;
 	background:#fff;
-
+    border:none;
+    border-bottom: 1px solid #dadadf !important;
+    display:table-cell;
 	>.wrapper {
 
 		@include pagerestrictwidth;
 		@include pagepadding;
-        overflow-x:auto;
-        border:none;
 
         >div {
             font-size:120%;
@@ -89,7 +88,3 @@ body >.core-router >.location {
 	}
 }
 
-body:not([scrollposition="0"]) >.core-router >.location {
-	display:none;
-
-}

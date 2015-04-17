@@ -1,0 +1,22 @@
+@import "../sass-global/mixins.scss";
+
+body >.core-router >.main >.compat >.wrapper {
+    @include layoutStandard;
+
+	>.instance-table >tbody >tr >td {
+
+		&.green {
+			background-color:green;
+		}
+
+		&.red {
+			background-color:red;
+		}
+
+		&.orange {
+			background-color:orange;
+		}
+
+    }
+
+}

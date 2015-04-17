@@ -7,8 +7,7 @@ module.exports = function(app) {
 
     return function(model) {
 
-        var view = model.view,
-            wrapper = model.wrapper,
+        var wrapper = model.wrapper,
             currency = app['core.currency'];
 
         model.stash.title = _tr("Features");
@@ -41,9 +40,9 @@ module.exports = function(app) {
         domMgr.mk('h1',wrapper,_tr("Goals"));
 
         domMgr.mk('p',wrapper,null,function() {
-
+            var self = this;
             objectMgr.create('table', { 
-                container:this,
+                container:self,
                 header : {
                     rows : [
                         {

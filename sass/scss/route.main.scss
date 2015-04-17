@@ -2,7 +2,6 @@
 
 @import "compass";
 
-
 @-webkit-keyframes route-main-list-bounce {
   0%, 20%, 50%, 80%, 100% {
     -webkit-transform: translateY(0);
@@ -41,8 +40,18 @@
 }
 
 body >.core-router >.main {
-    
+
+    height:100%;
+
+    >.route {
+        height:100%;
+        >.wrapper {
+            height:100%;
+        }
+    }
+
     >.wrapper {
+        
 
         >.header {
             text-align:center;
@@ -134,9 +143,7 @@ body >.core-router >.main {
 
         >.main {
 
-            @include pagepadding;
-            @include pagerestrictwidth;
-
+            @include layoutStandard;
             >section {
                 >h1 {
                     margin-left: 10%;
@@ -226,6 +233,18 @@ body >.core-router >.main {
                     >.features {
                         >a:after {
                             background: inline-image("route.main/features.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.compat {
+                        >a:after {
+                            background: inline-image("route.main/compat.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.events {
+                        >a:after {
+                            background: inline-image("route.main/events.svg") no-repeat 50% 65%;
                             background-size:60%;
                         }
                     }

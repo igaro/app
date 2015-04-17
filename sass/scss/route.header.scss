@@ -130,14 +130,27 @@
 body >.core-router >.header {
 
 	background: #000;
-	height:13%;
-	min-height:4.2em;
-	max-height:7em;
-    text-align:left;
+    height:6em;
+    @media screen and (max-height: 700px) {
+        height:4em;
+    }
+    @media screen and (min-height: 1000px) {
+        height:8em;
+    }
 
 	>.wrapper {
 
-		height:100%;
+        // firefox bug
+        height:6em;
+        @media screen and (max-height: 700px) {
+            height:4em;
+        }
+        @media screen and (min-height: 1000px) {
+            height:8em;
+        }
+
+        //height:100%;
+        text-align:left;
 		@include pagerestrictwidth;
 		@include pagepadding;
 		padding-top:0;
@@ -184,7 +197,9 @@ body >.core-router >.header {
 				    	height:100%; 
 				    	padding:0;
                         border:none;
-				    	>a { height:100%; }
+				    	>a { 
+                            height:100%; 
+                        }
 				    }
 
 					>.app {

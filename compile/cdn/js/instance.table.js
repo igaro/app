@@ -12,30 +12,22 @@ module.exports = function(app) {
     var bless = app['core.bless'];
 
     var InstanceTableDomainRowColumn = function(o) {
-        bless.call(this,{
-            name:'column',
-            parent:o.parent,
-            stash:o.stash,
-            container:function(dom) {
-                return dom.mk('td',o.parent,o.content,o.className);
-            }
-        });
+        this.name='column';
+        this.container=function(dom) {
+            return dom.mk('td',o.parent,o.content,o.className);
+        };
+        bless.call(this,o);
     };
 
     var InstanceTableDomainRow = function(o) {
-        bless.call(this,{
-            name:'row',
-            parent:o.parent,
-            stash:o.stash,
-            container:function(dom) {
-                return dom.mk('tr', o.insertBefore? {insertBefore:o.insertBefore} : o.parent,null,o.className);
-            }
-        });
-        var columns = this.columns = [];
-        this.managers.event
-            .on('column.destroy', function(o) {
-                columns.splice(columns.indexOf(o.value,1));
-            });
+        this.name = 'row';
+        this.container=function(dom) {
+            return dom.mk('tr', o.insertBefore? {insertBefore:o.insertBefore} : o.parent,null,o.className);
+        };
+        this.children = {
+            columns:'column'
+        };
+        bless.call(this,o);
     };
     InstanceTableDomainRow.prototype.addColumn = function(o) {
         if (! o)
@@ -47,17 +39,24 @@ module.exports = function(app) {
             return col;
         });
     };
+    InstanceTableDomainRow.prototype.addColumns = function(o) {
+        var self = this;
+        return o.reduce(function(a,b) {
+            return a.then(function() {
+                return self.addColumn(b);
+            });
+        }, Promise.resolve());
+    };
 
     var InstanceTableDomain = function(o) {
-        bless.call(this,{
-            name:'domain',
-            parent:o.parent,
-            stash:o.stash,
-            container:function(dom) {
-                return dom.mk(o.type,o.parent,null,o.className);
-            }
-        });
-        this.rows = [];
+        this.name='domain';
+        this.container=function(dom) {
+            return dom.mk(o.type,o.parent,null,o.className);
+        };
+        this.children = {
+            rows:'row'
+        };
+        bless.call(this,o);
     };
     InstanceTableDomain.prototype.addRow = function(o) {
         if (! o)
@@ -71,16 +70,19 @@ module.exports = function(app) {
             rows.push(r);
         }
         return this.managers.event.dispatch('addRow',r).then(function () {
-            if (o.columns) {
-                return o.columns.reduce(function(a,b) {
-                    a.parent = self;
-                    return r.addColumn(b);
-                }, Promise.resolve()).then(function() {
-                    return r;
-                });
-            }
+            if (o.columns)
+                return r.addColumns(o.columns);
+        }).then(function() {
             return r;
         });
+    };
+    InstanceTableDomain.prototype.addRows = function(o) {
+        var self = this;
+        return o.reduce(function(a,b) {
+            return a.then(function() {
+                return self.addRow(b);
+            });
+        }, Promise.resolve());
     };
     InstanceTableDomain.prototype.deleteRows = function() {
         return Promise.all(
@@ -114,15 +116,12 @@ module.exports = function(app) {
     };
 
     var InstanceTable = function(o) {
-        bless.call(this,{
-            name:'instance.table',
-            parent:o.parent,
-            asRoot:true,
-            stash:o.stash,
-            container:function(dom) {
-                return dom.mk('table',o,null,o.className);
-            }
-        });
+        this.name='instance.table';
+        this.asRoot=true;
+        this.container=function(dom) {
+            return dom.mk('table',o,null,o.className);
+        };
+        bless.call(this,o);
         this.header = new InstanceTableDomain({ parent:this, type:'thead', className:o.header? o.header.className:null });
         this.body = new InstanceTableDomain({ parent:this, type:'tbody', className:o.body? o.body.className:null });
         this.footer = new InstanceTableDomain({ parent:this,type:'tfoot', className:o.footer? o.footer.className:null});
@@ -133,16 +132,9 @@ module.exports = function(app) {
         return this.body.addRow().then(function(row) {
             self.searchRow = row;
             return Promise.all([[self.header,o.header],[self.body,o.body],[self.footer,o.footer]].map( function(o) {
-                var domain = o[0],
-                    opt = o[1];
-                if (opt && opt.rows) { 
-                    return opt.rows.reduce(function(a,b) {
-                        return a.then(function() {
-                            return domain.addRow(b);
-                        });
-                    }, Promise.resolve());
-                }
-                return Promise.resolve();
+                var opt = o[1];
+                if (opt && opt.rows) 
+                    return o[0].addRows(opt.rows);
             }));
         });
     };

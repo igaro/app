@@ -2,8 +2,7 @@
 
 body >.core-router >.main >.mobile >.wrapper {
 
-	@include pagepadding;
-	@include pagerestrictwidth;
+    @include layoutStandard;
 
 	>textarea {
 		max-width:100%;
