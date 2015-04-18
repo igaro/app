@@ -83,9 +83,9 @@ module.exports = function(app) {
             domMgr.setContent(
                 self.countUp !== self.countDown && self.countUp <= diff && diff <= self.countDown
                 ?
-                    language.mapKey(language.substitute(diff === 1? (diff < 0? _tr("%d seconds ago") : _tr("%d second")) : (diff < 0? _tr("%d seconds ago") : _tr("%d seconds")),diff))
+                language.mapKey(language.substitute(diff === 1? (diff < 0? _tr("%[0] seconds ago") : _tr("%[0] second")) : (diff < 0? _tr("%d seconds ago") : _tr("%d seconds")),diff))
                 :
-                    self.moment.fromNow()
+                self.moment.fromNow()
             );
         };
         f();

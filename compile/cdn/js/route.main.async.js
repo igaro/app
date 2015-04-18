@@ -16,9 +16,9 @@ module.exports = function(app) {
         
         model.stash.title= _tr("Asynchronous");
 
-        domMgr.mk('p',wrapper,_tr("Igaro App is a <b>100%</b> asynchronous framework using Promises throughout."));
+        domMgr.mk('p',wrapper,_tr("Igaro App is <b>100%</b> asynchronous, using Promises."));
 
-        domMgr.mk('p', wrapper, _tr("In Igaro App most functions dispatch an event at the end of execution which includes a reference to itself and a value. While events are synchronous in chain and hierarchy, each event may contain asynchronous code. This is why most functions in Igaro App return a Promise."));
+        domMgr.mk('p', wrapper, _tr("In Igaro App most functions dispatch an event at the end of execution which includes a reference to itself and a value. While events are synchronous in chain and hierarchy, each event may contain asynchronous code. This is why most functions return a Promise."));
 
         domMgr.mk('h1',wrapper,_tr("Promise Standard"));
 

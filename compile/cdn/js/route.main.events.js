@@ -56,6 +56,7 @@ module.exports = function(app) {
                     domMgr.mk('h1',container,_tr("Parent & Children"));
                     domMgr.mk('p',container,_tr("When an event dispatches on a child it propagates up through the parent. A rejected Promise or a literal containing stopPropagation can abort this."));
                     domMgr.mk('p',container,_tr("As the event propagates the path and name change. This allows parents to listen for child events. For example an object with parent 'materials' of name 'metal' which dispatches an event of 'cut' of value true, will also dispatch an event on 'materials' called 'metal.cut'. The value will be replaced with a child reference and original value."));
+                    domMgr.mk('p',container,_tr("The .asRoot() flag prevents a child event dispatching on the parent. It is mostly used by instances. A parent has no need for these dispatches since it can access the instance event manager directly."));
                     domMgr.mk('h1',container,_tr("By Instance/Singleton"));
                     domMgr.mk('p',container,_tr("Listening to events on modules is accomplished by accessing the event manager on the object and calling extend on it. This adds your object as a dependency (should it later be destroyed the event will be cleaned up automatically)."));
 

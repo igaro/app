@@ -119,12 +119,12 @@ module.exports = function(app) {
                 objMgr.create('navigation').then(function(navigation) {
                     var c = document.createDocumentFragment();
                     domMgr.mk('h1',c,_tr("Mobile Features"));
-                    domMgr.mk('p',c,language.substitute(_tr("%d is utilized to access mobile device features such as camera, accelerometer and GPS."),'<a href="http://cordova.apache.org">Apache Cordova</a>'));
+                    domMgr.mk('p',c,language.substitute(_tr("%[0] is utilized to access mobile device features such as camera, accelerometer and GPS."),'<a href="http://cordova.apache.org">Apache Cordova</a>'));
                     domMgr.mk('p',c,null, function() {
                         domMgr.mk('ul',this,null, function() {
-                            domMgr.mk('li',this,language.substitute(_tr("Within a terminal run %d"),'<b>cd cordova</b>'));
+                            domMgr.mk('li',this,language.substitute(_tr("Within a terminal run %[0]"),'<b>cd cordova</b>'));
                             domMgr.mk('li',this,_tr("Install the platforms you wish to support."));
-                            domMgr.mk('li',this,_tr("Deploy onto your device or emulator with <b>cordova run [ios][android][firefoxos]</b>. Note that by default the www folder contains files symlinked to the output/debug folder. You will want to change this to output/deploy when you are ready to release your app."));
+                            domMgr.mk('li',this,_tr("Deploy onto your device or emulator with <b>cordova run [ios][android][firefoxos]</b>. Note that by default the www folder contains files symlinked to the output/debug folder. You'll want to change this to output/deploy when you are ready to release your app."));
                             domMgr.mk('li',this,_tr("Customise splashscreens and icons within the same folder."));
                         });
                     });

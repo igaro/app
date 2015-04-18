@@ -23,7 +23,7 @@ module.exports = function(app) {
 
         domMgr.mk('h1',wrapper,_tr("Usage"));
 
-        domMgr.mk('p',wrapper,_tr("As the following code demonstrates, blessing an object is simple. Many attributes are within the <b>o</b> literal and are passed through. See the core.bless module for what this literal may contain."));
+        domMgr.mk('p',wrapper,_tr("Blessing an object is straight forward. Many attributes are within the <b>o</b> literal and are passed through. See the core.bless module for what this literal may contain."));
         
         domMgr.mk('pre',wrapper,"var InstanceMyWidget = function(o) {\
 \n   this.name = 'instance.mywidget';\

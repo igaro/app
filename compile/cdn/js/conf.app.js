@@ -2419,7 +2419,7 @@ module.exports = function(app, params) {
             // invalid url
             if (v.uri)
                 return new ModalDialog().alert({
-                    message: language.substitute(_tr("A problem with the URL was detected and loading aborted prematurely.\n\nError: %d"),o.uri)
+                    message: language.substitute(_tr("A problem with the URL was detected and loading aborted prematurely.\n\nError: %[0]"),o.uri)
                 });
             return router.managers.debug.handle(o);
         });

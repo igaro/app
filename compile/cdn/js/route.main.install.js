@@ -48,7 +48,7 @@ grunt",'gitcode')
 
         domMgr.mk('h1',wrapper,_tr("Boom!"));
 
-        domMgr.mk('p',wrapper,language.substitute(_tr("Igaro compiles into three modes; debug, deploy-debug and deploy. A web server for each can be found on ports %0, %1 and %2. These will reload automatically as you work."),'<a href="http://localhost:3006">3006</a>','<a href="http://localhost:3007">3007</a>','<a href="http://localhost:3008">3008</a>'));
+        domMgr.mk('p',wrapper,language.substitute(_tr("Igaro compiles into three modes; debug, deploy-debug and deploy. A web server for each can be found on ports %[0], %[1] and %[2]. These will reload automatically as you work."),'<a href="http://localhost:3006">3006</a>','<a href="http://localhost:3007">3007</a>','<a href="http://localhost:3008">3008</a>'));
 
         domMgr.mk('p',wrapper,_tr("That's it. Now read as much of the documentation as you need, hack the code behind this app, and create!"));
 

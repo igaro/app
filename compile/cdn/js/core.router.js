@@ -241,12 +241,6 @@ module.exports = function(app) {
                 c=this.current, 
                 v = this.requestId,
                 routerEventMgr = router.managers.event;
-               // action=[];
-            //if (c) {
-                //if (c.scrollPosition !== false) 
-                //    c.scrollPosition = document.body.scrollTop || document.documentElement.scrollTop;
-            var putHistory = function() {
-            };
             return (c
                 ?
                 c.managers.event.dispatch('leave')

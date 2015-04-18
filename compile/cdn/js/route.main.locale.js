@@ -28,13 +28,17 @@ module.exports = function(app) {
         domMgr.mk('h1',wrapper,_tr("Translation"));
 
         domMgr.mk('p',wrapper,_tr("Standard .po files are created automatically as code is edited. The applicable string is pulled at runtime."));
-        domMgr.mk('p',wrapper,_tr("core.language includes a parsing routine for embedding %s variables."));
 
-        domMgr.mk('h1',wrapper,_tr("Extras"));
-        
-        domMgr.mk('p',wrapper,_tr("A css based library <i>lib.iso.3166.1.flags</i> provides SVG flags for all countries."));
+        domMgr.mk('pre',wrapper,'_tr(\"translate\")');
 
-        domMgr.mk('p',wrapper,_tr("Currencies can be validated and formatted with per currency rules."));
+        domMgr.mk('p',wrapper,_tr("API should provide a literal of supported language IETF tags."));
+
+        domMgr.mk('pre',wrapper,'{\
+\n    en : "Good Morning",\
+\n    fr : "Bonjour"\
+\n}');
+
+        domMgr.mk('p',wrapper,_tr("core.language includes a parsing routine for embedding %[n] variables (where n is an integer)."));
 
     };
 
