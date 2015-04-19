@@ -14,7 +14,7 @@ module.exports = function(app) {
     var InstanceTableDomainRowColumn = function(o) {
         this.name='column';
         this.container=function(dom) {
-            return dom.mk('td',o.parent,o.content,o.className);
+            return dom.mk('td',o,o.content,o.className);
         };
         bless.call(this,o);
     };
@@ -22,7 +22,7 @@ module.exports = function(app) {
     var InstanceTableDomainRow = function(o) {
         this.name = 'row';
         this.container=function(dom) {
-            return dom.mk('tr', o.insertBefore? {insertBefore:o.insertBefore} : o.parent,null,o.className);
+            return dom.mk('tr',o,null,o.className);
         };
         this.children = {
             columns:'column'
@@ -33,6 +33,7 @@ module.exports = function(app) {
         if (! o)
             o = {};
         o.parent = this;
+        o.container = this.container;
         var col = new InstanceTableDomainRowColumn(o);
         this.columns.push(col);
         return this.managers.event.dispatch('addColumn',col).then(function() {
@@ -62,6 +63,7 @@ module.exports = function(app) {
         if (! o)
             o = {};
         o.parent = this;
+        o.container = this.container;
         var r = new InstanceTableDomainRow(o),
             rows = this.rows;
         if (o.insertBefore) {
@@ -92,28 +94,6 @@ module.exports = function(app) {
         );
     };
 
-    var searchExec = function(input,x) {
-        var tr = input.parentNode.parentNode,
-            hcols;
-        x.header.rows.some(function (o) {
-            if (o.container === tr) { 
-                hcols = o.columns; 
-                return true; 
-            }
-        });
-        x.body.rows.forEach(function (r) {
-            var cols = r.columns;
-            r.container.style.display = hcols.some(function (h, i) {
-                var search = h.container.firstChild.value.trim().toLowerCase();
-                if (! search.length || cols.length < i) 
-                    return;
-                var cc = cols[i],
-                    value = cc.search? cc.search() : cc.container.innerHTML;
-                if (! value.toLowerCase().match(search) ) 
-                    return true;
-            })? 'none' : '';
-        });
-    };
 
     var InstanceTable = function(o) {
         this.name='instance.table';
@@ -139,20 +119,58 @@ module.exports = function(app) {
         });
     };
 
-    InstanceTable.prototype.addSearchColumn = function(type) {
-        var row = this.searchRow;
-        return row.addColumn({
-            content: function(dom) {
-                if(type === 'text') {
-                    return dom.mk('input[text]',null,null, function() {
-                        dom.setPlaceholder(this,_tr('Search'));
-                        this.addEventListener('input', function() { 
-                            searchExec(this,self);
-                        });
+    InstanceTable.prototype.execSearch = function() {
+        try {
+            var src = this.searchRow.columns,
+                srcc;
+            this.body.rows.slice(1).forEach(function (r) {
+                r.container.style.display = r.columns.every(function (h, i) {
+                    srcc = src[i];
+                    if (srcc.searchFn)
+                        return srcc.searchFn(h);
+                    return true;
+                })? '' : 'none';
+            });
+        } catch(e) {
+            this.managers.debug.handle(e);
+        }
+    };
+
+    InstanceTable.prototype.addSearchColumn = function(o) {
+        var self = this,
+            debugMgr = this.managers.debug;
+        if (! o) 
+            o = {};
+        if (! o.content)
+            o.content = function(domMgr) {
+                return domMgr.mk('input[text]',null,null, function() {
+                    domMgr.setPlaceholder(this,_tr('Search'));
+                    var s = this;
+                    domMgr.parent.searchFn = function(column) {
+                        var v = s.value.toLowerCase().trim();
+                        if (v.length === 0)
+                            return true;    
+                        return column.container.innerHTML.toLowerCase().match(v); 
+                    };
+                    this.addEventListener('input', function() { 
+                        self.execSearch();
                     });
-                }
+                });
             }
-        });
+        return this.searchRow.addColumn(o);
+    };
+
+    InstanceTable.prototype.addSearchColumns = function(o) {
+        if (! o) // default to creating a text search on every column
+            o = this.header.rows[0].columns.map(function() {
+                return {};
+            });
+        var self = this;
+        return o.reduce(function(a,b) {
+            return a.then(function() {
+                return self.addSearchColumn(b);
+            });
+        }, Promise.resolve());
     };
 
     return InstanceTable;

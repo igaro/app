@@ -12,18 +12,16 @@ module.exports = function(app) {
 
         model.stash.title=_tr("Locale");
 
-        domMgr.mk('p',wrapper,_tr("Igaro App includes core support for country, language, currency, timezone offset and dates."));
+        domMgr.mk('p',wrapper,_tr("Igaro App supports country, language, currency, timezone offset and date locale."));
 
         domMgr.mk('h1',wrapper,_tr("Standards"));
 
-        domMgr.mk('p',wrapper,_tr("ISO 3166.1, IETF and ISO 4217 are supported."));
-
+        domMgr.mk('p',wrapper,_tr("ISO 3166.1, IETF,  ISO 4217 and Right-to-Left text are supported."));
+        
         domMgr.mk('h1',wrapper,_tr("Selection"));
 
-        domMgr.mk('p',wrapper,_tr("The user's country data is sourced from the OS/browser. From this country, the most likely language and currency is derived and selected."));
-        domMgr.mk('p',wrapper,_tr("When a language context is unavailable the root (if available) is tried, followed by the app default, and then the fallback, en."));
-        domMgr.mk('p',wrapper,_tr("All dates are formatted into the user's timezone. By default this is set to the user's system timezone."));
-        domMgr.mk('p',wrapper,_tr("All selections can be set manually and upon change update the app in realtime. There's no need to restart it."));
+        domMgr.mk('p',wrapper,_tr("Country data is sourced from the OS/browser. From this the most likely language and currency is derived and selected. If a language is unavailable the numerator is tried, followed by the app default, and then the fallback, en."));
+        domMgr.mk('p',wrapper,_tr("Dates are formatted into the user's timezone. Locale can be set manually and is applied in realtime. There's no need to restart the app."));
 
         domMgr.mk('h1',wrapper,_tr("Translation"));
 
@@ -31,7 +29,7 @@ module.exports = function(app) {
 
         domMgr.mk('pre',wrapper,'_tr(\"translate\")');
 
-        domMgr.mk('p',wrapper,_tr("API should provide a literal of supported language IETF tags."));
+        domMgr.mk('p',wrapper,_tr("API's should provide a literal of supported language IETF tags."));
 
         domMgr.mk('pre',wrapper,'{\
 \n    en : "Good Morning",\

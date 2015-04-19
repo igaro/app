@@ -85,15 +85,9 @@ module.exports = function(app) {
                         if (cc) 
                             a.innerHTML = cc;
                         td.appendChild(a);
-
-
-                        return Promise.all([
-                            tbl.addSearchColumn('text'),
-                            tbl.addSearchColumn('text')
-                        ]).then(function() {
+                        return tbl.addSearchColumns().then(function() {
                             return a;
                         });
-
                     };
                     var g = function(t,at) {
                         t.forEach(function (s) {
@@ -390,10 +384,7 @@ module.exports = function(app) {
                 })
             }
         }).then(function(tbl) {
-            return Promise.all([
-                tbl.addSearchColumn('text'),
-                tbl.addSearchColumn('text')
-            ]).then(function() {
+            return tbl.addSearchColumns().then(function() {
                 return tbl;
             });
         });

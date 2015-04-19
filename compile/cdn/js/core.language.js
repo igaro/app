@@ -98,7 +98,7 @@ module.exports = function(app, params) {
                 n = {};
             Object.keys(orig).forEach(function (k) {
                 n[k] = orig[k].replace(/\%\[[\d]\]/g, function(m,v) {
-                    v = args[parseInt(m.substr(1))];
+                    v = args[parseInt(m.substr(0,m.length-1).substr(2))];
                     if (typeof v === 'object') 
                         return v[k] || m;
                     return v || m;

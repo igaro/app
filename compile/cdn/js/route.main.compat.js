@@ -66,10 +66,8 @@ module.exports = function(app) {
                     {
                         columns : [
                             {
-                                content : "Microsoft"
                             },
                             {
-                                content : "Internet Explorer" 
                             },
                             {
                                 content : "9"
@@ -85,10 +83,8 @@ module.exports = function(app) {
                     {
                         columns : [
                             {
-                                content : "Microsoft"
                             },
                             {
-                                content : "Internet Explorer" 
                             },
                             {
                                 content : "8"
@@ -142,7 +138,6 @@ module.exports = function(app) {
                     {
                         columns : [
                             {
-                                content : "Google"
                             },
                             {
                                 content : "Android"
@@ -160,10 +155,8 @@ module.exports = function(app) {
                     {
                         columns : [
                             {
-                                content : "Google"
                             },
                             {
-                                content : "Android"
                             },
                             {
                                 content : "3"
@@ -179,10 +172,8 @@ module.exports = function(app) {
                     {
                         columns : [
                             {
-                                content : "Google"
                             },
                             {
-                                content : "Android"
                             },
                             {
                                 content : "2"
@@ -217,7 +208,6 @@ module.exports = function(app) {
                     {
                         columns : [
                             {
-                                content : "Apple"
                             },
                             {
                                 content : "IOS" 
@@ -235,10 +225,8 @@ module.exports = function(app) {
                     {
                         columns : [
                             {
-                                content : "Apple"
                             },
                             {
-                                content : "IOS" 
                             },
                             {
                                 content : "4"

@@ -18,15 +18,21 @@ module.exports = function(app) {
 
         model.stash.title=_tr("Mobile");
 
-        domMgr.mk('p',wrapper,_tr("Igaro App is mobile friendly with outstanding performance and a near native mobile app experience across all platforms."));
+        domMgr.mk('p',wrapper,_tr("Igaro App is <b>100%</b> mobile ready."));
 
-        domMgr.mk('h1',wrapper,_tr("Responsive Layout"));
+        domMgr.mk('p',wrapper,language.substitute(_tr("%[0] is utilized to access mobile device features such as camera, accelerometer and GPS."),'<a href="http://cordova.apache.org">Apache Cordova</a>'));
+        domMgr.mk('p',wrapper,null, function() {
+            domMgr.mk('ul',this,null, function() {
+                domMgr.mk('li',this,language.substitute(_tr("Within a terminal run %[0]"),'<b>cd cordova</b>'));
+                domMgr.mk('li',this,_tr("Install the platforms you wish to support."));
+                domMgr.mk('li',this,_tr("Deploy onto your device or emulator with <b>cordova run [ios][android][firefoxos]</b>. Note that by default the www folder contains files symlinked to the output/debug folder. You'll want to change this to output/deploy when you are ready to release your app."));
+                domMgr.mk('li',this,_tr("Customise splashscreens and icons within the same folder."));
+            });
+        });
 
-        domMgr.mk('p',wrapper,_tr("CSS3 Media queries take into account screens of all sizes. Try changing the size of this window to that of a large screen, tablet and phone. Notice how the footer disappears and how elements such as the header change height and width depending on screen ratio? While much of the work has been done you can customize the CSS to suit your own design."));
+        domMgr.mk('h1',wrapper,_tr("Embedding Resources"));
 
-        domMgr.mk('h1',wrapper,_tr("Embedded Resources"));
-
-        domMgr.mk('p',wrapper,_tr("Images and fonts are compiled into CSS making them available immediately. You can choose to load resources traditionally by editing the SASS files."));
+        domMgr.mk('p',wrapper,_tr("Compiling images and fonts into CSS reduces latency over slower networks and allows app's to perform with a native feel."));
 
         domMgr.mk('button',wrapper,_tr("Demo")).addEventListener('click', function() {
             domMgr.mk('div',{ insertBefore:this },null, function() {
@@ -37,7 +43,7 @@ module.exports = function(app) {
             domMgr.rm(this);
         });
 
-        domMgr.mk('h1',wrapper,_tr("Touch Ready"));
+        domMgr.mk('h1',wrapper,_tr("Touch & Gestures"));
 
         domMgr.mk('p',wrapper,_tr("For touch screens the browser 300ms delay is removed. Press and hold on the shapes below to compare the difference."));
 
@@ -72,7 +78,6 @@ module.exports = function(app) {
             });
         });
 
-        domMgr.mk('h1',wrapper,_tr("Gestures"));
         domMgr.mk('p',wrapper,_tr("Gesture events are available via the 3rdparty.hammer library. If you have a touch screen, try some actions in the box below."));
 
         return model.addSequence({
@@ -114,45 +119,7 @@ module.exports = function(app) {
                         type:'critical',
                         message : _tr("A touch screen has not been detected.")
                     });
-                })(),
-
-                objMgr.create('navigation').then(function(navigation) {
-                    var c = document.createDocumentFragment();
-                    domMgr.mk('h1',c,_tr("Mobile Features"));
-                    domMgr.mk('p',c,language.substitute(_tr("%[0] is utilized to access mobile device features such as camera, accelerometer and GPS."),'<a href="http://cordova.apache.org">Apache Cordova</a>'));
-                    domMgr.mk('p',c,null, function() {
-                        domMgr.mk('ul',this,null, function() {
-                            domMgr.mk('li',this,language.substitute(_tr("Within a terminal run %[0]"),'<b>cd cordova</b>'));
-                            domMgr.mk('li',this,_tr("Install the platforms you wish to support."));
-                            domMgr.mk('li',this,_tr("Deploy onto your device or emulator with <b>cordova run [ios][android][firefoxos]</b>. Note that by default the www folder contains files symlinked to the output/debug folder. You'll want to change this to output/deploy when you are ready to release your app."));
-                            domMgr.mk('li',this,_tr("Customise splashscreens and icons within the same folder."));
-                        });
-                    });
-                    c.appendChild(navigation.container);
-                    domMgr.mk('p',c);
-                    var ss = domMgr.mk('div',c,null,'android');
-                    return navigation.menu.addOptions([
-                        {
-                            id:'android',
-                            title : 'Android',
-                            active:true
-                        },
-                        {
-                            id:'ios',
-                            title : 'IOS'
-                        }
-                    ].map(function (o) {
-                        o.onClick = function() { 
-                            ss.className = o.id;
-                            this.setActive();
-                            return Promise.resolve();
-                        }
-                        return o;
-                    })).then(function() {
-                        return c;
-                    });;
-                })
-
+                })()
             ]
         });
 

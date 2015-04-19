@@ -46,6 +46,12 @@
             display:table-cell;
         }
 
+        &:not(.hideable) {
+            >a {
+                display:none;
+            }
+        }
+
         >a {
             background: inline-image("instance.pagemessage/close.svg") no-repeat 50% 50%;
             background-size:1.4em 1.4em;
