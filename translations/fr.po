@@ -1135,6 +1135,12 @@ msgstr ""
 msgid "Some missing features and many CSS issues. Not recommended."
 msgstr ""
 
+msgid "Opera Software"
+msgstr ""
+
+msgid "Opera"
+msgstr ""
+
 msgid "Design"
 msgstr ""
 

@@ -53,7 +53,7 @@ module.exports = function(app) {
                                     });
                                 } else {
                                     var a = model.uriPath.concat(id);
-                                    this.href = '/' + a.join('/');
+                                    this.href = a.join('/') + '/';
                                     this.addEventListener('click', function (evt) { 
                                         evt.preventDefault();
                                         router.to(a);

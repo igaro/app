@@ -24,6 +24,9 @@ module.exports = function(app) {
             });
         });
 
+        model.autoShow = false;
+        model.hide();
+
         // location
         domMgr.mk('div',wrapper,null, function() {
             var self = this,

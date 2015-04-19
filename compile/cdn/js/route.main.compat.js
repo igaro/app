@@ -239,6 +239,25 @@ module.exports = function(app) {
                             }
                         ]
                     },
+                    {
+                        columns : [
+                            {
+                                content:_tr("Opera Software")
+                            },
+                            {
+                                content:_tr("Opera")
+                            },
+                            {
+                                content : "10+"
+                            },
+                            {
+                                className : "green"
+                            },
+                            {
+                                content : _tr("Tested as far back as version 10, but may work with earlier versions.")
+                            }
+                        ]
+                    }
                 ]
             }
 

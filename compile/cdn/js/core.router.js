@@ -38,6 +38,7 @@ module.exports = function(app) {
         this.defaultHideChildren=true;
         this.defaultHideParentViewWrapper=true;
         this.defaultShowWrapper=true;
+        this.autoShow = true;
         this.scrollPosition=0;
         this.cssElement=dom.mk('style',dom.head);
     };
@@ -70,7 +71,7 @@ module.exports = function(app) {
     CoreRouterRoute.prototype.getUrl = function() {
         return '/'+this.uriPath.map(function (o) {
             return encodeURIComponent(o);
-        }).join('/');
+        }).concat('').join('/');
     };
 
     CoreRouterRoute.prototype.addSequence = function(o) {
@@ -258,10 +259,11 @@ module.exports = function(app) {
                                     // abort the load, another request has since came in
                                     if (self.requestId !== v) 
                                         throw -1600;
-                                    c = self.current = model = m[0];
+                                    self.current = model = m[0];
                                     i += model.uriPieces.length;
                                     model.uriPath = ra.slice(base.length,i+1);
-                                    model.show();
+                                    if (model.autoShow)
+                                        model.show();
                                     return routerEventMgr.dispatch('to-in-progress',model);
                             });
                         });
@@ -269,11 +271,11 @@ module.exports = function(app) {
                         if (c.scrollPosition !== false)
                             document.body.scrollTop = document.documentElement.scrollTop = c.scrollPosition;
                         if (typeof state === 'boolean' && state === false) {
-                            history.replaceState({ initial:true },null);
+                            window.history.replaceState({ initial:true },null);
                         } else {
-                            var urlPath = path.map(function(f) {
+                            var urlPath = '/'+path.map(function(f) {
                                 return encodeURIComponent(f);
-                            }).join('/');
+                            }).concat('').join('/');
                             if (search) {
                                 if (typeof search === 'function')
                                     search = search();
@@ -286,7 +288,7 @@ module.exports = function(app) {
                                     hash = hash();
                                 urlPath += '#'+hash;
                             }
-                            history.pushState(state || {},null,'/'+urlPath);
+                            window.history.pushState(state || {},null,urlPath);
                         }
                         return routerEventMgr.dispatch('to-loaded');
                     }).catch(function (e) {
@@ -295,6 +297,10 @@ module.exports = function(app) {
                         return routerEventMgr.dispatch('to-error', e).then(function() {
                             throw e;
                         });
+                    }).catch(function(e) {
+                        // replace the url with whatever has managed to load
+                        window.history.replaceState({},null,router.current.getUrl()); 
+                        throw e;
                     });
                 });
 
@@ -336,20 +342,17 @@ module.exports = function(app) {
 
     window.addEventListener('popstate', function() { f(); });
 
-    // load route from url if not served from fs
     if (document.location.protocol !== 'file:') {
-        events.on('','state.root', function() {
-            events.remove(this);
-            return router.to([],null,null,false).then(function() {
-                var p = [];
-                if (window.location.pathname.length > 1)
-                    p.push(f());
-                return Promise.all(p).then(function() {
-                    events.remove(this);
-                    events.on('','state.complete');
-                });
+        var wl = window.location;
+        // add missing slash
+        window.history.replaceState({},null,wl.href.replace(/\/?(\?|#|$)/, '/$1').substr(wl.origin.length));
+        if (wl.pathname.length > 1) {
+            events.on('','state.base', function() {
+                events.remove(this);
+                // do not return, this prevents event aborting
+                f();
             });
-        });
+        }
     }
 
     return router;

@@ -2503,7 +2503,7 @@ module.exports = function(app, params) {
                 router.current = router.base = m[2];
                 // handle error here
                 return events.dispatch('','state.base').then(function() {
-                    return events.dispatch('','state.root');
+                    return events.dispatch('','state.ready');
                 }).catch(function (e) {
                     // don't return the handle - doing so will prevent the parent model from displaying and will show the generic load error.
                     if (e !== 0) // connection issues are handled by a pageMessage
