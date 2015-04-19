@@ -36,13 +36,12 @@ module.exports = function(app) {
         domMgr.mk('p',wrapper,_tr("Run the following in a terminal."));
 
         domMgr.mk('textarea',wrapper,"mkdir igaro \n\
-git clone https://github.com/igaro/app.git igaro/git --depth=1 \n\
-sudo npm install grunt-cli \n\
+git clone https://github.com/igaro/app.git igaro/git\n\
+npm install grunt-cli \n\
 sudo gem update --system \n\
 sudo gem install compass \n\
 cd igaro/git \n\
 npm install \n\
-compass compile -c compass.rb \n\
 grunt",'gitcode') 
         .readOnly=true;
 
