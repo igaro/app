@@ -43,7 +43,7 @@ body >.core-router >.main {
 
     height:100%;
 
-    >.route {
+    .route {
         height:100%;
         >.wrapper {
             height:100%;
@@ -51,8 +51,6 @@ body >.core-router >.main {
     }
 
     >.wrapper {
-        
-
         >.header {
             text-align:center;
             @include pagepadding;

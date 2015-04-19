@@ -13,4 +13,5 @@ build/*
 bak
 .staging
 *.swp
+*.pot
 node_modules
