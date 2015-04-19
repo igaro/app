@@ -288,7 +288,7 @@ module.exports = function(app) {
                                     hash = hash();
                                 urlPath += '#'+hash;
                             }
-                            window.history.pushState(state || {},null,urlPath);
+                            history.pushState(state || {},null,urlPath);
                         }
                         return routerEventMgr.dispatch('to-loaded');
                     }).catch(function (e) {
@@ -299,7 +299,7 @@ module.exports = function(app) {
                         });
                     }).catch(function(e) {
                         // replace the url with whatever has managed to load
-                        window.history.replaceState({},null,router.current.getUrl()); 
+                        history.replaceState({},null,router.current.getUrl()); 
                         throw e;
                     });
                 });
@@ -345,7 +345,7 @@ module.exports = function(app) {
     if (document.location.protocol !== 'file:') {
         var wl = window.location;
         // add missing slash
-        window.history.replaceState({},null,wl.href.replace(/\/?(\?|#|$)/, '/$1').substr(wl.origin.length));
+        history.replaceState(history.state,null,wl.href.replace(/\/?(\?|#|$)/, '/$1').substr(wl.origin.length));
         if (wl.pathname.length > 1) {
             events.on('','state.base', function() {
                 events.remove(this);
