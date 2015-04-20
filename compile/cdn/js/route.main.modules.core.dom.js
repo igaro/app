@@ -6,7 +6,7 @@ module.exports = function(app) {
             desc : _tr("Provides DOM helpers to reduce repetitive coding. Automates dependency management and provides object destruction cleanup. Does not try to be JQuery."),
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://www.andrewcharnley.com' 
+                link:'http://people.igaro.com/ac' 
             },
             usage : {
                 class : true

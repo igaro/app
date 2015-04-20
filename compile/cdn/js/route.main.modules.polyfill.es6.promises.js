@@ -6,7 +6,7 @@ module.exports = function(app) {
             desc : _tr("This module polyfills standard Promise A+ spec into older browsers. The following functions are provided:\n%s"),
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://www.andrewcharnley.com' 
+                link:'http://people.igaro.com/ac' 
             },
             extlinks : [
                 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise'

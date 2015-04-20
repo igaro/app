@@ -70,7 +70,7 @@ model.managers.object.create('form.validate',{ \n \
 
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://www.andrewcharnley.com' 
+                link:'http://people.igaro.com/ac' 
             },
             attributes : [
                 { 

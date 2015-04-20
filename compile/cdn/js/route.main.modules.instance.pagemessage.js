@@ -29,7 +29,7 @@ model.managers.object.create('pagemessage', { \n \
             },
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://www.andrewcharnley.com' 
+                link:'http://people.igaro.com/ac' 
             },
             usage : {
                 instantiate : true,

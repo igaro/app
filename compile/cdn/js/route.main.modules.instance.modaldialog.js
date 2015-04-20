@@ -22,7 +22,7 @@ dom.mk('button',c,{ \n \
             },
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://www.andrewcharnley.com' 
+                link:'http://people.igaro.com/ac' 
             },
             usage : {
                 instantiate : true,

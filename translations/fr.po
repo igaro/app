@@ -1141,6 +1141,41 @@ msgstr ""
 msgid "Opera"
 msgstr ""
 
+msgid "Contact"
+msgstr ""
+
+msgid ""
+"Persons actively involved in Igaro App development have an email which is "
+"the quoted value found by their name followed by @igaro.com."
+msgstr ""
+
+msgid "Lead Developers"
+msgstr ""
+
+msgid ""
+"The <b>Freenode #igaro</b> channel is used by the developers to bounce "
+"around new ideas."
+msgstr ""
+
+msgid "If nobody is around ask your question and check back later for a reply."
+msgstr ""
+
+msgid "Priority Service"
+msgstr ""
+
+msgid ""
+"The priority service is offered to those requiring a guaranteed service "
+"level."
+msgstr ""
+
+msgid ""
+"Members receive a unique email address and a response within a pre-agreed "
+"time frame."
+msgstr ""
+
+msgid "Enquire"
+msgstr ""
+
 msgid "Design"
 msgstr ""
 
@@ -1498,7 +1533,7 @@ msgstr ""
 msgid "License"
 msgstr ""
 
-msgid "Insight"
+msgid "Begin"
 msgstr ""
 
 msgid ""
@@ -1559,9 +1594,6 @@ msgid "Forum"
 msgstr ""
 
 msgid "Report"
-msgstr ""
-
-msgid "Contact"
 msgstr ""
 
 msgid "Support"
@@ -2259,13 +2291,17 @@ msgstr ""
 msgid "Download"
 msgstr ""
 
-msgid "Create a new instance using <b>new <MODNAME></b>."
+msgid "Create a new instance using <b>new %[0]</b>."
 msgstr ""
 
-msgid "Access <b><MODNAME></b> directly without instantiating."
+msgid "Access <b>%[0]</b> directly without instantiating."
 msgstr ""
 
 msgid "Access the features of this library directly."
+msgstr ""
+
+msgid ""
+"Provides a manager on a blessed object, accessible via object.managers.%[0]."
 msgstr ""
 
 msgid ""
@@ -2681,54 +2717,6 @@ msgstr ""
 msgid ""
 "View the code behind this page to understand how the three accordions are "
 "created. Notice how instances can be children of instances?"
-msgstr ""
-
-msgid ""
-"Igaro App is supported by a small but growing amount of developers. You can "
-"open and view issues on the github tracker or offer suggestions on the "
-"trello board."
-msgstr ""
-
-msgid "Report Issue"
-msgstr ""
-
-msgid "Offer Suggestion"
-msgstr ""
-
-msgid "Community"
-msgstr ""
-
-msgid ""
-"Until Igaro API is up and running we've set up a forum. This is the best "
-"place to ask questions. Stackoverflow is also a good source for help - be "
-"sure to include 'Igaro App' in your title!."
-msgstr ""
-
-msgid "StackOverflow"
-msgstr ""
-
-msgid ""
-"The <b>Freenode #igaro</b> channel is used by the developers to bounce "
-"around new ideas."
-msgstr ""
-
-msgid "If nobody is around ask your question and check back later for a reply."
-msgstr ""
-
-msgid "Priority Service"
-msgstr ""
-
-msgid ""
-"The priority service is offered to those requiring a guaranteed service "
-"level."
-msgstr ""
-
-msgid ""
-"Members receive a unique email address and a response within a pre-agreed "
-"time frame."
-msgstr ""
-
-msgid "Enquire"
 msgstr ""
 
 #, fuzzy

@@ -49,7 +49,7 @@ model.managers.object.create('table', {\n \
             },
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://www.andrewcharnley.com' 
+                link:'http://people.igaro.com/ac' 
             },
             attributes : [
                 {

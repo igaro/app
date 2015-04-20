@@ -6,7 +6,7 @@ module.exports = function(app) {
             desc : _tr("Provides date and timezone functionality. Date strings should be ISO 8601 formatted. The timezone is determined from the system clock but can be overridden. Env code is stored."),
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://www.andrewcharnley.com' 
+                link:'http://people.igaro.com/ac' 
             },
             usage : {
                 class : true

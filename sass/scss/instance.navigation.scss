@@ -14,11 +14,6 @@
         font-size:100%;
         background-color:#444;
         color:#ccc;
-        &:after { 
-            content: ""; 
-            clear: both; 
-            display: block;
-        }
         >li {
             padding:0 0.7em;
             font-size:90%;

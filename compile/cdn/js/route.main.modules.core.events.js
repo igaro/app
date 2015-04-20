@@ -7,7 +7,7 @@ module.exports = function(app) {
             desc : _tr("Dispatches events and manages handles to functions."),
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://www.andrewcharnley.com' 
+                link:'http://people.igaro.com/ac' 
             },
             usage : {
                 class : true

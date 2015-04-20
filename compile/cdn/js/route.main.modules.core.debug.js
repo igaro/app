@@ -6,7 +6,7 @@ module.exports = function(app) {
             desc : _tr("Handles debug messages and fires an event when one comes in."),
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://www.andrewcharnley.com' 
+                link:'http://people.igaro.com/ac' 
             },
             usage : {
                 class : true

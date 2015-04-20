@@ -7,7 +7,7 @@ module.exports = function(app) {
             desc : _tr("Provides country switching and related functionality. Supported countries are set via an API or configuration file. Uses ISO 3166-1. Env code is stored."),
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://www.andrewcharnley.com' 
+                link:'http://people.igaro.com/ac' 
             },
             usage : {
                 class : true

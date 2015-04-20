@@ -32,8 +32,7 @@ module.exports = function(app) {
             container:wrapper,
             promises : [
 
-                managers.object.create({ name:'navigation'},{
-                    className:'headermn',
+                managers.object.create('navigation',{
                     options : [
                         { 
                             className:'app', 

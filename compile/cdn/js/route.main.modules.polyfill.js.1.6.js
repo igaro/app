@@ -6,7 +6,7 @@ module.exports = function(app) {
             desc : _tr("This library prototypes Javascript 1.6 (IE8). The following functions are provided:\n%s"),
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://www.andrewcharnley.com' 
+                link:'http://people.igaro.com/ac' 
             }
         };
 

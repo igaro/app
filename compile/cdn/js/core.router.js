@@ -345,7 +345,7 @@ module.exports = function(app) {
     if (document.location.protocol !== 'file:') {
         var wl = window.location;
         // add missing slash
-        history.replaceState(history.state,null,wl.href.replace(/\/?(\?|#|$)/, '/$1').substr(wl.origin.length));
+        history.replaceState(history.state,null,wl.href.replace(/\/?(\?|#|$)/, '/$1').substr(wl.protocol.length+wl.host.length+2));
         if (wl.pathname.length > 1) {
             events.on('','state.base', function() {
                 events.remove(this);

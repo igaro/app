@@ -130,23 +130,23 @@
 body >.core-router >.header {
 
 	background: #000;
-    height:6em;
+    height:7em;
     @media screen and (max-height: 700px) {
         height:4em;
     }
     @media screen and (min-height: 1000px) {
-        height:8em;
+        height:9em;
     }
 
 	>.wrapper {
 
         // firefox bug
-        height:6em;
+        height:7em;
         @media screen and (max-height: 700px) {
             height:4em;
         }
         @media screen and (min-height: 1000px) {
-            height:8em;
+            height:9em;
         }
 
         //height:100%;
@@ -155,7 +155,7 @@ body >.core-router >.header {
 		@include pagepadding;
 		padding-top:0;
 		padding-bottom:0;
-		background-color:rgba(65,60,63,.8);
+		background-color: rgba(32,28,30,.8);
 		border-left-color:rgba(35,30,33,.8);
 		border-right-color:rgba(35,30,33,.8);
 	
@@ -175,56 +175,47 @@ body >.core-router >.header {
 		}
 
 		>.instance-navigation {
-
 			height:100%;
-
-			&.headermn {
-				height:100%;
-				margin-left:1em;
-				width:6em;
+            margin-left:1em;
+            width:6em;
+            border:none;
+            >ul {
+                margin:0;
+                height:100%;
+                padding:0;
                 border:none;
-
-		    	>ul {
-		    		margin:0;
-		    		height:100%;
-		    		padding:0;
+                //background:none;
+                >li { 
+                    display:inline-block; 
+                    width:50%; 
+                    margin:0; 
+                    height:100%; 
+                    padding:0;
                     border:none;
-
-				    >li { 
-				    	display:inline-block; 
-				    	width:49%; 
-				    	margin:0; 
-				    	height:100%; 
-				    	padding:0;
-                        border:none;
-				    	>a { 
-                            height:100%; 
-                        }
-				    }
-
-					>.app {
-					    background:#FFF;
-					    padding-top:1px;
-					    >a {
-							background: inline-image("route.header/app.svg") no-repeat 50% 50%;
-					    	background-size:60%;
-					    }
-					}
-
-					>.api {
-						cursor:pointer;
-						margin-bottom:1px;
-					    background: linear-gradient(color-stops(#4988ef 0%, #235ebd 100%));
-					    &:hover {
-					    	background: linear-gradient(color-stops(#427ad7 0%, #1d4f9e 100%));
-					    }
-					    >a {
-							background: inline-image("route.header/api.svg") no-repeat 50% 52%;
-					    	background-size:45%;
-					    }
-					}
-
-				}
+                    >a { 
+                        height:100%; 
+                    }
+                }
+                >.app {
+                    background:#FFF;
+                    padding-top:1px;
+                    >a {
+                        background: inline-image("route.header/app.svg") no-repeat 50% 50%;
+                        background-size:60%;
+                    }
+                }
+                >.api {
+                    cursor:pointer;
+                    margin-bottom:1px;
+                    background: linear-gradient(color-stops(#4988ef 0%, #235ebd 100%));
+                    &:hover {
+                        background: linear-gradient(color-stops(#427ad7 0%, #1d4f9e 100%));
+                    }
+                    >a {
+                        background: inline-image("route.header/api.svg") no-repeat 50% 52%;
+                        background-size:45%;
+                    }
+                }
 			}
 		}
 

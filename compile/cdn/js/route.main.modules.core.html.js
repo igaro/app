@@ -7,7 +7,7 @@ module.exports = function(app) {
             desc : _tr("Provides HTML related functionality and formatting."),
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://www.andrewcharnley.com' 
+                link:'http://people.igaro.com/ac' 
             },
             usage : {
                 class : true

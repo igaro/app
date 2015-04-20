@@ -6,7 +6,7 @@ module.exports = function(app) {
             desc : _tr("This file configures other modules such as setting supported locale, links events, registers route handlers and customizes the Igaro App framework."),
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://www.andrewcharnley.com' 
+                link:'http://people.igaro.com/ac' 
             }
         };
 
