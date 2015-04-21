@@ -11,7 +11,7 @@ module.exports = function(app, params) {
 
     var store = app['core.store'],
         url = app['core.url'],
-        bless = app['core.bless'];
+        bless = app['core.object'].bless;
 
     var detect = function() {
         return language.managers.store.get('env').then(function (stored) {

@@ -173,7 +173,7 @@ module.exports = function(app, params) {\n\
 
                 Promise.resolve(domMgr.mk('h1',null,_tr("Instances"))),
                 Promise.resolve(domMgr.mk('p',null,_tr("Instances (also know as widgets) can be called anything, but Igaro supplied instances are denoted by an instance.* filename."))),
-                Promise.resolve(domMgr.mk('p',null,_tr("An instance module exports a function which is instantiated upon need. Although you can use the Javascript <b>new</b> keyword to do this, core.bless (covered in the next chapter) provides a helper to lazy load the module, call <b>new</b> and then call a second constructor, .init(). Unlike <b>new</b>, .init() is asynchronous."))),
+                Promise.resolve(domMgr.mk('p',null,_tr("An instance module exports a function which is instantiated upon need. Although you can use the Javascript <b>new</b> keyword to do this, core.object's bless (covered in the next chapter) provides a helper to lazy load the module, call <b>new</b> and then call a second constructor, .init(). Unlike <b>new</b>, .init() is asynchronous."))),
                 Promise.resolve(domMgr.mk('p',null,_tr("View the code behind this page to understand how the three accordions are created. Notice how instances can be children of instances?"))),
             ]
 

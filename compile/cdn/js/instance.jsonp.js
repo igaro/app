@@ -4,7 +4,7 @@
 
 module.exports = function(app) {
 
-    var bless = app['core.bless'],
+    var bless = app['core.object'].bless,
         setBits = function(p) {
             if (p.res) 
                 this.res = p.res;

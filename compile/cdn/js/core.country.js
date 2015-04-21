@@ -11,7 +11,7 @@ module.exports = function(app, params) {
 
     var store = app['core.store'],
         url = app['core.url'],
-        bless = app['core.bless'];
+        bless = app['core.object'].bless;
 
     var detect = function() {
         var n = window.navigator.userLanguage || window.navigator.language;

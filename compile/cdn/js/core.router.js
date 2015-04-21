@@ -16,7 +16,9 @@ module.exports = function(app) {
         language = app['core.language'], 
         Amd = app['instance.amd'],
         dom = app['core.dom'],
-        bless = app['core.bless'];
+        object = app['core.object'],
+        bless = object.bless,
+        arrayInsert = object.arrayInsert;
 
     // ROUTE
     var CoreRouterRoute = function(o) {
@@ -30,9 +32,11 @@ module.exports = function(app) {
                     this.classList.add(o.name.replace(/\./g,'--'));
             });
         }
+        this.children = {
+            routes : 'route'
+        }
         bless.call(this,o);
         this.uriPath = [];
-        this.children = [];
         this.uriPieces = [];
         this.originalUri = [];
         this.defaultHideChildren=true;
@@ -98,8 +102,8 @@ module.exports = function(app) {
         return this === router.base;
     };
 
-    CoreRouterRoute.prototype.getChildByName = function(name) {
-        var pool = this.children;
+    CoreRouterRoute.prototype.getRouteByName = function(name) {
+        var pool = this.routes;
         for (var i=0; i< pool.length; ++i) {
             if (pool[i].name === name)
                 return pool[i];
@@ -107,103 +111,86 @@ module.exports = function(app) {
         return null;
     };
 
-    CoreRouterRoute.prototype.addChildren = function(o) {
-        var pool = this.children,
-            self = this,
-            path = this.path,
-            silent=o.silent,
-            arr = [];
-        return new Promise(function(resolve,reject) {
-            o.list.map(function(name) {
-                var g,
-                    doAction = [];
-                if (! pool.some(function(y) {
-                    if (y.name === name) {
-                        g = y;
-                        return true;
-                    }
-                })) {
-                    g = new CoreRouterRoute({ 
-                        parent:self,
-                        container:self.container, 
-                        name:name
-                    });
-                    var provider = router.getProviderForPath(g.path);
-                    if (! provider) 
-                        throw new Error('No Route provider for path!');
-                    g.url = provider.url;
-                    doAction = [provider.fetch(g).then(
-                        function(j) {
-                            if (j.css)
-                                g.cssElement.innerHTML = css;
-                            var ret = j.js(g);
-                            if (ret && ret instanceof Promise) {
-                                return ret.then(function(h) {
-                                    return g;
-                                });
-                            } else {
-                                return g;
-                            }
-                        }
-                    ).then(function() {
-                        pool.push(g);
-                        g.managers.event
-                            .on('destroy', function() {
-                                pool.splice(pool.indexOf(g), 1);
-                            });
-                        return self.managers.event.dispatch('addChildren',g);
-                    })];
-                }
-                return Promise.all(doAction).then(function() {
-                    g.originalUri = o.uri;
-                    return g.managers.event.dispatch('enter').then(function() {
-                        if (!g._initilized)
-                            return g.managers.event.dispatch('init').then(function() {
-                                g._initilized = true;
-                            });
-                    }).then(function() {
-                        if (g.defaultShowWrapper)
-                            g.managers.dom.show(g.wrapper);
-                        if (g.defaultHideChildren) 
-                            g.hideChildren();
-                        if (g.defaultHideParentViewWrapper) 
-                            g.managers.dom.hide(g.parent.wrapper);
-                        return g;
-                    });
-                }).catch(function (e) {
-                    g.destroy();
-                    throw e;
-                });
-            }).reduce(function(sequence, cP) {
-                return sequence.then(function() {
-                    return cP;
-                }).then(function(model) {
-                    arr.push(model);
-                    if(arr.length===o.list.length) 
-                        resolve(arr);
-                }).catch(function(e) {
-                    reject(e);
-                });
-            }, Promise.resolve());
+    CoreRouterRoute.prototype.addRoutes = function(o) {
+        var self = this;
+        return object.promiseSequencer(o,function(a) {
+            return self.addRoute(a);
         });
     };
 
-    CoreRouterRoute.prototype.removeChildren = function() {
-        return Promise.all(this.children.map(function (m) { 
+    CoreRouterRoute.prototype.addRoute = function(o) {
+        var pool = this.routes,
+            self = this,
+            path = this.path,
+            silent = o.silent,
+            name = o.name,
+            g,
+            fetcher;
+        if (! pool.some(function(y) {
+            if (y.name === name) {
+                g = y;
+                return true;
+            }
+        })) {
+            g = new CoreRouterRoute({ 
+                parent:self,
+                container:self.container, 
+                name:name
+            });
+            var provider = router.getProviderForPath(g.path);
+            if (! provider) 
+                throw new Error('No Route provider for path!');
+            g.url = provider.url;
+            fetcher = provider.fetch(g).then(
+                function(j) {
+                    if (j.css)
+                        g.cssElement.innerHTML = css;
+                    var ret = j.js(g);
+                    if (ret && ret instanceof Promise) {
+                        return ret.then(function(h) {
+                            return g;
+                        });
+                    } else {
+                        return g;
+                    }
+                }
+            ).then(function() {
+                arrayInsert(pool,g,o);
+                return self.managers.event.dispatch('addRoute',g);
+            });
+        }
+        return (fetcher? fetcher : Promise.resolve()).then(function() {
+            g.originalUri = o.uri;
+            return g.managers.event.dispatch('enter').then(function() {
+                if (!g._initilized)
+                    return g.managers.event.dispatch('init').then(function() {
+                        g._initilized = true;
+                    });
+            }).then(function() {
+                if (g.defaultShowWrapper)
+                    g.managers.dom.show(g.wrapper);
+                if (g.defaultHideChildren) 
+                    g.hideRoutes();
+                if (g.defaultHideParentViewWrapper) 
+                    g.managers.dom.hide(g.parent.wrapper);
+                return g;
+            });
+        }).catch(function (e) {
+            g.destroy();
+            throw e;
+        });
+    };
+
+    CoreRouterRoute.prototype.removeRoutes = function() {
+        return Promise.all(this.routes.map(function (m) { 
             return m.destroy(); 
         }));
     };
     
-    CoreRouterRoute.prototype.hideChildren = function() {
-        this.children.forEach(function (m) { 
+    CoreRouterRoute.prototype.hideRoutes = function() {
+        this.routes.forEach(function (m) { 
             m.hide(); 
         });
-    };
-
-    // PROVIDER
-    var routerProvider = function(o) {
-
-
     };
 
     // CONTROLLER
@@ -230,7 +217,7 @@ module.exports = function(app) {
             bless.call(o, {
                 parent:this
             });
-            this.providers.push(o);
+            arrayInsert(this.providers,o,o);
         },
         
         to : function(path, search, hash, state) {
@@ -251,15 +238,15 @@ module.exports = function(app) {
                 return routerEventMgr.dispatch('to-begin').then(function (evt) {
                     return ra.reduce(function(a,b,i) {
                         return a.then(function() {
-                            return model.addChildren({
-                                    list:[ra[i]],
+                            return model.addRoute({
+                                    name:ra[i],
                                     uri : ra.slice(i+1),
                                     silent : true
                             }).then(function(m) {
                                     // abort the load, another request has since came in
                                     if (self.requestId !== v) 
                                         throw -1600;
-                                    self.current = model = m[0];
+                                    self.current = model = m;
                                     i += model.uriPieces.length;
                                     model.uriPath = ra.slice(base.length,i+1);
                                     if (model.autoShow)

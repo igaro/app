@@ -12,7 +12,7 @@ module.exports = function(app) {
     var zIndexAt = 999999,
         body = document.body,
         bodyStyle = body.style,
-        bless = app['core.bless'];
+        bless = app['core.object'].bless;
 
     var InstanceModalDialog = function(o) {
         this.name='instance.modaldialog';

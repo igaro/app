@@ -23,7 +23,7 @@ module.exports = function(app) {
 
         domMgr.mk('h1',wrapper,_tr("Usage"));
 
-        domMgr.mk('p',wrapper,_tr("Blessing an object is straight forward. Many attributes are within the <b>o</b> literal and are passed through. See the core.bless module for what this literal may contain."));
+        domMgr.mk('p',wrapper,_tr("Blessing an object is straight forward. Many attributes are within the <b>o</b> literal and are passed through. See the core.object module for what this literal may contain."));
         
         domMgr.mk('pre',wrapper,"var InstanceMyWidget = function(o) {\
 \n   this.name = 'instance.mywidget';\
@@ -32,7 +32,7 @@ module.exports = function(app) {
 \n        return dom.mk('div',o.container,null,o.className);\
 \n   };\
 \n   o.parent = this;\
-\n   app['core.bless'].call(this,o);\
+\n   app['core.object'].bless.call(this,o);\
 \n}");
 
         domMgr.mk('p',wrapper,_tr("The .asRoot flag will be covered in the next chapter."));

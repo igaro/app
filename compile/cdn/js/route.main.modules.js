@@ -14,7 +14,9 @@ module.exports = function(app) {
     return function(model) {
 
         var wrapper = model.wrapper,
-            domMgr = model.managers.dom;
+            managers = model.managers,
+            domMgr = managers.dom,  
+            objectMgr = managers.object;
             
         model.stash.title=_tr("Modules");
 
@@ -29,9 +31,8 @@ module.exports = function(app) {
             var createTable = function(data,container) {
 
                 domMgr.mk('p',container,_tr("* = required"));
-                return model.managers.object.create('table',{
+                return objectMgr.create('table',{
                     container:container,
-                    searchColumns : true,
                     header : {
                         rows : [
                             {
@@ -47,11 +48,6 @@ module.exports = function(app) {
                                     }
                                 ]
                             }
-                        ]
-                    },
-                    body : {
-                        rows : [
-
                         ]
                     }
                 }).then(function (tbl) {
@@ -81,97 +77,101 @@ module.exports = function(app) {
                                     }
                                 }
                                 td.activeFor=this;
-                                g(sd.attributes.reverse(),row);
                                 td.className = this.className = 'active' ;
-                            });
-                        });
-                    };
-                    var g = function(t,at) {
-                        t.forEach(function (s) {
-                            body.addRow({ 
-                                insertBefore:at? brows.indexOf(at)+1: null, 
-                                columns:[
-                                    { 
-                                        content:s.name? { en: s.name + (s.required? ' *' : '') } : null
-                                    }
-                                ]
-                            }).then(function(row) {
-                                row.belongsTo=[];
-                                if (at) {
-                                    row.belongsTo = at.belongsTo.concat([at]);
-                                    row.container.classList.add('shade'+row.belongsTo.length);
-                                }
-                                return row.addColumn().then(function(cc) {
-                                    
-                                    var domMgr = cc.managers.dom;
-                                    return row.addColumn({ 
-                                        content:s.desc?s.desc:null 
-                                    }).then(function(rr) {
-
-                                        if (s.returns && s.type==='function') {
-                                            var l,
-                                                returns = s.returns;
-                                            if (returns.instanceof) {
-                                                l = returns.instanceof().name;
-                                            } else if (returns.type) {
-                                                l = returns.type;
-                                            } else {
-                                                l = '⊗';
-                                            }
-                                            makeahref(row,s.returns,cc, l);
-                                            domMgr.mk('span',cc,' = ');
-                                        }
-                                        if (s.instanceof) {
-                                            var m=s.instanceof;
-                                            if (typeof m === 'function') { 
-                                                var mm = m();
-                                                makeahref(row,mm,cc,mm.name);
-                                                    //a.title = language.mapKey(mm.desc); 
-                                                var q = JSON.parse(JSON.stringify(mm.desc));
-                                                if (s.desc) {
-                                                    Object.keys(q).forEach(function(k) {
-                                                        if (s.desc[k]) 
-                                                            q[k] += ' '+s.desc[k];
-                                                    });
-                                                }
-                                                rr.setContent({ content:q });
-                                            } else {
-                                                var sa = m.name;
-                                                if (m.required) 
-                                                    sa += ' *';
-                                                domMgr.mk('a',cc,sa).href = m.href? m.href : 'https://developer.mozilla.org/en/docs/Web/API/'+m.name;
-                                                if (m.desc) 
-                                                    rr.setContent({ content:m.desc });
-                                            }
-                                        } else if (s.attributes && (s.type!=='function' || s.instanceof)) {
-                                            makeahref(row,s,cc,s.type);
-                                        } else {
-                                            domMgr.mk('span',cc,s.type);
-                                        }
-
-                                        if (s.attributes && (s.type==='function' || s.instanceof)) {
-                                            domMgr.mk('span',cc,' (');
-                                            s.attributes.forEach(function (m,i) {
-                                                if (i !== 0) 
-                                                    domMgr.mk('span',cc,',');
-                                                //if (m.instanceof) {
-                                                //    makeahref(row,m,ce,m.instanceof().name);
-                                                if (m.instanceof || m.attributes) { 
-                                                    makeahref(row,m,cc,m.instanceof? m.instanceof().name : m.type); 
-                                                } else { 
-                                                    domMgr.mk('span',cc,m.type); 
-                                                }
-                                                if (m.required) 
-                                                    domMgr.mk('sup',cc,'*');
-                                            });
-                                            domMgr.mk('span',cc,')');
-                                        }
-                                    });
+                                addRows(sd.attributes.reverse(),row).catch(function (e) {
+                                    return tbl.managers.debug.handle(e);
                                 });
                             });
                         });
                     };
-                    g(data);
+                    var addRows = function(rows,at) {
+                        return rows.reduce(function(a,s) {
+                            return a.then(function() {
+                                return body.addRow({ 
+                                    insertAfter:at, 
+                                    columns:[
+                                        { 
+                                            content:s.name? { en: s.name + (s.required? ' *' : '') } : null
+                                        }
+                                    ]
+                                }).then(function(row) {
+                                    row.belongsTo=[];
+                                    if (at) {
+                                        row.belongsTo = at.belongsTo.concat([at]);
+                                        row.container.classList.add('shade'+row.belongsTo.length);
+                                    }
+                                    return row.addColumn().then(function(cc) {
+                                        
+                                        var domMgr = cc.managers.dom;
+                                        return row.addColumn({ 
+                                            content:s.desc?s.desc:null 
+                                        }).then(function(rr) {
+
+                                            if (s.returns && s.type==='function') {
+                                                var l,
+                                                    returns = s.returns;
+                                                if (returns.instanceof) {
+                                                    l = returns.instanceof().name;
+                                                } else if (returns.type) {
+                                                    l = returns.type;
+                                                } else {
+                                                    l = '⊗';
+                                                }
+                                                makeahref(row,s.returns,cc, l);
+                                                domMgr.mk('span',cc,' = ');
+                                            }
+                                            if (s.instanceof) {
+                                                var m=s.instanceof;
+                                                if (typeof m === 'function') { 
+                                                    var mm = m();
+                                                    makeahref(row,mm,cc,mm.name);
+                                                    //a.title = language.mapKey(mm.desc); 
+                                                    var q = JSON.parse(JSON.stringify(mm.desc));
+                                                    if (s.desc) {
+                                                        Object.keys(q).forEach(function(k) {
+                                                            if (s.desc[k]) 
+                                                                q[k] += ' '+s.desc[k];
+                                                        });
+                                                    }
+                                                    rr.setContent({ content:q });
+                                                } else {
+                                                    var sa = m.name;
+                                                    if (m.required) 
+                                                        sa += ' *';
+                                                    domMgr.mk('a',cc,sa).href = m.href? m.href : 'https://developer.mozilla.org/en/docs/Web/API/'+m.name;
+                                                    if (m.desc) 
+                                                        rr.setContent({ content:m.desc });
+                                                }
+                                            } else if (s.attributes && (s.type!=='function' || s.instanceof)) {
+                                                makeahref(row,s,cc,s.type);
+                                            } else {
+                                                domMgr.mk('span',cc,s.type);
+                                            }
+
+                                            if (s.attributes && (s.type==='function' || s.instanceof)) {
+                                                domMgr.mk('span',cc,' (');
+                                                s.attributes.forEach(function (m,i) {
+                                                    if (i !== 0) 
+                                                        domMgr.mk('span',cc,',');
+                                                    //if (m.instanceof) {
+                                                    //    makeahref(row,m,ce,m.instanceof().name);
+                                                    if (m.instanceof || m.attributes) { 
+                                                        makeahref(row,m,cc,m.instanceof? m.instanceof().name : m.type); 
+                                                    } else { 
+                                                        domMgr.mk('span',cc,m.type); 
+                                                    }
+                                                    if (m.required) 
+                                                        domMgr.mk('sup',cc,'*');
+                                                });
+                                                domMgr.mk('span',cc,')');
+                                            }
+                                        });
+                                    });
+                                },Promise.resolve());
+                            });
+                        });
+                    };
+                    return addRows(data);
                 });
             };
 
@@ -334,7 +334,7 @@ module.exports = function(app) {
                     ['core.currency', _tr("Currency support and related functionality.")],
                     ['core.date', _tr("Timezone selection, date related functionality.")],
                     ['core.debug', _tr("Centralised debug management.")],
-                    ['core.domMgr', _tr("Provides DOM management and helpers.")],
+                    ['core.dom', _tr("Provides DOM management and helpers.")],
                     ['core.events', _tr("Event management, registration and dispatcher.")],
                     ['core.file', _tr("Filename parsing.")],
                     ['core.html', _tr("HTML parsing, conversion.")],

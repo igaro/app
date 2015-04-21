@@ -9,7 +9,9 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var bless = app['core.bless'];
+    var object = app['core.object'],
+        bless = object.bless,
+        arrayInsert = object.arrayInsert;
 
     var InstanceNavigationMenuOption = function(o) {
         var self = this;
@@ -84,16 +86,14 @@ module.exports = function(app) {
 
     InstanceNavigationMenu.prototype.addOptions = function(o) {
         var self = this;
-        return o.reduce(function(a,b) {
-            return a.then(function() {
-                return self.addOption(b);
-            });
-        }, Promise.resolve());
+        return object.promiseSequencer(o,function(a) {
+            return self.addOption(a);
+        });
     };
     InstanceNavigationMenu.prototype.addOption = function(o) {
         o.parent = this;
         var t = new InstanceNavigationMenuOption(o);
-        this.options.push(t);
+        arrayInsert(this.options,t,o);
         return this.managers.event.dispatch('addOption',t).then(function() {
             if (o.menu) {
                 return t.addMenu(o.menu).then(function() {

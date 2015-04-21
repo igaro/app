@@ -10,7 +10,7 @@ module.requires = [
 module.exports = function(app) {
 
     var url = app['core.url'],
- 		bless = app['core.bless'],
+ 		bless = app['core.object'].bless,
     	xhr = app['instance.xhr'];
 
 	var setBits = function(p) {

@@ -10,7 +10,9 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var bless = app['core.bless'];
+    var object = app['core.object'],
+        bless = object.bless,
+        arrayInsert = object.arrayInsert;
 
     var InstanceListItem = function(o) {
         this.name = 'item';
@@ -46,17 +48,15 @@ module.exports = function(app) {
 
     InstanceList.prototype.addItems = function(o) {
         var self = this;
-        return o.reduce(function (a,b) {
-            return a.then(function() {
-                return self.add(b);
-            }); 
-        }, Promise.resolve())
+        return object.promiseSequencer(o,function(a) {
+            return self.addItem(a);
+        });
     };
 
     InstanceList.prototype.addItem = function(o) {
         o.parent = this;
         var t = new InstanceListItem(o);
-        this.items.push(t);
+        arrayInsert(this.items,t,o);
         return this.managers.event.dispatch('addItem',t).then(function() {
             return t;
         });

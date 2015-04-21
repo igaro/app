@@ -88,7 +88,7 @@ module.exports = function(app) {
                     ],list).then(function() {
                         var domMgr = list.managers.dom;
                         return domMgr.mk('section', null, [
-                            domMgr.mk('h1', null, _tr('Begin')),
+                            domMgr.mk('h1', null, _tr('Insight')),
                             domMgr.mk('p', null, _tr('An amazing SPA architecture, developed by professionals, loaded with features.')),
                             list.container
                         ]);

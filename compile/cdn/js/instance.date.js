@@ -13,7 +13,7 @@ module.exports = function(app) {
     var date = app['core.date'],
         moment = app['3rdparty.moment'],
         language = app['core.language'],
-        bless = app['core.bless'];
+        bless = app['core.object'].bless;
 
     var dateEventMgr = date.managers.event,
         languageEventMgr = language.managers.event;

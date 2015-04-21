@@ -9,7 +9,9 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var bless = app['core.bless'];
+    var object = app['core.object'],
+        bless = object.bless,
+        arrayInsert = object.arrayInsert;
 
     var InstanceTableDomainRowColumn = function(o) {
         this.name='column';
@@ -35,18 +37,16 @@ module.exports = function(app) {
         o.parent = this;
         o.container = this.container;
         var col = new InstanceTableDomainRowColumn(o);
-        this.columns.push(col);
+        arrayInsert(this.columns,col,o);
         return this.managers.event.dispatch('addColumn',col).then(function() {
             return col;
         });
     };
     InstanceTableDomainRow.prototype.addColumns = function(o) {
         var self = this;
-        return o.reduce(function(a,b) {
-            return a.then(function() {
-                return self.addColumn(b);
-            });
-        }, Promise.resolve());
+        return object.promiseSequencer(o,function(a) {
+            return self.addColumn(a);
+        });
     };
 
     var InstanceTableDomain = function(o) {
@@ -64,13 +64,8 @@ module.exports = function(app) {
             o = {};
         o.parent = this;
         o.container = this.container;
-        var r = new InstanceTableDomainRow(o),
-            rows = this.rows;
-        if (o.insertBefore) {
-            rows.splice(rows.indexOf(o.insertBefore),0,r);
-        } else {
-            rows.push(r);
-        }
+        var r = new InstanceTableDomainRow(o);
+        arrayInsert(this.rows,r,o);
         return this.managers.event.dispatch('addRow',r).then(function () {
             if (o.columns)
                 return r.addColumns(o.columns);
@@ -80,11 +75,9 @@ module.exports = function(app) {
     };
     InstanceTableDomain.prototype.addRows = function(o) {
         var self = this;
-        return o.reduce(function(a,b) {
-            return a.then(function() {
-                return self.addRow(b);
-            });
-        }, Promise.resolve());
+        return object.promiseSequencer(o,function(a) {
+            return self.addRow(a);
+        });
     };
     InstanceTableDomain.prototype.deleteRows = function() {
         return Promise.all(
@@ -93,7 +86,6 @@ module.exports = function(app) {
             })
         );
     };
-
 
     var InstanceTable = function(o) {
         this.name='instance.table';

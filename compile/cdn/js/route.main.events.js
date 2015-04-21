@@ -19,7 +19,7 @@ module.exports = function(app) {
         
         domMgr.mk('p',wrapper,_tr("Igaro App is <b>100%</b> event driven."));
 
-        domMgr.mk('p',wrapper,_tr("core.events is responsible for event management. It provides a manager to core.bless, and this is used extensively throughout the Igaro App framework.")); 
+        domMgr.mk('p',wrapper,_tr("core.events is responsible for event management. It provides a manager to core.object's bless, and this is used extensively throughout the Igaro App framework.")); 
 
         return model.addSequence({
             container:wrapper,
@@ -28,7 +28,7 @@ module.exports = function(app) {
                     sections : [
                         {
                             title:_tr("Path"),
-                            content:_tr("Typically taken from the object path attribute, as defined by core.bless.")
+                            content:_tr("Typically taken from the object path attribute, as defined by core.object's bless.")
                         },
                         {
                             title:_tr("Name"),
@@ -36,7 +36,7 @@ module.exports = function(app) {
                         },
                         {
                             title:_tr("Target"),
-                            content:_tr("Defines if any event is for a particular object. Using the event manager provided by core.bless sets this automatically to the object.")
+                            content:_tr("Defines if any event is for a particular object. Using the event manager provided by core.object's bless sets this automatically to the object.")
                         },
                         {
                             title:_tr("Dependencies"),

@@ -9,7 +9,9 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var bless = app['core.bless'];
+    var object = app['core.object'],
+        bless = object.bless,
+        arrayInsert = object.arrayInsert;
 
     var InstanceAccordionSection = function(o) {
         this.name = 'section';
@@ -83,27 +85,15 @@ module.exports = function(app) {
 
     InstanceAccordion.prototype.addSections = function(o) {
         var self = this;
-        return o.reduce(function(a,b) {
-            return a.then(function() {
-                return self.addSection(b);
-            });
-        }, Promise.resolve());
+        return object.promiseSequencer(o,function(a) {
+            return self.addSection(a);
+        });
     };
 
     InstanceAccordion.prototype.addSection = function(o) {
         o.parent = this;
-        var sections = this.sections,
-            s = new InstanceAccordionSection(o),
-            insertBefore = o.insertBefore,
-            insertAfter = o.insertAfter;
-        if (insertBefore || insertAfter) {
-            var pos = sections.indexOf(insertBefore || insertAfter);
-            if (insertAfter)
-                pos++;
-            sections.slice(0,pos).concat(s).concat(sections.slice(pos));
-        } else {
-            sections.push(s);
-        }
+        var s = new InstanceAccordionSection(o);
+        arrayInsert(this.sections,s,o);
         return this.managers.event.dispatch('addSection',s).then(function() {
             return s;
         });

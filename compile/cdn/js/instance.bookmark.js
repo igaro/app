@@ -4,7 +4,7 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var bless = app['core.bless'];
+    var bless = app['core.object'].bless;
     
     var opts = [
         { name:'Delicious', url:'http://del.icio.us/post?url=<URL>&title=<TITLE>' },

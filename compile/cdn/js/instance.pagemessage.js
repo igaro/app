@@ -10,7 +10,7 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var bless = app['core.bless'];
+    var bless = app['core.object'].bless;
 
     var InstancePageMessage = function(o) {
         this.name='instance.pagemessage';

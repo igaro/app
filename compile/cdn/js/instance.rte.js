@@ -9,7 +9,7 @@ module.exports = function(app) {
     if (! ('getSelection' in window)) 
         throw new Error({ incompatible:true, noobject:'getSelection' });
 
-    var bless = app['core.bless'];
+    var bless = app['core.object'].bless;
 
     var InstanceRTE = function(o) {
         this.name = 'instance.rte';

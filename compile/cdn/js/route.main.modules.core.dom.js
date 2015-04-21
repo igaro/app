@@ -17,7 +17,7 @@ module.exports = function(app) {
                 {
                     name:'empty',
                     type:'function',
-                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.bless instead."),
+                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.object's bless instead."),
                     attributes : [
                         { 
                             type:'*',
@@ -29,7 +29,7 @@ module.exports = function(app) {
                 {
                     name:'hide',
                     type:'function',
-                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.bless instead."),
+                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.object's bless instead."),
                     attributes : [
                         { 
                             type:'*',
@@ -49,7 +49,7 @@ module.exports = function(app) {
                 {
                     name:'mk',
                     type:'function',
-                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.bless instead."),
+                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.object's bless instead."),
                     attributes : [
                         { 
                             type:'*',
@@ -69,7 +69,7 @@ module.exports = function(app) {
                 {
                     name:'rm',
                     type:'function',
-                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.bless instead."),
+                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.object's bless instead."),
                     attributes : [
                         { 
                             type:'*',
@@ -129,7 +129,7 @@ module.exports = function(app) {
                 {
                     name:'setContent',
                     type:'function',
-                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.bless instead."),
+                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.object's bless instead."),
                     attributes : [
                         { 
                             type:'*',
@@ -149,7 +149,7 @@ module.exports = function(app) {
                 {
                     name:'show',
                     type:'function',
-                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.bless instead."),
+                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.object's bless instead."),
                     attributes : [
                         { 
                             type:'*',

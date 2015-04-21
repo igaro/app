@@ -18,7 +18,7 @@ module.exports = function(app) {
                 {
                     name:'clean',
                     type:'function',
-                    desc: _tr("Removes an event linked to a dependency (object). This function is called automatically via the manager exposed via core.bless when any blessed object is destroyed."),
+                    desc: _tr("Removes an event linked to a dependency (object). This function is called automatically via the manager exposed via core.object's bless when any blessed object is destroyed."),
                     attributes : [
                         { 
                             type:'object', 

@@ -2493,9 +2493,11 @@ module.exports = function(app, params) {
         events.on('','state.init', function() {      
             events.remove(this);
             // load initial routes
-            return router.root.addChildren({ 
-                list:['header','location','main','footer'] 
-            }).then(function(m) {
+            return router.root.addRoutes(
+                ['header','location','main','footer'].map(function(name) {
+                    return { name:name }
+                }) 
+            ).then(function(m) {
                 m.forEach(function(v) {
                     if (v.autoShow) 
                         v.show(); 

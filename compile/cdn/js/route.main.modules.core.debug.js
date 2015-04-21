@@ -22,7 +22,7 @@ module.exports = function(app) {
                 {
                     name:'handle',
                     type:'function',
-                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.bless instead."),
+                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.object's bless instead."),
                     attributes : [
                         { 
                             type:'*',

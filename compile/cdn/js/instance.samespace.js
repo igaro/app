@@ -8,7 +8,9 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var bless = app['core.bless'];
+    var object = app['core.object'],
+        bless = object.bless,
+        arrayInsert = object.arrayInsert;
 
     var InstanceSameSpaceArea = function(o) {
         this.name='space';
@@ -75,17 +77,15 @@ module.exports = function(app) {
 
     InstanceSameSpace.prototype.addSpaces = function(o) {
         var self = this;
-        return o.reduce(function(a,b) {
-            return a.then(function() {
-                return self.addSpace(b);
-            });
-        },Promise.resolve());
+        return object.promiseSequencer(o,function(a) {
+            return self.addSpace(a);
+        });
     };
 
     InstanceSameSpace.prototype.addSpace = function(o) {
         o.parent = this;
         var s = new InstanceSameSpaceArea(o);
-        this.spaces.push(s);
+        arrayInsert(this.spaces,s,o);
         return this.managers.event.dispatch('addSpace',s);
     };
 

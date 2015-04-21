@@ -10,7 +10,7 @@ module.requires = [
 module.exports = function(app) {
 
     var msgonevent,
-        bless = app['core.bless'];
+        bless = app['core.object'].bless;
 
     var l = {
         required : _tr("Value required"),

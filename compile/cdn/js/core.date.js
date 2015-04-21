@@ -9,7 +9,7 @@ module.requires = [
 module.exports = function(app) {
 
     var store = app['core.store'],
-        bless = app['core.bless'];
+        bless = app['core.object'].bless;
 
     var coreDate = {
 

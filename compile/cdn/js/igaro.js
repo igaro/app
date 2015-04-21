@@ -371,8 +371,6 @@ window.addEventListener('load', function() {
                 if (o && typeof o === 'object') {
                     if (o instanceof HTMLElement || o instanceof DocumentFragment) {
                         o.appendChild(r);
-                    } else if (o.container) {
-                        o.container.appendChild(r);
                     } else if (o.insertBefore) {
                         var i = o.insertBefore;
                         if (!(i instanceof HTMLElement))
@@ -383,6 +381,8 @@ window.addEventListener('load', function() {
                         if (!(i instanceof HTMLElement))
                             i = i.container;
                         i.parentNode.insertBefore(r,i.nextSibling);
+                    } else if (o.container) {
+                        o.container.appendChild(r);
                     } 
                 }
                 switch (typeof m) {
@@ -552,120 +552,145 @@ window.addEventListener('load', function() {
             app['core.dom'] = new CoreDom();
         })();
 
-        // core.bless: built in
+        // core.object: built in
         (function() {
             var events = app['core.events'];
-            app['core.bless'] = function(o) {
-                if (!o) 
-                    o = {};
-                var self = this,
-                    name = this.name,
-                    managers = this.managers || [],
-                    parent = this.parent = o.parent,
-                    path = this.path = [name],
-                    container = this.container,
-                    thisManagers = this.managers = {},
-                    children = this.children,
-                    asRoot = this.asRoot;
-                this.stash = o.stash || {};
-                // build path using parents?
-                if (! asRoot) {
-                    var x = this;
-                    while (x.parent) {
-                        path.unshift(x.parent.name);
-                        x = x.parent;
-                        if (x.asRoot)
-                            break;
+            app['core.object'] = {
+                arrayInsert : function(a,v,o) {
+                    if (o && o.insertBefore) {
+                        a.splice(a.indexOf(o.insertBefore)-1,0,v);
+                    } else if (o && o.insertAfter) {
+                        a.splice(a.indexOf(o.insertAfter),0,v);
+                    } else {
+                        a.push(v);
                     }
-                }
-                // append managers
-                [
-                    ['event',parent?parent.managers.event : events],
-                    ['debug',app['core.debug']],
-                    ['dom',app['core.dom']]
-                ].concat(Object.keys(managers).map(function(k) {
-                    return [k,managers[k]];
-                }))
-                .forEach(function (o) {
-                    thisManagers[o[0]] = o[1].createMgr(self);
-                }); 
-                // add object manager
-                var amd = app['instance.amd'];
-                thisManagers.object = {
-                    create : function(g,o) {
-                        if (! o)
-                            o = {};
-                        var t = typeof g === 'string'? { name:g } : g,
-                            name = t.fullname? t.fullname : 'instance.'+t.name,
-                            p = { 
-                                modules : [{ name: name+'.js' }],
-                                repo : t.repo? t.repo : null
-                            };
-                        return new amd({ parent:self }).get(p).then(function () {
-                            o.parent = self;
-                            var i = new app[name](o);
-                            if (! i.init)
-                                throw { module:name, error:'No init() constructor' };
-                            return i.init(o).then(function() {
-                                return i;
+                },
+                promiseSequencer : function(o,fn) {
+                    var self = this,
+                        r=[];
+                    return o.reduce(function(a,b) {
+                        return a.then(function() {
+                            return fn(b).then(function(g) {
+                                r.push(g);
+                                return g;
                             });
                         });
+                    }, Promise.resolve()).then(function() {
+                        return r;
+                    });
+                },
+                bless :  function(o) {
+                    if (!o) 
+                        o = {};
+                    var self = this,
+                        name = this.name,
+                        managers = this.managers || [],
+                        parent = this.parent = o.parent,
+                        path = this.path = [name],
+                        container = this.container,
+                        thisManagers = this.managers = {},
+                        children = this.children,
+                        asRoot = this.asRoot;
+                    this.stash = o.stash || {};
+                    // build path using parents?
+                    if (! asRoot) {
+                        var x = this;
+                        while (x.parent) {
+                            path.unshift(x.parent.name);
+                            x = x.parent;
+                            if (x.asRoot)
+                                break;
+                        }
                     }
-                }
-                // create child arrays
-                if (children) {
-                    Object.keys(children).forEach(function (k) {
-                        var child = children[k],
-                            a = self[k] = [];       
-                        self.managers.event.on(child+'.destroy', function(s) {
-                            a.splice(a.indexOf(s.value),1);
+                    // append managers
+                    [
+                        ['event',parent?parent.managers.event : events],
+                        ['debug',app['core.debug']],
+                        ['dom',app['core.dom']]
+                    ].concat(Object.keys(managers).map(function(k) {
+                        return [k,managers[k]];
+                    }))
+                    .forEach(function (o) {
+                        thisManagers[o[0]] = o[1].createMgr(self);
+                    }); 
+                    // add object manager
+                    var amd = app['instance.amd'];
+                    thisManagers.object = {
+                        create : function(g,o) {
+                            if (! o)
+                                o = {};
+                            var t = typeof g === 'string'? { name:g } : g,
+                                name = t.fullname? t.fullname : 'instance.'+t.name,
+                                p = { 
+                                    modules : [{ name: name+'.js' }],
+                                    repo : t.repo? t.repo : null
+                                };
+                            return new amd({ parent:self }).get(p).then(function () {
+                                o.parent = self;
+                                var i = new app[name](o);
+                                if (! i.init)
+                                    throw { module:name, error:'No init() constructor' };
+                                return i.init(o).then(function() {
+                                    return i;
+                                });
+                            });
+                        }
+                    }
+                    // create child arrays
+                    if (children) {
+                        Object.keys(children).forEach(function (k) {
+                            var child = children[k],
+                                a = self[k] = [];       
+                            self.managers.event.on(child+'.destroy', function(s) {
+                                a.splice(a.indexOf(s.value),1);
+                            });
                         });
-                    });
-                    delete this.children;
-                }
-                // parent->child autodestroy
-                if (parent)
-                    parent.managers.event.on('destroy', function() {
-                        return self.destroy();
-                    });
-                var thisMgrsEvt = thisManagers.event;
-                this.destroy = function() {
-                    return thisMgrsEvt.dispatch('destroy').then(function() {
-                        Object.keys(self).forEach(function(k) {
-                            delete self[k];
+                        delete this.children;
+                    }
+                    // parent->child autodestroy
+                    if (parent)
+                        parent.managers.event.on('destroy', function() {
+                            return self.destroy();
                         });
-                        self.__destroyed = true;
-                        return events.clean(self);
-                    });
-                };
-                this.disable = function(v) {
-                    v = this.disabled = ! (typeof v === 'boolean' && ! v);
-                    var container = self.container;
+                    var thisMgrsEvt = thisManagers.event;
+                    this.destroy = function() {
+                        return thisMgrsEvt.dispatch('destroy').then(function() {
+                            Object.keys(self).forEach(function(k) {
+                                delete self[k];
+                            });
+                            self.__destroyed = true;
+                            return events.clean(self);
+                        });
+                    };
+                    this.disable = function(v) {
+                        v = this.disabled = ! (typeof v === 'boolean' && ! v);
+                        var container = self.container;
+                        if (container) {
+                            container.setAttribute('disabled',v);
+                            container.setAttribute('inert',v);
+                        };
+                    };
                     if (container) {
-                        container.setAttribute('disabled',v);
-                        container.setAttribute('inert',v);
-                    };
-                };
-                if (container) {
-                    var dom = this.managers.dom;
-                    if (typeof container === 'function') 
-                        self.container = container = container(dom);
-                    if (asRoot)
-                        container.classList.add(name.replace(/\./g,'-'));
-                    this.hide = function(v) {
-                        dom.hide(container,v);
-                    };
-                    this.show = function() {
-                        dom.show(container);
-                    };
-                    thisManagers.event.on('destroy',function() {
-                        dom.nuke(container);
-                    });
-                    if (o.hidden)
-                        this.hide();
+                        var dom = this.managers.dom;
+                        if (typeof container === 'function') 
+                            self.container = container = container(dom);
+                        if (asRoot)
+                            container.classList.add(name.replace(/\./g,'-'));
+                        this.hide = function(v) {
+                            dom.hide(container,v);
+                        };
+                        this.show = function() {
+                            dom.show(container);
+                        };
+                        thisManagers.event.on('destroy',function() {
+                            dom.nuke(container);
+                        });
+                        if (o.hidden)
+                            this.hide();
+                    }
+                    if (o.disabled)
+                        this.disable();
                 }
-                if (o.disabled)
-                    this.disable();
             };
         })();
 
@@ -697,7 +722,7 @@ window.addEventListener('load', function() {
               if (typeof p.expectedContentType !== undefined)
                 this.expectedContentType = p.expectedContentType;
             };
-            var bless = app['core.bless'];
+            var bless = app['core.object'].bless;
             var InstanceXhr = function(o) {
                 this.name = 'instance.xhr';
                 this.asRoot = true;
@@ -868,12 +893,12 @@ window.addEventListener('load', function() {
             var repo = __igaroapp.cdn,
                 InstanceXhr = app['instance.xhr'],
                 events = app['core.events'],
-                bless = app['core.bless'],
+                bless = app['core.object'].bless,
                 dom = app['core.dom'],
                 head = dom.head,
                 workers = [
                     'core.events',
-                    'core.bless',
+                    'core.object',
                     'core.debug',
                     'core.dom',
                     'instance.xhr',
