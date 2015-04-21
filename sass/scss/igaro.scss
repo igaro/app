@@ -30,10 +30,11 @@ body {
     }
 
     a {
-        color:#242c61;
+        color:#0860a8; 
         text-decoration:none;
         &:hover {
-           color:#0860a8; text-decoration:underline;
+            color:#242c61;
+            text-decoration:underline;
            img {
                 opacity:.85;
             }
