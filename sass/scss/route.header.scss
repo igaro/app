@@ -165,13 +165,17 @@ body >.core-router >.header {
 	
 		>.logo {
 		    height:100%;
-		    width:100px;
-		    margin-left:5%;
-		    background: inline-image("route.header/logo.svg") no-repeat 50% 50%;
+		    width:5em;
+		    margin-left:4%;
+		    margin-right:1%;
+		    background: inline-image("route.header/logo.svg") no-repeat 100% 50%;
 		    background-size:80%;
 		    &:hover {
 		    	cursor:pointer;
 		    }
+            @media screen and (min-width: 800px) and (min-height:700px) {
+                width:7em;
+            }
 		}
 
 		>.instance-navigation {

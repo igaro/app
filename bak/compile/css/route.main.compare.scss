@@ -1,7 +1,0 @@
-@import "../sass-global/mixins.scss";
-
-body >.core-mvc >.main >.compare >.wrapper {
-	@include pagerestrictwidth;
-	@include pagepadding;
-}
-

@@ -45,38 +45,7 @@ module.exports = function(app) {
 
         domMgr.mk('h1',wrapper,_tr("Touch & Gestures"));
 
-        domMgr.mk('p',wrapper,_tr("For touch screens the browser 300ms delay is removed. Press and hold on the shapes below to compare the difference."));
-
-        domMgr.mk('div',wrapper,null, function() {
-            this.className = 'touchdemo';
-            domMgr.mk('div',this,null, function() {
-                this.addEventListener('mousedown', function() {
-                    this.classList.add('touched');
-                });
-                this.addEventListener('mouseup', function() {
-                    this.classList.remove('touched');
-                });
-                this.addEventListener('mouseout', function() {
-                    this.classList.remove('touched');
-                });
-            });
-
-            domMgr.mk('div',this,null, function() {
-                var timeout;
-                this.addEventListener('mousedown', function() {
-                    var self = this;
-                    timeout = setTimeout(function() { self.classList.add('touched'); }, 300);
-                });
-                this.addEventListener('mouseup', function() {
-                    clearTimeout(timeout);
-                    this.classList.remove('touched');
-                });
-                this.addEventListener('mouseout', function() {
-                    clearTimeout(timeout);
-                    this.classList.remove('touched');
-                });
-            });
-        });
+        domMgr.mk('p',wrapper,_tr("For touch screens the browser 300ms click delay is removed."));
 
         domMgr.mk('p',wrapper,_tr("Gesture events are available via the 3rdparty.hammer library. If you have a touch screen, try some actions in the box below."));
 

@@ -1322,8 +1322,8 @@ msgid "Igaro's architecture is build on several core principles;"
 msgstr ""
 
 msgid ""
-"The Javascript specification must be adhered to. No duplicity and always use "
-"standards."
+"The Javascript specification must be adhered to. No duplicity and use of "
+"standards throughout."
 msgstr ""
 
 msgid ""
@@ -1685,9 +1685,7 @@ msgstr ""
 msgid "Touch & Gestures"
 msgstr ""
 
-msgid ""
-"For touch screens the browser 300ms delay is removed. Press and hold on the "
-"shapes below to compare the difference."
+msgid "For touch screens the browser 300ms click delay is removed."
 msgstr ""
 
 msgid ""

@@ -31,6 +31,7 @@ body >.core-router >.main >.mobile >.wrapper {
 		>div { 
 			display:inline-block; 
 			background: inline-image("route.main.mobile/chinchilla.jpg") no-repeat;
+            background-size:100%;
 		}
 
 		>* {
@@ -47,25 +48,6 @@ body >.core-router >.main >.mobile >.wrapper {
 			>* {
 				height:177px;
 				width:200px;
-			}
-
-		}
-	}
-
-	>.touchdemo {
-		>div {
-			width:8em;
-			height:5em;
-			border: 2px solid #000;
-			border-radius: 4px;
-			display:inline-block;
-			text-align:center;
-			background-color:#fff;
-			&:first-child {
-				margin-right:1em;
-			}
-			&.touched {
-				background-color:#000;
 			}
 		}
 	}

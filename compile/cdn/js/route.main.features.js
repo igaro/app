@@ -20,7 +20,7 @@ module.exports = function(app) {
         domMgr.mk('p',wrapper,_tr("Igaro's architecture is build on several core principles;"));
 
         domMgr.mk('p',wrapper,domMgr.mk('ul',null,[
-           domMgr.mk('li',null,_tr("The Javascript specification must be adhered to. No duplicity and always use standards.")), 
+           domMgr.mk('li',null,_tr("The Javascript specification must be adhered to. No duplicity and use of standards throughout.")), 
            domMgr.mk('li',null,_tr("HTML is a design language ill suited for dynamic operation. Therefore, use no HTML.")), 
            domMgr.mk('li',null,_tr("Child objects should be able to communicate with parent objects and thus events should fire up a hierarchy.")),
            domMgr.mk('li',null,_tr("Most functions have a potential to be asynchronous, or emit an event which may be so, therefore they should return Promises.")) 

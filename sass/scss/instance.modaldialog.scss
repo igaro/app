@@ -1,13 +1,11 @@
 @import "../sass-global/mixins.scss";
 
-
 .instance-modaldialog {
     position:fixed;
 	left:0;
    	top:0;
     height:100%;
     width:100%;
-    box-sizing: border-box !important;
     background-color: rgba(0,0,0,.7);
     font-size:130%;
 	>div {
@@ -17,7 +15,6 @@
 		-webkit-transform: translate(-50%, -50%);
 		transform: translate(-50%, -50%);
 		@include corners;
-        box-sizing: border-box !important;
 		background:#fff;
 		width:60%;
 		max-width:30em;
@@ -65,7 +62,6 @@
 				margin-left:0;
 				display:block;
 				width:100%;
-				box-sizing: border-box !important;
 			}
 	        width:90%;   
             >.message, >.action, >.custom {

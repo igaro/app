@@ -12,11 +12,14 @@ from { transform: rotate(0deg); opacity: 0.2; }
 to { transform: rotate(360deg); opacity: 0.2; }
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin:0;
     padding:0;
     background-color:#fff;
-    box-sizing: border-box !important;
     height:100%;
     color:#424347;
     font-family: "Proxima Nova", "Open Sans", "Helvetica", "Arial";
@@ -108,7 +111,6 @@ body {
             &>select, &>textarea, &>input:not([type='button']):not([type='submit']):not([type='radio']):not([type='checkbox']) {
               width:100%;
               margin:0;
-              box-sizing: border-box !important;
             }
           }
           >legend {

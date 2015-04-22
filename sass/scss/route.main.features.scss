@@ -20,7 +20,7 @@ body >.core-router >.main >.features >.wrapper {
     }
 
     .youtube {
-    	width:500px;
+    	max-width:500px;
     	height:350px;
     	border:0;
     	margin:0;
@@ -29,7 +29,7 @@ body >.core-router >.main >.features >.wrapper {
 
     .instance-samespace {
 
-    	width:460px;
+    	max-width:460px;
 
     	>div {
 
