@@ -14,6 +14,7 @@ module.exports = function(app) {
 
         var managers = model.managers,
             domMgr= managers.dom,
+            dom = app['core.dom'],
             debugMgr = managers.debug,
             objectMgr = managers.object;
         
@@ -268,7 +269,7 @@ module.exports = function(app) {
                         domMgr = rte.managers.dom;
                     domMgr.mk('h2',container,_tr("Rich Text Editor"));
                     domMgr.mk('p',container);
-                    domMgr.append(container,rte);
+                    dom.append(container,rte);
                     return container;
                 }),
 
@@ -296,7 +297,7 @@ module.exports = function(app) {
                         domMgr = accordion.managers.dom;
                     domMgr.mk('h2',container,_tr("Accordion"));
                     domMgr.mk('p',container);
-                    domMgr.append(container,accordion);
+                    dom.append(container,accordion);
                     return container; 
                 })
             ]

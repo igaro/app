@@ -9,7 +9,8 @@ module.exports = function(app) {
     if (! ('getSelection' in window)) 
         throw new Error({ incompatible:true, noobject:'getSelection' });
 
-    var bless = app['core.object'].bless;
+    var bless = app['core.object'].bless,
+        dom = app['core.dom'];
 
     var InstanceRTE = function(o) {
         this.name = 'instance.rte';
@@ -79,7 +80,7 @@ module.exports = function(app) {
             var raw = self.raw = domMgr.mk('textarea',self,null,function() {
                 if (o.html) 
                     this.value = o.html;
-                domMgr.hide(this);
+                dom.hide(this);
                 this.addEventListener("input", onChange);
                 this.addEventListener("change", onChange);
             });
@@ -91,8 +92,8 @@ module.exports = function(app) {
                             title: 'WYSIWYG',
                             active:true,
                             onClick : function() {
-                                domMgr.show(wysiwyg);
-                                domMgr.hide(raw);
+                                dom.show(wysiwyg);
+                                dom.hide(raw);
                                 self.inWYSIWYG = true;
                                 self.rte.focus();
                                 return Promise.resolve();
@@ -101,8 +102,8 @@ module.exports = function(app) {
                         { 
                             title: 'HTML',
                             onClick : function() {
-                                domMgr.show(raw);
-                                domMgr.hide(wysiwyg);
+                                dom.show(raw);
+                                dom.hide(wysiwyg);
                                 self.inWYSIWYG = false;
                                 raw.focus();
                                 return Promise.resolve();
@@ -253,12 +254,12 @@ module.exports = function(app) {
             title:o.title,
             active:o.active,
             onClick : function() {
-                self.managers.dom.setContent(pc,o.content,true);
+                dom.setContent(pc,o.content,true);
                 return Promise.resolve();
             }
         }).then(function() {
             if (o.active) 
-                self.managers.dom.setContent(pc,o.content,true);
+                dom.setContent(pc,o.content,true);
         });
     };
 

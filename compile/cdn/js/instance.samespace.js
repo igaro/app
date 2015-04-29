@@ -33,8 +33,8 @@ module.exports = function(app) {
 
     var InstanceSameSpace = function (o)  {
         var self = this;
-        this.name='instance.samespace';
-        this.asRoot=true;
+        this.name = 'instance.samespace';
+        this.asRoot = true;
         this.children = {
             spaces:'space'
         };
@@ -43,16 +43,22 @@ module.exports = function(app) {
                 if (o.className)
                     this.classList.add(o.className);
                 self.canvas = dom.mk('div',this,null,o.effect);
-            })
+            });
         }
-        bless.call(this,o);
-        var domMgr = this.managers.dom;
         this.current = -1;
         this.delay = o.delay || 5000;
+        bless.call(this,o);
+        var managers = this.managers,
+            domMgr = managers.dom;
         this.nav = domMgr.mk('nav',this,domMgr.mk('ul'));
         if (! o.transparent) 
             this.canvas.style.backgroundColor = 'black';
         this.loop = typeof o.loop === 'boolean'? o.loop : true;
+        managers.event.on('destroy', function() {
+            if (self.timerRef) 
+                clearInterval(self.timerRef);
+        });
+
     };
 
     InstanceSameSpace.prototype.init = function(o) {
@@ -90,18 +96,18 @@ module.exports = function(app) {
     };
 
     InstanceSameSpace.prototype.stop = function() {
-        if (this.timerref) 
-            clearInterval(this.timerref);
+        if (this.timerRef) 
+            clearInterval(this.timerRef);
         this.canvas.setAttribute('status','stopped');
         return this.managers.event.dispatch('stop');
     };
 
     InstanceSameSpace.prototype.start = function() {
-        if (this.timerref) 
-            clearInterval(this.timerref);
+        if (this.timerRef) 
+            clearInterval(this.timerRef);
         var self = this;
         this.canvas.setAttribute('status','playing');
-        this.timerref = setInterval(function() {
+        this.timerRef = setInterval(function() {
             if (self.current === self.spaces.length-1 && ! self.loop) 
                 return self.stop();
             var to = self.current === self.spaces.length-1? 0 : self.current+1;

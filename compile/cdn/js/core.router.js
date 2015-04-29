@@ -32,13 +32,15 @@ module.exports = function(app) {
                     this.classList.add(o.name.replace(/\./g,'--'));
             });
         }
-        this.children = {
-            routes : 'route'
-        }
+        //this.children = {
+        ///    routes : 'route'
+        //}
+        this.routes = [];
         bless.call(this,o);
         this.uriPath = [];
         this.uriPieces = [];
         this.originalUri = [];
+        this.destroyOnLeave = false;
         this.defaultHideChildren=true;
         this.defaultHideParentViewWrapper=true;
         this.defaultShowWrapper=true;
@@ -137,9 +139,14 @@ module.exports = function(app) {
                 container:self.container, 
                 name:name
             });
+            g.managers.event.on('destroy', function() {
+                pool.splice(pool.indexOf(g),1);
+                if (router.current === g)
+                    router.current = g.parent;
+            });
             var provider = router.getProviderForPath(g.path);
             if (! provider) 
-                throw new Error('No Route provider for path!');
+                throw { error:'No Route provider for path', route:g };
             g.url = provider.url;
             fetcher = provider.fetch(g).then(
                 function(j) {
@@ -168,11 +175,11 @@ module.exports = function(app) {
                     });
             }).then(function() {
                 if (g.defaultShowWrapper)
-                    g.managers.dom.show(g.wrapper);
+                    dom.show(g.wrapper);
                 if (g.defaultHideChildren) 
                     g.hideRoutes();
                 if (g.defaultHideParentViewWrapper) 
-                    g.managers.dom.hide(g.parent.wrapper);
+                    dom.hide(g.parent.wrapper);
                 return g;
             });
         }).catch(function (e) {
@@ -231,7 +238,11 @@ module.exports = function(app) {
                 routerEventMgr = router.managers.event;
             return (c
                 ?
-                c.managers.event.dispatch('leave')
+                c.managers.event.dispatch('leave').then(function() {
+                    if(c.destroyOnLeave) {
+                        return c.destroy();
+                    }
+                })
                 :
                 Promise.resolve()
             ).then(function() {

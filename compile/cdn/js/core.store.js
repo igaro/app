@@ -37,6 +37,9 @@ module.exports = function(app) {
             });
         });
     };
+    CoreStoreMgr.prototype.destroy = function() {
+        this.parent = null;
+    };
 
     var store = {
 

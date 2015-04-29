@@ -10,6 +10,7 @@ module.requires = [
 module.exports = function(app) {
 
     var object = app['core.object'],
+        dom = app['core.dom'],
         bless = object.bless,
         arrayInsert = object.arrayInsert;
 
@@ -136,7 +137,7 @@ module.exports = function(app) {
         if (! o.content)
             o.content = function(domMgr) {
                 return domMgr.mk('input[text]',null,null, function() {
-                    domMgr.setPlaceholder(this,_tr('Search'));
+                    dom.setPlaceholder(this,_tr('Search'));
                     var s = this;
                     domMgr.parent.searchFn = function(column) {
                         var v = s.value.toLowerCase().trim();

@@ -4,7 +4,8 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var bless = app['core.object'].bless;
+    var bless = app['core.object'].bless,
+        dom = app['core.dom'];
     
     var opts = [
         { name:'Delicious', url:'http://del.icio.us/post?url=<URL>&title=<TITLE>' },
@@ -34,7 +35,7 @@ module.exports = function(app) {
     bookmark.prototype.setURL = function(o) {
         var c = this.container,
             domMgr = this.managers.dom;
-        domMgr.empty(c);
+        dom.empty(c);
         opts.forEach(function(p) {
             var to = encodeURIComponent(o.url),
                 title = o.title? encodeURIComponent(o.title) : '',

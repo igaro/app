@@ -11,6 +11,7 @@ module.requires = [
 module.exports = function(app) {
 
     var date = app['core.date'],
+        dom = app['core.dom'],
         moment = app['3rdparty.moment'],
         language = app['core.language'],
         bless = app['core.object'].bless;
@@ -75,12 +76,11 @@ module.exports = function(app) {
     };
 
     InstanceDate.prototype.relative = function() {
-        var self = this,
-            domMgr = this.managers.dom;
+        var self = this;
         var f = function() {
             var date = self.date,
                 diff = parseInt((date.getTime()-(new Date()).getTime()) / 1000);
-            domMgr.setContent(
+            dom.setContent(
                 self.countUp !== self.countDown && self.countUp <= diff && diff <= self.countDown
                 ?
                 language.mapKey(language.substitute(diff === 1? (diff < 0? _tr("%[0] seconds ago") : _tr("%[0] second")) : (diff < 0? _tr("%d seconds ago") : _tr("%d seconds")),diff))

@@ -2491,7 +2491,6 @@ module.exports = function(app, params) {
 
         // setup page with core routes
         events.on('','state.init', function() {      
-            events.remove(this);
             // load initial routes
             return router.root.addRoutes(
                 ['header','location','main','footer'].map(function(name) {
@@ -2511,7 +2510,8 @@ module.exports = function(app, params) {
                     if (e !== 0) // connection issues are handled by a pageMessage
                         debug.handle(e);
                 });
-                
+            }).then(function() {
+                return { removeEventListener:true };
             });
         });
 

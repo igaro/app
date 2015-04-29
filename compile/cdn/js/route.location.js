@@ -8,7 +8,8 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var router = app['core.router'];
+    var router = app['core.router'],
+        dom = app['core.dom'];
 
     return function(model) {
 
@@ -18,8 +19,8 @@ module.exports = function(app) {
         domMgr.mk('a',wrapper,null,function() {
             this.className = 'home';
             this.href = '/';
-            this.addEventListener('click', function(evt) { 
-                evt.preventDefault(); 
+            this.addEventListener('click', function(event) { 
+                event.preventDefault(); 
                 router.to([]); 
             });
         });
@@ -35,24 +36,24 @@ module.exports = function(app) {
                 paramsw = domMgr.mk('div',params);
 
             this.className = 'location';
-            domMgr.hide(params);
+            dom.hide(params);
             router.managers.event.extend(model)
                 .on('to-start', function() {
-                    domMgr.hide(params);
+                    dom.hide(params);
                 })
                 .on('to-in-progress', function() {
                     if (! router.isAtBase()) {
                         model.show();
-                        domMgr.empty(paths);
-                        domMgr.empty(paramsw);
+                        dom.empty(paths);
+                        dom.empty(paramsw);
                         var c = router.current;
                         while (! c.isBase()) {
                             var m = domMgr.mk(c === router.current? 'span':'a',null, c.stash.title || c.name);
                             if (c !== router.current) {
                                 m.href=c.getUrl();
                                 var b = c.uriPath;
-                                m.addEventListener('click', function(evt) {
-                                    evt.preventDefault();
+                                m.addEventListener('click', function(event) {
+                                    event.preventDefault();
                                     router.to(b); 
                                 });
                             }

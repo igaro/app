@@ -13,6 +13,7 @@ module.exports = function(app) {
         var wrapper = model.wrapper,
             managers = model.managers,
             domMgr = managers.dom,
+            dom = app['core.dom'],
             objectMgr = managers.object;
 
         model.stash.title=_tr("Structure");
@@ -28,7 +29,7 @@ module.exports = function(app) {
                     var domMgr = accordion.managers.dom;
                     domMgr.mk('h1',wrapper,_tr("Files & Folders"));
                     domMgr.mk('p',wrapper);
-                    domMgr.append(wrapper,accordion);
+                    dom.append(wrapper,accordion);
 
                     // build
                     return accordion.addSection({

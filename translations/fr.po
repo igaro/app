@@ -895,27 +895,6 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-msgid "Your App, on <b>IE</b>, <b>Firefox</b>, <b>Safari</b> and <b>Chrome</b>"
-msgstr ""
-
-msgid "Your App, on <b>IOS</b>, <b>Android</b> and <b>Windows Mobile</b>"
-msgstr ""
-
-msgid "ECMA Standard Javascript with ES6 Promises"
-msgstr ""
-
-msgid "Advanced router Framework with Multiple Sources"
-msgstr ""
-
-msgid "Async Modules, Lazy Loading & Event Management"
-msgstr ""
-
-msgid "Language, Currency, Timezone and Country Support"
-msgstr ""
-
-msgid "Welcome to <b>Igaro App</b>"
-msgstr ""
-
 msgid "License: GNUv2"
 msgstr ""
 
@@ -1049,10 +1028,11 @@ msgid "Managers"
 msgstr ""
 
 msgid ""
-"A manager is a module that uses the blessed decorations to enhance the way "
-"the original routines work. Common managers include events, debugging, "
-"object creation and dom. Additional managers can be supplied at time of "
-"blessing, i.e if the module requires a store. Any module can be a manager."
+"A manager is a module that uses the blessed decorations to enhance it's "
+"functions and/or to provide helper functions linking the blessed object as a "
+"dependency. Common managers include events, debugging, object creation and "
+"dom. Additional managers can be supplied at time of blessing, i.e if the "
+"module requires a store. Any module can offer a manager."
 msgstr ""
 
 msgid "Helpers"

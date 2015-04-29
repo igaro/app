@@ -92,7 +92,6 @@ window.addEventListener('load', function() {
             };
             CoreDebugMgr.prototype.destroy = function() {
                 this.parent = null;
-                return Promise.resolve();
             };
             var debug = app['core.debug'] = {
                 developer : __igaroapp.debug,
@@ -216,58 +215,51 @@ window.addEventListener('load', function() {
                         self = this,
                         target = null,
                         pn = pool[name],
-                        t,
-                        r,
                         toCall = [];
-                    return new Promise(function(resolve, reject) {
-                        if (typeof evt === 'object') {
-                            target=evt[1];
-                            evt = evt[0];
-                        }
-                        if (! pn || ! pn[evt]) 
-                            return resolve();
-                        pn[evt].forEach(function(t) {
-                            if (! t.target || target === t.target)
-                                toCall.push(t);
-                        });
-                        var processNext = function() {
-                            if (toCall.length === 0) 
-                                return resolve();
-                            t = toCall.shift();
+                    if (evt instanceof Array) {
+                        target=evt[1];
+                        evt = evt[0];
+                    }
+                    if (! pn || ! pn[evt]) 
+                        return Promise.resolve();
+                    pn[evt].forEach(function(t) {
+                        if (! t.target || target === t.target)
+                            toCall.push(t);
+                    });
+                    return toCall.reduce(function(a,t) {
+                        return a.then(function() {
                             if (! t || ! t.fn)
-                                return processNext();
+                                return;
                             try {
                                 r = t.fn.call(t, params);
                             } catch(e) {
                                 if (window.console && debug.developer)
                                     console.error(e, t, t.fn);
-                                return reject(e);
+                                throw e;
                             }
-                            if (r instanceof Promise) {
-                                r.then(function(a) {
-                                    if (typeof a === 'object' && a.stopImmediatePropagation) {
-                                        resolve(a);
-                                    } else {
-                                        processNext();
-                                    } 
-                                }).catch(function (e) {
-                                    reject(e);
+                            var handleReturn = function(v) {
+                                if (typeof v !== 'object')
+                                    return;
+                                if (v.removeEventListener)
+                                    self.remove(t.fn,name,evt);
+                                if (v.stopImmediatePropagation)
+                                    throw v;
+                            };
+                            if (r instanceof Promise)
+                                return r.then(function(a) {
+                                    handleReturn(a);
                                 });
-                            } else if (typeof r === 'object' && r.stopImmediatePropagation) {
-                                return resolve(r);
-                            } else {
-                                processNext();
-                            }
-                        };
-                        processNext();
-                    }).catch(function (e) {
-                        throw { 
-                            name:name, 
-                            process:evt,
-                            params:params, 
-                            target:target,
-                            error:e,
-                        };
+                            handleReturn(r);
+                        });
+                    }, Promise.resolve()).catch(function(e) {
+                        if (typeof e !== 'object' || ! e.stopImmediatePropagation)
+                            throw { 
+                                name:name, 
+                                process:evt,
+                                params:params, 
+                                target:target,
+                                error:e,
+                            };
                     });
                 }
             };
@@ -317,12 +309,10 @@ window.addEventListener('load', function() {
                 events.remove(fn,this.x.name,evt);
                 return this;
             };
-            CoreEventMgr.prototype.dispatch = function(evt,value,child) {
+            CoreEventMgr.prototype.dispatch = function(evt,value) {
                 var obj = this.x,
-                    self = this,
                     parent = obj.parent,
-                    x = { 
-                        child:child,
+                    x = {
                         value:value,
                         x:obj
                     };
@@ -330,8 +320,10 @@ window.addEventListener('load', function() {
                     // send up the chain?
                     if (typeof o === 'object' && (o.stopPropagation || o.stopImmediatePropagation))
                         return o;
-                    if (parent && ! self.__asRoot)
-                        return parent.managers.event.dispatch(obj.name+'.'+evt, x, obj);
+                    if (parent && ! obj.asRoot)
+                        return parent.managers.event.dispatch(obj.name+'.'+evt, x, obj).then(function() {
+                            return o;
+                        });
                     return o;
                 });
             };
@@ -347,214 +339,248 @@ window.addEventListener('load', function() {
         // core.dom: built in
         (function() {
             var events = app['core.events'],
-                CoreDom = function(parent) {
-                    this.parent = parent;
-                    this.head = document.getElementsByTagName('head')[0];
-                },
                 pQ = function(o) {
                     if (!(o instanceof HTMLElement || o instanceof DocumentFragment) && o.container)
                         return o.container
                     return o;
                 };
-            CoreDom.prototype.mk = function(t,o,c,m) {
-                var r,
-                    self = this, 
-                    type = t.indexOf('[');
-                if (type !== -1) {
-                    r = document.createElement(t.substr(0,type));
-                    r.type = t.slice(type+1,-1);
-                } else {
-                    r = document.createElement(t);
-                }
-                if (t === 'a')
-                    r.href='';
-                if (o && typeof o === 'object') {
-                    if (o instanceof HTMLElement || o instanceof DocumentFragment) {
-                        o.appendChild(r);
-                    } else if (o.insertBefore) {
-                        var i = o.insertBefore;
-                        if (!(i instanceof HTMLElement))
-                            i = i.container;
-                        i.parentNode.insertBefore(r,i);
-                    } else if (o.insertAfter) {
-                        var i = o.insertAfter;
-                        if (!(i instanceof HTMLElement))
-                            i = i.container;
-                        i.parentNode.insertBefore(r,i.nextSibling);
-                    } else if (o.container) {
-                        o.container.appendChild(r);
-                    } 
-                }
-                switch (typeof m) {
-                    case 'string' :
-                        r.className=m;
-                        break;
-                    case 'function' :
-                        m.call(r);
-                        break;
-                }
-                if (typeof c !== 'undefined' && c !== null) {
-                    if (typeof c === 'function') {
-                        c = c(self);
-                    } else if (c instanceof Array) {
-                        var d = document.createDocumentFragment();
-                        c.forEach(function(k) {
-                            d.appendChild(k);
-                        });
-                        c=d;   
-                    }
-                    if (c)
-                        self.setContent(r,c);
-                }
-                // is manager?
-                var parent = this.parent;
-                if (parent)
-                    parent.managers.event.on('destroy', function() {
-                        return dom.rm(r);
-                    });
+            var CoreDomMgr = function(parent) {
+                this.parent = parent;
+            };
+            CoreDomMgr.prototype.mk = function(t,o,c,m) {
+                var r = dom.mk.call(this,t,o,c,m);
+                this.parent.managers.event.extend(r).on('destroy', function() {
+                    return dom.rm(r);
+                });
                 return r;
             };
-            CoreDom.prototype.setPlaceholder = function(r,l) {
-                var f = r.igaroPlaceholderFn;
-                var language = app['core.language'];
-                if (! language) 
-                    throw new Error('core.dom -> core.language is not loaded.');
-                var xMgr = language.managers.event;
-                if (f)
-                    xMgr.clean(r.igaroPlaceholderFn,'setEnv');
-                f = r.igaroPlaceholderFn = function() {
-                    r.placeholder = language.mapKey(l);
-                };
-                xMgr.extend(r).on('setEnv', f);
-                f();
+            CoreDomMgr.prototype.destroy = function() {
+                this.parent = null;
+                return Promise.resolve();
             };
-            CoreDom.prototype.hide = function(r,v) {
-                if (! (r instanceof Node))
-                    throw new Error('No DOM element supplied');
-                if (typeof v === 'boolean' && v === false)
-                    return this.show(r);
-                r.classList.add('core-dom-hide');
-            };
-            CoreDom.prototype.isHidden = function(r) {
-                var s = r.style;
-                return s.visibility === 'hidden' || s.display === 'none';
-            };
-            CoreDom.prototype.toggleVisibility = function(r) {
-                if (! (r instanceof Node))
-                    throw new Error('No DOM element supplied');
-                return this.hide(r,! r.classList.contains('core-dom-hide'));
-            }
-            CoreDom.prototype.show = function(r) {
-                if (! (r instanceof Node))
-                    throw new Error('No DOM element supplied');
-                r.classList.remove('core-dom-hide');
-            };
-
-            CoreDom.prototype.append = function(r,c,o) {
-                var self = this;
-                if (c instanceof Array)
-                    return c.forEach(function(a) {
-                        self.append(r,a,o);
+            var dom = app['core.dom'] = {
+                head : document.getElementsByTagName('head')[0],
+                mk : function(t,o,c,m) {
+                    var r,
+                        self = this, 
+                        type = t.indexOf('[');
+                    if (type !== -1) {
+                        r = document.createElement(t.substr(0,type));
+                        r.type = t.slice(type+1,-1);
+                    } else {
+                        r = document.createElement(t);
+                    }
+                    if (t === 'a')
+                        r.href='';
+                    if (o && typeof o === 'object') {
+                        if (o instanceof HTMLElement || o instanceof DocumentFragment) {
+                            o.appendChild(r);
+                        } else if (o.insertBefore) {
+                            var i = o.insertBefore;
+                            if (!(i instanceof HTMLElement))
+                                i = i.container;
+                            i.parentNode.insertBefore(r,i);
+                        } else if (o.insertAfter) {
+                            var i = o.insertAfter;
+                            if (!(i instanceof HTMLElement))
+                                i = i.container;
+                            i.parentNode.insertBefore(r,i.nextSibling);
+                        } else if (o.container) {
+                            o.container.appendChild(r);
+                        } 
+                    }
+                    switch (typeof m) {
+                        case 'string' :
+                            r.className=m;
+                            break;
+                        case 'function' :
+                            m.call(r);
+                            break;
+                    }
+                    if (typeof c !== 'undefined' && c !== null) {
+                        if (typeof c === 'function') {
+                            c = c(self);
+                        } else if (c instanceof Array) {
+                            var d = document.createDocumentFragment();
+                            c.forEach(function(k) {
+                                d.appendChild(k);
+                            });
+                            c=d;   
+                        }
+                        if (c)
+                            dom.setContent(r,c);
+                    }
+                    return r;
+                },
+                setPlaceholder : function(r,l) {
+                    var f = r.igaroPlaceholderFn;
+                    var language = app['core.language'];
+                    if (! language) 
+                        throw new Error('core.dom -> core.language is not loaded.');
+                    var xMgr = language.managers.event;
+                    if (f)
+                        xMgr.clean(r.igaroPlaceholderFn,'setEnv');
+                    f = r.igaroPlaceholderFn = function() {
+                        r.placeholder = language.mapKey(l);
+                    };
+                    xMgr.extend(r).on('setEnv', f);
+                    f();
+                },
+                hide : function(r,v) {
+                    if (! (r instanceof Node))
+                        throw new Error('No DOM element supplied');
+                    if (typeof v === 'boolean' && v === false)
+                        return this.show(r);
+                    r.classList.add('core-dom-hide');
+                },
+                isHidden : function(r) {
+                    var s = r.style;
+                    return s.visibility === 'hidden' || s.display === 'none';
+                },
+                toggleVisibility : function(r) {
+                    if (! (r instanceof Node))
+                        throw new Error('No DOM element supplied');
+                    return this.hide(r,! r.classList.contains('core-dom-hide'));
+                },
+                show : function(r) {
+                    if (! (r instanceof Node))
+                        throw new Error('No DOM element supplied');
+                    r.classList.remove('core-dom-hide');
+                },
+                append : function(r,c,o) {
+                    var self = this;
+                    if (c instanceof Array)
+                        return c.forEach(function(a) {
+                            self.append(r,a,o);
+                        });
+                    r = pQ(r);
+                    c = pQ(c);
+                    if (o && o.insertBefore) {
+                        r.insertBefore(c,pQ(o.insertBefore));
+                    } else if (o && o.insertAfter) {
+                        var insertAfter = pQ(o.insertAfter);
+                        if (insertAfter.nextElementSibling) {
+                            r.insertBefore(c, insertAfter.nextElementSibling);
+                        } else {
+                            r.appendChild(c);
+                        }
+                    } else {
+                        r.appendChild(c);
+                    }
+                },
+                setContent : function(r,c,o) {
+                    if (! o)
+                        this.nuke(r,true);
+                    r.innerHTML = '';
+                    var lf = r.igaroLangFn;
+                    if (lf) {
+                        app['core.language'].managers.event.clean(r);
+                        delete r.igaroLangFn;
+                    }
+                    if (typeof c === 'object') {
+                        if (c instanceof HTMLElement || c instanceof DocumentFragment) {
+                            r.appendChild(c);
+                        } else {
+                            // language literal 
+                            var language = app['core.language'];
+                            if (! language) 
+                                throw new Error('core.dom -> core.language is not loaded.');
+                            var f = r.igaroLangFn = function() {
+                                if (r.nodeName === 'META') {
+                                    r.content = language.mapKey(c); 
+                                } else if (! (r.nodeName === 'INPUT' && r.type && r.type === 'submit') && 'innerHTML' in r) {
+                                    r.innerHTML = language.mapKey(c);
+                                } else if ('value' in r) {
+                                    r.value = language.mapKey(c);
+                                }
+                            };
+                            language.managers.event.extend(r).on('setEnv', f);
+                            f();
+                        }
+                    } else {
+                        r.innerHTML = c;
+                    }
+                },
+                nuke : function(element,leaveRoot) {
+                    var self = this,
+                        node;
+                    while (node = element.lastChild) {
+                        self.nuke(node);
+                        events.clean(node);
+                    }
+                    if (! leaveRoot) {
+                        self.rm(element);
+                        events.clean(element);
+                    }
+                },
+                empty : function(element) {
+                    while (element.firstChild)
+                        element.removeChild(element.firstChild);
+                    element.innerHTML = '';
+                },
+                rm : function(element) {
+                    var p = element.parentNode;
+                    if (p)
+                        p.removeChild(element);
+                },
+                sort : function(o) {
+                    var slice = o.slice,
+                        on = o.on || function(o) { return o.innerHTML; },
+                        root = o.root || o.nodes[0].parentNode,
+                        nodes = Array.prototype.slice.call(o.nodes || o.root.childNodes);  
+                    if (slice) 
+                        nodes = nodes.slice(slice[0],slice[1],slice[2]);
+                    var insertBefore = nodes[nodes.length-1].nextElementSibling;
+                    nodes = nodes.sort(function(a, b) {
+                        a = on(a);
+                        b = on(b);
+                        return a == b? 0: (a > b ? 1 : -1);
                     });
-                r = pQ(r);
-                c = pQ(c);
-                if (o && o.insertBefore) {
-                    r.insertBefore(c,pQ(o.insertBefore));
-                } else if (o && o.insertAfter) {
-                    var insertAfter = pQ(o.insertAfter);
-                    if (insertAfter.nextElementSibling) {
-                        r.insertBefore(c, insertAfter.nextElementSibling);
-                    } else {
-                        r.appendChild(c);
-                    }
-                } else {
-                    r.appendChild(c);
+                    if (o.reverse)
+                        nodes = nodes.reverse();
+                    nodes.forEach(function (o) {
+                        root.insertBefore(o,insertBefore); 
+                    });
+                },
+                createMgr : function(parent) {
+                    return new CoreDomMgr(parent);
                 }
-            };
-
-            CoreDom.prototype.setContent = function(r,c,o) {
-                if (! o)
-                    this.nuke(r,true);
-                r.innerHTML = '';
-                var lf = r.igaroLangFn;
-                if (lf) {
-                    app['core.language'].managers.event.clean(r);
-                    delete r.igaroLangFn;
-                }
-                if (typeof c === 'object') {
-                    if (c instanceof HTMLElement || c instanceof DocumentFragment) {
-                        r.appendChild(c);
-                    } else {
-                        // language literal 
-                        var language = app['core.language'];
-                        if (! language) 
-                            throw new Error('core.dom -> core.language is not loaded.');
-                        var f = r.igaroLangFn = function() {
-                            if (r.nodeName === 'META') {
-                                r.content = language.mapKey(c); 
-                            } else if (! (r.nodeName === 'INPUT' && r.type && r.type === 'submit') && 'innerHTML' in r) {
-                                r.innerHTML = language.mapKey(c);
-                            } else if ('value' in r) {
-                                r.value = language.mapKey(c);
-                            }
-                        };
-                        language.managers.event.extend(r).on('setEnv', f);
-                        f();
-                    }
-                } else {
-                    r.innerHTML = c;
-                }
-            };
-            CoreDom.prototype.nuke = function(element,leaveRoot) {
-                var self = this,
-                    node;
-                while (node = element.lastChild) {
-                    self.nuke(node);
-                    events.clean(node);
-                }
-                if (! leaveRoot) {
-                    self.rm(element);
-                    events.clean(element);
-                }
-            };
-            CoreDom.prototype.empty = function(element) {
-                while (element.firstChild)
-                    element.removeChild(element.firstChild);
-                element.innerHTML = '';
-            };
-            CoreDom.prototype.rm = function(element) {
-                var p = element.parentNode;
-                if (p)
-                    p.removeChild(element);
-            };
-            CoreDom.prototype.sort = function(o) {
-                var slice = o.slice,
-                    on = o.on || function(o) { return o.innerHTML; },
-                    root = o.root || o.nodes[0].parentNode,
-                    nodes = Array.prototype.slice.call(o.nodes || o.root.childNodes);  
-                if (slice) 
-                    nodes = nodes.slice(slice[0],slice[1],slice[2]);
-                var insertBefore = nodes[nodes.length-1].nextElementSibling;
-                nodes = nodes.sort(function(a, b) {
-                    a = on(a);
-                    b = on(b);
-                    return a == b? 0: (a > b ? 1 : -1);
-                });
-                if (o.reverse)
-                    nodes = nodes.reverse();
-                nodes.forEach(function (o) {
-                    root.insertBefore(o,insertBefore); 
-                });
-            };
-            CoreDom.prototype.createMgr = function(self) {
-                return new CoreDom(self);
-            };
-            app['core.dom'] = new CoreDom();
+            }
         })();
 
         // core.object: built in
         (function() {
-            var events = app['core.events'];
+            var events = app['core.events'],
+                dom = app['core.dom'];
+            var CoreObjectMgr = function(parent) {
+                this.parent = parent;
+            };
+            CoreObjectMgr.prototype.create = function(g,o) {
+                var parent = this.parent;
+                if (! o)
+                    o = {};
+                var amd = app['instance.amd'];
+                var t = typeof g === 'string'? { name:g } : g,
+                    name = t.fullname? t.fullname : 'instance.'+t.name,
+                    p = { 
+                        modules : [{ name: name+'.js' }],
+                        repo : t.repo? t.repo : null
+                    };
+                return new amd({ parent:parent }).get(p).then(function () {
+                    o.parent = parent;
+                    var i = new app[name](o);
+                    if (! i.init)
+                        throw { module:name, error:'No init() constructor' };
+                    return i.init(o).then(function() {
+                        return i;
+                    });
+                });
+            };
+            CoreObjectMgr.prototype.destroy = function() {
+                this.parent = null;
+                return Promise.resolve();
+            };
+
             app['core.object'] = {
                 arrayInsert : function(a,v,o) {
                     if (o && o.insertBefore) {
@@ -564,6 +590,9 @@ window.addEventListener('load', function() {
                     } else {
                         a.push(v);
                     }
+                },
+                createMgr : function(parent) {
+                    return new CoreObjectMgr(parent);
                 },
                 promiseSequencer : function(o,fn) {
                     var self = this,
@@ -603,39 +632,18 @@ window.addEventListener('load', function() {
                         }
                     }
                     // append managers
-                    [
+                    var mgrs = [
                         ['event',parent?parent.managers.event : events],
                         ['debug',app['core.debug']],
-                        ['dom',app['core.dom']]
+                        ['dom',app['core.dom']],
+                        ['object',app['core.object']]
                     ].concat(Object.keys(managers).map(function(k) {
                         return [k,managers[k]];
-                    }))
-                    .forEach(function (o) {
-                        thisManagers[o[0]] = o[1].createMgr(self);
+                    })).map(function (o) {
+                        var mgr = thisManagers[o[0]] = o[1].createMgr(self);
+                        return mgr;
                     }); 
-                    // add object manager
-                    var amd = app['instance.amd'];
-                    thisManagers.object = {
-                        create : function(g,o) {
-                            if (! o)
-                                o = {};
-                            var t = typeof g === 'string'? { name:g } : g,
-                                name = t.fullname? t.fullname : 'instance.'+t.name,
-                                p = { 
-                                    modules : [{ name: name+'.js' }],
-                                    repo : t.repo? t.repo : null
-                                };
-                            return new amd({ parent:self }).get(p).then(function () {
-                                o.parent = self;
-                                var i = new app[name](o);
-                                if (! i.init)
-                                    throw { module:name, error:'No init() constructor' };
-                                return i.init(o).then(function() {
-                                    return i;
-                                });
-                            });
-                        }
-                    }
+
                     // create child arrays
                     if (children) {
                         Object.keys(children).forEach(function (k) {
@@ -654,12 +662,19 @@ window.addEventListener('load', function() {
                         });
                     var thisMgrsEvt = thisManagers.event;
                     this.destroy = function() {
+                        // purge container beforehand to prevent any reapply
+                        if (self.container) {
+                            dom.nuke(self.container);
+                            delete self.container;
+                        }
                         return thisMgrsEvt.dispatch('destroy').then(function() {
-                            Object.keys(self).forEach(function(k) {
-                                delete self[k];
+                            self.destroyed = true;
+                            return Promise.all(mgrs.map(function(o) {
+                                return o.destroy();
+                            })).then(function() {
+                                delete self.parent;
+                                return events.clean(self);
                             });
-                            self.__destroyed = true;
-                            return events.clean(self);
                         });
                     };
                     this.disable = function(v) {
@@ -671,9 +686,8 @@ window.addEventListener('load', function() {
                         };
                     };
                     if (container) {
-                        var dom = this.managers.dom;
                         if (typeof container === 'function') 
-                            self.container = container = container(dom);
+                            self.container = container = container(self.managers.dom);
                         if (asRoot)
                             container.classList.add(name.replace(/\./g,'-'));
                         this.hide = function(v) {
@@ -682,9 +696,6 @@ window.addEventListener('load', function() {
                         this.show = function() {
                             dom.show(container);
                         };
-                        thisManagers.event.on('destroy',function() {
-                            dom.nuke(container);
-                        });
                         if (o.hidden)
                             this.hide();
                     }
@@ -1009,7 +1020,7 @@ window.addEventListener('load', function() {
                     mod = this.module,
                     eventMgr = this.managers.event,
                     self = this;
-                return eventMgr.dispatch('worker.start').then(function() {
+                return  eventMgr.dispatch('worker.start').then(function() {
                     return xhr.get({ res:file }).then(function(data) {
                         switch (type) {
                             case 'js':
@@ -1019,24 +1030,20 @@ window.addEventListener('load', function() {
                                 };
                                 eval(data);
                                 var code = self.code = module.exports ? module.exports : null;
-                                var promises=[];
-                                if (module.requires.length) {
-                                    promises.push(
-                                        new InstanceAmd().get({ 
-                                            repo:mod.repo, 
-                                            modules:module.requires,
-                                        })
-                                    );
-                                }
-                                return Promise.all(promises).then(function(o) {
+                                return (module.requires.length?
+                                    new InstanceAmd().get({ 
+                                        repo:mod.repo, 
+                                        modules:module.requires
+                                    })
+                                : Promise.resolve()).then(function() {
                                     var u = null,
                                         m = self.module.name,
                                         s = m.substr(0,m.length-3);
                                     if (code)
                                         u = code(app,{ appconf:__igaroapp });
-                                    return Promise.all([ u instanceof Promise? u : Promise.resolve(u) ]).then(function (data) {
-                                        if (data.length)
-                                            app[s] = data[0];
+                                    return (u instanceof Promise? u : Promise.resolve(u)).then(function (data) {
+                                        if (data)
+                                            app[s] = data;
                                         return self.loaded();
                                     });
                                 });

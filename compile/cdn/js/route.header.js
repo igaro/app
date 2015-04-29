@@ -12,7 +12,8 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var events = app['core.events'], 
+    var events = app['core.events'],
+        dom = app['core.dom'],
         language = app['core.language'], 
         router = app['core.router'], 
         xcti = app['core.date'];
@@ -93,7 +94,7 @@ module.exports = function(app) {
                                             }
                                         };
                                         var sort = function() {
-                                            domMgr.sort({ 
+                                            dom.sort({ 
                                                 nodes:select.options,
                                                 slice:[2]
                                             });
@@ -204,7 +205,7 @@ module.exports = function(app) {
                 Promise.resolve(
                     domMgr.mk('div',null,null,function() {
                         this.className = 'xhr';
-                        domMgr.hide(this);
+                        dom.hide(this);
                         var total=0, 
                             ref,
                             self = this;
@@ -212,7 +213,7 @@ module.exports = function(app) {
                         model.on('instance.xhr','start', function () {
                             if (total === 0 && ! ref) 
                                 ref=setTimeout(function() { 
-                                    domMgr.show(self);
+                                    dom.show(self);
                                 },350);
                             total++;
                         });
@@ -223,7 +224,7 @@ module.exports = function(app) {
                                 return;
                             clearTimeout(ref);
                             ref=null;
-                            domMgr.hide(self)
+                            dom.hide(self)
                         });
                     })
                 )

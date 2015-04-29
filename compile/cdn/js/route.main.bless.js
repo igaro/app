@@ -14,7 +14,8 @@ module.exports = function(app) {
         var wrapper = model.wrapper,
             managers = model.managers,
             objectMgr = managers.object,
-            domMgr = managers.dom;
+            domMgr = managers.dom,
+            dom = app['core.dom'];
         
         model.stash.title=_tr("Bless");
 
@@ -57,7 +58,7 @@ module.exports = function(app) {
                 },
                 {
                     title:_tr("Managers"),
-                    content:_tr("A manager is a module that uses the blessed decorations to enhance the way the original routines work. Common managers include events, debugging, object creation and dom. Additional managers can be supplied at time of blessing, i.e if the module requires a store. Any module can be a manager.")
+                    content:_tr("A manager is a module that uses the blessed decorations to enhance it's functions and/or to provide helper functions linking the blessed object as a dependency. Common managers include events, debugging, object creation and dom. Additional managers can be supplied at time of blessing, i.e if the module requires a store. Any module can offer a manager.")
                 },
                 {
                     title:_tr("Helpers"),
@@ -69,10 +70,10 @@ module.exports = function(app) {
                 }
             ]
         }).then(function(accordion) {
-            domMgr = accordion.managers.dom;
+            var domMgr = accordion.managers.dom;
             domMgr.mk('h1',wrapper,_tr("Provides"));
             domMgr.mk('p',wrapper,_tr("What bless provides for an object depends on what was available and passed to it at the point of blessing."));
-            domMgr.append(wrapper,accordion);
+            dom.append(wrapper,accordion);
         });
 
     };
