@@ -2652,6 +2652,9 @@ msgid ""
 "stylesheets."
 msgstr ""
 
+msgid "Contains E2E test configuration and scripts for NightwatchJS."
+msgstr ""
+
 msgid ""
 "Translation files produced by the compiler and translation files generated "
 "by translators are stored here and merged upon the build process."
@@ -2697,6 +2700,46 @@ msgstr ""
 msgid ""
 "View the code behind this page to understand how the three accordions are "
 "created. Notice how instances can be children of instances?"
+msgstr ""
+
+msgid "Igaro App utilizes NightwatchJS for E2E testing."
+msgstr ""
+
+msgid "Before launching the test suite the following requisites are required;"
+msgstr ""
+
+msgid "Install %[0] into the bin/nightwatch folder."
+msgstr ""
+
+msgid "Download %[0] into the lib folder."
+msgstr ""
+
+msgid ""
+"For Chrome support, download the %[0]Selenium driver%[1] into the lib folder."
+msgstr ""
+
+msgid ""
+"For Internet Explorer support, download the %[0]Selenium driver%[1] into the "
+"lib folder."
+msgstr ""
+
+msgid ""
+"Verify the tests/nightwatch.json and package.json files match your browser "
+"support requirements and the Selenium version matches what you downloaded."
+msgstr ""
+
+msgid "Running & Adding Tests"
+msgstr ""
+
+msgid ""
+"At time of writing the Selenium Firefox driver contains a bug preventing "
+"NightwatchJS from starting Selenium on demand."
+msgstr ""
+
+msgid "Begin the test suite with the command below."
+msgstr ""
+
+msgid "Customise and add your own tests in the tests/src folder."
 msgstr ""
 
 #, fuzzy

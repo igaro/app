@@ -112,7 +112,7 @@ body >.core-router >.main {
                     background-size:35%;
                     @media (max-width:1100px) {
                         background:none;
-                    }
+                    }    
                 }
 
                 >h1 {
@@ -143,6 +143,12 @@ body >.core-router >.main {
                     >.bless {
                         >a:after {
                             background: inline-image("route.main/bless.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.testing {
+                        >a:after {
+                            background: inline-image("route.main/testing.svg") no-repeat 50% 65%;
                             background-size:60%;
                         }
                     }

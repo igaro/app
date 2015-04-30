@@ -106,6 +106,7 @@ module.exports = function(app) {
                         ['locale', _tr("Locale")],
                         ['mobile', _tr("Mobile")],
                         ['compat',_tr("Compatibility")],
+                        ['testing',_tr("Testing")],
                         ['modules',_tr("Modules")]
                     ],list).then(function() {
                         var domMgr = list.managers.dom;
