@@ -14,6 +14,7 @@ module.exports = function(app) {
             managers = model.managers,
             domMgr = managers.dom,
             objMgr = managers.object,
+            dom = app['core.dom'],
             language = app['core.language'];
 
         model.stash.title=_tr("Mobile");
@@ -40,7 +41,7 @@ module.exports = function(app) {
                 domMgr.mk('div', this);
                 domMgr.mk('img', this).src = 'http://www.igaro.com/misc/chinchilla.jpg?x='+ Math.floor((Math.random() * 999) + 1);
             });
-            domMgr.rm(this);
+            dom.rm(this);
         });
 
         domMgr.mk('h1',wrapper,_tr("Touch & Gestures"));

@@ -6,6 +6,7 @@ body >.core-router >.location {
     border:none;
     border-bottom: 1px solid #dadadf !important;
     display:table-cell;
+    font-size:130%;
 	>.wrapper {
 
 		@include pagerestrictwidth;
@@ -24,12 +25,11 @@ body >.core-router >.location {
             
             >.home {
                 background: inline-image("route.location/home-standard.svg") no-repeat 0 50%;
-                background-size:75%;
-                width:2em;
+                background-size:80% !important;
+                width:1.5em;
                 height:100%;
                 &:hover { 
-                    background: inline-image("route.location/home-hover.svg") no-repeat 0 50%;
-                    background-size:75%;
+                    background-image: inline-image("route.location/home-hover.svg");
                 }
             }
 

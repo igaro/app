@@ -2528,14 +2528,14 @@ msgid ""
 msgstr ""
 
 msgid ""
-"Uri data for a route is stored under .uriPath. This allows for quick "
+"URI data for a route is accessible on the route. This allows for quick "
 "hyperlinking to child routes."
 msgstr ""
 
 msgid "Partials"
 msgstr ""
 
-msgid "A route can load children routes as partials."
+msgid "A route can load child routes as partials without assigning a URL."
 msgstr ""
 
 msgid "Navigation"

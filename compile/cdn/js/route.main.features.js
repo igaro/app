@@ -98,7 +98,7 @@ module.exports = function(app) {
                                     content : _tr("Automated test suite exhaustively testing all features across all modules.")
                                 },
                                 {
-                                    className : 'red'
+                                    className : 'orange'
                                 }
                             ]
                         },

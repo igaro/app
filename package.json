@@ -19,6 +19,14 @@
     "grunt-contrib-connect" : "^0",
     "po2json" : "^0.3",
     "grunt-shell": "^0",
-    "mime": "^1.0.0"
+    "mime": "^1.0.0",
+    "nodeunit": "^1"
+  },
+  "bin": {
+    "nightwatch": "./bin/nightwatch"
+  },
+  "man": "",
+  "scripts": {
+    "test": "./bin/nightwatch/bin/nightwatch -e firefox,chrome -c ./tests/nightwatch.json ./tests/src"
   }
 }
