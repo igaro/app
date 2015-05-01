@@ -66,8 +66,8 @@ window.addEventListener('load', function() {
             }
         )(
             [
-                'Proxima Nova' // license required - see Adobe!
-                // 'Open Sans' // open source alternative of above
+                //'Proxima Nova' // license required - see Adobe!
+                'Open Sans' // open source alternative of above
             ]
         );
 
