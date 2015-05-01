@@ -310,8 +310,10 @@ window.addEventListener('load', function() {
                 return this;
             };
             CoreEventMgr.prototype.dispatch = function(evt,value) {
-                var obj = this.x,
-                    parent = obj.parent,
+                var obj = this.x;
+                if (! obj && console)
+                    console.error({ error:'EventMgr represents no object.', mgr:this });
+                var parent = obj.parent,
                     x = {
                         value:value,
                         x:obj
@@ -508,7 +510,7 @@ window.addEventListener('load', function() {
                     while (node) {
                         self.purge(node);
                         events.clean(node);
-                        node = element.lastChild;
+                        node = node.lastChild;
                     }
                     if (! leaveRoot) {
                         self.rm(element);
@@ -648,11 +650,12 @@ window.addEventListener('load', function() {
 
                     // create child arrays
                     if (children) {
+                        var eventMgr = self.managers.event;
                         Object.keys(children).forEach(function (k) {
                             var child = children[k],
                                 a = self[k] = [];       
-                            self.managers.event.on(child+'.destroy', function(s) {
-                                a.splice(a.indexOf(s.value),1);
+                            eventMgr.on(child+'.destroy', function(s) {
+                                a.splice(a.indexOf(s.value.x),1);
                             });
                         });
                         delete this.children;
@@ -671,11 +674,12 @@ window.addEventListener('load', function() {
                         }
                         return thisMgrsEvt.dispatch('destroy').then(function() {
                             self.destroyed = true;
+                            events.clean(self);
                             return Promise.all(mgrs.map(function(o) {
                                 return o.destroy();
                             })).then(function() {
                                 delete self.parent;
-                                return events.clean(self);
+                                return ;
                             });
                         });
                     };
