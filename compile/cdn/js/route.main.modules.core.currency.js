@@ -4,7 +4,7 @@ module.exports = function(app) {
 
         var data = {
 
-            desc : _tr("Provides currency switching and related functionality. Supported currencies are set via an API or configuration file. Uses ISO 4217. Env code is stored."),
+            desc : _tr("Provides currency switching and related functionality. Supported currencies are set via an API or configuration file. Uses ISO 4217. ENV code is stored."),
             author : { 
                 name:'Andrew Charnley', 
                 link:'http://people.igaro.com/ac' 
@@ -15,6 +15,7 @@ module.exports = function(app) {
             dependencies : [
                 'core.store'
             ],
+            blessed:true,
             extlinks : [
                 {
                     href:'http://en.wikipedia.org/wiki/ISO_4217',
@@ -27,7 +28,7 @@ module.exports = function(app) {
                     type:'function',
                     attributes: [
                         { 
-                            type:['float','number'], 
+                            type:'float', 
                             required:true, 
                             attributes : [{
                                 desc: _tr("The value to process.")
@@ -38,7 +39,7 @@ module.exports = function(app) {
                         
                 },
                 { 
-                    name:'getNameOfId', 
+                    name:'getFromPoolById', 
                     type:'function',
                     attributes: [
                         {
@@ -57,21 +58,49 @@ module.exports = function(app) {
                     desc: _tr("The currently applied currency code.")
                 },
                 {
+                    name:'isAuto',
+                    type:'boolean',
+                    desc: _tr("Defines if the current ENV is automatically chosen.")
+                },
+                {
                     name:'pool',
                     type:'object',
                     desc: _tr("A literal list of supported currency codes.")
+                },
+                {
+                    name:'reset',
+                    type:'function',
+                    desc: _tr("Resets the ENV to the automatically defined value."),
+                    returns : {
+                        attributes : [{
+                            instanceof: { name: 'Promise' }
+                        }]
+                    }
                 },
                 {    
                     name:'setEnv',
                     type:'function',
                     desc: _tr("Sets the currently applied currency code."),
-                    attributes : [{
-                        type:'string',
-                        required:true,
-                        attributes:[{
-                            desc: _tr("The code must exist in the current pool and is case sensitive."),
+                    attributes : [
+                        {
+                            type:'string',
+                            required:true,
+                            attributes:[{
+                                desc: _tr("The code must exist in the current pool and is case sensitive."),
+                            }]
+                        },
+                        {
+                            type:'boolean',
+                            attributes:[{
+                                desc: _tr("Defines whether the value should be saved. Default is true."),
+                            }]
+                        }
+                    ],
+                    returns : {
+                        attributes : [{
+                            instanceof: { name: 'Promise' }
                         }]
-                    }]
+                    }
                 },
                 {    
                     name:'setPool',
@@ -83,17 +112,23 @@ module.exports = function(app) {
                         attributes:[{
                             desc: _tr("See conf.app.js for an example."),
                         }]
-                    }]
+                    }],
+                    returns : {
+                        attributes : [{
+                            instanceof: { name: 'Promise' }
+                        }]
+                    }
                 },
                 {    
                     name:'substitute',
                     type:'function',
-                    desc: _tr("Parses and replaces %s with any arguments."),
+                    desc: _tr("Parses and replaces %[n] with any arguments."),
                     attributes : [{
-                        instanceof:'Array',
+                        type:'object',
                         required:true,
                         attributes:[{
-                            desc: _tr("The first element is the object literal, Further elements correspond to each %s to be switched."),
+                            instanceof : { name: 'Array' },
+                            desc: _tr("The first element is the object literal, Further elements correspond to the value of n."),
                         }]
                     }]
                 },
@@ -102,7 +137,7 @@ module.exports = function(app) {
                     type:'function',
                     attributes: [
                         { 
-                            type:['float','number'], 
+                            type:'float',
                             required:true, 
                             attributes : [{
                                 desc: _tr("The value to validate."),
@@ -110,7 +145,6 @@ module.exports = function(app) {
                         },
                         { 
                             type:'boolean', 
-                            required:false, 
                             attributes : [{
                                 desc: _tr("Allow negative values. Default is false."),
                             }]

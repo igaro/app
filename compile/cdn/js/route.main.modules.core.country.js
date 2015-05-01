@@ -4,7 +4,7 @@ module.exports = function(app) {
 
         var data = {
 
-            desc : _tr("Provides country switching and related functionality. Supported countries are set via an API or configuration file. Uses ISO 3166-1. Env code is stored."),
+            desc : _tr("Provides country switching and related functionality. Supported countries are set via an API or configuration file. Uses ISO 3166-1. ENV code is stored."),
             author : { 
                 name:'Andrew Charnley', 
                 link:'http://people.igaro.com/ac' 
@@ -21,9 +21,10 @@ module.exports = function(app) {
                     name:'ISO 3166-1 Alpha 2'
                 }
             ],
+            blessed : true,
             attributes : [
                 { 
-                    name:'getNameOfId', 
+                    name:'getFromPoolById', 
                     type:'function',
                     attributes: [
                         {
@@ -42,21 +43,49 @@ module.exports = function(app) {
                     desc: _tr("The currently applied country code.")
                 },
                 {
+                    name:'isAuto',
+                    type:'boolean',
+                    desc: _tr("Defines if the current ENV is automatically chosen.")
+                },
+                {
                     name:'pool',
                     type:'object',
                     desc: _tr("A literal list of supported country codes.")
+                },
+                {
+                    name:'reset',
+                    type:'function',
+                    desc: _tr("Resets the ENV to the automatically defined value."),
+                    returns : {
+                        attributes : [{
+                            instanceof: { name: 'Promise' }
+                        }]
+                    }
                 },
                 {    
                     name:'setEnv',
                     type:'function',
                     desc: _tr("Sets the currently applied country code."),
-                    attributes : [{
-                        type:'string',
-                        required:true,
-                        attributes:[{
-                            desc: _tr("The code must exist in the current pool and is case sensitive."),
+                    attributes : [
+                        {
+                            type:'string',
+                            required:true,
+                            attributes:[{
+                                desc: _tr("The code must exist in the current pool and is case sensitive."),
+                            }]
+                        },
+                        {
+                            type:'boolean',
+                            attributes:[{
+                                desc: _tr("Defines whether the value should be saved. Default is true."),
+                            }]
+                        }
+                    ],
+                    returns : {
+                        attributes : [{
+                            instanceof: { name: 'Promise' }
                         }]
-                    }]
+                    }
                 },
                 {    
                     name:'setPool',
@@ -68,7 +97,12 @@ module.exports = function(app) {
                         attributes:[{
                             desc: _tr("See conf.app.js for an example."),
                         }]
-                    }]
+                    }],
+                    returns : {
+                        attributes : [{
+                            instanceof: { name: 'Promise' }
+                        }]
+                    }
                 }
             ]
         };

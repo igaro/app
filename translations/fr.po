@@ -1711,7 +1711,7 @@ msgstr ""
 
 msgid ""
 "Provides country switching and related functionality. Supported countries "
-"are set via an API or configuration file. Uses ISO 3166-1. Env code is "
+"are set via an API or configuration file. Uses ISO 3166-1. ENV code is "
 "stored."
 msgstr ""
 
@@ -1724,13 +1724,22 @@ msgstr ""
 msgid "The currently applied country code."
 msgstr ""
 
+msgid "Defines if the current ENV is automatically chosen."
+msgstr ""
+
 msgid "A literal list of supported country codes."
+msgstr ""
+
+msgid "Resets the ENV to the automatically defined value."
 msgstr ""
 
 msgid "Sets the currently applied country code."
 msgstr ""
 
 msgid "The code must exist in the current pool and is case sensitive."
+msgstr ""
+
+msgid "Defines whether the value should be saved. Default is true."
 msgstr ""
 
 msgid "Sets the supported country codes."
@@ -1741,7 +1750,7 @@ msgstr ""
 
 msgid ""
 "Provides currency switching and related functionality. Supported currencies "
-"are set via an API or configuration file. Uses ISO 4217. Env code is stored."
+"are set via an API or configuration file. Uses ISO 4217. ENV code is stored."
 msgstr ""
 
 msgid "The value to process."
@@ -1762,12 +1771,12 @@ msgstr ""
 msgid "Sets the supported currency codes."
 msgstr ""
 
-msgid "Parses and replaces %s with any arguments."
+msgid "Parses and replaces %[n] with any arguments."
 msgstr ""
 
 msgid ""
-"The first element is the object literal, Further elements correspond to each "
-"%s to be switched."
+"The first element is the object literal, Further elements correspond to the "
+"value of n."
 msgstr ""
 
 msgid "The value to validate."
@@ -2298,6 +2307,9 @@ msgid "Output"
 msgstr ""
 
 msgid "Attributes"
+msgstr ""
+
+msgid "This object is blessed. See core.blessed module documentation."
 msgstr ""
 
 msgid "Related"

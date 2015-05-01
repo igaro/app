@@ -66,8 +66,13 @@ module.exports = function(app) {
                             container = col.container,
                             row = col.parent;
                         return domMgr.mk('a',col,content,function() {
+                            stash.hyperlinks.push(this);
                             this.addEventListener('click', function(evt) {
                                 evt.preventDefault();
+                                var rem = this.className === 'active';
+                                stash.hyperlinks.forEach(function(a) {
+                                    a.className = '';
+                                }); 
                                 if (stash.activeFor) {
                                     container.className=stash.activeFor.container.className='';
                                     brows.forEach(function(br,i) {
@@ -79,7 +84,8 @@ module.exports = function(app) {
                                     });
                                     if (stash.activeFor === col) {
                                         stash.activeFor=null;
-                                        return;
+                                        if (rem)
+                                            return;
                                     }
                                 }
                                 stash.activeFor=col;
@@ -107,14 +113,14 @@ module.exports = function(app) {
                                     row.container.classList.add('shade'+stash.belongsTo.length);
                                 }
                                 return row.addColumn().then(function(cc) {
-                                    
                                     var domMgr = cc.managers.dom;
                                     return row.addColumn({ 
                                         content:s.desc?s.desc:null 
                                     }).then(function(rr) {
-                                        if (s.returns && s.type==='function') {
-                                            var l,
-                                                returns = s.returns;
+                                        cc.stash.hyperlinks = [];
+                                        var returns = s.returns;
+                                        if (returns && s.type==='function') {
+                                            var l;
                                             if (returns.instanceof) {
                                                 l = returns.instanceof().name;
                                             } else if (returns.type) {
@@ -143,7 +149,7 @@ module.exports = function(app) {
                                                 var sa = m.name;
                                                 if (m.required) 
                                                     sa += ' *';
-                                                domMgr.mk('a',cc,sa).href = m.href? m.href : 'https://developer.mozilla.org/en/docs/Web/API/'+m.name;
+                                                domMgr.mk('a',cc,sa).href = m.href? m.href : 'https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/'+m.name;
                                                 if (m.desc) 
                                                     rr.setContent({ content:m.desc });
                                             }
@@ -194,6 +200,7 @@ module.exports = function(app) {
                 });
             }
 
+
             if (data.usage) {
                 var u = data.usage;
                 domMgr.mk('h1',v,_tr("Usage"));
@@ -242,9 +249,12 @@ module.exports = function(app) {
                 eval(data.demo);
             }
 
-            if (data.attributes) {
+            if (data.attributes || data.blessed) {
                 domMgr.mk('h1',v,_tr("Attributes"));
-                createTable(data.attributes, domMgr.mk('p',v));
+                if (data.blessed)
+                    domMgr.mk('p',v,_tr("This object is blessed. See core.blessed module documentation."));
+                if (data.attributes)
+                    createTable(data.attributes, domMgr.mk('p',v));
             }
 
             if (data.dependencies) {
