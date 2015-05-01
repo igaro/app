@@ -230,14 +230,15 @@ module.exports = function(app) {
                 ra = path? base.concat(path) : base,
                 model = this.root, 
                 self = this, 
-                c=this.current, 
+                c = this.current, 
                 v = this.requestId,
                 routerEventMgr = router.managers.event;
             return (c?
                 c.managers.event.dispatch('leave').then(function() {
-                    if(c.destroyOnLeave) {
+                    if(c.destroyOnLeave)
                         return c.destroy();
-                    }
+                    var s = document.body.scrollTop || document.documentElement.scrollTop;
+                    c.scrollPosition = s < 0? 0 :s;
                 })
                 :
                 Promise.resolve()
@@ -253,7 +254,7 @@ module.exports = function(app) {
                                     // abort the load, another request has since came in
                                     if (self.requestId !== v) 
                                         throw -1600;
-                                    self.current = model = m;
+                                    c = self.current = model = m;
                                     i += model.uriPieces.length;
                                     model.uriPath = ra.slice(base.length,i+1);
                                     if (model.autoShow)
@@ -265,7 +266,7 @@ module.exports = function(app) {
                         if (c.scrollPosition !== false)
                             document.body.scrollTop = document.documentElement.scrollTop = c.scrollPosition;
                         if (typeof state === 'boolean' && state === false) {
-                            window.history.replaceState({ initial:true },null);
+                            history.replaceState({ initial:true },null);
                         } else {
                             var urlPath = '/'+path.map(function(f) {
                                 return encodeURIComponent(f);
@@ -316,15 +317,6 @@ module.exports = function(app) {
     mrv.show();
     document.body.appendChild(mrv.container);
 
-    window.addEventListener('scroll', function(evt) {
-        var s = document.body.scrollTop || document.documentElement.scrollTop;
-        if (s < 0) 
-            s=0;
-        if (router.current) 
-            router.current.scrollPosition = s;
-        document.body.setAttribute('scrollposition',s);
-    });
-    document.body.setAttribute('scrollposition',0);
 
     var f = function() {
         var w = window.location.pathname.trim().substr(1),
