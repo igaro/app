@@ -53,7 +53,7 @@ module.exports = function(app) {
                         domMgr = accordion.managers.dom;
                     domMgr.mk('h1',container,_tr("The Dispatch"));
                     domMgr.mk('p',container);
-                    dom.append(container,accordion),
+                    dom.append(container,accordion);
                     domMgr.mk('h1',container,_tr("Parent & Children"));
                     domMgr.mk('p',container,_tr("When an event dispatches on a child it propagates up through the parent. A rejected Promise or a literal containing stopPropagation can abort this."));
                     domMgr.mk('p',container,_tr("As the event propagates the path and name change. This allows parents to listen for child events. For example an object with parent 'materials' of name 'metal' which dispatches an event of 'cut' of value true, will also dispatch an event on 'materials' called 'metal.cut'. The value will be replaced with a child reference and original value."));

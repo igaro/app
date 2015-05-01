@@ -44,7 +44,7 @@ module.exports = function(app) {
                     this.classList.add(o.className);
                 self.canvas = dom.mk('div',this,null,o.effect);
             });
-        }
+        };
         this.current = -1;
         this.delay = o.delay || 5000;
         bless.call(this,o);
@@ -64,8 +64,7 @@ module.exports = function(app) {
     InstanceSameSpace.prototype.init = function(o) {
         var self = this,
             spaces = o.spaces;
-        return (spaces
-            ?
+        return (spaces?
             self.addSpaces(spaces)
             :
             Promise.resolve()

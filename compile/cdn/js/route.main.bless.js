@@ -21,12 +21,10 @@ module.exports = function(app) {
 
         domMgr.mk('p',wrapper,_tr("Igaro App's bless decorates standard javascript objects providing two-way parent-child event management, managers, dependency tracking, abstraction, shared routines and dynamic functions."));
         domMgr.mk('p',wrapper,_tr("Most objects bless themselves, and most objects in Igaro are blessed."));
-
         domMgr.mk('h1',wrapper,_tr("Usage"));
-
         domMgr.mk('p',wrapper,_tr("Blessing an object is straight forward. Many attributes are within the <b>o</b> literal and are passed through. See the core.object module for what this literal may contain."));
         
-        domMgr.mk('pre',wrapper,"var InstanceMyWidget = function(o) {\
+        domMgr.mk('pre',wrapper,domMgr.mk('code',null,"var InstanceMyWidget = function(o) {\
 \n   this.name = 'instance.mywidget';\
 \n   this.asRoot = true;\
 \n   this.container = function(dom) {\
@@ -34,7 +32,7 @@ module.exports = function(app) {
 \n   };\
 \n   o.parent = this;\
 \n   app['core.object'].bless.call(this,o);\
-\n}");
+\n}"));
 
         domMgr.mk('p',wrapper,_tr("The .asRoot flag will be covered in the next chapter."));
 

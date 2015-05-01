@@ -40,8 +40,8 @@ module.exports = function(app) {
             var to = encodeURIComponent(o.url),
                 title = o.title? encodeURIComponent(o.title) : '',
                 url = p.url
-                        .replace(/\<URL\>/g,to)
-                        .replace(/\<TITLE\>/g,title);
+                        .replace(/<URL\>/g,to)
+                        .replace(/<TITLE\>/g,title);
             domMgr.mk('li',c,null,function() {
                 this.className = p.name.toLowerCase();
                 domMgr.mk('a',this,null,function() {

@@ -35,6 +35,7 @@
     test.id = 1;
     test.id = 2;
     delete test.id;
+
     arr.push(1, 2);
     arr.length = 0;
 

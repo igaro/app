@@ -81,8 +81,7 @@ module.exports = function(app) {
             var date = self.date,
                 diff = parseInt((date.getTime()-(new Date()).getTime()) / 1000);
             dom.setContent(
-                self.countUp !== self.countDown && self.countUp <= diff && diff <= self.countDown
-                ?
+                self.countUp !== self.countDown && self.countUp <= diff && diff <= self.countDown?
                 language.mapKey(language.substitute(diff === 1? (diff < 0? _tr("%[0] seconds ago") : _tr("%[0] second")) : (diff < 0? _tr("%d seconds ago") : _tr("%d seconds")),diff))
                 :
                 self.moment.fromNow()

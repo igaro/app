@@ -36,8 +36,7 @@ module.exports = function(app) {
 
     InstanceList.prototype.init = function(o) {
         var self = this;
-        return (o.options
-            ? 
+        return (o.options ? 
             self.addItems(o)
             :
             Promise.resolve()

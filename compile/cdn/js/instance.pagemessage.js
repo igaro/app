@@ -62,6 +62,6 @@ module.exports = function(app) {
 
     return InstancePageMessage;
 
-}
+};
 
 })();

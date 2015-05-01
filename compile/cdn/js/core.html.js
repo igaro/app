@@ -3,7 +3,7 @@ module.exports = function(app) {
     return {
 
     	to : function(v) {
-	    	return v.replace(/\</g,"\&lt;")
+	    	return v.replace(/</g,"\&lt;")
 	    		.replace(/\>/g,"\&gt;")
 		    	.replace(/\|/g,"\&#124;") 
 		    	.replace(/  /g," \&nbsp;") 

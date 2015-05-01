@@ -166,7 +166,7 @@ module.exports = function(app) {
                 Promise.resolve(domMgr.mk('p',null,_tr("Igaro modules export code via module.export while 3rd party code (i.e JQuery) may not. All have access to the app (private) and global settings (public) variable, so only load modules from locations you trust."))),
                 Promise.resolve(domMgr.mk('p',null,_tr("The name of the module dicatates its namespace in the app, i.e for type.name.js, what is exported will be available in app['type.name']."))),
                 Promise.resolve(domMgr.mk('p',null,_tr("Dependencies can be added to the requires list. Instance modules can be lazy loaded (initial load speed -v- possible lag later on, your call) and don't need to be added. A custom server/cdn can be supplied along with the module name (not shown)."))),
-                Promise.resolve(domMgr.mk('pre',null,"(function() {\n\
+                Promise.resolve(domMgr.mk('pre',null,domMgr.mk('code',null,"(function() {\n\
 'use strict';\n\
 module.requires = [\n\
     { name : 'type.name.css' },\n\
@@ -174,7 +174,7 @@ module.requires = [\n\
 module.exports = function(app, params) {\n\
     // return - usually a function or literal \n\
 };\n\
-})();")),
+})();"))),
 
                 Promise.resolve(domMgr.mk('h1',null,_tr("Instances"))),
                 Promise.resolve(domMgr.mk('p',null,_tr("Instances (also know as widgets) can be called anything, but Igaro supplied instances are denoted by an instance.* filename."))),
@@ -184,7 +184,7 @@ module.exports = function(app, params) {\n\
 
         });
 
-    }
+    };
 
 };
 

@@ -23,18 +23,15 @@ module.exports = function(app) {
     // ROUTE
     var CoreRouterRoute = function(o) {
         var self = this;
-        this.name = o.name,
-        this.container =  function(dom) {
+        this.name = o.name;
+        this.container = function(dom) {
             return dom.mk('div',o.container,null,function() {
                 this.className = 'route';
                 self.wrapper = dom.mk('div',this,null,'wrapper');
                 if (typeof o.name === 'string')
                     this.classList.add(o.name.replace(/\./g,'--'));
             });
-        }
-        //this.children = {
-        ///    routes : 'route'
-        //}
+        };
         this.routes = [];
         bless.call(this,o);
         this.uriPath = [];
@@ -63,7 +60,7 @@ module.exports = function(app) {
         if (typeof evt === 'string') {
             t = evt;
         } else {
-            if (! evt instanceof Array)
+            if (! (evt instanceof Array))
                 throw new Error('CoreRouterRoute.on: second argument must be string or array');
             t = evt.shift();
             if (evt.length)
@@ -236,8 +233,7 @@ module.exports = function(app) {
                 c=this.current, 
                 v = this.requestId,
                 routerEventMgr = router.managers.event;
-            return (c
-                ?
+            return (c?
                 c.managers.event.dispatch('leave').then(function() {
                     if(c.destroyOnLeave) {
                         return c.destroy();

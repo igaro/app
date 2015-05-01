@@ -98,7 +98,7 @@ module.exports = function(app) {
         this.header = new InstanceTableDomain({ parent:this, type:'thead', className:o.header? o.header.className:null });
         this.body = new InstanceTableDomain({ parent:this, type:'tbody', className:o.body? o.body.className:null });
         this.footer = new InstanceTableDomain({ parent:this,type:'tfoot', className:o.footer? o.footer.className:null});
-    }
+    };
 
     InstanceTable.prototype.init = function(o) {
         var self = this;
@@ -149,7 +149,7 @@ module.exports = function(app) {
                         self.execSearch();
                     });
                 });
-            }
+            };
         return this.searchRow.addColumn(o);
     };
 

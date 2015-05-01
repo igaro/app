@@ -2494,7 +2494,7 @@ module.exports = function(app, params) {
             // load initial routes
             return router.root.addRoutes(
                 ['header','location','main','footer'].map(function(name) {
-                    return { name:name }
+                    return { name:name };
                 }) 
             ).then(function(m) {
                 m.forEach(function(v) {

@@ -42,7 +42,7 @@ module.exports = function(app, params) {
                 function() { }
             );
         });
-    }
+    };
 
     var language = {
 

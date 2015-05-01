@@ -56,7 +56,7 @@ module.exports = function(app) {
                 self.panels = {
                     pool:[],
                     container : domMgr.mk('div',t,null,'panels')
-                }
+                };
                 var rte = self.rte = domMgr.mk('div',t,null,function() {
                     this.className = 'editable';
                     this.contentEditable = true;
@@ -109,8 +109,7 @@ module.exports = function(app) {
                                 return Promise.resolve();
                             }
                         },
-                    ])
-                    ,
+                    ]),
                     objectMgr.create('navigation',{
                         parent:self,
                         container:self.panels.container

@@ -45,7 +45,7 @@ window.addEventListener('load', function() {
             var b,d,e,f,g,
                 h=document.body,
                 a=document.createElement("div");
-                a.innerHTML='<span style="'+["position:absolute","width:auto","font-size:128px","left:-99999px"].join(" !important;")+'">'+Array(100).join("wi")+"</span>";
+                a.innerHTML='<span style="'+["position:absolute","width:auto","font-size:128px","left:-99999px"].join(" !important;")+'">'+(new Array(100)).join("wi")+"</span>";
                 a=a.firstChild;
                 b=function(b){
                     a.style.fontFamily=b;
@@ -341,7 +341,7 @@ window.addEventListener('load', function() {
             var events = app['core.events'],
                 pQ = function(o) {
                     if (!(o instanceof HTMLElement || o instanceof DocumentFragment) && o.container)
-                        return o.container
+                        return o.container;
                     return o;
                 };
             var CoreDomMgr = function(parent) {
@@ -362,6 +362,7 @@ window.addEventListener('load', function() {
                 head : document.getElementsByTagName('head')[0],
                 mk : function(t,o,c,m) {
                     var r,
+                        i,
                         self = this, 
                         type = t.indexOf('[');
                     if (type !== -1) {
@@ -376,12 +377,12 @@ window.addEventListener('load', function() {
                         if (o instanceof HTMLElement || o instanceof DocumentFragment) {
                             o.appendChild(r);
                         } else if (o.insertBefore) {
-                            var i = o.insertBefore;
+                            i = o.insertBefore;
                             if (!(i instanceof HTMLElement))
                                 i = i.container;
                             i.parentNode.insertBefore(r,i);
                         } else if (o.insertAfter) {
-                            var i = o.insertAfter;
+                            i = o.insertAfter;
                             if (!(i instanceof HTMLElement))
                                 i = i.container;
                             i.parentNode.insertBefore(r,i.nextSibling);
@@ -470,7 +471,7 @@ window.addEventListener('load', function() {
                 },
                 setContent : function(r,c,o) {
                     if (! o)
-                        this.nuke(r,true);
+                        this.purge(r,true);
                     r.innerHTML = '';
                     var lf = r.igaroLangFn;
                     if (lf) {
@@ -501,12 +502,13 @@ window.addEventListener('load', function() {
                         r.innerHTML = c;
                     }
                 },
-                nuke : function(element,leaveRoot) {
+                purge : function(element,leaveRoot) {
                     var self = this,
-                        node;
-                    while (node = element.lastChild) {
-                        self.nuke(node);
+                        node = element.lastChild;
+                    while (node) {
+                        self.purge(node);
                         events.clean(node);
+                        node = element.lastChild;
                     }
                     if (! leaveRoot) {
                         self.rm(element);
@@ -545,7 +547,7 @@ window.addEventListener('load', function() {
                 createMgr : function(parent) {
                     return new CoreDomMgr(parent);
                 }
-            }
+            };
         })();
 
         // core.object: built in
@@ -559,14 +561,14 @@ window.addEventListener('load', function() {
                 var parent = this.parent;
                 if (! o)
                     o = {};
-                var amd = app['instance.amd'];
+                var Amd = app['instance.amd'];
                 var t = typeof g === 'string'? { name:g } : g,
                     name = t.fullname? t.fullname : 'instance.'+t.name,
                     p = { 
                         modules : [{ name: name+'.js' }],
                         repo : t.repo? t.repo : null
                     };
-                return new amd({ parent:parent }).get(p).then(function () {
+                return new Amd({ parent:parent }).get(p).then(function () {
                     o.parent = parent;
                     var i = new app[name](o);
                     if (! i.init)
@@ -664,7 +666,7 @@ window.addEventListener('load', function() {
                     this.destroy = function() {
                         // purge container beforehand to prevent any reapply
                         if (self.container) {
-                            dom.nuke(self.container);
+                            dom.purge(self.container);
                             delete self.container;
                         }
                         return thisMgrsEvt.dispatch('destroy').then(function() {
@@ -683,7 +685,7 @@ window.addEventListener('load', function() {
                         if (container) {
                             container.setAttribute('disabled',v);
                             container.setAttribute('inert',v);
-                        };
+                        }
                     };
                     if (container) {
                         if (typeof container === 'function') 
@@ -915,7 +917,7 @@ window.addEventListener('load', function() {
                     'instance.xhr',
                     'instance.amd'
                 ].map(function(m,i) {
-                    return { uid:i*-1-1, done:true, module: { name:m+'.js' }}
+                    return { uid:i*-1-1, done:true, module: { name:m+'.js' }};
                 }),
                 setBits = function(p) {
                     if (p.modules)

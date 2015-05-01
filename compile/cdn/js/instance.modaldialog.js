@@ -24,7 +24,7 @@ module.exports = function(app) {
 
     InstanceModalDialog.prototype.init = function(o) {
         return this.managers.event.dispatch('init');
-    }
+    };
 
     InstanceModalDialog.prototype.custom = function(o) {
         if (! o) 
@@ -55,7 +55,7 @@ module.exports = function(app) {
             if (o.title) 
                 o.header = domMgr.mk('h1',null,o.title);
             if (o.header)
-                domMgr.mk('div',wrapper,o.header,'header')
+                domMgr.mk('div',wrapper,o.header,'header');
 
             var msg = o.message;
             if (msg) {
@@ -87,7 +87,7 @@ module.exports = function(app) {
                 this.className = 'action';
                 var actDiv = this;
                 myActions = myActions.map(function (action) {
-                    return action.element = domMgr.mk('button',actDiv,action.l,function() {
+                    action.element = domMgr.mk('button',actDiv,action.l,function() {
                         if (action.id)
                             this.className = action.id;
                         if (action.onClick)
@@ -100,7 +100,8 @@ module.exports = function(app) {
                                 self.managers.debug.handle(e);
                             });
                         });
-                    });         
+                    });
+                    return action.element;     
                 });
             });
 

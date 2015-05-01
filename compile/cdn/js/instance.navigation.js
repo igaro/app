@@ -76,10 +76,10 @@ module.exports = function(app) {
         this.name = 'menu';
         this.children = {
             options:'option'
-        },
+        };
         this.container = function(dom) {
             return dom.mk('ul',o.parent.container);
-        }
+        };
         bless.call(this,o);
         this.onClick = o.onClick;
     };
@@ -114,7 +114,7 @@ module.exports = function(app) {
         this.asRoot = true;
         this.container = function(dom) {
             return dom.mk('nav',o.container,null,o.className);
-        }
+        };
         bless.call(this,o);
         this.menu = new InstanceNavigationMenu({ 
             parent:this, 

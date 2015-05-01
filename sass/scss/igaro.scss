@@ -31,6 +31,21 @@ body {
     >noscript {
       text-align:center;
     }
+    
+    pre {
+        white-space: pre-wrap;
+    }
+
+    code {
+        border-left:0.4em solid #558abb;
+        padding:0.4em 0.4em 0.4em 0.6em;
+        display:block;
+        color:#4d4e53;
+        tab-size:4;
+        line-height:normal;
+        font-size:90%;
+        background-color:#dde4e9;
+    }
 
     a {
         color:#0860a8; 

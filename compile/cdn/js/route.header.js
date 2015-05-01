@@ -70,7 +70,7 @@ module.exports = function(app) {
                                         select.addEventListener('change', function() {
                                             (this.selectedIndex === 0? mod.reset() : mod.setEnv(this.options[this.selectedIndex].value)).catch(function(e) {
                                                 return debugMgr.handle(e);
-                                            })
+                                            });
                                         });
                                         var write = function() {
                                             select.options.length = 0;
@@ -133,29 +133,31 @@ module.exports = function(app) {
                                     accordion.addSection({ 
                                         title:_tr("Timezone"), 
                                         content:domMgr.mk('select',null,null, function() {
-                                            var self = this,
+                                            var self = this, h,v,m,y,
                                                 date = app['core.date'],
                                                 offset = date.envOffsetAuto? null : date.envOffset;
                                             domMgr.mk('option',self,_tr("Automatic"));
                                             domMgr.mk('option',self).disabled = true;
-                                            for (var h=14; h >= 0; h--) {
-                                                var v = (h < 10? '0'+h : h);
-                                                for (var m=45; m >= 0 && (h > 0 || m !== 0); m-=15) {
-                                                    domMgr.mk('option',self,'GMT - '+v+':'+(m === 0? '00':m), function() {
-                                                        var y = this.value = (h*60+m)*-1;
-                                                        if (y === offset)
-                                                            this.selected = true;
-                                                    });
+                                            var eF = function() {
+                                                y = this.value = (h*60+m)*-1;
+                                                if (y === offset)
+                                                    this.selected = true;
+                                            };
+                                            for (h=14; h >= 0; h--) {
+                                                v = (h < 10? '0'+h : h);
+                                                for (m=45; m >= 0 && (h > 0 || m !== 0); m-=15) {
+                                                    domMgr.mk('option',self,'GMT - '+v+':'+(m === 0? '00':m),eF); 
                                                 }
                                             }
-                                            for (var h=0; h <= 14; h++) {
-                                                var v = h < 10? '0'+h : h;
-                                                for (var m=0; m <= 45; m+=15) {
-                                                    domMgr.mk('option',self,'GMT +'+v+':'+(m === 0? '00':m), function() {
-                                                        var y = this.value = (h*60+m);
-                                                        if (y === offset)
-                                                            this.selected = true;
-                                                    });
+                                            eF =  function() {
+                                                y = this.value = (h*60+m);
+                                                if (y === offset)
+                                                    this.selected = true;
+                                            };
+                                            for (h=0; h <= 14; h++) {
+                                                v = h < 10? '0'+h : h;
+                                                for (m=0; m <= 45; m+=15) {
+                                                    domMgr.mk('option',self,'GMT +'+v+':'+(m === 0? '00':m),eF);
                                                 }
                                             }
                                             eventMgr.on('core.date','setEnvOffset', function() {
@@ -184,7 +186,7 @@ module.exports = function(app) {
                                         title:_tr("Locale"),
                                         custom:accordion.container
                                     });
-                                })
+                                });
                             }).catch(function(e) {
                                 return managers.debug.handle(e);
                             }); 
@@ -197,7 +199,7 @@ module.exports = function(app) {
                         this.className = 'code';
                         this.addEventListener('click',function(event) {
                             event.preventDefault();
-                            window.open('https://github.com/igaro/app/blob/master/compile/js/'+router.current.path.join('.')+'.js')
+                            window.open('https://github.com/igaro/app/blob/master/compile/js/'+router.current.path.join('.')+'.js');
                         });
                     })
                 ),
@@ -209,7 +211,7 @@ module.exports = function(app) {
                         var total=0, 
                             ref,
                             self = this;
-                        domMgr.mk('div', self),
+                        domMgr.mk('div', self);
                         model.on('instance.xhr','start', function () {
                             if (total === 0 && ! ref) 
                                 ref=setTimeout(function() { 
@@ -224,7 +226,7 @@ module.exports = function(app) {
                                 return;
                             clearTimeout(ref);
                             ref=null;
-                            dom.hide(self)
+                            dom.hide(self);
                         });
                     })
                 )

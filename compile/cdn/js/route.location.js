@@ -46,16 +46,17 @@ module.exports = function(app) {
                         model.show();
                         dom.empty(paths);
                         dom.empty(paramsw);
-                        var c = router.current;
+                        var c = router.current,
+                            eF=function(event) {
+                                event.preventDefault();
+                                router.to(b); 
+                            };
                         while (! c.isBase()) {
                             var m = domMgr.mk(c === router.current? 'span':'a',null, c.stash.title || c.name);
                             if (c !== router.current) {
                                 m.href=c.getUrl();
                                 var b = c.uriPath;
-                                m.addEventListener('click', function(event) {
-                                    event.preventDefault();
-                                    router.to(b); 
-                                });
+                                m.addEventListener('click', eF);
                             }
                             paths.insertBefore(m,paths.firstChild);
                             c = c.parent;

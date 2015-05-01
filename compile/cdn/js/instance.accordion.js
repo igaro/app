@@ -73,8 +73,7 @@ module.exports = function(app) {
 
     InstanceAccordion.prototype.init = function(o) {
         var self = this;
-        return (o.sections
-            ?
+        return (o.sections?
             self.addSections(o.sections) 
             :
             Promise.resolve()
