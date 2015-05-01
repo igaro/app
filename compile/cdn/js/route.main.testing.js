@@ -19,7 +19,6 @@ module.exports = function(app) {
         model.stash.title=_tr("Testing");
 
         domMgr.mk('p',wrapper,_tr("Igaro App utilizes NightwatchJS for E2E testing."));
-
         domMgr.mk('p',wrapper,language.substitute(_tr("Before launching the test suite the following requisites are required;")));
         domMgr.mk('p',wrapper,null, function() {
             domMgr.mk('ul',this,null, function() {
@@ -32,7 +31,6 @@ module.exports = function(app) {
         });
 
         domMgr.mk('h1',wrapper,_tr("Running & Adding Tests"));
-
         domMgr.mk('p',wrapper);
 
         return objMgr.create('pagemessage', {
@@ -41,11 +39,8 @@ module.exports = function(app) {
             message:_tr("At time of writing the Selenium Firefox driver contains a bug preventing NightwatchJS from starting Selenium on demand.")
         }).then(function() {
             domMgr.mk('p',wrapper,_tr("Begin the test suite with the command below."));
-
-            domMgr.mk('pre',wrapper,"npm test");
-
+            domMgr.mk('pre',wrapper,domMgr.mk('code',null,"npm test"));
             domMgr.mk('p',wrapper,_tr("Customise and add your own tests in the tests/src folder."));
-
         });
 
     };

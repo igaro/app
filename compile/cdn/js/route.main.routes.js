@@ -18,7 +18,7 @@ module.exports = function(app) {
 
         domMgr.mk('p',wrapper,_tr("Igaro App is <b>100%</b> MVC free."));
         
-        domMgr.mk('p',wrapper,_tr("Most users will want to use core.router to serve pages. This router is dynamic, it begins at root and loads further routes as children. A route builds content by either appending elements or embedding instances."));
+        domMgr.mk('p',wrapper,_tr("Most users will use the core.router module to serve pages. This router is dynamic, it begins at root and loads further routes as children. A route builds content by either appending elements or embedding instances."));
 
         domMgr.mk('p',wrapper,_tr("By default a route's container is appended into the parent route's container and siblings are hidden. By default routes are cached and retain state."));
 
@@ -57,10 +57,10 @@ module.exports = function(app) {
 
         domMgr.mk('p',wrapper,_tr("The router provides .to() which is ideal for DOM event handlers. It contains a built in error handler. This function takes a path, search (?xxx), hash (#xxx) and state."));
 
-        domMgr.mk('pre', wrapper,"model.managers.dom.mk('a',wrapper,_tr(\"Store\")).addEventListener('click',function(event) {\
+        domMgr.mk('pre',wrapper,domMgr.mk('code', null,"model.managers.dom.mk('a',wrapper,_tr(\"Store\")).addEventListener('click',function(event) {\
 \n  event.preventDefault();\
 \n  router.to(['store'],'welcome');\
-\n});");
+\n});"));
 
     };
 

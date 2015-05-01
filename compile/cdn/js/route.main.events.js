@@ -19,7 +19,6 @@ module.exports = function(app) {
         model.stash.title = _tr("Events");
         
         domMgr.mk('p',wrapper,_tr("Igaro App is <b>100%</b> event driven."));
-
         domMgr.mk('p',wrapper,_tr("core.events is responsible for event management. It provides a manager to core.object's bless, and this is used extensively throughout the Igaro App framework.")); 
 
         return model.addSequence({
@@ -60,16 +59,11 @@ module.exports = function(app) {
                     domMgr.mk('p',container,_tr("The .asRoot() flag prevents a child event dispatching on the parent. It is mostly used by instances. A parent has no need for these dispatches since it can access the instance event manager directly."));
                     domMgr.mk('h1',container,_tr("By Instance/Singleton"));
                     domMgr.mk('p',container,_tr("Listening to events on modules is accomplished by accessing the event manager on the object and calling extend on it. This adds your object as a dependency (should it later be destroyed the event will be cleaned up automatically)."));
-
-                    domMgr.mk('pre',container,_tr("(object).managers.event.extend(this).on('eventName',fn);"));
-
+                    domMgr.mk('pre',container,domMgr.mk('code',null,_tr("(object).managers.event.extend(this).on('eventName',fn);")));
                     domMgr.mk('h1',container,_tr("By Path/Type"));
                     domMgr.mk('p',container,_tr("Listening to the event manager on an instance will only provide events for that particular instance, not the instance type."));
-
                     domMgr.mk('p',container,_tr("In this App, each time an instance.r start and end event fire we keep a tally and display an icon in the header. This is an example of monitoring by type and is accomplished via core.events, not through a manager. View route.header.js and take a look at the code used to do this."));
-                    
-                    domMgr.mk('pre',container,_tr("app['core.events'].on('instance.xhr','start',fn);"));
-
+                    domMgr.mk('pre',container,domMgr.mk('code',null,_tr("app['core.events'].on('instance.xhr','start',fn);")));
                     return container; 
                 })
             ]

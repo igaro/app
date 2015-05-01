@@ -29,17 +29,17 @@ module.exports = function(app) {
 
         domMgr.mk('p',wrapper,_tr("Shorthand DOM element creation and appendation are provided by the core.dom module. Blessed objects gain a core.dom manager, which handles dependency tracking (i.e .destroy() your model and the dom elements disappear).")); 
 
-        domMgr.mk('p',wrapper,_tr("The .mk() function provided by core.dom creates elements, appends (or inserts before or after), sets content (can be a language literal) or appends other elements into it, and either sets the className or accepts a function for more power."));
+        domMgr.mk('p',wrapper,_tr("The .mk() function provided by core.dom creates elements, appends (or inserts before or after), sets content (can be a language literal) or appends other elements into it, and either sets the className or accepts a function."));
 
-        domMgr.mk('pre',wrapper,"model.managers.dom.mk('p',wrapper,_tr(\"Localized string\"),'myClassName');");
-
-        domMgr.mk('pre',wrapper,"model.managers.dom.mk('a',wrapper,_tr(\"Store\"),function() {\
+        domMgr.mk('pre',wrapper,domMgr.mk('code',null,"model.managers.dom.mk('p',wrapper,_tr(\"Localized string\"),'myClassName');\
+\n\
+\nmodel.managers.dom.mk('a',wrapper,_tr(\"Store\"),function() {\
 \n  this.className='store'\
 \n  this.addEventListener('click',function(event) {\
 \n      event.preventDefault();\
 \n      router.to(['store']);\
 \n  }\
-\n});");
+\n});"));
     };
 
 };
