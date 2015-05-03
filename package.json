@@ -20,7 +20,7 @@
     "po2json" : "^0.3",
     "grunt-shell": "^0",
     "mime": "^1.0.0",
-    "nodeunit": "^1"
+    "nodeunit": "^0"
   },
   "bin": {
     "nightwatch": "./bin/nightwatch"
