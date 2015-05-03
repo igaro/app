@@ -10,7 +10,8 @@ module.requires = [
 module.exports = function(app) {
 
     var msgonevent,
-        bless = app['core.object'].bless;
+        bless = app['core.object'].bless,
+        dom = app['core.dom'];
 
     var l = {
         required : _tr("Value required"),
@@ -222,7 +223,7 @@ module.exports = function(app) {
         var self = this,
             domMgr = this.managers.dom;
         return Promise.all(this.messages.map(function (element) {
-            return domMgr.rm(element);
+            return dom.rm(element);
         })).then(function () {
             self.messages = [];
             return self.managers.event.dispatch('clear');

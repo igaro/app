@@ -40,6 +40,23 @@
       }
     },
 
+    "opera" : {
+      "launch_url" : "http://localhost",
+      "selenium_host" : "127.0.0.1",
+      "selenium_port" : 4444,
+      "silent" : true,
+      "disable_colors": false,
+      "screenshots" : {
+        "enabled" : false,
+        "path" : ""
+      },
+      "desiredCapabilities" : {
+        "browserName" : "opera",
+        "javascriptEnabled" : true,
+        "acceptSslCerts" : true
+      }
+    },
+
     "chrome" : {
       "launch_url" : "http://localhost",
       "selenium_host" : "127.0.0.1",

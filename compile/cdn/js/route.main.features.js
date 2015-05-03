@@ -213,7 +213,7 @@ module.exports = function(app) {
                                     this.src = 'http://www.youtube.com/embed/'+playlist[0]+'?wmode=transparent&amp;HD=1&amp;rel=0&amp;showinfo=1&amp;controls=1&amp;autoplay=0;playlist='+playlist.slice(1).join(',');
                                     self.parentNode.insertBefore(this,self);
                                 });
-                                domMgr.rm(self);
+                                dom.rm(self);
                             }
                         ).catch(function() { 
                             model.managers.debug.handle(e);
