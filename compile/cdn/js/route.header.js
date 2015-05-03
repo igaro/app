@@ -199,7 +199,7 @@ module.exports = function(app) {
                         this.className = 'code';
                         this.addEventListener('click',function(event) {
                             event.preventDefault();
-                            window.open('https://github.com/igaro/app/blob/master/compile/js/'+router.current.path.join('.')+'.js');
+                            window.open('https://github.com/igaro/app/blob/master/compile/cdn/js/'+router.current.path.join('.')+'.js');
                         });
                     })
                 ),
