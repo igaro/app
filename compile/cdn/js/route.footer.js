@@ -16,6 +16,15 @@ module.exports = function(app) {
             objectMgr = managers.object,
             router = app['core.router'];
 
+        // save scroll for top button 
+        var saveScroll = function(event) {
+            var db = document.body,
+                v = db.scrollTop || document.documentElement.scrollTop;
+            db.setAttribute('data-scrollPosition', v<0? 0:v);
+        };
+        saveScroll(0);
+        window.addEventListener('scroll', saveScroll);
+
     	var navTop = domMgr.mk('div',null,null,'navTop');
     	navTop.addEventListener('click', function() {
     		document.body.scrollTop = document.documentElement.scrollTop = 0;

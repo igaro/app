@@ -57,7 +57,7 @@ body >.core-router >.footer {
 
 }
 
-body:not([scrollposition="0"]) >.core-router >.footer >.toTop {
+body:not([data-scrollPosition="0"]) >.core-router >.footer >.toTop {
 	position:fixed;
 	display:inline-block;
 	width:100%;
