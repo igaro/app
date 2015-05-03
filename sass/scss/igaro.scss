@@ -106,7 +106,7 @@ body {
 
       @media screen and (min-width: 1000px) {
         >fieldset {
-          float:left;
+          display:inline-block;;
           &:not(last-child) {
               margin-right:$PAGE_PADDING_STANDARD_WIDTH;
           }
@@ -114,14 +114,13 @@ body {
       }
 
       @media screen and (max-width: 1000px) {
-        text-align:center;
+        //text-align:center;
         >fieldset {
           border:none;
           padding-left:0;
           padding-right:0;
           padding-bottom:0;
           background-color:inherit;
-          float:none;
           >div {
             &>select, &>textarea, &>input:not([type='button']):not([type='submit']):not([type='radio']):not([type='checkbox']) {
               width:100%;
@@ -133,9 +132,6 @@ body {
             margin-left:0;
             background-color:inherit;
             font-weight:bold;
-          }
-          label {
-            text-align:left;
           }
         }
         >input[type="submit"] , >button {
