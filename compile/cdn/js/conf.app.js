@@ -2488,7 +2488,7 @@ module.exports = function(app, params) {
                         v.show(); 
                 });
                 router.current = router.base = m[2];
-                // write page meta title & desc for current route and on route change (SEO)
+                // write page title & meta for current route and on route change (SEO)
                 var eF = function(element,n,model) {
                     var c = model.stash[n];
                     if (! c) 
@@ -2496,7 +2496,18 @@ module.exports = function(app, params) {
                     dom.setContent(element,c);
                     dom.head.appendChild(element);
                 };
-                ['title','description','keywords'].forEach(function(n) {
+                // title
+                var title = dom.head.getElementsByTagName('title')[0],
+                    orig = title.innerHTML,
+                    set = function(model) {
+                        return eF(title,'title',model);
+                    };
+                set(router.current);
+                router.managers.event.on('to-in-progress', function(o) {
+                    return set(o.value);
+                });                    
+                // meta tags
+                ['description','keywords'].forEach(function(n) {
                     dom.mk('meta',null,null,function() {
                         this.name = n;
                         eF(this,n,router.current);
