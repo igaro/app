@@ -175,7 +175,7 @@ module.exports = function(grunt) {
                     return middlewares;
                 }
             }
-        }
+        };
 
     });
 

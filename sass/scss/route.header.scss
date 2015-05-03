@@ -210,7 +210,6 @@ body >.core-router >.header {
                 }
                 >.api {
                     cursor:pointer;
-                    margin-bottom:1px;
                     background: linear-gradient(color-stops(#4988ef 0%, #235ebd 100%));
                     &:hover {
                         background: linear-gradient(color-stops(#427ad7 0%, #1d4f9e 100%));
@@ -231,7 +230,7 @@ body >.core-router >.header {
 
         >.settings {
             margin-left:0.3em;
-            background-size:85% !important;
+            background-size:80% !important;
             background: inline-image("route.header/settings.svg") no-repeat 50% 50%;
         }
 
@@ -246,10 +245,10 @@ body >.core-router >.header {
 		    height:2.2em;
 			>div {
 			    position:absolute; 
-			    z-index:9999; 
+			    z-index:9999;
 			    right:0;
-		        width: 0.72em; 
-		        height: 0.72em;
+		        width: 1.5em; 
+		        height: 1.5em;
 		        border: 0.42em solid #fff;
 		        border-right-color: transparent; border-radius: 50%;
 		        -webkit-animation: route-header-xhr-spin 1s linear infinite;
