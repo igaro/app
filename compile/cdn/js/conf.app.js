@@ -2474,20 +2474,6 @@ module.exports = function(app, params) {
             });
         });
 
-        // write page meta title & desc on route change (SEO)
-        ['title','description','keywords'].forEach(function(n) {
-            dom.mk('meta',null,null,function() {
-                var self = this;
-                this.name = n;
-                router.managers.event.on('to-in-progress', function() {
-                    var c = router.current.stash[n];
-                    if (! c) 
-                        return dom.rm(self);
-                    dom.setContent(self,c);
-                    dom.head.appendChild(self);
-                });
-            });
-        });
 
         // setup page with core routes
         events.on('','state.init', function() {      
@@ -2502,6 +2488,24 @@ module.exports = function(app, params) {
                         v.show(); 
                 });
                 router.current = router.base = m[2];
+                // write page meta title & desc for current route and on route change (SEO)
+                var eF = function(element,n,model) {
+                    var c = model.stash[n];
+                    if (! c) 
+                        return dom.rm(element);
+                    dom.setContent(element,c);
+                    dom.head.appendChild(element);
+                };
+                ['title','description','keywords'].forEach(function(n) {
+                    dom.mk('meta',null,null,function() {
+                        this.name = n;
+                        eF(this,n,router.current);
+                        var self = this;
+                        router.managers.event.on('to-in-progress', function(o) {
+                            return eF(self,n,o.value);
+                        });                    
+                    });
+                });
                 // handle error here
                 return events.dispatch('','state.base').then(function() {
                     return events.dispatch('','state.ready');
