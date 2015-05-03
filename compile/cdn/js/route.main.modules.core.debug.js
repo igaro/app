@@ -6,7 +6,7 @@ module.exports = function(app) {
             desc : _tr("Handles debug messages and fires an event when one comes in."),
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://people.igaro.com/ac' 
+                link:'http://www.igaro.com/ppl/ac' 
             },
             usage : {
                 class : true
@@ -22,7 +22,7 @@ module.exports = function(app) {
                 {
                     name:'handle',
                     type:'function',
-                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.object's bless instead."),
+                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands."),
                     attributes : [
                         { 
                             type:'*',
@@ -43,7 +43,6 @@ module.exports = function(app) {
                 {
                     name:'log',
                     type:'object',
-                    desc : _tr("Manages and stores the log data."),
                     attributes : [
                         { 
                             name:'append',
@@ -72,12 +71,7 @@ module.exports = function(app) {
                                 }
                             ],
                             desc: _tr("Appends a debug event to storage and fires a core.debug event containing the data.")
-                        },
-                        { 
-                            name:'data',
-                            instanceof:'Array', 
-                            desc : _tr("Contains debug data appended since program execution."),
-                        },
+                        }
                     ]
                 }
             ]

@@ -1543,6 +1543,11 @@ msgid ""
 "parenthesis icon in the header."
 msgstr ""
 
+msgid ""
+"You're using Igaro App 1.00 Beta. Documentation and translations are "
+"currently incomplete."
+msgstr ""
+
 msgid "Overview"
 msgstr ""
 
@@ -1793,7 +1798,7 @@ msgstr ""
 msgid ""
 "Provides date and timezone functionality. Date strings should be ISO 8601 "
 "formatted. The timezone is determined from the system clock but can be "
-"overridden. Env code is stored."
+"overridden. ENV code is stored."
 msgstr ""
 
 msgid "The year value."
@@ -1814,10 +1819,19 @@ msgstr ""
 msgid "Currently applied timezone offset in minutes from GMT."
 msgstr ""
 
+msgid "Defines whether the ENV has been determined automatically."
+msgstr ""
+
+msgid "Resets the timezone offset to the automatically determined value."
+msgstr ""
+
 msgid "Sets the timezone offset."
 msgstr ""
 
 msgid "Amount of minutes from GMT. Use null for system default."
+msgstr ""
+
+msgid "Defines if the value should be stored. Default is true."
 msgstr ""
 
 msgid "The value to parse."
@@ -1842,8 +1856,7 @@ msgstr ""
 
 msgid ""
 "A generic error handling mechanism for functions that don't do it "
-"themselves. Useful for hyperlink invoked commands. Try to use the manager "
-"provided by core.object's bless instead."
+"themselves. Useful for hyperlink invoked commands."
 msgstr ""
 
 msgid "The error object or value."
@@ -1853,9 +1866,6 @@ msgid "The scope path name."
 msgstr ""
 
 msgid "The scope event name"
-msgstr ""
-
-msgid "Manages and stores the log data."
 msgstr ""
 
 msgid "The module name."
@@ -1874,13 +1884,109 @@ msgid ""
 "data."
 msgstr ""
 
-msgid "Contains debug data appended since program execution."
-msgstr ""
-
 msgid ""
 "Provides DOM helpers to reduce repetitive coding. Automates dependency "
 "management and provides object destruction cleanup. Does not try to be "
 "JQuery."
+msgstr ""
+
+msgid "Shorthand for accessing the body>head element"
+msgstr ""
+
+msgid "Empties an element of any child elements or content."
+msgstr ""
+
+msgid "The element to empty."
+msgstr ""
+
+msgid ""
+"Destroys an element, all child elements, and dereferences from dependencies."
+msgstr ""
+
+msgid "The element to remove."
+msgstr ""
+
+msgid "If true, the element isn't removed from it's parent. Default is false."
+msgstr ""
+
+msgid "Removes an element from it's parent node."
+msgstr ""
+
+msgid "Returns whether an element is hidden or visible."
+msgstr ""
+
+msgid "True for hidden, False for visible."
+msgstr ""
+
+msgid "Hides an element."
+msgstr ""
+
+msgid "The element to hide."
+msgstr ""
+
+msgid ""
+"Set to false to invert the operation (show the element). Default is true."
+msgstr ""
+
+msgid ""
+"A generic error handling mechanism for functions that don't do it "
+"themselves. Useful for hyperlink invoked commands. Try to use the manager "
+"provided by core.object's bless instead."
+msgstr ""
+
+msgid "Manages and stores the log data."
+msgstr ""
+
+msgid "Contains debug data appended since program execution."
+msgstr ""
+
+msgid ""
+"Appends an element into another optionally pre/appending before a sibling."
+msgstr ""
+
+msgid "The container for the element to be appended into."
+msgstr ""
+
+msgid "An element or array of elements to append."
+msgstr ""
+
+msgid "Optional parameters to insert before or after a sibling."
+msgstr ""
+
+msgid ""
+"Specify a sibling element to insert after. Can also be a blessed object with "
+"a container element."
+msgstr ""
+
+msgid ""
+"Specify a sibling element to insert before. Can also be a blessed object "
+"with a container element."
+msgstr ""
+
+msgid ""
+"Sets the content of an element, correctly handing dependencies in the "
+"process."
+msgstr ""
+
+msgid "The element of which to set the content."
+msgstr ""
+
+msgid ""
+"Element, elements (in Array), string or language literal to use for the "
+"content"
+msgstr ""
+
+msgid ""
+"By default the element will be purged of content prior to new content being "
+"written. If this value is true, the element will be cleared (shallow)."
+msgstr ""
+
+msgid "Shows an element."
+msgstr ""
+
+msgid ""
+"Shows an element. Element must have been previously hidden with .hide(). "
+"Overriding styles and className strings are unsupported."
 msgstr ""
 
 msgid "Dispatches events and manages handles to functions."
@@ -2275,6 +2381,9 @@ msgid "Type"
 msgstr ""
 
 msgid "Description"
+msgstr ""
+
+msgid "This module is embedded into igaro.js"
 msgstr ""
 
 msgid "Download"

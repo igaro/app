@@ -7,7 +7,7 @@ module.exports = function(app) {
             desc : _tr("A very simple status event emitter."),
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://people.igaro.com/ac' 
+                link:'http://www.igaro.com/ppl/ac' 
             },
             usage : {
                 class : true

@@ -29,7 +29,7 @@ module.exports = function(app) {
     	],'license');
 
     	domMgr.mk('div',wrapper,[
-    		domMgr.mk('span', null, '© <a href="http://people.igaro.com/ac">A. Charnley</a> 2013-'+new Date().getFullYear()),
+    		domMgr.mk('span', null, '© <a href="http://www.igaro.com/ppl/ac">A. Charnley</a> 2013-'+new Date().getFullYear()),
     	],'author');
 
         model.addSequence({ container:wrapper, promises:[

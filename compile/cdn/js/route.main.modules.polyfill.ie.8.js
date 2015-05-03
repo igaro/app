@@ -6,7 +6,7 @@ module.exports = function(app) {
             desc : _tr("This library prototypes missing IE8 functionality. Due to deficiencies with IE8/9 (CORS,CSS3,SVG), both are unsupported by Igaro App and probably won't work well out the box."),
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://people.igaro.com/ac' 
+                link:'http://www.igaro.com/ppl/ac' 
             }
         };
 

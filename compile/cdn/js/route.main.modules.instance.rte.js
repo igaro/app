@@ -156,7 +156,7 @@ module.exports = function(app) {
             ],
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://people.igaro.com/ac' 
+                link:'http://www.igaro.com/ppl/ac' 
             },
             extlinks : [
                 'https://developer.mozilla.org/en-US/docs/Rich-Text_Editing_in_Mozilla',

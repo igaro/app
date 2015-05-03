@@ -9,7 +9,7 @@ module.exports = function(app) {
             },
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://people.igaro.com/ac' 
+                link:'http://www.igaro.com/ppl/ac' 
             },
             demo : "
 var b = dom.mk('button', c, { en: 'Get JSON', fr: 'Obtenez JSON' }); \n \

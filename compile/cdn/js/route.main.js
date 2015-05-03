@@ -80,6 +80,11 @@ module.exports = function(app) {
                     }
                 }),
 
+                objectMgr.create('pagemessage',{
+                    type:'warn',
+                    message: _tr("You're using Igaro App 1.00 Beta. Documentation and translations are currently incomplete."),
+                }),
+
                 objectMgr.create('list').then(function (list) {
                     return writeList([
                         ['overview', _tr("Overview")],

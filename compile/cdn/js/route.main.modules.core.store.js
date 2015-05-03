@@ -6,7 +6,7 @@ module.exports = function(app) {
             desc : _tr("Storage routines for cookie, localStorage and sessionStorage. This module is only for immediate access stores."),
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://people.igaro.com/ac' 
+                link:'http://www.igaro.com/ppl/ac' 
             },
             usage : {
                 class : true

@@ -294,13 +294,13 @@ body {
             }
 
             &:not(.error) >div {
-                border: 2em solid #000; 
+                border: 1.2em solid #000; 
                 border-right-color: transparent; 
                 border-radius: 50%;
                 -webkit-animation: igaro-spin 1.2s linear infinite; 
                 animation: igaro-spin 1.2s linear infinite;
-                width:6em;
-                height:6em;
+                width:8em;
+                height:8em;
             }
         }
     }

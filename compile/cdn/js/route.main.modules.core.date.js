@@ -3,10 +3,10 @@ module.exports = function(app) {
     return function(model) {
 
         var data = {
-            desc : _tr("Provides date and timezone functionality. Date strings should be ISO 8601 formatted. The timezone is determined from the system clock but can be overridden. Env code is stored."),
+            desc : _tr("Provides date and timezone functionality. Date strings should be ISO 8601 formatted. The timezone is determined from the system clock but can be overridden. ENV code is stored."),
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://people.igaro.com/ac' 
+                link:'http://www.igaro.com/ppl/ac' 
             },
             usage : {
                 class : true
@@ -14,6 +14,7 @@ module.exports = function(app) {
             dependencies : [
                 'core.store'
             ],
+            blessed:true,
             extlinks : [
                 {
                     href:'http://en.wikipedia.org/wiki/ISO_8601',
@@ -64,24 +65,52 @@ module.exports = function(app) {
                     type:'number',
                     desc: _tr("Currently applied timezone offset in minutes from GMT.")
                 },
+                {
+                    name:'envOffsetAuto',
+                    type:'boolean',
+                    desc: _tr("Defines whether the ENV has been determined automatically.")
+                },
                 { 
-                    name:'setOffset',
+                    name:'resetEnvOffset',
+                    type:'function',
+                    desc: _tr("Resets the timezone offset to the automatically determined value."),
+                    returns : {
+                        attributes : [{
+                            instanceof: { name: 'Promise' }
+                        }]
+                    }
+                },
+                { 
+                    name:'setEnvOffset',
                     type:'function',
                     desc: _tr("Sets the timezone offset."),
-                    attributes : [{
-                        type:'number',
-                        required:true,
-                        attributes:[{
-                            desc: _tr("Amount of minutes from GMT. Use null for system default.")
+                    attributes : [
+                        {
+                            type:'number',
+                            required:true,
+                            attributes:[{
+                                desc: _tr("Amount of minutes from GMT. Use null for system default.")
+                            }]
+                        },
+                        {
+                            type:'boolean',
+                            attributes:[{
+                                desc: _tr("Defines if the value should be stored. Default is true.")
+                            }]
+                        }
+                    ],
+                    returns : {
+                        attributes : [{
+                            instanceof: { name: 'Promise' }
                         }]
-                    }]
+                    }
                 },
                 { 
                     name:'strip', 
                     type:'function',
                     attributes: [
                         { 
-                            type:['date','string'], 
+                            type:'string', 
                             required:true, 
                             attributes : [{
                                 desc: _tr("The value to parse.")
@@ -95,11 +124,14 @@ module.exports = function(app) {
                     type:'function',
                     attributes: [
                         { 
-                            type:'date', 
+                            type:'object', 
                             required:true, 
                             attributes : [{
-                                desc: _tr("The value to convert.")
-                            }]
+                                desc: _tr("The value to convert."),
+                                instanceof : {
+                                    name: 'Date'
+                                }
+                            }],
                         }
                     ],
                     desc: _tr("Returns a date object in the user's timezone.")

@@ -6,7 +6,7 @@ module.exports = function(app) {
             desc : _tr("Provides a Router framework to manage navigation and storage of routes. A route represents a resource and manages child routes. Routes can be loaded from multiple API & file servers transparently to the user and do not necessarily correspond to the URI that the user sees. They may form a page or merely a section on a page."),
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://people.igaro.com/ac' 
+                link:'http://www.igaro.com/ppl/ac' 
             },
             usage : {
                 class : true

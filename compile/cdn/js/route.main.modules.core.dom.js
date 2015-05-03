@@ -6,7 +6,7 @@ module.exports = function(app) {
             desc : _tr("Provides DOM helpers to reduce repetitive coding. Automates dependency management and provides object destruction cleanup. Does not try to be JQuery."),
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://people.igaro.com/ac' 
+                link:'http://www.igaro.com/ppl/ac' 
             },
             usage : {
                 class : true
@@ -15,59 +15,81 @@ module.exports = function(app) {
             embedded:true,
             attributes : [
                 {
+                    name:'head',
+                    type:'element',
+                    desc:_tr("Shorthand for accessing the body>head element")
+                },
+                {
                     name:'empty',
                     type:'function',
-                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.object's bless instead."),
+                    desc:_tr("Empties an element of any child elements or content."),
                     attributes : [
-                        { 
-                            type:'*',
+                        {
+                            type:'object',
                             required:true,
-                            desc: _tr("The error object or value.")
+                            desc: _tr("The element to empty.")
                         }
                     ]
                 },
                 {
-                    name:'hide',
+                    name:'purge',
                     type:'function',
-                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.object's bless instead."),
+                    desc:_tr("Destroys an element, all child elements, and dereferences from dependencies."),
                     attributes : [
-                        { 
-                            type:'*',
+                        {
+                            type:'object',
                             required:true,
-                            desc: _tr("The error object or value.")
+                            desc: _tr("The element to remove.")
                         },
                         {
-                            type:'string',
-                            desc: _tr("The scope path name.")
-                        },
-                        { 
-                            type:'string',
-                            desc : _tr("The scope event name")
-                        }
-                    ]
-                },
-                {
-                    name:'mk',
-                    type:'function',
-                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.object's bless instead."),
-                    attributes : [
-                        { 
-                            type:'*',
-                            required:true,
-                            desc: _tr("The error object or value.")
-                        },
-                        {
-                            type:'string',
-                            desc: _tr("The scope path name.")
-                        },
-                        { 
-                            type:'string',
-                            desc : _tr("The scope event name")
+                            type:'boolean',
+                            desc: _tr("If true, the element isn't removed from it's parent. Default is false.")
                         }
                     ]
                 },
                 {
                     name:'rm',
+                    type:'function',
+                    desc:_tr("Removes an element from it's parent node."),
+                    attributes : [
+                        {
+                            type:'object',
+                            required:true,
+                            desc: _tr("The element to remove.")
+                        }
+                    ]
+                },
+                {
+                    name:"isHidden",
+                    type:"function",
+                    desc:_tr("Returns whether an element is hidden or visible."),
+                    returns: {
+                        attributes : [
+                            {
+                                desc:_tr("True for hidden, False for visible."),
+                                instanceof : { name:'Boolean' }
+                            }
+                        ]
+                    }
+                },
+                {
+                    name:"hide",
+                    type:"function",
+                    desc:_tr("Hides an element."),
+                    attributes : [
+                        { 
+                            type:'object',
+                            required:true,
+                            desc: _tr("The element to hide.")
+                        },
+                        {
+                            type:'boolean',
+                            desc: _tr("Set to false to invert the operation (show the element). Default is true.")
+                        }
+                    ]
+                },
+                {
+                    name:'mk',
                     type:'function',
                     desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.object's bless instead."),
                     attributes : [
@@ -127,42 +149,68 @@ module.exports = function(app) {
                     ]
                 },
                 {
-                    name:'setContent',
+                    name:'append',
                     type:'function',
-                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.object's bless instead."),
+                    desc:_tr("Appends an element into another optionally pre/appending before a sibling."),
                     attributes : [
                         { 
-                            type:'*',
+                            type:'object',
                             required:true,
-                            desc: _tr("The error object or value.")
+                            desc: _tr("The container for the element to be appended into.")
                         },
                         {
-                            type:'string',
-                            desc: _tr("The scope path name.")
+                            type:'object',
+                            required:true,
+                            desc: _tr("An element or array of elements to append.")
                         },
                         { 
-                            type:'string',
-                            desc : _tr("The scope event name")
+                            type:'object',
+                            desc : _tr("Optional parameters to insert before or after a sibling."),
+                            attributes:[
+                                {
+                                    name:"insertAfter",
+                                    type:"object",
+                                    desc:_tr("Specify a sibling element to insert after. Can also be a blessed object with a container element.")
+                                },
+                                {
+                                    name:"insertBefore",
+                                    type:"object",
+                                    desc:_tr("Specify a sibling element to insert before. Can also be a blessed object with a container element.")
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    name:'setContent',
+                    type:'function',
+                    desc:_tr("Sets the content of an element, correctly handing dependencies in the process."),
+                    attributes : [
+                        { 
+                            type:'object',
+                            required:true,
+                            desc: _tr("The element of which to set the content.")
+                        },
+                        {
+                            type:'object',
+                            required:true,
+                            desc: _tr("Element, elements (in Array), string or language literal to use for the content")
+                        },
+                        { 
+                            type:'boolean',
+                            desc : _tr("By default the element will be purged of content prior to new content being written. If this value is true, the element will be cleared (shallow).")
                         }
                     ]
                 },
                 {
                     name:'show',
                     type:'function',
-                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.object's bless instead."),
+                    desc:_tr("Shows an element."),
                     attributes : [
                         { 
-                            type:'*',
+                            type:'object',
                             required:true,
-                            desc: _tr("The error object or value.")
-                        },
-                        {
-                            type:'string',
-                            desc: _tr("The scope path name.")
-                        },
-                        { 
-                            type:'string',
-                            desc : _tr("The scope event name")
+                            desc: _tr("Shows an element. Element must have been previously hidden with .hide(). Overriding styles and className strings are unsupported.")
                         }
                     ]
                 }

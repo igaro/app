@@ -193,13 +193,15 @@ module.exports = function(app) {
                 domMgr.mk('p',v,data.desc);
             }
 
+            if (data.embedded)
+                domMgr.mk('p',v,_tr("This module is embedded into igaro.js"));
+
             if (data.download !== false) {
                 var l = data.download? data.download : 'https://github.com/igaro/app/blob/master/app/compile/js/'+m.name+'.js';
                 domMgr.mk('button',v,_tr("Download")).addEventListener('click', function() {
                     window.open(l);
                 });
             }
-
 
             if (data.usage) {
                 var u = data.usage;

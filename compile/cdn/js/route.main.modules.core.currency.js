@@ -7,7 +7,7 @@ module.exports = function(app) {
             desc : _tr("Provides currency switching and related functionality. Supported currencies are set via an API or configuration file. Uses ISO 4217. ENV code is stored."),
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://people.igaro.com/ac' 
+                link:'http://www.igaro.com/ppl/ac' 
             },
             usage : {
                 class : true

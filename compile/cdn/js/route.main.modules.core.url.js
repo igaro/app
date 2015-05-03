@@ -6,7 +6,7 @@ module.exports = function(app) {
             desc : _tr("Provides url and uri related functionality."),
             author : { 
                 name:'Andrew Charnley', 
-                link:'http://people.igaro.com/ac' 
+                link:'http://www.igaro.com/ppl/ac' 
             },
             usage : {
                 class : true
