@@ -1,0 +1,81 @@
+.instance-rte {
+
+    >nav >div  {
+        border-color:#eee;
+    }
+
+    >textarea {
+        margin:0;
+        height:21em;
+        width:100%;
+    }
+
+    >div {
+
+        >.editable {
+            height:13em;
+            overflow:auto;
+            clear:both;
+        }
+
+        >.panels {
+            >nav >div  {
+                border:none;
+            }
+            margin:0;
+            font-size:90%;
+            line-height:0;
+            >div {
+                padding:0.3em;
+                background:#E5E5E5;
+                >div >button {
+                    margin:0.1em;
+                    min-width:0;
+                    min-height:0;
+                }
+                >.main {
+                    >select { 
+                        padding:0; 
+                        float:left;
+                    }
+                    >.bold { background-image:inline-image('instance.rte/bold.gif') }
+                    >.italic { background-image:inline-image('instance.rte/italic.gif') }
+                    >.underline { background-image:inline-image('instance.rte/underline.gif') }
+                    >.strikethrough { background-image:inline-image('instance.rte/strikethrough.gif') }
+                    >.subscript { background-image:inline-image('instance.rte/subscript.gif') }
+                    >.superscript { background-image:inline-image('instance.rte/superscript.gif') }
+                    >.justifyleft { background-image:inline-image('instance.rte/justifyleft.gif') }
+                    >.justifycenter { background-image:inline-image('instance.rte/justifycentre.gif') }
+                    >.justifyright { background-image:inline-image('instance.rte/justifyright.gif') }
+                    >.justifyfull { background-image:inline-image('instance.rte/justifyfull.gif') }
+                    >.inserthorizontalrule { background-image:inline-image('instance.rte/inserthorizontalrule.gif') }
+                    >.insertorderedlist { background-image:inline-image('instance.rte/insertorderedlist.gif') }
+                    >.insertunorderedlist { background-image:inline-image('instance.rte/insertunorderedlist.gif') }
+                    >.outdent { background-image:inline-image('instance.rte/outdent.gif') }
+                    >.indent { background-image:inline-image('instance.rte/indent.gif') }
+                    >.cut { background-image:inline-image('instance.rte/cut.gif'); margin-left:0.6em; }
+                    >.copy { background-image:inline-image('instance.rte/copy.gif') }
+                    >.paste { background-image:inline-image('instance.rte/paste.gif') }
+                    >.undo { background-image:inline-image('instance.rte/undo.gif'); margin-left:0.6em; }
+                    >.redo { background-image:inline-image('instance.rte/redo.gif') }
+                    >.removeformat { background-image:inline-image('instance.rte/removeformat.gif') }
+                    button {
+                        padding:0;
+                        width:23px;
+                        height:22px;
+                        margin:0;
+                    }
+                }
+                >.character >button { 
+                    padding:0.3em 0.4em;
+                }
+                >.forecolor, >.backcolor, >.hilitecolor {
+                    >button { 
+                        background:none;
+                        padding:0.65em;
+                    }
+                }
+            }
+        } 
+    }
+}

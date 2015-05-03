@@ -1,28 +1,14 @@
 #Igaro App [http://app.igaro.com](http://app.igaro.com)
 
-Igaro App is a complete web application stack which does away with HTML. Just pure Javascript and SASS.
+Igaro App is a complete single page application stack using Javascript. It's 100% free.
 
-Embed into a website, run from a USB stick, or serve via an App store (Cordova ready).
+What do Angular, Backbone and React all have in common? The answer is they extend HTML. While this works well for HTML pages that require a bit of interaction, once you build something significant - like an SPA - you realise just how ineffective these frameworks are. Igaro App on the other hand isn't. It's built from the ground up to do away with HTML, and it's fully object orientated, asynchronous, event driven, modular, lazy loading and so well engineered it doesn't require weakmaps to thwart memory leaks or a virtual DOM to encapsulate mess. You've seen nothing like it. 
 
-Igaro App is fast, secure, modular and featured. It's designed for developers and engineers rather than lesser programmers that need everything 'HTML easy'. It provides common modules loaded via an ondemand load system and conforms to ECMA standards. It doesn't wrap protoyping into factories or attempt to rewrite Javascript, and it's so well engineered it doesn't need a virtual DOM to encapsulate messy structure. 
+Documentation is online and also forms the basis of the github repo you download locally. You'll instantly have an App to modify to your own requirements, ready to deploy anywhere
 
-* Object Orientated with no global variables. 
-* Event Driven, Async with A+ Promises.
+## Igaro 1.00 Beta Merged!
 
-## Igaro 1.00 Preview!
-
-It's coming soon. The bulk of the work is complete with just the documentation to go. Massive amount of updates, enhancemments and features. The most complete and best written SPA framework available? Probably! Check it out! 
-
-mkdir igaro  
-git clone https://github.com/igaro/app.git igaro/git  
-sudo npm install grunt-cli  
-sudo gem update --system  
-sudo gem install compass  
-cd igaro/git  
-git checkout -b igaro100 origin/igaro100  
-npm install  
-compass compile -c compass.rb  
-grunt  
+The igaro100 branch had pulled too far ahead of master and has been merged. Module documentation is still being updated. Translators are required - can you help?
 
 ## Overview
 
@@ -35,8 +21,3 @@ grunt
 ## Install
 
 [http://app.igaro.com/install](http://app.igaro.com/install)
-
-## Manual
-
-[http://app.igaro.com/develop](http://app.igaro.com/develop)
-

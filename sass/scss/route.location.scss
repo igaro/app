@@ -1,0 +1,87 @@
+@import "../sass-global/mixins.scss";
+
+body >.core-router >.location {
+
+	background:#fff;
+    border:none;
+    border-bottom: 1px solid #dadadf !important;
+    display:table-cell;
+    @media (min-width:650px) {
+        font-size:150%;
+    }
+	>.wrapper {
+
+		@include pagerestrictwidth;
+		@include pagepadding;
+
+        >div {
+            font-weight:bold;
+            display:table;
+            background:none;
+            border:none;
+        
+            >* {
+                display:table-cell;
+                vertical-align:middle;
+            }
+            
+            >.home {
+                background: inline-image("route.location/home-standard.svg") no-repeat 0 50%;
+                background-size:80% !important;
+                width:1.5em;
+                height:100%;
+                &:hover { 
+                    background-image: inline-image("route.location/home-hover.svg");
+                }
+            }
+
+            >.location {
+                >.paths {
+                    font-weight:200;
+                    display:table;
+                    vertical-align:middle;
+                    >* {
+                        display:table-cell;
+                        padding-left:0.4em;
+                        padding-right:0.7em;	
+                        &:first-child {
+                            padding-left:0;
+                        }
+                        background: inline-image("route.location/section.svg") 100% 50% no-repeat;
+                        background-size: 0.4em 70%;
+                        &:last-child {
+                            background:none;
+                        }
+                        &:hover {
+                            text-decoration:none;
+                        }
+                    }
+                }
+
+                >.params {
+                    font-size:65%;
+                    font-weight:bold;
+                    overflow:hidden;
+                    text-overflow: ellipsis;
+                    >div {
+                        overflow:hidden;
+                        text-overflow: ellipsis;
+                        >span {
+                            position:relative;
+                            margin-right:0.3em;
+                            &:after {
+                                content:'|';
+                                margin-left:0.3em;
+                            }
+                            &:last-child:after {
+                                content:'';
+                                margin-left:0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+	}
+}
+

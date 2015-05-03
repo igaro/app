@@ -1,0 +1,27 @@
+@import "../sass-global/mixins.scss";
+
+body >.core-router >.main >.routes >.wrapper {
+
+    @include layoutStandard;
+
+	>p {
+		>.viewblock {
+			background:#444;
+			display:inline-block;
+			font-weight:bold;
+			color:#fff;			
+			padding:0.5em;
+            div {
+				margin:0.25em 0.5em;
+				padding:0.1em 0.5em;
+            }
+			>div {
+				background:red;
+				>div {
+					background:green;
+				}
+			}
+		}	
+	}
+
+}

@@ -1,0 +1,24 @@
+.instance-bookmark {
+    margin:0;
+    padding:0;
+    line-height:normal;
+    >li {    
+        display:inline-block;
+        margin: 0 1.6em 0 0;
+        >a {
+            display:inline-block;
+            padding:16px 16px 0 0;
+            background-repeat:no-repeat !important;
+            background-position:50% 50% !important;
+        }
+        &.delicious >a { background-image: inline-image("instance.bookmark/delicious.png") }
+        &.digg >a { background-image: inline-image("instance.bookmark/digg.png") }
+        &.reddit >a { background-image: inline-image("instance.bookmark/reddit.png") }
+        &.facebook >a { background-image: inline-image("instance.bookmark/facebook.png") }
+        &.stumbleupon >a { background-image: inline-image("instance.bookmark/stumbleupon.png") }
+        &.email >a { background-image: inline-image("instance.bookmark/email.png") }
+        &.twitter >a { background-image: inline-image("instance.bookmark/twitter.png") }
+        &:last-child { margin-right:0; }
+    }
+}
+

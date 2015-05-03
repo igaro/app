@@ -1,0 +1,76 @@
+@import "../sass-global/mixins.scss";
+
+.instance-modaldialog {
+    position:fixed;
+	left:0;
+   	top:0;
+    height:100%;
+    width:100%;
+    background-color: rgba(0,0,0,.7);
+    font-size:130%;
+	>div {
+		position:fixed;
+		top: 50%;
+		left: 50%;
+		-webkit-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+		@include corners;
+		background:#fff;
+		width:60%;
+		max-width:30em;
+        max-height:100%;
+        overflow:auto;
+		border: .3em solid #eee;
+		margin:0 auto;
+        >.header {
+            background:#eee;
+            >h1 {
+               padding:.7em; 
+            }
+        }
+        >.message, >.action, >.custom {
+            margin:1.6em;
+        }
+        >.message, >.action {
+            text-align:center;
+        }
+		>.message, >.custom {
+			margin-bottom:1em;
+		}
+		>.custom {
+			input, select, button {
+				padding:.7em 1em;
+			}
+		}
+
+		>.action {
+			input, select, button {
+				padding:.7em 1em;
+			}
+
+			input + input, select + select, input + select, select + input, select + button, input + button, button + select, button + input { 
+				margin-left: 1em 
+			}
+		}
+
+	    @media screen and (max-width:900px) {
+			input, select, button {
+				margin-top:1em; 
+				&:first-child {
+					margin-top:0; 
+				}
+				margin-left:0;
+				display:block;
+				width:100%;
+			}
+	        width:90%;   
+            >.message, >.action, >.custom {
+                margin:.7em;
+            }
+            >.header >h1 {
+                padding:.3em;
+            }
+	    }
+
+	}
+}

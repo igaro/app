@@ -1,0 +1,32 @@
+@font-face {
+    font-family: "Open Sans";
+	src: inline-font-files("opensans-bold.woff",woff);
+	font-weight:bold;
+	font-style:normal;
+}
+
+@font-face {
+    font-family: "Open Sans";
+	src: inline-font-files("opensans-regular.woff",woff);
+	font-weight:normal;
+	font-style:normal;
+}
+
+@font-face {
+    font-family: "Open Sans";
+	src: inline-font-files("opensans-light.woff",woff);
+	font-weight:200;
+}
+
+@font-face {
+    font-family: "Open Sans";
+	src: inline-font-files("opensans-semibold.woff",woff);
+	font-weight:600;
+}
+
+@font-face {
+    font-family: "Open Sans";
+	src: inline-font-files("opensans-italic.woff",woff);
+	font-style:italic;
+}
+

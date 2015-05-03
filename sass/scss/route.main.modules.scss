@@ -1,0 +1,30 @@
+@import "../sass-global/mixins.scss";
+
+
+body >.core-router >.main >.modules {
+
+	>.wrapper {
+        @include layoutStandard;
+	}
+
+	>div >.wrapper {
+
+        @include layoutStandard;
+
+		>p >table {
+			>tbody {
+				>tr {		
+					>td { 
+						&:not(:last-child) {
+							white-space:nowrap;
+						}
+					}
+				}
+			}
+		}
+
+		>.extlinks {
+			font-size:90%;
+		}
+	}
+}

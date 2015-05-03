@@ -1,0 +1,26 @@
+.instance-form-validate {
+
+	.validation-fail, .validation-fail:hover, .validation-fail:focus {
+		border-color:#8e2710 !important;
+	}
+
+	.validation-ok, .validation-ok:hover, .validation-ok:focus {
+		//border-color:#5eb518;
+	}
+
+	.validation-message {
+		position:absolute;
+		line-height:1;
+		border-radius:0 0 0.1em 0.1em;
+		white-space:nowrap;
+		font-size:70%;
+		font-weight:bold;
+		background-color:#8e2710;
+		background: linear-gradient(color-stops(#8e2710 0%, #8f2710 100%));
+		color:#fff;
+		padding:0.3em 0.5em 0.3em 0.5em;
+		z-index:999;
+		display:block;
+	}
+
+}

@@ -1,0 +1,79 @@
+.instance-accordion {
+	
+	>dl {
+
+		margin:0;
+        &[inert='true'] {
+            opacity:.3;
+        }
+
+		>dt {
+			border-bottom:.05em solid rgba(0,0,0,.6);
+			padding-bottom:.2em;
+			font-weight:bold;
+			margin-bottom:.5em;
+			position:relative;
+			font-size:100%;
+            text-align:left;
+			&:hover {
+				cursor:pointer;
+				text-decoration:none;
+			}
+			>span {
+				display:inline-block;
+				&:last-child {
+					&:empty {
+						display:none;
+					}
+					font-size:75%;
+					font-weight:bold;
+					margin-left:.4em;
+					vertical-align: super;
+				}
+			}
+			>div {
+				position:absolute;
+				right:0;
+				width:1em;
+				top:.25em;
+				height:1em;
+				background: inline-image("instance.accordion/arrow.svg") no-repeat 100% 50%;
+            	background-size: 100%;
+            	-webkit-transition: all .5s ease-in-out;                 
+				transition: all .5s ease-in-out;
+			}
+
+		}
+
+		>dd {
+			max-height:0;
+			overflow:hidden;
+			margin:0;
+			-webkit-transition: all .6s;                 
+			transition: all .6s;
+			opacity:0;
+            >.instance-accordion {
+                margin:0 1em;
+            }
+		}
+
+		&.expand {
+			>dd {
+				max-height:999px;
+				opacity:1;
+				margin-bottom:.5em;
+			}
+			>dt {
+				>div {
+					transform: rotate(-90deg);
+				}
+				>span:last-child {
+					display:none;
+				}
+			}
+		}
+
+	}
+
+
+}

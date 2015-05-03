@@ -1,0 +1,33 @@
+@import "../sass-global/mixins.scss";
+
+body {
+
+   	height:100%;
+    width:100%;
+    position:absolute;
+    background-color:rgba(222,220,230, .5);
+    
+	>.core-router {
+		height:100%;
+		width:100%;
+		position:relative;
+        display:table;
+        >.route {
+            display:table-row;
+        }
+	}
+
+	.route {
+        >.wrapper {
+            &:empty {
+                display:none;
+            }
+            *:first-child { 
+                >div *:first-child { margin-top:0; }
+                margin-top:0; 
+            }
+        }
+    }
+
+}
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<!-- The icon can be used freely in both personal and commercial projects with no attribution required, but always appreciated. 
+You may NOT sub-license, resell, rent, redistribute or otherwise transfer the icon without express written permission from iconmonstr.com -->
+
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+
+	 width="512px" height="512px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+
+<path id="check-mark-11-icon" d="M429.18,227.567c17.294,115.72-72.229,219.077-188.533,219.077
+
+	C135.355,446.645,50,361.291,50,256.001c0-105.289,85.355-190.646,190.647-190.646c46.292,0,88.727,16.504,121.751,43.943
+
+	l-30.676,30.677c-25.078-19.711-56.704-31.471-91.076-31.471c-81.461,0-147.497,66.034-147.497,147.496
+
+	c0,81.46,66.036,147.494,147.497,147.494c77.052,0,140.295-59.09,146.911-134.425L429.18,227.567z M410.771,101.666L251.343,261.092
+
+	l-69.055-69.074l-51.208,51.216l120.265,120.299L462,152.861L410.771,101.666z"/>
+
+</svg>
+

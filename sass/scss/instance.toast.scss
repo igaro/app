@@ -1,0 +1,58 @@
+@import "../sass-global/mixins.scss";
+
+@-webkit-keyframes instance-toast-fade {
+	0% { opacity: 0; -webkit-transform:translateY(-1em); }
+	30% { opacity: 0.8; -webkit-transform:translateY(0); }
+	90% { opacity: 0.8; }
+	100% { opacity: 0;  }
+}
+
+@keyframes instance-toast-fade {
+	0% { opacity: 0; transform:translateY(-1em); }
+	30% { opacity: 0.8; transform:translateY(0); }
+	90% { opacity: 0.8; }
+	100% { opacity: 0;  }
+}
+
+
+body >.instance-toast {
+	z-index:999999999;
+	position:fixed;
+	left:0;
+    right:0;
+	bottom:10%;
+    margin:0 auto;
+    text-align:center;
+    padding-bottom:1em;
+	-webkit-user-select: none;   
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select:none;
+    &:hover {
+        cursor:default;
+    }
+    &:empty {
+        display:none;
+    }
+    >div {
+        -webkit-animation-name: instance-toast-fade;
+        animation-name: instance-toast-fade;
+        &.short {
+            -webkit-animation-duration:2s;
+            animation-duration:2s;
+        }
+        &.long {
+            -webkit-animation-duration:4s;
+            animation-duration:4s;
+        }
+        padding:0.2em 1em;
+        background-color:#000;
+        color:#fff;
+        opacity:0;
+        font-weight:bold;
+        font-size:130%;
+        display:inline-block;
+        @include corners;
+        margin:0 0.5em 1em 0.5em;
+    }
+}

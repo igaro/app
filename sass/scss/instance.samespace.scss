@@ -1,0 +1,116 @@
+@-webkit-keyframes instance-samespace-swipe {
+0% { opacity: 0; -webkit-transform: translateY(-100%); }
+100% { opacity: 1; -webkit-transform: translateY(0); }
+}
+
+@keyframes instance-samespace-swipe {
+0% { opacity: 0; transform: translateY(-100%); }
+100% { opacity: 1; transform: translateX(0); }
+}
+
+@-webkit-keyframes instance-samespace-fade {
+0% { opacity: 0; }
+100% { opacity: 1; }
+}
+
+@keyframes instance-samespace-fade {
+0% { opacity: 0;}
+100% { opacity: 1; }
+}
+
+@-webkit-keyframes instance-samespace-slowswipe {
+0% { opacity: 0; -webkit-transform: translateX(-20px); }
+100% { opacity: 1; -webkit-transform: translateX(0); }
+}
+
+@keyframes instance-samespace-slowswipe {
+0% { opacity: 0; transform: translateX(-20px); }
+100% { opacity: 1; transform: translateX(0); }
+}
+
+.instance-samespace {
+
+    position:relative;
+    max-width:100%;
+
+    >nav {
+        position:absolute;
+        z-index:9999;
+        bottom:1em;
+        text-align:center;
+        width:100%;
+        >ul {
+            display:inline-block;
+            bottom:1em;
+            >li {
+                padding:0.5em;
+                margin-right:0.5em;
+                background:#999;
+                border: 1px solid #000;
+                opacity:.8;
+                display:inline-block;
+                border-radius:1em;
+                &:last-child {
+                    margin-right:0;
+                }
+                &:only-child {
+                    display:none;
+                }
+                &:hover { cursor:pointer; opacity:1 }
+                &.active {
+                    background:#fff;
+                    &:hover {
+                        opacity:.8;
+                        cursor:default;
+                    }
+                }
+            }
+        }
+    }
+
+    >div {
+
+        &.fade >div {
+            -webkit-animation-name: instance-samespace-fade;
+            animation-name: instance-samespace-fade;
+            -webkit-animation-duration:0.5s;
+            animation-duration:0.5s;
+        }
+
+        &.swipe >div {
+            -webkit-animation-name: instance-samespace-swipe;
+            animation-name: instance-samespace-swipe;
+            -webkit-animation-duration:0.5s;
+            animation-duration:0.5s;
+        }
+
+        &.slowswipe >div {
+            -webkit-animation-name: instance-samespace-slowswipe;
+            animation-name: instance-samespace-slowswipe;
+            -webkit-animation-duration:3s;
+            animation-duration:3s;
+        }
+
+        &[status="stopped"] >div {
+            -webkit-animation-name: none;
+            animation-name: none;
+        }
+
+        >div {
+            float: left;
+            margin-left: -100%;
+            position: relative;
+            left: 100%;
+            width: 100%;
+        }
+
+        &:after {
+            content: "";
+            display: block;
+            height:0;
+            clear:both;
+            visibility: hidden;
+        }
+    }
+
+}

@@ -1,0 +1,61 @@
+.instance-navigation {
+
+    font-weight:bold;
+
+    @media (min-width:1000px) {
+        font-size:130%;
+    }
+
+    >ul {
+        margin:0;
+        padding:0 10px;
+        font-size:100%;
+        position:relative;
+        font-size:100%;
+        background-color:#444;
+        color:#ccc;
+        >li {
+            padding:0 0.7em;
+            font-size:90%;
+            line-height:180%;
+            &.tick { 
+                background-color:green; 
+            }
+            &.cross { 
+                background-color:red; 
+            }
+            sup { 
+                margin-left:2px; 
+            }
+            list-style:none;
+            margin:0;
+            white-space:nowrap;
+            outline:0;
+            display:inline-block;
+            >a {
+                display:block;
+                color:inherit;
+                text-decoration:none;
+                >span {
+                    display:block;
+                    &:empty {
+                        display:none;
+                    }
+                }
+            }
+            &[inert='true'] {
+                opacity:.3;
+                cursor:default;
+                &:hover, >a { 
+                    color:inherit; 
+                    cursor:default;
+                }
+            }
+            &.active {
+                >a >span {
+                    color:#fff;
+                }
+            }
+        }
+    }
+}

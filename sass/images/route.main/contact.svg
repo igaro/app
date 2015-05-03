@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<!-- The icon can be used freely in both personal and commercial projects with no attribution required, but always appreciated. 
+You may NOT sub-license, resell, rent, redistribute or otherwise transfer the icon without express written permission from iconmonstr.com -->
+
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+
+	 width="512px" height="512px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+
+<path id="email-10-icon" d="M256,90c44.34,0,86.026,17.267,117.38,48.62S422,211.659,422,256c0,44.34-17.267,86.026-48.62,117.38
+
+	C342.026,404.732,300.34,422,256,422s-86.026-17.268-117.38-48.62C107.267,342.026,90,300.34,90,256
+
+	c0-44.341,17.267-86.026,48.62-117.38S211.66,90,256,90 M256,50C142.229,50,50,142.229,50,256s92.229,206,206,206
+
+	s206-92.229,206-206S369.771,50,256,50L256,50z M232.759,241.081 M213.419,248.356l-61.479-47.225v108.702L213.419,248.356z
+
+	 M361.514,179.178h-208.85l104.342,80.152L361.514,179.178z M286.252,259.396l-29.255,22.437l-29.303-22.508l-75.498,75.498H361.68
+
+	L286.252,259.396z M300.538,248.438l61.522,61.522V201.254L300.538,248.438z"/>
+
+</svg>
+

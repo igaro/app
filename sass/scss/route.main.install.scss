@@ -1,0 +1,5 @@
+@import "../sass-global/mixins.scss";
+
+body >.core-router >.main >.install >.wrapper {
+    @include layoutStandard;
+}

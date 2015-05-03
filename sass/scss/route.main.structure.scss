@@ -1,0 +1,19 @@
+@import "../sass-global/mixins.scss";
+
+body >.core-router >.main >.structure >.wrapper {
+
+    @include layoutStandard;
+
+	>.root {
+		width:291px;
+		height:103px;
+	    background: inline-image("route.main.structure/root.png");
+	}
+
+	>.cssjs {
+		width:163px;
+		height:91px;
+	    background: inline-image("route.main.structure/cssjs.png");
+	}
+
+}

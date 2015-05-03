@@ -1,0 +1,33 @@
+@import "../sass-global/mixins.scss";
+
+body >.core-router >.main >.locale >.wrapper {
+    @include layoutStandard;
+
+    >.lib-iso-3166-1-flags {
+    	>div {
+    		display:inline-block;
+    		width:6em;
+    		height:3.2em;
+    		background-size:100% 100%;
+    	}
+    }
+
+    >p {
+        >.instance-form-validate >.show {
+            margin-left:1em;
+            font-weight:bold;
+        }
+
+        >.instance-date {
+            background: #000;
+            padding:0.3em 0.7em;
+            margin-right:1em;
+            border: 1px solid #666;
+            color:#eee;
+            border-radius:0.7em;
+            font-weight:bold;
+        }
+    }
+
+
+}
