@@ -72,10 +72,10 @@ window.addEventListener('load', function() {
         );
 
         // further modules
-        threads.push([
+        threads[threads.length-1].push(
             // conf
-            { name:'conf.app.js' }
-        ]);
+            __igaroapp.conf
+        );
 
         // BEGIN - DO NOT EDIT BELOW THIS LINE ////////////////////
 
