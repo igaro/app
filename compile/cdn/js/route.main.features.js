@@ -196,27 +196,26 @@ module.exports = function(app) {
 
                 objectMgr.create('xhr').then(function(xhr) {
                     var container = document.createDocumentFragment(),
-                        domMgr = xhr.managers.dom;
+                        managers = xhr.managers,
+                        domMgr = managers.dom,
+                        debugMgr = managers.debug;
                     domMgr.mk('h2',container,'AJAX (XHR)');
-                    domMgr.mk('p',container,_tr("This example contacts the Youtube API, which returns JSON. From it three videos are loaded. Enjoy the great music!"));
+                    domMgr.mk('p',container,_tr("This example contacts the Youtube API, which returns JSON. From it a video is loaded."));
                     domMgr.mk('button',container,_tr("Fetch")).addEventListener('click', function() {
                         var self = this;
                         xhr.get({
-                            res:'http://gdata.youtube.com/feeds/users/JustinBieberVEVO/uploads?alt=json&format=5&max-results=3'
+                            res:'https://www.googleapis.com/youtube/v3/search?key=AIzaSyDNXQ5go80HlxX8MydQy2_f9AEIS3ipuJg&channelId=UC2pmfLm7iq6Ov1UwYrWYkZA&part=snippet,id&order=date&maxResults=1'
                         }).then(
                             function(data) {
                                 domMgr.mk('iframe',null,null,function() {
                                     this.className = 'youtube';
-                                    var playlist = data.feed.entry.map(function(o) { 
-                                        return o.id.$t.substring(38); 
-                                    });
-                                    this.src = 'http://www.youtube.com/embed/'+playlist[0]+'?wmode=transparent&amp;HD=1&amp;rel=0&amp;showinfo=1&amp;controls=1&amp;autoplay=0;playlist='+playlist.slice(1).join(',');
+                                    this.src = 'http://www.youtube.com/embed/'+data.items[0].id.videoId+'?wmode=transparent&amp;HD=1&amp;rel=0&amp;showinfo=1&amp;controls=1&amp;autoplay=0';
                                     self.parentNode.insertBefore(this,self);
                                 });
                                 dom.rm(self);
                             }
-                        ).catch(function() { 
-                            model.managers.debug.handle(e);
+                        ).catch(function(e) { 
+                            return debugMgr.handle(e);
                         });
                     });
                     return container;

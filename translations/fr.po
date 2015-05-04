@@ -1423,8 +1423,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"This example contacts the Youtube API, which returns JSON. From it three "
-"videos are loaded. Enjoy the great music!"
+"This example contacts the Youtube API, which returns JSON. From it a video "
+"is loaded."
 msgstr ""
 
 msgid "Fetch"
