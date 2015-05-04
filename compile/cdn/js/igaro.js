@@ -6,13 +6,6 @@ window.addEventListener('load', function() {
     var app = {};
 
     // status handling
-    var loadingC = document.createElement('div');
-    loadingC.className='igaro';
-    document.body.appendChild(loadingC);
-    var loadingW = document.createElement('div');
-    loadingC.appendChild(loadingW);
-    var loadingD = document.createElement('div');
-    loadingW.appendChild(loadingD);
 
     new Promise(function(r,rreject) {
 
@@ -1085,7 +1078,9 @@ window.addEventListener('load', function() {
         return Promise.all(m).then(
             function() {
                 return events.dispatch('','state.init').then(function() {
-                    return dom.rm(loadingC);    
+                    var ii = __igaroapp.init;
+                    if (ii && ii.onReady)
+                        ii.onReady();
                 });
             }
         ).catch(function(e) {
@@ -1093,7 +1088,6 @@ window.addEventListener('load', function() {
         });
 
     }).catch(function (e) {
-        loadingW.className='error';
         var l;
         if ('core.language' in app) {
             l = app['core.language'].env || 'en';
@@ -1106,7 +1100,9 @@ window.addEventListener('load', function() {
             var c = l.split('-');  
             l = t[c[0]]? c[0] : 'en';
         }
-        loadingD.innerHTML = t[l].replace(/\\n/g,'<br>');
+        var ii = __igaroapp.init;
+        if (ii && ii.onError)
+            ii.onError(t[l].replace(/\\n/g,'<br>'));
         return app['core.debug'].log.append(e);
 
     }).catch(function (e) {

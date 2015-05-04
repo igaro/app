@@ -67,11 +67,6 @@ s.type = "text/css";
 s.rel = "stylesheet";
 s.href = __igaroapp.cdn + "/css/igaro.css";
 head.appendChild(s);
-
-s = document.createElement('script');
-s.src = __igaroapp.cdn + "/js/igaro.js";
-head.appendChild(s);
-
 </script>
 
 </head>
@@ -82,6 +77,30 @@ head.appendChild(s);
 <p>Javascript está desactivado. No podemos cargar esta solicitud sin ella.</p>
 <p>تم تعطيل جافا سكريبت، ونحن لا يمكن تحميل هذا التطبيق دون ذلك.</p>
 </noscript>
+<script>
+var body = document.body,
+    loadingC = document.createElement('div'),
+    loadingW = document.createElement('div'),
+    loadingD = document.createElement('div');
+loadingC.className='igaro';
+body.appendChild(loadingC);
+loadingC.appendChild(loadingW);
+loadingW.appendChild(loadingD);
+
+__igaroapp.init = {
+    onReady : function() {
+        body.removeChild(loadingC);
+    },
+    onError : function(e) {
+        loadingD.innerHTML = e;
+        loadingW.className='error';
+    }
+};
+
+var s = document.createElement('script');
+s.src = __igaroapp.cdn + "/js/igaro.js";
+document.getElementsByTagName('head')[0].appendChild(s);
+</script>
 
 </body>
 </html>
