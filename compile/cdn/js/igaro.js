@@ -5,72 +5,49 @@ window.addEventListener('load', function() {
     // app holder
     var app = {};
 
-    // status handling
-
     new Promise(function(r,rreject) {
 
-        // MODULES - EDIT BELOW THIS LINE ////////////////////
-        var threads = [[]];
+        var modules = [],
+            libs = __igaroapp.libs;
 
-        // phonegap (cordova)
-        if (document.location.protocol === 'file:') {
-            threads[threads.length-1].push(
-                { name:'3rdparty.fastclick.js' },       
-                { name:'3rdparty.cordova.css' }
-            );
-        }
-
-        // touch screen
-        if ('ontouchstart' in window || navigator.maxTouchPoints || navigator.msMaxTouchPoints) {
-            threads[threads.length-1].push(
-                { name:'3rdparty.hammer.js' }
-            );
-        }
+        // local libraries
+        if (libs.local && document.location.protocol === 'file:')
+            modules.push.apply(modules,libs.local);          
+  
+        // network libraries
+        if (libs.network && document.location.protocol !== 'file:')
+            modules.push.apply(modules,libs.network);          
+        
+        // touch libraries
+        if (libs.touch && ('ontouchstart' in window || navigator.maxTouchPoints || navigator.msMaxTouchPoints))
+            modules.push.apply(modules,libs.touch);          
      
-        // 3rdparty libraries
-        /* threads.push([
-           { name:'3rdparty.jquery.2.js' }
-        ]);
-        */
-
         // fonts
-        (function(fonts) {
+        if (libs.fonts) {
             var b,d,e,f,g,
                 h=document.body,
                 a=document.createElement("div");
-                a.innerHTML='<span style="'+["position:absolute","width:auto","font-size:128px","left:-99999px"].join(" !important;")+'">'+(new Array(100)).join("wi")+"</span>";
-                a=a.firstChild;
-                b=function(b){
-                    a.style.fontFamily=b;
-                    h.appendChild(a);
-                    g=a.clientWidth;
-                    h.removeChild(a);
-                    return g; 
-                };
-                d=b("monospace");
-                e=b("serif");
-                f=b("sans-serif"); 
-                fonts.forEach(function (a) { 
-                    if (! (d!==b(a+",monospace") || f!==b(a+",sans-serif") ||e!==b(a+",serif")))
-                        threads[threads.length-1].push(
-                            { name:'lib.fonts.'+a.replace(' ','').toLowerCase()+'.css' }
-                        );
-                }); 
-            }
-        )(
-            [
-                //'Proxima Nova' // license required - see Adobe!
-                'Open Sans' // open source alternative of above
-            ]
-        );
+            a.innerHTML='<span style="'+["position:absolute","width:auto","font-size:128px","left:-99999px"].join(" !important;")+'">'+(new Array(100)).join("wi")+"</span>";
+            a=a.firstChild;
+            b=function(b){
+                a.style.fontFamily=b;
+                h.appendChild(a);
+                g=a.clientWidth;
+                h.removeChild(a);
+                return g; 
+            };
+            d=b("monospace");
+            e=b("serif");
+            f=b("sans-serif"); 
+            libs.fonts.forEach(function (font) {
+                var a = font.name; 
+                if (! (d!==b(a+",monospace") || f!==b(a+",sans-serif") ||e!==b(a+",serif")))
+                    modules.push(font.module);
+            }); 
+        }
 
-        // further modules
-        threads[threads.length-1].push(
-            // conf
-            __igaroapp.conf
-        );
-
-        // BEGIN - DO NOT EDIT BELOW THIS LINE ////////////////////
+        // further modules - must inc conf
+        modules.push.apply(modules,libs.load);
 
         // core.debug: built-in
         (function() {
@@ -1067,15 +1044,15 @@ window.addEventListener('load', function() {
 
         // external modules
         var InstanceAmd = app['instance.amd'],
-            dom = app['core.dom'],
             events = app['core.events'];
-        var x = [],
-            m = threads.map(function(modules) {
-                var y = new InstanceAmd().get({ modules:modules });
-                x.push({ p:y, m:modules });
-                return y;
-            });
-        return Promise.all(m).then(
+        //var x = [],
+        //    m = threads.map(function(modules) {
+        //        var y = 
+        //        x.push({ p:y, m:modules });
+        //        return y;
+        //    });
+
+        new InstanceAmd().get({ modules:modules }).then(
             function() {
                 return events.dispatch('','state.init').then(function() {
                     var ii = __igaroapp.init;

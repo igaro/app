@@ -9,7 +9,21 @@
 <script>
 var __igaroapp = {
     cdn : location.protocol === 'file:'? location.href+'/../cdn' : '/cdn',
-    conf :{ name:'conf.app.js' },
+    libs : { 
+        load :[
+            { name:'conf.app.js' }
+        ],
+        local : [
+            { name:'3rdparty.fastclick.js' },       
+            { name:'3rdparty.cordova.css' }
+        ],
+        touch : [
+            { name:'3rdparty.hammer.js' }
+        ],
+        fonts : [
+            { name:'opensans', module: { name:'lib.fonts.opensans.css' }}
+        ]
+    },
     version: 0.1,
     timestamp : new Date(),
     debug : new RegExp("^(3006|3007)$").test(location.port),
