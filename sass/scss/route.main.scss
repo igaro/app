@@ -105,9 +105,10 @@ body >.core-router >.main {
         >.main {
 
             @include layoutStandard;
+
             >section {
 
-                &:first-child {
+                &:nth-child(2) {
                     background: inline-image("route.main/side.svg") no-repeat 95% 10%;
                     background-size:35%;
                     @media (max-width:1100px) {
