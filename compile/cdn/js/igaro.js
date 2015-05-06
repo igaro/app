@@ -5,7 +5,7 @@ window.addEventListener('load', function() {
     // app holder
     var app = {};
 
-    new Promise(function(r,rreject) {
+    return Promise.resolve().then(function () {
 
         var modules = [],
             libs = __igaroapp.libs;
@@ -198,6 +198,7 @@ window.addEventListener('load', function() {
                     });
                     return toCall.reduce(function(a,t) {
                         return a.then(function() {
+                            var r = null;
                             if (! t || ! t.fn)
                                 return;
                             try {
@@ -503,7 +504,7 @@ window.addEventListener('load', function() {
                         root = o.root || o.nodes[0].parentNode,
                         nodes = Array.prototype.slice.call(o.nodes || o.root.childNodes);  
                     if (slice) 
-                        nodes = nodes.slice(slice[0],slice[1],slice[2]);
+                        nodes = nodes.slice(slice[0],slice[1]);
                     var insertBefore = nodes[nodes.length-1].nextElementSibling;
                     nodes = nodes.sort(function(a, b) {
                         a = on(a);
@@ -1042,49 +1043,43 @@ window.addEventListener('load', function() {
             };
         })();
 
-        // external modules
         var InstanceAmd = app['instance.amd'],
             events = app['core.events'];
-        //var x = [],
-        //    m = threads.map(function(modules) {
-        //        var y = 
-        //        x.push({ p:y, m:modules });
-        //        return y;
-        //    });
-
-        new InstanceAmd().get({ modules:modules }).then(
-            function() {
-                return events.dispatch('','state.init').then(function() {
-                    var ii = __igaroapp.init;
-                    if (ii && ii.onReady)
-                        ii.onReady();
-                });
-            }
-        ).catch(function(e) {
-            rreject(e);
+        // load externals
+        return new InstanceAmd().get({ modules:modules }).then(function() {
+            return events.dispatch('','state.init').then(function() {
+                var ii = __igaroapp.init;
+                if (ii && ii.onReady)
+                    ii.onReady();
+                return app;
+            });
         });
 
     }).catch(function (e) {
-        var l;
-        if ('core.language' in app) {
-            l = app['core.language'].env || 'en';
-        } else {
-            l = window.navigator.userLanguage || window.navigator.language;
-            l = l.substr(0,3) + l.substr(3).toUpperCase();
+        try {
+            var l;
+            if ('core.language' in app) {
+                l = app['core.language'].env || 'en';
+            } else {
+                l = window.navigator.userLanguage || window.navigator.language;
+                l = l.substr(0,3) + l.substr(3).toUpperCase();
+            }
+            var t = typeof e === 'object' && e.error && e.error.incompatible? __igaroapp.browserincompat : __igaroapp.loaderr;
+            if (! t[l]) {
+                var c = l.split('-');  
+                l = t[c[0]]? c[0] : 'en';
+            }
+            var ii = __igaroapp.init;
+            if (ii && ii.onError)
+                ii.onError(t[l].replace(/\\n/g,'<br>'));
+        } catch (ex) {
+            // capture error in this handler ... and handle. Ideally shouldn't happen.
+            if (window.console) 
+                console.error(e);
         }
-        var t = typeof e === 'object' && e.error && e.error.incompatible? __igaroapp.browserincompat : __igaroapp.loaderr;
-        if (! t[l]) {
-            var c = l.split('-');  
-            l = t[c[0]]? c[0] : 'en';
-        }
-        var ii = __igaroapp.init;
-        if (ii && ii.onError)
-            ii.onError(t[l].replace(/\\n/g,'<br>'));
-        return app['core.debug'].log.append(e);
-
-    }).catch(function (e) {
-        if (window.console) 
-            console.error(e);
+        return app['core.debug'].log.append(e).then(function() {
+            throw e;
+        });
     });
 
 });
