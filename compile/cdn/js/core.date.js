@@ -54,20 +54,18 @@ module.exports = function(app) {
         setEnvOffset : function(minutes, noStore) {
             var self = this,
                 managers = this.managers;
-            return new Promise(function(resolve) {
+            return Promise.resolve().then(function() {
                 if (typeof minutes !== 'number') {
                     minutes = new Date().getTimezoneOffset() * -1;
                 } else if (! noStore) {
                     self.envOffsetAuto = false;
                 }
-                //if (minutes === self.envOffset) 
-                //    return resolve();
                 if (!((-840 <= minutes <= 840) || minutes %15)) 
                     throw new Error('Timezone offset must be between +-840 and divide exactly by 15.');
                 self.envOffset = minutes;
-                return Promise.all([ noStore? null : managers.store.set('envOffset',minutes)]).then(function() {
+                return (noStore? Promise.resolve() : managers.store.set('envOffset',minutes)).then(function() {
                     return managers.event.dispatch('setEnvOffset', minutes);    
-                }).then(resolve);
+                });
             });
         }
     };

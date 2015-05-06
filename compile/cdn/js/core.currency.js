@@ -65,15 +65,15 @@ module.exports = function(app, params) {
         setEnv : function(id,noStore) {
             var self = this,
                 managers = self.managers;
-            return new Promise(function (resolve) {
+            return Promise.resolve().then(function() {
                 if (! self.pool[id]) 
                     throw new Error('Code is not in pool.');
                 self.env = id;
                 if (! noStore)
                     self.isAuto = false;
-                return Promise.all([ noStore? null : managers.store.set('env',id)]).then(function() {
+                return (noStore? Promise.resolve() : managers.store.set('env',id)).then(function() {
                     return managers.event.dispatch('setEnv',id);
-                }).then(resolve);
+                });
             });
         },
 

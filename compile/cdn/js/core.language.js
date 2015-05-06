@@ -71,7 +71,7 @@ module.exports = function(app, params) {
         setEnv : function(id,noStore) {
             var self = this,
                 managers = this.managers;
-            return new Promise(function (resolve) {
+            return Promise.resolve().then(function () {
                 if (id.length > 2) 
                     id = id.substr(0,3)+id.substr(3).toUpperCase();
                 var o = self.pool[id];
@@ -82,9 +82,9 @@ module.exports = function(app, params) {
                 self.rtl = o.rtl === true;
                 if (! noStore)
                     self.isAuto = false;
-                return Promise.all([ noStore? null : managers.store.set('env',id)]).then(function() {
+                return (noStore? Promise.resolve() : managers.store.set('env',id)).then(function() {
                     return managers.event.dispatch('setEnv',id);
-                }).then(resolve);
+                });
             });
         },
 

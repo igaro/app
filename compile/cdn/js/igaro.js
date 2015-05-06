@@ -1,14 +1,17 @@
-window.addEventListener('load', function() {
+(function () {
 
     "use strict";
 
-    // app holder
     var app = {};
+
+    // conf is in a global literal. Move ref into private then undef it.
+    var appConf = __igaroapp;
+    __igaroapp = undefined;
 
     return Promise.resolve().then(function () {
 
         var modules = [],
-            libs = __igaroapp.libs;
+            libs = appConf.libs;
 
         // local libraries
         if (libs.local && document.location.protocol === 'file:')
@@ -20,8 +23,8 @@ window.addEventListener('load', function() {
         
         // touch libraries
         if (libs.touch && ('ontouchstart' in window || navigator.maxTouchPoints || navigator.msMaxTouchPoints))
-            modules.push.apply(modules,libs.touch);          
-     
+            modules.push.apply(modules,libs.touch);
+
         // fonts
         if (libs.fonts) {
             var b,d,e,f,g,
@@ -64,7 +67,7 @@ window.addEventListener('load', function() {
                 this.parent = null;
             };
             var debug = app['core.debug'] = {
-                developer : __igaroapp.debug,
+                developer : appConf.debug,
                 log : {
                     append : function(value,path,event) {
                         if (window.console && debug.developer) {
@@ -749,6 +752,7 @@ window.addEventListener('load', function() {
                         } else {
                             throw(status);
                         }
+                    
                     }).catch(function (e) {
                         self._promise.reject({ error:e, x:self });
                         if (! self.silent)
@@ -812,7 +816,7 @@ window.addEventListener('load', function() {
                         resolve : resolve,
                         reject : reject
                     };
-                    self.send();
+                    return self.send().catch(reject);
                 });
             };
             InstanceXhr.prototype.get = function(p) {
@@ -878,7 +882,7 @@ window.addEventListener('load', function() {
 
         // instance.amd: built-in
         (function() {
-            var repo = __igaroapp.cdn,
+            var repo = appConf.cdn,
                 InstanceXhr = app['instance.xhr'],
                 events = app['core.events'],
                 bless = app['core.object'].bless,
@@ -899,12 +903,15 @@ window.addEventListener('load', function() {
                         this.modules = p.modules;
                     if (p.repo)
                         this.repo = p.repo;
+                    if (p.depRepoRevert)
+                        this.depRepoRevert = true;
                     if (p.onProgress)
                         this.onProgress = p.onProgress;
                 };
             var InstanceAmd = app['instance.amd'] = function(o) {
                 this.name='instance.amd';
                 this.asRoot = true;
+                this.depRepoRevert = false;
                 bless.call(this,o);
                 this.uid = Math.floor((Math.random() * 9999));
                 this.repo = repo;
@@ -958,7 +965,7 @@ window.addEventListener('load', function() {
                             }
                         })) {
                             wk = new InstanceAmdWorker({ 
-                                module:m, 
+                                module:m,
                                 parent:self 
                             });
                         }
@@ -981,7 +988,7 @@ window.addEventListener('load', function() {
                     modname = this.module.name,
                     e = /^.+\.([^.]+)$/.exec(modname.toLowerCase()),
                     type=this.type = e === null? '' : e[1],
-                    file = this.file = mod.repo+(mod.nosub? '' : '/'+type+'/')+modname;
+                    file = this.file = mod.repo+'/'+(mod.nosub? '' : type+'/')+modname;
                 if (['css','js'].indexOf(type) === -1) 
                     throw new Error('instance.amd can\'t handle file type: '+modname);
                 this.done = false;
@@ -1009,7 +1016,7 @@ window.addEventListener('load', function() {
                                 var code = self.code = module.exports ? module.exports : null;
                                 return (module.requires.length?
                                     new InstanceAmd().get({ 
-                                        repo:mod.repo, 
+                                        repo:mod.depRepoRevert? repo : mod.repo, 
                                         modules:module.requires
                                     })
                                 : Promise.resolve()).then(function() {
@@ -1017,7 +1024,7 @@ window.addEventListener('load', function() {
                                         m = self.module.name,
                                         s = m.substr(0,m.length-3);
                                     if (code)
-                                        u = code(app,{ appconf:__igaroapp });
+                                        u = code(app,{ appconf:appConf });
                                     return (u instanceof Promise? u : Promise.resolve(u)).then(function (data) {
                                         if (data)
                                             app[s] = data;
@@ -1048,7 +1055,7 @@ window.addEventListener('load', function() {
         // load externals
         return new InstanceAmd().get({ modules:modules }).then(function() {
             return events.dispatch('','state.init').then(function() {
-                var ii = __igaroapp.init;
+                var ii = appConf.init;
                 if (ii && ii.onReady)
                     ii.onReady();
                 return app;
@@ -1061,26 +1068,26 @@ window.addEventListener('load', function() {
             if ('core.language' in app) {
                 l = app['core.language'].env || 'en';
             } else {
-                l = window.navigator.userLanguage || window.navigator.language;
-                l = l.substr(0,3) + l.substr(3).toUpperCase();
+                if (navigator)
+                    l = navigator.userLanguage || navigator.language;
+                l = !l? 'en' : l.substr(0,3) + l.substr(3).toUpperCase();
             }
-            var t = typeof e === 'object' && e.error && e.error.incompatible? __igaroapp.browserincompat : __igaroapp.loaderr;
+            var t = typeof e === 'object' && e.error && e.error.incompatible? appConf.browserincompat : appConf.loaderr;
             if (! t[l]) {
                 var c = l.split('-');  
                 l = t[c[0]]? c[0] : 'en';
             }
-            var ii = __igaroapp.init;
+            var ii = appConf.init;
             if (ii && ii.onError)
                 ii.onError(t[l].replace(/\\n/g,'<br>'));
-        } catch (ex) {
+        } catch (eX) {
             // capture error in this handler ... and handle. Ideally shouldn't happen.
-            if (window.console) 
-                console.error(e);
+            if (console) 
+                console.error(eX);
         }
         return app['core.debug'].log.append(e).then(function() {
             throw e;
         });
     });
 
-});
-
+})();
