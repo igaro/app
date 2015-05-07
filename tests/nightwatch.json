@@ -69,6 +69,9 @@
       },
       "desiredCapabilities" : {
         "browserName" : "chrome",
+        "chromeOptions": {
+          "args":["disable-web-security", "ignore-certificate-errors", "start-maximized"]
+        },
         "javascriptEnabled" : true,
         "acceptSslCerts" : true
       }

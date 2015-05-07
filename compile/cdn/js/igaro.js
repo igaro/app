@@ -1057,7 +1057,7 @@
             return events.dispatch('','state.init').then(function() {
                 var ii = appConf.init;
                 if (ii && ii.onReady)
-                    ii.onReady();
+                    ii.onReady(app);
                 return app;
             });
         });
@@ -1079,7 +1079,7 @@
             }
             var ii = appConf.init;
             if (ii && ii.onError)
-                ii.onError(t[l].replace(/\\n/g,'<br>'));
+                ii.onError(app,t[l]);
         } catch (eX) {
             // capture error in this handler ... and handle. Ideally shouldn't happen.
             if (console) 

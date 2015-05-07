@@ -1,0 +1,42 @@
+<html>
+<head>
+<script src="vendor/mocha.js"></script>
+<link rel="stylesheet" href="vendor/mocha.css" />
+<script src="vendor/chai.js"></script>
+<script src="conf/base.js"></script>
+<script>mocha.setup('bdd')</script>
+<script>
+
+var assert = chai.assert,  
+    expect = chai.expect,
+    should = chai.should();
+
+testSuite = function(app) {
+    var coreCountry = app['core.country'];
+
+    describe("core.country", function() {
+        it("set country to French",function(done) {
+            coreCountry.setEnv('FR',true).then(function() {
+                assert.equal(coreCountry.env,'FR');
+                done()
+            }).catch(done);
+        });
+        it("reset to auto detect (which will default to U.S). Test will fail for browsers detecting env as FR.",function(done) {
+            coreCountry.reset().then(function() {
+                assert.equal(coreCountry.env,'US');
+                done()
+            }).catch(done);
+        });
+    });
+
+    mocha.run();
+
+};
+
+</script>
+<script src="../../build/debug/cdn/js/igaro.js"></script>
+</head>
+<body>
+<div id="mocha"></div>
+</body>
+</html>
