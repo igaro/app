@@ -1834,15 +1834,7 @@ msgstr ""
 msgid "Defines if the value should be stored. Default is true."
 msgstr ""
 
-msgid "The value to parse."
-msgstr ""
-
-msgid ""
-"Removes anything non-numeric and returns the remainder. Useful for "
-"generating an id."
-msgstr ""
-
-msgid "The value to convert."
+msgid "The value to convert. May also be a string respresentation."
 msgstr ""
 
 msgid "Returns a date object in the user's timezone."
@@ -1890,56 +1882,6 @@ msgid ""
 "JQuery."
 msgstr ""
 
-msgid "Shorthand for accessing the body>head element"
-msgstr ""
-
-msgid "Empties an element of any child elements or content."
-msgstr ""
-
-msgid "The element to empty."
-msgstr ""
-
-msgid ""
-"Destroys an element, all child elements, and dereferences from dependencies."
-msgstr ""
-
-msgid "The element to remove."
-msgstr ""
-
-msgid "If true, the element isn't removed from it's parent. Default is false."
-msgstr ""
-
-msgid "Removes an element from it's parent node."
-msgstr ""
-
-msgid "Returns whether an element is hidden or visible."
-msgstr ""
-
-msgid "True for hidden, False for visible."
-msgstr ""
-
-msgid "Hides an element."
-msgstr ""
-
-msgid "The element to hide."
-msgstr ""
-
-msgid ""
-"Set to false to invert the operation (show the element). Default is true."
-msgstr ""
-
-msgid ""
-"A generic error handling mechanism for functions that don't do it "
-"themselves. Useful for hyperlink invoked commands. Try to use the manager "
-"provided by core.object's bless instead."
-msgstr ""
-
-msgid "Manages and stores the log data."
-msgstr ""
-
-msgid "Contains debug data appended since program execution."
-msgstr ""
-
 msgid ""
 "Appends an element into another optionally pre/appending before a sibling."
 msgstr ""
@@ -1963,6 +1905,73 @@ msgid ""
 "with a container element."
 msgstr ""
 
+msgid "Empties an element of any child elements or content."
+msgstr ""
+
+msgid "The element to empty."
+msgstr ""
+
+msgid "Shorthand for accessing the body>head element"
+msgstr ""
+
+msgid ""
+"Destroys an element, all child elements, and dereferences from dependencies."
+msgstr ""
+
+msgid "The element to remove."
+msgstr ""
+
+msgid "If true, the element isn't removed from it's parent. Default is false."
+msgstr ""
+
+msgid "Returns whether an element is hidden or visible."
+msgstr ""
+
+msgid "True for hidden, False for visible."
+msgstr ""
+
+msgid "Hides an element."
+msgstr ""
+
+msgid "The element to hide."
+msgstr ""
+
+msgid ""
+"Set to false to invert the operation (show the element). Default is true."
+msgstr ""
+
+msgid ""
+"Creates and appends an element, optionally setting parameters and appending "
+"siblings into it."
+msgstr ""
+
+msgid ""
+"The tag name of the element to create, i.e 'div'. A type can also be set by "
+"use of brackets, i.e 'input[password]'"
+msgstr ""
+
+msgid ""
+"Appending information. Accepts either an element or an object with a "
+"container attribute linked to an element. For the later, can take "
+"insertBefore and insertAfter attributes to define the ordering of how the "
+"element is to be added. These should be either elements or objects with a "
+"container attribute linking to one. This allows you to specify a blessed "
+"element."
+msgstr ""
+
+msgid ""
+"Defines the content to be appended into the element.Accepts an element, an "
+"array of elements, a string, or an "
+msgstr ""
+
+msgid ""
+"May be a string to apppend to the element's className or a function. If the "
+"later, it will be called with the this keyword set to the element."
+msgstr ""
+
+msgid "Removes an element from it's parent node."
+msgstr ""
+
 msgid ""
 "Sets the content of an element, correctly handing dependencies in the "
 "process."
@@ -1973,12 +1982,50 @@ msgstr ""
 
 msgid ""
 "Element, elements (in Array), string or language literal to use for the "
-"content"
+"content."
 msgstr ""
 
 msgid ""
 "By default the element will be purged of content prior to new content being "
 "written. If this value is true, the element will be cleared (shallow)."
+msgstr ""
+
+msgid ""
+"Sets the placeholder value of an element. This is usually required for multi-"
+"language support."
+msgstr ""
+
+msgid "The element to set."
+msgstr ""
+
+msgid "A string or a language literal."
+msgstr ""
+
+msgid "Sorts child elements inside an element based on content or a function."
+msgstr ""
+
+msgid ""
+"Defines the node elements to be sorted. If not set, the root element should "
+"be instead."
+msgstr ""
+
+msgid ""
+"If undefined uses the content of the child element, or define a custom "
+"function to use instead. The function will be passed the element as the "
+"first argument and follows the standard Array.sort() for legal return values."
+msgstr ""
+
+msgid "Defines whether the order should be reversed."
+msgstr ""
+
+msgid ""
+"Defines the root element for which to traverse for children. This or nodes "
+"must be supplied."
+msgstr ""
+
+msgid ""
+"Defines whether the compiled list should be sliced. Accepts two values like "
+"Array.slice(). Use this to stick elements to the top of a sort"
 msgstr ""
 
 msgid "Shows an element."
@@ -1987,6 +2034,12 @@ msgstr ""
 msgid ""
 "Shows an element. Element must have been previously hidden with .hide(). "
 "Overriding styles and className strings are unsupported."
+msgstr ""
+
+msgid "Toggles an elements visibility based on it's current status.."
+msgstr ""
+
+msgid "Calls .show() if hidden, or vice-versa."
 msgstr ""
 
 msgid "Dispatches events and manages handles to functions."

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<script src="vendor/mocha.js"></script>
+<link rel="stylesheet" href="vendor/mocha.css" />
+<script src="vendor/chai.js"></script>
+<script src="conf/base.js"></script>
+<script>
+
+__igaroapp.libs.load.push({ name:'core.date.js' });
+
+mocha.setup('bdd');
+
+var assert = chai.assert;
+
+testSuite = function(app) {
+    var modName = 'core.date',
+        module = app[modName];
+
+    describe('isLeapYear()', function() {
+
+        it("2016 is a leap",function() {
+            var valid = module.isLeapYear(2016);
+                assert.equal(valid,true);
+        });
+
+        it("2015 is not a leap",function() {
+            var valid = module.isLeapYear(2015);
+                assert.equal(valid,false);
+        });
+
+    });
+
+    describe('daysInMonth()', function() {
+
+        it("2016 (leap), Feb = 29",function() {
+            var v = module.daysInMonth(2016,2);
+                assert.equal(v,29);
+        });
+
+        it("2015 (leap), Feb = 28",function() {
+            var v = module.daysInMonth(2015,2);
+                assert.equal(v,28);
+        });
+
+    });
+
+    describe('setEnvOffset()', function() {
+        var v = module.envOffset;
+        v = v === 30? 15: 30;
+        before("Should switch to offset +"+v, function() {
+            return module.setEnvOffset(v,false).then(function() {
+                assert.equal(module.envOffset,v);
+            }); 
+        });
+
+        it("Should return date using new offset", function() {
+            var d = new Date('2000-01-01 00:00:00'),
+                n = module.userTz(d).valueOf();
+            assert.equal(n,d.valueOf()+d.getTimezoneOffset()*60000+v*60000);
+        });
+
+        it("Should reset offset", function() {
+            return module.resetEnvOffset().then(function() {
+                var d = new Date('2000-01-01 00:00:00'),
+                    n = module.userTz(d).valueOf();
+                assert.notEqual(n,d.valueOf()+d.getTimezoneOffset()*60000+v*60000);
+            });
+        });
+
+    });
+
+    mocha.run();
+
+};
+
+</script>
+<script src="../../build/debug/cdn/js/igaro.js"></script>
+</head>
+<body>
+<div id="mocha"></div>
+</body>
+</html>

@@ -106,20 +106,6 @@ module.exports = function(app) {
                     }
                 },
                 { 
-                    name:'strip', 
-                    type:'function',
-                    attributes: [
-                        { 
-                            type:'string', 
-                            required:true, 
-                            attributes : [{
-                                desc: _tr("The value to parse.")
-                            }]
-                        }
-                    ],
-                    desc: _tr("Removes anything non-numeric and returns the remainder. Useful for generating an id.")
-                },
-                { 
                     name:'userTz', 
                     type:'function',
                     attributes: [
@@ -127,7 +113,7 @@ module.exports = function(app) {
                             type:'object', 
                             required:true, 
                             attributes : [{
-                                desc: _tr("The value to convert."),
+                                desc: _tr("The value to convert. May also be a string respresentation."),
                                 instanceof : {
                                     name: 'Date'
                                 }

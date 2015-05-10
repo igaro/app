@@ -15,140 +15,6 @@ module.exports = function(app) {
             embedded:true,
             attributes : [
                 {
-                    name:'head',
-                    type:'element',
-                    desc:_tr("Shorthand for accessing the body>head element")
-                },
-                {
-                    name:'empty',
-                    type:'function',
-                    desc:_tr("Empties an element of any child elements or content."),
-                    attributes : [
-                        {
-                            type:'object',
-                            required:true,
-                            desc: _tr("The element to empty.")
-                        }
-                    ]
-                },
-                {
-                    name:'purge',
-                    type:'function',
-                    desc:_tr("Destroys an element, all child elements, and dereferences from dependencies."),
-                    attributes : [
-                        {
-                            type:'object',
-                            required:true,
-                            desc: _tr("The element to remove.")
-                        },
-                        {
-                            type:'boolean',
-                            desc: _tr("If true, the element isn't removed from it's parent. Default is false.")
-                        }
-                    ]
-                },
-                {
-                    name:'rm',
-                    type:'function',
-                    desc:_tr("Removes an element from it's parent node."),
-                    attributes : [
-                        {
-                            type:'object',
-                            required:true,
-                            desc: _tr("The element to remove.")
-                        }
-                    ]
-                },
-                {
-                    name:"isHidden",
-                    type:"function",
-                    desc:_tr("Returns whether an element is hidden or visible."),
-                    returns: {
-                        attributes : [
-                            {
-                                desc:_tr("True for hidden, False for visible."),
-                                instanceof : { name:'Boolean' }
-                            }
-                        ]
-                    }
-                },
-                {
-                    name:"hide",
-                    type:"function",
-                    desc:_tr("Hides an element."),
-                    attributes : [
-                        { 
-                            type:'object',
-                            required:true,
-                            desc: _tr("The element to hide.")
-                        },
-                        {
-                            type:'boolean',
-                            desc: _tr("Set to false to invert the operation (show the element). Default is true.")
-                        }
-                    ]
-                },
-                {
-                    name:'mk',
-                    type:'function',
-                    desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands. Try to use the manager provided by core.object's bless instead."),
-                    attributes : [
-                        { 
-                            type:'*',
-                            required:true,
-                            desc: _tr("The error object or value.")
-                        },
-                        {
-                            type:'string',
-                            desc: _tr("The scope path name.")
-                        },
-                        { 
-                            type:'string',
-                            desc : _tr("The scope event name")
-                        }
-                    ]
-                },
-                {
-                    name:'setPlaceholder',
-                    type:'object',
-                    desc : _tr("Manages and stores the log data."),
-                    attributes : [
-                        { 
-                            name:'append',
-                            type:'function',
-                            attributes: [
-                                { 
-                                    type:'string',
-                                    required:true, 
-                                    attributes:[{
-                                        desc: _tr("The module name.")
-                                    }]
-                                },
-                                { 
-                                    type:'string',
-                                    required:true, 
-                                    attributes:[{
-                                        desc: _tr("The event name.")
-                                    }]
-                                },
-                                { 
-                                    type:'object', 
-                                    required:true, 
-                                    attributes:[{
-                                        desc: _tr("A value to pass to functions registered to receive the debug event. You can pass anything here."),
-                                    }]
-                                }
-                            ],
-                            desc: _tr("Appends a debug event to storage and fires a core.debug event containing the data.")
-                        },
-                        { 
-                            name:'data',
-                            instanceof:'Array', 
-                            desc : _tr("Contains debug data appended since program execution."),
-                        },
-                    ]
-                },
-                {
                     name:'append',
                     type:'function',
                     desc:_tr("Appends an element into another optionally pre/appending before a sibling."),
@@ -182,6 +48,152 @@ module.exports = function(app) {
                     ]
                 },
                 {
+                    name:'empty',
+                    type:'function',
+                    desc:_tr("Empties an element of any child elements or content."),
+                    attributes : [
+                        {
+                            type:'object',
+                            required:true,
+                            attributes : [
+                                {
+                                    desc: _tr("The element to empty.")
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    name:'head',
+                    type:'object',
+                    desc:_tr("Shorthand for accessing the body>head element")
+                },
+                {
+                    name:'purge',
+                    type:'function',
+                    desc:_tr("Destroys an element, all child elements, and dereferences from dependencies."),
+                    attributes : [
+                        {
+                            type:'object',
+                            required:true,
+                            attributes : [
+                                {
+                                    desc: _tr("The element to remove.")
+                                }
+                            ]
+                        },
+                        {
+                            type:'boolean',
+                            attributes : [
+                                {
+                                    desc: _tr("If true, the element isn't removed from it's parent. Default is false.")
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    name:"isHidden",
+                    type:"function",
+                    desc:_tr("Returns whether an element is hidden or visible."),
+                    returns: {
+                        attributes : [
+                            {
+                                desc:_tr("True for hidden, False for visible."),
+                                instanceof : { name:'Boolean' }
+                            }
+                        ]
+                    }
+                },
+                {
+                    name:"hide",
+                    type:"function",
+                    desc:_tr("Hides an element."),
+                    attributes : [
+                        { 
+                            type:'object',
+                            required:true,
+                            attributes : [
+                                {
+                                    desc: _tr("The element to hide.")
+                                }
+                            ]
+                        },
+                        {
+                            type:'boolean',
+                            attributes : [
+                                {
+                                    desc: _tr("Set to false to invert the operation (show the element). Default is true.")
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    name:'mk',
+                    type:'function',
+                    returns : {
+                        attributes : [
+                            {
+                                instanceof : { name:'Element' }
+                            }
+                        ]
+                    },
+                    desc:_tr("Creates and appends an element, optionally setting parameters and appending siblings into it."),
+                    attributes : [
+                        { 
+                            type:'*',
+                            required:true,
+                            attributes : [
+                                {
+                                    desc: _tr("The tag name of the element to create, i.e 'div'. A type can also be set by use of brackets, i.e 'input[password]'")
+                                }
+                            ]
+                        },
+                        {
+                            type:'*',
+                            attributes : [
+                                {
+                                    desc: _tr("Appending information. Accepts either an element or an object with a container attribute linked to an element. For the later, can take insertBefore and insertAfter attributes to define the ordering of how the element is to be added. These should be either elements or objects with a container attribute linking to one. This allows you to specify a blessed element.")
+                                }
+                            ]
+                        },
+                        { 
+                            type:'*',
+                            attributes : [
+                                {
+                                    desc : _tr("Defines the content to be appended into the element.Accepts an element, an array of elements, a string, or an ")
+                                }
+                            ]
+                        },
+                        {
+                            type:'*',
+                            attributes : [
+                                {
+                                    desc : _tr("May be a string to apppend to the element's className or a function. If the later, it will be called with the this keyword set to the element.")
+                                }
+                            ]
+
+                        }
+                    ]
+                },
+                {
+                    name:'rm',
+                    type:'function',
+                    desc:_tr("Removes an element from it's parent node."),
+                    attributes : [
+                        {
+                            type:'object',
+                            required:true,
+                            attributes : [
+                                {
+                                    desc: _tr("The element to remove.")
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
                     name:'setContent',
                     type:'function',
                     desc:_tr("Sets the content of an element, correctly handing dependencies in the process."),
@@ -189,16 +201,102 @@ module.exports = function(app) {
                         { 
                             type:'object',
                             required:true,
-                            desc: _tr("The element of which to set the content.")
+                            attributes : [
+                                {
+                                    desc: _tr("The element of which to set the content.")
+                                }
+                            ]
                         },
                         {
                             type:'object',
                             required:true,
-                            desc: _tr("Element, elements (in Array), string or language literal to use for the content")
+                            attributes : [
+                                {
+                                    desc: _tr("Element, elements (in Array), string or language literal to use for the content.")
+                                }
+                            ]
                         },
                         { 
                             type:'boolean',
-                            desc : _tr("By default the element will be purged of content prior to new content being written. If this value is true, the element will be cleared (shallow).")
+                            attributes : [
+                                {
+                                    desc : _tr("By default the element will be purged of content prior to new content being written. If this value is true, the element will be cleared (shallow).")
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    name:'setPlaceholder',
+                    type:'function',
+                    desc : _tr("Sets the placeholder value of an element. This is usually required for multi-language support."),
+                    attributes : [
+                        { 
+                            type:'object',
+                            required:true,
+                            attributes: [
+                                { 
+                                    desc: _tr("The element to set.")
+                                } 
+                            ],
+                            desc: _tr("Appends a debug event to storage and fires a core.debug event containing the data.")
+                        },
+                        { 
+                            type:'*',
+                            required:true,
+                            attributes: [
+                                { 
+                                    desc: _tr("A string or a language literal.")
+                                } 
+                            ],
+                        },
+                    ]
+                },
+                {
+                    name:'sort',
+                    type:'function',
+                    desc:_tr("Sorts child elements inside an element based on content or a function."),
+                    attributes : [
+                        { 
+                            type:'object',
+                            required:true,
+                            attributes : [
+                                { 
+                                    name:'nodes',
+                                    type: {
+                                        instanceof : { name:'Array' }
+                                    },
+                                    desc:_tr("Defines the node elements to be sorted. If not set, the root element should be instead.")
+                                },
+                                { 
+                                    name:'on',
+                                    type: '*',
+                                    desc:_tr("If undefined uses the content of the child element, or define a custom function to use instead. The function will be passed the element as the first argument and follows the standard Array.sort() for legal return values.")
+                                },
+                                { 
+                                    name:'reverse',
+                                    type: {
+                                        instanceof : { name:'Boolean' }
+                                    },
+                                    desc:_tr("Defines whether the order should be reversed.")
+                                },
+                                { 
+                                    name:'root',
+                                    type: {
+                                        instanceof : { name:'Element' }
+                                    },
+                                    desc:_tr("Defines the root element for which to traverse for children. This or nodes must be supplied.")
+                                },
+                                { 
+                                    name:'slice',
+                                    type: {
+                                        instanceof : { name:'Array' }
+                                    },
+                                    desc:_tr("Defines whether the compiled list should be sliced. Accepts two values like Array.slice(). Use this to stick elements to the top of a sort")
+                                }
+                                    
+
+                            ]
                         }
                     ]
                 },
@@ -211,6 +309,18 @@ module.exports = function(app) {
                             type:'object',
                             required:true,
                             desc: _tr("Shows an element. Element must have been previously hidden with .hide(). Overriding styles and className strings are unsupported.")
+                        }
+                    ]
+                },
+                {
+                    name:'toggleVisibility',
+                    type:'function',
+                    desc:_tr("Toggles an elements visibility based on it's current status.."),
+                    attributes : [
+                        { 
+                            type:'object',
+                            required:true,
+                            desc: _tr("Calls .show() if hidden, or vice-versa.")
                         }
                     ]
                 }

@@ -28,21 +28,18 @@ module.exports = function(app) {
             if (cMonth === 4 || cMonth === 6 || cMonth === 9 || cMonth === 11) 
                 return 30;
             if (cMonth === 2) 
-                return (this.isleapyear(cYear))? 29:28;
+                return (this.isLeapYear(cYear))? 29:28;
             return 31;
         },
 
-        userTz : function(tz) { //ISO 8601
+        userTz : function(tz) { //ISO 8601 
             var date = typeof tz === 'string'? new Date(tz) : tz;
-            date = new Date(date.valueOf() + (date.getTimezoneOffset()*60000) + (this.uiOffset*60000) );
+            if (! (date instanceof Date))
+                throw new Error("Invalid parameter passed to function. Use string or date object.");
+            date = new Date(date.valueOf() + (date.getTimezoneOffset()*60000) + (this.envOffset*60000) );
             return date;
         },
     
-        strip : function(o) { 
-            var str = typeof o === Date? o.valueOf() : o;
-            return str.replace(/[^0-9]/g, ''); 
-        },
-            
         resetEnvOffset : function() {
             var self = this;
             return this.managers.store.set('envOffset').then(function() {

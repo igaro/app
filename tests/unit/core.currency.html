@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<script src="vendor/mocha.js"></script>
+<link rel="stylesheet" href="vendor/mocha.css" />
+<script src="vendor/chai.js"></script>
+<script src="conf/base.js"></script>
+<script>
+
+mocha.setup('bdd');
+
+var assert = chai.assert;
+
+testSuite = function(app) {
+    var modName = 'core.currency',
+        module = app[modName];
+
+    describe(modName, function() {
+
+        // add data - US dollar + fake
+        before(function() {
+            return module.setPool({
+                XXX : {
+                    symbol :'@',
+                    name : { en:'Fake Currency' }
+                },
+                USD : {
+                    symbol : '$',
+                    name : { en:"United States Dollar" }
+                }
+            });
+        });
+
+        it("set currency to Fake",function() {
+            module.setEnv('XXX',true).then(function() {
+                assert.equal(module.env,'XXX');
+            });
+        });
+
+        it("reset to auto detect (which will default to USD).",function() {
+            module.reset().then(function() {
+                assert.equal(module.env,'USD');
+            });
+        });
+
+        it("shouldn't allow an invalid code to be set.",function(done) {
+            module.setEnv('ZZZ',true).then(function() {
+                done(new Error);
+            }).catch(function() {
+                done();
+            })
+        });
+    });
+
+    mocha.run();
+
+};
+
+</script>
+<script src="../../build/debug/cdn/js/igaro.js"></script>
+</head>
+<body>
+<div id="mocha"></div>
+</body>
+</html>
