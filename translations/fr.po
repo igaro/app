@@ -1502,9 +1502,8 @@ msgid "Boom!"
 msgstr ""
 
 msgid ""
-"Igaro compiles into three modes; debug, deploy-debug and deploy. A web "
-"server for each can be found on ports %[0], %[1] and %[2]. These will reload "
-"automatically as you work."
+"Igaro compiles into two modes; debug and deploy. A web server for each can "
+"be found on ports %[0] and %[1]. These will reload automatically as you work."
 msgstr ""
 
 msgid ""
@@ -2741,28 +2740,21 @@ msgstr ""
 msgid "debug"
 msgstr ""
 
-msgid ""
-"Defines the location of the cdn folder, loads polyfill libraries, provides a "
-"loading screen, and defines a container for the app."
+msgid "The output folder for the debug compliation process."
 msgstr ""
 
 msgid "deploy"
 msgstr ""
 
-msgid ""
-"Contains code that prints data to the console. Code remains uncompressed. "
-"Used for development and shouldn't be released."
-msgstr ""
-
-msgid "deploy-debug"
-msgstr ""
-
-msgid ""
-"As deploy, but uncompressed. Assists with debugging problems introduced by "
-"the compile cycle."
+msgid "The output folder for the deploy compilation process."
 msgstr ""
 
 msgid "index.html"
+msgstr ""
+
+msgid ""
+"Defines the location of the cdn folder, loads polyfill libraries, provides a "
+"loading screen, and defines a container for the app."
 msgstr ""
 
 msgid "cdn"

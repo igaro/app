@@ -42,15 +42,11 @@ module.exports = function(app) {
                             sections : [
                                 {
                                     title:_tr("debug"),
-                                    content:_tr("Defines the location of the cdn folder, loads polyfill libraries, provides a loading screen, and defines a container for the app.")
+                                    content:_tr("The output folder for the debug compliation process.")
                                 },
                                 {
                                     title:_tr("deploy"),
-                                    content:_tr("Contains code that prints data to the console. Code remains uncompressed. Used for development and shouldn't be released.")
-                                },
-                                {
-                                    title:_tr("deploy-debug"),
-                                    content:_tr("As deploy, but uncompressed. Assists with debugging problems introduced by the compile cycle.")
+                                    content:_tr("The output folder for the deploy compilation process.")
                                 }
                             ]
                         });

@@ -3,7 +3,7 @@ module.exports = function(grunt) {
     var _ = grunt.util._;
     var locales = ["fr"];
     var stagingDir = '.staging';
-    var buildDirs  = ['build/debug','build/deploy-debug','build/deploy'];
+    var buildDirs  = ['build/debug','build/deploy'];
     var mime = require('mime');
     var beginPort = 3006; 
     var config = {
@@ -33,9 +33,9 @@ module.exports = function(grunt) {
         uglify: {
             options: {
                 mangle: {
-                except: ['jQuery']
-            },
-            sourceMap: true,
+                    except: ['jQuery']
+                },
+                sourceMap: false,
                 sourceMapIncludeSources : false
             },
             app: {
@@ -79,12 +79,6 @@ module.exports = function(grunt) {
                         cwd: stagingDir, 
                         src: ['**'],
                         dest: buildDirs[1]
-                    },
-                    {
-                        expand: true,
-                        cwd: stagingDir, 
-                        src: ['**', '!**/*.map'],
-                        dest: buildDirs[2]
                     }
                 ]
             }
