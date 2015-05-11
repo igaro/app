@@ -11,42 +11,71 @@ module.exports = function(app) {
             usage : {
                 class : true
             },
+           
+            manager : 'debug',
             embedded:true,
             providesManager:true,
             attributes : [
                 {
                     name:'developer',
                     type:'boolean',
-                    desc: _tr("Defines whether the framework is in debug mode.")
+                    desc: _tr("Defines whether the framework is in debug mode."),
+                    attributes: [
+                        {
+                            desc: _tr("True for enabled, False for disabled."),
+                        }
+                    ]
                 },
                 {
                     name:'handle',
                     type:'function',
+                    returns: {
+                        attributes : [
+                            {
+                                instanceof : { name:'Promise' }
+                            }
+                        ]
+                    },
+                    forManager:true,
                     desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands."),
                     attributes : [
                         { 
                             type:'*',
                             required:true,
-                            desc: _tr("The error object or value.")
+                            forManager:true,
+                            attributes: [{
+                                desc: _tr("The error object or value.")
+                            }]
                         },
                         {
                             type:'string',
-                            desc: _tr("The scope path name.")
+                            attributes: [{
+                                desc: _tr("The scope path name.")
+                            }]
                         },
                         { 
                             type:'string',
-                            desc : _tr("The scope event name")
+                            attributes: [{
+                                desc : _tr("The scope event name")
+                            }]
                         }
                     ]
                 },
-
                 {
                     name:'log',
                     type:'object',
+                    forManager:true,
                     attributes : [
                         { 
                             name:'append',
                             type:'function',
+                            returns: {
+                                attributes : [
+                                    {
+                                        instanceof : { name:'Promise' }
+                                    }
+                                ]
+                            },
                             attributes: [
                                 { 
                                     type:'string',
@@ -64,7 +93,8 @@ module.exports = function(app) {
                                 },
                                 { 
                                     type:'object', 
-                                    required:true, 
+                                    required:true,
+                                    forManager:true, 
                                     attributes:[{
                                         desc: _tr("A value to pass to functions registered to receive the debug event. You can pass anything here."),
                                     }]

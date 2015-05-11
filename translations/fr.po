@@ -1845,6 +1845,9 @@ msgstr ""
 msgid "Defines whether the framework is in debug mode."
 msgstr ""
 
+msgid "True for enabled, False for disabled."
+msgstr ""
+
 msgid ""
 "A generic error handling mechanism for functions that don't do it "
 "themselves. Useful for hyperlink invoked commands."
@@ -1910,7 +1913,7 @@ msgstr ""
 msgid "The element to empty."
 msgstr ""
 
-msgid "Shorthand for accessing the body>head element"
+msgid "Shortcut for accessing the body>head element."
 msgstr ""
 
 msgid ""
@@ -2027,12 +2030,12 @@ msgid ""
 "Array.slice(). Use this to stick elements to the top of a sort"
 msgstr ""
 
-msgid "Shows an element."
-msgstr ""
-
 msgid ""
 "Shows an element. Element must have been previously hidden with .hide(). "
 "Overriding styles and className strings are unsupported."
+msgstr ""
+
+msgid "The element to show."
 msgstr ""
 
 msgid "Toggles an elements visibility based on it's current status.."
@@ -2471,6 +2474,16 @@ msgid "Attributes"
 msgstr ""
 
 msgid "This object is blessed. See core.blessed module documentation."
+msgstr ""
+
+msgid "Manager"
+msgstr ""
+
+msgid ""
+"A blessed object can use this module as a manager (see core.bless). These "
+"functions should be used over those in Attributes to reduce coding duplicity "
+"and to set and manage relations and dependencies. You can access this "
+"manager using <b>object.managers.%[0]</b>."
 msgstr ""
 
 msgid "Related"

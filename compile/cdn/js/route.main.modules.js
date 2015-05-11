@@ -30,7 +30,9 @@ module.exports = function(app) {
 
         model.stash.childsupport = function(data, m) {
 
-            var createTable = function(data,container) {
+            var createTable = function(data,container,manager) {
+
+                var mgrForRow = false;
 
                 domMgr.mk('p',container,_tr("* = required"));
                 return objectMgr.create('table',{
@@ -57,7 +59,7 @@ module.exports = function(app) {
                     var body=tbl.body, 
                         brows=body.rows,
                         domMgr = tbl.managers.dom;
-                    var makeahref = function(col,meta,content) {
+                    var makeahref = function(col,meta,content,manager) {
                         if (meta.instanceof) 
                             meta = meta.instanceof();
                         if (! meta.attributes) 
@@ -89,14 +91,23 @@ module.exports = function(app) {
                                     }
                                 }
                                 stash.activeFor=col;
-                                container.className = this.className = 'active' ;
-                                addRows(meta.attributes.reverse(),row).catch(function (e) {
+                                container.className = this.className = 'active';
+                                addRows(meta.attributes.reverse(),row,manager).catch(function (e) {
                                     return debugMgr.handle(e);
                                 });
                             });
                         });
                     };
-                    var addRows = function(rows,at) {
+                    var addRows = function(r,at,manager) {
+                        var rows = [];
+                        if (manager) {
+                            r.forEach(function(o) {
+                                if (o.forManager)
+                                    rows.push(o);
+                            });
+                        } else {
+                            rows = r;
+                        }
                         return coreObject.promiseSequencer(rows, function(s) {
                             return body.addRow({ 
                                 insertAfter:at, 
@@ -128,16 +139,19 @@ module.exports = function(app) {
                                             } else {
                                                 l = '⊗';
                                             }
-                                            makeahref(cc,s.returns,l);
+                                            if (returns.attributes)
+                                                returns.attributes.forEach(function(o) {
+                                                    o.forManager = s.forManager;
+                                                });
+                                            makeahref(cc,returns,l,manager);
                                             domMgr.mk('span',cc,' = ');
                                         }
-                                        if (s.instanceof) {
-                                            var m=s.instanceof;
+                                        var m=s.instanceof;
+                                        if (m) {
                                             if (typeof m === 'function') { 
-                                                var mm = m();
-                                                makeahref(cc,mm,mm.name);
-                                                //a.title = language.mapKey(mm.desc); 
-                                                var q = JSON.parse(JSON.stringify(mm.desc));
+                                                m = m();
+                                                makeahref(cc,m,m.name,manager);
+                                                var q = JSON.parse(JSON.stringify(m.desc));
                                                 if (s.desc) {
                                                     Object.keys(q).forEach(function(k) {
                                                         if (s.desc[k]) 
@@ -149,39 +163,54 @@ module.exports = function(app) {
                                                 var sa = m.name;
                                                 if (m.required) 
                                                     sa += ' *';
-                                                domMgr.mk('a',cc,sa).href = m.href? m.href : 'https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/'+m.name;
+                                                domMgr.mk('a',cc,sa).href = m.href? m.href : 'https://developer.mozilla.org/en-US/docs/Web/API/'+m.name;
                                                 if (m.desc) 
                                                     rr.setContent({ content:m.desc });
                                             }
-                                        } else if (s.attributes && (s.type!=='function' || s.instanceof)) {
-                                            makeahref(cc,s,s.type);
+                                        } else if (s.attributes && s.type!=='function') {
+                                            s.attributes.forEach(function(o) {
+                                                o.forManager = s.forManager;
+                                            });
+                                            makeahref(cc,s,s.type,manager);
                                         } else {
                                             domMgr.mk('span',cc,s.type);
                                         }
 
                                         if (s.attributes && (s.type==='function' || s.instanceof)) {
-                                            domMgr.mk('span',cc,' (');
-                                            s.attributes.forEach(function (m,i) {
-                                                if (i !== 0) 
+                                            var j = 0;
+                                            s.attributes.forEach(function (m) {
+                                                if (manager && ! m.forManager)
+                                                    return;
+                                                if (! j)
+                                                    domMgr.mk('span',cc,' (');
+                                                if (j) 
                                                     domMgr.mk('span',cc,',');
-                                                //if (m.instanceof) {
-                                                //    makeahref(row,m,ce,m.instanceof().name);
-                                                if (m.instanceof || m.attributes) { 
-                                                    makeahref(cc,m,m.instanceof? m.instanceof().name : m.type); 
+                                                var mIO = m.instanceof;
+                                                if (mIO || m.attributes) { 
+                                                    if (m.attributes) {
+                                                        m.attributes.forEach(function(o) {
+                                                            o.forManager = m.forManager;
+                                                        });
+                                                    }
+                                                    makeahref(cc,m,mIO? mIO().name : m.type,manager); 
                                                 } else { 
-                                                    domMgr.mk('span',cc,m.type); 
+                                                    domMgr.mk('span',cc,type); 
                                                 }
                                                 if (m.required) 
                                                     domMgr.mk('sup',cc,'*');
+                                                j++;
                                             });
-                                            domMgr.mk('span',cc,')');
+                                            if (j)
+                                                domMgr.mk('span',cc,')');
                                         }
                                     });
                                 });
                             });
                         });
                     };
-                    return addRows(data);
+                    return addRows(data,null,manager);
+                }).catch(function(e) {
+                    return debugMgr.handle(e);
                 });
             };
 
@@ -257,6 +286,12 @@ module.exports = function(app) {
                     domMgr.mk('p',v,_tr("This object is blessed. See core.blessed module documentation."));
                 if (data.attributes)
                     createTable(data.attributes, domMgr.mk('p',v));
+            }
+
+            if (data.manager) {
+                domMgr.mk('h1',v,_tr("Manager"));
+                domMgr.mk('p',v,language.substitute(_tr("A blessed object can use this module as a manager (see core.bless). These functions should be used over those in Attributes to reduce coding duplicity and to set and manage relations and dependencies. You can access this manager using <b>object.managers.%[0]</b>."),data.manager));
+                createTable(data.attributes, domMgr.mk('p',v), true);
             }
 
             if (data.dependencies) {

@@ -11,7 +11,7 @@ module.exports = function(app) {
             usage : {
                 class : true
             },
-            providesManager:true,
+            manager:'dom',
             embedded:true,
             attributes : [
                 {
@@ -22,12 +22,16 @@ module.exports = function(app) {
                         { 
                             type:'object',
                             required:true,
-                            desc: _tr("The container for the element to be appended into.")
+                            attributes : [{
+                                desc: _tr("The container for the element to be appended into.")
+                            }]
                         },
                         {
                             type:'object',
                             required:true,
-                            desc: _tr("An element or array of elements to append.")
+                            attributes : [{
+                                desc: _tr("An element or array of elements to append.")
+                            }]
                         },
                         { 
                             type:'object',
@@ -66,7 +70,7 @@ module.exports = function(app) {
                 {
                     name:'head',
                     type:'object',
-                    desc:_tr("Shorthand for accessing the body>head element")
+                    desc:_tr("Shortcut for accessing the body>head element.")
                 },
                 {
                     name:'purge',
@@ -131,6 +135,7 @@ module.exports = function(app) {
                 },
                 {
                     name:'mk',
+                    forManager:true,
                     type:'function',
                     returns : {
                         attributes : [
@@ -143,6 +148,7 @@ module.exports = function(app) {
                     attributes : [
                         { 
                             type:'*',
+                            forManager:true,
                             required:true,
                             attributes : [
                                 {
@@ -152,6 +158,7 @@ module.exports = function(app) {
                         },
                         {
                             type:'*',
+                            forManager:true,
                             attributes : [
                                 {
                                     desc: _tr("Appending information. Accepts either an element or an object with a container attribute linked to an element. For the later, can take insertBefore and insertAfter attributes to define the ordering of how the element is to be added. These should be either elements or objects with a container attribute linking to one. This allows you to specify a blessed element.")
@@ -160,6 +167,7 @@ module.exports = function(app) {
                         },
                         { 
                             type:'*',
+                            forManager:true,
                             attributes : [
                                 {
                                     desc : _tr("Defines the content to be appended into the element.Accepts an element, an array of elements, a string, or an ")
@@ -168,6 +176,7 @@ module.exports = function(app) {
                         },
                         {
                             type:'*',
+                            forManager:true,
                             attributes : [
                                 {
                                     desc : _tr("May be a string to apppend to the element's className or a function. If the later, it will be called with the this keyword set to the element.")
@@ -263,9 +272,7 @@ module.exports = function(app) {
                             attributes : [
                                 { 
                                     name:'nodes',
-                                    type: {
-                                        instanceof : { name:'Array' }
-                                    },
+                                    instanceof : { name: 'Array' },
                                     desc:_tr("Defines the node elements to be sorted. If not set, the root element should be instead.")
                                 },
                                 { 
@@ -275,23 +282,17 @@ module.exports = function(app) {
                                 },
                                 { 
                                     name:'reverse',
-                                    type: {
-                                        instanceof : { name:'Boolean' }
-                                    },
+                                    instanceof : { name: 'Boolean' },
                                     desc:_tr("Defines whether the order should be reversed.")
                                 },
                                 { 
                                     name:'root',
-                                    type: {
-                                        instanceof : { name:'Element' }
-                                    },
+                                    instanceof : { name: 'Element' },
                                     desc:_tr("Defines the root element for which to traverse for children. This or nodes must be supplied.")
                                 },
                                 { 
-                                    name:'slice',
-                                    type: {
-                                        instanceof : { name:'Array' }
-                                    },
+                                    name: 'slice',
+                                    instanceof :  { name: 'Array' },
                                     desc:_tr("Defines whether the compiled list should be sliced. Accepts two values like Array.slice(). Use this to stick elements to the top of a sort")
                                 }
                                     
@@ -303,12 +304,16 @@ module.exports = function(app) {
                 {
                     name:'show',
                     type:'function',
-                    desc:_tr("Shows an element."),
+                    desc: _tr("Shows an element. Element must have been previously hidden with .hide(). Overriding styles and className strings are unsupported."),
                     attributes : [
                         { 
                             type:'object',
                             required:true,
-                            desc: _tr("Shows an element. Element must have been previously hidden with .hide(). Overriding styles and className strings are unsupported.")
+                            attributes : [
+                                {
+                                    desc: _tr("The element to show.")
+                                }
+                            ]
                         }
                     ]
                 },
@@ -320,7 +325,9 @@ module.exports = function(app) {
                         { 
                             type:'object',
                             required:true,
-                            desc: _tr("Calls .show() if hidden, or vice-versa.")
+                            attributes : [{
+                                desc: _tr("Calls .show() if hidden, or vice-versa.")
+                            }]
                         }
                     ]
                 }
