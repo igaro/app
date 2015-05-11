@@ -39,7 +39,7 @@ module.exports = function(app) {
                 },
                 {
                     name:'env',
-                    type:'object',
+                    type:'string',
                     desc: _tr("The currently applied country code.")
                 },
                 {

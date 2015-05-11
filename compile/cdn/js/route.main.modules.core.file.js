@@ -24,6 +24,13 @@ module.exports = function(app) {
                             }]
                         }
                     ],
+                    returns: {
+                        attributes : [
+                            {
+                                type:'string'
+                            }
+                        ]
+                    },
                     desc: _tr("Returns a filename extension.")
                 },
                 { 
@@ -38,7 +45,14 @@ module.exports = function(app) {
                             }]
                         }
                     ],
-                    desc: _tr("Returns a string containing a formatted file size.")
+                    returns: {
+                        attributes : [
+                            {
+                                type:'string'
+                            }
+                        ]
+                    },
+                    desc: _tr("Returns a formatted file size, i.e 12Kb, 35Mb, 120Gb.")
                 }
             ]
         };

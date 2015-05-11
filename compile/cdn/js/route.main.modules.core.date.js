@@ -28,6 +28,13 @@ module.exports = function(app) {
                 { 
                     name:'daysInMonth', 
                     type:'function',
+                    returns: {
+                        attributes : [
+                            {
+                                type:'number'
+                            }
+                        ]
+                    },
                     attributes: [
                         { 
                             type:'number', 
@@ -49,6 +56,13 @@ module.exports = function(app) {
                 { 
                     name:'isLeapYear', 
                     type:'function',
+                    returns: {
+                        attributes : [
+                            {
+                                type:'boolean'
+                            }
+                        ]
+                    },
                     attributes: [
                         { 
                             type:'number', 
@@ -108,6 +122,13 @@ module.exports = function(app) {
                 { 
                     name:'userTz', 
                     type:'function',
+                    returns: {
+                        attributes : [
+                            {
+                                instanceof: { name: 'Date' }
+                            }
+                        ]
+                    },
                     attributes: [
                         { 
                             type:'object', 

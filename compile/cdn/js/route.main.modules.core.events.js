@@ -12,19 +12,19 @@ module.exports = function(app) {
             usage : {
                 class : true
             },
-            providesManager:true,
+            manager:'event',
             embedded:true,
             attributes : [
                 {
                     name:'clean',
                     type:'function',
-                    desc: _tr("Removes an event linked to a dependency (object). This function is called automatically via the manager exposed via core.object's bless when any blessed object is destroyed."),
+                    desc: _tr("Removes an event linked to a dependency."), 
                     attributes : [
                         { 
-                            type:'object', 
+                            type:'*', 
                             required:true,
                             attributes : [{
-                                desc: _tr("The dependency.")
+                                desc: _tr("An object or function.")
                             }]
                         },
                     ]
@@ -32,6 +32,14 @@ module.exports = function(app) {
                 { 
                     name:'dispatch', 
                     type:'function',
+                    forManager:true,
+                    returns: {
+                        attributes : [
+                            {
+                                instanceof : { name:'Promise' }
+                            }
+                        ]
+                    },
                     attributes: [
                         { 
                             type:'string', 
@@ -41,49 +49,90 @@ module.exports = function(app) {
                             }]
                         },
                         { 
-                            type:['string','object'], 
+                            type:'*', 
                             required:true,
                             attributes : [{
-                                desc: _tr("If string, it is the event name. If array, the first value is the string name and the second is the target for the event. If a target is supplied, only registered agents which have no target or which match this target will be executed.")
+                                desc: _tr("If string, it is the event name. If an array, the first value is the string name and the second is the target for the event. If a target is supplied, only registered agents which have no target or which match this target will be executed.")
+                            }]
+                        },
+                        { 
+                            type:'string', 
+                            required:true,
+                            forManager:true,
+                            onlyManager:true,
+                            attributes : [{
+                                desc: _tr("The event name..")
                             }]
                         },
                         { 
                             type:'*',
+                            forManager:true,
                             attributes : [{
-                                desc: _tr("An object or value to pass on to the registered function.")
+                                desc: _tr("An object or value to pass on to each event handler.")
                             }]
                         }
                     ],
-                    desc: _tr("Triggers registered event handlers. Any handler can return { stopPropagation:true } to abort the iteration.")
+                    desc: _tr("Triggers registered event handlers. A handler may return an object literal or a Promise, which in turn may return { stopPropagation:true } to prevent the event firing up the chain and { stopImmediatePropagation } to prevent the event reaching further sibling handlers.")
+                },
+                { 
+                    name:'extend', 
+                    type:'function',
+                    forManager:true,
+                    onlyManager:true,
+                    attributes: [
+                        { 
+                            type:'*',
+                            forManager:true,
+                            required:true,
+                            attributes : [{
+                                desc: _tr("An object or function to add as a dependency.")
+                            }]
+                        },
+                    ],
+                    desc: _tr("Creates a clone of the event manager but with an additional dependency.")
                 },
                 { 
                     name:'on', 
+                    forManager:true,
                     type:'function',
                     attributes: [
                         { 
-                            type:['string','array'], 
-                            required:true, 
+                            type:'*', 
+                            required:true,
+                            forManager:true, 
                             attributes: [ 
                                 {
-                                    desc: _tr("If string, it is the module name. If array, the function will iterate for each string within it allowing you to register the same function for multiple event names.")
+                                    desc: _tr("If string, it will be the module name. If array, the function will iterate for each string within it allowing you to register the same function for multiple event names.")
                                 }
                             ]
                         },
                         { 
-                            type:['string','object'],
+                            type:'*',
                             required:true,
                             attributes: [ 
                                 {
-                                    desc: _tr("If string, it is the event name. If array, the first value is the string name, the second is a target in which the event applies to (this is automatically registered as a dependency) and the third is any additional dependencies.")
+                                    desc: _tr("If string, it will be the event name. If array, the first value is the string name, the second is a target in which the event applies to (this is automatically registered as a dependency) and the third is any additional dependencies.")
                                 }
                             ]
                         },
                         { 
                             type:'function', 
                             required:true,
+                            forManager:true, 
                             attributes: [ 
                                 {
                                     desc: _tr("Function to execute on event trigger.")
+                                }
+                            ]
+                        },
+                        { 
+                            type:'object',
+                            forManager:true, 
+                            attributes : [
+                                {
+                                    name:'prepend',
+                                    type:'boolean',
+                                    desc: _tr("Defines whether the event handler should be added to the beginning of the array. Use if the function may cancel propagation.")
                                 }
                             ]
                         }
@@ -98,7 +147,7 @@ module.exports = function(app) {
                             type:'function',
                             required:true,
                             attributes : [{
-                                desc: _tr("The function that was previously registered.")
+                                desc: _tr("The function handler previously registered.")
                             }]
                         },
                         {
@@ -114,7 +163,7 @@ module.exports = function(app) {
                             }]
                         }
                     ],
-                    desc: _tr("Unregisters a function from the event pool.")
+                    desc: _tr("Deregisters a function from the event pool.")
                 }
             ]
         };

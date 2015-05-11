@@ -104,7 +104,7 @@ module.exports = function(app) {
                         attributes : [
                             {
                                 desc:_tr("True for hidden, False for visible."),
-                                instanceof : { name:'Boolean' }
+                                type:'boolean'
                             }
                         ]
                     }
@@ -282,7 +282,7 @@ module.exports = function(app) {
                                 },
                                 { 
                                     name:'reverse',
-                                    instanceof : { name: 'Boolean' },
+                                    type:'boolean',
                                     desc:_tr("Defines whether the order should be reversed.")
                                 },
                                 { 

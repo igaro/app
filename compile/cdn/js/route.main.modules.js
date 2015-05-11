@@ -106,7 +106,10 @@ module.exports = function(app) {
                                     rows.push(o);
                             });
                         } else {
-                            rows = r;
+                            r.forEach(function(o) {
+                                if (! o.onlyManager)
+                                    rows.push(o);
+                            });
                         }
                         return coreObject.promiseSequencer(rows, function(s) {
                             return body.addRow({ 
@@ -163,7 +166,7 @@ module.exports = function(app) {
                                                 var sa = m.name;
                                                 if (m.required) 
                                                     sa += ' *';
-                                                domMgr.mk('a',cc,sa).href = m.href? m.href : 'https://developer.mozilla.org/en-US/docs/Web/API/'+m.name;
+                                                domMgr.mk('a',cc,sa).href = m.href? m.href : 'https://developer.mozilla.org/en-US/search?q='+m.name;
                                                 if (m.desc) 
                                                     rr.setContent({ content:m.desc });
                                             }
@@ -180,6 +183,8 @@ module.exports = function(app) {
                                             var j = 0;
                                             s.attributes.forEach(function (m) {
                                                 if (manager && ! m.forManager)
+                                                    return;
+                                                if (! manager && m.onlyManager)
                                                     return;
                                                 if (! j)
                                                     domMgr.mk('span',cc,' (');
@@ -283,14 +288,14 @@ module.exports = function(app) {
             if (data.attributes || data.blessed) {
                 domMgr.mk('h1',v,_tr("Attributes"));
                 if (data.blessed)
-                    domMgr.mk('p',v,_tr("This object is blessed. See core.blessed module documentation."));
+                    domMgr.mk('p',v,_tr("This object is blessed. See core.object documentation."));
                 if (data.attributes)
                     createTable(data.attributes, domMgr.mk('p',v));
             }
 
             if (data.manager) {
                 domMgr.mk('h1',v,_tr("Manager"));
-                domMgr.mk('p',v,language.substitute(_tr("A blessed object can use this module as a manager (see core.bless). These functions should be used over those in Attributes to reduce coding duplicity and to set and manage relations and dependencies. You can access this manager using <b>object.managers.%[0]</b>."),data.manager));
+                domMgr.mk('p',v,language.substitute(_tr("A blessed object can use this module as a manager (see core.object). These functions should be used over those in Attributes to reduce coding duplicity and to set and manage relations and dependencies. You can access this manager using <b>object.managers.%[0]</b>."),data.manager));
                 createTable(data.attributes, domMgr.mk('p',v), true);
             }
 
@@ -390,6 +395,7 @@ module.exports = function(app) {
                     ['core.file', _tr("Filename parsing.")],
                     ['core.html', _tr("HTML parsing, conversion.")],
                     ['core.language', _tr("Language support, formatting, related functionality.")],
+                    ['core.object', _tr("Bless and other object helper functionality.")],
                     ['core.router', _tr("Router, an MVC alternative using routes to build partials.")],
                     ['core.status', _tr("Status management for user feedback.")],
                     ['core.store', _tr("Session, local, cookie and remote store access.")],

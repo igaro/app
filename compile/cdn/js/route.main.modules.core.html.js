@@ -16,6 +16,13 @@ module.exports = function(app) {
                 { 
                     name:'from',
                     type:'function',
+                    returns: {
+                        attributes : [
+                            {
+                                type:'string'
+                            }
+                        ]
+                    },
                     attributes: [
                         { 
                             type:'string', 
@@ -30,6 +37,13 @@ module.exports = function(app) {
                 { 
                     name:'to', 
                     type:'function',
+                    returns: {
+                        attributes : [
+                            {
+                                type:'string'
+                            }
+                        ]
+                    },
                     attributes: [
                         { 
                             type:'string', 
@@ -44,6 +58,13 @@ module.exports = function(app) {
                 { 
                     name:'strip',
                     type:'function',
+                    returns: {
+                        attributes : [
+                            {
+                                type:'string'
+                            }
+                        ]
+                    },
                     attributes: [
                         { 
                             type:'string', 

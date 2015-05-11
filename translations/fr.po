@@ -2047,42 +2047,50 @@ msgstr ""
 msgid "Dispatches events and manages handles to functions."
 msgstr ""
 
-msgid ""
-"Removes an event linked to a dependency (object). This function is called "
-"automatically via the manager exposed via core.object's bless when any "
-"blessed object is destroyed."
+msgid "Removes an event linked to a dependency."
 msgstr ""
 
-msgid "The dependency."
+msgid "An object or function."
 msgstr ""
 
 msgid "Module name."
 msgstr ""
 
 msgid ""
-"If string, it is the event name. If array, the first value is the string "
+"If string, it is the event name. If an array, the first value is the string "
 "name and the second is the target for the event. If a target is supplied, "
 "only registered agents which have no target or which match this target will "
 "be executed."
 msgstr ""
 
-msgid "An object or value to pass on to the registered function."
+msgid "The event name.."
+msgstr ""
+
+msgid "An object or value to pass on to each event handler."
 msgstr ""
 
 msgid ""
-"Triggers registered event handlers. Any handler can return { stopPropagation:"
-"true } to abort the iteration."
+"Triggers registered event handlers. A handler may return an object literal "
+"or a Promise, which in turn may return { stopPropagation:true } to prevent "
+"the event firing up the chain and { stopImmediatePropagation } to prevent "
+"the event reaching further sibling handlers."
+msgstr ""
+
+msgid "An object or function to add as a dependency."
+msgstr ""
+
+msgid "Creates a clone of the event manager but with an additional dependency."
 msgstr ""
 
 msgid ""
-"If string, it is the module name. If array, the function will iterate for "
-"each string within it allowing you to register the same function for "
+"If string, it will be the module name. If array, the function will iterate "
+"for each string within it allowing you to register the same function for "
 "multiple event names."
 msgstr ""
 
 msgid ""
-"If string, it is the event name. If array, the first value is the string "
-"name, the second is a target in which the event applies to (this is "
+"If string, it will be the event name. If array, the first value is the "
+"string name, the second is a target in which the event applies to (this is "
 "automatically registered as a dependency) and the third is any additional "
 "dependencies."
 msgstr ""
@@ -2090,10 +2098,15 @@ msgstr ""
 msgid "Function to execute on event trigger."
 msgstr ""
 
+msgid ""
+"Defines whether the event handler should be added to the beginning of the "
+"array. Use if the function may cancel propagation."
+msgstr ""
+
 msgid "Registers a callback using the module name and event."
 msgstr ""
 
-msgid "The function that was previously registered."
+msgid "The function handler previously registered."
 msgstr ""
 
 msgid ""
@@ -2106,7 +2119,7 @@ msgid ""
 "faster and prevents the function being deregistered from all event names."
 msgstr ""
 
-msgid "Unregisters a function from the event pool."
+msgid "Deregisters a function from the event pool."
 msgstr ""
 
 msgid "Provides file related functionality and formatting."
@@ -2121,7 +2134,7 @@ msgstr ""
 msgid "The filesize in bytes."
 msgstr ""
 
-msgid "Returns a string containing a formatted file size."
+msgid "Returns a formatted file size, i.e 12Kb, 35Mb, 120Gb."
 msgstr ""
 
 msgid "Provides HTML related functionality and formatting."
@@ -2145,8 +2158,14 @@ msgid "A structure containing language codes."
 msgstr ""
 
 msgid ""
-"Returns the value of a function or steps into the object using the current "
+"Executes a function then/or steps into an object literal using the current "
 "language code and returns what's there."
+msgstr ""
+
+msgid "Applies a currency code to the current environment."
+msgstr ""
+
+msgid "Sets supported currency data."
 msgstr ""
 
 msgid ""
@@ -2473,14 +2492,14 @@ msgstr ""
 msgid "Attributes"
 msgstr ""
 
-msgid "This object is blessed. See core.blessed module documentation."
+msgid "This object is blessed. See core.object documentation."
 msgstr ""
 
 msgid "Manager"
 msgstr ""
 
 msgid ""
-"A blessed object can use this module as a manager (see core.bless). These "
+"A blessed object can use this module as a manager (see core.object). These "
 "functions should be used over those in Attributes to reduce coding duplicity "
 "and to set and manage relations and dependencies. You can access this "
 "manager using <b>object.managers.%[0]</b>."
@@ -2538,6 +2557,9 @@ msgid "HTML parsing, conversion."
 msgstr ""
 
 msgid "Language support, formatting, related functionality."
+msgstr ""
+
+msgid "Bless and other object helper functionality."
 msgstr ""
 
 msgid "Router, an MVC alternative using routes to build partials."

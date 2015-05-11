@@ -54,7 +54,7 @@ module.exports = function(app) {
                 },
                 {
                     name:'env',
-                    type:'object',
+                    type:'string',
                     desc: _tr("The currently applied currency code.")
                 },
                 {
@@ -135,6 +135,13 @@ module.exports = function(app) {
                 { 
                     name:'validate', 
                     type:'function',
+                    returns: {
+                        attributes : [
+                            {
+                                type:'boolean'
+                            }
+                        ]
+                    },
                     attributes: [
                         { 
                             type:'float',

@@ -183,7 +183,7 @@
                         t(name);
                     }
                 },
-                dispatch : function(name, evt, params, opts) {
+                dispatch : function(name, evt, params) {
                     var pool = this.pool,
                         self = this,
                         target = null,

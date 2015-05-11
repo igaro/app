@@ -15,6 +15,7 @@ module.exports = function(app) {
             dependencies : [
                 'core.store'
             ],
+            blessed:true,
             extlinks : [
                 {
                     href:'http://en.wikipedia.org/wiki/IETF_language_tag',
@@ -38,7 +39,7 @@ module.exports = function(app) {
                 },
                 {
                     name:'env',
-                    type:'object',
+                    type:'string',
                     desc: _tr("The currently applied currency code.")
                 },
                 { 
@@ -46,14 +47,14 @@ module.exports = function(app) {
                     type:'function',
                     attributes: [
                         { 
-                            type:['function','object'], 
+                            type:'*', 
                             required:true, 
                             attributes:[{
                                 desc: _tr("A structure containing language codes.")
                             }]
                         }
                     ],
-                    desc: _tr("Returns the value of a function or steps into the object using the current language code and returns what's there.")
+                    desc: _tr("Executes a function then/or steps into an object literal using the current language code and returns what's there.")
                 },
                 {
                     name:'pool',
@@ -63,7 +64,14 @@ module.exports = function(app) {
                 {    
                     name:'setEnv',
                     type:'function',
-                    desc: _tr("Sets the currently applied currency code."),
+                    returns: {
+                        attributes : [
+                            {
+                                instanceof : { name:'Promise' }
+                            }
+                        ]
+                    },
+                    desc: _tr("Applies a currency code to the current environment."),
                     attributes : [{
                         type:'string',
                         required:true,
@@ -75,7 +83,14 @@ module.exports = function(app) {
                 {    
                     name:'setPool',
                     type:'function',
-                    desc: _tr("Sets the supported currency codes."),
+                    desc: _tr("Sets supported currency data."),
+                    returns: {
+                        attributes : [
+                            {
+                                instanceof : { name:'Promise' }
+                            }
+                        ]
+                    },
                     attributes : [{
                         type:'string',
                         required:true,
