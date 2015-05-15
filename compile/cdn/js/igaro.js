@@ -1054,7 +1054,6 @@
             events = app['core.events'];
         // load externals
         return new InstanceAmd().get({ modules:modules }).then(function() {
-            throw 'ffff';
             return events.dispatch('','state.init').then(function() {
                 var ii = appConf.init;
                 if (ii && ii.onReady)
