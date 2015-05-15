@@ -14,7 +14,6 @@ module.exports = function(app) {
            
             manager : 'debug',
             embedded:true,
-            providesManager:true,
             attributes : [
                 {
                     name:'developer',
