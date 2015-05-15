@@ -1054,6 +1054,7 @@
             events = app['core.events'];
         // load externals
         return new InstanceAmd().get({ modules:modules }).then(function() {
+            throw 'ffff';
             return events.dispatch('','state.init').then(function() {
                 var ii = appConf.init;
                 if (ii && ii.onReady)
@@ -1063,31 +1064,14 @@
         });
 
     }).catch(function (e) {
-        try {
-            var l;
-            if ('core.language' in app) {
-                l = app['core.language'].env || 'en';
-            } else {
-                if (navigator)
-                    l = navigator.userLanguage || navigator.language;
-                l = !l? 'en' : l.substr(0,3) + l.substr(3).toUpperCase();
-            }
-            var t = typeof e === 'object' && e.error && e.error.incompatible? appConf.browserincompat : appConf.loaderr;
-            if (! t[l]) {
-                var c = l.split('-');  
-                l = t[c[0]]? c[0] : 'en';
-            }
-            var ii = appConf.init;
-            if (ii && ii.onError)
-                ii.onError(app,t[l]);
-        } catch (eX) {
-            // capture error in this handler ... and handle. Ideally shouldn't happen.
-            if (console) 
-                console.error(eX);
-        }
-        return app['core.debug'].log.append(e).then(function() {
-            throw e;
-        });
+        var ii = appConf.init;
+        if (ii && ii.onError)
+            ii.onError(app,e);
+        return app['core.debug'].log.append(e);
+    }).catch (function(e) {
+        // capture error in this handler ... and handle. Ideally shouldn't happen.
+        if (console) 
+            console.error(eX);
     });
 
 })();

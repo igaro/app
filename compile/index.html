@@ -26,9 +26,7 @@ var __igaroapp = {
     },
     version: 0.1,
     timestamp : new Date(),
-    debug : new RegExp("^(3006|3007)$").test(location.port),
-    browserincompat : _tr("Your device or software is too old to work with this application. Please upgrade."),
-    loaderr : _tr("An error has occurred.\n\n If this problem persists please contact us at:\napp-support@igaro.com")
+    debug : new RegExp("^(3006|3007)$").test(location.port)
 };
 var s,
     head = document.getElementsByTagName('head')[0];
@@ -105,8 +103,14 @@ __igaroapp.init = {
     onReady : function() {
         body.removeChild(loadingC);
     },
-    onError : function(e) {
-        loadingD.innerHTML = e;
+    onError : function(app,e) {
+        e = typeof e === 'object' && e.error && e.error.incompatible?
+            _tr("Your device or software is too old. Please upgrade.")
+        :   _tr("An error has occurred. Email <b>app-support@igaro.com</b> for support.")
+        ;
+        loadingD.innerHTML = Object.keys(e).map(function(n) {
+           return e[n]; 
+        }).join("<p>");
         loadingW.className='error';
     }
 };
