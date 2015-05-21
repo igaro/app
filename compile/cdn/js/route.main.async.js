@@ -18,7 +18,7 @@ module.exports = function(app) {
 
         domMgr.mk('p',wrapper,_tr("Igaro App is <b>100%</b> asynchronous, using Promises."));
 
-        domMgr.mk('p', wrapper, _tr("In Igaro App most functions dispatch an event at the end of execution which includes a reference to itself and a value. While events are synchronous in chain and hierarchy, each event may contain asynchronous code. This is why most functions return a Promise."));
+        domMgr.mk('p', wrapper, _tr("Most functions in Igaro App dispatch an event at the end of execution which includes a reference to itself and a value. While events are synchronous in chain and hierarchy, each event may contain asynchronous code. This is why most functions return a Promise."));
 
         domMgr.mk('h1',wrapper,_tr("Promise Standard"));
 
@@ -34,9 +34,9 @@ module.exports = function(app) {
 
         domMgr.mk('p',wrapper,_tr("Unfortunately Promises can become verbose, especially for sequencing (applying the output from multiple Promises in the order they were supplied in). While future versions of Javascript attempt to address this, a standard is many years away."));
 
-        domMgr.mk('p',wrapper,_tr("To assist, many instance modules provide pluralized creation functions, i.e .addItem() and addItems(), and core.router provides .addSequence()."));
+        domMgr.mk('p',wrapper,_tr("core.object provides promiseSequencer() to reduce promises in order while core.router's .addSequence() is similar but also appends DOM elements (or the container element for an instance)."));
 
-        domMgr.mk('p', wrapper, _tr("Igaro App's event management system is cleaner than Object.observe() and signficiantly faster than any other framework's implementation. Events are linked to dependencies, which can be other objects or DOM elements and are automatically released, avoiding memory leaks by removing circular references and allowing Javascripts garbage collector to do it's job. The entire process is automatic."));
+        domMgr.mk('p',wrapper,_tr("Many instance modules provide pluralized creation functions, i.e .addItem() and addItems()."));     
 
     };
 

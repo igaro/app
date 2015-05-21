@@ -10,31 +10,21 @@ module.exports = function(app) {
     CoreStoreMgr.prototype.get = function(id,o) {
         var self = this,
             name = this.parent.name;
-        return new Promise(function (resolve, reject) {
+        return Promise.resolve().then(function() {
             var type = o && o.type? store.providers[o.type] : store.defaultProvider;
             if (! type)
                 throw new Error('core.store -> invalid provider or default not set.',type);
-            return type.get(name+':'+id,o).then(function(data) {
-                resolve(data || null);
-            }).catch(function (e) {
-                reject(e);
-                throw e;
-            });
+            return type.get(name+':'+id,o);
         });
     };
     CoreStoreMgr.prototype.set = function(id,value,o) {
         var name = this.parent.name;
-        return new Promise(function (resolve, reject) {
+        return Promise.resolve().then(function() {
             var type = o && o.type? store.providers[o.type] : store.defaultProvider;
             if (! type)
                 throw new Error('core.store -> invalid provider or default not set.',type);
             var expiry = o && o.expiry? o.expiry.getTime() : null;
-            return type.set(name+':'+id,value,expiry,o).then(function() {
-                resolve();
-            }).catch(function (e) {
-                reject(e);
-                throw e;
-            });
+            return type.set(name+':'+id,value,expiry,o);
         });
     };
     CoreStoreMgr.prototype.destroy = function() {

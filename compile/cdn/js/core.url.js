@@ -7,10 +7,10 @@ module.exports = function(app) {
     return {
     
         getParams : function(url, separator) {
-            if (! separator)
-                separator = '?';
             if (! url) 
                 url = window.location.href;
+            if (! separator)
+                separator = '?';
             var vars = {};
             var regexp = new RegExp("["+separator+"&]+([^=&]+)=([^&]*)", "gi");
             var parts = url.replace(regexp, function(m,key,value) {

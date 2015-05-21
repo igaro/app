@@ -199,7 +199,7 @@ module.exports = function(app) {
                                                     }
                                                     makeahref(cc,m,mIO? mIO().name : m.type,manager); 
                                                 } else { 
-                                                    domMgr.mk('span',cc,type); 
+                                                    domMgr.mk('span',cc,m.type); 
                                                 }
                                                 if (m.required) 
                                                     domMgr.mk('sup',cc,'*');
@@ -295,7 +295,9 @@ module.exports = function(app) {
 
             if (data.manager) {
                 domMgr.mk('h1',v,_tr("Manager"));
-                domMgr.mk('p',v,language.substitute(_tr("A blessed object can use this module as a manager (see core.object). These functions should be used over those in Attributes to reduce coding duplicity and to set and manage relations and dependencies. You can access this manager using <b>object.managers.%[0]</b>."),data.manager));
+                domMgr.mk('p',v,language.substitute(_tr("A blessed object can use this module as a manager (see core.object). These functions should be used over those in Attributes to reduce coding duplicity and to set and manage relations and dependencies.")));
+                if (typeof data.manager === 'string')
+                    domMgr.mk('p'.v,_tr("You can access this manager using <b>[object].managers.%[0]</b>."),data.manager);
                 createTable(data.attributes, domMgr.mk('p',v), true);
             }
 
@@ -397,9 +399,8 @@ module.exports = function(app) {
                     ['core.language', _tr("Language support, formatting, related functionality.")],
                     ['core.object', _tr("Bless and other object helper functionality.")],
                     ['core.router', _tr("Router, an MVC alternative using routes to build partials.")],
-                    ['core.status', _tr("Status management for user feedback.")],
                     ['core.store', _tr("Session, local, cookie and remote store access.")],
-                    ['core.url', _tr("Url parsing, related functionality.")],
+                    ['core.url', _tr("URL parsing, related functionality.")],
                     ['instance.amd', _tr("Async loading of resources, NodeJS/Require style.")],
                     ['instance.bookmark', _tr("Basic social media bookmarking.")],
                     ['instance.date', _tr("Date display with language switching & timezone correction.")],

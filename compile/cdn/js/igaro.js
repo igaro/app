@@ -533,12 +533,13 @@
             var CoreObjectMgr = function(parent) {
                 this.parent = parent;
             };
-            CoreObjectMgr.prototype.create = function(g,o) {
-                var parent = this.parent;
+            CoreObjectMgr.prototype.create = function(t,o) {
                 if (! o)
                     o = {};
-                var Amd = app['instance.amd'];
-                var t = typeof g === 'string'? { name:g } : g,
+                if (typeof t === 'string') 
+                    t = { name:t };
+                var Amd = app['instance.amd'],
+                    parent = this.parent,
                     name = t.fullname? t.fullname : 'instance.'+t.name,
                     p = { 
                         modules : [{ name: name+'.js' }],
@@ -1055,8 +1056,8 @@
         // load externals
         return new InstanceAmd().get({ modules:modules }).then(function() {
             return events.dispatch('','state.init').then(function() {
-                var ii = appConf.init;
-                if (ii && ii.onReady)
+               var ii = appConf.init;
+               if (ii && ii.onReady)
                     ii.onReady(app);
                 return app;
             });
@@ -1070,7 +1071,7 @@
     }).catch (function(e) {
         // capture error in this handler ... and handle. Ideally shouldn't happen.
         if (console) 
-            console.error(eX);
+            console.error(e);
     });
 
 })();

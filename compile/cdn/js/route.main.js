@@ -74,7 +74,7 @@ module.exports = function(app) {
 
                 objectMgr.create('pagemessage',{
                     type:'info',
-                    message: _tr("You can view the code behind any page in this app by clicking the parenthesis icon in the header."),
+                    message: _tr("You can view the code behind any page in this app by clicking the curly bracket icon in the header."),
                     hideable: {
                         id:model.path.join('.')+'.hintcode'
                     }

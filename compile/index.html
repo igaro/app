@@ -9,6 +9,8 @@
 <script>
 var __igaroapp = {
     cdn : location.protocol === 'file:'? location.href+'/../cdn' : '/cdn',
+    msgIncompatible : _tr("Your device or software is too old. Please upgrade."),
+    msgErr : _tr("An unexpected error has occurred. For support please email <b>app-support@igaro.com</b> for support."),
     libs : { 
         load :[
             { name:'conf.app.js' }
@@ -104,10 +106,7 @@ __igaroapp.init = {
         body.removeChild(loadingC);
     },
     onError : function(app,e) {
-        e = typeof e === 'object' && e.error && e.error.incompatible?
-            _tr("Your device or software is too old. Please upgrade.")
-        :   _tr("An error has occurred. Email <b>app-support@igaro.com</b> for support.")
-        ;
+        e = typeof e === 'object' && e.error && e.error.incompatible? this.msgIncompatible : this.msgErr;
         loadingD.innerHTML = Object.keys(e).map(function(n) {
            return e[n]; 
         }).join("<p>");

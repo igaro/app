@@ -2387,10 +2387,13 @@ module.exports = function(app, params) {
         // debug handling
         var displaying = false;
         events.on('core.debug','handle', function (o) {
-            if (displaying || (typeof o === 'object' && o.value && o.value.error === 0))
+            var value = typeof o === 'object' && typeof o.value === 'object'? o.value : {},
+                error = value.error;
+            if (displaying || error === 0)
                 return;
             displaying = true;
-            var msg = params.appconf.loaderr;
+            var param = params.appconf,
+                msg = typeof error === 'object' && error.incompatible? param.msgIncompatible : param.msgErr;
             try {
                 new ModalDialog().alert({
                     message: msg
@@ -2398,7 +2401,12 @@ module.exports = function(app, params) {
                     displaying = false;
                 });
             } catch (e) {
-                alert(msg['en-US']);
+                // should never get here
+                try {
+                    alert(msg.en);
+                } catch(eX) {
+                    alert(eX);
+                }
                 displaying = false;
             }
             return debug.log.append(o.value,o.path,o.event);
