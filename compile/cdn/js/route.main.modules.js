@@ -161,14 +161,14 @@ module.exports = function(app) {
                                                             q[k] += ' '+s.desc[k];
                                                     });
                                                 }
-                                                rr.setContent({ content:q });
+                                                dom.setContent(rr, q);
                                             } else {
                                                 var sa = m.name;
                                                 if (m.required) 
                                                     sa += ' *';
                                                 domMgr.mk('a',cc,sa).href = m.href? m.href : 'https://developer.mozilla.org/en-US/search?q='+m.name;
                                                 if (m.desc) 
-                                                    rr.setContent({ content:m.desc });
+                                                    dom.setContent(rr,m.desc);
                                             }
                                         } else if (s.attributes && s.type!=='function') {
                                             s.attributes.forEach(function(o) {
@@ -253,8 +253,8 @@ module.exports = function(app) {
                 } else if (u.direct) {
                     domMgr.mk('p',v,_tr("Access the features of this library directly."));
                 }
-                if (u.managerName) {
-                    domMgr.mk('p',v, _tr("Provides a manager on a blessed object, accessible via object.managers.%[0]."));
+                if (data.manager) {
+                    domMgr.mk('p',v, _tr("Provides a manager on a blessed object. See Manager below."));
                 }
                 if (u.attributes) {
                     domMgr.mk('p',v, _tr("Where <b>o</b> is an object containing attributes from the following table."));
@@ -296,8 +296,8 @@ module.exports = function(app) {
             if (data.manager) {
                 domMgr.mk('h1',v,_tr("Manager"));
                 domMgr.mk('p',v,language.substitute(_tr("A blessed object can use this module as a manager (see core.object). These functions should be used over those in Attributes to reduce coding duplicity and to set and manage relations and dependencies.")));
-                if (typeof data.manager === 'string')
-                    domMgr.mk('p'.v,_tr("You can access this manager using <b>[object].managers.%[0]</b>."),data.manager);
+                if (typeof data.manager === 'boolean')
+                    domMgr.mk('p',v,language.substitute(_tr("You can access this manager using <b>[object].managers.%[0]</b>."),m.name.substr(m.name.lastIndexOf('.')+1)));
                 createTable(data.attributes, domMgr.mk('p',v), true);
             }
 
