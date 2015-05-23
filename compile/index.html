@@ -100,10 +100,13 @@ loadingC.className='igaro';
 body.appendChild(loadingC);
 loadingC.appendChild(loadingW);
 loadingW.appendChild(loadingD);
-
+body.style.overflow = 'hidden';
 __igaroapp.init = {
     onReady : function() {
-        body.removeChild(loadingC);
+        setTimeout(function() {
+            body.removeChild(loadingC);
+            body.style.overflow = '';
+        }, 50);
     },
     onError : function(app,e) {
         e = typeof e === 'object' && e.error && e.error.incompatible? this.msgIncompatible : this.msgErr;
@@ -111,6 +114,7 @@ __igaroapp.init = {
            return e[n]; 
         }).join("<p>");
         loadingW.className='error';
+        body.style.overflow = '';
     }
 };
 

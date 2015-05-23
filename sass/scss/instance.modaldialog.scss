@@ -25,7 +25,8 @@
         >.header {
             background:#eee;
             >h1 {
-               padding:.7em; 
+                margin:0;
+                padding:.7em; 
             }
         }
         >.message, >.action, >.custom {

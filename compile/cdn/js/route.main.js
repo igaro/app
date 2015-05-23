@@ -117,7 +117,7 @@ module.exports = function(app) {
                         var domMgr = list.managers.dom;
                         return domMgr.mk('section', null, [
                             domMgr.mk('h1', null, _tr("Documentation")),
-                            domMgr.mk('p', null, _tr("Learn, develop and deploy an app in a web browser or on a mobile device/emulator.")),
+                            domMgr.mk('p', null, _tr("Learn, develop and deploy an app in a web browser or on a mobile device or emulator.")),
                             list.container
                         ]);
                     });
@@ -132,7 +132,7 @@ module.exports = function(app) {
                         var domMgr = list.managers.dom;
                         return domMgr.mk('section', null, [
                             domMgr.mk('h1', null, _tr("Support")),
-                            domMgr.mk('p', null, _tr("Discuss with others, get involved with Igaro App development, or seek help.")),
+                            domMgr.mk('p', null, _tr("Discuss ideas, get involved with Igaro App development, or seek help.")),
                             list.container
                         ]);
                     });
