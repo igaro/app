@@ -35,7 +35,14 @@ module.exports = function(app) {
                             }]
                         }
                     ],
-                    desc: _tr("Returns an object literal from the pool for a specified code.")
+                    desc: _tr("Returns an object literal from the pool for a specified code."),
+                    returns: {
+                        attributes : [
+                            {
+                                type:'object'
+                            }
+                        ]
+                    }
                 },
                 {
                     name:'env',

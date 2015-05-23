@@ -10,7 +10,7 @@
 var __igaroapp = {
     cdn : location.protocol === 'file:'? location.href+'/../cdn' : '/cdn',
     msgIncompatible : _tr("Your device or software is too old. Please upgrade."),
-    msgErr : _tr("An unexpected error has occurred. For support please email <b>app-support@igaro.com</b> for support."),
+    msgErr : _tr("An unexpected error has occurred. Please email <b>app-support@igaro.com</b> for support."),
     libs : { 
         load :[
             { name:'conf.app.js' }
@@ -100,21 +100,16 @@ loadingC.className='igaro';
 body.appendChild(loadingC);
 loadingC.appendChild(loadingW);
 loadingW.appendChild(loadingD);
-body.style.overflow = 'hidden';
 __igaroapp.init = {
     onReady : function() {
-        setTimeout(function() {
-            body.removeChild(loadingC);
-            body.style.overflow = '';
-        }, 50);
+        body.removeChild(loadingC);
     },
-    onError : function(app,e) {
-        e = typeof e === 'object' && e.error && e.error.incompatible? this.msgIncompatible : this.msgErr;
+    onError : function(app,params,e) {
+        loadingW.className='error';
+        e = typeof e === 'object' && e.error && e.error.incompatible? params.msgIncompatible : params.msgErr;
         loadingD.innerHTML = Object.keys(e).map(function(n) {
            return e[n]; 
         }).join("<p>");
-        loadingW.className='error';
-        body.style.overflow = '';
     }
 };
 

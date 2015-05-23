@@ -268,7 +268,6 @@ body {
         height:100%;
         width:100%;
         display:table;
-        background-color:#fff;
         color:#000;
         >div {
             z-index:99999999;
@@ -280,23 +279,24 @@ body {
               margin:0 auto;
               display:inline-block;
             }
-
-            &.error > div {
-              padding:10em 1em 1em 1em;
-              background-size:9em 9em;
-              background-position: 50% 0;
-              background-repeat: no-repeat;
-              background-image: inline-image("error.svg");
+            &.error {
+                background-color:#fff;
+                > div {
+                  padding:10em 1em 1em 1em;
+                  background-size:9em 9em;
+                  background-position: 50% 0;
+                  background-repeat: no-repeat;
+                  background-image: inline-image("error.svg");
+                }
             }
-
             &:not(.error) >div {
                 border: 1.2em solid #000; 
                 border-right-color: transparent; 
                 border-radius: 50%;
                 -webkit-animation: igaro-spin 1.2s linear infinite; 
                 animation: igaro-spin 1.2s linear infinite;
-                width:8em;
-                height:8em;
+                width:10em;
+                height:10em;
             }
         }
     }

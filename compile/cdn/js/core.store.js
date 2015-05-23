@@ -41,8 +41,12 @@ module.exports = function(app) {
             return new CoreStoreMgr(parent);
         },
 
-        installProvider : function(name,o) {
-            this.providers[name] = o;
+        getProviderById : function(id) {
+            return this.providers[id];
+        },  
+
+        installProvider : function(id,o) {
+            this.providers[id] = o;
         }
     };
 
@@ -51,7 +55,7 @@ module.exports = function(app) {
         'cookie',
         { 
             get : function(id) {
-                return new Promise(function (resolve) {
+                return Promise.resolve(function() {
                     id += '='; 
                     var j = -1,
                         done = false,
@@ -71,18 +75,17 @@ module.exports = function(app) {
                         t = unescape(document.cookie.substring(j + id.length, j + id.length + k - 1));
                         done = true;
                     }
-                    resolve(JSON.parse(t));
+                    return JSON.parse(t);
                 });
             },
             set : function(id,value,expiry) {
-                return new Promise(function (resolve) {
+                return Promise.resolve().then(function() {
                     if (typeof value === 'undefined') {
                         document.cookie = id + '=\'\';path=/;expires=Sun, 17-Jan-1980 00:00:00 GMT;\n';
                     } else {
                         value = JSON.stringify(value);
                         document.cookie = id +'='+(expiry === null? escape(value)+';path=/;\n' : escape(value)+';path=/;expires='+expiry+';\n');
                     }
-                    resolve();
                 });
             }
         }
@@ -93,24 +96,23 @@ module.exports = function(app) {
         'local',
         { 
             get : function(id) {
-                return new Promise(function (resolve) {
+                return Promise.resolve(function() {
                     var v = localStorage.getItem(id);
                     if (v) 
                         v = JSON.parse(v);
                     if (! v) 
-                        return resolve();
+                        return;
                     if (v.expiry && v.expiry < new Date().getTime()) {
                         localStorage.setItem(id,null);
-                        return resolve();
+                        return;
                     }
-                    return resolve(v.value);
+                    return v.value;
                 });
             },
             set : function(id,value,expiry) {
-                return new Promise(function (resolve) {
+                return Promise.resolve(function() {
                     value = typeof value === 'undefined' || value === null? null : JSON.stringify({ value:value, expiry:expiry });
                     localStorage.setItem(id,value);
-                    resolve();
                 });
             }
         }
@@ -120,25 +122,24 @@ module.exports = function(app) {
     store.installProvider(
         'session',
         {
-            set : function(id) {
-                return new Promise(function (resolve) {
+            get : function(id) {
+                return Promise.resolve(function() {
                     var v = sessionStorage.getItem(id);
                     if (v) 
                         v = JSON.parse(v);
                     if (! v) 
-                        return resolve();
+                        return;
                     if (v.expiry && v.expiry < new Date().getTime()) {
                         sessionStorage.setItem(id,null);
-                        return resolve();
+                        return;
                     }
-                    return resolve(v.value);
+                    return v.value;
                 });
             },
-            get : function(id,value,expiry) {
-                return new Promise(function (resolve) {
+            set : function(id,value,expiry) {
+                return Promise.resolve(function() {
                     value = typeof value === 'undefined' || value === null? null : JSON.stringify({ value:value, expiry:expiry });
                     sessionStorage.setItem(id,value);
-                    resolve();
                 });
             }
         }

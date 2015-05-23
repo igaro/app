@@ -32,7 +32,14 @@ module.exports = function(app) {
                             ]
                         }
                     ],
-                    desc: _tr("Returns the current fully qualified domain name.")
+                    desc: _tr("Returns the current fully qualified domain name."),
+                    returns: {
+                        attributes : [
+                            {
+                                type:'string'
+                            }
+                        ]
+                    }
                 },
                 { 
                     name:'getHashParam', 
@@ -52,7 +59,14 @@ module.exports = function(app) {
                             }]
                         }
                     ],
-                    desc: _tr("Parses a string for params after the hash and on match of a specific key returns the value.")
+                    desc: _tr("Parses a string for params after the hash and on match of a specific key returns the value."),
+                    returns: {
+                        attributes : [
+                            {
+                                type:'string'
+                            }
+                        ]
+                    }
                 },
                 { 
                     name:'getHashParams', 
@@ -93,6 +107,13 @@ module.exports = function(app) {
                             }]
                         }
                     ],
+                    returns: {
+                        attributes : [
+                            {
+                                type:'string'
+                            }
+                        ]
+                    },
                     desc: _tr("Parses a string for params after the question mark and on match of a specific key returns the value.")
                 },
                 { 
@@ -151,7 +172,6 @@ module.exports = function(app) {
                     desc: _tr("Parses a URL and replaces or appends a new param, returning the new URL.")
                 }
             ]
-
         };
 
         model.parent.stash.childsupport(data,model);

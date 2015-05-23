@@ -24,7 +24,7 @@ module.exports = function(app) {
             ],
             attributes : [
                 { 
-                    name:'getNameOfId', 
+                    name:'getFromPoolById', 
                     type:'function',
                     attributes: [
                         {
@@ -35,7 +35,14 @@ module.exports = function(app) {
                             }]
                         }
                     ],
-                    desc: _tr("Returns an object literal from the pool for a specified code.")
+                    desc: _tr("Returns an object literal from the pool for a specified code."),
+                    returns: {
+                        attributes : [
+                            {
+                                type:'object'
+                            }
+                        ]
+                    }
                 },
                 {
                     name:'env',
@@ -54,6 +61,13 @@ module.exports = function(app) {
                             }]
                         }
                     ],
+                    returns: {
+                        attributes : [
+                            {
+                                type:'string'
+                            }
+                        ]
+                    },
                     desc: _tr("Executes a function then/or steps into an object literal using the current language code and returns what's there.")
                 },
                 {

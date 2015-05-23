@@ -36,7 +36,13 @@ module.exports = function(app) {
                         },
                     ],
                     desc: _tr("Takes a denomination and formats it to two decimal places."),
-                        
+                    returns: {
+                        attributes : [
+                            {
+                                type:'float'
+                            }
+                        ]
+                    }   
                 },
                 { 
                     name:'getFromPoolById', 
@@ -50,7 +56,14 @@ module.exports = function(app) {
                             }]
                         }
                     ],
-                    desc: _tr("Returns an object literal from the pool for a specified code.")
+                    desc: _tr("Returns an object literal from the pool for a specified code."),
+                    returns: {
+                        attributes : [
+                            {
+                                type:'object'
+                            }
+                        ]
+                    }
                 },
                 {
                     name:'env',
@@ -122,7 +135,7 @@ module.exports = function(app) {
                 {    
                     name:'substitute',
                     type:'function',
-                    desc: _tr("Parses and replaces %[n] with any arguments."),
+                    desc: _tr("Parses each key on a literal replacing %[n] with any arguments."),
                     attributes : [{
                         type:'object',
                         required:true,
@@ -130,7 +143,14 @@ module.exports = function(app) {
                             instanceof : { name: 'Array' },
                             desc: _tr("The first element is the object literal, Further elements correspond to the value of n."),
                         }]
-                    }]
+                    }],
+                    returns: {
+                        attributes : [
+                            {
+                                type:'object'
+                            }
+                        ]
+                    }
                 },
                 { 
                     name:'validate', 

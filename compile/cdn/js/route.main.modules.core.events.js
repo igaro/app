@@ -18,16 +18,39 @@ module.exports = function(app) {
                 {
                     name:'clean',
                     type:'function',
-                    desc: _tr("Removes an event linked to a dependency."), 
+                    forManager:true,
+                    desc: _tr("Removes dependencies from an event and the event itself if the dependency is a target. Warning: unless you can be sure the dependency is only used by your function block use the non-manager clean() method instead."), 
                     attributes : [
                         { 
-                            type:'*', 
+                            type:'*',
+                            forManager:true, 
                             required:true,
                             attributes : [{
                                 desc: _tr("An object or function.")
                             }]
                         },
-                    ]
+                        {
+                            type:'string',
+                            attributes : [{
+                                desc: _tr("The module name to be used to lookup the function. This makes the lookup faster and prevents the dependency being removed from all module names.")
+                            }]
+                        },
+                        { 
+                            type:'string',
+                            forManager:true,
+                            attributes : [{
+                                desc: _tr("The event name to be used to lookup the function. This makes the lookup faster and prevents the dependency being removed from all event names.")
+                            }]
+                        }
+                    ],
+                    returns: {
+                        attributes : [
+                            {
+                                type:'object',
+                                desc:_tr("The event manager is returned allowing for linked actions.")
+                            }
+                        ]
+                    }
                 },
                 { 
                     name:'dispatch', 
@@ -85,11 +108,19 @@ module.exports = function(app) {
                             forManager:true,
                             required:true,
                             attributes : [{
-                                desc: _tr("An object or function to add as a dependency.")
+                                desc: _tr("An object, array of, or function to add as a dependency.")
                             }]
                         },
                     ],
-                    desc: _tr("Creates a clone of the event manager but with an additional dependency.")
+                    returns: {
+                        attributes : [
+                            {
+                                type:'object',
+                                desc:_tr("A copy of the event manager.")
+                            }
+                        ]
+                    },
+                    desc: _tr("Creates a clone of the event manager but with an additional dependencies.")
                 },
                 { 
                     name:'on', 
@@ -137,17 +168,27 @@ module.exports = function(app) {
                             ]
                         }
                     ],
+                    returns: {
+                        attributes : [
+                            {
+                                type:'object',
+                                desc:_tr("The event manager is returned allowing for linked actions.")
+                            }
+                        ]
+                    },
                     desc: _tr("Registers a callback using the module name and event.")
                 },
                 { 
                     name:'remove', 
                     type:'function',
+                    forManager:true,
                     attributes: [
                         { 
                             type:'function',
                             required:true,
+                            forManager:true,
                             attributes : [{
-                                desc: _tr("The function handler previously registered.")
+                                desc: _tr("The function previously registered.")
                             }]
                         },
                         {
@@ -158,11 +199,20 @@ module.exports = function(app) {
                         },
                         { 
                             type:'string',
+                            forManager:true,
                             attributes : [{
                                 desc: _tr("The event name to be used to lookup the function. This makes the lookup faster and prevents the function being deregistered from all event names.")
                             }]
                         }
                     ],
+                    returns: {
+                        attributes : [
+                            {
+                                type:'object',
+                                desc:_tr("The event manager is returned allowing for linked actions.")
+                            }
+                        ]
+                    },
                     desc: _tr("Deregisters a function from the event pool.")
                 }
             ]

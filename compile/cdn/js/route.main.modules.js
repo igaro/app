@@ -254,7 +254,7 @@ module.exports = function(app) {
                     domMgr.mk('p',v,_tr("Access the features of this library directly."));
                 }
                 if (data.manager) {
-                    domMgr.mk('p',v, _tr("Provides a manager on a blessed object. See Manager below."));
+                    domMgr.mk('p',v, _tr("Provides a manager for a blessed object. See Manager below."));
                 }
                 if (u.attributes) {
                     domMgr.mk('p',v, _tr("Where <b>o</b> is an object containing attributes from the following table."));
@@ -295,9 +295,9 @@ module.exports = function(app) {
 
             if (data.manager) {
                 domMgr.mk('h1',v,_tr("Manager"));
-                domMgr.mk('p',v,language.substitute(_tr("A blessed object can use this module as a manager (see core.object). These functions should be used over those in Attributes to reduce coding duplicity and to set and manage relations and dependencies.")));
-                if (typeof data.manager === 'boolean')
-                    domMgr.mk('p',v,language.substitute(_tr("You can access this manager using <b>[object].managers.%[0]</b>."),m.name.substr(m.name.lastIndexOf('.')+1)));
+                domMgr.mk('p',v,_tr("A blessed object can use this module as a manager (see core.object). These functions should be used over those in Attributes to reduce coding duplicity and to set and manage relations and dependencies."));
+                if (typeof data.manager === 'string')
+                    domMgr.mk('p',v,language.substitute(_tr("You can access this manager using <b>[object].managers.%[0]</b>."),data.manager));
                 createTable(data.attributes, domMgr.mk('p',v), true);
             }
 

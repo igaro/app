@@ -88,7 +88,7 @@ module.exports = function(app, params) {
             });
         },
 
-        getPoolItemById : function(id) {
+        getFromPoolById : function(id) {
             return this.pool[id];
         },
     

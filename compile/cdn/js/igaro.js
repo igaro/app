@@ -129,29 +129,43 @@
                         m.push(p);
                     }                
                 },
-                // removes events linked to a particular dependency. A dependency can be a function or object.
-                clean : function(target) {
-                    var pool = this.pool;
-                    Object.keys(pool).forEach(function(n) {
-                        var t = pool[n];
-                        Object.keys(t).forEach(function(e) {
-                            var m = t[e];
+
+                // removes dependencies from events and the event itself if the dependency is a target.
+                clean : function(dep, name, event) {
+                    var pool = this.pool,
+                    t = function(name) {
+                        var d = pool[name];
+                        var h = function(event) {
+                            var m = d[event];
                             m.forEach(function(x,i) {
-                                if (x.deps.indexOf(target) > -1)
+                                x.deps.splice(x.deps.indexOf(dep), 1);
+                                if (x.target === dep)
                                     m.splice(i,1);
                             });
-
-                        });
-                    });
-                },
-                // remove an event by event literal or function
-                remove : function(fn,name,event) {
-                    var obj = null;
-                    if (typeof fn === 'object') {
-                        obj = fn;
-                        name = fn.name;
-                        event = fn.event;
+                        };
+                        if (! event) {
+                            Object.keys(pool[name]).forEach(h);
+                        } else {
+                            h(event);
+                        }
+                    };
+                    if (typeof name !== 'string') {
+                        Object.keys(pool).forEach(t);
+                    } else {
+                        t(name);
                     }
+                    return this;
+                },
+
+                // remove an event by function
+                remove : function(fn,name,event) {
+                    //var obj = null;
+                    //if (typeof fn === 'object') {
+                    //    obj = fn;
+                    //    name = fn.name;
+                    //    event = fn.event;
+                    //}
+                    var obj = fn;
                     var self = this;
                     if (fn instanceof Array) {
                         fn.forEach(function (f) {
@@ -182,6 +196,7 @@
                     } else {
                         t(name);
                     }
+                    return this;
                 },
                 dispatch : function(name, evt, params) {
                     var pool = this.pool,
@@ -275,12 +290,12 @@
                 });
                 return this;
             };
-            CoreEventMgr.prototype.clean = function(fn,evt) {
-                events.clean(fn,this.x.name,evt);
-                return this;
-            };
             CoreEventMgr.prototype.remove = function(fn,evt) {
                 events.remove(fn,this.x.name,evt);
+                return this;
+            };
+            CoreEventMgr.prototype.clean = function(dep,evt) {
+                events.clean(dep,this.x.name,evt);
                 return this;
             };
             CoreEventMgr.prototype.dispatch = function(evt,value) {
@@ -1066,7 +1081,7 @@
     }).catch(function (e) {
         var ii = appConf.init;
         if (ii && ii.onError)
-            ii.onError(app,e);
+            ii.onError(app,appConf,e);
         return app['core.debug'].log.append(e);
     }).catch (function(e) {
         // capture error in this handler ... and handle. Ideally shouldn't happen.

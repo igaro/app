@@ -14,6 +14,11 @@ module.exports = function(app) {
             manager:true,
             attributes : [
                 { 
+                    name:'defaultprovider', 
+                    type:'object',
+                    desc : _tr("Links to the object in the provider array which provides the default storage routine."),
+                },
+                { 
                     name:'get', 
                     type:'function',
                     forManager:true,
@@ -48,6 +53,118 @@ module.exports = function(app) {
                             }
                         ]
                     }
+                },
+                { 
+                    name:'getProviderById', 
+                    type:'function',
+                    desc : _tr("Returns a provider by it's unique id, such as 'cookie'."),
+                    attributes: [
+                        { 
+                            type:'string', 
+                            required:true,
+                            attributes:[{
+                                desc: _tr("The id to match.")
+                            }]
+                        }
+                    ],
+                    returns : {
+                        attributes : [
+                            {
+                                type:'object'
+                            }
+                        ]
+                    }
+                },
+                { 
+                    name:'installProvider', 
+                    type:'function',
+                    desc : _tr("Installs and returns a new provider. Typically this is used for adding API storage methods."),
+                    attributes: [
+                        { 
+                            type:'string', 
+                            required:true,
+                            attributes:[{
+                                desc: _tr("A name to use as a unique identifier.")
+                            }]
+                        },
+                        { 
+                            type:'object', 
+                            required:true,
+                            attributes: [
+                                { 
+                                    name:'get',
+                                    type:'function', 
+                                    required:true,
+                                    desc: _tr("The getter routine for the provider."),
+                                    attributes: [
+                                        { 
+                                            type:'string', 
+                                            required:true,
+                                            attributes:[{
+                                                desc: _tr("The unique id of the value to be retrieved.")
+                                            }]
+                                        }
+                                    ],
+                                    returns : {
+                                        attributes : [
+                                            {
+                                                instanceof: { name: 'Promise' }
+                                            }
+                                        ]
+                                    }
+                                },
+                                { 
+                                    name:'set',
+                                    type:'function', 
+                                    required:true,
+                                    desc: _tr("The setter routine for the provider."),
+                                    attributes: [
+                                        { 
+                                            type:'string', 
+                                            required:true,
+                                            attributes:[{
+                                                desc: _tr("The unique id of the value to be retrieved.")
+                                            }]
+                                        },
+                                        { 
+                                            type:'*', 
+                                            attributes:[{
+                                                desc: _tr("The value to be stored. Typically a provider will delete any matching key if this value is undefined or null.")
+                                            }]
+                                        },
+                                        { 
+                                            type:'object', 
+                                            attributes:[
+                                                {
+                                                    instanceof: { name:'Date' },
+                                                    desc: _tr("Defines a date/time when the value to be stored should expire. Typically if no value is supplied the provider will store the value indefinitely.")
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    returns : {
+                                        attributes : [
+                                            {
+                                                instanceof: { name: 'Promise' }
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    returns : {
+                        attributes : [
+                            {
+                                type:'object'
+                            }
+                        ]
+                    }
+                },
+                { 
+                    name:'providers', 
+                    instanceof : { name:'Array' },
+                    desc : _tr("A pool for storage mechanisms. Cookie, localStorage and sessionStorage are built in.")
                 },
                 { 
                     name:'set', 

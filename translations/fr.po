@@ -17,8 +17,8 @@ msgid "Your device or software is too old. Please upgrade."
 msgstr "Your Browser is too old to work with this application. Please upgrade."
 
 msgid ""
-"An unexpected error has occurred. For support please email <b>app-"
-"support@igaro.com</b> for support."
+"An unexpected error has occurred. Please email <b>app-support@igaro.com</b> "
+"for support."
 msgstr ""
 
 msgid "Andorra"
@@ -1565,7 +1565,7 @@ msgid "Documentation"
 msgstr ""
 
 msgid ""
-"Learn, develop and deploy an app in a web browser or on a mobile device/"
+"Learn, develop and deploy an app in a web browser or on a mobile device or "
 "emulator."
 msgstr ""
 
@@ -1578,8 +1578,7 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-msgid ""
-"Discuss with others, get involved with Igaro App development, or seek help."
+msgid "Discuss ideas, get involved with Igaro App development, or seek help."
 msgstr ""
 
 msgid ""
@@ -1768,7 +1767,7 @@ msgstr ""
 msgid "Sets the supported currency codes."
 msgstr ""
 
-msgid "Parses and replaces %[n] with any arguments."
+msgid "Parses each key on a literal replacing %[n] with any arguments."
 msgstr ""
 
 msgid ""
@@ -2040,10 +2039,26 @@ msgstr ""
 msgid "Dispatches events and manages handles to functions."
 msgstr ""
 
-msgid "Removes an event linked to a dependency."
+msgid ""
+"Removes dependencies from an event and the event itself if the dependency is "
+"a target. Warning: unless you can be sure the dependency is only used by "
+"your function block use the non-manager clean() method instead."
 msgstr ""
 
 msgid "An object or function."
+msgstr ""
+
+msgid ""
+"The module name to be used to lookup the function. This makes the lookup "
+"faster and prevents the dependency being removed from all module names."
+msgstr ""
+
+msgid ""
+"The event name to be used to lookup the function. This makes the lookup "
+"faster and prevents the dependency being removed from all event names."
+msgstr ""
+
+msgid "The event manager is returned allowing for linked actions."
 msgstr ""
 
 msgid "Module name."
@@ -2069,10 +2084,14 @@ msgid ""
 "the event reaching further sibling handlers."
 msgstr ""
 
-msgid "An object or function to add as a dependency."
+msgid "An object, array of, or function to add as a dependency."
 msgstr ""
 
-msgid "Creates a clone of the event manager but with an additional dependency."
+msgid "A copy of the event manager."
+msgstr ""
+
+msgid ""
+"Creates a clone of the event manager but with an additional dependencies."
 msgstr ""
 
 msgid ""
@@ -2099,7 +2118,7 @@ msgstr ""
 msgid "Registers a callback using the module name and event."
 msgstr ""
 
-msgid "The function handler previously registered."
+msgid "The function previously registered."
 msgstr ""
 
 msgid ""
@@ -2525,6 +2544,11 @@ msgstr ""
 msgid "Storage routines for cookie, localStorage, sessionStorage and API's."
 msgstr ""
 
+msgid ""
+"Links to the object in the provider array which provides the default storage "
+"routine."
+msgstr ""
+
 msgid "Retrieves a value from a storage system."
 msgstr ""
 
@@ -2534,6 +2558,41 @@ msgstr ""
 msgid ""
 "Defines the provider. Use 'cookie', 'local', 'session' or a custom provider. "
 "Default is 'local'."
+msgstr ""
+
+msgid "Returns a provider by it's unique id, such as 'cookie'."
+msgstr ""
+
+msgid ""
+"Installs and returns a new provider. Typically this is used for adding API "
+"storage methods."
+msgstr ""
+
+msgid "A name to use as a unique identifier."
+msgstr ""
+
+msgid "The getter routine for the provider."
+msgstr ""
+
+msgid "The unique id of the value to be retrieved."
+msgstr ""
+
+msgid "The setter routine for the provider."
+msgstr ""
+
+msgid ""
+"The value to be stored. Typically a provider will delete any matching key if "
+"this value is undefined or null."
+msgstr ""
+
+msgid ""
+"Defines a date/time when the value to be stored should expire. Typically if "
+"no value is supplied the provider will store the value indefinitely."
+msgstr ""
+
+msgid ""
+"A pool for storage mechanisms. Cookie, localStorage and sessionStorage are "
+"built in."
 msgstr ""
 
 msgid "Saves a value to a storage system."
@@ -2627,8 +2686,7 @@ msgstr ""
 msgid "Access the features of this library directly."
 msgstr ""
 
-msgid ""
-"Provides a manager on a blessed object, accessible via object.managers.%[0]."
+msgid "Provides a manager for a blessed object. See Manager below."
 msgstr ""
 
 msgid ""
