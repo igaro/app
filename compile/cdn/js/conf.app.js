@@ -2392,7 +2392,7 @@ module.exports = function(app, params) {
             if (displaying || error === 0)
                 return;
             displaying = true;
-            var param = params.appconf,
+            var param = params.conf,
                 msg = typeof error === 'object' && error.incompatible? param.msgIncompatible : param.msgErr;
             try {
                 new ModalDialog().alert({

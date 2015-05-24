@@ -20,7 +20,7 @@ module.exports = function(app, params) {
         return country.managers.store.get('env').then(function (stored) {
             return [
                 stored,
-                params.appconf.localeCountry,
+                params.conf.localeCountry,
                 url.getParam('localeCountry'),
                 n,
                 'US'

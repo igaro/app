@@ -258,9 +258,8 @@ body {
     h4 { font-size: 105%; margin:1.4% 0 0 0; opacity:.7; line-height:normal; }
     h5 { font-size: 100%; margin:1.1% 0 0 0; opacity:.6; line-height:normal; }
     h6 { font-size: 95%; margin:0.8% 0 0 0; opacity:.5; line-height:normal; }
-    //p { line-height:normal; }
     
-    >.igaro {
+    >.igaro-loading {
         position:fixed;
         z-index:9999999;
         left:0;
@@ -268,6 +267,7 @@ body {
         height:100%;
         width:100%;
         display:table;
+        background-color:#fff;
         color:#000;
         >div {
             z-index:99999999;
@@ -275,6 +275,7 @@ body {
             display:table-cell;
             vertical-align:middle;
             text-align:center;
+            transition: all 1s;
             >div {
               margin:0 auto;
               display:inline-block;
@@ -293,10 +294,15 @@ body {
                 border: 1.2em solid #000; 
                 border-right-color: transparent; 
                 border-radius: 50%;
-                -webkit-animation: igaro-spin 1.2s linear infinite; 
-                animation: igaro-spin 1.2s linear infinite;
+                -webkit-animation: igaro-spin 1.35s linear infinite; 
+                animation: igaro-spin 1.35s linear infinite;
                 width:10em;
                 height:10em;
+            }
+            &.progress >div {
+                border-left-color: transparent;
+                animation-duration: 1.15s; 
+                -webkit-animation-duration: 1.15s; 
             }
         }
     }

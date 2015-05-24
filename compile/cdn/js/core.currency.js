@@ -21,7 +21,7 @@ module.exports = function(app, params) {
         return currency.managers.store.get('env').then(function (stored) {
             return [
                 stored,
-                params.appconf.localeCurrency,
+                params.conf.localeCurrency,
                 url.getParam('localeCurrency'),
                 country.env? country.pool[country.env].currency[0] : null,
                 'USD'

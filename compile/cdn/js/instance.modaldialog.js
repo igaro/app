@@ -7,19 +7,20 @@ module.requires = [
     { name:'core.language.js' }
 ];
 
-module.exports = function(app) {
+module.exports = function(app,params) {
 
     var zIndexAt = 999999,
         body = document.body,
         bodyStyle = body.style,
+        activeCnt = 0,
         bless = app['core.object'].bless;
 
     var InstanceModalDialog = function(o) {
         this.name='instance.modaldialog';
         this.asRoot=true;
         bless.call(this,o);
-        this.bodyOverflowPrevious = bodyStyle.overflow;
         bodyStyle.overflow = 'hidden';
+        params.conf.noBodyStyleOverflowReset = true;
     };
 
     InstanceModalDialog.prototype.init = function(o) {
@@ -49,6 +50,7 @@ module.exports = function(app) {
             myActions = o.actions || [];
 
         zIndexAt+=1;
+        activeCnt++;
 
         return new Promise(function(resolve) {
 
@@ -71,7 +73,11 @@ module.exports = function(app) {
                 domMgr.mk('div',wrapper,o.custom,'custom');
 
             self.resolve = function(action) {
-                bodyStyle.overflow = self.bodyOverflowPrevious;
+                activeCnt--;
+                if (! activeCnt) { 
+                    bodyStyle.overflow = '';
+                    params.conf.noBodyStyleOverflowReset = true;
+                }
                 resolve(action);
                 return self.destroy();
             };

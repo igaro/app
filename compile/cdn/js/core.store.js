@@ -55,7 +55,7 @@ module.exports = function(app) {
         'cookie',
         { 
             get : function(id) {
-                return Promise.resolve(function() {
+                return Promise.resolve().then(function() {
                     id += '='; 
                     var j = -1,
                         done = false,
@@ -96,7 +96,7 @@ module.exports = function(app) {
         'local',
         { 
             get : function(id) {
-                return Promise.resolve(function() {
+                return Promise.resolve().then(function() {
                     var v = localStorage.getItem(id);
                     if (v) 
                         v = JSON.parse(v);
@@ -110,7 +110,7 @@ module.exports = function(app) {
                 });
             },
             set : function(id,value,expiry) {
-                return Promise.resolve(function() {
+                return Promise.resolve().then(function() {
                     value = typeof value === 'undefined' || value === null? null : JSON.stringify({ value:value, expiry:expiry });
                     localStorage.setItem(id,value);
                 });
@@ -123,7 +123,7 @@ module.exports = function(app) {
         'session',
         {
             get : function(id) {
-                return Promise.resolve(function() {
+                return Promise.resolve().then(function() {
                     var v = sessionStorage.getItem(id);
                     if (v) 
                         v = JSON.parse(v);
@@ -137,7 +137,7 @@ module.exports = function(app) {
                 });
             },
             set : function(id,value,expiry) {
-                return Promise.resolve(function() {
+                return Promise.resolve().then(function() {
                     value = typeof value === 'undefined' || value === null? null : JSON.stringify({ value:value, expiry:expiry });
                     sessionStorage.setItem(id,value);
                 });

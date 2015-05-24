@@ -17,7 +17,7 @@ module.exports = function(app, params) {
         return language.managers.store.get('env').then(function (stored) {
             return [
                 stored,
-                params.appconf.localeLanguage,
+                params.conf.localeLanguage,
                 url.getParam('localeLanguage'),
                 window.navigator.userLanguage || window.navigator.language,
                 'en-US',

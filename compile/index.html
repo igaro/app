@@ -93,21 +93,34 @@ head.appendChild(s);
 </noscript>
 <script>
 var body = document.body,
-    loadingC = document.createElement('div'),
-    loadingW = document.createElement('div'),
-    loadingD = document.createElement('div');
-loadingC.className='igaro';
-body.appendChild(loadingC);
-loadingC.appendChild(loadingW);
-loadingW.appendChild(loadingD);
+    bodyStyle = body.style,
+    resetOverflow = function(conf) {
+        if (! conf.noBodyStyleOverflowReset)
+            bodyStyle.overflow = '';
+    };
+    loading = [];
+[0,1,2].forEach(function(i) {
+    var d = document.createElement('div');
+    (i? loading[i-1] : body).appendChild(d);
+    loading.push(d);
+});
+loading[0].className='igaro-loading';
+bodyStyle.overflow = 'hidden';
 __igaroapp.init = {
-    onReady : function() {
-        body.removeChild(loadingC);
+    onProgress : function() {
+       loading[1].className='progress';
     },
-    onError : function(app,params,e) {
-        loadingW.className='error';
-        e = typeof e === 'object' && e.error && e.error.incompatible? params.msgIncompatible : params.msgErr;
-        loadingD.innerHTML = Object.keys(e).map(function(n) {
+    onReady : function(app,conf) {
+        setTimeout(function() {
+            body.removeChild(loading[0]);
+            resetOverflow(conf);
+        }, 50);
+    },
+    onError : function(app,conf,e) {
+        loading[1].className='error';
+        resetOverflow(conf);
+        e = typeof e === 'object' && e.error && e.error.incompatible? conf.msgIncompatible : conf.msgErr;
+        loading[2].innerHTML = Object.keys(e).map(function(n) {
            return e[n]; 
         }).join("<p>");
     }

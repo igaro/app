@@ -1040,7 +1040,7 @@
                                         m = self.module.name,
                                         s = m.substr(0,m.length-3);
                                     if (code)
-                                        u = code(app,{ appconf:appConf });
+                                        u = code(app,{ conf:appConf });
                                     return (u instanceof Promise? u : Promise.resolve(u)).then(function (data) {
                                         if (data)
                                             app[s] = data;
@@ -1070,10 +1070,12 @@
             events = app['core.events'];
         // load externals
         return new InstanceAmd().get({ modules:modules }).then(function() {
+            var ii = appConf.init;
+            if (ii && ii.onProgress)
+                ii.onProgress(app,appConf);
             return events.dispatch('','state.init').then(function() {
-               var ii = appConf.init;
-               if (ii && ii.onReady)
-                    ii.onReady(app);
+                if (ii && ii.onReady)
+                    ii.onReady(app,appConf);
                 return app;
             });
         });
