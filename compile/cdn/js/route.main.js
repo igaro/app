@@ -28,13 +28,6 @@ module.exports = function(app) {
         var wrapper = model.wrapper, 
             header = domMgr.mk('div',wrapper,null,'header');
        
-        // spinners
-        domMgr.mk('div',wrapper,
-            ['firefox','chrome','ie','android','ios','wm'].map(function(o) {
-                return domMgr.mk('div',null,null,o);
-            }),
-            'spinners');
- 
         // header
         domMgr.mk('span',header,_tr("Welcome to <b>Igaro App</b> Javascript Framework"));
 
@@ -93,6 +86,11 @@ module.exports = function(app) {
                     ],list).then(function() {
                         var domMgr = list.managers.dom;
                         return domMgr.mk('section', null, [
+                            domMgr.mk('div',null,[
+                                'firefox','chrome','ie','android','ios','wm'
+                            ].map(function(id) {
+                                return domMgr.mk('div',null,null,'supported ' + id);
+                            }),'ani'),
                             domMgr.mk('h1', null, _tr('Insight')),
                             domMgr.mk('p', null, _tr('An amazing SPA architecture, developed by professionals, loaded with features.')),
                             list.container
