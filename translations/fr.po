@@ -2335,72 +2335,41 @@ msgstr ""
 
 msgid ""
 "Provides a Router framework to manage navigation and storage of routes. A "
-"route represents a resource and manages child routes. Routes can be loaded "
-"from multiple API & file servers transparently to the user and do not "
+"route represents a resource and may contain child routes. Routes can be "
+"loaded from API & file servers transparently to the user and don't "
 "necessarily correspond to the URI that the user sees. They may form a page "
-"or merely a section on a page."
-msgstr ""
-
-msgid "Logic and data for managing a route."
+"or a partial on it."
 msgstr ""
 
 msgid ""
-"Adds an instance module, instantiates and optionally inserts any returning "
-"element into the wrapper. Lazy loads the module if unloaded."
+"The name of the route to load. The source provider decides how to handle "
+"this. For file based routes typically the name corresponds to the sub "
+"resource."
+msgstr ""
+
+msgid "Loads the route without user indications."
+msgstr ""
+
+msgid "On success contains the route."
 msgstr ""
 
 msgid ""
-"If string will prepend 'instance.' onto the value and if unloaded then load "
-"from the default repo."
+"Attempts to load a child route. If loaded an enter event is fired on the "
+"routes event manager. Use this to force code reload. An init event is fired "
+"the first time a route is loaded. Use this to set-up a view and parameters "
+"that keep state."
 msgstr ""
 
-msgid "The full name of the module to be loaded and instantiated."
+msgid "The Promise contains an array of the loaded routes."
 msgstr ""
 
-msgid "The repo location to load the module from should it be unloaded."
-msgstr ""
-
-msgid "Additional options."
-msgstr ""
-
-msgid ""
-"If the instance returns a DOM element then insert into the DOM before the "
-"specified element."
+msgid "Adds routes in sequence."
 msgstr ""
 
 msgid ""
-"If the instance returns a DOM element then insert into the DOM after the "
-"specified element."
-msgstr ""
-
-msgid "On success returns the requested instance."
-msgstr ""
-
-msgid ""
-"Names of the children to load. The source provider decides what to do with "
-"these. For file based routes typically the name is appended onto that of the "
-"parent route."
-msgstr ""
-
-msgid ""
-"The container for a route will append into the parent container but may be "
-"overridden by specifying an element"
-msgstr ""
-
-msgid "On success returns the route."
-msgstr ""
-
-msgid ""
-"Attempts to load a child route. If loaded an enter() event is fired on the "
-"routes event manager. Use this to force code reload. An init() event is "
-"fired the first time a route is loaded. Use this to set-up a view and "
-"parameters that keep state."
-msgstr ""
-
-msgid ""
-"Executes a pool of promises and reduces the returned values using the pool "
-"order. For an example see file route.main.js. If a promise returns nothing "
-"or rejects it is ignored."
+"Reduces an array of promises and adds container elements (if any) using the "
+"reducing order. For an example see file route.main.js. If a promise rejects "
+"it is ignored."
 msgstr ""
 
 msgid "The array of promises to execute."
@@ -2414,10 +2383,7 @@ msgid ""
 "navigation. Default is true."
 msgstr ""
 
-msgid "A list of loaded child routes."
-msgstr ""
-
-msgid "Inline CSS provided by an API. Automatically appended."
+msgid "Inline CSS provided by the route's provider. Automatically appended."
 msgstr ""
 
 msgid "The display element."
@@ -2429,13 +2395,15 @@ msgid ""
 msgstr ""
 
 msgid ""
-"Typically a child view will hide the wrapper content of it's parent. Set to "
-"false to disable."
+"When a child view is displayed the wrapper of it's parent is usually hidden. "
+"Set to false to disable."
+msgstr ""
+
+msgid "By default a route's wrapper is shown. Set to false to disable."
 msgstr ""
 
 msgid ""
-"Useful for preventing animation repeat or differentiated content. Appended "
-"to the container element for use with CSS selectors."
+"By default a route is cached and retains state. Disable by setting to true."
 msgstr ""
 
 msgid "Returns a Route matching a name."
@@ -2444,10 +2412,7 @@ msgstr ""
 msgid "Handling name for the Route."
 msgstr ""
 
-msgid "Hides all child' containers."
-msgstr ""
-
-msgid "Use to abort/pause XHR and polling operations."
+msgid "Hides all child route containers."
 msgstr ""
 
 msgid "A collection of meta data for the route."
@@ -2458,10 +2423,16 @@ msgstr ""
 
 msgid ""
 "References core.events.on() but registers the route as a dependency to "
-"reduce code overhead. Functionally identical."
+"reduce code overhead. For blessed objects, use the .extend() method instead."
+msgstr ""
+
+msgid "Represents the URL path for this route, including captured URI data."
 msgstr ""
 
 msgid "Takes an Array of Routes in which to destroy."
+msgstr ""
+
+msgid "A pool of loaded child routes."
 msgstr ""
 
 msgid ""
@@ -2470,69 +2441,93 @@ msgid ""
 "at the same position they left off. Set to false to disable."
 msgstr ""
 
-msgid "Sets the value and fires an event."
+msgid ""
+"Represents the URL path once URI resources have been removed from it. This "
+"makes it useful for building a user navigation location bar."
 msgstr ""
 
 msgid ""
-"May be shown to the user (non localised). Used for history.pushstate. Not to "
-"be confused with route.path."
+"The URI data extracted for this route. It is a cache for .captureUri(), "
+"which should be run by the route when it loads to capture it's data."
 msgstr ""
 
 msgid ""
-"The container element contains a wrapper and normally view elements go into "
-"this. Child routes go into the container."
+"The container element contains a wrapper and normally view elements append "
+"into it. Child routes go directly into the container."
 msgstr ""
 
-msgid "Appends a route provider."
+msgid "Appends a route provider to the pool."
 msgstr ""
 
 msgid "Contains the configuration."
 msgstr ""
 
-msgid "Fetches either a route file or the data and view from an API."
+msgid ""
+"Used to fetch the resource from a fileserver or API. The function should "
+"return a Promise containing the attributes specified."
 msgstr ""
 
-msgid "If a handler for the requested resource it should return true."
+msgid "The style for the route."
+msgstr ""
+
+msgid ""
+"The route setup function responsible for building a view. See any route.* "
+"file for an example. The function may return a Promise."
+msgstr ""
+
+msgid "Determines if the provider is a handler for a resource."
 msgstr ""
 
 msgid "The path of the requested resource."
 msgstr ""
 
-msgid "References the last loaded route from any call to .to()."
+msgid ""
+"A base route with it's container most likely appended into that of the root "
+"route. The base represents the root of the URL."
+msgstr ""
+
+msgid "References the last successfully loaded route from any call to .to()."
+msgstr ""
+
+msgid ""
+"Determines whether the current route is that of the base route, aka at root "
+"of the URL."
 msgstr ""
 
 msgid "Pool of route providers. Note: the discoverer traverses backwards."
 msgstr ""
 
-msgid "A root route with a container appended into document.body"
+msgid ""
+"A root route with it's container appended into document.body. The root will "
+"normally have common header, main and footer routes appended into it."
 msgstr ""
 
 msgid ""
-"Values represent a path which is handled by a source provider. The path may "
-"contain URI data which will be parsed out by route logic."
+"Values represent a URL path which is handled by a source provider. The path "
+"may contain URI data which will be parsed out by route logic."
 msgstr ""
 
 msgid ""
-"Search data (anything after the ? in the URL) may be supplied here. Useful "
-"to supply global parameters to all routes."
+"Search data to append after ? in the URL. This can be a function to compile "
+"the value dynamically or an array which will be joined using the = operator."
 msgstr ""
 
 msgid ""
-"Hash data (anything after the # in the URL) may be supplied here. Designed "
-"for page navigation, misused to supply global parameters."
+"Hash data to append after # in the URL. This can be a function to compile "
+"the value dynamtically or a string."
 msgstr ""
 
 msgid ""
-"Supply false to disable pushing the location into the URL bar or a string to "
-"customise."
+"Supply a state to push into the browsers history. This is data which moves "
+"with the URL."
 msgstr ""
 
 msgid ""
-"Loads multiple resources beginning at root and enumerating through each "
-"request. Used for user actioned navigation. A to-begin event is fired which "
-"can be used to abort the load by returning a literal containing ."
-"stopImmediatePropogation. An event to-in-progress() is fired as the function "
-"iterates and to-loaded() fires on success."
+"Loads multiple resources by way of a URL beginning at the base route and "
+"enumerating through. Used for user actioned navigation. The current route "
+"can abort the load via its leave event if it returns { abort:true }. The "
+"events to-begin, to-in-progress and to-loaded() can be used to provide user "
+"feedback as routes load."
 msgstr ""
 
 msgid "A very simple status event emitter."
@@ -2662,7 +2657,7 @@ msgstr ""
 msgid "View on Github"
 msgstr ""
 
-msgid "* = required"
+msgid "<b>*</b> - required, <b>+</b> - blessed object"
 msgstr ""
 
 msgid "Type"

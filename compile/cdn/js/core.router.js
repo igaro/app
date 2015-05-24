@@ -38,7 +38,7 @@ module.exports = function(app) {
         this.uriPieces = [];
         this.originalUri = [];
         this.destroyOnLeave = false;
-        this.defaultHideChildren=true;
+        this.defaultHideRoutes=true;
         this.defaultHideParentViewWrapper=true;
         this.defaultShowWrapper=true;
         this.autoShow = true;
@@ -47,10 +47,10 @@ module.exports = function(app) {
     };
     
     CoreRouterRoute.prototype.captureUri = function(c) {
-        var p = this.uriPieces = this.originalUri.slice(0,c).map(function(p) {
+        this.uriPieces = this.originalUri.slice(0,c).map(function(p) {
             return decodeURIComponent(p);
         });
-        return p && p.length? p : null;
+        return this.uriPieces;
     };
 
     CoreRouterRoute.prototype.on = function(name,evt,fn) {
@@ -173,15 +173,16 @@ module.exports = function(app) {
             }).then(function() {
                 if (g.defaultShowWrapper)
                     dom.show(g.wrapper);
-                if (g.defaultHideChildren) 
+                if (g.defaultHideRoutes) 
                     g.hideRoutes();
                 if (g.defaultHideParentViewWrapper) 
                     dom.hide(g.parent.wrapper);
                 return g;
             });
         }).catch(function (e) {
-            g.destroy();
-            throw e;
+            return g.destroy().then(function() {
+                throw e;
+            });
         });
     };
 
@@ -234,7 +235,9 @@ module.exports = function(app) {
                 v = this.requestId,
                 routerEventMgr = router.managers.event;
             return (c?
-                c.managers.event.dispatch('leave').then(function() {
+                c.managers.event.dispatch('leave').then(function(o) {
+                    if (o && o.abort) 
+                        throw -14443864;
                     if(c.destroyOnLeave)
                         return c.destroy();
                     var s = document.body.scrollTop || document.documentElement.scrollTop;
@@ -298,9 +301,10 @@ module.exports = function(app) {
                         throw e;
                     });
                 });
-
-            });
-            
+            }).catch(function (e) {
+                if (e !== -14443864)
+                    throw e;
+            });   
         }
     };
 

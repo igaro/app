@@ -34,7 +34,7 @@ module.exports = function(app) {
 
                 var mgrForRow = false;
 
-                domMgr.mk('p',container,_tr("* = required"));
+                domMgr.mk('p',container,_tr("<b>*</b> - required, <b>+</b> - blessed object"));
                 return objectMgr.create('table',{
                     container:container,
                     header : {
@@ -60,7 +60,7 @@ module.exports = function(app) {
                         brows=body.rows,
                         domMgr = tbl.managers.dom;
                     var makeahref = function(col,meta,content,manager) {
-                        if (meta.instanceof) 
+                        if (typeof meta.instanceof === 'function') 
                             meta = meta.instanceof();
                         if (! meta.attributes) 
                             return document.createElement('span');
@@ -135,7 +135,7 @@ module.exports = function(app) {
                                         var returns = s.returns;
                                         if (returns && s.type==='function') {
                                             var l;
-                                            if (returns.instanceof) {
+                                            if (typeof returns.instanceof === 'function') {
                                                 l = returns.instanceof().name;
                                             } else if (returns.type) {
                                                 l = returns.type;
@@ -154,14 +154,18 @@ module.exports = function(app) {
                                             if (typeof m === 'function') { 
                                                 m = m();
                                                 makeahref(cc,m,m.name,manager);
-                                                var q = JSON.parse(JSON.stringify(m.desc));
-                                                if (s.desc) {
-                                                    Object.keys(q).forEach(function(k) {
-                                                        if (s.desc[k]) 
-                                                            q[k] += ' '+s.desc[k];
-                                                    });
+                                                if (m.blessed)
+                                                    domMgr.mk('sup',cc,'+');
+                                                if (m.desc) {
+                                                    var q = JSON.parse(JSON.stringify(m.desc));
+                                                    if (s.desc) {
+                                                        Object.keys(q).forEach(function(k) {
+                                                            if (s.desc[k]) 
+                                                                q[k] += ' '+s.desc[k];
+                                                        });
+                                                    }
+                                                    dom.setContent(rr, q);
                                                 }
-                                                dom.setContent(rr, q);
                                             } else {
                                                 var sa = m.name;
                                                 if (m.required) 
