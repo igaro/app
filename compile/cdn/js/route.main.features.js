@@ -11,6 +11,7 @@ module.exports = function(app) {
             currency = app['core.currency'];
 
         model.stash.title = _tr("Features");
+        model.stash.desc = _tr("The highest performing Javascript framework - read to see what Igaro App offers you.");
 
         var managers = model.managers,
             domMgr= managers.dom,

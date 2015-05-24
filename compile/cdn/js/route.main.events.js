@@ -17,6 +17,7 @@ module.exports = function(app) {
             wrapper = model.wrapper;
 
         model.stash.title = _tr("Events");
+        model.stash.desc = _tr("Igaro App's event management system tracks dependencies and fires events up through parent objects. It's hugely powerful.");
         
         domMgr.mk('p',wrapper,_tr("Igaro App is <b>100%</b> event driven."));
         domMgr.mk('p',wrapper,_tr("core.events is responsible for event management. It provides a manager to core.object's bless, and this is used extensively throughout the Igaro App framework.")); 

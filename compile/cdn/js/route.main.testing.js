@@ -17,6 +17,7 @@ module.exports = function(app) {
             language = app['core.language'];
 
         model.stash.title=_tr("Testing");
+        model.stash.desc = _tr("End2End and Unit tests are included and run in web browsers via Selenium WebDriver.");
 
         domMgr.mk('p',wrapper,_tr("Igaro App utilizes NightwatchJS for E2E testing via the Selenium WebDriver. Unit tests are performed by Mocha & Chai (also within the browser)."));
         domMgr.mk('p',wrapper,language.substitute(_tr("Before launching the test suite the following requisites are required;")));

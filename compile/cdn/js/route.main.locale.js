@@ -11,6 +11,7 @@ module.exports = function(app) {
             domMgr = managers.dom;
 
         model.stash.title=_tr("Locale");
+        model.stash.description=_tr("Which framework offers multiple language, currency, country and timezone support without restarting it's core? Igaro App. And that's it.");
 
         domMgr.mk('p',wrapper,_tr("Igaro App supports country, language, currency, timezone offset and date locale."));
 

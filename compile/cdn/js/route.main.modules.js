@@ -21,6 +21,7 @@ module.exports = function(app) {
             debugMgr = managers.debug;
             
         model.stash.title=_tr("Modules");
+        model.stash.description=_tr("All main respository module documentation can be found on this page.");
 
         domMgr.mk('h1',wrapper, _tr("Igaro Repository"));
 
@@ -229,6 +230,7 @@ module.exports = function(app) {
             if (data.desc) {
                 domMgr.mk('h1',v,_tr("Description"));
                 domMgr.mk('p',v,data.desc);
+                m.stash.description=data.desc;
             }
 
             if (data.embedded)

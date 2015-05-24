@@ -921,6 +921,11 @@ msgstr ""
 msgid "Asynchronous"
 msgstr ""
 
+msgid ""
+"Standard A+ Promises throughout, with an event driven architecture and "
+"sequencing."
+msgstr ""
+
 msgid "Igaro App is <b>100%</b> asynchronous, using Promises."
 msgstr ""
 
@@ -1057,6 +1062,11 @@ msgid "Compatibiity"
 msgstr ""
 
 msgid ""
+"Igaro App works with any recent browser and platform. This page contains the "
+"list."
+msgstr ""
+
+msgid ""
 "Igaro App is compatible with all modern web browsers and mobile devices."
 msgstr ""
 
@@ -1152,6 +1162,11 @@ msgstr ""
 msgid "Design"
 msgstr ""
 
+msgid ""
+"Only the best frameworks can do away with HTML. No templates or MVC, instead "
+"consistency and staggering performance."
+msgstr ""
+
 msgid "Igaro App is <b>100%</b> HTML free."
 msgstr ""
 
@@ -1190,6 +1205,11 @@ msgid ""
 msgstr ""
 
 msgid "Events"
+msgstr ""
+
+msgid ""
+"Igaro App's event management system tracks dependencies and fires events up "
+"through parent objects. It's hugely powerful."
 msgstr ""
 
 msgid "Igaro App is <b>100%</b> event driven."
@@ -1289,6 +1309,11 @@ msgid "app['core.events'].on('instance.xhr','start',fn);"
 msgstr ""
 
 msgid "Features"
+msgstr ""
+
+msgid ""
+"The highest performing Javascript framework - read to see what Igaro App "
+"offers you."
 msgstr ""
 
 msgid "Igaro's architecture is build on several core principles;"
@@ -1474,6 +1499,11 @@ msgstr ""
 msgid "Install"
 msgstr ""
 
+msgid ""
+"Install in one step. It's free, and you'll instantly have an app ready to "
+"modify. Prepare to be impressed!"
+msgstr ""
+
 msgid "The following instructions assume a unix, linux or mac environment."
 msgstr ""
 
@@ -1500,8 +1530,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"That's it. Now read as much of the documentation as you need, hack the code "
-"behind this app, and create!"
+"That's it. Now read as much of the documentation as you need, modify the "
+"route files behind this app, and create!"
 msgstr ""
 
 msgid "License"
@@ -1582,6 +1612,11 @@ msgid "Discuss ideas, get involved with Igaro App development, or seek help."
 msgstr ""
 
 msgid ""
+"Which framework offers multiple language, currency, country and timezone "
+"support without restarting it's core? Igaro App. And that's it."
+msgstr ""
+
+msgid ""
 "Igaro App supports country, language, currency, timezone offset and date "
 "locale."
 msgstr ""
@@ -1621,6 +1656,11 @@ msgstr ""
 msgid ""
 "core.language includes a parsing routine for embedding %[n] variables (where "
 "n is an integer)."
+msgstr ""
+
+msgid ""
+"Ready for all mobile devices, with outstanding performance and one codebase "
+"for all platforms."
 msgstr ""
 
 msgid "Igaro App is <b>100%</b> mobile ready."
@@ -2651,6 +2691,9 @@ msgid ""
 "Parses a URL and replaces or appends a new param, returning the new URL."
 msgstr ""
 
+msgid "All main respository module documentation can be found on this page."
+msgstr ""
+
 msgid "Igaro Repository"
 msgstr ""
 
@@ -2896,6 +2939,11 @@ msgstr ""
 msgid "It works great on monitors, tablets. phones and everything inbetween."
 msgstr ""
 
+msgid ""
+"Igaro App's router is dynamic and loads routes from file systems and API's. "
+"It's a beautiful way to serve pages be it for a website or a mobile app."
+msgstr ""
+
 msgid "Igaro App is <b>100%</b> MVC free."
 msgstr ""
 
@@ -3108,6 +3156,11 @@ msgstr ""
 msgid ""
 "View the code behind this page to understand how the three accordions are "
 "created. Notice how instances can be children of instances?"
+msgstr ""
+
+msgid ""
+"End2End and Unit tests are included and run in web browsers via Selenium "
+"WebDriver."
 msgstr ""
 
 msgid ""

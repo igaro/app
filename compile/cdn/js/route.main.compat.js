@@ -9,6 +9,7 @@ module.exports = function(app) {
         var wrapper = model.wrapper;
 
         model.stash.title = _tr("Compatibiity");
+        model.stash.desc = _tr("Igaro App works with any recent browser and platform. This page contains the list.");
 
         var managers = model.managers,
             domMgr= managers.dom,

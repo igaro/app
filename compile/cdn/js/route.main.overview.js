@@ -16,6 +16,7 @@ module.exports = function(app) {
             domMgr = managers.dom;
 
         model.stash.title=_tr("Overview");
+        model.stash.description=_tr("Igaro App is a Javascript framework for developing scalable, responsive and dynamic web and mobile apps.");
 
         domMgr.mk('p',wrapper,_tr("Igaro App is a Javascript framework for developing scalable, responsive and dynamic web and mobile apps."));
 

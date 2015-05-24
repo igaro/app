@@ -18,6 +18,7 @@ module.exports = function(app) {
             dom = app['core.dom'];
         
         model.stash.title=_tr("Bless");
+        model.stash.description=_tr("Igaro App's bless decorates standard javascript objects providing two-way parent-child event management, managers, dependency tracking, abstraction, shared routines and dynamic functions.");
 
         domMgr.mk('p',wrapper,_tr("Igaro App's bless decorates standard javascript objects providing two-way parent-child event management, managers, dependency tracking, abstraction, shared routines and dynamic functions."));
         domMgr.mk('p',wrapper,_tr("Most objects bless themselves, and most objects in Igaro are blessed."));

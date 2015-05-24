@@ -17,6 +17,7 @@ module.exports = function(app) {
             router = app['core.router'];
 
         model.stash.title=_tr("Install");
+        model.stash.description=_tr("Install in one step. It's free, and you'll instantly have an app ready to modify. Prepare to be impressed!");
         
         domMgr.mk('p',wrapper,_tr("The following instructions assume a unix, linux or mac environment."));
 
@@ -48,7 +49,7 @@ grunt",'gitcode'));
 
         domMgr.mk('p',wrapper,language.substitute(_tr("Igaro compiles into two modes; debug and deploy. A web server for each can be found on ports %[0] and %[1]. These will reload automatically as you work."),'<a href="http://localhost:3006">3006</a>','<a href="http://localhost:3007">3007</a>'));
 
-        domMgr.mk('p',wrapper,_tr("That's it. Now read as much of the documentation as you need, hack the code behind this app, and create!"));
+        domMgr.mk('p',wrapper,_tr("That's it. Now read as much of the documentation as you need, modify the route files behind this app, and create!"));
 
     };
 

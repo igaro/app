@@ -15,6 +15,7 @@ module.exports = function(app) {
             domMgr = model.managers.dom;
 
         model.stash.title=_tr("Routes");
+        model.stash.description=_tr("Igaro App's router is dynamic and loads routes from file systems and API's. It's a beautiful way to serve pages be it for a website or a mobile app.");
 
         domMgr.mk('p',wrapper,_tr("Igaro App is <b>100%</b> MVC free."));
         

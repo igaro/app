@@ -15,6 +15,7 @@ module.exports = function(app) {
             router = app['core.router'];
         
         model.stash.title= _tr("Asynchronous");
+        model.stash.desc = _tr("Standard A+ Promises throughout, with an event driven architecture and sequencing.");
 
         domMgr.mk('p',wrapper,_tr("Igaro App is <b>100%</b> asynchronous, using Promises."));
 

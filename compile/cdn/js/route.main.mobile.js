@@ -18,6 +18,7 @@ module.exports = function(app) {
             language = app['core.language'];
 
         model.stash.title=_tr("Mobile");
+        model.stash.description=_tr("Ready for all mobile devices, with outstanding performance and one codebase for all platforms.");
 
         domMgr.mk('p',wrapper,_tr("Igaro App is <b>100%</b> mobile ready."));
 

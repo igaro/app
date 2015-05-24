@@ -14,6 +14,7 @@ module.exports = function(app) {
             domMgr = model.managers.dom;
 
         model.stash.title=_tr("Design");
+        model.stash.description=_tr("Only the best frameworks can do away with HTML. No templates or MVC, instead consistency and staggering performance.");
 
         domMgr.mk('p',wrapper,_tr("Igaro App is <b>100%</b> HTML free."));
         
