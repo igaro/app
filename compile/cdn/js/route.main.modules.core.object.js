@@ -35,7 +35,7 @@ module.exports = function(app) {
                             required:true,
                             attributes : [  
                                 {
-                                    desc:_tr("The value to use for the insertion")
+                                    desc:_tr("The value to use for the insertion.")
                                 }
                             ],
                             
@@ -52,6 +52,11 @@ module.exports = function(app) {
                                     name:'insertBefore',
                                     type:'*',
                                     desc:_tr("If defined, the insertion will occur before the index of the value.")
+                                },
+                                {
+                                    name:'prepend',
+                                    type:'boolean',
+                                    desc:_tr("Adds the item at the beginning of the array.")
                                 }
                             ]
                         }

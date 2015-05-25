@@ -2233,13 +2233,16 @@ msgstr ""
 msgid "The array to manipulate."
 msgstr ""
 
-msgid "The value to use for the insertion"
+msgid "The value to use for the insertion."
 msgstr ""
 
 msgid "If defined, the insertion will occur after the index of the value."
 msgstr ""
 
 msgid "If defined, the insertion will occur before the index of the value."
+msgstr ""
+
+msgid "Adds the item at the beginning of the array."
 msgstr ""
 
 msgid ""

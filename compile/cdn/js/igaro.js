@@ -367,6 +367,8 @@
                     if (o && typeof o === 'object') {
                         if (o instanceof HTMLElement || o instanceof DocumentFragment) {
                             o.appendChild(r);
+                        } else if (o.prepend) {
+                            i.parentNode.insertBefore(r,i.parentNode.firstChild);
                         } else if (o.insertBefore) {
                             i = o.insertBefore;
                             if (!(i instanceof HTMLElement))
@@ -577,9 +579,13 @@
 
             app['core.object'] = {
                 arrayInsert : function(a,v,o) {
-                    if (o && o.insertBefore) {
+                    if (! o)
+                        o = {};
+                    if (o.prepend) {
+                        a.unshift(v);
+                    } else if (o.insertBefore) {
                         a.splice(a.indexOf(o.insertBefore)-1,0,v);
-                    } else if (o && o.insertAfter) {
+                    } else if (o.insertAfter) {
                         a.splice(a.indexOf(o.insertAfter),0,v);
                     } else {
                         a.push(v);
