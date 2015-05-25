@@ -27,34 +27,35 @@ module.exports = function(app) {
         };
         bless.call(this,o);
         this.date = o.date;
-        this.countDown = 60;
-        this.countUp = 0;
+        this.countUp = typeof o.countUp === 'number'? o.countUp : 0;
+        this.countDown = typeof o.countDown === 'number'? o.countDown : 60;
         var self = this,
             m = self.moment = moment(o.date),
-                erf = {
-                    lang : function() {
-                        m.lang(language.env);
-                        self.format();
-                    },
-                    tzoffset : function(v) {
-                        if (! self.ov) 
-                            self.offset(date.envOffset,true);
-                    }
-                };
+            erf = {
+                lang : function() {
+                    m.lang(language.env);
+                    self.format();
+                },
+                tzoffset : function(v) {
+                    if (! self.ov) 
+                        self.offset(date.envOffset,true);
+                }
+            };
         if (o.format) 
             this.f = o.format;
         if (o.offset) {
             this.offset(o.offset);
-        if (typeof o.countDown === 'number')
-            this.countDown = o.countDown;
-        if (typeof o.countUp === 'number')
-            this.countUp = o.countUp;
         } else {
             this.offset(date.envOffset,true);
         }
         dateEventMgr.extend(this).on('setEnvOffset',erf.tzoffset);
         languageEventMgr.extend(this).on('setEnv',erf.lang);
         erf.lang();
+        if (o.relative)
+            this.relative();
+        this.managers.event.on('destroy', function() {
+            removeInterval(self.__relHook);
+        });
     };
 
     InstanceDate.prototype.init = function() {
@@ -76,19 +77,23 @@ module.exports = function(app) {
     };
 
     InstanceDate.prototype.relative = function() {
-        var self = this;
+        var self = this,
+            container = self.container;
         var f = function() {
             var date = self.date,
                 diff = parseInt((date.getTime()-(new Date()).getTime()) / 1000);
-            dom.setContent(
-                self.countUp !== self.countDown && self.countUp <= diff && diff <= self.countDown?
-                language.mapKey(language.substitute(diff === 1? (diff < 0? _tr("%[0] seconds ago") : _tr("%[0] second")) : (diff < 0? _tr("%d seconds ago") : _tr("%d seconds")),diff))
-                :
-                self.moment.fromNow()
-            );
+            if (diff !== 0) {
+                if (diff < 0 && self.countUp >= (diff*-1)) {
+                    diff *= -1;
+                    return dom.setContent(container,language.mapKey(language.substitute(diff === 1? _tr("%[0] second ago") : _tr("%[0] seconds ago"),diff)));
+                } else if (diff > 0 && diff <= self.countDown) {
+                    return dom.setContent(container,language.mapKey(language.substitute(diff === 1? _tr("%[0] second") : _tr("%[0] seconds"),diff)));
+                }
+            }
+            dom.setContent(container,self.moment.fromNow());
         };
         f();
-        return setInterval(f,1000);
+        this.__relHook =  setInterval(f,1000);
     };
 
     InstanceDate.prototype.format = function(f) {
