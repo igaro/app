@@ -2694,6 +2694,72 @@ msgid ""
 "Parses a URL and replaces or appends a new param, returning the new URL."
 msgstr ""
 
+msgid ""
+"Asynchronously loads modules and there dependencies using XHR and appends "
+"Igaro App modules into the namespace."
+msgstr ""
+
+msgid ""
+"The repository (i.e URL) from which to load files. Defaults to the location "
+"where the application was loaded from."
+msgstr ""
+
+msgid "Modules to load. Each is represented by an object in the array."
+msgstr ""
+
+msgid "The name of the module excluding any file extension."
+msgstr ""
+
+msgid ""
+"By default a folder /js will be appended to the repo location. Pass true to "
+"disable this."
+msgstr ""
+
+msgid ""
+"Callback for when a set of modules has completed. Given modules load may "
+"load there own dependencies it isn't possible to calculate a percentage."
+msgstr ""
+
+msgid ""
+"The module will use the default or last loaded module repo value unless this "
+"is defined."
+msgstr ""
+
+msgid ""
+"A module usually defines its dependencies, but they can also be specified "
+"here. A dependency follows the same format as this object."
+msgstr ""
+
+msgid ""
+"Any of the instantiated attributes can be passed here to update the instance "
+"before executing the Promise, else the default or previously set values will "
+"be used."
+msgstr ""
+
+msgid "Resolves when all modules and dependencies are loaded."
+msgstr ""
+
+msgid "Provides a simple bookmark toolbar for the major social platforms."
+msgstr ""
+
+msgid "The URL to bookmark. Defaults to the current."
+msgstr ""
+
+msgid "Title to pass over to the external service."
+msgstr ""
+
+msgid "Container to append the instance into."
+msgstr ""
+
+msgid "Sets the URL and optional title to pass over to the external service."
+msgstr ""
+
+msgid "URL to bookmark. Defaults to the current."
+msgstr ""
+
+msgid "Title to pass over."
+msgstr ""
+
 msgid "All main respository module documentation can be found on this page."
 msgstr ""
 
@@ -2718,7 +2784,9 @@ msgstr ""
 msgid "Download"
 msgstr ""
 
-msgid "Create a new instance using <b>new %[0]</b>."
+msgid ""
+"Blessed objects lazy load and instantiate via <b>[object].managers.object."
+"create()</b>. Unblessed objects use <b>new %[0]</b>."
 msgstr ""
 
 msgid "Access <b>%[0]</b> directly without instantiating."
@@ -2737,7 +2805,9 @@ msgstr ""
 msgid "code"
 msgstr ""
 
-msgid "Note: In demo code <b>c</b> references model.wrapper."
+msgid ""
+"Hint: <b>c</b> is a container element. For blessed objects this will default "
+"to the objects container."
 msgstr ""
 
 msgid "Output"

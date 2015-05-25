@@ -5,36 +5,28 @@ module.exports = function(app) {
         var data = {
 
             demo : "model.managers.object.create('bookmark', { container:c }) ",
-            desc : {
-                en : 'Provides a simple bookmark toolbar for the major social platforms.',
-                fr : 'Fournit une barre de signets simple pour les principales plates-formes sociales.'
-            },
+            desc : _tr("Provides a simple bookmark toolbar for the major social platforms."),
+            blessed:true,
             usage : {
                 instantiate : true,
                 attributes : [
                     { 
                         name:'url', 
                         type:'string',
-                        desc : {
-                            en : 'The URL to bookmark. Defaults to the current.',
-                            fr : 'L\' URL pour l\'ajouter. Par défaut, le courant.'
-                        }
+                        desc : _tr("The URL to bookmark. Defaults to the current.")
                     },
                     { 
                         name:'title', 
                         type:'string',
-                        desc : {
-                            en : 'Title to pass over to the external service.',
-                            fr : 'Titre de passer au service externe.'
-                        }
+                        desc : _tr("Title to pass over to the external service.")
                     },
                     { 
                         name:'container', 
-                        type:'element',
-                        desc : {
-                            en : 'Container to append the instance into.',
-                            fr : 'Conteneur pour ajouter l\'instance en.'
-                        }
+                        type:'object',
+                        attributes:[{
+                            instanceof: { name:'Element' }
+                        }],
+                        desc : _tr("Container to append the instance into.")
                     }
                 ]
             },
@@ -47,10 +39,7 @@ module.exports = function(app) {
                 { 
                     name:'setURL',
                     type:'function',
-                    desc: {
-                        en : 'Sets the URL and optional title to pass over to the external service.',
-                        fr : 'Définit l\'URL et le titre facultatif à passer au service externe.'
-                    },
+                    desc: _tr("Sets the URL and optional title to pass over to the external service."),
                     attributes : [
                         {
                             type:'object',
@@ -58,30 +47,16 @@ module.exports = function(app) {
                                 { 
                                     name:'url', 
                                     type:'string',
-                                    desc : {
-                                        en : 'URL to bookmark. Defaults to the current.',
-                                        fr : 'URL de signet. Par défaut, le courant.'
-                                    }
+                                    desc : _tr("URL to bookmark. Defaults to the current.")
                                 },
                                 { 
                                     name:'title', 
                                     type:'string',
-                                    desc : {
-                                        en : 'Title to pass over.',
-                                        fr : 'Titre de passer au-dessus.'
-                                    }
+                                    desc : _tr("Title to pass over.")
                                 }
                             ]
                         }
                     ]
-                },
-                { 
-                    name:'container', 
-                    type:'element',
-                    desc: {
-                        en : 'Element the instance is appended into.',
-                        fr : 'L\'élément instance est ajouté dans.'
-                    }
                 }
             ]
         };

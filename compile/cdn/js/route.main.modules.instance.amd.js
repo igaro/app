@@ -3,74 +3,57 @@ module.exports = function(app) {
     return function(model) {
 
         var data = {
-            desc : {
-                en : 'Asynchronously loads modules and there dependencies using XHR and appends Igaro App modules into the namespace.',
-                fr : 'Charge asynchrone modules et il dépendances en utilisant XHR et ajoute des modules Igaro Application dans l\'espace de noms.'
-            },
+            desc : _tr("Asynchronously loads modules and there dependencies using XHR and appends Igaro App modules into the namespace."),
             author : { 
                 name:'Andrew Charnley', 
                 link:'http://www.igaro.com/ppl/ac' 
             },
+            blessed:true,
             usage : {
                 instantiate : true,
                 attributes : [
                     { 
                         name:'repo',
                         type:'string',
-                        desc : {
-                            en : 'The repository (i.e URL) from which to load files. Defaults to the location where the application was loaded from.',
-                            fr : 'Le dépôt (à savoir l\'URL) pour charger les fichiers. Par défaut, le lieu où la demande a été chargé à partir.'
-                        }
+                        desc : _tr("The repository (i.e URL) from which to load files. Defaults to the location where the application was loaded from."),
                     },
                     { 
                         name:'modules', 
                         required:true,
-                        type:'array',
-                        desc : {
-                            en : 'Modules to load. Each is represented by an object.',
-                            fr : 'Modules à charger. Chacun d\'eux est représenté par un objet.'
-                        },
+                        type:'object',
+                        desc : _tr("Modules to load. Each is represented by an object in the array."),
                         attributes : [
+                            {
+                                instanceof: { name:'Array' }
+                            },
                             {
                                 name:'name',
                                 type:'string',
                                 required:true,
-                                desc: {
-                                    en : 'The name of the module excluding extension.',
-                                    fr : 'Le nom du module excluant l\'extension.'
-                                }
+                                desc:_tr("The name of the module excluding any file extension.")
                             },
                             {
                                 name:'nosub',
                                 type:'boolean',
-                                desc : {
-                                    en : 'By default a folder /js will be appended to the repo location. Set to true to disable this.',
-                                    fr : 'Par défaut un dossier /js seront ajoutés à l\'emplacement des prises en pension. Affectez la valeur true pour le désactiver.'
-                                }
+                                desc : _tr("By default a folder /js will be appended to the repo location. Pass true to disable this.")
                             },
                             {
                                 name:'onProgress',
                                 type:'function',
-                                desc : {
-                                    en : 'Callback for when an individual part of the loading process has completed.',
-                                    fr : 'Rappel pour quand une partie individuelle du processus de chargement est terminé.'
-                                }
+                                desc : _tr("Callback for when a set of modules has completed. Given modules load may load there own dependencies it isn't possible to calculate a percentage.")
                             },
                             {
                                 name:'repo',
                                 type:'string',
-                                desc : {
-                                    en : 'The module will use the instantiated repo value unless this is set.',
-                                    fr : 'Le module utilise la valeur des pensions instancié sauf si cela est réglé.'
-                                }
+                                desc : _tr("The module will use the default or last loaded module repo value unless this is defined.")
                             },
                             {
                                 name:'requires',
-                                type:'array',
-                                desc : {
-                                    en : 'A module usually defines its dependencies, but they can also be specified here. A dependency follows the same format as this object.',
-                                    fr : 'Un module définit habituellement ses dépendances, mais ils peuvent aussi être spécifié ici. Une dépendance suit le même format que cet objet.'
-                                }
+                                type:'object',
+                                desc : _tr("A module usually defines its dependencies, but they can also be specified here. A dependency follows the same format as this object."),
+                                attributes : [{
+                                    instanceof: { name:'Array' }
+                                }]
                             }
                         ]
                     }
@@ -85,10 +68,7 @@ module.exports = function(app) {
                             type:'object', 
                             attributes : [
                                 {
-                                    desc: {
-                                        en : 'Any of the instantiated attributes can be passed here to update the instance before executing the Promise, else the default or previously set values will be used.',
-                                        fr : 'L\'un des attributs instanciés peut être passé ici pour mettre à jour l\'instance avant d\'exécuter la promesse, sinon le défaut ou les valeurs précédemment définies seront utilisées.'
-                                    }
+                                    desc: _tr("Any of the instantiated attributes can be passed here to update the instance before executing the Promise, else the default or previously set values will be used.")
                                 }
                             ]
                         }
@@ -96,10 +76,7 @@ module.exports = function(app) {
                     returns : {
                         attributes : [{
                             instanceof: { name: 'Promise' },
-                            desc : {
-                                en : 'Resolves when all modules and dependencies are loaded.',
-                                fr : 'Décide quand tous les modules et les dépendances sont chargées.'
-                            }
+                            desc : _tr("Resolves when all modules and dependencies are loaded.")
                         }]
                     },
                 }

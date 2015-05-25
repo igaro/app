@@ -248,7 +248,7 @@ module.exports = function(app) {
                 domMgr.mk('h1',v,_tr("Usage"));
                 if (u.instantiate || u.class) {
                     var o = u.instantiate? 
-                        _tr("Create a new instance using <b>new %[0]</b>.")
+                        _tr("Blessed objects lazy load and instantiate via <b>[object].managers.object.create()</b>. Unblessed objects use <b>new %[0]</b>.")
                     :
                         _tr("Access <b>%[0]</b> directly without instantiating.")
                     ;
@@ -271,23 +271,21 @@ module.exports = function(app) {
             if (data.demo) {
                 domMgr.mk('h1',v,_tr("Demo"));
                 domMgr.mk('h2',v,_tr("code"));
-                domMgr.mk('p',v);
-
-                var dr = domMgr.mk('pre',v, data.demo.trim(), 'democode');
+                var cc = domMgr.mk('p',v);
 
                 model.managers.object.create('pagemessage',{ 
                     type:'info',
-                    message: _tr("Note: In demo code <b>c</b> references model.wrapper."),
-                    hideable: {
-                        model:model,
-                        id:'democode'
-                    }
-                }).then(function(cp) {
-                    v.insertBefore(cp.container,dr);
+                    message: _tr("Hint: <b>c</b> is a container element. For blessed objects this will default to the objects container."),
+                    container:cc,
+                    hideable: true,
+                    id:model.path.join('.')+'.democode'
+                }).catch(function(e) {
+                    debugMgr.handle(e);
                 });
-                
+
+                domMgr.mk('pre',v, data.demo.trim(), 'democode');
                 domMgr.mk('h2',v,_tr("Output"));
-                domMgr.mk('p',v);
+                var c = domMgr.mk('p',v);
                 eval(data.demo);
             }
 

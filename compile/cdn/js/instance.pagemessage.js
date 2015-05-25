@@ -21,7 +21,7 @@ module.exports = function(app) {
         var self = this;
         this.container = function(dom) {
             var managers = self.managers;
-            return dom.mk('div',o.container,null,function() {
+            return dom.mk('div',o,null,function() {
                 if (o.className)
                     this.classList.add(o.className);
                 dom.mk('div',this,null,function() {

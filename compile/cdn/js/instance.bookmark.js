@@ -20,7 +20,7 @@ module.exports = function(app) {
         this.name='instance.bookmark';
         this.asRoot=true;
         this.container = function(dom) { 
-            return dom.mk('ul',o.container,null,o.className);
+            return dom.mk('ul',o,null,o.className);
         };
         bless.call(this,o);
         this.setURL({ 
