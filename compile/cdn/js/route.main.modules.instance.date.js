@@ -4,51 +4,50 @@ module.exports = function(app) {
 
         var data = {
 
-            demo : "model.managers.object.create('date', { container:c, date:new Date(), format:'LLLL', })",
-            desc : {
-                en : 'Provides a managed date with automatic display and timezone conversion. By default uses 3rdparty.moment.js for formatting to the user locale.',
-                fr : 'Fournit une date géré avec affichage automatique et la conversion de fuseau horaire. Par défaut utilise 3rdparty.moment.js de mise en forme à l\'utilisateur locale.'
-            },
+            demo : "model.managers.object.create('date', { container:c, countUp:15, date:new Date(), relative:true, format:'LLLL' })",
+            desc : _tr("Provides a managed date with automatic display and timezone conversion. By default uses 3rdparty.moment.js for formatting to the user locale."),
             usage : {
                 instantiate : true,
                 attributes : [
                     { 
                         name:'date', 
-                        type:'date',
-                        desc : {
-                            en : 'The date to use.',
-                            fr : 'La date à utiliser.'
-                        },
-                        required:true
+                        instanceof : { name:'Date' }, 
+                        required:true,
+                        desc: _tr("The date to use.")
                     },
                     { 
                         name:'format', 
                         type:'string',
-                        desc : {
-                            en : 'The format used to stringify the date object.',
-                            fr : 'Le format utilisé pour chaîne toutes l\'objet de date.'
-                        },
+                        desc : _tr("The format used to stringify the date object. See MomentJS for codes."),
                         required:true
                     },
                     { 
                         name:'container', 
-                        type:'element',
-                        desc : {
-                            en : 'Container to append the instance into.',
-                            fr : 'Conteneur pour ajouter l\'instance en.'
-                        }
+                        instanceof : { name:'Element' }, 
+                        desc : _tr("Container to append the instance into.")
+                    },
+                    {
+                        name:'countDown',
+                        type:'number',
+                        desc:_tr("For relative time, will show a countdown when the delta is less than or equal to this value.")
+                    },
+                    {
+                        name:'countUp',
+                        type:'number',
+                        desc:_tr("For relative time,  will show a countup when the delta is less than or equal to this value.")
                     },
                     { 
                         name:'offset', 
                         type:'number',
-                        desc : {
-                            en : 'By default the timezone offset will be read from core.date.js. To set a specific timezone specify the +- minutes here.',
-                            fr : 'Par défaut, le décalage horaire sera lue à partir core.date.js. Pour définir un fuseau horaire spécifique précise les + - minutes ici.'
-                        }
+                        desc : _tr("By default the timezone offset will be read from core.date.js. To set a specific timezone specify the +- minutes here.")
+                    },
+                    {
+                        name:'relative',
+                        type:'boolean',
+                        desc : _tr("Set to true to enable relative time.")
                     }
                 ]
             },
-
             author : { 
                 name:'Andrew Charnley', 
                 link:'http://www.igaro.com/ppl/ac' 
@@ -57,71 +56,59 @@ module.exports = function(app) {
                 { 
                     name:'set',
                     type:'function',
-                    desc: {
-                        en : 'Sets the date.',
-                        fr : 'Définit la date.'
-                    },
+                    desc: _tr("Sets the date."),
                     attributes : [
                         {
-                            type:'date'
+                            required:true,
+                            type:'object',
+                            attributes : [{
+                                instanceof : { name:'Date' }  
+                            }]
                         }
                     ]
                 },
                 { 
                     name:'offset',
                     type:'function',
-                    desc: {
-                        en : 'Sets the timezone offset.',
-                        fr : 'Définit le décalage horaire.'
-                    },
+                    desc: _tr("Sets the timezone offset."),
                     attributes : [
                         {
                             type:'number',
                             attributes: [{
-                                desc: {
-                                    en : '+- 15 minute blocks.',
-                                    fr : '+- Blocs de 15 minutes.'
-                                }
+                                desc: _tr("+- 15 minute blocks.")
                             }]
                         },
                         {
                             type:'boolean',
                             attributes: [{
-                                desc: {
-                                    en : 'By default the offset is stored. Use true to disable.',
-                                    fr : 'Par défaut, le décalage est stocké. Utilisez true pour désactiver.'
-                                }
+                                desc:_tr("By default the offset is stored. Use true to disable.")
                             }]
                         }
                     ]
                 },
                 { 
                     name:'container', 
-                    type:'element',
-                    desc: {
-                        en : 'The element the instance is appended into.',
-                        fr : 'L\'élément de l\'instance est ajouté dans.'
-                    }
+                    desc: _tr("The element the instance is appended into."),
+                    instanceof : { name:'Element' }  
                 },
-                { 
+                {
                     name:'format', 
                     type:'function',
-                    desc: {
-                        en : 'Formats the stringified version of the date.',
-                        fr : 'Formate la version chainifiée de la date.'
-                    },
+                    desc: _tr("Formats the stringified version of the date."),
                     attributes : [
                         {
                             type:'string',
                             required:true,
                             attributes:[{
-                                desc: {
-                                    en : 'The formatting code to pass to the plugin.',
-                                    fr : 'Le code de mise en forme pour passer au plugin.'
-                                }
+                                desc: _tr("The formatting code to pass to the plugin.")
                             }]
                         }
                     ]
+                },
+                {
+                    name:'relative', 
+                    type:'function',
+                    desc: _tr("Begins a countdown/count up (if the time difference is within range).")
                 }
             ],
             related : [

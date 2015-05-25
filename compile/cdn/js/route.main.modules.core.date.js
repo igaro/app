@@ -88,11 +88,7 @@ module.exports = function(app) {
                     name:'resetEnvOffset',
                     type:'function',
                     desc: _tr("Resets the timezone offset to the automatically determined value."),
-                    returns : {
-                        attributes : [{
-                            instanceof: { name: 'Promise' }
-                        }]
-                    }
+                    async:true
                 },
                 { 
                     name:'setEnvOffset',
@@ -113,11 +109,7 @@ module.exports = function(app) {
                             }]
                         }
                     ],
-                    returns : {
-                        attributes : [{
-                            instanceof: { name: 'Promise' }
-                        }]
-                    }
+                    async:true
                 },
                 { 
                     name:'userTz', 

@@ -78,13 +78,7 @@ module.exports = function(app) {
                 {    
                     name:'setEnv',
                     type:'function',
-                    returns: {
-                        attributes : [
-                            {
-                                instanceof : { name:'Promise' }
-                            }
-                        ]
-                    },
+                    async:true,
                     desc: _tr("Applies a currency code to the current environment."),
                     attributes : [{
                         type:'string',
@@ -98,13 +92,7 @@ module.exports = function(app) {
                     name:'setPool',
                     type:'function',
                     desc: _tr("Sets supported currency data."),
-                    returns: {
-                        attributes : [
-                            {
-                                instanceof : { name:'Promise' }
-                            }
-                        ]
-                    },
+                    async:true,
                     attributes : [{
                         type:'string',
                         required:true,

@@ -39,7 +39,7 @@ module.exports = function(app) {
             spaces:'space'
         };
         this.container = function(dom) {
-            return dom.mk('div',o.container,null,function() {
+            return dom.mk('div',o,null,function() {
                 if (o.className)
                     this.classList.add(o.className);
                 self.canvas = dom.mk('div',this,null,o.effect);

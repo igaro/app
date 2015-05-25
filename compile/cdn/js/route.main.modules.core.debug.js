@@ -28,13 +28,7 @@ module.exports = function(app) {
                 {
                     name:'handle',
                     type:'function',
-                    returns: {
-                        attributes : [
-                            {
-                                instanceof : { name:'Promise' }
-                            }
-                        ]
-                    },
+                    async:true,
                     forManager:true,
                     desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands."),
                     attributes : [
@@ -68,13 +62,6 @@ module.exports = function(app) {
                         { 
                             name:'append',
                             type:'function',
-                            returns: {
-                                attributes : [
-                                    {
-                                        instanceof : { name:'Promise' }
-                                    }
-                                ]
-                            },
                             attributes: [
                                 { 
                                     type:'string',
@@ -99,7 +86,8 @@ module.exports = function(app) {
                                     }]
                                 }
                             ],
-                            desc: _tr("Appends a debug event to storage and fires a core.debug event containing the data.")
+                            desc: _tr("Appends a debug event to storage and fires a core.debug event containing the data."),
+                            async:true
                         }
                     ]
                 }

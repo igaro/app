@@ -9,14 +9,15 @@ module.exports = function(app) {
     if (! ('getSelection' in window)) 
         throw new Error({ incompatible:true, noobject:'getSelection' });
 
-    var bless = app['core.object'].bless,
-        dom = app['core.dom'];
+    var dom = app['core.dom'],
+        object = app['core.object'],
+        bless = object.bless;
 
     var InstanceRTE = function(o) {
         this.name = 'instance.rte';
         this.asRoot = true;
         this.container = function(dom) { 
-            return dom.mk('div',o.container,null,o.className); 
+            return dom.mk('div',o,null,o.className); 
         };
         bless.call(this,o);
         this.hasFocus = false;
@@ -236,13 +237,12 @@ module.exports = function(app) {
         return (this.inWYSIWYG? this.rte.innerHTML : this.raw.value).trim();
     };
 
-    InstanceRTE.prototype.addPanels = function(panels) {
+
+    InstanceRTE.prototype.addPanels = function(o) {
         var self = this;
-        return panels.reduce(function(a,b) {
-            return a.then(function() {
-                return self.addPanel(b);
-            });
-        },Promise.resolve());
+        return object.promiseSequencer(o,function(a) {
+            return self.addPanel(a);
+        });
     };
 
     InstanceRTE.prototype.addPanel = function(o) {

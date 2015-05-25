@@ -62,12 +62,8 @@ module.exports = function(app) {
                 {
                     name:'reset',
                     type:'function',
+                    async:true,
                     desc: _tr("Resets the ENV to the automatically defined value."),
-                    returns : {
-                        attributes : [{
-                            instanceof: { name: 'Promise' }
-                        }]
-                    }
                 },
                 {    
                     name:'setEnv',
@@ -88,11 +84,7 @@ module.exports = function(app) {
                             }]
                         }
                     ],
-                    returns : {
-                        attributes : [{
-                            instanceof: { name: 'Promise' }
-                        }]
-                    }
+                    async:true
                 },
                 {    
                     name:'setPool',
@@ -105,11 +97,7 @@ module.exports = function(app) {
                             desc: _tr("See conf.app.js for an example."),
                         }]
                     }],
-                    returns : {
-                        attributes : [{
-                            instanceof: { name: 'Promise' }
-                        }]
-                    }
+                    async:true
                 }
             ]
         };

@@ -46,13 +46,7 @@ module.exports = function(app) {
                             ]
                         }
                     ],
-                    returns : {
-                        attributes : [
-                            {
-                                instanceof: { name:'Promise' }
-                            }
-                        ]
-                    }
+                    async:true
                 },
                 { 
                     name:'getProviderById', 
@@ -105,13 +99,7 @@ module.exports = function(app) {
                                             }]
                                         }
                                     ],
-                                    returns : {
-                                        attributes : [
-                                            {
-                                                instanceof: { name: 'Promise' }
-                                            }
-                                        ]
-                                    }
+                                    async:true
                                 },
                                 { 
                                     name:'set',
@@ -142,13 +130,7 @@ module.exports = function(app) {
                                             ]
                                         }
                                     ],
-                                    returns : {
-                                        attributes : [
-                                            {
-                                                instanceof: { name: 'Promise' }
-                                            }
-                                        ]
-                                    }
+                                    async:true
                                 }
                             ]
                         }
@@ -206,13 +188,7 @@ module.exports = function(app) {
                             ]
                         },
                     ],
-                    returns : {
-                        attributes : [
-                            {
-                                instanceof: { name: 'Promise' }
-                            }
-                        ]
-                    }
+                    async:true
                 }
             ]
         };

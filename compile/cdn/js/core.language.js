@@ -101,7 +101,7 @@ module.exports = function(app, params) {
                     v = args[parseInt(m.substr(0,m.length-1).substr(2))];
                     if (typeof v === 'object') 
                         return v[k] || m;
-                    return v || m;
+                    return typeof v !== 'undefined' && v !== null? v : m;
                 });
             });
             return n;

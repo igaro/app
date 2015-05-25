@@ -89,13 +89,7 @@ module.exports = function(app) {
                                     name:'destroy',
                                     type:'function',
                                     desc:_tr("A destructor method that automatically cleans the object for memory collection, destroys any child objects and removes dependencies."),
-                                    returns: {
-                                        attributes : [
-                                            {
-                                                instanceof : { name:'Promise' }
-                                            }
-                                        ]
-                                    }
+                                    async:true
                                 },
                                 {
                                     name:'disable',
@@ -193,13 +187,7 @@ module.exports = function(app) {
                             desc: _tr("Object instantiation attributes. Usually an object literal.")
                         }
                     ],
-                    returns: {
-                        attributes : [
-                            {
-                                instanceof : { name:'Promise' }
-                            }
-                        ]
-                    }
+                    async:true
                 },
                 {
                     name:'developer',
@@ -214,13 +202,7 @@ module.exports = function(app) {
                 {
                     name:'handle',
                     type:'function',
-                    returns: {
-                        attributes : [
-                            {
-                                instanceof : { name:'Promise' }
-                            }
-                        ]
-                    },
+                    async:true,
                     forManager:true,
                     desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands."),
                     attributes : [
@@ -254,13 +236,7 @@ module.exports = function(app) {
                         { 
                             name:'append',
                             type:'function',
-                            returns: {
-                                attributes : [
-                                    {
-                                        instanceof : { name:'Promise' }
-                                    }
-                                ]
-                            },
+                            async:true,
                             attributes: [
                                 { 
                                     type:'string',
@@ -314,10 +290,11 @@ module.exports = function(app) {
                             ],
                         }
                     ],
+                    async:true,
                     returns: {
                         attributes : [
                             {
-                                instanceof : { name:'Promise' }
+                                instanceof : { name:'Array' }
                             }
                         ]
                     }

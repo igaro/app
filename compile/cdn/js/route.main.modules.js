@@ -35,7 +35,7 @@ module.exports = function(app) {
 
                 var mgrForRow = false;
 
-                domMgr.mk('p',container,_tr("<b>*</b> - required, <b>+</b> - blessed object"));
+                domMgr.mk('p',container,_tr("<b>*</b> - required, <b>+</b> - blessed object, <b><u>underlined</u></b> - asynchronous return (Promise)"));
                 return objectMgr.create('table',{
                     container:container,
                     header : {
@@ -181,7 +181,7 @@ module.exports = function(app) {
                                             });
                                             makeahref(cc,s,s.type,manager);
                                         } else {
-                                            domMgr.mk('span',cc,s.type);
+                                            domMgr.mk(s.async? 'u' : 'span',cc,s.type);
                                         }
 
                                         if (s.attributes && (s.type==='function' || s.instanceof)) {
@@ -247,15 +247,15 @@ module.exports = function(app) {
                 var u = data.usage;
                 domMgr.mk('h1',v,_tr("Usage"));
                 if (u.instantiate || u.class) {
-                    var o = u.instantiate? 
-                        _tr("Blessed objects lazy load and instantiate via <b>[object].managers.object.create()</b>. Unblessed objects use <b>new %[0]</b>.")
-                    :
-                        _tr("Access <b>%[0]</b> directly without instantiating.")
-                    ;
                     var n= 'app[\''+m.name+'\']';
                     if (u.attributes) 
                         n += '(o)';
-                    domMgr.mk('p',v,language.substitute(o,n));
+                    if (u.instantiate) {
+                        domMgr.mk('p',v,_tr("Blessed objects lazy load and instantiate via <b>[object].managers.object.create()</b>."));
+                        domMgr.mk('p',v,language.substitute(_tr("Unblessed objects use <b>new %[0]</b>."),n));
+                    } else {
+                        domMgr.mk('p',v,language.substitute(_tr("Access <b>%[0]</b> directly without instantiating."),n));
+                    }
                 } else if (u.direct) {
                     domMgr.mk('p',v,_tr("Access the features of this library directly."));
                 }
@@ -267,6 +267,22 @@ module.exports = function(app) {
                     createTable(u.attributes, domMgr.mk('p',v));
                 }
             }        
+
+            if (data.attributes || data.blessed) {
+                domMgr.mk('h1',v,_tr("Attributes"));
+                if (data.blessed)
+                    domMgr.mk('p',v,_tr("This object is blessed with attributes not shown here. See core.object documentation."));
+                if (data.attributes)
+                    createTable(data.attributes, domMgr.mk('p',v));
+            }
+
+            if (data.manager) {
+                domMgr.mk('h1',v,_tr("Manager"));
+                domMgr.mk('p',v,_tr("A blessed object can use this module as a manager (see core.object). These functions should be used over those in Attributes to reduce coding duplicity and to set and manage relations and dependencies."));
+                if (typeof data.manager === 'string')
+                    domMgr.mk('p',v,language.substitute(_tr("You can access this manager using <b>[object].managers.%[0]</b>."),data.manager));
+                createTable(data.attributes, domMgr.mk('p',v), true);
+            }
 
             if (data.demo) {
                 domMgr.mk('h1',v,_tr("Demo"));
@@ -287,22 +303,6 @@ module.exports = function(app) {
                 domMgr.mk('h2',v,_tr("Output"));
                 var c = domMgr.mk('p',v);
                 eval(data.demo);
-            }
-
-            if (data.attributes || data.blessed) {
-                domMgr.mk('h1',v,_tr("Attributes"));
-                if (data.blessed)
-                    domMgr.mk('p',v,_tr("This object is blessed. See core.object documentation."));
-                if (data.attributes)
-                    createTable(data.attributes, domMgr.mk('p',v));
-            }
-
-            if (data.manager) {
-                domMgr.mk('h1',v,_tr("Manager"));
-                domMgr.mk('p',v,_tr("A blessed object can use this module as a manager (see core.object). These functions should be used over those in Attributes to reduce coding duplicity and to set and manage relations and dependencies."));
-                if (typeof data.manager === 'string')
-                    domMgr.mk('p',v,language.substitute(_tr("You can access this manager using <b>[object].managers.%[0]</b>."),data.manager));
-                createTable(data.attributes, domMgr.mk('p',v), true);
             }
 
             if (data.dependencies) {
@@ -405,6 +405,7 @@ module.exports = function(app) {
                     ['core.router', _tr("Router, an MVC alternative using routes to build partials.")],
                     ['core.store', _tr("Session, local, cookie and remote store access.")],
                     ['core.url', _tr("URL parsing, related functionality.")],
+                    ['instance.accordion', _tr("Creates a list which can expand and collapse nodes.")],
                     ['instance.amd', _tr("Async loading of resources, NodeJS/Require style.")],
                     ['instance.bookmark', _tr("Basic social media bookmarking.")],
                     ['instance.date', _tr("Date display with language switching & timezone correction.")],
@@ -413,6 +414,7 @@ module.exports = function(app) {
                     ['instance.list', _tr("LI list management with re-ordering functionality.")],
                     ['instance.modaldialog', _tr("Async dialog boxes with alert() and confirm() replacements.")],
                     ['instance.navigation', _tr("Navigation controls (tabs, dropdown etc).")],
+                    ['instance.oauth2', _tr("Handles the standard authentication credential sign-in process.")],
                     ['instance.pagemessage', _tr("Displays a formatted message.")],
                     ['instance.rte', _tr("Rich text data entry and display.")],
                     ['instance.samespace', _tr("Elements in same space with navigation and animation.")],

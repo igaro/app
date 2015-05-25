@@ -73,12 +73,7 @@ module.exports = function(app) {
                             ]
                         }
                     ],
-                    returns : {
-                        attributes : [{
-                            instanceof: { name: 'Promise' },
-                            desc : _tr("Resolves when all modules and dependencies are loaded.")
-                        }]
-                    },
+                    async:true
                 }
             ]
 

@@ -113,7 +113,7 @@ module.exports = function(app) {
         this.name = 'instance.navigation';
         this.asRoot = true;
         this.container = function(dom) {
-            return dom.mk('nav',o.container,null,o.className);
+            return dom.mk('nav',o,null,o.className);
         };
         bless.call(this,o);
         this.menu = new InstanceNavigationMenu({ 

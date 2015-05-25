@@ -41,11 +41,11 @@ module.exports = function(app) {
                                 ]
                             }
                         ],
+                        async:true,
                         returns: {
                             attributes:[
                                 {
-                                    instanceof: { name:'Promise' },
-                                    desc: _tr("On success contains the route.")
+                                    instanceof: function() { return data.objects.route; },
                                 }
                             ]
                         },
@@ -69,12 +69,11 @@ module.exports = function(app) {
                         returns: {
                             attributes:[
                                 {
-                                    instanceof: { name:'Promise' },
-                                    desc: _tr("The Promise contains an array of the loaded routes.")
+                                    instanceof: { name:'Array' },
                                 }
                             ]
                         },
-                        desc : _tr("Adds routes in sequence.")
+                        desc : _tr("Adds routes by calling .addRoute() in sequence.")
                     },
                     {
                         name:'addSequence',
@@ -99,13 +98,7 @@ module.exports = function(app) {
                                 ]
                             },
                         ],
-                        returns: {
-                            attributes:[
-                                {
-                                    instanceof: { name:'Promise' }
-                                }
-                            ]
-                        },
+                        async:true
                     },
                     { 
                         name:'autoShow', 
@@ -192,6 +185,7 @@ module.exports = function(app) {
                         name:'removeRoutes',
                         type:'function',
                         desc: _tr("Takes an Array of Routes in which to destroy."),
+                        async:true,
                         attributes : [
                             {
                                 type:'object',
@@ -199,14 +193,7 @@ module.exports = function(app) {
                                     instanceof: { name:'Array' }
                                 }],
                             }
-                        ],
-                        returns: {
-                            attributes:[
-                                {
-                                    instanceof: { name:'Promise' },
-                                }
-                            ]
-                        },
+                        ]
                     },
                     { 
                         name:'routes', 

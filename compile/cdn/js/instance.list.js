@@ -26,7 +26,7 @@ module.exports = function(app) {
         this.name='instance.list';
         this.asRoot=true;
         this.container=function(dom) {
-            return dom.mk('ol',o.container,null,o.className);
+            return dom.mk('ol',o,null,o.className);
         };
         this.children = {
             items:'item'

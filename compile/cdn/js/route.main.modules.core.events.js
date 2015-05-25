@@ -56,13 +56,7 @@ module.exports = function(app) {
                     name:'dispatch', 
                     type:'function',
                     forManager:true,
-                    returns: {
-                        attributes : [
-                            {
-                                instanceof : { name:'Promise' }
-                            }
-                        ]
-                    },
+                    async:true,
                     attributes: [
                         { 
                             type:'string', 

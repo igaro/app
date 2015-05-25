@@ -798,16 +798,16 @@ msgstr ""
 msgid "Connection Refused"
 msgstr ""
 
+msgid "%[0] second ago"
+msgstr ""
+
 msgid "%[0] seconds ago"
 msgstr ""
 
 msgid "%[0] second"
 msgstr ""
 
-msgid "%d seconds ago"
-msgstr ""
-
-msgid "%d seconds"
+msgid "%[0] seconds"
 msgstr ""
 
 msgid "Value required"
@@ -2393,9 +2393,6 @@ msgstr ""
 msgid "Loads the route without user indications."
 msgstr ""
 
-msgid "On success contains the route."
-msgstr ""
-
 msgid ""
 "Attempts to load a child route. If loaded an enter event is fired on the "
 "routes event manager. Use this to force code reload. An init event is fired "
@@ -2403,10 +2400,7 @@ msgid ""
 "that keep state."
 msgstr ""
 
-msgid "The Promise contains an array of the loaded routes."
-msgstr ""
-
-msgid "Adds routes in sequence."
+msgid "Adds routes by calling .addRoute() in sequence."
 msgstr ""
 
 msgid ""
@@ -2695,6 +2689,51 @@ msgid ""
 msgstr ""
 
 msgid ""
+"Creates a list that can expand and collapse nodes. Useful to condense "
+"information for when navigation is important or where space is limited."
+msgstr ""
+
+msgid "Container to append the instance into."
+msgstr ""
+
+msgid ""
+"Pass true to allow more than one section to expand. If false (default) then "
+"open sections contract prior to another section opening."
+msgstr ""
+
+msgid "Initial sections to create. Calls .addSections() with the list."
+msgstr ""
+
+msgid "Adds a new section to the accordion."
+msgstr ""
+
+msgid "A language literal, content or other Element."
+msgstr ""
+
+msgid "Sets the initial mode to be expanded."
+msgstr ""
+
+msgid "A language literal or string."
+msgstr ""
+
+msgid ""
+"Calls .addSection() with each item in the array and returns the added "
+"sections."
+msgstr ""
+
+msgid "Collapses all sections"
+msgstr ""
+
+msgid "The UL element that contains the LI siblings"
+msgstr ""
+
+msgid "Expands all sections. multiExpand must be enabled for this to work."
+msgstr ""
+
+msgid "The sections added to the accordion."
+msgstr ""
+
+msgid ""
 "Asynchronously loads modules and there dependencies using XHR and appends "
 "Igaro App modules into the namespace."
 msgstr ""
@@ -2736,9 +2775,6 @@ msgid ""
 "be used."
 msgstr ""
 
-msgid "Resolves when all modules and dependencies are loaded."
-msgstr ""
-
 msgid "Provides a simple bookmark toolbar for the major social platforms."
 msgstr ""
 
@@ -2746,9 +2782,6 @@ msgid "The URL to bookmark. Defaults to the current."
 msgstr ""
 
 msgid "Title to pass over to the external service."
-msgstr ""
-
-msgid "Container to append the instance into."
 msgstr ""
 
 msgid "Sets the URL and optional title to pass over to the external service."
@@ -2760,6 +2793,56 @@ msgstr ""
 msgid "Title to pass over."
 msgstr ""
 
+msgid ""
+"Provides a managed date with automatic display and timezone conversion. By "
+"default uses 3rdparty.moment.js for formatting to the user locale."
+msgstr ""
+
+msgid "The date to use."
+msgstr ""
+
+msgid "The format used to stringify the date object. See MomentJS for codes."
+msgstr ""
+
+msgid ""
+"For relative time, will show a countdown when the delta is less than or "
+"equal to this value."
+msgstr ""
+
+msgid ""
+"For relative time,  will show a countup when the delta is less than or equal "
+"to this value."
+msgstr ""
+
+msgid ""
+"By default the timezone offset will be read from core.date.js. To set a "
+"specific timezone specify the +- minutes here."
+msgstr ""
+
+msgid "Set to true to enable relative time."
+msgstr ""
+
+msgid "Sets the date."
+msgstr ""
+
+msgid "+- 15 minute blocks."
+msgstr ""
+
+msgid "By default the offset is stored. Use true to disable."
+msgstr ""
+
+msgid "The element the instance is appended into."
+msgstr ""
+
+msgid "Formats the stringified version of the date."
+msgstr ""
+
+msgid "The formatting code to pass to the plugin."
+msgstr ""
+
+msgid "Begins a countdown/count up (if the time difference is within range)."
+msgstr ""
+
 msgid "All main respository module documentation can be found on this page."
 msgstr ""
 
@@ -2769,7 +2852,9 @@ msgstr ""
 msgid "View on Github"
 msgstr ""
 
-msgid "<b>*</b> - required, <b>+</b> - blessed object"
+msgid ""
+"<b>*</b> - required, <b>+</b> - blessed object, <b><u>underlined</u></b> - "
+"asynchronous return (Promise)"
 msgstr ""
 
 msgid "Type"
@@ -2786,7 +2871,10 @@ msgstr ""
 
 msgid ""
 "Blessed objects lazy load and instantiate via <b>[object].managers.object."
-"create()</b>. Unblessed objects use <b>new %[0]</b>."
+"create()</b>."
+msgstr ""
+
+msgid "Unblessed objects use <b>new %[0]</b>."
 msgstr ""
 
 msgid "Access <b>%[0]</b> directly without instantiating."
@@ -2802,21 +2890,12 @@ msgid ""
 "Where <b>o</b> is an object containing attributes from the following table."
 msgstr ""
 
-msgid "code"
-msgstr ""
-
-msgid ""
-"Hint: <b>c</b> is a container element. For blessed objects this will default "
-"to the objects container."
-msgstr ""
-
-msgid "Output"
-msgstr ""
-
 msgid "Attributes"
 msgstr ""
 
-msgid "This object is blessed. See core.object documentation."
+msgid ""
+"This object is blessed with attributes not shown here. See core.object "
+"documentation."
 msgstr ""
 
 msgid "Manager"
@@ -2829,6 +2908,17 @@ msgid ""
 msgstr ""
 
 msgid "You can access this manager using <b>[object].managers.%[0]</b>."
+msgstr ""
+
+msgid "code"
+msgstr ""
+
+msgid ""
+"Hint: <b>c</b> is a container element. For blessed objects this will default "
+"to the objects container."
+msgstr ""
+
+msgid "Output"
 msgstr ""
 
 msgid "Related"
@@ -2897,6 +2987,9 @@ msgstr ""
 msgid "URL parsing, related functionality."
 msgstr ""
 
+msgid "Creates a list which can expand and collapse nodes."
+msgstr ""
+
 msgid "Async loading of resources, NodeJS/Require style."
 msgstr ""
 
@@ -2919,6 +3012,9 @@ msgid "Async dialog boxes with alert() and confirm() replacements."
 msgstr ""
 
 msgid "Navigation controls (tabs, dropdown etc)."
+msgstr ""
+
+msgid "Handles the standard authentication credential sign-in process."
 msgstr ""
 
 msgid "Displays a formatted message."

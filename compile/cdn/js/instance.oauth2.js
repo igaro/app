@@ -4,14 +4,13 @@
 
 module.requires = [
     { name: 'instance.oauth2.css' },
-    { name: 'core.url.js' },
+    { name: 'core.url.js' }
 ];
 
 module.exports = function(app) {
 
     var url = app['core.url'],
- 		bless = app['core.object'].bless,
-    	xhr = app['instance.xhr'];
+ 		bless = app['core.object'].bless;
 
 	var setBits = function(p) {
 		if (p.scope) 
@@ -72,9 +71,8 @@ module.exports = function(app) {
 		return new Promise(function(resolve) {
 			self._resolve = function(o) {
 				self.inProgress =  false;
-				try {
-					body.removeChild(self.container);
-				} catch(e) {}
+                if (self.container.parentNode)
+                    body.removeChild(self.container);
 				resolve(o);
 			};
 		});
