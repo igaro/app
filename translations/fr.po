@@ -2843,6 +2843,61 @@ msgstr ""
 msgid "Begins a countdown/count up (if the time difference is within range)."
 msgstr ""
 
+msgid ""
+"Provides form validation with native support for number, min, max, email, "
+"tel, pattern, required and length. Custom rules are supported."
+msgstr ""
+
+msgid "The amount of errors to show at once. Default is 1."
+msgstr ""
+
+msgid "A form element containing the inputs to validate."
+msgstr ""
+
+msgid "Defines whether the validation should run in realtime. Default is true."
+msgstr ""
+
+msgid "If validation passes the form will execute this function on submission."
+msgstr ""
+
+msgid "The routine to run on any form element value change."
+msgstr ""
+
+msgid "The element which failed validation."
+msgstr ""
+
+msgid "A message pertaining to the validation failure."
+msgstr ""
+
+msgid ""
+"Custom rules in addition to basic rules that will be enumerated through to "
+"check if the form is valid. A rule may be asynchronous. When invalid the "
+"function should return a language literal."
+msgstr ""
+
+msgid ""
+"Adds onInput event listeners to text inputs. Use after adding new elements "
+"to the form."
+msgstr ""
+
+msgid ""
+"Runs the validation rules and displays validation messages on those elements "
+"that fail."
+msgstr ""
+
+msgid "A valid pass is denoted by true."
+msgstr ""
+
+msgid "Clears the form of any validation messages."
+msgstr ""
+
+msgid ""
+"Update the validation routine by applying a new function to this attribute."
+msgstr ""
+
+msgid "Hooks up a form to the validation process."
+msgstr ""
+
 msgid "All main respository module documentation can be found on this page."
 msgstr ""
 

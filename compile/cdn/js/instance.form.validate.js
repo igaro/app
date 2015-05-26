@@ -31,11 +31,10 @@ module.exports = function(app) {
         this.inRealTime = typeof o.inRealTime === 'boolean'? o.inRealTime : true;
         this.rules = o.rules || [];
         this.errorDisplayAmount = 'errorDisplayAmount' in o? o.errorDisplayAmount : 1;
-        this.runOnChange = 'runOnChange' in o? o.runOnChange : true;
         this.messages = [];
         this.resizeHooks = [];
         if (o.form)
-            this.setForm(form);
+            this.setForm(o.form);
         this.onValidSubmit = o.onValidSubmit;
     };
 
@@ -140,17 +139,12 @@ module.exports = function(app) {
                 return Promise.resolve(true);
             };
         return this.clear().then(function () {
-
             return Promise.all(self.getFormElements().map(function(element) {
-
                 if (element.getAttribute('no-validate'))
                     return Promise.resolve();
-
                 element.classList.add('validation-ok');
-
                 var value = element.nodeName === 'SELECT'? element.options[element.selectedIndex].value  : element.value.trim(),
                     type = element.type? element.type.toLowerCase() : null;
-                
                 if (element.required && ! value.length) {
                     return addMsg(element, l.required);
                 }
@@ -179,7 +173,7 @@ module.exports = function(app) {
                 var elementRules = [];
                 self.rules.forEach(function (o) {
                     if (element.name === o[0]) 
-                        elementRules.push(o[1](value));
+                        elementRules.push(o[1].call(o,value));
                 });
 
                 // reduce promises
@@ -195,7 +189,6 @@ module.exports = function(app) {
                             return addMsg(element,b);
                     }); 
                 }, Promise.resolve());
-
             })).then(function(results) {
                 var valid = results.every(function(o) {
                     return !o; 
@@ -204,9 +197,7 @@ module.exports = function(app) {
                     return valid;
                 });
             });
-
         });
-       
     };
 
     InstanceFormValidate.prototype.clear = function() {

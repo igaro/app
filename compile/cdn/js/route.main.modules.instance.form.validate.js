@@ -1,69 +1,77 @@
+module.requires = [
+    { name:'core.currency.js' }
+];
+
 module.exports = function(app) {
 
     return function(model) {
 
         var data = {
-
-            demo : "var f = dom.mk('form',c), v = dom.mk('input[text]',f); \n \
-v.placeholder='Currency amount'; \n \
-model.managers.object.create('form.validate',{ \n \
-    form:f, \n \
-    routine: function() { \n \
-        var vg = v.value.trim(); \n \
-        if (! vg.length) return { near:v, message: { \n \
-            en: 'A value is required', \n \
-            fr: 'Une valeur est requise' \n \
-        }}; \n \
-        if (! app['core.currency'].validate(vg)) return { near:v, message: { \n \
-            en:'Invalid amount', \n \
-            fr:'Montant invalide' \n \
-        }}; \n \
-    } \n \
+            demo : "model.managers.object.create('form.validate',{\n\
+    form: dom.mk('form',c, dom.mk('input[text]',null,null,function() {\n\
+        this.name='amount';\n\
+        this.required=true;\n\
+        dom.setPlaceholder(this, { en:'Currency Amount' });\n\
+    })),\n\
+    rules: [['amount',function(v) { \n\
+        if (! app['core.currency'].validate(v)) {\n\
+            return {\n\
+                en:'Invalid amount'\n\
+            }\n\
+        }\n\
+    }]]\n\
 })",
-            desc : {
-                en : 'Provides form validation. Note: at some point in the near future this module will change to work in a similar fashion to AngularJS form validation.',
-                fr : 'Fournit la validation de formulaire. Remarque: à un certain point dans un proche avenir ce module va changer à travailler d\'une manière similaire à AngularJS validation du formulaire.'
-            },
+            desc : _tr("Provides form validation with native support for number, min, max, email, tel, pattern, required and length. Custom rules are supported."),
+            blessed:true,
             usage : {
                 instantiate : true,
                 attributes : [
+                    {
+                        name:'errorDisplayAmount',
+                        type:'number', 
+                        desc : _tr("The amount of errors to show at once. Default is 1.")
+                    },
                     { 
-                        name:'form', 
-                        type:'element',
-                        desc : {
-                            en : 'A form element containing the inputs to validate.',
-                            fr : 'Un élément de formulaire contenant les entrées pour valider.'
-                        },
+                        name:'form',
+                        instanceof : { name:'Element' }, 
+                        desc : _tr("A form element containing the inputs to validate."),
                         required:true
+                    },
+                    {
+                        name:'inRealTime',
+                        type:'boolean', 
+                        desc : _tr("Defines whether the validation should run in realtime. Default is true.")
+                    },
+                    {
+                        name:'onValidSubmit',
+                        type:'function', 
+                        desc : _tr("If validation passes the form will execute this function on submission.")
                     },
                     { 
                         name:'routine', 
                         type:'function',
-                        desc : {
-                            en : 'The routine to run on any form element value change.',
-                            fr : 'La routine pour fonctionner sur tout changement de valeur de l\'élément de formulaire.'
-                        },
+                        desc : _tr("The routine to run on any form element value change."),
                         required:true,
                         returns : {
                             attributes : [
                                 {
-                                    type:'element',
+                                    instanceof : { name:'Element' }, 
                                     name:'near',
-                                    desc: {
-                                        en : 'The element which failed validation.',
-                                        fr : 'L\'élément qui a échoué validation.'
-                                    }
+                                    desc: _tr("The element which failed validation.")
                                 },
                                 {
                                     type:'object',
                                     name:'message',
-                                    desc:{
-                                        en : 'A message pertaining to the validation failure.',
-                                        fr : 'Un message concernant l\'échec de validation.'
-                                    }
+                                    desc: _tr("A message pertaining to the validation failure.")
                                 }
                             ]
                         }
+                    },
+                    { 
+                        name:'rules',
+                        instanceof : { name:'Array' }, 
+                        desc : _tr("Custom rules in addition to basic rules that will be enumerated through to check if the form is valid. A rule may be asynchronous. When invalid the function should return a language literal."),
+                        required:true
                     }
                 ]
             },
@@ -73,29 +81,44 @@ model.managers.object.create('form.validate',{ \n \
                 link:'http://www.igaro.com/ppl/ac' 
             },
             attributes : [
-                { 
-                    name:'init', 
+                {
+                    name:'addTextInputListeners', 
                     type:'function',
-                    desc : {
-                        en : 'Used to register event handles onto the inputs. If your form inputs change you should re-call this.',
-                        fr : 'Utilisé pour enregistrer l\'événement poignées sur les entrées. Si les entrées de votre formulaire de modification, vous devez re-appeler cela.'
+                    desc : _tr("Adds onInput event listeners to text inputs. Use after adding new elements to the form.")
+                },
+                { 
+                    name:'check',
+                    async:true, 
+                    type:'function',
+                    desc : _tr("Runs the validation rules and displays validation messages on those elements that fail."),
+                    returns : {
+                        attributes:[{
+                            type:'boolean',
+                            desc:_tr("A valid pass is denoted by true.")
+                        }]
                     }
+                },
+                { 
+                    name:'clear',
+                    async:true, 
+                    type:'function',
+                    desc : _tr("Clears the form of any validation messages.")
                 },
                 { 
                     name:'routine', 
                     type:'function',
-                    desc : {
-                        en : 'You can update the validation routine by applying a new function to this variable.',
-                        fr : 'Vous pouvez mettre à jour le programme de validation par l\'application d\'une nouvelle fonction de cette variable.'
-                    }
+                    desc : _tr("Update the validation routine by applying a new function to this attribute."),
                 },
                 { 
-                    name:'clear', 
+                    name:'setForm', 
                     type:'function',
-                    desc : {
-                        en : 'Clears the form of all validation messages.',
-                        fr : 'Efface la forme de tous les messages de validation.'
-                    }
+                    desc : _tr("Hooks up a form to the validation process."),
+                    attributes:[{
+                        type:'object',
+                        attributes: [{ 
+                            instanceof: { name:'Element' }
+                        }]
+                    }]
                 }
             ]
         };
