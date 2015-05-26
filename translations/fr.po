@@ -2898,6 +2898,27 @@ msgstr ""
 msgid "Hooks up a form to the validation process."
 msgstr ""
 
+msgid ""
+"Asynchronously fetch JSON from a resource without hitting CORS restrictions."
+msgstr ""
+
+msgid "For when the resource requires a callback name other than 'callback'."
+msgstr ""
+
+msgid "The resource to load."
+msgstr ""
+
+msgid "Aborts the operation (if currently running."
+msgstr ""
+
+msgid "Begins the request."
+msgstr ""
+
+msgid ""
+"Any of the instantiated data can be set here to update the XHR before it is "
+"sent."
+msgstr ""
+
 msgid "All main respository module documentation can be found on this page."
 msgstr ""
 

@@ -5,6 +5,7 @@
 module.exports = function(app) {
 
     var bless = app['core.object'].bless,
+        dom = app['core.dom'],
         setBits = function(p) {
             if (p.res) 
                 this.res = p.res;
@@ -37,27 +38,24 @@ module.exports = function(app) {
             setBits.call(this,o);
         var self = this, 
             eventMgr = this.managers.event,
-            dom = this.managers.dom,
             jsonp = this.jsonp, 
-            s = this.res +
-                s.indexOf('?') === -1? '?' : '&' +
-                this.callbackName + '=' + this.uid;
+            res = this.res;
+        res += res.indexOf('?') === -1? '?' : '&';
+        res += this.callbackName + '=' + this.uid;
         return new Promise(function(resolve, reject) {
             window[self.uid] = function(data) {
                 delete window[self.uid];
-                resolve(data).then(function() {
-                    return eventMgr.dispatch('success').then(function() {
-                        return eventMgr.dispatch('end');
-                    });
+                resolve(data);
+                return eventMgr.dispatch('success').then(function() {
+                    return eventMgr.dispatch('end');
                 });
             };
-            jsonp.src = s;
+            jsonp.src = res;
             jsonp.onerror = function(err) {
                 delete window[self.uid];
-                reject(err).then(function() {
-                    return eventMgr.dispatch('error',err).then(function() {
-                        return eventMgr.dispatch('end');   
-                    });
+                reject(err);
+                return eventMgr.dispatch('error',err).then(function() {
+                    return eventMgr.dispatch('end');   
                 });
             };
             dom.head.appendChild(jsonp);
