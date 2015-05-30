@@ -2693,6 +2693,23 @@ msgid ""
 "information for when navigation is important or where space is limited."
 msgstr ""
 
+msgid "A DL container for the object."
+msgstr ""
+
+msgid "A DD element representing the content."
+msgstr ""
+
+msgid "A DT element representing the header."
+msgstr ""
+
+msgid ""
+"A SPAN element representing the selection status of the content. For example "
+"a SELECT element could write it's current value."
+msgstr ""
+
+msgid "A SPAN element representing the title inside the header."
+msgstr ""
+
 msgid "Container to append the instance into."
 msgstr ""
 
@@ -2919,6 +2936,47 @@ msgid ""
 "sent."
 msgstr ""
 
+msgid "Provides an array like list mapped to a UL and LI elements."
+msgstr ""
+
+msgid "An LI container for the object."
+msgstr ""
+
+msgid "Initial items to use for the list. See addItem() for attributes."
+msgstr ""
+
+msgid ""
+"Adds an object to the list optionally shifting it to a specified position. "
+"The object will have an LI element appended at the same position."
+msgstr ""
+
+msgid "The content to supply to the DOM creator (see core.dom.mk)."
+msgstr ""
+
+msgid "If supplied the value will be appended to the LI.className."
+msgstr ""
+
+msgid "Calls .addItem() in sequence and returns the new items."
+msgstr ""
+
+msgid "Items to insert."
+msgstr ""
+
+msgid "The UL element that contains the LI siblings."
+msgstr ""
+
+msgid "The list's items."
+msgstr ""
+
+msgid "Moves an object in the list by a number of places."
+msgstr ""
+
+msgid "The object in the list to move."
+msgstr ""
+
+msgid "The number of places to move the item in the list up or down.."
+msgstr ""
+
 msgid "All main respository module documentation can be found on this page."
 msgstr ""
 
@@ -2929,8 +2987,8 @@ msgid "View on Github"
 msgstr ""
 
 msgid ""
-"<b>*</b> - required, <b>+</b> - blessed object, <b><u>underlined</u></b> - "
-"asynchronous return (Promise)"
+"%[0] - required, %[1] - blessed object, %[2]underlined%[3] - asynchronous "
+"(%[4])"
 msgstr ""
 
 msgid "Type"
@@ -2969,9 +3027,7 @@ msgstr ""
 msgid "Attributes"
 msgstr ""
 
-msgid ""
-"This object is blessed with attributes not shown here. See core.object "
-"documentation."
+msgid "This object is blessed with attributes not shown here."
 msgstr ""
 
 msgid "Manager"

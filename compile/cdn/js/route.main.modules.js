@@ -31,11 +31,13 @@ module.exports = function(app) {
 
         model.stash.childsupport = function(data, m) {
 
+            var showBlessed = false;
+
             var createTable = function(data,container,manager) {
 
                 var mgrForRow = false;
 
-                domMgr.mk('p',container,_tr("<b>*</b> - required, <b>+</b> - blessed object, <b><u>underlined</u></b> - asynchronous return (Promise)"));
+                domMgr.mk('p',container,language.substitute(_tr("%[0] - required, %[1] - blessed object, %[2]underlined%[3] - asynchronous (%[4])"),'<b>*</b>','<b>+</b>','<b><u>','</u></b>','<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>'));
                 return objectMgr.create('table',{
                     container:container,
                     header : {
@@ -135,9 +137,12 @@ module.exports = function(app) {
                                         cc.stash.hyperlinks = [];
                                         var returns = s.returns;
                                         if (returns && s.type==='function') {
-                                            var l;
+                                            var l,
+                                                blessed;
                                             if (typeof returns.instanceof === 'function') {
-                                                l = returns.instanceof().name;
+                                                l = returns.instanceof();
+                                                blessed = l.blessed;
+                                                l = l.name;
                                             } else if (returns.type) {
                                                 l = returns.type;
                                             } else {
@@ -148,6 +153,10 @@ module.exports = function(app) {
                                                     o.forManager = s.forManager;
                                                 });
                                             makeahref(cc,returns,l,manager);
+                                            if (blessed) {
+                                                showBlessed = true;
+                                                domMgr.mk('sup',cc,'+');
+                                            }
                                             domMgr.mk('span',cc,' = ');
                                         }
                                         var m=s.instanceof;
@@ -155,8 +164,10 @@ module.exports = function(app) {
                                             if (typeof m === 'function') { 
                                                 m = m();
                                                 makeahref(cc,m,m.name,manager);
-                                                if (m.blessed)
+                                                if (m.blessed) {
+                                                    showBlessed = true;
                                                     domMgr.mk('sup',cc,'+');
+                                                }
                                                 if (m.desc) {
                                                     var q = JSON.parse(JSON.stringify(m.desc));
                                                     if (s.desc) {
@@ -270,8 +281,10 @@ module.exports = function(app) {
 
             if (data.attributes || data.blessed) {
                 domMgr.mk('h1',v,_tr("Attributes"));
-                if (data.blessed)
-                    domMgr.mk('p',v,_tr("This object is blessed with attributes not shown here. See core.object documentation."));
+                if (data.blessed) {
+                    showBlessed = true;
+                    domMgr.mk('p',v,_tr("This object is blessed with attributes not shown here."));
+                }
                 if (data.attributes)
                     createTable(data.attributes, domMgr.mk('p',v));
             }
@@ -322,11 +335,19 @@ module.exports = function(app) {
                 });
             }
 
+            if (showBlessed) {
+                if (!(data.related instanceof Array)) 
+                    data.related = [];
+                if (! data.related.some(function(relation) {
+                    return relation === 'core.object';
+                })) data.related.push('core.object');
+            }
+
             if (data.related) {
                 domMgr.mk('h1',v,_tr("Related"));
                 domMgr.mk('p',v,null,function() {
                     var s = this;
-                    data.related.forEach(function(o) { 
+                    data.related.sort().forEach(function(o) { 
                         domMgr.mk('button',s,o).addEventListener('click', function(evt) {
                             evt.preventDefault();
                             this.disabled = true;
@@ -336,8 +357,7 @@ module.exports = function(app) {
                             });
                         });
                     });
-                });
-                
+                }); 
             }
 
             if (data.author) {

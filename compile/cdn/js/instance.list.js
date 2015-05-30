@@ -36,8 +36,8 @@ module.exports = function(app) {
 
     InstanceList.prototype.init = function(o) {
         var self = this;
-        return (o.options ? 
-            self.addItems(o)
+        return (o.items? 
+            self.addItems(o.items)
             :
             Promise.resolve()
         ).then(function() {
@@ -87,7 +87,7 @@ module.exports = function(app) {
         if (i === items.length-1) { 
             c.appendChild(li);
         } else {
-            c.insertBefore(li,items[i+1].li);
+            c.insertBefore(li,items[i+1].container);
         }
     };
 

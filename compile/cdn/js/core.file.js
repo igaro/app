@@ -11,7 +11,7 @@ module.exports = function(app) {
                 return (v/1000000000).toFixed(2)+'Gb';
             if (v < 1000000000000000) 
                 return (v/1000000000000).toFixed(2)+'Tb';
-            return v;
+                            return v;
         },
         
         getExtension : function(f) {

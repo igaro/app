@@ -10,11 +10,66 @@ model.managers.object.create('accordion',{ \n \
     sections : [ \n \
         { title: { en:'1' }, content:{ en : 'Blue' }}, \n \
         { title: { en:'2' }, content:{ en : 'Black' }}, \n \
-        { title: { en:'3' }, content:{ en : 'Red' }} \n \
+        { title: { en:'3' }, content:{ en : 'Red' }, disabled:true } \n \
     ] \n \
 });",
             desc : _tr("Creates a list that can expand and collapse nodes. Useful to condense information for when navigation is important or where space is limited."), 
             blessed:true,
+            objects : {
+                section : { 
+                    name:'Section',
+                    blessed : true,
+                    attributes : [
+                        { 
+                            name:'addRoute', 
+                            type:'function',
+                            attributes: [
+                                { 
+                                    type:'object', 
+                                    required:true,
+                                    attributes:[
+                                        {
+                                            name:'container',
+                                            instanceof : { name:'Element' },
+                                            desc: _tr("A DL container for the object.")
+                                        },
+                                        {
+                                            name:'content',
+                                            instanceof : { name:'Element' },
+                                            desc: _tr("A DD element representing the content.")
+                                        },
+                                        {
+                                            name:'header',
+                                            instanceof : { name:'Element' },
+                                            desc: _tr("A DT element representing the header.")
+                                        },
+                                        {
+                                            name:'selector',
+                                            instanceof : { name:'Element' },
+                                            desc: _tr("A SPAN element representing the selection status of the content. For example a SELECT element could write it's current value.")
+                                        },
+                                        {
+                                            name:'title',
+                                            instanceof : { name:'Element' },
+                                            desc: _tr("A SPAN element representing the title inside the header.")
+                                        }
+                                    ]
+                                }
+                            ],
+                            async:true,
+                            returns: {
+                                attributes:[
+                                    {
+                                        instanceof: function() { return data.objects.route; },
+                                    }
+                                ]
+                            },
+                            desc : _tr("Attempts to load a child route. If loaded an enter event is fired on the routes event manager. Use this to force code reload. An init event is fired the first time a route is loaded. Use this to set-up a view and parameters that keep state.")
+                        }
+                    ]
+                }
+            },
+
             usage : {
                 instantiate : true,
                 attributes : [
@@ -51,6 +106,9 @@ model.managers.object.create('accordion',{ \n \
                     type:'function',
                     async:true,
                     desc : _tr("Adds a new section to the accordion."),
+                    returns : {
+                        instanceof: function() { return data.objects.section; },
+                    },
                     attributes : [
                         {
                             type:'object',

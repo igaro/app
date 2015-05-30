@@ -8,6 +8,7 @@ module.exports = function(app) {
                 name:'Andrew Charnley', 
                 link:'http://www.igaro.com/ppl/ac' 
             },
+            blessed:true,
             demo : "dom.mk('button', c, { en: 'Get JSON' }, function() {\n\
     this.addEventListener('click', function () {\n\
         var self = this;\n\
