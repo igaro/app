@@ -2977,6 +2977,50 @@ msgstr ""
 msgid "The number of places to move the item in the list up or down.."
 msgstr ""
 
+msgid ""
+"Provides asynchronous dialog screens which force a user action. A "
+"replacement for alert() and confirm()."
+msgstr ""
+
+msgid "Resolves when the user selects an action. The action is returned."
+msgstr ""
+
+msgid "Displays a list of actions."
+msgstr ""
+
+msgid "A language literal to use for the message."
+msgstr ""
+
+msgid ""
+"Specifies actions to be included. A cancel action will always be appended."
+msgstr ""
+
+msgid "A language literal to use for the action."
+msgstr ""
+
+msgid "Displays an alert dialog."
+msgstr ""
+
+msgid "Displays a confirm or cancel dialog."
+msgstr ""
+
+msgid "Provides a styled message for display on a view."
+msgstr ""
+
+msgid "Used to retain a hidden state, where applicable."
+msgstr ""
+
+msgid "Allow the message to be permanently hidden."
+msgstr ""
+
+msgid "A language literal to be displayed."
+msgstr ""
+
+msgid ""
+"Defines the style. Choose between; warn, info, error, default, success and "
+"ok, or make your own."
+msgstr ""
+
 msgid "All main respository module documentation can be found on this page."
 msgstr ""
 

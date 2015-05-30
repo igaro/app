@@ -10,7 +10,6 @@ model.managers.object.create('pagemessage', { \n \
     type:'error', \n \
     message : { \n \
         en : 'Some sort of error occured.', \n \
-        fr : 'xyz' \n \
     } \n \
 }); \n \
 model.managers.object.create('pagemessage', { \n \
@@ -20,13 +19,10 @@ model.managers.object.create('pagemessage', { \n \
     hideable: true, \n \
     message : { \n \
         en : 'After closing this message try refreshing your page.', \n \
-        fr : 'Après la fermeture de ce message essayez de rafraîchir votre page.' \n \
     } \n \
 });",
-            desc : {
-                en : 'Provides a styled message for display on a view.',
-                fr : 'Fournit un message de style pour l\'affichage sur une vue.'
-            },
+            desc : _tr("Provides a styled message for display on a view."),
+            blessed:true,
             author : { 
                 name:'Andrew Charnley', 
                 link:'http://www.igaro.com/ppl/ac' 
@@ -36,57 +32,32 @@ model.managers.object.create('pagemessage', { \n \
                 attributes : [
                     { 
                         name:'container', 
-                        type:'element',
-                        desc : {
-                            en : 'Container to append the instance into.',
-                            fr : 'Conteneur pour ajouter l\'instance en.'
-                        }
+                        instanceof : { name:'Element' },
+                        desc : _tr("Container to append the instance into.")
                     },
                     { 
                         name:'id', 
                         type:'string',
-                        desc : {
-                            en : 'The id is automatically determined by the location where the message is appended, however it can be set manually.',
-                            fr : 'L\'identifiant est automatiquement déterminée par l\'endroit où le message est ajouté, mais il peut être réglée manuellement.'
-                        }
+                        desc : _tr("Used to retain a hidden state, where applicable.")
                     },
                     { 
                         name:'hideable', 
                         type:'boolean',
-                        desc : {
-                            en : 'Allow the message to be permanently hidden.',
-                            fr : 'Laisser le message caché en permanence.'
-                        }
+                        desc : _tr("Allow the message to be permanently hidden.")
                     },
                     { 
                         name:'message', 
                         type:'object',
                         required:true,
-                        desc : {
-                            en : 'A standard language object to be displayed.',
-                            fr : 'Un objet de langue standard à afficher.'
-                        }
+                        desc : _tr("A language literal to be displayed.")
                     },
                     { 
                         name:'type', 
                         type:'string',
-                        desc : {
-                            en : 'The type defines the style. Choose between; warn, info, error, default, success and ok.',
-                            fr : 'Le genre définit le style. Choisissez entre les deux; avertir, info, erreur, défaut, le succès et ok.'
-                        }
+                        desc : _tr("Defines the style. Choose between; warn, info, error, default, success and ok, or make your own.")
                     }
                 ]
-            },
-            attributes : [
-                { 
-                    name:'destroy',
-                    type:'function',
-                    desc: {
-                        en : 'Destroys the instance, removing it from the view and cleaning up any references.',
-                        fr : ''
-                    }
-                }
-            ]
+            }
         };
 
         model.parent.stash.childsupport(data,model);
