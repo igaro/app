@@ -5,15 +5,15 @@ module.exports = function(app) {
         var data = {
 
             desc : _tr("Provides HTML related functionality and formatting."),
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             usage : {
                 class : true
             },
             attributes : [
-                { 
+                {
                     name:'from',
                     type:'function',
                     returns: {
@@ -24,9 +24,9 @@ module.exports = function(app) {
                         ]
                     },
                     attributes: [
-                        { 
-                            type:'string', 
-                            required:true, 
+                        {
+                            type:'string',
+                            required:true,
                             attributes : [{
                                 desc: _tr("The value to process.")
                             }]
@@ -34,8 +34,8 @@ module.exports = function(app) {
                     ],
                     desc: _tr("Converts HTML special characters into print code.")
                 },
-                { 
-                    name:'to', 
+                {
+                    name:'to',
                     type:'function',
                     returns: {
                         attributes : [
@@ -45,9 +45,9 @@ module.exports = function(app) {
                         ]
                     },
                     attributes: [
-                        { 
-                            type:'string', 
-                            required:true, 
+                        {
+                            type:'string',
+                            required:true,
                             attributes : [{
                                 desc: _tr("The value to process.")
                             }]
@@ -55,7 +55,7 @@ module.exports = function(app) {
                     ],
                     desc: _tr("Formats special characters into HTML code.")
                 },
-                { 
+                {
                     name:'strip',
                     type:'function',
                     returns: {
@@ -66,8 +66,8 @@ module.exports = function(app) {
                         ]
                     },
                     attributes: [
-                        { 
-                            type:'string', 
+                        {
+                            type:'string',
                             required:true,
                             attributes : [{
                                 desc: _tr("The value to process.")

@@ -18,9 +18,9 @@ module.exports = function(app) {
 
         model.stash.title = _tr("Events");
         model.stash.desc = _tr("Igaro App's event management system tracks dependencies and fires events up through parent objects. It's hugely powerful.");
-        
+
         domMgr.mk('p',wrapper,_tr("Igaro App is <b>100%</b> event driven."));
-        domMgr.mk('p',wrapper,_tr("core.events is responsible for event management. It provides a manager to core.object's bless, and this is used extensively throughout the Igaro App framework.")); 
+        domMgr.mk('p',wrapper,_tr("core.events is responsible for event management. It provides a manager to core.object's bless, and this is used extensively throughout the Igaro App framework."));
 
         return model.addSequence({
             container:wrapper,
@@ -65,7 +65,7 @@ module.exports = function(app) {
                     domMgr.mk('p',container,_tr("Listening to the event manager on an instance will only provide events for that particular instance, not the instance type."));
                     domMgr.mk('p',container,_tr("In this App, each time an instance.r start and end event fire we keep a tally and display an icon in the header. This is an example of monitoring by type and is accomplished via core.events, not through a manager. View route.header.js and take a look at the code used to do this."));
                     domMgr.mk('pre',container,domMgr.mk('code',null,_tr("app['core.events'].on('instance.xhr','start',fn);")));
-                    return container; 
+                    return container;
                 })
             ]
         });

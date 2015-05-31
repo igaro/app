@@ -28,34 +28,34 @@ module.exports = function(app) {
                 attributes : [
                     {
                         name:'errorDisplayAmount',
-                        type:'number', 
+                        type:'number',
                         desc : _tr("The amount of errors to show at once. Default is 1.")
                     },
-                    { 
+                    {
                         name:'form',
-                        instanceof : { name:'Element' }, 
+                        instanceof : { name:'Element' },
                         desc : _tr("A form element containing the inputs to validate."),
                         required:true
                     },
                     {
                         name:'inRealTime',
-                        type:'boolean', 
+                        type:'boolean',
                         desc : _tr("Defines whether the validation should run in realtime. Default is true.")
                     },
                     {
                         name:'onValidSubmit',
-                        type:'function', 
+                        type:'function',
                         desc : _tr("If validation passes the form will execute this function on submission.")
                     },
-                    { 
-                        name:'routine', 
+                    {
+                        name:'routine',
                         type:'function',
                         desc : _tr("The routine to run on any form element value change."),
                         required:true,
                         returns : {
                             attributes : [
                                 {
-                                    instanceof : { name:'Element' }, 
+                                    instanceof : { name:'Element' },
                                     name:'near',
                                     desc: _tr("The element which failed validation.")
                                 },
@@ -67,28 +67,28 @@ module.exports = function(app) {
                             ]
                         }
                     },
-                    { 
+                    {
                         name:'rules',
-                        instanceof : { name:'Array' }, 
+                        instanceof : { name:'Array' },
                         desc : _tr("Custom rules in addition to basic rules that will be enumerated through to check if the form is valid. A rule may be asynchronous. When invalid the function should return a language literal."),
                         required:true
                     }
                 ]
             },
 
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             attributes : [
                 {
-                    name:'addTextInputListeners', 
+                    name:'addTextInputListeners',
                     type:'function',
                     desc : _tr("Adds onInput event listeners to text inputs. Use after adding new elements to the form.")
                 },
-                { 
+                {
                     name:'check',
-                    async:true, 
+                    async:true,
                     type:'function',
                     desc : _tr("Runs the validation rules and displays validation messages on those elements that fail."),
                     returns : {
@@ -98,24 +98,24 @@ module.exports = function(app) {
                         }]
                     }
                 },
-                { 
+                {
                     name:'clear',
-                    async:true, 
+                    async:true,
                     type:'function',
                     desc : _tr("Clears the form of any validation messages.")
                 },
-                { 
-                    name:'routine', 
+                {
+                    name:'routine',
                     type:'function',
                     desc : _tr("Update the validation routine by applying a new function to this attribute."),
                 },
-                { 
-                    name:'setForm', 
+                {
+                    name:'setForm',
                     type:'function',
                     desc : _tr("Hooks up a form to the validation process."),
                     attributes:[{
                         type:'object',
-                        attributes: [{ 
+                        attributes: [{
                             instanceof: { name:'Element' }
                         }]
                     }]

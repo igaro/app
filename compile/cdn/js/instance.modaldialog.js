@@ -28,7 +28,7 @@ module.exports = function(app,params) {
     };
 
     InstanceModalDialog.prototype.custom = function(o) {
-        if (! o) 
+        if (! o)
             o = {};
         var domMgr = this.managers.dom,
             self = this,
@@ -54,7 +54,7 @@ module.exports = function(app,params) {
 
         return new Promise(function(resolve) {
 
-            if (o.title) 
+            if (o.title)
                 o.header = domMgr.mk('h1',null,o.title);
             if (o.header)
                 domMgr.mk('div',wrapper,o.header,'header');
@@ -74,7 +74,7 @@ module.exports = function(app,params) {
 
             self.resolve = function(action) {
                 activeCnt--;
-                if (! activeCnt) { 
+                if (! activeCnt) {
                     bodyStyle.overflow = '';
                     params.conf.noBodyStyleOverflowReset = true;
                 }
@@ -86,7 +86,7 @@ module.exports = function(app,params) {
             if (o.addCancel || ! myActions.length) {
                myActions.push({
                     l:o.addCancel? _tr("Cancel") : _tr("Close")
-               }); 
+               });
             }
 
             domMgr.mk('div',wrapper,null,function() {
@@ -107,7 +107,7 @@ module.exports = function(app,params) {
                             });
                         });
                     });
-                    return action.element;     
+                    return action.element;
                 });
             });
 
@@ -117,7 +117,7 @@ module.exports = function(app,params) {
                 if (myActions && myActions.length === 1)
                     myActions[0].focus();
                 // setup, usually used for custom focusing
-                if (o.setup)    
+                if (o.setup)
                     o.setup();
             },50);
 
@@ -149,7 +149,7 @@ module.exports = function(app,params) {
             }
         );
     };
-    
+
     InstanceModalDialog.prototype.confirm = function(o) {
         var confirmAction = {
             l : _tr("Confirm")

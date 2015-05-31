@@ -106,7 +106,7 @@ module.exports = function(app) {
             self.searchRow = row;
             return Promise.all([[self.header,o.header],[self.body,o.body],[self.footer,o.footer]].map( function(o) {
                 var opt = o[1];
-                if (opt && opt.rows) 
+                if (opt && opt.rows)
                     return o[0].addRows(opt.rows);
             }));
         });
@@ -132,7 +132,7 @@ module.exports = function(app) {
     InstanceTable.prototype.addSearchColumn = function(o) {
         var self = this,
             debugMgr = this.managers.debug;
-        if (! o) 
+        if (! o)
             o = {};
         if (! o.content)
             o.content = function(domMgr) {
@@ -142,10 +142,10 @@ module.exports = function(app) {
                     domMgr.parent.searchFn = function(column) {
                         var v = s.value.toLowerCase().trim();
                         if (v.length === 0)
-                            return true;    
-                        return column.container.innerHTML.toLowerCase().match(v); 
+                            return true;
+                        return column.container.innerHTML.toLowerCase().match(v);
                     };
-                    this.addEventListener('input', function() { 
+                    this.addEventListener('input', function() {
                         self.execSearch();
                     });
                 });

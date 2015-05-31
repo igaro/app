@@ -15,7 +15,7 @@ module.exports = function(app, params) {
 
     var detect = function() {
         var n = window.navigator.userLanguage || window.navigator.language;
-        if (n.length > 3) 
+        if (n.length > 3)
             n=n.substr(3);
         return country.managers.store.get('env').then(function (stored) {
             return [
@@ -34,7 +34,7 @@ module.exports = function(app, params) {
                             },
                             function () {}
                         );
-                    }); 
+                    });
                 },
                 Promise.resolve()
             ).then(
@@ -65,7 +65,7 @@ module.exports = function(app, params) {
             var self = this,
                 managers = self.managers;
             return Promise.resolve().then(function () {
-                if (! self.pool[id]) 
+                if (! self.pool[id])
                     throw new Error('Code is not in pool.');
                 self.env = id;
                 if (! noStore)

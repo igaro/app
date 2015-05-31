@@ -15,8 +15,8 @@ module.exports = function(app) {
 
     var InstanceAccordionSection = function(o) {
         this.name = 'section';
-        this.container = function(dom) { 
-            return dom.mk('dl',o.parent); 
+        this.container = function(dom) {
+            return dom.mk('dl',o.parent);
         };
         bless.call(this,o);
         var self = this,
@@ -64,7 +64,7 @@ module.exports = function(app) {
         this.children = {
             sections:'section'
         };
-        this.container = function(dom) { 
+        this.container = function(dom) {
             return dom.mk('div',o,null,o.className);
         };
         bless.call(this,o);
@@ -74,7 +74,7 @@ module.exports = function(app) {
     InstanceAccordion.prototype.init = function(o) {
         var self = this;
         return (o.sections?
-            self.addSections(o.sections) 
+            self.addSections(o.sections)
             :
             Promise.resolve()
         ).then(function() {

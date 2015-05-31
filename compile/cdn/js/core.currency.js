@@ -35,7 +35,7 @@ module.exports = function(app, params) {
                             },
                             function () {}
                         );
-                    }); 
+                    });
                 },
                 Promise.resolve()
             ).then(
@@ -66,7 +66,7 @@ module.exports = function(app, params) {
             var self = this,
                 managers = self.managers;
             return Promise.resolve().then(function() {
-                if (! self.pool[id]) 
+                if (! self.pool[id])
                     throw new Error('Code is not in pool.');
                 self.env = id;
                 if (! noStore)
@@ -103,14 +103,14 @@ module.exports = function(app, params) {
             if (isNeg)
                 v = n*-1;
             v+= '';
-            var o = v.split('.',2), 
+            var o = v.split('.',2),
                 t = '';
-            for (var i=o[0].length;i>3;i-=3) { 
-                t += ','+o[0].substr(i-3,3); 
-            } 
+            for (var i=o[0].length;i>3;i-=3) {
+                t += ','+o[0].substr(i-3,3);
+            }
             t = o[0].substr(0,i)+t;
             if (o.length === 2)
-                t += '.' + o[1]; 
+                t += '.' + o[1];
             return isNeg? '-'+t:t;
         },
 

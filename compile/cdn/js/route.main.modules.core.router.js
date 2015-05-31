@@ -4,29 +4,32 @@ module.exports = function(app) {
 
         var data = {
             desc : _tr("Provides a Router framework to manage navigation and storage of routes. A route represents a resource and may contain child routes. Routes can be loaded from API & file servers transparently to the user and don't necessarily correspond to the URI that the user sees. They may form a page or a partial on it."),
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             blessed : true,
             usage : {
                 class : true
             }
         };
-            
+
         data.objects = {
 
-            route : { 
+            route : {
                 name:'Route',
-                blessed : true,
+                blessed : {
+                    container:true
+                },
                 attributes : [
-                    { 
-                        name:'addRoute', 
+                    {
+                        name:'addRoute',
                         type:'function',
                         attributes: [
-                            { 
-                                type:'object', 
+                            {
+                                type:'object',
                                 required:true,
+                                decorateWithOrder:function() { return data.objects.route; },
                                 attributes:[
                                     {
                                         name:'name',
@@ -51,12 +54,12 @@ module.exports = function(app) {
                         },
                         desc : _tr("Attempts to load a child route. If loaded an enter event is fired on the routes event manager. Use this to force code reload. An init event is fired the first time a route is loaded. Use this to set-up a view and parameters that keep state.")
                     },
-                    { 
-                        name:'addRoutes', 
+                    {
+                        name:'addRoutes',
                         type:'function',
                         attributes: [
-                            { 
-                                type:'object', 
+                            {
+                                type:'object',
                                 required:true,
                                 attributes:[
                                     {
@@ -93,45 +96,40 @@ module.exports = function(app) {
                                     {
                                         name:'container',
                                         instanceof: { name:'Element' },
-                                        desc : _tr("The container for which to append the returned values into.")
+                                        desc : _tr("The container for which to append the returned values into. Defaults to the route's wrapper Element.")
                                     }
                                 ]
                             },
                         ],
                         async:true
                     },
-                    { 
-                        name:'autoShow', 
-                        type:'boolean', 
+                    {
+                        name:'autoShow',
+                        type:'boolean',
                         desc : _tr("Determines if a view will be automatically shown if requested via user navigation. Default is true."),
                     },
-                    { 
-                        name:'cssElement', 
+                    {
+                        name:'cssElement',
                         instanceof: { name:'Element' },
                         desc : _tr("Inline CSS provided by the route's provider. Automatically appended.")
                     },
-                    { 
-                        name:'container',
-                        instanceof: { name:'Element' },
-                        desc : _tr("The display element.")
-                    },
-                    { 
-                        name:'defaultHideRoutes', 
-                        type:'boolean', 
+                    {
+                        name:'defaultHideRoutes',
+                        type:'boolean',
                         desc : _tr("If a view is cached and it's children are displayed they will be automatically hidden when the view is reshown. Set to false to disable.")
                     },
-                    { 
-                        name:'defaultHideParentViewWrapper', 
-                        type:'boolean', 
+                    {
+                        name:'defaultHideParentViewWrapper',
+                        type:'boolean',
                         desc : _tr("When a child view is displayed the wrapper of it's parent is usually hidden. Set to false to disable.")
                     },
-                    { 
-                        name:'defaultShowWrapper', 
-                        type:'boolean', 
+                    {
+                        name:'defaultShowWrapper',
+                        type:'boolean',
                         desc : _tr("By default a route's wrapper is shown. Set to false to disable.")
                     },
-                    { 
-                        name:'destroyOnLeave', 
+                    {
+                        name:'destroyOnLeave',
                         type:'boolean',
                         desc : _tr("By default a route is cached and retains state. Disable by setting to true.")
                     },
@@ -161,23 +159,23 @@ module.exports = function(app) {
                         type:'function',
                         desc: _tr("Hides all child route containers.")
                     },
-                    { 
-                        name:'meta', 
+                    {
+                        name:'meta',
                         type:'object',
                         desc : _tr("A collection of meta data for the route.")
                     },
-                    { 
-                        name:'name', 
+                    {
+                        name:'name',
                         type:'string',
                         desc : _tr("A uniquely identifying name. Not to be used for user display.")
                     },
-                    { 
-                        name:'on', 
+                    {
+                        name:'on',
                         type:'function',
                         desc : _tr("References core.events.on() but registers the route as a dependency to reduce code overhead. For blessed objects, use the .extend() method instead.")
                     },
                     {
-                        name:'originalUrl', 
+                        name:'originalUrl',
                         instanceof: { name:'Array' },
                         desc : _tr("Represents the URL path for this route, including captured URI data."),
                     },
@@ -195,28 +193,28 @@ module.exports = function(app) {
                             }
                         ]
                     },
-                    { 
-                        name:'routes', 
+                    {
+                        name:'routes',
                         instanceof: { name:'Array' },
                         desc : _tr("A pool of loaded child routes."),
                     },
-                    { 
-                        name:'scrollPosition', 
-                        type:'*', 
+                    {
+                        name:'scrollPosition',
+                        type:'*',
                         desc : _tr("When a route has current scope the window scroll position will be saved to this value. If the user navigates away and returns later they'll be placed at the same position they left off. Set to false to disable.")
                     },
                     {
-                        name:'uriPath', 
+                        name:'uriPath',
                         instanceof: { name:'Array' },
                         desc : _tr("Represents the URL path once URI resources have been removed from it. This makes it useful for building a user navigation location bar."),
                     },
                     {
-                        name:'uriPieces', 
+                        name:'uriPieces',
                         instanceof: { name:'Array' },
                         desc : _tr("The URI data extracted for this route. It is a cache for .captureUri(), which should be run by the route when it loads to capture it's data."),
                     },
-                    { 
-                        name:'wrapper', 
+                    {
+                        name:'wrapper',
                         instanceof: { name:'Element' },
                         desc : _tr("The container element contains a wrapper and normally view elements append into it. Child routes go directly into the container.")
                     }
@@ -232,14 +230,14 @@ module.exports = function(app) {
                 desc: _tr("Appends a route provider to the pool."),
                 attributes: [
                     {
-                        type:'object', 
-                        required:true, 
+                        type:'object',
+                        required:true,
                         desc: _tr("Contains the configuration."),
                         attributes: [
-                            { 
-                                name:'fetch', 
-                                type:'function', 
-                                required:true, 
+                            {
+                                name:'fetch',
+                                type:'function',
+                                required:true,
                                 desc: _tr("Used to fetch the resource from a fileserver or API. The function should return a Promise containing the attributes specified."),
                                 returns : {
                                     attributes: [
@@ -264,22 +262,22 @@ module.exports = function(app) {
                                                         instanceof: { name: 'Promise' }
                                                     }
                                                 ]
-                                            } 
+                                            }
                                         }
                                     ]
                                 }
                             },
                             {
-                                name:'handles', 
+                                name:'handles',
                                 type:'function',
-                                required:true, 
+                                required:true,
                                 desc: _tr("Determines if the provider is a handler for a resource."),
                                 attributes : [{
                                     type:'string',
                                     desc: _tr("The path of the requested resource.")
                                 }],
                                 returns : {
-                                    attributes : [{ 
+                                    attributes : [{
                                         type:'boolean'
                                     }]
                                 }
@@ -288,18 +286,18 @@ module.exports = function(app) {
                     }
                 ]
             },
-            { 
+            {
                 name:'base',
-                instanceof: function() { return data.objects.route; }, 
+                instanceof: function() { return data.objects.route; },
                 desc: _tr("A base route with it's container most likely appended into that of the root route. The base represents the root of the URL.")
             },
             {
-                name:'current', 
+                name:'current',
                 instanceof: function() { return data.objects.route; },
                 desc: _tr("References the last successfully loaded route from any call to .to().")
             },
             {
-                name:'isAtBase', 
+                name:'isAtBase',
                 type:'function',
                 desc: _tr("Determines whether the current route is that of the base route, aka at root of the URL."),
                 returns: {
@@ -313,12 +311,12 @@ module.exports = function(app) {
                 instanceof: { name:'Array' },
                 desc: _tr("Pool of route providers. Note: the discoverer traverses backwards.")
             },
-            { 
+            {
                 name:'root',
-                instanceof: function() { return data.objects.route; }, 
+                instanceof: function() { return data.objects.route; },
                 desc: _tr("A root route with it's container appended into document.body. The root will normally have common header, main and footer routes appended into it.")
             },
-            { 
+            {
                 name:'to',
                 type:'function',
                 attributes: [
@@ -342,7 +340,7 @@ module.exports = function(app) {
                             desc: _tr("Hash data to append after # in the URL. This can be a function to compile the value dynamtically or a string."),
                         }]
                     },
-                    { 
+                    {
                         type:"object",
                         attributes : [{
                             desc: _tr("Supply a state to push into the browsers history. This is data which moves with the URL.")

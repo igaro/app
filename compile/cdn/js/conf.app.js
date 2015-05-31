@@ -36,7 +36,7 @@ module.exports = function(app, params) {
 
     // add supported languages - IETF
     language.setPool({
-        en : { 
+        en : {
             name:"English"
         },
         fr : {
@@ -2363,13 +2363,13 @@ module.exports = function(app, params) {
 
         // adds route.* files as a route provider
         router.addProvider({
-            handles:function(path) { 
-                return true; 
+            handles:function(path) {
+                return true;
             },
             url : params.repo,
             fetch:function(o) {
                 var name = o.path.join('.');
-                return new Amd().get({ 
+                return new Amd().get({
                     modules:[{ name: name+'.js' }]
                 }).then(function() {
                     if (! app[name])
@@ -2378,7 +2378,7 @@ module.exports = function(app, params) {
                             route:name
                         };
                     return {
-                        js: app[name] 
+                        js: app[name]
                     };
                 });
             }
@@ -2417,7 +2417,7 @@ module.exports = function(app, params) {
             var v = o.value;
             if (typeof v === 'object' && v.value)
               v = v.value;
-            if (! v) 
+            if (! v)
               return;
             //invalid route
             if (v.error === 404)
@@ -2484,22 +2484,22 @@ module.exports = function(app, params) {
 
 
         // setup page with core routes
-        events.on('','state.init', function() {      
+        events.on('','state.init', function() {
             // load initial routes
             return router.root.addRoutes(
                 ['header','location','main','footer'].map(function(name) {
                     return { name:name };
-                }) 
+                })
             ).then(function(m) {
                 m.forEach(function(v) {
-                    if (v.autoShow) 
-                        v.show(); 
+                    if (v.autoShow)
+                        v.show();
                 });
                 router.current = router.base = m[2];
                 // write page title & meta for current route and on route change (SEO)
                 var eF = function(element,n,model) {
                     var c = model.stash[n];
-                    if (! c) 
+                    if (! c)
                         return dom.rm(element);
                     dom.setContent(element,c);
                     dom.head.appendChild(element);
@@ -2513,7 +2513,7 @@ module.exports = function(app, params) {
                 set(router.current);
                 router.managers.event.on('to-in-progress', function(o) {
                     return set(o.value);
-                });                    
+                });
                 // meta tags
                 ['description','keywords'].forEach(function(n) {
                     dom.mk('meta',null,null,function() {
@@ -2522,7 +2522,7 @@ module.exports = function(app, params) {
                         var self = this;
                         router.managers.event.on('to-in-progress', function(o) {
                             return eF(self,n,o.value);
-                        });                    
+                        });
                     });
                 });
                 // handle error here

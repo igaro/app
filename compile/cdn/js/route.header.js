@@ -14,8 +14,8 @@ module.exports = function(app) {
 
     var events = app['core.events'],
         dom = app['core.dom'],
-        language = app['core.language'], 
-        router = app['core.router'], 
+        language = app['core.language'],
+        router = app['core.router'],
         xcti = app['core.date'];
 
     return function(model) {
@@ -35,12 +35,12 @@ module.exports = function(app) {
 
                 managers.object.create('navigation',{
                     options : [
-                        { 
-                            className:'app', 
-                            active:true 
-                        }, 
-                        { 
-                            className:'api', 
+                        {
+                            className:'app',
+                            active:true
+                        },
+                        {
+                            className:'api',
                             href : 'http://api.igaro.com',
                             onClick : function() {
                                 window.open(this.href);
@@ -57,7 +57,7 @@ module.exports = function(app) {
                             event.preventDefault();
                             managers.object.create('modaldialog').then(function(modal) {
                                 return modal.managers.object.create('accordion').then(function(accordion) {
-                                   
+
                                     var managers = accordion.managers,
                                         domMgr = managers.dom,
                                         debugMgr = managers.debug,
@@ -89,12 +89,12 @@ module.exports = function(app) {
                                                     if (o.value === env) {
                                                         o.selected = true;
                                                         return true;
-                                                    } 
+                                                    }
                                                 });
                                             }
                                         };
                                         var sort = function() {
-                                            dom.sort({ 
+                                            dom.sort({
                                                 nodes:select.options,
                                                 slice:[2]
                                             });
@@ -123,15 +123,15 @@ module.exports = function(app) {
                                             _tr("Currency")
                                         ]
                                     ].forEach(function(o) {
-                                        accordion.addSection({ 
-                                            title:o[1], 
+                                        accordion.addSection({
+                                            title:o[1],
                                             content:domMgr.mk('select',null,null, function() {
                                                 writeModuleOptions(this,o[0]);
                                             })
                                         });
                                     });
-                                    accordion.addSection({ 
-                                        title:_tr("Timezone"), 
+                                    accordion.addSection({
+                                        title:_tr("Timezone"),
                                         content:domMgr.mk('select',null,null, function() {
                                             var self = this, h,v,m,y,
                                                 date = app['core.date'],
@@ -146,7 +146,7 @@ module.exports = function(app) {
                                             for (h=14; h >= 0; h--) {
                                                 v = (h < 10? '0'+h : h);
                                                 for (m=45; m >= 0 && (h > 0 || m !== 0); m-=15) {
-                                                    domMgr.mk('option',self,'GMT - '+v+':'+(m === 0? '00':m),eF); 
+                                                    domMgr.mk('option',self,'GMT - '+v+':'+(m === 0? '00':m),eF);
                                                 }
                                             }
                                             eF =  function() {
@@ -170,7 +170,7 @@ module.exports = function(app) {
                                                             o.selected = true;
                                                             return true;
                                                         }
-                                                    });        
+                                                    });
                                                 }
                                             });
                                             this.addEventListener('change', function() {
@@ -189,8 +189,8 @@ module.exports = function(app) {
                                 });
                             }).catch(function(e) {
                                 return managers.debug.handle(e);
-                            }); 
-                        });    
+                            });
+                        });
                     })
                 ),
 
@@ -208,21 +208,21 @@ module.exports = function(app) {
                     domMgr.mk('div',null,null,function() {
                         this.className = 'xhr';
                         dom.hide(this);
-                        var total=0, 
+                        var total=0,
                             ref,
                             self = this;
                         domMgr.mk('div', self);
                         model.on('instance.xhr','start', function () {
-                            if (total === 0 && ! ref) 
-                                ref=setTimeout(function() { 
+                            if (total === 0 && ! ref)
+                                ref=setTimeout(function() {
                                     dom.show(self);
                                 },350);
                             total++;
                         });
                         model.on('instance.xhr','end', function() {
-                            if (total > 0) 
-                                total--; 
-                            if (total !== 0) 
+                            if (total > 0)
+                                total--;
+                            if (total !== 0)
                                 return;
                             clearTimeout(ref);
                             ref=null;

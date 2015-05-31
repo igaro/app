@@ -50,12 +50,12 @@ module.exports = function(app) {
                                 }
                             ]
                         });
-                        
+
                     }).then(function() {
 
                         // compile
                         return accordion.addSection({
-                            title:'compile' 
+                            title:'compile'
                         }).then(function(section) {
                             var managers = section.managers;
                             managers.dom.mk('p',section.content,_tr("Contains javascript and html files that should be compiled (and optionally compressed) into the build folder."));
@@ -157,7 +157,7 @@ module.exports = function(app) {
                         return accordion;
                     });
                 }),
-            
+
                 Promise.resolve(domMgr.mk('h1',null,_tr("Module Layout"))),
                 Promise.resolve(domMgr.mk('p',null,_tr("Igaro modules export code via module.export while 3rd party code (i.e JQuery) may not. All have access to the app (private) and global settings (public) variable, so only load modules from locations you trust."))),
                 Promise.resolve(domMgr.mk('p',null,_tr("The name of the module dicatates its namespace in the app, i.e for type.name.js, what is exported will be available in app['type.name']."))),

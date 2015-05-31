@@ -19,9 +19,9 @@ module.exports = function(app) {
         domMgr.mk('a',wrapper,null,function() {
             this.className = 'home';
             this.href = '/';
-            this.addEventListener('click', function(event) { 
-                event.preventDefault(); 
-                router.to([]); 
+            this.addEventListener('click', function(event) {
+                event.preventDefault();
+                router.to([]);
             });
         });
 
@@ -49,7 +49,7 @@ module.exports = function(app) {
                         var c = router.current,
                             eF=function(event) {
                                 event.preventDefault();
-                                router.to(b); 
+                                router.to(b);
                             };
                         while (! c.isBase()) {
                             var m = domMgr.mk(c === router.current? 'span':'a',null, c.stash.title || c.name);

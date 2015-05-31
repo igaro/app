@@ -43,7 +43,7 @@ module.exports = function(app) {
 
         getProviderById : function(id) {
             return this.providers[id];
-        },  
+        },
 
         installProvider : function(id,o) {
             this.providers[id] = o;
@@ -53,24 +53,24 @@ module.exports = function(app) {
     // cookie provider
     store.installProvider(
         'cookie',
-        { 
+        {
             get : function(id) {
                 return Promise.resolve().then(function() {
-                    id += '='; 
+                    id += '=';
                     var j = -1,
                         done = false,
                         t,
                         k,
                         x;
-                    while ((j < document.cookie.length) && done === false) { 
+                    while ((j < document.cookie.length) && done === false) {
                         ++j;
-                        if (document.cookie.substring(j, j + id.length) !== id) 
+                        if (document.cookie.substring(j, j + id.length) !== id)
                             continue;
-                        k=0;  
+                        k=0;
                         x='';
-                        while (x !== '' && x !== ';') { 
-                            ++k; 
-                            x = document.cookie.substring(j + id.length + k, j + id.length + k - 1); 
+                        while (x !== '' && x !== ';') {
+                            ++k;
+                            x = document.cookie.substring(j + id.length + k, j + id.length + k - 1);
                         }
                         t = unescape(document.cookie.substring(j + id.length, j + id.length + k - 1));
                         done = true;
@@ -94,13 +94,13 @@ module.exports = function(app) {
     // local provider
     store.installProvider(
         'local',
-        { 
+        {
             get : function(id) {
                 return Promise.resolve().then(function() {
                     var v = localStorage.getItem(id);
-                    if (v) 
+                    if (v)
                         v = JSON.parse(v);
-                    if (! v) 
+                    if (! v)
                         return;
                     if (v.expiry && v.expiry < new Date().getTime()) {
                         localStorage.setItem(id,null);
@@ -125,9 +125,9 @@ module.exports = function(app) {
             get : function(id) {
                 return Promise.resolve().then(function() {
                     var v = sessionStorage.getItem(id);
-                    if (v) 
+                    if (v)
                         v = JSON.parse(v);
-                    if (! v) 
+                    if (! v)
                         return;
                     if (v.expiry && v.expiry < new Date().getTime()) {
                         sessionStorage.setItem(id,null);

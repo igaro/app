@@ -13,7 +13,7 @@ module.exports = function(app) {
         var wrapper = model.wrapper,
             domMgr = model.managers.dom,
             router = app['core.router'];
-        
+
         model.stash.title= _tr("Asynchronous");
         model.stash.desc = _tr("Standard A+ Promises throughout, with an event driven architecture and sequencing.");
 
@@ -37,7 +37,7 @@ module.exports = function(app) {
 
         domMgr.mk('p',wrapper,_tr("core.object provides promiseSequencer() to reduce promises in order while core.router's .addSequence() is similar but also appends DOM elements (or the container element for an instance)."));
 
-        domMgr.mk('p',wrapper,_tr("Many instance modules provide pluralized creation functions, i.e .addItem() and addItems()."));     
+        domMgr.mk('p',wrapper,_tr("Many instance modules provide pluralized creation functions, i.e .addItem() and addItems()."));
 
     };
 

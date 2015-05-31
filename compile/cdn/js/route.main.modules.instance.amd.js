@@ -4,21 +4,21 @@ module.exports = function(app) {
 
         var data = {
             desc : _tr("Asynchronously loads modules and there dependencies using XHR and appends Igaro App modules into the namespace."),
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             blessed:true,
             usage : {
                 instantiate : true,
                 attributes : [
-                    { 
+                    {
                         name:'repo',
                         type:'string',
                         desc : _tr("The repository (i.e URL) from which to load files. Defaults to the location where the application was loaded from."),
                     },
-                    { 
-                        name:'modules', 
+                    {
+                        name:'modules',
                         required:true,
                         type:'object',
                         desc : _tr("Modules to load. Each is represented by an object in the array."),
@@ -60,12 +60,12 @@ module.exports = function(app) {
                 ]
             },
             attributes : [
-                { 
+                {
                     name:'get',
-                    type:'function', 
+                    type:'function',
                     attributes: [
-                        { 
-                            type:'object', 
+                        {
+                            type:'object',
                             attributes : [
                                 {
                                     desc: _tr("Any of the instantiated attributes can be passed here to update the instance before executing the Promise, else the default or previously set values will be used.")

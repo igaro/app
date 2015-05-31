@@ -4,37 +4,37 @@ module.exports = function(app) {
 
         var data = {
             desc : _tr("Storage routines for cookie, localStorage, sessionStorage and API's."),
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             usage : {
                 class : true
             },
             manager:true,
             attributes : [
-                { 
-                    name:'defaultprovider', 
+                {
+                    name:'defaultprovider',
                     type:'object',
                     desc : _tr("Links to the object in the provider array which provides the default storage routine."),
                 },
-                { 
-                    name:'get', 
+                {
+                    name:'get',
                     type:'function',
                     forManager:true,
                     onlyManager:true,
                     desc : _tr("Retrieves a value from a storage system."),
                     attributes: [
-                        { 
-                            type:'string', 
+                        {
+                            type:'string',
                             required:true,
                             forManager:true,
                             attributes:[{
                                 desc: _tr("The id to match.")
                             }]
                         },
-                        { 
-                            type:'object', 
+                        {
+                            type:'object',
                             required:true,
                             forManager:true,
                             attributes:[
@@ -48,13 +48,13 @@ module.exports = function(app) {
                     ],
                     async:true
                 },
-                { 
-                    name:'getProviderById', 
+                {
+                    name:'getProviderById',
                     type:'function',
                     desc : _tr("Returns a provider by it's unique id, such as 'cookie'."),
                     attributes: [
-                        { 
-                            type:'string', 
+                        {
+                            type:'string',
                             required:true,
                             attributes:[{
                                 desc: _tr("The id to match.")
@@ -69,30 +69,30 @@ module.exports = function(app) {
                         ]
                     }
                 },
-                { 
-                    name:'installProvider', 
+                {
+                    name:'installProvider',
                     type:'function',
                     desc : _tr("Installs and returns a new provider. Typically this is used for adding API storage methods."),
                     attributes: [
-                        { 
-                            type:'string', 
+                        {
+                            type:'string',
                             required:true,
                             attributes:[{
                                 desc: _tr("A name to use as a unique identifier.")
                             }]
                         },
-                        { 
-                            type:'object', 
+                        {
+                            type:'object',
                             required:true,
                             attributes: [
-                                { 
+                                {
                                     name:'get',
-                                    type:'function', 
+                                    type:'function',
                                     required:true,
                                     desc: _tr("The getter routine for the provider."),
                                     attributes: [
-                                        { 
-                                            type:'string', 
+                                        {
+                                            type:'string',
                                             required:true,
                                             attributes:[{
                                                 desc: _tr("The unique id of the value to be retrieved.")
@@ -101,27 +101,27 @@ module.exports = function(app) {
                                     ],
                                     async:true
                                 },
-                                { 
+                                {
                                     name:'set',
-                                    type:'function', 
+                                    type:'function',
                                     required:true,
                                     desc: _tr("The setter routine for the provider."),
                                     attributes: [
-                                        { 
-                                            type:'string', 
+                                        {
+                                            type:'string',
                                             required:true,
                                             attributes:[{
                                                 desc: _tr("The unique id of the value to be retrieved.")
                                             }]
                                         },
-                                        { 
-                                            type:'*', 
+                                        {
+                                            type:'*',
                                             attributes:[{
                                                 desc: _tr("The value to be stored. Typically a provider will delete any matching key if this value is undefined or null.")
                                             }]
                                         },
-                                        { 
-                                            type:'object', 
+                                        {
+                                            type:'object',
                                             attributes:[
                                                 {
                                                     instanceof: { name:'Date' },
@@ -143,19 +143,19 @@ module.exports = function(app) {
                         ]
                     }
                 },
-                { 
-                    name:'providers', 
+                {
+                    name:'providers',
                     instanceof : { name:'Array' },
                     desc : _tr("A pool for storage mechanisms. Cookie, localStorage and sessionStorage are built in.")
                 },
-                { 
-                    name:'set', 
+                {
+                    name:'set',
                     type:'function',
                     forManager:true,
                     onlyManager:true,
                     desc: _tr("Saves a value to a storage system."),
                     attributes: [
-                        { 
+                        {
                             type:'string',
                             forManager:true,
                             required:true,
@@ -163,14 +163,14 @@ module.exports = function(app) {
                                 desc: _tr("The id to use.")
                             }]
                         },
-                        { 
+                        {
                             type:'*',
                             forManager:true,
                             attributes:[{
                                 desc: _tr("The value to store. Undefined removes the record.")
                             }]
                         },
-                        { 
+                        {
                             type:'object',
                             forManager:true,
                             required:false,

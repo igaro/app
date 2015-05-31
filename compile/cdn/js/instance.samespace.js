@@ -21,8 +21,8 @@ module.exports = function(app) {
         var parent = this.parent,
             self = this;
         this.li = this.managers.dom.mk('li',parent.nav.firstChild,null,function() {
-            this.addEventListener('click',function() { 
-                return parent.stop().then(function() { 
+            this.addEventListener('click',function() {
+                return parent.stop().then(function() {
                     return parent.to(self);
                 }).catch(function (e) {
                     return self.managers.debug.handle(e);
@@ -51,11 +51,11 @@ module.exports = function(app) {
         var managers = this.managers,
             domMgr = managers.dom;
         this.nav = domMgr.mk('nav',this,domMgr.mk('ul'));
-        if (! o.transparent) 
+        if (! o.transparent)
             this.canvas.style.backgroundColor = 'black';
         this.loop = typeof o.loop === 'boolean'? o.loop : true;
         managers.event.on('destroy', function() {
-            if (self.timerRef) 
+            if (self.timerRef)
                 clearInterval(self.timerRef);
         });
 
@@ -95,19 +95,19 @@ module.exports = function(app) {
     };
 
     InstanceSameSpace.prototype.stop = function() {
-        if (this.timerRef) 
+        if (this.timerRef)
             clearInterval(this.timerRef);
         this.canvas.setAttribute('status','stopped');
         return this.managers.event.dispatch('stop');
     };
 
     InstanceSameSpace.prototype.start = function() {
-        if (this.timerRef) 
+        if (this.timerRef)
             clearInterval(this.timerRef);
         var self = this;
         this.canvas.setAttribute('status','playing');
         this.timerRef = setInterval(function() {
-            if (self.current === self.spaces.length-1 && ! self.loop) 
+            if (self.current === self.spaces.length-1 && ! self.loop)
                 return self.stop();
             var to = self.current === self.spaces.length-1? 0 : self.current+1;
             self.to(self.spaces[to]);
@@ -118,7 +118,7 @@ module.exports = function(app) {
     InstanceSameSpace.prototype.to = function(s) {
         var spaces = this.spaces,
             i = spaces.indexOf(s);
-        if (i === this.current) 
+        if (i === this.current)
             return;
         this.current = i;
         this.canvas.appendChild(s.container);

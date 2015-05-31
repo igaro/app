@@ -12,15 +12,15 @@ module.exports = function(app) {
             usage : {
                 instantiate : true,
                 attributes : [
-                    { 
-                        name:'html', 
+                    {
+                        name:'html',
                         type:'string',
                         desc : {
                             en : 'The initial value to insert into the container.',
                             fr : 'La valeur initiale pour insérer dans le conteneur.'
                         }
                     },
-                    { 
+                    {
                         name:'container',
                         type:'element',
                         desc : {
@@ -28,7 +28,7 @@ module.exports = function(app) {
                             fr : 'Le conteneur pour ajouter la vue RTE en.'
                         }
                     },
-                    { 
+                    {
                         name:'onChange',
                         type:'function',
                         desc : {
@@ -39,7 +39,7 @@ module.exports = function(app) {
                 ]
             },
             attributes : [
-                { 
+                {
                     name:'addPanel',
                     type:'function',
                     desc: {
@@ -84,7 +84,7 @@ module.exports = function(app) {
                         }
                     ]
                 },
-                { 
+                {
                     name:'execCommand',
                     type:'function',
                     desc: {
@@ -116,15 +116,15 @@ module.exports = function(app) {
                         }
                     ]
                 },
-                { 
-                    name:'getHTML', 
+                {
+                    name:'getHTML',
                     type:'function',
                     desc: {
                         en : 'This function returns the current HTML, trimmed of any white space.',
                         fr : 'Cette fonction retourne le code HTML courant, garni d\'un espace blanc.'
                     }
                 },
-                { 
+                {
                     name:'insertHTML',
                     type:'function',
                     desc: {
@@ -137,16 +137,16 @@ module.exports = function(app) {
                         }
                     ]
                 },
-                { 
-                    name:'raw', 
+                {
+                    name:'raw',
                     type:'element[textarea]',
                     desc : {
                         en : 'The raw code.',
                         fr : 'Le code brut.'
                     }
                 },
-                { 
-                    name:'rte', 
+                {
+                    name:'rte',
                     type:'element[div]',
                     desc : {
                         en : 'The element (contentEditable) containing the WYSIWYG.',
@@ -154,9 +154,9 @@ module.exports = function(app) {
                     }
                 },
             ],
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             extlinks : [
                 'https://developer.mozilla.org/en-US/docs/Rich-Text_Editing_in_Mozilla',

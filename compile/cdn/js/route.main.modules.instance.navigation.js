@@ -32,15 +32,15 @@ model.managers.object.create('navigation', {\n \
                 en : 'Provides a universal navigation menu system using standard UL and LI elements with definable CSS styles.',
                 fr : 'Fournit un système de menu de navigation universelle utilisant des éléments UL et LI standards avec des styles CSS définissables.'
             },
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             usage : {
                 instantiate : true,
                 attributes : [
-                    { 
-                        name:'container', 
+                    {
+                        name:'container',
                         type:'element',
                         desc : {
                             en : 'Container to append the instance into.',
@@ -306,8 +306,8 @@ model.managers.object.create('navigation', {\n \
         };
 
         data.attributes = [
-            { 
-                name:'container', 
+            {
+                name:'container',
                 type:'element',
                 desc : {
                     en : 'Element containing the UI/LI siblings.',
@@ -319,7 +319,7 @@ model.managers.object.create('navigation', {\n \
                 type:'object',
                 instanceof: function() { return data.objects.menu; }
             },
-            { 
+            {
                 name:'type',
                 type:'object',
                 desc: {

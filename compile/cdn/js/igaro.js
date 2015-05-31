@@ -15,12 +15,12 @@
 
         // local libraries
         if (libs.local && document.location.protocol === 'file:')
-            modules.push.apply(modules,libs.local);          
-  
+            modules.push.apply(modules,libs.local);
+
         // network libraries
         if (libs.network && document.location.protocol !== 'file:')
-            modules.push.apply(modules,libs.network);          
-        
+            modules.push.apply(modules,libs.network);
+
         // touch libraries
         if (libs.touch && ('ontouchstart' in window || navigator.maxTouchPoints || navigator.msMaxTouchPoints))
             modules.push.apply(modules,libs.touch);
@@ -37,16 +37,16 @@
                 h.appendChild(a);
                 g=a.clientWidth;
                 h.removeChild(a);
-                return g; 
+                return g;
             };
             d=b("monospace");
             e=b("serif");
-            f=b("sans-serif"); 
+            f=b("sans-serif");
             libs.fonts.forEach(function (font) {
-                var a = font.name; 
+                var a = font.name;
                 if (! (d!==b(a+",monospace") || f!==b(a+",sans-serif") ||e!==b(a+",serif")))
                     modules.push(font.module);
-            }); 
+            });
         }
 
         // further modules - must inc conf
@@ -118,16 +118,16 @@
                     var pool = this.pool,
                         prepend = o && o.prepend === true,
                         p = { fn:fn, target:target, deps:deps, name:name, evt:ev };
-                    if (! pool[name]) 
+                    if (! pool[name])
                         pool[name] = {};
-                    if (! pool[name][ev]) 
+                    if (! pool[name][ev])
                         pool[name][ev] = [];
                     var m = pool[name][ev];
                     if (prepend) {
                         m.unshift(p);
                     } else {
                         m.push(p);
-                    }                
+                    }
                 },
 
                 // removes dependencies from events and the event itself if the dependency is a target.
@@ -179,7 +179,7 @@
                         var h = function(event) {
                             var p = d[event];
                             for (var i=0; i < p.length; ++i) {
-                                if ((obj && p[i] !== obj) || (! obj && p[i].fn !== fn)) 
+                                if ((obj && p[i] !== obj) || (! obj && p[i].fn !== fn))
                                     continue;
                                 p.splice(i,1);
                                 break;
@@ -208,7 +208,7 @@
                         target=evt[1];
                         evt = evt[0];
                     }
-                    if (! pn || ! pn[evt]) 
+                    if (! pn || ! pn[evt])
                         return Promise.resolve();
                     pn[evt].forEach(function(t) {
                         if (! t.target || target === t.target)
@@ -242,10 +242,10 @@
                         });
                     }, Promise.resolve()).catch(function(e) {
                         if (typeof e !== 'object' || ! e.stopImmediatePropagation)
-                            throw { 
-                                name:name, 
+                            throw {
+                                name:name,
                                 process:evt,
-                                params:params, 
+                                params:params,
                                 target:target,
                                 error:e,
                             };
@@ -354,7 +354,7 @@
                 mk : function(t,o,c,m) {
                     var r,
                         i,
-                        self = this, 
+                        self = this,
                         type = t.indexOf('[');
                     if (type !== -1) {
                         r = document.createElement(t.substr(0,type));
@@ -381,7 +381,7 @@
                             i.parentNode.insertBefore(r,i.nextSibling);
                         } else if (o.container) {
                             o.container.appendChild(r);
-                        } 
+                        }
                     }
                     switch (typeof m) {
                         case 'string' :
@@ -399,7 +399,7 @@
                             c.forEach(function(k) {
                                 d.appendChild(k);
                             });
-                            c=d;   
+                            c=d;
                         }
                         if (c)
                             dom.setContent(r,c);
@@ -409,7 +409,7 @@
                 setPlaceholder : function(r,l) {
                     var f = r.igaroPlaceholderFn;
                     var language = app['core.language'];
-                    if (! language) 
+                    if (! language)
                         throw new Error('core.dom -> core.language is not loaded.');
                     var xMgr = language.managers.event;
                     if (f)
@@ -475,13 +475,13 @@
                         if (c instanceof HTMLElement || c instanceof DocumentFragment) {
                             r.appendChild(c);
                         } else {
-                            // language literal 
+                            // language literal
                             var language = app['core.language'];
-                            if (! language) 
+                            if (! language)
                                 throw new Error('core.dom -> core.language is not loaded.');
                             var f = r.igaroLangFn = function() {
                                 if (r.nodeName === 'META') {
-                                    r.content = language.mapKey(c); 
+                                    r.content = language.mapKey(c);
                                 } else if (! (r.nodeName === 'INPUT' && r.type && r.type === 'submit') && 'innerHTML' in r) {
                                     r.innerHTML = language.mapKey(c);
                                 } else if ('value' in r) {
@@ -522,8 +522,8 @@
                     var slice = o.slice,
                         on = o.on || function(o) { return o.innerHTML; },
                         root = o.root || o.nodes[0].parentNode,
-                        nodes = Array.prototype.slice.call(o.nodes || o.root.childNodes);  
-                    if (slice) 
+                        nodes = Array.prototype.slice.call(o.nodes || o.root.childNodes);
+                    if (slice)
                         nodes = nodes.slice(slice[0],slice[1]);
                     var insertBefore = nodes[nodes.length-1].nextElementSibling;
                     nodes = nodes.sort(function(a, b) {
@@ -534,7 +534,7 @@
                     if (o.reverse)
                         nodes = nodes.reverse();
                     nodes.forEach(function (o) {
-                        root.insertBefore(o,insertBefore); 
+                        root.insertBefore(o,insertBefore);
                     });
                 },
                 createMgr : function(parent) {
@@ -553,12 +553,12 @@
             CoreObjectMgr.prototype.create = function(t,o) {
                 if (! o)
                     o = {};
-                if (typeof t === 'string') 
+                if (typeof t === 'string')
                     t = { name:t };
                 var Amd = app['instance.amd'],
                     parent = this.parent,
                     name = t.fullname? t.fullname : 'instance.'+t.name,
-                    p = { 
+                    p = {
                         modules : [{ name: name+'.js' }],
                         repo : t.repo? t.repo : null
                     };
@@ -609,7 +609,7 @@
                     });
                 },
                 bless :  function(o) {
-                    if (!o) 
+                    if (!o)
                         o = {};
                     var self = this,
                         name = this.name,
@@ -642,14 +642,14 @@
                     })).map(function (o) {
                         var mgr = thisManagers[o[0]] = o[1].createMgr(self);
                         return mgr;
-                    }); 
+                    });
 
                     // create child arrays
                     if (children) {
                         var eventMgr = self.managers.event;
                         Object.keys(children).forEach(function (k) {
                             var child = children[k],
-                                a = self[k] = [];       
+                                a = self[k] = [];
                             eventMgr.on(child+'.destroy', function(s) {
                                 a.splice(a.indexOf(s.value.x),1);
                             });
@@ -688,7 +688,7 @@
                         }
                     };
                     if (container) {
-                        if (typeof container === 'function') 
+                        if (typeof container === 'function')
                             self.container = container = container(self.managers.dom);
                         if (asRoot)
                             container.classList.add(name.replace(/\./g,'-'));
@@ -702,7 +702,7 @@
                             this.hide();
                     }
                     if (o.disabled)
-                        this.disable();
+                        return this.disable();
                 }
             };
         })();
@@ -710,25 +710,25 @@
         // instance.xhr: built-in
         (function() {
             if (typeof XMLHttpRequest === 'undefined')
-                throw { 
+                throw {
                     error: {
-                        incompatible:true, 
+                        incompatible:true,
                         noobject:'XMLHttpRequest'
-                    } 
+                    }
                 };
             var events = app['core.events'];
             var setBits = function(p) {
-              if (p.res) 
+              if (p.res)
                 this.res = p.res;
-              if (p.headers) 
+              if (p.headers)
                 this.headers = p.headers;
-              if (p.vars) 
+              if (p.vars)
                 this.vars = p.vars;
-              if (p.withCredentials !== undefined) 
+              if (p.withCredentials !== undefined)
                 this.withCredentials = p.withCredentials;
-              if (p.form) 
+              if (p.form)
                 this.setForm(p.form);
-              if (p.silent) 
+              if (p.silent)
                 this.silent = p.silent;
               if (p.stash)
                 this.stash = p.stash;
@@ -774,13 +774,13 @@
                         } else {
                             throw(status);
                         }
-                    
+
                     }).catch(function (e) {
                         self._promise.reject({ error:e, x:self });
                         if (! self.silent)
                             return eventMgr.dispatch('error', e);
                     }).then(function() {
-                        return eventMgr.dispatch('end'); 
+                        return eventMgr.dispatch('end');
                     }).catch(function (e) {
                         return self.managers.debug.handle(e);
                     });
@@ -794,7 +794,7 @@
             };
             InstanceXhr.prototype.send = function() {
                 var self = this,
-                    action = self.action, 
+                    action = self.action,
                     xhr = self.xhr,
                     uri = this._uri,
                     t = this.res;
@@ -820,7 +820,7 @@
             InstanceXhr.prototype.exec = function(action, p) {
                 var xhr = this.xhr,
                     self = this;
-                if (p) 
+                if (p)
                     setBits.call(this,p);
                 this.action = action;
                 this.abort();
@@ -842,59 +842,59 @@
                 });
             };
             InstanceXhr.prototype.get = function(p) {
-                return this.exec('GET',p); 
+                return this.exec('GET',p);
             };
-            InstanceXhr.prototype.post = function(p) { 
-                return this.exec('POST',p); 
+            InstanceXhr.prototype.post = function(p) {
+                return this.exec('POST',p);
             };
-            InstanceXhr.prototype.put = function(p) { 
-                return this.exec('PUT',p); 
+            InstanceXhr.prototype.put = function(p) {
+                return this.exec('PUT',p);
             };
-            InstanceXhr.prototype.trace = function(p) { 
-                return this.exec('TRACE',p); 
+            InstanceXhr.prototype.trace = function(p) {
+                return this.exec('TRACE',p);
             };
-            InstanceXhr.prototype.head = function(p) { 
-                return this.exec('HEAD',p); 
+            InstanceXhr.prototype.head = function(p) {
+                return this.exec('HEAD',p);
             };
-            InstanceXhr.prototype.delete = function(p) { 
-                return this.exec('DELETE',p); 
+            InstanceXhr.prototype.delete = function(p) {
+                return this.exec('DELETE',p);
             };
-            InstanceXhr.prototype.options = function(p) { 
-                return this.exec('OPTIONS',p); 
+            InstanceXhr.prototype.options = function(p) {
+                return this.exec('OPTIONS',p);
             };
             InstanceXhr.prototype.abort = function() {
                 if (this._promise) {
                     this._promise.reject();
                 }
-                if (this.xhr.readyState === 0) 
+                if (this.xhr.readyState === 0)
                     return Promise.resolve();
                 this.xhr.abort();
                 this.aborted = true;
                 var eventMgr = this.managers.event;
                 return eventMgr.dispatch('aborted').then(function() {
-                    return eventMgr.dispatch('end');    
+                    return eventMgr.dispatch('end');
                 });
             };
             InstanceXhr.prototype.applyForm = function(form, autorefresh) {
                 var fd = this.formdata = {};
                 this.headers["Content-Type"] = "application/x-www-form-urlencoded";
                 Array.prototype.splice.call(form.elements).forEach(function (l) {
-                    if (l.disabled) 
+                    if (l.disabled)
                         return;
                     if (l.type=="checkbox" && l.checked) {
                         fd[l.name] = l.checked? 1:0;
                     } else if (l.type=="select-one" && l.selectedIndex > -1) {
-                        if (l.options.length) 
+                        if (l.options.length)
                             fd[l.name] = l.options[l.selectedIndex].value;
                     } else if (l.type=="select-multiple") {
                         var t=l.options.map(function(s) {
-                            if (! s.selected) 
+                            if (! s.selected)
                                 return;
                             return s.value;
                         }).join('\n');
-                        if (t.length) 
+                        if (t.length)
                             fd[l.name] = t;
-                    } else {                  
+                    } else {
                         fd[l.name] = l.value.trim();
                     }
                 });
@@ -942,7 +942,7 @@
             };
             InstanceAmd.prototype.get = function(p) {
                 var self = this;
-                if (p) 
+                if (p)
                     setBits.call(this,p);
                 return new Promise(function(resolve, reject) {
                     var swrks = self.workers = [];
@@ -973,11 +973,11 @@
                         }
                     };
                     self.modules.forEach(function (m) {
-                        if (typeof m.repo === 'undefined' && repo) 
+                        if (typeof m.repo === 'undefined' && repo)
                             m.repo = repo;
-                        if (! m.requires) 
+                        if (! m.requires)
                             m.requires = [];
-                        var wk, 
+                        var wk,
                             n=m.name;
                         // if there's already a worker for this module, find it, else create one
                         if (! workers.some(function (w) {
@@ -986,9 +986,9 @@
                                 return true;
                             }
                         })) {
-                            wk = new InstanceAmdWorker({ 
+                            wk = new InstanceAmdWorker({
                                 module:m,
-                                parent:self 
+                                parent:self
                             });
                         }
                         if (! wk.done) {
@@ -998,7 +998,7 @@
                             self.onProgress();
                         }
                     });
-                    if (chk()) 
+                    if (chk())
                         end();
                 });
             };
@@ -1011,7 +1011,7 @@
                     e = /^.+\.([^.]+)$/.exec(modname.toLowerCase()),
                     type=this.type = e === null? '' : e[1],
                     file = this.file = mod.repo+'/'+(mod.nosub? '' : type+'/')+modname;
-                if (['css','js'].indexOf(type) === -1) 
+                if (['css','js'].indexOf(type) === -1)
                     throw new Error('instance.amd can\'t handle file type: '+modname);
                 this.done = false;
                 workers.push(this);
@@ -1037,8 +1037,8 @@
                                 eval(data);
                                 var code = self.code = module.exports ? module.exports : null;
                                 return (module.requires.length?
-                                    new InstanceAmd().get({ 
-                                        repo:mod.depRepoRevert? repo : mod.repo, 
+                                    new InstanceAmd().get({
+                                        repo:mod.depRepoRevert? repo : mod.repo,
                                         modules:module.requires
                                     })
                                 : Promise.resolve()).then(function() {
@@ -1093,7 +1093,7 @@
         return app['core.debug'].log.append(e);
     }).catch (function(e) {
         // capture error in this handler ... and handle. Ideally shouldn't happen.
-        if (console) 
+        if (console)
             console.error(e);
     });
 

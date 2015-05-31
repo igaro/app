@@ -5,20 +5,20 @@ module.exports = function(app) {
         var data = {
 
             desc : _tr("A very simple status event emitter."),
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             usage : {
                 class : true
             },
             attributes : [
-                { 
-                    name:'append', 
+                {
+                    name:'append',
                     type:'function',
                     attributes: [
-                        { 
-                            type:'object', 
+                        {
+                            type:'object',
                             required:true,
                             attributes:[{
                                 desc: _tr("Object to pass onto the event handler."),

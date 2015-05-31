@@ -47,17 +47,17 @@ model.managers.object.create('table', {\n \
             desc : {
                 en : 'Creates a table with header,body,footer objects.',
             },
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             attributes : [
                 {
                     name : 'body',
                     instanceof : function() { return data.objects.domain; }
                 },
-                { 
-                    name:'container', 
+                {
+                    name:'container',
                     type:'element',
                     desc : {
                         en : 'UL element containing the LI siblings.'
@@ -75,8 +75,8 @@ model.managers.object.create('table', {\n \
             usage : {
                 instantiate : true,
                 attributes : [
-                    { 
-                        name:'container', 
+                    {
+                        name:'container',
                         type:'element',
                         desc : {
                             en : 'Container to append the instance into.',
@@ -253,7 +253,7 @@ model.managers.object.create('table', {\n \
                         },
                         attributes : [
                             {
-                                instanceof : function() { return data.objects.row; },        
+                                instanceof : function() { return data.objects.row; },
                             }
                         ]
                     },

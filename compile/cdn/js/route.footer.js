@@ -16,7 +16,7 @@ module.exports = function(app) {
             objectMgr = managers.object,
             router = app['core.router'];
 
-        // save scroll for top button 
+        // save scroll for top button
         var saveScroll = function(event) {
             var db = document.body,
                 v = db.scrollTop || document.documentElement.scrollTop;
@@ -45,7 +45,7 @@ module.exports = function(app) {
 
             // last update
             objectMgr.create('xhr').then(function (xhr) {
-                return xhr.get({ 
+                return xhr.get({
                     silent:true,
                     res:'https://api.github.com/orgs/igaro/repos',
                 }).then(
@@ -62,7 +62,7 @@ module.exports = function(app) {
                                 this.href = 'https://github.com/igaro/app';
                             })
                         }).then(function() {
-                            return x;	
+                            return x;
                         });
                     }
                 ).catch(function () {});
@@ -71,7 +71,7 @@ module.exports = function(app) {
             // open issues
             objectMgr.create('xhr').then(function (xhr) {
                 return xhr.get({
-                    silent:true, 
+                    silent:true,
                     res:'https://api.github.com/orgs/igaro/repos',
                 }).then(
                     function(data) {
@@ -88,14 +88,14 @@ module.exports = function(app) {
             }),
 
             // bookmark
-            objectMgr.create('bookmark', { 
+            objectMgr.create('bookmark', {
                 url:'http://app.igaro.com',
-                title:router.current.stash.title 
+                title:router.current.stash.title
             }).then (function(bookmark) {
                 // on route change
                 return domMgr.mk('div',null,bookmark.container,'bookmarks');
             })
-            
+
         ] });
 
     };

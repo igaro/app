@@ -49,7 +49,7 @@ module.exports = function(app) {
         // phonegap InstanceToast plugin
         if (window.plugins && window.plugins.toast)
             return window.plugins.toast.show(typeof txt === 'object'? language.mapKey(txt) : txt,duration,position);
-        
+
         // html InstanceToast
         domMgr.mk('div',container,txt,duration);
     };

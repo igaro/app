@@ -36,7 +36,7 @@ module.exports = function(app) {
 
     InstanceList.prototype.init = function(o) {
         var self = this;
-        return (o.items? 
+        return (o.items?
             self.addItems(o.items)
             :
             Promise.resolve()
@@ -75,16 +75,16 @@ module.exports = function(app) {
             i = items.indexOf(o);
         if (places+i >= items.length) {
             places = places+i;
-            while (places >= 0) { 
+            while (places >= 0) {
                 places -= items.length;
             }
             --places;
         }
-        if (li.parentNode) 
+        if (li.parentNode)
             c.removeChild(li);
         items.splice(i+places,0,items.splice(i,1)[0]);
         i = items.indexOf(o);
-        if (i === items.length-1) { 
+        if (i === items.length-1) {
             c.appendChild(li);
         } else {
             c.insertBefore(li,items[i+1].container);

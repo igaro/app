@@ -5,9 +5,9 @@
 module.exports = function(app) {
 
     return {
-    
+
         getParams : function(url, separator) {
-            if (! url) 
+            if (! url)
                 url = window.location.href;
             if (! separator)
                 separator = '?';
@@ -33,7 +33,7 @@ module.exports = function(app) {
         },
 
         replaceParam : function(param,value,url) {
-            if (! url) 
+            if (! url)
                 url = window.location.href;
             if (url.indexOf(param + "=") >= 0) {
                 var prefix = url.substring(0, url.indexOf(param)),
@@ -44,23 +44,23 @@ module.exports = function(app) {
             } else {
                 url += url.indexOf("?") < 0? "?" + param + "=" + value : "&" + param + "=" + value;
             }
-            return url;  		
+            return url;
         },
-            
+
         getCurrent : function(o) {
             var w = document.location.protocol;
-            if (o && o.ssl === false) 
+            if (o && o.ssl === false)
                 w = 'http:';
-            if (o && o.ssl === true) 
+            if (o && o.ssl === true)
                 w = 'https:';
             w += '//'+window.location.hostname;
-            if (window.location.pathname.length && o && o.path !== false) 
+            if (window.location.pathname.length && o && o.path !== false)
                 w += window.location.pathname;
-            if (window.location.search.length && o && o.search !== false) 
+            if (window.location.search.length && o && o.search !== false)
                 w += '?'+window.location.search;
             return w;
         }
-    
+
     };
 
 };

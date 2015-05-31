@@ -7,7 +7,7 @@
         throw new TypeError(" this is null or not defined");
     var O = Object(this);
     var len = O.length >>> 0;
-    if (typeof callback !== "function") 
+    if (typeof callback !== "function")
       throw new TypeError(callback + " is not a function");
     if (thisArg) T = thisArg;
     A = new Array(len);
@@ -22,7 +22,7 @@
     k++;
     }
     return A;
-  };      
+  };
 }
 
 if (!Array.prototype.reduce ) {
@@ -38,7 +38,7 @@ if (!Array.prototype.reduce ) {
     if ( arguments.length >= 2 ) {
       value = arguments[1];
     } else {
-      while ( k < len && ! k in t ) k++; 
+      while ( k < len && ! k in t ) k++;
       if ( k >= len )
         throw new TypeError('Reduce of empty array with no initial value');
       value = t[ k++ ];

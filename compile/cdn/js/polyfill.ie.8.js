@@ -25,7 +25,7 @@ if (!window.addEventListener) {
                 newEvent.nativeEvent = nativeEvent;
                 while (node) {
                     newNodeList.unshift(node);
- 
+
                     node = node.parentNode;
                 }
                 for (var a, i = 0; (a = newNodeList[i]); ++i) {
@@ -49,7 +49,7 @@ if (!window.addEventListener) {
         }
         cite.__eventListener[type][useCapture ? 0 : 1].push(listener);
     }
-    
+
     window.constructor.prototype.removeEventListener = document.constructor.prototype.removeEventListener = Element.prototype.removeEventListener = function(type, listener, useCapture) {
         useCapture = !!useCapture;
         var cite = this, a;

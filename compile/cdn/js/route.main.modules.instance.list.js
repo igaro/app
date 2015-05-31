@@ -19,9 +19,11 @@ model.managers.object.create('list',{ \n\
     }); \n \
 });",
             desc : _tr("Provides an array like list mapped to a UL and LI elements."),
-            blessed:true,
+            blessed: {
+                container:true
+            },
             objects : {
-                item : { 
+                item : {
                     name:'Item',
                     blessed : true,
                     attributes : [
@@ -34,43 +36,34 @@ model.managers.object.create('list',{ \n\
                 }
             },
             usage : {
+                decorateWithContainer:true,
                 instantiate : true,
                 attributes : [
-                    { 
-                        name:'container', 
-                        instanceof: { name:'Element' },
-                        desc : _tr("Container to append the instance into.")
-                    },
-                    { 
-                        name:'items', 
+                    {
+                        name:'items',
                         instanceof: { name:'Array' },
                         desc : _tr("Initial items to use for the list. See addItem() for attributes.")
                     }
                 ]
             },
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             attributes : [
-                { 
+                {
                     name:'addItem',
-                    async:true, 
+                    async:true,
                     type:'function',
                     returns : {
-                        instanceof: { 
-                            attributes:[
-                                {
-                                    instanceof: function() { return data.objects.item; },
-                                }
-                            ]
-                        }
+                        instanceof: function() { return data.objects.item; },
                     },
                     desc : _tr("Adds an object to the list optionally shifting it to a specified position. The object will have an LI element appended at the same position."),
                     attributes : [
                         {
                             type:'object',
                             required:true,
+                            decorateWithContainer:true,
                             attributes:[
                                 {
                                     name:'content',
@@ -78,19 +71,12 @@ model.managers.object.create('list',{ \n\
                                     desc: _tr("The content to supply to the DOM creator (see core.dom.mk).")
                                 }
                             ]
-                        },
-                        {
-                            type:'number',
-                            attributes:[{
-                                name:'shift',
-                                desc: _tr("If supplied the value will be appended to the LI.className.")
-                            }]
                         }
                     ]
                 },
-                { 
+                {
                     name:'addItems',
-                    async:true, 
+                    async:true,
                     type:'function',
                     desc : _tr("Calls .addItem() in sequence and returns the new items."),
                     returns : {
@@ -111,19 +97,13 @@ model.managers.object.create('list',{ \n\
                         }
                     ]
                 },
-                { 
-                    name:'container', 
-                    type:'element',
-                    instanceof : { name:'Element' },
-                    desc : _tr("The UL element that contains the LI siblings.")
-                },
-                { 
-                    name:'items', 
+                {
+                    name:'items',
                     instanceof : { name:'Array' },
                     desc : _tr("The list's items.")
                 },
-                { 
-                    name:'shift', 
+                {
+                    name:'shift',
                     type:'function',
                     desc : _tr("Moves an object in the list by a number of places."),
                     attributes:[

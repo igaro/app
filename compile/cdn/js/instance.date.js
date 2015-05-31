@@ -37,11 +37,11 @@ module.exports = function(app) {
                     self.format();
                 },
                 tzoffset : function(v) {
-                    if (! self.ov) 
+                    if (! self.ov)
                         self.offset(date.envOffset,true);
                 }
             };
-        if (o.format) 
+        if (o.format)
             this.f = o.format;
         if (o.offset) {
             this.offset(o.offset);
@@ -61,7 +61,7 @@ module.exports = function(app) {
     InstanceDate.prototype.init = function() {
         return this.managers.event.dispatch('init');
     };
-    
+
     InstanceDate.prototype.set = function(date) {
         this.date = date;
         this.moment = moment(date);
@@ -71,7 +71,7 @@ module.exports = function(app) {
 
     InstanceDate.prototype.offset = function(offset,nostore) {
         this.moment.zone(offset);
-        if (! nostore) 
+        if (! nostore)
             this.ov = offset;
         this.format();
     };
@@ -97,7 +97,7 @@ module.exports = function(app) {
     };
 
     InstanceDate.prototype.format = function(f) {
-        if (f) 
+        if (f)
             this.f = f;
         this.container.innerHTML = this.moment.format(this.f);
     };

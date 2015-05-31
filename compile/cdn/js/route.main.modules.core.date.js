@@ -4,9 +4,9 @@ module.exports = function(app) {
 
         var data = {
             desc : _tr("Provides date and timezone functionality. Date strings should be ISO 8601 formatted. The timezone is determined from the system clock but can be overridden. ENV code is stored."),
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             usage : {
                 class : true
@@ -25,8 +25,8 @@ module.exports = function(app) {
                 'instance.date'
             ],
             attributes : [
-                { 
-                    name:'daysInMonth', 
+                {
+                    name:'daysInMonth',
                     type:'function',
                     returns: {
                         attributes : [
@@ -36,16 +36,16 @@ module.exports = function(app) {
                         ]
                     },
                     attributes: [
-                        { 
-                            type:'number', 
-                            required:true, 
+                        {
+                            type:'number',
+                            required:true,
                             attributes : [{
                                 desc: _tr("The year value.")
                             }]
                         },
-                        { 
-                            type:'number', 
-                            required:true, 
+                        {
+                            type:'number',
+                            required:true,
                             attributes : [{
                                 desc: _tr("The month value.")
                             }]
@@ -53,8 +53,8 @@ module.exports = function(app) {
                     ],
                     desc: _tr("Returns the amount of days within a month for a given year."),
                 },
-                { 
-                    name:'isLeapYear', 
+                {
+                    name:'isLeapYear',
                     type:'function',
                     returns: {
                         attributes : [
@@ -64,9 +64,9 @@ module.exports = function(app) {
                         ]
                     },
                     attributes: [
-                        { 
-                            type:'number', 
-                            required:true, 
+                        {
+                            type:'number',
+                            required:true,
                             attributes : [{
                                 desc: _tr("The year to check."),
                             }]
@@ -84,13 +84,13 @@ module.exports = function(app) {
                     type:'boolean',
                     desc: _tr("Defines whether the ENV has been determined automatically.")
                 },
-                { 
+                {
                     name:'resetEnvOffset',
                     type:'function',
                     desc: _tr("Resets the timezone offset to the automatically determined value."),
                     async:true
                 },
-                { 
+                {
                     name:'setEnvOffset',
                     type:'function',
                     desc: _tr("Sets the timezone offset."),
@@ -111,8 +111,8 @@ module.exports = function(app) {
                     ],
                     async:true
                 },
-                { 
-                    name:'userTz', 
+                {
+                    name:'userTz',
                     type:'function',
                     returns: {
                         attributes : [
@@ -122,9 +122,9 @@ module.exports = function(app) {
                         ]
                     },
                     attributes: [
-                        { 
-                            type:'object', 
-                            required:true, 
+                        {
+                            type:'object',
+                            required:true,
                             attributes : [{
                                 desc: _tr("The value to convert. May also be a string respresentation."),
                                 instanceof : {

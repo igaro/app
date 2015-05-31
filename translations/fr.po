@@ -2412,7 +2412,9 @@ msgstr ""
 msgid "The array of promises to execute."
 msgstr ""
 
-msgid "The container for which to append the returned values into."
+msgid ""
+"The container for which to append the returned values into. Defaults to the "
+"route's wrapper Element."
 msgstr ""
 
 msgid ""
@@ -2421,9 +2423,6 @@ msgid ""
 msgstr ""
 
 msgid "Inline CSS provided by the route's provider. Automatically appended."
-msgstr ""
-
-msgid "The display element."
 msgstr ""
 
 msgid ""
@@ -2693,26 +2692,6 @@ msgid ""
 "information for when navigation is important or where space is limited."
 msgstr ""
 
-msgid "A DL container for the object."
-msgstr ""
-
-msgid "A DD element representing the content."
-msgstr ""
-
-msgid "A DT element representing the header."
-msgstr ""
-
-msgid ""
-"A SPAN element representing the selection status of the content. For example "
-"a SELECT element could write it's current value."
-msgstr ""
-
-msgid "A SPAN element representing the title inside the header."
-msgstr ""
-
-msgid "Container to append the instance into."
-msgstr ""
-
 msgid ""
 "Pass true to allow more than one section to expand. If false (default) then "
 "open sections contract prior to another section opening."
@@ -2741,13 +2720,7 @@ msgstr ""
 msgid "Collapses all sections"
 msgstr ""
 
-msgid "The UL element that contains the LI siblings"
-msgstr ""
-
 msgid "Expands all sections. multiExpand must be enabled for this to work."
-msgstr ""
-
-msgid "The sections added to the accordion."
 msgstr ""
 
 msgid ""
@@ -2801,6 +2774,9 @@ msgstr ""
 msgid "Title to pass over to the external service."
 msgstr ""
 
+msgid "Container to append the instance into."
+msgstr ""
+
 msgid "Sets the URL and optional title to pass over to the external service."
 msgstr ""
 
@@ -2846,9 +2822,6 @@ msgid "+- 15 minute blocks."
 msgstr ""
 
 msgid "By default the offset is stored. Use true to disable."
-msgstr ""
-
-msgid "The element the instance is appended into."
 msgstr ""
 
 msgid "Formats the stringified version of the date."
@@ -2953,16 +2926,10 @@ msgstr ""
 msgid "The content to supply to the DOM creator (see core.dom.mk)."
 msgstr ""
 
-msgid "If supplied the value will be appended to the LI.className."
-msgstr ""
-
 msgid "Calls .addItem() in sequence and returns the new items."
 msgstr ""
 
 msgid "Items to insert."
-msgstr ""
-
-msgid "The UL element that contains the LI siblings."
 msgstr ""
 
 msgid "The list's items."
@@ -3030,15 +2997,109 @@ msgstr ""
 msgid "View on Github"
 msgstr ""
 
-msgid ""
-"%[0] - required, %[1] - blessed object, %[2]underlined%[3] - asynchronous "
-"(%[4])"
+msgid "%[0] - required, %[1]underlined%[2] - asynchronous (%[3])"
 msgstr ""
 
 msgid "Type"
 msgstr ""
 
 msgid "Description"
+msgstr ""
+
+msgid "Appends a className onto the container."
+msgstr ""
+
+msgid ""
+"A container in which to append the new object's container. May be an Element "
+"or an object with a container."
+msgstr ""
+
+msgid ""
+"Inserts the new object's container at the beginning of the specified "
+"container."
+msgstr ""
+
+msgid ""
+"Inserts the new object's container after the index of a specified object. "
+"The object can be an Element or an object with a container."
+msgstr ""
+
+msgid ""
+"Inserts the new object's container before before the index of a specified "
+"object. The object can be an Element or an object with a container."
+msgstr ""
+
+msgid ""
+"Inserts any container and the object into the beginning of parent array(s)."
+msgstr ""
+
+msgid ""
+"Inserts any container and the object into parent array(s) after the index of "
+"a specified object."
+msgstr ""
+
+msgid ""
+"Inserts any container and the object into parent array(s) before the index "
+"of a specified object."
+msgstr ""
+
+msgid ""
+"Call this to destroy the object. Cleanup (dependencies, DOM container, "
+"events, parent array removal) is automatic."
+msgstr ""
+
+msgid ""
+"Sets the disabled flag. This does not affect object functionality which "
+"should manually check the flag and adjust it's response. If the object has a "
+"container Element of an INPUT type then this will be disabled."
+msgstr ""
+
+msgid "Define false to enable. Default is true."
+msgstr ""
+
+msgid "Indicates if the object is disabled."
+msgstr ""
+
+msgid ""
+"Provides customised module functionality. See core.object documentation."
+msgstr ""
+
+msgid "A manager. See %[0]."
+msgstr ""
+
+msgid ""
+"A value identifying the object type. Used by managers, for building the "
+"path, debugging, and events."
+msgstr ""
+
+msgid "Reference to the parent object, if applicable."
+msgstr ""
+
+msgid ""
+"An internal path to the object type which indicates the module it came from "
+"and it's location in the instantiation tree. Not to be confused with URL "
+"path."
+msgstr ""
+
+msgid "A container Element representing the object."
+msgstr ""
+
+msgid "Hides the container Element."
+msgstr ""
+
+msgid "Define false to show. Default is true."
+msgstr ""
+
+msgid "Indicates if the container Element is hidden."
+msgstr ""
+
+msgid "Shows the container Element."
+msgstr ""
+
+msgid "Toggles whether the container ELement between shown and hidden."
+msgstr ""
+
+msgid "A pool of child objects."
 msgstr ""
 
 msgid "This module is embedded into igaro.js"
@@ -3071,16 +3132,13 @@ msgstr ""
 msgid "Attributes"
 msgstr ""
 
-msgid "This object is blessed with attributes not shown here."
-msgstr ""
-
 msgid "Manager"
 msgstr ""
 
 msgid ""
-"A blessed object can use this module as a manager (see core.object). These "
-"functions should be used over those in Attributes to reduce coding duplicity "
-"and to set and manage relations and dependencies."
+"A blessed object can use this module as a manager. Functions shown here "
+"should be used over those of the same name in Attributes to reduce coding "
+"complexity and to aid automation and efficiency."
 msgstr ""
 
 msgid "You can access this manager using <b>[object].managers.%[0]</b>."

@@ -2,7 +2,7 @@
 
 'use strict';
 
-if (typeof history.pushState === 'undefined') 
+if (typeof history.pushState === 'undefined')
     throw { incompatible:true, noobject:'history.pushState' };
 
 module.requires = [
@@ -12,8 +12,8 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var events = app['core.events'], 
-        language = app['core.language'], 
+    var events = app['core.events'],
+        language = app['core.language'],
         Amd = app['instance.amd'],
         dom = app['core.dom'],
         object = app['core.object'],
@@ -45,7 +45,7 @@ module.exports = function(app) {
         this.scrollPosition=0;
         this.cssElement=dom.mk('style',dom.head);
     };
-    
+
     CoreRouterRoute.prototype.captureUri = function(c) {
         this.uriPieces = this.originalUri.slice(0,c).map(function(p) {
             return decodeURIComponent(p);
@@ -131,9 +131,9 @@ module.exports = function(app) {
                 return true;
             }
         })) {
-            g = new CoreRouterRoute({ 
+            g = new CoreRouterRoute({
                 parent:self,
-                container:self.container, 
+                container:self.container,
                 name:name
             });
             g.managers.event.on('destroy', function() {
@@ -142,7 +142,7 @@ module.exports = function(app) {
                     router.current = g.parent;
             });
             var provider = router.getProviderForPath(g.path);
-            if (! provider) 
+            if (! provider)
                 throw { error:'No Route provider for path', route:g };
             g.url = provider.url;
             fetcher = provider.fetch(g).then(
@@ -173,9 +173,9 @@ module.exports = function(app) {
             }).then(function() {
                 if (g.defaultShowWrapper)
                     dom.show(g.wrapper);
-                if (g.defaultHideRoutes) 
+                if (g.defaultHideRoutes)
                     g.hideRoutes();
-                if (g.defaultHideParentViewWrapper) 
+                if (g.defaultHideParentViewWrapper)
                     dom.hide(g.parent.wrapper);
                 return g;
             });
@@ -187,14 +187,14 @@ module.exports = function(app) {
     };
 
     CoreRouterRoute.prototype.removeRoutes = function() {
-        return Promise.all(this.routes.map(function (m) { 
-            return m.destroy(); 
+        return Promise.all(this.routes.map(function (m) {
+            return m.destroy();
         }));
     };
-    
+
     CoreRouterRoute.prototype.hideRoutes = function() {
-        this.routes.forEach(function (m) { 
-            m.hide(); 
+        this.routes.forEach(function (m) {
+            m.hide();
         });
     };
 
@@ -208,12 +208,12 @@ module.exports = function(app) {
             return this.current === this.base;
         },
         children : {
-            providers : 'provider' 
+            providers : 'provider'
         },
         getProviderForPath : function(path) {
             var providers = this.providers;
             for (var i=providers.length-1; i>=0; --i) {
-                if (providers[i].handles(path)) 
+                if (providers[i].handles(path))
                     return providers[i];
             }
         },
@@ -224,19 +224,19 @@ module.exports = function(app) {
             });
             arrayInsert(this.providers,o,o);
         },
-        
+
         to : function(path, search, hash, state) {
             this.requestId++;
             var base = router.base.path.slice(1),
                 ra = path? base.concat(path) : base,
-                model = this.root, 
-                self = this, 
-                c = this.current, 
+                model = this.root,
+                self = this,
+                c = this.current,
                 v = this.requestId,
                 routerEventMgr = router.managers.event;
             return (c?
                 c.managers.event.dispatch('leave').then(function(o) {
-                    if (o && o.abort) 
+                    if (o && o.abort)
                         throw -14443864;
                     if(c.destroyOnLeave)
                         return c.destroy();
@@ -255,7 +255,7 @@ module.exports = function(app) {
                                     silent : true
                             }).then(function(m) {
                                     // abort the load, another request has since came in
-                                    if (self.requestId !== v) 
+                                    if (self.requestId !== v)
                                         throw -1600;
                                     c = self.current = model = m;
                                     i += model.uriPieces.length;
@@ -297,19 +297,19 @@ module.exports = function(app) {
                         });
                     }).catch(function(e) {
                         // replace the url with whatever has managed to load
-                        history.replaceState({},null,router.current.getUrl()); 
+                        history.replaceState({},null,router.current.getUrl());
                         throw e;
                     });
                 });
             }).catch(function (e) {
                 if (e !== -14443864)
                     throw e;
-            });   
+            });
         }
     };
 
     bless.call(router);
-    
+
     router.root = new CoreRouterRoute({
         name:'route'
     });

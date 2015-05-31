@@ -4,14 +4,14 @@ module.exports = function(app) {
 
         var data = {
             desc : _tr("Provides Igaro's bless mechanism and helper functions for objects such as Promises."),
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             usage : {
                 class : true
             },
-           
+
             embedded:true,
             manager:'object',
             attributes : [
@@ -24,25 +24,25 @@ module.exports = function(app) {
                             type : 'object',
                             required:true,
                             attributes : [{
-                                instanceof: { 
-                                    name: 'Array' 
+                                instanceof: {
+                                    name: 'Array'
                                 },
                                 desc:_tr("The array to manipulate.")
                             }]
                         },
                         {
-                            type:'*',   
+                            type:'*',
                             required:true,
-                            attributes : [  
+                            attributes : [
                                 {
                                     desc:_tr("The value to use for the insertion.")
                                 }
                             ],
-                            
+
                         },
                         {
                             type:'object',
-                            attributes : [  
+                            attributes : [
                                 {
                                     name:'insertAfter',
                                     type:'*',
@@ -206,7 +206,7 @@ module.exports = function(app) {
                     forManager:true,
                     desc:_tr("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands."),
                     attributes : [
-                        { 
+                        {
                             type:'*',
                             required:true,
                             forManager:true,
@@ -220,7 +220,7 @@ module.exports = function(app) {
                                 desc: _tr("The scope path name.")
                             }]
                         },
-                        { 
+                        {
                             type:'string',
                             attributes: [{
                                 desc : _tr("The scope event name")
@@ -233,29 +233,29 @@ module.exports = function(app) {
                     type:'object',
                     forManager:true,
                     attributes : [
-                        { 
+                        {
                             name:'append',
                             type:'function',
                             async:true,
                             attributes: [
-                                { 
+                                {
                                     type:'string',
-                                    required:true, 
+                                    required:true,
                                     attributes:[{
                                         desc: _tr("The module name.")
                                     }]
                                 },
-                                { 
+                                {
                                     type:'string',
-                                    required:true, 
+                                    required:true,
                                     attributes:[{
                                         desc: _tr("The event name.")
                                     }]
                                 },
-                                { 
-                                    type:'*', 
+                                {
+                                    type:'*',
                                     required:true,
-                                    forManager:true, 
+                                    forManager:true,
                                     attributes:[{
                                         desc: _tr("A value to pass to functions registered to receive the debug event. You can pass anything here."),
                                     }]
@@ -274,16 +274,16 @@ module.exports = function(app) {
                             type : 'object',
                             required:true,
                             attributes : [{
-                                instanceof: { 
-                                    name: 'Array' 
+                                instanceof: {
+                                    name: 'Array'
                                 },
                                 desc:_tr("The array of Promises to reduce.")
                             }]
                         },
                         {
-                            type:'function',   
+                            type:'function',
                             required:true,
-                            attributes : [  
+                            attributes : [
                                 {
                                     desc:_tr("The function to call for each Promise.")
                                 }

@@ -7,9 +7,9 @@ module.exports = function(app) {
     var bless = app['core.object'].bless,
         dom = app['core.dom'],
         setBits = function(p) {
-            if (p.res) 
+            if (p.res)
                 this.res = p.res;
-            if (p.callbackName) 
+            if (p.callbackName)
                 this.callbackName = p.callbackName;
         };
 
@@ -34,11 +34,11 @@ module.exports = function(app) {
 
     InstanceJsonP.prototype.get = function(o) {
         this.abort();
-        if (o) 
+        if (o)
             setBits.call(this,o);
-        var self = this, 
+        var self = this,
             eventMgr = this.managers.event,
-            jsonp = this.jsonp, 
+            jsonp = this.jsonp,
             res = this.res;
         res += res.indexOf('?') === -1? '?' : '&';
         res += this.callbackName + '=' + this.uid;
@@ -55,7 +55,7 @@ module.exports = function(app) {
                 delete window[self.uid];
                 reject(err);
                 return eventMgr.dispatch('error',err).then(function() {
-                    return eventMgr.dispatch('end');   
+                    return eventMgr.dispatch('end');
                 });
             };
             dom.head.appendChild(jsonp);
@@ -65,12 +65,12 @@ module.exports = function(app) {
 
     InstanceJsonP.prototype.abort = function() {
         var j = this.jsonp;
-        if (! j.parentNode) 
+        if (! j.parentNode)
             return Promise.resolve();
         j.parentNode.removeChild(j);
         var eventMgr = this.managers.event;
         return eventMgr.dispatch('aborted').then(function() {
-            return eventMgr.dispatch('end');    
+            return eventMgr.dispatch('end');
         });
     };
 

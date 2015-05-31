@@ -9,7 +9,7 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var language = app['core.language'], 
+    var language = app['core.language'],
         router = app['core.router'],
         Amd = app['instance.amd'];
 
@@ -23,32 +23,32 @@ module.exports = function(app) {
 
         model.stash.title = _tr("Igaro App Javascript Framework");
         model.stash.description = _tr("Igaro App is a powerful Javascript framework for developing single page application websites (web-apps). Zero HTML, zero dependencies and beautifully engineered.");
-        model.stash.keywords = _tr("javascript, spa, app, html5, framework");        
+        model.stash.keywords = _tr("javascript, spa, app, html5, framework");
 
-        var wrapper = model.wrapper, 
+        var wrapper = model.wrapper,
             header = domMgr.mk('div',wrapper,null,'header');
-       
+
         // header
         domMgr.mk('span',header,_tr("Welcome to <b>Igaro App</b> Javascript Framework"));
 
         var writeList = function(pool,list) {
-            return coreObject.promiseSequencer(pool,function(b) { 
+            return coreObject.promiseSequencer(pool,function(b) {
                 var id = b[0];
-                return list.addItem({ 
+                return list.addItem({
                     className:id,
                     content:function(dom) {
                         return dom.mk('a',null,null,function() {
                             var url = b[2];
                             if (url) {
                                 this.href = url;
-                                this.addEventListener('click', function (evt) { 
+                                this.addEventListener('click', function (evt) {
                                     evt.preventDefault();
                                     window.open(url);
                                 });
                             } else {
                                 var a = model.uriPath.concat(id);
                                 this.href = a.join('/') + '/';
-                                this.addEventListener('click', function (evt) { 
+                                this.addEventListener('click', function (evt) {
                                     evt.preventDefault();
                                     router.to(a);
                                 });
@@ -56,13 +56,13 @@ module.exports = function(app) {
                             dom.mk('div',this,b[1]);
                         });
                     }
-                }); 
+                });
             },Promise.resolve());
         };
 
         // sequence
-        model.addSequence({ 
-            container:domMgr.mk('div',wrapper,null,'main'), 
+        model.addSequence({
+            container:domMgr.mk('div',wrapper,null,'main'),
             promises:[
 
                 objectMgr.create('pagemessage',{

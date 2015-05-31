@@ -9,9 +9,9 @@ module.exports = function(app) {
                 fr : 'Cette bibliothèque prototypes Javascript 1.8.1 (IE9). \
 <p></p>Les éléments suivants sont fournis;<p></p><ul></ul>'
             },
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             }
         };
 

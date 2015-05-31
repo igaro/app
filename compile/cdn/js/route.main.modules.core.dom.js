@@ -4,9 +4,9 @@ module.exports = function(app) {
 
         var data = {
             desc : _tr("Provides DOM helpers to reduce repetitive coding. Automates dependency management and provides object destruction cleanup. Does not try to be JQuery."),
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             usage : {
                 class : true
@@ -19,7 +19,7 @@ module.exports = function(app) {
                     type:'function',
                     desc:_tr("Appends an element into another optionally pre/appending before a sibling."),
                     attributes : [
-                        { 
+                        {
                             type:'object',
                             required:true,
                             attributes : [{
@@ -33,7 +33,7 @@ module.exports = function(app) {
                                 desc: _tr("An element or array of elements to append.")
                             }]
                         },
-                        { 
+                        {
                             type:'object',
                             desc : _tr("Optional parameters to insert before or after a sibling."),
                             attributes:[
@@ -114,7 +114,7 @@ module.exports = function(app) {
                     type:"function",
                     desc:_tr("Hides an element."),
                     attributes : [
-                        { 
+                        {
                             type:'object',
                             required:true,
                             attributes : [
@@ -146,7 +146,7 @@ module.exports = function(app) {
                     },
                     desc:_tr("Creates and appends an element, optionally setting parameters and appending siblings into it."),
                     attributes : [
-                        { 
+                        {
                             type:'*',
                             forManager:true,
                             required:true,
@@ -165,7 +165,7 @@ module.exports = function(app) {
                                 }
                             ]
                         },
-                        { 
+                        {
                             type:'*',
                             forManager:true,
                             attributes : [
@@ -207,7 +207,7 @@ module.exports = function(app) {
                     type:'function',
                     desc:_tr("Sets the content of an element, correctly handing dependencies in the process."),
                     attributes : [
-                        { 
+                        {
                             type:'object',
                             required:true,
                             attributes : [
@@ -225,7 +225,7 @@ module.exports = function(app) {
                                 }
                             ]
                         },
-                        { 
+                        {
                             type:'boolean',
                             attributes : [
                                 {
@@ -240,23 +240,23 @@ module.exports = function(app) {
                     type:'function',
                     desc : _tr("Sets the placeholder value of an element. This is usually required for multi-language support."),
                     attributes : [
-                        { 
+                        {
                             type:'object',
                             required:true,
                             attributes: [
-                                { 
+                                {
                                     desc: _tr("The element to set.")
-                                } 
+                                }
                             ],
                             desc: _tr("Appends a debug event to storage and fires a core.debug event containing the data.")
                         },
-                        { 
+                        {
                             type:'*',
                             required:true,
                             attributes: [
-                                { 
+                                {
                                     desc: _tr("A string or a language literal.")
-                                } 
+                                }
                             ],
                         },
                     ]
@@ -266,36 +266,36 @@ module.exports = function(app) {
                     type:'function',
                     desc:_tr("Sorts child elements inside an element based on content or a function."),
                     attributes : [
-                        { 
+                        {
                             type:'object',
                             required:true,
                             attributes : [
-                                { 
+                                {
                                     name:'nodes',
                                     instanceof : { name: 'Array' },
                                     desc:_tr("Defines the node elements to be sorted. If not set, the root element should be instead.")
                                 },
-                                { 
+                                {
                                     name:'on',
                                     type: '*',
                                     desc:_tr("If undefined uses the content of the child element, or define a custom function to use instead. The function will be passed the element as the first argument and follows the standard Array.sort() for legal return values.")
                                 },
-                                { 
+                                {
                                     name:'reverse',
                                     type:'boolean',
                                     desc:_tr("Defines whether the order should be reversed.")
                                 },
-                                { 
+                                {
                                     name:'root',
                                     instanceof : { name: 'Element' },
                                     desc:_tr("Defines the root element for which to traverse for children. This or nodes must be supplied.")
                                 },
-                                { 
+                                {
                                     name: 'slice',
                                     instanceof :  { name: 'Array' },
                                     desc:_tr("Defines whether the compiled list should be sliced. Accepts two values like Array.slice(). Use this to stick elements to the top of a sort")
                                 }
-                                    
+
 
                             ]
                         }
@@ -306,7 +306,7 @@ module.exports = function(app) {
                     type:'function',
                     desc: _tr("Shows an element. Element must have been previously hidden with .hide(). Overriding styles and className strings are unsupported."),
                     attributes : [
-                        { 
+                        {
                             type:'object',
                             required:true,
                             attributes : [
@@ -322,7 +322,7 @@ module.exports = function(app) {
                     type:'function',
                     desc:_tr("Toggles an elements visibility based on it's current status.."),
                     attributes : [
-                        { 
+                        {
                             type:'object',
                             required:true,
                             attributes : [{

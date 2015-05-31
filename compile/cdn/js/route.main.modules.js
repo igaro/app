@@ -10,16 +10,16 @@ module.exports = function(app) {
 
     var language = app['core.language'],
         router = app['core.router'];
-   
+
     return function(model) {
 
         var wrapper = model.wrapper,
             managers = model.managers,
-            domMgr = managers.dom,  
+            domMgr = managers.dom,
             objectMgr = managers.object,
             coreObject = app['core.object'],
             debugMgr = managers.debug;
-            
+
         model.stash.title=_tr("Modules");
         model.stash.description=_tr("All main respository module documentation can be found on this page.");
 
@@ -33,11 +33,12 @@ module.exports = function(app) {
 
             var showBlessed = false;
 
-            var createTable = function(data,container,manager) {
+            var createTable = function(meta,container,manager) {
 
-                var mgrForRow = false;
+                var mgrForRow = false,
+                    data = meta.attributes;
 
-                domMgr.mk('p',container,language.substitute(_tr("%[0] - required, %[1] - blessed object, %[2]underlined%[3] - asynchronous (%[4])"),'<b>*</b>','<b>+</b>','<b><u>','</u></b>','<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>'));
+                domMgr.mk('p',container,language.substitute(_tr("%[0] - required, %[1]underlined%[2] - asynchronous (%[3])"),'<b>*</b>','<b><u>','</u></b>','<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>'));
                 return objectMgr.create('table',{
                     container:container,
                     header : {
@@ -59,13 +60,13 @@ module.exports = function(app) {
                     }
                 }).then(function (tbl) {
 
-                    var body=tbl.body, 
+                    var body=tbl.body,
                         brows=body.rows,
                         domMgr = tbl.managers.dom;
                     var makeahref = function(col,meta,content,manager) {
-                        if (typeof meta.instanceof === 'function') 
+                        if (typeof meta.instanceof === 'function')
                             meta = meta.instanceof();
-                        if (! meta.attributes) 
+                        if (! meta.attributes)
                             return document.createElement('span');
                         var stash = col.stash,
                             container = col.container,
@@ -77,11 +78,11 @@ module.exports = function(app) {
                                 var rem = this.className === 'active';
                                 stash.hyperlinks.forEach(function(a) {
                                     a.className = '';
-                                }); 
+                                });
                                 if (stash.activeFor) {
                                     container.className=stash.activeFor.container.className='';
                                     brows.forEach(function(br,i) {
-                                        if (br.stash.belongsTo && br.stash.belongsTo.indexOf(row) !== -1) { 
+                                        if (br.stash.belongsTo && br.stash.belongsTo.indexOf(row) !== -1) {
                                             br.destroy().catch(function (e) {
                                                 return debugMgr.handle(e);
                                             });
@@ -95,30 +96,206 @@ module.exports = function(app) {
                                 }
                                 stash.activeFor=col;
                                 container.className = this.className = 'active';
-                                addRows(meta.attributes.reverse(),row,manager).catch(function (e) {
+                                addRows(meta,row,manager).catch(function (e) {
                                     return debugMgr.handle(e);
                                 });
                             });
                         });
                     };
-                    var addRows = function(r,at,manager) {
+
+                    var addRows = function(meta,at,manager,reverse) {
+
+                        var attributes = meta.attributes? meta.attributes.slice(0) : [],
+                            blessed = meta.blessed,
+                            decorateWithOrder = meta.decorateWithOrder;
+
+                        if (meta.decorateWithContainer) {
+                            attributes.push(
+                                {
+                                    name:"className",
+                                    desc: _tr("Appends a className onto the container."),
+                                    type:'object'
+                                },
+                                {
+                                    name:"container",
+                                    desc: _tr("A container in which to append the new object's container. May be an Element or an object with a container."),
+                                    type:'object'
+                                },
+                                {
+                                    name:'prepend',
+                                    type:'boolean',
+                                    desc:_tr("Inserts the new object's container at the beginning of the specified container.")
+                                },
+                                {
+                                    name:'insertAfter',
+                                    desc:_tr("Inserts the new object's container after the index of a specified object. The object can be an Element or an object with a container."),
+                                    type:'object'
+                                },
+                                {
+                                    name:'insertBefore',
+                                    desc:_tr("Inserts the new object's container before before the index of a specified object. The object can be an Element or an object with a container."),
+                                    type:'object'
+                                }
+                            );
+                        }
+
+                        if (decorateWithOrder) {
+                            attributes.push(
+                                {
+                                    name:'prepend',
+                                    type:'boolean',
+                                    desc:_tr("Inserts any container and the object into the beginning of parent array(s).")
+                                }
+                            );
+                            if (typeof decorateWithOrder === 'function') {
+                                attributes.push(
+                                    {
+                                        name:'insertAfter',
+                                        desc:_tr("Inserts any container and the object into parent array(s) after the index of a specified object."),
+                                        instanceof : decorateWithOrder
+                                    },
+                                    {
+                                        name:'insertBefore',
+                                        desc:_tr("Inserts any container and the object into parent array(s) before the index of a specified object."),
+                                        instanceof : decorateWithOrder
+                                    }
+                                );
+                            }
+                        }
+
+                        if (blessed) {
+                            var isObject = typeof blessed === 'object',
+                                managers = ['debug','dom','object','event'].map(function(o) { return [o,'core.'+o]; });
+                            if (isObject && blessed.managers)
+                                managers.push(blessed.managers);
+                            attributes.push(
+                                {
+                                    name:"destroy",
+                                    async:true,
+                                    desc: _tr("Call this to destroy the object. Cleanup (dependencies, DOM container, events, parent array removal) is automatic."),
+                                    type:"function"
+                                },
+                                {
+                                    name:"disable",
+                                    type:"function",
+                                    desc: _tr("Sets the disabled flag. This does not affect object functionality which should manually check the flag and adjust it's response. If the object has a container Element of an INPUT type then this will be disabled."),
+                                    attributes:[{
+                                        type:'boolean',
+                                        attributes:[{
+                                           desc:_tr("Define false to enable. Default is true.")
+                                        }]
+                                    }]
+                                },
+                                {
+                                    name:"disabled",
+                                    type:"boolean",
+                                    desc: _tr("Indicates if the object is disabled.")
+                                },
+                                {
+                                    name:'managers',
+                                    desc:_tr("Provides customised module functionality. See core.object documentation."),
+                                    type:'object',
+                                    attributes:managers.map(function(o) {
+                                        return {
+                                            name:o[0],
+                                            type:'object',
+                                            desc:language.substitute(_tr("A manager. See %[0]."), o[1])
+                                        };
+                                    })
+                                },
+                                {
+                                    name:"name",
+                                    desc: _tr("A value identifying the object type. Used by managers, for building the path, debugging, and events."),
+                                    type:"string"
+                                },
+                                {
+                                    name:"parent",
+                                    desc: _tr("Reference to the parent object, if applicable."),
+                                    type:'object'
+                                },
+                                {
+                                    name:"path",
+                                    desc: _tr("An internal path to the object type which indicates the module it came from and it's location in the instantiation tree. Not to be confused with URL path."),
+                                    instanceof : { name:'Array' }
+                                }
+                            );
+
+                            if (isObject) {
+                                if (blessed.container) {
+                                    attributes.push(
+                                        {
+                                            name:"container",
+                                            desc: _tr("A container Element representing the object."),
+                                            instanceof : { name:'Element' }
+                                        },
+                                        {
+                                            name:"hide",
+                                            type:"function",
+                                            desc: _tr("Hides the container Element."),
+                                            attributes:[{
+                                                type:'boolean',
+                                                attributes:[{
+                                                   desc:_tr("Define false to show. Default is true.")
+                                                }]
+                                            }]
+                                        },
+                                        {
+                                            name:"hidden",
+                                            type:"boolean",
+                                            desc: _tr("Indicates if the container Element is hidden.")
+                                        },
+                                        {
+                                            name:"show",
+                                            type:"function",
+                                            desc: _tr("Shows the container Element.")
+                                        },
+                                        {
+                                            name:"toggleVisibility",
+                                            type:"function",
+                                            desc: _tr("Toggles whether the container ELement between shown and hidden.")
+                                        }
+                                    );
+                                }
+                                if (blessed.children) {
+                                    blessed.children.forEach(function(o) {
+                                        attributes.push({
+                                            name:o,
+                                            instanceof : { name:'Array' },
+                                            desc:_tr("A pool of child objects.")
+                                        });
+                                    });
+                                }
+                            }
+                        }
+
+                        attributes = attributes.sort(function(a,b) {
+                            if(a.name > b.name)
+                                return -1;
+                            if(a.name < b.name)
+                                return 1;
+                            return 0;
+                        });
+
+                        if (reverse)
+                            attributes = attributes.reverse();
+
                         var rows = [];
                         if (manager) {
-                            r.forEach(function(o) {
+                            attributes.forEach(function(o) {
                                 if (o.forManager)
                                     rows.push(o);
                             });
                         } else {
-                            r.forEach(function(o) {
+                            attributes.forEach(function(o) {
                                 if (! o.onlyManager)
                                     rows.push(o);
                             });
                         }
                         return coreObject.promiseSequencer(rows, function(s) {
-                            return body.addRow({ 
-                                insertAfter:at, 
+                            return body.addRow({
+                                insertAfter:at,
                                 columns:[
-                                    { 
+                                    {
                                         content:s.name? { en: s.name + (s.required? ' *' : '') } : null
                                     }
                                 ]
@@ -131,8 +308,8 @@ module.exports = function(app) {
                                 }
                                 return row.addColumn().then(function(cc) {
                                     var domMgr = cc.managers.dom;
-                                    return row.addColumn({ 
-                                        content:s.desc?s.desc:null 
+                                    return row.addColumn({
+                                        content:s.desc?s.desc:null
                                     }).then(function(rr) {
                                         cc.stash.hyperlinks = [];
                                         var returns = s.returns;
@@ -153,26 +330,22 @@ module.exports = function(app) {
                                                     o.forManager = s.forManager;
                                                 });
                                             makeahref(cc,returns,l,manager);
-                                            if (blessed) {
+                                            if (blessed)
                                                 showBlessed = true;
-                                                domMgr.mk('sup',cc,'+');
-                                            }
                                             domMgr.mk('span',cc,' = ');
                                         }
                                         var m=s.instanceof;
                                         if (m) {
-                                            if (typeof m === 'function') { 
+                                            if (typeof m === 'function') {
                                                 m = m();
                                                 makeahref(cc,m,m.name,manager);
-                                                if (m.blessed) {
+                                                if (m.blessed)
                                                     showBlessed = true;
-                                                    domMgr.mk('sup',cc,'+');
-                                                }
                                                 if (m.desc) {
                                                     var q = JSON.parse(JSON.stringify(m.desc));
                                                     if (s.desc) {
                                                         Object.keys(q).forEach(function(k) {
-                                                            if (s.desc[k]) 
+                                                            if (s.desc[k])
                                                                 q[k] += ' '+s.desc[k];
                                                         });
                                                     }
@@ -180,10 +353,10 @@ module.exports = function(app) {
                                                 }
                                             } else {
                                                 var sa = m.name;
-                                                if (m.required) 
+                                                if (m.required)
                                                     sa += ' *';
                                                 domMgr.mk('a',cc,sa).href = m.href? m.href : 'https://developer.mozilla.org/en-US/search?q='+m.name;
-                                                if (m.desc) 
+                                                if (m.desc)
                                                     dom.setContent(rr,m.desc);
                                             }
                                         } else if (s.attributes && s.type!=='function') {
@@ -204,20 +377,20 @@ module.exports = function(app) {
                                                     return;
                                                 if (! j)
                                                     domMgr.mk('span',cc,' (');
-                                                if (j) 
+                                                if (j)
                                                     domMgr.mk('span',cc,',');
                                                 var mIO = m.instanceof;
-                                                if (mIO || m.attributes) { 
+                                                if (mIO || m.attributes) {
                                                     if (m.attributes) {
                                                         m.attributes.forEach(function(o) {
                                                             o.forManager = m.forManager;
                                                         });
                                                     }
-                                                    makeahref(cc,m,mIO? mIO().name : m.type,manager); 
-                                                } else { 
-                                                    domMgr.mk('span',cc,m.type); 
+                                                    makeahref(cc,m,mIO? mIO().name : m.type,manager);
+                                                } else {
+                                                    domMgr.mk('span',cc,m.type);
                                                 }
-                                                if (m.required) 
+                                                if (m.required)
                                                     domMgr.mk('sup',cc,'*');
                                                 j++;
                                             });
@@ -229,7 +402,7 @@ module.exports = function(app) {
                             });
                         });
                     };
-                    return addRows(data,null,manager);
+                    return addRows(meta,null,manager,true);
                 }).catch(function(e) {
                     return debugMgr.handle(e);
                 });
@@ -259,7 +432,7 @@ module.exports = function(app) {
                 domMgr.mk('h1',v,_tr("Usage"));
                 if (u.instantiate || u.class) {
                     var n= 'app[\''+m.name+'\']';
-                    if (u.attributes) 
+                    if (u.attributes)
                         n += '(o)';
                     if (u.instantiate) {
                         domMgr.mk('p',v,_tr("Blessed objects lazy load and instantiate via <b>[object].managers.object.create()</b>."));
@@ -275,26 +448,23 @@ module.exports = function(app) {
                 }
                 if (u.attributes) {
                     domMgr.mk('p',v, _tr("Where <b>o</b> is an object containing attributes from the following table."));
-                    createTable(u.attributes, domMgr.mk('p',v));
+                    createTable(u, domMgr.mk('p',v));
                 }
-            }        
+            }
 
             if (data.attributes || data.blessed) {
                 domMgr.mk('h1',v,_tr("Attributes"));
-                if (data.blessed) {
+                if (data.blessed)
                     showBlessed = true;
-                    domMgr.mk('p',v,_tr("This object is blessed with attributes not shown here."));
-                }
-                if (data.attributes)
-                    createTable(data.attributes, domMgr.mk('p',v));
+                createTable(data, domMgr.mk('p',v));
             }
 
             if (data.manager) {
                 domMgr.mk('h1',v,_tr("Manager"));
-                domMgr.mk('p',v,_tr("A blessed object can use this module as a manager (see core.object). These functions should be used over those in Attributes to reduce coding duplicity and to set and manage relations and dependencies."));
+                domMgr.mk('p',v,_tr("A blessed object can use this module as a manager. Functions shown here should be used over those of the same name in Attributes to reduce coding complexity and to aid automation and efficiency."));
                 if (typeof data.manager === 'string')
                     domMgr.mk('p',v,language.substitute(_tr("You can access this manager using <b>[object].managers.%[0]</b>."),data.manager));
-                createTable(data.attributes, domMgr.mk('p',v), true);
+                createTable(data, domMgr.mk('p',v), true);
             }
 
             if (data.demo) {
@@ -302,7 +472,7 @@ module.exports = function(app) {
                 domMgr.mk('h2',v,_tr("code"));
                 var cc = domMgr.mk('p',v);
 
-                model.managers.object.create('pagemessage',{ 
+                model.managers.object.create('pagemessage',{
                     type:'info',
                     message: _tr("Hint: <b>c</b> is a container element. For blessed objects this will default to the objects container."),
                     container:cc,
@@ -322,7 +492,7 @@ module.exports = function(app) {
                 domMgr.mk('h1',v,_tr("Dependencies"));
                 var p = domMgr.mk('p',v,null,function() {
                     var s = this;
-                    data.dependencies.forEach(function(o) { 
+                    data.dependencies.forEach(function(o) {
                         domMgr.mk('button',s,o).addEventListener('click', function(evt) {
                             evt.preventDefault();
                             this.disabled = true;
@@ -335,8 +505,8 @@ module.exports = function(app) {
                 });
             }
 
-            if (showBlessed) {
-                if (!(data.related instanceof Array)) 
+            if (showBlessed || data.manager) {
+                if (!(data.related instanceof Array))
                     data.related = [];
                 if (! data.related.some(function(relation) {
                     return relation === 'core.object';
@@ -347,7 +517,7 @@ module.exports = function(app) {
                 domMgr.mk('h1',v,_tr("Related"));
                 domMgr.mk('p',v,null,function() {
                     var s = this;
-                    data.related.sort().forEach(function(o) { 
+                    data.related.sort().forEach(function(o) {
                         domMgr.mk('button',s,o).addEventListener('click', function(evt) {
                             evt.preventDefault();
                             this.disabled = true;
@@ -357,7 +527,7 @@ module.exports = function(app) {
                             });
                         });
                     });
-                }); 
+                });
             }
 
             if (data.author) {

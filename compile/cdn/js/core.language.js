@@ -32,7 +32,7 @@ module.exports = function(app, params) {
                             },
                             function () {}
                         );
-                    }); 
+                    });
                 },
                 Promise.resolve()
             ).then(
@@ -59,7 +59,7 @@ module.exports = function(app, params) {
             this.pool = o;
             return this.managers.event.dispatch('setPool');
         },
-        
+
         reset : function() {
             var self = this;
             return this.managers.store.set('env').then(function() {
@@ -72,7 +72,7 @@ module.exports = function(app, params) {
             var self = this,
                 managers = this.managers;
             return Promise.resolve().then(function () {
-                if (id.length > 2) 
+                if (id.length > 2)
                     id = id.substr(0,3)+id.substr(3).toUpperCase();
                 var o = self.pool[id];
                 if (! o)
@@ -91,7 +91,7 @@ module.exports = function(app, params) {
         getFromPoolById : function(id) {
             return this.pool[id];
         },
-    
+
         substitute : function() {
             var args = Array.prototype.slice.call(arguments,0),
                 orig = args.shift(),
@@ -99,7 +99,7 @@ module.exports = function(app, params) {
             Object.keys(orig).forEach(function (k) {
                 n[k] = orig[k].replace(/\%\[[\d]\]/g, function(m,v) {
                     v = args[parseInt(m.substr(0,m.length-1).substr(2))];
-                    if (typeof v === 'object') 
+                    if (typeof v === 'object')
                         return v[k] || m;
                     return typeof v !== 'undefined' && v !== null? v : m;
                 });
@@ -108,21 +108,21 @@ module.exports = function(app, params) {
         },
 
         mapKey : function(c) {
-            if (!c) 
+            if (!c)
                 throw new Error('No object!');
             var l = language.env;
-            if (typeof c === 'function') 
+            if (typeof c === 'function')
                 return c(l);
-            if (typeof c !== 'object') 
+            if (typeof c !== 'object')
                 return c;
             if (l) {
-                if (c[l]) 
+                if (c[l])
                     return c[l];
                 var t = l.split('-');
-                if (c[t[0]]) 
+                if (c[t[0]])
                     return c[t[0]];
             }
-            if ('en' in c) 
+            if ('en' in c)
                 return c.en;
             throw new Error('No language support:'+JSON.stringify(c));
         }

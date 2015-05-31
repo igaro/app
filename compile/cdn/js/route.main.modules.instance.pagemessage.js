@@ -22,37 +22,35 @@ model.managers.object.create('pagemessage', { \n \
     } \n \
 });",
             desc : _tr("Provides a styled message for display on a view."),
-            blessed:true,
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            blessed:{
+                container:true
+            },
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             usage : {
+                decorateWithContainer:true,
                 instantiate : true,
                 attributes : [
-                    { 
-                        name:'container', 
-                        instanceof : { name:'Element' },
-                        desc : _tr("Container to append the instance into.")
-                    },
-                    { 
-                        name:'id', 
+                    {
+                        name:'id',
                         type:'string',
                         desc : _tr("Used to retain a hidden state, where applicable.")
                     },
-                    { 
-                        name:'hideable', 
+                    {
+                        name:'hideable',
                         type:'boolean',
                         desc : _tr("Allow the message to be permanently hidden.")
                     },
-                    { 
-                        name:'message', 
+                    {
+                        name:'message',
                         type:'object',
                         required:true,
                         desc : _tr("A language literal to be displayed.")
                     },
-                    { 
-                        name:'type', 
+                    {
+                        name:'type',
                         type:'string',
                         desc : _tr("Defines the style. Choose between; warn, info, error, default, success and ok, or make your own.")
                     }

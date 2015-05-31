@@ -5,9 +5,9 @@ module.exports = function(app) {
         var data = {
 
             desc : _tr("Provides language switching and related functionality. Supported languages are set via an API or configuration file. Uses IETF Tags. Env code is stored."),
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             usage : {
                 class : true
@@ -23,12 +23,12 @@ module.exports = function(app) {
                 }
             ],
             attributes : [
-                { 
-                    name:'getFromPoolById', 
+                {
+                    name:'getFromPoolById',
                     type:'function',
                     attributes: [
                         {
-                            type:'string', 
+                            type:'string',
                             required:true,
                             attributes:[{
                                 desc: _tr("The code to match."),
@@ -49,13 +49,13 @@ module.exports = function(app) {
                     type:'string',
                     desc: _tr("The currently applied currency code.")
                 },
-                { 
-                    name:'mapKey', 
+                {
+                    name:'mapKey',
                     type:'function',
                     attributes: [
-                        { 
-                            type:'*', 
-                            required:true, 
+                        {
+                            type:'*',
+                            required:true,
                             attributes:[{
                                 desc: _tr("A structure containing language codes.")
                             }]
@@ -75,7 +75,7 @@ module.exports = function(app) {
                     type:'object',
                     desc: _tr("A literal list of supported currency codes.")
                 },
-                {    
+                {
                     name:'setEnv',
                     type:'function',
                     async:true,
@@ -88,7 +88,7 @@ module.exports = function(app) {
                         }]
                     }]
                 },
-                {    
+                {
                     name:'setPool',
                     type:'function',
                     desc: _tr("Sets supported currency data."),

@@ -4,9 +4,9 @@ module.requires = [
 
 module.exports = function(app) {
 
-    if (! ('contentEditable' in document.body)) 
+    if (! ('contentEditable' in document.body))
         throw new Error({ incompatible:true, noobject:'contentEditable' });
-    if (! ('getSelection' in window)) 
+    if (! ('getSelection' in window))
         throw new Error({ incompatible:true, noobject:'getSelection' });
 
     var dom = app['core.dom'],
@@ -16,8 +16,8 @@ module.exports = function(app) {
     var InstanceRTE = function(o) {
         this.name = 'instance.rte';
         this.asRoot = true;
-        this.container = function(dom) { 
-            return dom.mk('div',o,null,o.className); 
+        this.container = function(dom) {
+            return dom.mk('div',o,null,o.className);
         };
         bless.call(this,o);
         this.hasFocus = false;
@@ -40,15 +40,15 @@ module.exports = function(app) {
                 var raw = self.raw,
                     rte = self.rte;
                 clearTimeout(self.onChangeTimerid);
-                if (self.inWYSIWYG) { 
-                    raw.value = rte.innerHTML; 
-                } else { 
-                    rte.innerHTML = raw.value; 
+                if (self.inWYSIWYG) {
+                    raw.value = rte.innerHTML;
+                } else {
+                    rte.innerHTML = raw.value;
                 }
-                if (dispatch) 
+                if (dispatch)
                     return eventMgr.dispatch('change', self.getHTML());
-                self.onChangeTimerid = setTimeout(function() { 
-                    onChange(true); 
+                self.onChangeTimerid = setTimeout(function() {
+                    onChange(true);
                 },300);
             };
 
@@ -63,10 +63,10 @@ module.exports = function(app) {
                     this.contentEditable = true;
                     this.styleWithCSS=false;
                     this.insertBrOnReturn=false;
-                    if (o.html) 
+                    if (o.html)
                         this.innerHTML = o.html;
-                    this.addEventListener("blur", function () { 
-                        self.hasFocus = false; 
+                    this.addEventListener("blur", function () {
+                        self.hasFocus = false;
                     });
                     var saveRange = function() {
                         self.savedRange = window.getSelection().getRangeAt(0);
@@ -79,7 +79,7 @@ module.exports = function(app) {
             });
 
             var raw = self.raw = domMgr.mk('textarea',self,null,function() {
-                if (o.html) 
+                if (o.html)
                     this.value = o.html;
                 dom.hide(this);
                 this.addEventListener("input", onChange);
@@ -89,7 +89,7 @@ module.exports = function(app) {
             return Promise.all(
                 [
                     navMode.menu.addOptions([
-                        { 
+                        {
                             title: 'WYSIWYG',
                             active:true,
                             onClick : function() {
@@ -99,8 +99,8 @@ module.exports = function(app) {
                                 self.rte.focus();
                                 return Promise.resolve();
                             }
-                        }, 
-                        { 
+                        },
+                        {
                             title: 'HTML',
                             onClick : function() {
                                 dom.show(raw);
@@ -115,7 +115,7 @@ module.exports = function(app) {
                         parent:self,
                         container:self.panels.container
                     }).then(function(panelNav) {
-                        self.panels.menu = panelNav.menu;       
+                        self.panels.menu = panelNav.menu;
                     })
                 ]
             ).then(function() {
@@ -132,7 +132,7 @@ module.exports = function(app) {
                             this.className = 'main';
                             domMgr.mk('select',this,null,function() {
                                 this.addEventListener('change', function() {
-                                    if (this.selectedIndex === 0) 
+                                    if (this.selectedIndex === 0)
                                         return;
                                     self.execCommand('formatblock', this.options[this.selectedIndex].value);
                                     this.selectedIndex=0;
@@ -165,16 +165,16 @@ module.exports = function(app) {
                                     'outdent',
                                     'indent'
                                 ];
-                            if (document.queryCommandSupported('cut')) 
+                            if (document.queryCommandSupported('cut'))
                                 f.push('cut','copy','paste');
-                            if (document.queryCommandSupported('undo')) 
+                            if (document.queryCommandSupported('undo'))
                                 f.push('undo','redo');
                             f.push('removeformat');
                             f.forEach(function (id) {
                                 domMgr.mk('button',s,null,function() {
                                     this.className = id;
-                                    this.addEventListener('click', function() { 
-                                        self.execCommand(id,''); 
+                                    this.addEventListener('click', function() {
+                                        self.execCommand(id,'');
                                     });
                                 });
                             });
@@ -257,7 +257,7 @@ module.exports = function(app) {
                 return Promise.resolve();
             }
         }).then(function() {
-            if (o.active) 
+            if (o.active)
                 dom.setContent(pc,o.content,true);
         });
     };

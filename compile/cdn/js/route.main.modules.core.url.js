@@ -4,19 +4,19 @@ module.exports = function(app) {
 
         var data = {
             desc : _tr("Provides url and uri related functionality."),
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             usage : {
                 class : true
             },
             attributes : [
-                { 
-                    name:'getCurrent', 
+                {
+                    name:'getCurrent',
                     type:'function',
                     attributes: [
-                        { 
+                        {
                             type:'object',
                             attributes : [
                                 {
@@ -41,18 +41,18 @@ module.exports = function(app) {
                         ]
                     }
                 },
-                { 
-                    name:'getHashParam', 
+                {
+                    name:'getHashParam',
                     type:'function',
                     attributes: [
-                        { 
-                            type:'string', 
-                            required:true, 
+                        {
+                            type:'string',
+                            required:true,
                             attributes : [{
                                 desc: _tr("The name to search.")
                             }]
                         },
-                        { 
+                        {
                             type:'string',
                             attributes : [{
                                 desc: _tr("The URL to parse. Defaults to the current URL.")
@@ -68,13 +68,13 @@ module.exports = function(app) {
                         ]
                     }
                 },
-                { 
-                    name:'getHashParams', 
+                {
+                    name:'getHashParams',
                     type:'function',
                     attributes: [
-                        { 
-                            type:'string', 
-                            required:true, 
+                        {
+                            type:'string',
+                            required:true,
                             attributes : [{
                                 desc: _tr("The URL to parse. Defaults to the current URL.")
                             }]
@@ -89,18 +89,18 @@ module.exports = function(app) {
                         ]
                     }
                 },
-                { 
-                    name:'getParam', 
+                {
+                    name:'getParam',
                     type:'function',
                     attributes: [
-                        { 
-                            type:'string', 
-                            required:true, 
+                        {
+                            type:'string',
+                            required:true,
                             attributes : [{
                                 desc: _tr("The name to search.")
                             }]
                         },
-                        { 
+                        {
                             type:'string',
                             attributes : [{
                                 desc: _tr("The URL to parse. Defaults to the current URL.")
@@ -116,13 +116,13 @@ module.exports = function(app) {
                     },
                     desc: _tr("Parses a string for params after the question mark and on match of a specific key returns the value.")
                 },
-                { 
-                    name:'getParams', 
+                {
+                    name:'getParams',
                     type:'function',
                     attributes: [
-                        { 
-                            type:'string', 
-                            required:true, 
+                        {
+                            type:'string',
+                            required:true,
                             attributes : [{
                                 desc: _tr("The URL to parse. Defaults to the current URL.")
                             }]
@@ -137,26 +137,26 @@ module.exports = function(app) {
                         ]
                     }
                 },
-                { 
-                    name:'replaceParam', 
+                {
+                    name:'replaceParam',
                     type:'function',
                     attributes: [
-                        { 
-                            type:'string', 
-                            required:true, 
+                        {
+                            type:'string',
+                            required:true,
                             attributes: [{
                                 desc: _tr("The name of to replace or append.")
                             }]
                         },
-                        { 
-                            type:'string', 
-                            required:true, 
+                        {
+                            type:'string',
+                            required:true,
                             attributes: [{
                                 desc: _tr("The value to use. If the value contains special characters pass encodeURIComponent(value) beforehand."),
                             }]
                         },
                         {
-                            type:'string', 
+                            type:'string',
                             attributes: [{
                                 desc: _tr("The URL to use (defaults to the current URL).")
                             }]
@@ -167,7 +167,7 @@ module.exports = function(app) {
                             {
                                 type:'string'
                             }
-                        ]  
+                        ]
                     },
                     desc: _tr("Parses a URL and replaces or appends a new param, returning the new URL.")
                 }

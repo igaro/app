@@ -18,7 +18,7 @@ module.exports = function(app) {
         domMgr.mk('h1',wrapper,_tr("Standards"));
 
         domMgr.mk('p',wrapper,_tr("ISO 3166.1, IETF,  ISO 4217 and Right-to-Left text are supported."));
-        
+
         domMgr.mk('h1',wrapper,_tr("Selection"));
 
         domMgr.mk('p',wrapper,_tr("Country data is sourced from the OS/browser. From this the most likely language and currency is derived and selected. If a language is unavailable the numerator is tried, followed by the app default, and then the fallback, en."));

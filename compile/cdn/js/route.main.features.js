@@ -18,23 +18,23 @@ module.exports = function(app) {
             dom = app['core.dom'],
             debugMgr = managers.debug,
             objectMgr = managers.object;
-        
+
         domMgr.mk('p',wrapper,_tr("Igaro's architecture is build on several core principles;"));
 
         domMgr.mk('p',wrapper,domMgr.mk('ul',null,[
-           domMgr.mk('li',null,_tr("The Javascript specification must be adhered to. No duplicity and use of standards throughout.")), 
-           domMgr.mk('li',null,_tr("HTML is a design language ill suited for dynamic operation. Therefore, use no HTML.")), 
+           domMgr.mk('li',null,_tr("The Javascript specification must be adhered to. No duplicity and use of standards throughout.")),
+           domMgr.mk('li',null,_tr("HTML is a design language ill suited for dynamic operation. Therefore, use no HTML.")),
            domMgr.mk('li',null,_tr("Child objects should be able to communicate with parent objects and thus events should fire up a hierarchy.")),
-           domMgr.mk('li',null,_tr("Most functions have a potential to be asynchronous, or emit an event which may be so, therefore they should return Promises.")) 
+           domMgr.mk('li',null,_tr("Most functions have a potential to be asynchronous, or emit an event which may be so, therefore they should return Promises."))
         ]));
 
         domMgr.mk('p',wrapper,_tr("From these the foundation on which your app is built will feature;"));
 
         domMgr.mk('p',wrapper,domMgr.mk('ul',null,[
-           domMgr.mk('li',null,_tr("Flexability - expand functions without appending code into them.")), 
-           domMgr.mk('li',null,_tr("Design - built on DOM, not HTML templating and slow parsing.")), 
+           domMgr.mk('li',null,_tr("Flexability - expand functions without appending code into them.")),
+           domMgr.mk('li',null,_tr("Design - built on DOM, not HTML templating and slow parsing.")),
            domMgr.mk('li',null,_tr("Encapsulation - code is compartmentalized and abstracted.")),
-           domMgr.mk('li',null,_tr("Security - no memory leaks or public variables.")), 
+           domMgr.mk('li',null,_tr("Security - no memory leaks or public variables.")),
            domMgr.mk('li',null,_tr("Resilience - smart error control, reporting, debugging and recovery.")),
            domMgr.mk('li',null,_tr("Compatibility - works in any modern web browser and across all devices.")),
         ]));
@@ -43,7 +43,7 @@ module.exports = function(app) {
 
         domMgr.mk('p',wrapper,null,function() {
             var self = this;
-            objectMgr.create('table', { 
+            objectMgr.create('table', {
                 container:self,
                 header : {
                     rows : [
@@ -215,7 +215,7 @@ module.exports = function(app) {
                                 });
                                 dom.rm(self);
                             }
-                        ).catch(function(e) { 
+                        ).catch(function(e) {
                             return debugMgr.handle(e);
                         });
                     });
@@ -235,7 +235,7 @@ module.exports = function(app) {
                         formValidate.setForm(this);
                         domMgr.mk('label',this,_tr("Deposit"));
                         var v = domMgr.mk('input[text]',this,null,function() {
-                            this.placeholder='xx.xx'; 
+                            this.placeholder='xx.xx';
                             this.name='amount';
                             this.required = true;
                         }),
@@ -243,9 +243,9 @@ module.exports = function(app) {
                         domMgr.mk('input[submit]',this,_tr("Transfer"));
                         formValidate.rules = [
                             [
-                              'amount', 
+                              'amount',
                               function(v) {
-                                  if (! currency.validate(v))  
+                                  if (! currency.validate(v))
                                     return _tr("Invalid amount");
                                   if (v === 0)
                                     return _tr("Must be positive");
@@ -298,7 +298,7 @@ module.exports = function(app) {
                     domMgr.mk('h2',container,_tr("Accordion"));
                     domMgr.mk('p',container);
                     dom.append(container,accordion);
-                    return container; 
+                    return container;
                 })
             ]
 

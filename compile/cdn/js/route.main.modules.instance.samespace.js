@@ -29,7 +29,7 @@ module.exports = function(app) {
                             fr : 'Mettre à true pour commencer un diaporama des éléments.'
                         }
                     },
-                    { 
+                    {
                         name:'container',
                         type:'element',
                         desc : {
@@ -37,7 +37,7 @@ module.exports = function(app) {
                             fr : 'Le conteneur pour ajouter l\'instance en.'
                         }
                     },
-                    { 
+                    {
                         name:'delay',
                         type:'number',
                         desc : {
@@ -53,8 +53,8 @@ module.exports = function(app) {
                             fr : 'Une liste des éléments HTML (généralement div\'s mais vous pouvez fournir n\'importe quel type). L\'élément sera ajouté à une div, fournissant ainsi null vous donne toujours la possibilité de coiffer le récipient. C\'est ainsi que la démo fonctionne.'
                         }
                     },
-                    { 
-                        name:'effect', 
+                    {
+                        name:'effect',
                         type:'string',
                         desc : {
                             en : 'The name of the CSS effect to apply (see relevant scss file).',
@@ -96,7 +96,7 @@ module.exports = function(app) {
                 ]
             },
             attributes : [
-                { 
+                {
                     name:'addSpace',
                     type:'function',
                     desc: {
@@ -117,7 +117,7 @@ module.exports = function(app) {
                         }
                     ]
                 },
-                { 
+                {
                     name:'setEffect',
                     type:'function',
                     desc: {
@@ -139,15 +139,15 @@ module.exports = function(app) {
                         }
                     ]
                 },
-                { 
-                    name:'stop', 
+                {
+                    name:'stop',
                     type:'function',
                     desc: {
                         en : 'Stops the automated transitioning between elements.',
                         fr : 'Arrête la transition automatique entre les éléments.'
                     }
                 },
-                { 
+                {
                     name:'to',
                     type:'function',
                     desc: {
@@ -161,8 +161,8 @@ module.exports = function(app) {
                         }
                     ]
                 },
-                { 
-                    name:'toggleNavigation', 
+                {
+                    name:'toggleNavigation',
                     type:'function',
                     desc : {
                         en : 'Display the navigation controls.',
@@ -175,9 +175,9 @@ module.exports = function(app) {
                     ]
                 }
             ],
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             }
         };
 

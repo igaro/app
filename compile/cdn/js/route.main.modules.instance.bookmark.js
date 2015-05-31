@@ -10,18 +10,18 @@ module.exports = function(app) {
             usage : {
                 instantiate : true,
                 attributes : [
-                    { 
-                        name:'url', 
+                    {
+                        name:'url',
                         type:'string',
                         desc : _tr("The URL to bookmark. Defaults to the current.")
                     },
-                    { 
-                        name:'title', 
+                    {
+                        name:'title',
                         type:'string',
                         desc : _tr("Title to pass over to the external service.")
                     },
-                    { 
-                        name:'container', 
+                    {
+                        name:'container',
                         type:'object',
                         attributes:[{
                             instanceof: { name:'Element' }
@@ -31,12 +31,12 @@ module.exports = function(app) {
                 ]
             },
 
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             attributes : [
-                { 
+                {
                     name:'setURL',
                     type:'function',
                     desc: _tr("Sets the URL and optional title to pass over to the external service."),
@@ -44,13 +44,13 @@ module.exports = function(app) {
                         {
                             type:'object',
                             attributes : [
-                                { 
-                                    name:'url', 
+                                {
+                                    name:'url',
                                     type:'string',
                                     desc : _tr("URL to bookmark. Defaults to the current.")
                                 },
-                                { 
-                                    name:'title', 
+                                {
+                                    name:'title',
                                     type:'string',
                                     desc : _tr("Title to pass over.")
                                 }

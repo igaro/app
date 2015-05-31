@@ -13,15 +13,15 @@ module.exports = function(app) {
  		bless = app['core.object'].bless;
 
 	var setBits = function(p) {
-		if (p.scope) 
+		if (p.scope)
 			this.scope = p.scope;
-		if (p.devid) 
+		if (p.devid)
 			this.devid = p.devid;
-		if (p.callbackUrl) 
+		if (p.callbackUrl)
 			this.callbackUrl = p.callbackUrl;
-		if (p.authUrl) 
+		if (p.authUrl)
 			this.authUrl = p.authUrl;
-		if (p.tokenName) 
+		if (p.tokenName)
 			this.tokenName = p.tokenName;
 		if (p.stash)
 			this.stash = p.stash;
@@ -57,7 +57,7 @@ module.exports = function(app) {
     };
 
 	InstanceOauth2.prototype.exec = function(o) {
-		if (o) 
+		if (o)
             setBits.call(this,o);
 		var self = this,
 			body = document.body,
@@ -79,7 +79,7 @@ module.exports = function(app) {
 	};
 
 	return InstanceOauth2;
-	
+
 };
 
 })();

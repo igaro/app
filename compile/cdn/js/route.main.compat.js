@@ -14,12 +14,12 @@ module.exports = function(app) {
         var managers = model.managers,
             domMgr= managers.dom,
             objectMgr = managers.object;
-        
+
         domMgr.mk('p',wrapper,_tr("Igaro App is compatible with all modern web browsers and mobile devices."));
 
         domMgr.mk('p',wrapper,_tr("Modules are responsible for verifying requirements upon load. Upon an error a message is displayed to the user."));
 
-        return objectMgr.create('table', { 
+        return objectMgr.create('table', {
             container:wrapper,
             header : {
                 rows : [
@@ -52,7 +52,7 @@ module.exports = function(app) {
                                 content : "Microsoft"
                             },
                             {
-                                content : "Internet Explorer" 
+                                content : "Internet Explorer"
                             },
                             {
                                 content : "10+"
@@ -104,7 +104,7 @@ module.exports = function(app) {
                                 content : "Mozilla"
                             },
                             {
-                                content : "Firefox" 
+                                content : "Firefox"
                             },
                             {
                                 content : "10+"
@@ -123,7 +123,7 @@ module.exports = function(app) {
                                 content : "Google"
                             },
                             {
-                                content : "Chrome" 
+                                content : "Chrome"
                             },
                             {
                                 content : "15+"
@@ -193,7 +193,7 @@ module.exports = function(app) {
                                 content : "Apple"
                             },
                             {
-                                content : "Safari" 
+                                content : "Safari"
                             },
                             {
                                 content : "5+"
@@ -211,7 +211,7 @@ module.exports = function(app) {
                             {
                             },
                             {
-                                content : "IOS" 
+                                content : "IOS"
                             },
                             {
                                 content : "5+"

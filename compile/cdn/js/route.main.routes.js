@@ -18,7 +18,7 @@ module.exports = function(app) {
         model.stash.description=_tr("Igaro App's router is dynamic and loads routes from file systems and API's. It's a beautiful way to serve pages be it for a website or a mobile app.");
 
         domMgr.mk('p',wrapper,_tr("Igaro App is <b>100%</b> MVC free."));
-        
+
         domMgr.mk('p',wrapper,_tr("Most users will use the core.router module to serve pages. This router is dynamic, it begins at root and loads further routes as children. A route builds content by either appending elements or embedding instances."));
 
         domMgr.mk('p',wrapper,_tr("By default a route's container is appended into the parent route's container and siblings are hidden. By default routes are cached and retain state."));

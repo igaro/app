@@ -5,9 +5,9 @@ module.exports = function(app) {
         var data = {
 
             desc : _tr("Provides country switching and related functionality. Supported countries are set via an API or configuration file. Uses ISO 3166-1. ENV code is stored."),
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             usage : {
                 class : true
@@ -23,12 +23,12 @@ module.exports = function(app) {
             ],
             blessed : true,
             attributes : [
-                { 
-                    name:'getFromPoolById', 
+                {
+                    name:'getFromPoolById',
                     type:'function',
                     attributes: [
                         {
-                            type:'string', 
+                            type:'string',
                             required:true,
                             attributes:[{
                                 desc: _tr("The code to match."),
@@ -65,7 +65,7 @@ module.exports = function(app) {
                     async:true,
                     desc: _tr("Resets the ENV to the automatically defined value."),
                 },
-                {    
+                {
                     name:'setEnv',
                     type:'function',
                     desc: _tr("Sets the currently applied country code."),
@@ -86,7 +86,7 @@ module.exports = function(app) {
                     ],
                     async:true
                 },
-                {    
+                {
                     name:'setPool',
                     type:'function',
                     desc: _tr("Sets the supported country codes."),

@@ -9,9 +9,9 @@ module.exports = function(app) {
                 fr : 'Cette prototypes de la bibliothèque classList, un groupe de fonctions de gestion className CSS est sur un élément DOM. \
 <p></p>Les éléments suivants sont fournis;<p></p><ul></ul>'
             },
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             }
         };
 

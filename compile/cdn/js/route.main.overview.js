@@ -27,7 +27,7 @@ module.exports = function(app) {
             domMgr.mk('li',this,_tr("Standard Object Orientated Javascript."));
 
             domMgr.mk('li',this,_tr("Cutting edge features, error handling and techniques."));
-            
+
             domMgr.mk('li',this,_tr("Dynamic with an event driven architecture and modular plugins."));
 
             domMgr.mk('li',this,_tr("Extreme performance and efficiency."));
@@ -43,7 +43,7 @@ module.exports = function(app) {
         domMgr.mk('p',wrapper,_tr("Igaro App can be served to a web browser, distributed through an app store, or bundled on removeable media."));
 
         domMgr.mk('p',wrapper,_tr("It works great on monitors, tablets. phones and everything inbetween."));
-  
+
         domMgr.mk('div',wrapper,null,'viewport');
 
     };

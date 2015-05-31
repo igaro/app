@@ -26,7 +26,7 @@ module.exports = function(app) {
                         this.href = o.href;
                     this.addEventListener('click',function(event) {
                         event.preventDefault();
-                        if (self.disabled) 
+                        if (self.disabled)
                             return event.stopImmediatePropagation();
                         return Promise.resolve().then(function() {
                             return (self.onClick? self.onClick.call(self,event) : Promise.resolve()).then(function() {
@@ -48,12 +48,12 @@ module.exports = function(app) {
         });
         this.onClick = o.onClick;
         this.status = 0;
-        if (o.active) 
+        if (o.active)
             this.setActive();
     };
 
     InstanceNavigationMenuOption.prototype.setActive = function(s,nodeact) {
-        if (this.disabled) 
+        if (this.disabled)
             return;
         s = typeof s !== 'boolean' || s;
         if (this.active === s)
@@ -65,9 +65,9 @@ module.exports = function(app) {
         cl.remove('active');
         if (s)
             cl.add('active');
-        if (! nodeact) 
+        if (! nodeact)
             this.parent.options.forEach(function (o) {
-                if (o !== self) 
+                if (o !== self)
                     o.setActive(false,true);
             });
     };
@@ -105,7 +105,7 @@ module.exports = function(app) {
     };
     InstanceNavigationMenu.prototype.clear = function(o) {
         return Promise.all((o? o:this.options).map(function (p) {
-            return p.destroy(); 
+            return p.destroy();
         }));
     };
 
@@ -116,9 +116,9 @@ module.exports = function(app) {
             return dom.mk('nav',o,null,o.className);
         };
         bless.call(this,o);
-        this.menu = new InstanceNavigationMenu({ 
-            parent:this, 
-            onClick:o.onClick 
+        this.menu = new InstanceNavigationMenu({
+            parent:this,
+            onClick:o.onClick
         });
     };
     InstanceNavigation.prototype.init = function(o) {

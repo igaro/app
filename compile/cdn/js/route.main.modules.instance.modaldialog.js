@@ -16,22 +16,22 @@ dom.mk('button',c,{ \n \
 });",
             desc : _tr("Provides asynchronous dialog screens which force a user action. A replacement for alert() and confirm()."),
             blessed:true,
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             usage : {
                 instantiate : true,
                 attributes : [
-                    { 
-                        name:'container', 
+                    {
+                        name:'container',
                         instanceof : { name:'Element' },
                         desc : _tr("Container to append the instance into.")
                     }
                 ]
             },
             attributes : [
-                { 
+                {
                     name:'action',
                     type:'function',
                     returns : {
@@ -66,7 +66,7 @@ dom.mk('button',c,{ \n \
                         }
                     ]
                 },
-                { 
+                {
                     name:'alert',
                     type:'function',
                     async:true,
@@ -84,7 +84,7 @@ dom.mk('button',c,{ \n \
                         }
                     ]
                 },
-                { 
+                {
                     name:'confirm',
                     type:'function',
                     async:true,

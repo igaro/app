@@ -71,7 +71,7 @@ module.exports = function(app) {
         setTimeout(function() {
             self.addTextInputListeners();
         },200);
-    };    
+    };
 
     InstanceFormValidate.prototype.onFormModify = function() {
         var self = this;
@@ -153,18 +153,18 @@ module.exports = function(app) {
                     if (! filter.test(value))
                         return addMsg(element, l.email);
                 }
-                if (type === 'tel' && ! /^([0-9])+$/.test(value)) { 
+                if (type === 'tel' && ! /^([0-9])+$/.test(value)) {
                     return addMsg(element, l.tel);
                 }
                 if (type === 'number') {
                     if (isNaN(value))
                         return addMsg(element, l.isNaN);
-                    if (typeof element.min !== 'undefined' && value < parseInt(element.min)) 
+                    if (typeof element.min !== 'undefined' && value < parseInt(element.min))
                         return addMsg(element, l.min);
-                    if (typeof element.max !== 'undefined' && value < parseInt(element.max)) 
+                    if (typeof element.max !== 'undefined' && value < parseInt(element.max))
                         return addMsg(element, l.max);
                 }
-                if (typeof element.min !== 'undefined' && value.length < element.min) 
+                if (typeof element.min !== 'undefined' && value.length < element.min)
                     return addMsg(element, l.minLength);
                 if (element.pattern && ! new RegExp(element.pattern).test(value))
                     return addMsg(element, l.pattern);
@@ -172,7 +172,7 @@ module.exports = function(app) {
                 // custom rules
                 var elementRules = [];
                 self.rules.forEach(function (o) {
-                    if (element.name === o[0]) 
+                    if (element.name === o[0])
                         elementRules.push(o[1].call(o,value));
                 });
 
@@ -184,14 +184,14 @@ module.exports = function(app) {
                                 if (v)
                                     return addMsg(element,v);
                             });
-                        } 
+                        }
                         if (b)
                             return addMsg(element,b);
-                    }); 
+                    });
                 }, Promise.resolve());
             })).then(function(results) {
                 var valid = results.every(function(o) {
-                    return !o; 
+                    return !o;
                 });
                 return eventMgr.dispatch('validated',valid).then(function() {
                     return valid;

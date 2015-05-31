@@ -4,9 +4,9 @@ module.exports = function(app) {
 
         var data = {
             desc : _tr("Asynchronously fetch JSON from a resource without hitting CORS restrictions."),
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             blessed:true,
             demo : "dom.mk('button', c, { en: 'Get JSON' }, function() {\n\
@@ -25,22 +25,22 @@ module.exports = function(app) {
             usage : {
                 instantiate : true,
                 attributes : [
-                    { 
-                        name:'callbackName', 
-                        required:false, 
+                    {
+                        name:'callbackName',
+                        required:false,
                         type:'string',
                         desc : _tr("For when the resource requires a callback name other than 'callback'.")
                     },
-                    { 
-                        name:'res', 
-                        required:true, 
+                    {
+                        name:'res',
+                        required:true,
                         type:'string',
                         desc : _tr("The resource to load.")
                     }
                 ]
             },
             attributes : [
-                { 
+                {
                     name:'abort',
                     type:'function',
                     desc: _tr("Aborts the operation (if currently running.")
@@ -60,8 +60,8 @@ module.exports = function(app) {
             ],
 
             extlinks : [
-                { 
-                    name:'JSONP @ Wikipedia', 
+                {
+                    name:'JSONP @ Wikipedia',
                     href:'http://en.wikipedia.org/wiki/JSONP'
                 }
             ]

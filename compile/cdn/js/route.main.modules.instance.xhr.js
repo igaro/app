@@ -7,9 +7,9 @@ module.exports = function(app) {
                 en : 'Asynchronously fetches and returns data from a resource.',
                 fr : 'Récupère de manière asynchrone et renvoie des données provenant d\'une ressource.'
             },
-            author : { 
-                name:'Andrew Charnley', 
-                link:'http://www.igaro.com/ppl/ac' 
+            author : {
+                name:'Andrew Charnley',
+                link:'http://www.igaro.com/ppl/ac'
             },
             demo : "
 var b = dom.mk('button', c, { en: 'Get JSON', fr: 'Obtenez JSON' }); \n \
@@ -35,7 +35,7 @@ b.addEventListener('click', function () { \n \
                             fr : 'Un littéral d\'objet de têtes à être envoyé.'
                         }
                     },
-                    { 
+                    {
                         name:'form',
                         type:'element',
                         desc : {
@@ -43,17 +43,17 @@ b.addEventListener('click', function () { \n \
                             fr : 'Invite applyForm() directement.'
                         }
                     },
-                    { 
-                        name:'res', 
-                        required:true, 
+                    {
+                        name:'res',
+                        required:true,
                         type:'string',
                         desc : {
                             en : 'The resource (i.e URL) to load.',
                             fr : 'La ressource (à savoir l\'URL) pour charger.'
                         }
                     },
-                    { 
-                        name:'withCredentials', 
+                    {
+                        name:'withCredentials',
                         type:'boolean',
                         desc : {
                             en : 'Enables CORS over XHR.',
@@ -71,7 +71,7 @@ b.addEventListener('click', function () { \n \
                 ]
             },
             attributes : [
-                { 
+                {
                     name:'abort',
                     type:'function',
                     desc: {
@@ -79,8 +79,8 @@ b.addEventListener('click', function () { \n \
                         fr : 'Annule l\'opération de XHR (si elle est en cours d\'exécution).'
                     }
                 },
-                { 
-                    name:'applyForm', 
+                {
+                    name:'applyForm',
                     type:'function',
                     desc : {
                         en : 'Enumerates over a form and caches the values to be sent. If the XHR is resent you must re-run this to send modified form data.',
@@ -250,8 +250,8 @@ b.addEventListener('click', function () { \n \
                         }]
                     },
                 },
-                { 
-                    name:'setHeader', 
+                {
+                    name:'setHeader',
                     type:'function',
                     desc : {
                         en : 'Modifies a header.'
@@ -277,8 +277,8 @@ b.addEventListener('click', function () { \n \
                         }
                     ]
                 },
-                { 
-                    name:'setVar', 
+                {
+                    name:'setVar',
                     type:'function',
                     desc : {
                         en : 'Appends or removes (if no value) a name/value to URI encode.',
@@ -331,16 +331,16 @@ b.addEventListener('click', function () { \n \
                         }]
                     },
                 },
-                { 
-                    name:'withCredentials', 
+                {
+                    name:'withCredentials',
                     type:'boolean',
                     desc : {
                         en : 'Enable CORS over XHR. Usual browser limitations apply.',
                         fr : 'Activer CORS sur XHR. Des restrictions des navigateurs habituels s\'appliquent.'
                     }
                 },
-                { 
-                    name:'xhr', 
+                {
+                    name:'xhr',
                     instanceof: { name:'XMLHttpRequest' },
                     desc : {
                         en : 'A reference to the XMLHttpRequest object.',
@@ -350,8 +350,8 @@ b.addEventListener('click', function () { \n \
             ],
 
             extlinks : [
-                { 
-                    name:'W3C RFC2616', 
+                {
+                    name:'W3C RFC2616',
                     href:'http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html'
                 }
             ]
