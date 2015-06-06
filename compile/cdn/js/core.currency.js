@@ -98,17 +98,21 @@ module.exports = function(app, params) {
         },
 
         commarize : function(v) {
-            var n = parseFloat(v);
-            var isNeg = n < 0;
+            var t = parseFloat(v),
+                isNeg = t < 0;
             if (isNeg)
-                v = n*-1;
-            v+= '';
-            var o = v.split('.',2),
-                t = '';
-            for (var i=o[0].length;i>3;i-=3) {
-                t += ','+o[0].substr(i-3,3);
-            }
-            t = o[0].substr(0,i)+t;
+                t *= -1;
+            t+= '';
+            var o = t.split('.',2);
+            t = o[0]
+                .split('')
+                .reverse()
+                .join('')
+                .match(/.{1,3}/g)
+                .join(',')
+                .split('')
+                .reverse()
+                .join('');
             if (o.length === 2)
                 t += '.' + o[1];
             return isNeg? '-'+t:t;
