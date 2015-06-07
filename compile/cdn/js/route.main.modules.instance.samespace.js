@@ -8,90 +8,52 @@ module.exports = function(app) {
 
         var data = {
 
-            demo : "model.managers.object.create('samespace', { \n \
-    container:c, \n \
-    elements:[null,null,null], \n \
-    effect:'fade', \n \
-    transparent:true \n \
+            demo : "model.managers.object.create('samespace', {\n\
+    container:c,\n\
+    spaces:[0,1,2].map(function(x,i) { return { className:'a'+i }; }),\n\
+    transparent:true\n\
 });",
-            desc : {
-                en : 'Provides a means for multiple elements to occupy the same space on a page with navigation and CSS3 transition effects.',
-                fr : 'Fournit un moyen de multiples éléments à occuper le même espace sur une page avec navigation et CSS3 effets de transition.'
+            desc : _tr("Provides a means for multiple elements to occupy the same space on a page with navigation and CSS3 transition effects."),
+            blessed: {
+                container:true,
+                children:['spaces']
+            },
+            objects : {
+                space : {
+                    name:'Space',
+                    blessed : {
+                        container:true
+                    }
+                }
             },
             usage : {
                 instantiate : true,
+                decorateWithContainer:true,
                 attributes : [
-                    {
-                        name:'autostart',
-                        type:'boolean',
-                        desc : {
-                            en : 'Set to true to begin a slideshow of the elements.',
-                            fr : 'Mettre à true pour commencer un diaporama des éléments.'
-                        }
-                    },
-                    {
-                        name:'container',
-                        type:'element',
-                        desc : {
-                            en : 'The container to append the instance into.',
-                            fr : 'Le conteneur pour ajouter l\'instance en.'
-                        }
-                    },
                     {
                         name:'delay',
                         type:'number',
-                        desc : {
-                            en : 'In slideshow mode this is the delay between transitions, measured in milliseconds.',
-                            fr : 'En mode diaporama c\'est le délai entre les transitions, mesuré en millisecondes.'
-                        }
-                    },
-                    {
-                        name:'elements',
-                        type:'array',
-                        desc : {
-                            en : 'A list of HTML elements (typically div\'s but you can supply any type). The element will be added to a div, thus supplying null still gives you the option to style the container. This is how the demo works.',
-                            fr : 'Une liste des éléments HTML (généralement div\'s mais vous pouvez fournir n\'importe quel type). L\'élément sera ajouté à une div, fournissant ainsi null vous donne toujours la possibilité de coiffer le récipient. C\'est ainsi que la démo fonctionne.'
-                        }
-                    },
-                    {
-                        name:'effect',
-                        type:'string',
-                        desc : {
-                            en : 'The name of the CSS effect to apply (see relevant scss file).',
-                            fr : 'Le nom de l\'effet de CSS à appliquer (voir fichier scss pertinente).'
-                        }
-                    },
-                    {
-                        name:'navOff',
-                        type:'boolean',
-                        desc : {
-                            en : 'Set to true to disable the internal navigation controls.',
-                            fr : 'Mettre à true pour désactiver les contrôles de navigation internes.'
-                        }
+                        desc : _tr("In slideshow mode this is the delay between transitions, measured in milliseconds."),
                     },
                     {
                         name:'loop',
                         type:'boolean',
-                        desc : {
-                            en : 'Set to true to loop when the navigation cycle reaches the end.',
-                            fr : 'Affectez la valeur true à la boucle lorsque le cycle de navigation arrive à la fin.'
-                        }
+                        desc : _tr("Set to true to loop when the navigation cycle reaches the end. Default is true.")
                     },
                     {
-                        name:'shuffle',
+                        name:'spaces',
+                        instanceof: { name:'Array' },
+                        desc : _tr("Calls .addSpaces().")
+                    },
+                    {
+                        name:'start',
                         type:'boolean',
-                        desc : {
-                            en : 'Set to true to initially shuffle the elements into a random order.',
-                            fr : 'Affectez la valeur true à mélanger d\'abord les éléments dans un ordre aléatoire.'
-                        }
+                        desc: _tr("Auto starts the automated transitioning between spaces. Default is false.")
                     },
                     {
                         name:'transparent',
                         type:'boolean',
-                        desc : {
-                            en : 'By default the container will have its background set to black. Supply true to disable.',
-                            fr : 'Par défaut, le conteneur sera mis à fond noir. Fournir true pour désactiver.'
-                        }
+                        desc : _tr("By default each space's canvas background is set to black. Supply true to disable.")
                     }
                 ]
             },
@@ -99,78 +61,67 @@ module.exports = function(app) {
                 {
                     name:'addSpace',
                     type:'function',
-                    desc: {
-                        en : 'Appends an item to the end of the list.',
-                        fr : 'Ajoute un élément à la fin de la liste.'
+                    async : true,
+                    desc: _tr("Creates a Space object."),
+                    returns : {
+                        instanceof : function() { return data.objects.space; }
                     },
                     attributes : [
                         {
-                            type:'element',
-                            attributes : [
-                                {
-                                    desc : {
-                                        en : 'Element to append.',
-                                        fr : 'Élément à ajouter.'
-                                    }
-                                }
-                            ]
+                            type:'object',
+                            required:true,
+                            attributes : [{
+                                decorateWithContainer : true
+                            }]
                         }
                     ]
                 },
                 {
-                    name:'setEffect',
+                    name:'addSpaces',
                     type:'function',
-                    desc: {
-                        en : 'Applies a transition effect between element rotation.',
-                        fr : 'Applique un effet de transition entre l\'élément de rotation.'
+                    async : true,
+                    desc: _tr("Calls .addSpace() in sequence."),
+                    returns : {
+                        attributes :[{
+                            instanceof : { name:'Array' }
+                        }]
                     },
                     attributes : [
                         {
-                            type:'string',
+                            type:'object',
                             required:true,
-                            attributes : [
-                                {
-                                    desc: {
-                                        en : 'The name of the effect must match that in the relevant css file.',
-                                        fr : 'Le nom de l\'effet doit correspondre à celle dans le fichier css pertinente.'
-                                    }
-                                }
-                            ]
+                            attributes : [{
+                                instanceof : { name:'Array' }
+                            }]
                         }
                     ]
+                },
+                {
+                    name:'nav',
+                    instanceof : { name:'Element' },
+                    desc : _tr("Navigation controls. See instance.samespace.css for customizing how and when this is displayed.")
                 },
                 {
                     name:'stop',
                     type:'function',
-                    desc: {
-                        en : 'Stops the automated transitioning between elements.',
-                        fr : 'Arrête la transition automatique entre les éléments.'
-                    }
+                    async : true,
+                    desc: _tr("Stops the automated transitioning between spaces.")
+                },
+                {
+                    name:'start',
+                    type:'function',
+                    async: true,
+                    desc: _tr("Begins the automated transitioning between spaces.")
                 },
                 {
                     name:'to',
                     type:'function',
-                    desc: {
-                        en : 'Navigates to a particular element.',
-                        fr : 'Navigue à un élément particulier.'
-                    },
+                    async : true,
+                    desc: _tr("Navigates to a space."),
                     attributes : [
                         {
                             type:'element',
                             required: true,
-                        }
-                    ]
-                },
-                {
-                    name:'toggleNavigation',
-                    type:'function',
-                    desc : {
-                        en : 'Display the navigation controls.',
-                        fr : 'Afficher les commandes de navigation.'
-                    },
-                    attributes : [
-                        {
-                            type:'boolean'
                         }
                     ]
                 }

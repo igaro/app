@@ -2912,27 +2912,19 @@ msgstr ""
 msgid "Provides an array like list mapped to a UL and LI elements."
 msgstr ""
 
-msgid "An LI container for the object."
-msgstr ""
-
 msgid "Initial items to use for the list. See addItem() for attributes."
 msgstr ""
 
-msgid ""
-"Adds an object to the list optionally shifting it to a specified position. "
-"The object will have an LI element appended at the same position."
+msgid "Creates a new Item object."
 msgstr ""
 
 msgid "The content to supply to the DOM creator (see core.dom.mk)."
 msgstr ""
 
-msgid "Calls .addItem() in sequence and returns the new items."
+msgid "Calls .addItem() in sequence."
 msgstr ""
 
 msgid "Items to insert."
-msgstr ""
-
-msgid "The list's items."
 msgstr ""
 
 msgid "Moves an object in the list by a number of places."
@@ -2988,6 +2980,53 @@ msgid ""
 "ok, or make your own."
 msgstr ""
 
+msgid ""
+"Provides a means for multiple elements to occupy the same space on a page "
+"with navigation and CSS3 transition effects."
+msgstr ""
+
+msgid ""
+"In slideshow mode this is the delay between transitions, measured in "
+"milliseconds."
+msgstr ""
+
+msgid ""
+"Set to true to loop when the navigation cycle reaches the end. Default is "
+"true."
+msgstr ""
+
+msgid "Calls .addSpaces()."
+msgstr ""
+
+msgid ""
+"Auto starts the automated transitioning between spaces. Default is false."
+msgstr ""
+
+msgid ""
+"By default each space's canvas background is set to black. Supply true to "
+"disable."
+msgstr ""
+
+msgid "Creates a Space object."
+msgstr ""
+
+msgid "Calls .addSpace() in sequence."
+msgstr ""
+
+msgid ""
+"Navigation controls. See instance.samespace.css for customizing how and when "
+"this is displayed."
+msgstr ""
+
+msgid "Stops the automated transitioning between spaces."
+msgstr ""
+
+msgid "Begins the automated transitioning between spaces."
+msgstr ""
+
+msgid "Navigates to a space."
+msgstr ""
+
 msgid "All main respository module documentation can be found on this page."
 msgstr ""
 
@@ -2995,15 +3034,6 @@ msgid "Igaro Repository"
 msgstr ""
 
 msgid "View on Github"
-msgstr ""
-
-msgid "%[0] - required, %[1]underlined%[2] - asynchronous (%[3])"
-msgstr ""
-
-msgid "Type"
-msgstr ""
-
-msgid "Description"
 msgstr ""
 
 msgid "Appends a className onto the container."
@@ -3100,6 +3130,15 @@ msgid "Toggles whether the container ELement between shown and hidden."
 msgstr ""
 
 msgid "A pool of child objects."
+msgstr ""
+
+msgid "%[0] - required, %[1]underlined%[2] - asynchronous (%[3])"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Description"
 msgstr ""
 
 msgid "This module is embedded into igaro.js"

@@ -4,35 +4,30 @@ module.exports = function(app) {
 
         var data = {
 
-            demo : " \n \
-model.managers.object.create('list',{ \n\
-    container:c, \n\
-    items : [ \n\
-        { content:{ en : '1' }}, \n\
-        { content:{ en : '2' }}, \n\
-        { content:{ en : '3' }} \n\
+            demo : "model.managers.object.create('list',{ \n\
+    container:c,\n\
+    items : [\n\
+        { content:{ en : '1' }},\n\
+        { content:{ en : '2' }},\n\
+        { content:{ en : '3' }}\n\
     ] \n \
-}).then(function(l) { \n\
-    var x = l.items[0]; \n\
-    dom.mk('button',c,'Move #1 down').addEventListener('click', function() { \n\
+}).then(function(l) {\n\
+    var x = l.items[0];\n\
+    dom.mk('button',c,'Move #1 down').addEventListener('click', function() {\n\
         l.shift(x,1); \n\
-    }); \n \
+    });\n\
 });",
             desc : _tr("Provides an array like list mapped to a UL and LI elements."),
             blessed: {
-                container:true
+                container:true,
+                children:["items"]
             },
             objects : {
                 item : {
                     name:'Item',
-                    blessed : true,
-                    attributes : [
-                        {
-                            name:'container',
-                            instanceof : { name:'Element' },
-                            desc: _tr("An LI container for the object.")
-                        }
-                    ]
+                    blessed : {
+                        container: true
+                    }
                 }
             },
             usage : {
@@ -58,7 +53,7 @@ model.managers.object.create('list',{ \n\
                     returns : {
                         instanceof: function() { return data.objects.item; },
                     },
-                    desc : _tr("Adds an object to the list optionally shifting it to a specified position. The object will have an LI element appended at the same position."),
+                    desc : _tr("Creates a new Item object."),
                     attributes : [
                         {
                             type:'object',
@@ -78,7 +73,7 @@ model.managers.object.create('list',{ \n\
                     name:'addItems',
                     async:true,
                     type:'function',
-                    desc : _tr("Calls .addItem() in sequence and returns the new items."),
+                    desc : _tr("Calls .addItem() in sequence."),
                     returns : {
                         attributes: [{
                             instanceof: { name:'Array' }
@@ -96,11 +91,6 @@ model.managers.object.create('list',{ \n\
                             ]
                         }
                     ]
-                },
-                {
-                    name:'items',
-                    instanceof : { name:'Array' },
-                    desc : _tr("The list's items.")
                 },
                 {
                     name:'shift',

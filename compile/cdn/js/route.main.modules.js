@@ -24,7 +24,6 @@ module.exports = function(app) {
         model.stash.description=_tr("All main respository module documentation can be found on this page.");
 
         domMgr.mk('h1',wrapper, _tr("Igaro Repository"));
-
         domMgr.mk('button',domMgr.mk('p',wrapper), _tr("View on Github")).addEventListener('click', function() {
             window.open('https://github.com/igaro/app');
         });
@@ -33,11 +32,350 @@ module.exports = function(app) {
 
             var showBlessed = false;
 
+            var addRows = function(meta,at,manager,reverse,tbl) {
+
+                var makeahref = function(col,meta,content,manager) {
+                    if (typeof meta.instanceof === 'function')
+                        meta = meta.instanceof();
+                    if (! meta.attributes && ! meta.blessed && ! meta.decorateWithContainer && ! meta.decorateWithOrder)
+                        return document.createElement('span');
+                    var stash = col.stash,
+                        container = col.container,
+                        row = col.parent;
+                    return domMgr.mk('a',col,content,function() {
+                        stash.hyperlinks.push(this);
+                        this.addEventListener('click', function(evt) {
+                            evt.preventDefault();
+                            var rem = this.className === 'active';
+                            stash.hyperlinks.forEach(function(a) {
+                                a.className = '';
+                            });
+                            if (stash.activeFor) {
+                                container.className=stash.activeFor.container.className='';
+                                brows.forEach(function(br,i) {
+                                    if (br.stash.belongsTo && br.stash.belongsTo.indexOf(row) !== -1) {
+                                        br.destroy().catch(function (e) {
+                                            return debugMgr.handle(e);
+                                        });
+                                    }
+                                });
+                                if (stash.activeFor === col) {
+                                    stash.activeFor=null;
+                                    if (rem)
+                                        return;
+                                }
+                            }
+                            stash.activeFor=col;
+                            container.className = this.className = 'active';
+                            addRows(meta,row,manager,null,tbl).catch(function (e) {
+                                return debugMgr.handle(e);
+                            });
+                        });
+                    });
+                };
+
+                var body=tbl.body,
+                    brows=body.rows,
+                    domMgr = tbl.managers.dom,
+                    attributes = meta.attributes? meta.attributes.slice(0) : [],
+                    blessed = meta.blessed,
+                    decorateWithOrder = meta.decorateWithOrder;
+
+                if (meta.decorateWithContainer) {
+                    attributes.push(
+                        {
+                            name:"className",
+                            desc: _tr("Appends a className onto the container."),
+                            type:'object'
+                        },
+                        {
+                            name:"container",
+                            desc: _tr("A container in which to append the new object's container. May be an Element or an object with a container."),
+                            type:'object'
+                        },
+                        {
+                            name:'prepend',
+                            type:'boolean',
+                            desc:_tr("Inserts the new object's container at the beginning of the specified container.")
+                        },
+                        {
+                            name:'insertAfter',
+                            desc:_tr("Inserts the new object's container after the index of a specified object. The object can be an Element or an object with a container."),
+                            type:'object'
+                        },
+                        {
+                            name:'insertBefore',
+                            desc:_tr("Inserts the new object's container before before the index of a specified object. The object can be an Element or an object with a container."),
+                            type:'object'
+                        }
+                    );
+                }
+
+                if (decorateWithOrder) {
+                    attributes.push(
+                        {
+                            name:'prepend',
+                            type:'boolean',
+                            desc:_tr("Inserts any container and the object into the beginning of parent array(s).")
+                        }
+                    );
+                    if (typeof decorateWithOrder === 'function') {
+                        attributes.push(
+                            {
+                                name:'insertAfter',
+                                desc:_tr("Inserts any container and the object into parent array(s) after the index of a specified object."),
+                                instanceof : decorateWithOrder
+                            },
+                            {
+                                name:'insertBefore',
+                                desc:_tr("Inserts any container and the object into parent array(s) before the index of a specified object."),
+                                instanceof : decorateWithOrder
+                            }
+                        );
+                    }
+                }
+
+                if (blessed) {
+                    var isObject = typeof blessed === 'object',
+                        managers = ['debug','dom','object','event'].map(function(o) { return [o,'core.'+o]; });
+                    if (isObject && blessed.managers)
+                        managers.push(blessed.managers);
+                    attributes.push(
+                        {
+                            name:"destroy",
+                            async:true,
+                            desc: _tr("Call this to destroy the object. Cleanup (dependencies, DOM container, events, parent array removal) is automatic."),
+                            type:"function"
+                        },
+                        {
+                            name:"disable",
+                            type:"function",
+                            desc: _tr("Sets the disabled flag. This does not affect object functionality which should manually check the flag and adjust it's response. If the object has a container Element of an INPUT type then this will be disabled."),
+                            attributes:[{
+                                type:'boolean',
+                                attributes:[{
+                                   desc:_tr("Define false to enable. Default is true.")
+                                }]
+                            }]
+                        },
+                        {
+                            name:"disabled",
+                            type:"boolean",
+                            desc: _tr("Indicates if the object is disabled.")
+                        },
+                        {
+                            name:'managers',
+                            desc:_tr("Provides customised module functionality. See core.object documentation."),
+                            type:'object',
+                            attributes:managers.map(function(o) {
+                                return {
+                                    name:o[0],
+                                    type:'object',
+                                    desc:language.substitute(_tr("A manager. See %[0]."), o[1])
+                                };
+                            })
+                        },
+                        {
+                            name:"name",
+                            desc: _tr("A value identifying the object type. Used by managers, for building the path, debugging, and events."),
+                            type:"string"
+                        },
+                        {
+                            name:"parent",
+                            desc: _tr("Reference to the parent object, if applicable."),
+                            type:'object'
+                        },
+                        {
+                            name:"path",
+                            desc: _tr("An internal path to the object type which indicates the module it came from and it's location in the instantiation tree. Not to be confused with URL path."),
+                            instanceof : { name:'Array' }
+                        }
+                    );
+
+                    if (isObject) {
+                        if (blessed.container) {
+                            attributes.push(
+                                {
+                                    name:"container",
+                                    desc: _tr("A container Element representing the object."),
+                                    instanceof : { name:'Element' }
+                                },
+                                {
+                                    name:"hide",
+                                    type:"function",
+                                    desc: _tr("Hides the container Element."),
+                                    attributes:[{
+                                        type:'boolean',
+                                        attributes:[{
+                                           desc:_tr("Define false to show. Default is true.")
+                                        }]
+                                    }]
+                                },
+                                {
+                                    name:"hidden",
+                                    type:"boolean",
+                                    desc: _tr("Indicates if the container Element is hidden.")
+                                },
+                                {
+                                    name:"show",
+                                    type:"function",
+                                    desc: _tr("Shows the container Element.")
+                                },
+                                {
+                                    name:"toggleVisibility",
+                                    type:"function",
+                                    desc: _tr("Toggles whether the container ELement between shown and hidden.")
+                                }
+                            );
+                        }
+                        if (blessed.children) {
+                            blessed.children.forEach(function(o) {
+                                attributes.push({
+                                    name:o,
+                                    instanceof : { name:'Array' },
+                                    desc:_tr("A pool of child objects.")
+                                });
+                            });
+                        }
+                    }
+                }
+
+                attributes = attributes.sort(function(a,b) {
+                    if(a.name > b.name)
+                        return -1;
+                    if(a.name < b.name)
+                        return 1;
+                    return 0;
+                });
+
+                if (reverse)
+                    attributes = attributes.reverse();
+
+                var rows = [];
+                if (manager) {
+                    attributes.forEach(function(o) {
+                        if (o.forManager)
+                            rows.push(o);
+                    });
+                } else {
+                    attributes.forEach(function(o) {
+                        if (! o.onlyManager)
+                            rows.push(o);
+                    });
+                }
+                return coreObject.promiseSequencer(rows, function(s) {
+                    return body.addRow({
+                        insertAfter:at,
+                        columns:[
+                            {
+                                content:s.name? { en: s.name + (s.required? ' *' : '') } : null
+                            }
+                        ]
+                    }).then(function(row) {
+                        var stash = row.stash;
+                        stash.belongsTo=[];
+                        if (at) {
+                            stash.belongsTo = at.stash.belongsTo.concat([at]);
+                            row.container.classList.add('shade'+stash.belongsTo.length);
+                        }
+                        return row.addColumn().then(function(cc) {
+                            var domMgr = cc.managers.dom;
+                            return row.addColumn({
+                                content:s.desc?s.desc:null
+                            }).then(function(rr) {
+                                cc.stash.hyperlinks = [];
+                                var returns = s.returns;
+                                if (returns && s.type==='function') {
+                                    var l,
+                                        blessed;
+                                    if (typeof returns.instanceof === 'function') {
+                                        l = returns.instanceof();
+                                        blessed = l.blessed;
+                                        l = l.name;
+                                    } else if (returns.type) {
+                                        l = returns.type;
+                                    } else {
+                                        l = '⊗';
+                                    }
+                                    if (returns.attributes)
+                                        returns.attributes.forEach(function(o) {
+                                            o.forManager = s.forManager;
+                                        });
+                                    makeahref(cc,returns,l,manager);
+                                    if (blessed)
+                                        showBlessed = true;
+                                    domMgr.mk('span',cc,' = ');
+                                }
+                                var m=s.instanceof;
+                                if (m) {
+                                    if (typeof m === 'function') {
+                                        m = m();
+                                        makeahref(cc,m,m.name,manager);
+                                        if (m.blessed)
+                                            showBlessed = true;
+                                        if (m.desc) {
+                                            var q = JSON.parse(JSON.stringify(m.desc));
+                                            if (s.desc) {
+                                                Object.keys(q).forEach(function(k) {
+                                                    if (s.desc[k])
+                                                        q[k] += ' '+s.desc[k];
+                                                });
+                                            }
+                                            dom.setContent(rr, q);
+                                        }
+                                    } else {
+                                        var sa = m.name;
+                                        if (m.required)
+                                            sa += ' *';
+                                        domMgr.mk('a',cc,sa).href = m.href? m.href : 'https://developer.mozilla.org/en-US/search?q='+m.name;
+                                        if (m.desc)
+                                            dom.setContent(rr,m.desc);
+                                    }
+                                } else if (s.attributes && s.type!=='function') {
+                                    s.attributes.forEach(function(o) {
+                                        o.forManager = s.forManager;
+                                    });
+                                    makeahref(cc,s,s.type,manager);
+                                } else {
+                                    domMgr.mk(s.async? 'u' : 'span',cc,s.type);
+                                }
+
+                                if (s.attributes && (s.type==='function' || s.instanceof)) {
+                                    var j = 0;
+                                    s.attributes.forEach(function (m) {
+                                        if (manager && ! m.forManager)
+                                            return;
+                                        if (! manager && m.onlyManager)
+                                            return;
+                                        if (! j)
+                                            domMgr.mk('span',cc,' (');
+                                        if (j)
+                                            domMgr.mk('span',cc,',');
+                                        var mIO = m.instanceof;
+                                        if (mIO || m.attributes) {
+                                            if (m.attributes) {
+                                                m.attributes.forEach(function(o) {
+                                                    o.forManager = m.forManager;
+                                                });
+                                            }
+                                            makeahref(cc,m,mIO? mIO().name : m.type,manager);
+                                        } else {
+                                            domMgr.mk('span',cc,m.type);
+                                        }
+                                        if (m.required)
+                                            domMgr.mk('sup',cc,'*');
+                                        j++;
+                                    });
+                                    if (j)
+                                        domMgr.mk('span',cc,')');
+                                }
+                            });
+                        });
+                    });
+                });
+            };
+
             var createTable = function(meta,container,manager) {
-
-                var mgrForRow = false,
-                    data = meta.attributes;
-
                 domMgr.mk('p',container,language.substitute(_tr("%[0] - required, %[1]underlined%[2] - asynchronous (%[3])"),'<b>*</b>','<b><u>','</u></b>','<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>'));
                 return objectMgr.create('table',{
                     container:container,
@@ -59,350 +397,7 @@ module.exports = function(app) {
                         ]
                     }
                 }).then(function (tbl) {
-
-                    var body=tbl.body,
-                        brows=body.rows,
-                        domMgr = tbl.managers.dom;
-                    var makeahref = function(col,meta,content,manager) {
-                        if (typeof meta.instanceof === 'function')
-                            meta = meta.instanceof();
-                        if (! meta.attributes)
-                            return document.createElement('span');
-                        var stash = col.stash,
-                            container = col.container,
-                            row = col.parent;
-                        return domMgr.mk('a',col,content,function() {
-                            stash.hyperlinks.push(this);
-                            this.addEventListener('click', function(evt) {
-                                evt.preventDefault();
-                                var rem = this.className === 'active';
-                                stash.hyperlinks.forEach(function(a) {
-                                    a.className = '';
-                                });
-                                if (stash.activeFor) {
-                                    container.className=stash.activeFor.container.className='';
-                                    brows.forEach(function(br,i) {
-                                        if (br.stash.belongsTo && br.stash.belongsTo.indexOf(row) !== -1) {
-                                            br.destroy().catch(function (e) {
-                                                return debugMgr.handle(e);
-                                            });
-                                        }
-                                    });
-                                    if (stash.activeFor === col) {
-                                        stash.activeFor=null;
-                                        if (rem)
-                                            return;
-                                    }
-                                }
-                                stash.activeFor=col;
-                                container.className = this.className = 'active';
-                                addRows(meta,row,manager).catch(function (e) {
-                                    return debugMgr.handle(e);
-                                });
-                            });
-                        });
-                    };
-
-                    var addRows = function(meta,at,manager,reverse) {
-
-                        var attributes = meta.attributes? meta.attributes.slice(0) : [],
-                            blessed = meta.blessed,
-                            decorateWithOrder = meta.decorateWithOrder;
-
-                        if (meta.decorateWithContainer) {
-                            attributes.push(
-                                {
-                                    name:"className",
-                                    desc: _tr("Appends a className onto the container."),
-                                    type:'object'
-                                },
-                                {
-                                    name:"container",
-                                    desc: _tr("A container in which to append the new object's container. May be an Element or an object with a container."),
-                                    type:'object'
-                                },
-                                {
-                                    name:'prepend',
-                                    type:'boolean',
-                                    desc:_tr("Inserts the new object's container at the beginning of the specified container.")
-                                },
-                                {
-                                    name:'insertAfter',
-                                    desc:_tr("Inserts the new object's container after the index of a specified object. The object can be an Element or an object with a container."),
-                                    type:'object'
-                                },
-                                {
-                                    name:'insertBefore',
-                                    desc:_tr("Inserts the new object's container before before the index of a specified object. The object can be an Element or an object with a container."),
-                                    type:'object'
-                                }
-                            );
-                        }
-
-                        if (decorateWithOrder) {
-                            attributes.push(
-                                {
-                                    name:'prepend',
-                                    type:'boolean',
-                                    desc:_tr("Inserts any container and the object into the beginning of parent array(s).")
-                                }
-                            );
-                            if (typeof decorateWithOrder === 'function') {
-                                attributes.push(
-                                    {
-                                        name:'insertAfter',
-                                        desc:_tr("Inserts any container and the object into parent array(s) after the index of a specified object."),
-                                        instanceof : decorateWithOrder
-                                    },
-                                    {
-                                        name:'insertBefore',
-                                        desc:_tr("Inserts any container and the object into parent array(s) before the index of a specified object."),
-                                        instanceof : decorateWithOrder
-                                    }
-                                );
-                            }
-                        }
-
-                        if (blessed) {
-                            var isObject = typeof blessed === 'object',
-                                managers = ['debug','dom','object','event'].map(function(o) { return [o,'core.'+o]; });
-                            if (isObject && blessed.managers)
-                                managers.push(blessed.managers);
-                            attributes.push(
-                                {
-                                    name:"destroy",
-                                    async:true,
-                                    desc: _tr("Call this to destroy the object. Cleanup (dependencies, DOM container, events, parent array removal) is automatic."),
-                                    type:"function"
-                                },
-                                {
-                                    name:"disable",
-                                    type:"function",
-                                    desc: _tr("Sets the disabled flag. This does not affect object functionality which should manually check the flag and adjust it's response. If the object has a container Element of an INPUT type then this will be disabled."),
-                                    attributes:[{
-                                        type:'boolean',
-                                        attributes:[{
-                                           desc:_tr("Define false to enable. Default is true.")
-                                        }]
-                                    }]
-                                },
-                                {
-                                    name:"disabled",
-                                    type:"boolean",
-                                    desc: _tr("Indicates if the object is disabled.")
-                                },
-                                {
-                                    name:'managers',
-                                    desc:_tr("Provides customised module functionality. See core.object documentation."),
-                                    type:'object',
-                                    attributes:managers.map(function(o) {
-                                        return {
-                                            name:o[0],
-                                            type:'object',
-                                            desc:language.substitute(_tr("A manager. See %[0]."), o[1])
-                                        };
-                                    })
-                                },
-                                {
-                                    name:"name",
-                                    desc: _tr("A value identifying the object type. Used by managers, for building the path, debugging, and events."),
-                                    type:"string"
-                                },
-                                {
-                                    name:"parent",
-                                    desc: _tr("Reference to the parent object, if applicable."),
-                                    type:'object'
-                                },
-                                {
-                                    name:"path",
-                                    desc: _tr("An internal path to the object type which indicates the module it came from and it's location in the instantiation tree. Not to be confused with URL path."),
-                                    instanceof : { name:'Array' }
-                                }
-                            );
-
-                            if (isObject) {
-                                if (blessed.container) {
-                                    attributes.push(
-                                        {
-                                            name:"container",
-                                            desc: _tr("A container Element representing the object."),
-                                            instanceof : { name:'Element' }
-                                        },
-                                        {
-                                            name:"hide",
-                                            type:"function",
-                                            desc: _tr("Hides the container Element."),
-                                            attributes:[{
-                                                type:'boolean',
-                                                attributes:[{
-                                                   desc:_tr("Define false to show. Default is true.")
-                                                }]
-                                            }]
-                                        },
-                                        {
-                                            name:"hidden",
-                                            type:"boolean",
-                                            desc: _tr("Indicates if the container Element is hidden.")
-                                        },
-                                        {
-                                            name:"show",
-                                            type:"function",
-                                            desc: _tr("Shows the container Element.")
-                                        },
-                                        {
-                                            name:"toggleVisibility",
-                                            type:"function",
-                                            desc: _tr("Toggles whether the container ELement between shown and hidden.")
-                                        }
-                                    );
-                                }
-                                if (blessed.children) {
-                                    blessed.children.forEach(function(o) {
-                                        attributes.push({
-                                            name:o,
-                                            instanceof : { name:'Array' },
-                                            desc:_tr("A pool of child objects.")
-                                        });
-                                    });
-                                }
-                            }
-                        }
-
-                        attributes = attributes.sort(function(a,b) {
-                            if(a.name > b.name)
-                                return -1;
-                            if(a.name < b.name)
-                                return 1;
-                            return 0;
-                        });
-
-                        if (reverse)
-                            attributes = attributes.reverse();
-
-                        var rows = [];
-                        if (manager) {
-                            attributes.forEach(function(o) {
-                                if (o.forManager)
-                                    rows.push(o);
-                            });
-                        } else {
-                            attributes.forEach(function(o) {
-                                if (! o.onlyManager)
-                                    rows.push(o);
-                            });
-                        }
-                        return coreObject.promiseSequencer(rows, function(s) {
-                            return body.addRow({
-                                insertAfter:at,
-                                columns:[
-                                    {
-                                        content:s.name? { en: s.name + (s.required? ' *' : '') } : null
-                                    }
-                                ]
-                            }).then(function(row) {
-                                var stash = row.stash;
-                                stash.belongsTo=[];
-                                if (at) {
-                                    stash.belongsTo = at.stash.belongsTo.concat([at]);
-                                    row.container.classList.add('shade'+stash.belongsTo.length);
-                                }
-                                return row.addColumn().then(function(cc) {
-                                    var domMgr = cc.managers.dom;
-                                    return row.addColumn({
-                                        content:s.desc?s.desc:null
-                                    }).then(function(rr) {
-                                        cc.stash.hyperlinks = [];
-                                        var returns = s.returns;
-                                        if (returns && s.type==='function') {
-                                            var l,
-                                                blessed;
-                                            if (typeof returns.instanceof === 'function') {
-                                                l = returns.instanceof();
-                                                blessed = l.blessed;
-                                                l = l.name;
-                                            } else if (returns.type) {
-                                                l = returns.type;
-                                            } else {
-                                                l = '⊗';
-                                            }
-                                            if (returns.attributes)
-                                                returns.attributes.forEach(function(o) {
-                                                    o.forManager = s.forManager;
-                                                });
-                                            makeahref(cc,returns,l,manager);
-                                            if (blessed)
-                                                showBlessed = true;
-                                            domMgr.mk('span',cc,' = ');
-                                        }
-                                        var m=s.instanceof;
-                                        if (m) {
-                                            if (typeof m === 'function') {
-                                                m = m();
-                                                makeahref(cc,m,m.name,manager);
-                                                if (m.blessed)
-                                                    showBlessed = true;
-                                                if (m.desc) {
-                                                    var q = JSON.parse(JSON.stringify(m.desc));
-                                                    if (s.desc) {
-                                                        Object.keys(q).forEach(function(k) {
-                                                            if (s.desc[k])
-                                                                q[k] += ' '+s.desc[k];
-                                                        });
-                                                    }
-                                                    dom.setContent(rr, q);
-                                                }
-                                            } else {
-                                                var sa = m.name;
-                                                if (m.required)
-                                                    sa += ' *';
-                                                domMgr.mk('a',cc,sa).href = m.href? m.href : 'https://developer.mozilla.org/en-US/search?q='+m.name;
-                                                if (m.desc)
-                                                    dom.setContent(rr,m.desc);
-                                            }
-                                        } else if (s.attributes && s.type!=='function') {
-                                            s.attributes.forEach(function(o) {
-                                                o.forManager = s.forManager;
-                                            });
-                                            makeahref(cc,s,s.type,manager);
-                                        } else {
-                                            domMgr.mk(s.async? 'u' : 'span',cc,s.type);
-                                        }
-
-                                        if (s.attributes && (s.type==='function' || s.instanceof)) {
-                                            var j = 0;
-                                            s.attributes.forEach(function (m) {
-                                                if (manager && ! m.forManager)
-                                                    return;
-                                                if (! manager && m.onlyManager)
-                                                    return;
-                                                if (! j)
-                                                    domMgr.mk('span',cc,' (');
-                                                if (j)
-                                                    domMgr.mk('span',cc,',');
-                                                var mIO = m.instanceof;
-                                                if (mIO || m.attributes) {
-                                                    if (m.attributes) {
-                                                        m.attributes.forEach(function(o) {
-                                                            o.forManager = m.forManager;
-                                                        });
-                                                    }
-                                                    makeahref(cc,m,mIO? mIO().name : m.type,manager);
-                                                } else {
-                                                    domMgr.mk('span',cc,m.type);
-                                                }
-                                                if (m.required)
-                                                    domMgr.mk('sup',cc,'*');
-                                                j++;
-                                            });
-                                            if (j)
-                                                domMgr.mk('span',cc,')');
-                                        }
-                                    });
-                                });
-                            });
-                        });
-                    };
-                    return addRows(meta,null,manager,true);
+                    return addRows(meta,null,manager,true,tbl);
                 }).catch(function(e) {
                     return debugMgr.handle(e);
                 });

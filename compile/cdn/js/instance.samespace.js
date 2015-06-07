@@ -74,7 +74,7 @@ module.exports = function(app) {
                 :
                 Promise.resolve()
             ).then(function() {
-                if (typeof o.start === 'boolean' && o.start)
+                if (o.start)
                     return self.start();
             });
         });

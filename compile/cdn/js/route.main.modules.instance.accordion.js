@@ -23,9 +23,7 @@ model.managers.object.create('accordion',{ \n \
                     name:'Section',
                     blessed : {
                         container:true
-                    },
-                    attributes : [
-                    ]
+                    }
                 }
             },
 
