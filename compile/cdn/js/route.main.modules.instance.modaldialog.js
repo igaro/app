@@ -22,13 +22,6 @@ dom.mk('button',c,{ \n \
             },
             usage : {
                 instantiate : true,
-                attributes : [
-                    {
-                        name:'container',
-                        instanceof : { name:'Element' },
-                        desc : _tr("Container to append the instance into.")
-                    }
-                ]
             },
             attributes : [
                 {

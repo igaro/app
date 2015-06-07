@@ -2981,6 +2981,52 @@ msgid ""
 msgstr ""
 
 msgid ""
+"Provides data input via a rich text formatted display and html conversion."
+msgstr ""
+
+msgid "An initial value to insert into the container."
+msgstr ""
+
+msgid ""
+"A callback function to be triggered upon data change. Returns the raw data."
+msgstr ""
+
+msgid ""
+"Appends a new panel (plugin) into the RTE view allowing to expand on the "
+"basic functionality."
+msgstr ""
+
+msgid "A language literal for the tab."
+msgstr ""
+
+msgid "A div to be displayed when the tab is activated."
+msgstr ""
+
+msgid "Defines whether the panel should be set as current. Default is false."
+msgstr ""
+
+msgid "Directly executes a command on the WYSIWYG container. See ECMA spec."
+msgstr ""
+
+msgid "Command to pass to the RTE."
+msgstr ""
+
+msgid "Attribute to pass with the RTE command."
+msgstr ""
+
+msgid "Returns the current HTML trimmed of white space."
+msgstr ""
+
+msgid "Inserts HTML at the current cursor position."
+msgstr ""
+
+msgid "Element containing the raw code."
+msgstr ""
+
+msgid "Element (contentEditable) containing the WYSIWYG."
+msgstr ""
+
+msgid ""
 "Provides a means for multiple elements to occupy the same space on a page "
 "with navigation and CSS3 transition effects."
 msgstr ""
