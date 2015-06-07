@@ -15,7 +15,7 @@
 }
 
 
-body >.instance-toast {
+body >.igaro-instance-toast {
 	z-index:999999999;
 	position:fixed;
 	left:0;
@@ -24,7 +24,7 @@ body >.instance-toast {
     margin:0 auto;
     text-align:center;
     padding-bottom:1em;
-	-webkit-user-select: none;   
+	-webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select:none;

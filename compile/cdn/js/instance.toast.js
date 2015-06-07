@@ -17,7 +17,7 @@ module.exports = function(app) {
         long : 4000
     };
 
-    var container = dom.mk('div',document.body,null,'instance-toast'),
+    var container = dom.mk('div',document.body,null,'igaro-instance-toast'),
         recentInstanceToastMessages = [];
 
     var InstanceToast = function(o) {

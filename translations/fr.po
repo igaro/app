@@ -3073,6 +3073,22 @@ msgstr ""
 msgid "Navigates to a space."
 msgstr ""
 
+msgid ""
+"Provides a popup notification message using native OS features where "
+"available with a CSS fallback."
+msgstr ""
+
+msgid "Language literal containing the message to display. Keep it short."
+msgstr ""
+
+msgid "Currently only long and short are supplied. Default is short."
+msgstr ""
+
+msgid ""
+"Used to define where the message is displayed. Default is bottom center. "
+"Native toast's may not permit position change."
+msgstr ""
+
 msgid "Asynchronously fetches and returns data from a resource."
 msgstr ""
 
