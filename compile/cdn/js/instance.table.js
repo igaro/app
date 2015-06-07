@@ -80,13 +80,6 @@ module.exports = function(app) {
             return self.addRow(a);
         });
     };
-    InstanceTableDomain.prototype.deleteRows = function() {
-        return Promise.all(
-            this.rows.slice(0).map(function(r) {
-                return r.destroy();
-            })
-        );
-    };
 
     var InstanceTable = function(o) {
         this.name='instance.table';
@@ -130,8 +123,7 @@ module.exports = function(app) {
     };
 
     InstanceTable.prototype.addSearchColumn = function(o) {
-        var self = this,
-            debugMgr = this.managers.debug;
+        var self = this;
         if (! o)
             o = {};
         if (! o.content)
@@ -150,7 +142,11 @@ module.exports = function(app) {
                     });
                 });
             };
-        return this.searchRow.addColumn(o);
+        return this.searchRow.addColumn(o).then(function(col) {
+            if (o.searchFn)
+                col.searchFn = o.searchFn;
+            return col;
+        });
     };
 
     InstanceTable.prototype.addSearchColumns = function(o) {
@@ -159,11 +155,9 @@ module.exports = function(app) {
                 return {};
             });
         var self = this;
-        return o.reduce(function(a,b) {
-            return a.then(function() {
-                return self.addSearchColumn(b);
-            });
-        }, Promise.resolve());
+        return object.promiseSequencer(o,function(a) {
+            return self.addSearchColumn(a);
+        });
     };
 
     return InstanceTable;

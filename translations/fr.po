@@ -3073,6 +3073,64 @@ msgstr ""
 msgid "Navigates to a space."
 msgstr ""
 
+msgid "Creates a table with header,body,footer objects."
+msgstr ""
+
+msgid ""
+"A search row is always added to the body. Use .addColumn() to insert blank "
+"column or tbl.addSearchColumn() to insert a search column."
+msgstr ""
+
+msgid "Adds a search column to the built in search row."
+msgstr ""
+
+msgid ""
+"The DOM Element control or similar which takes input and calls .searchExec() "
+"to perform the search."
+msgstr ""
+
+msgid ""
+"On .searchExec(), this function is passed the column and should return true "
+"if a match is found."
+msgstr ""
+
+msgid "Calls .addSearchColumn() sequentially."
+msgstr ""
+
+msgid "Calls .Domain.addRow() sequentially."
+msgstr ""
+
+msgid ""
+"Executes the search mechanism. A column will only be searched if it has a ."
+"searchFn() function. See .addSearchColumn()"
+msgstr ""
+
+msgid "A row object for a Domain object."
+msgstr ""
+
+msgid "Adds a Column to a Row."
+msgstr ""
+
+msgid "Appends a language literal, DOM element or text."
+msgstr ""
+
+msgid "Calls .addColumn() sequentially."
+msgstr ""
+
+msgid ""
+"Represents a header, body or footer object, which in turn contains Row "
+"objects."
+msgstr ""
+
+msgid "Adds a Row object to the Domain."
+msgstr ""
+
+msgid "Inserts columns sequentially. See Row.addColumn()."
+msgstr ""
+
+msgid "Calls .addRow() sequentially."
+msgstr ""
+
 msgid ""
 "Provides a popup notification message using native OS features where "
 "available with a CSS fallback."

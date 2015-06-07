@@ -12,12 +12,12 @@ model.managers.object.create('table', {\n \
             {\n \
                 columns : [\n \
                     {\n \
-                        lang : { \n \
+                        content : { \n \
                             en : '1'\n \
                         } \n \
                     },\n \
                     {\n \
-                        lang : { \n \
+                        content : { \n \
                             en : '2'\n \
                         } \n \
                     }\n \
@@ -30,12 +30,12 @@ model.managers.object.create('table', {\n \
             {\n \
                 columns : [\n \
                     {\n \
-                        lang : { \n \
+                        content : { \n \
                             en : 'Lorem ipsum'\n \
                         } \n \
                     },\n \
                     {\n \
-                        lang : { \n \
+                        content : { \n \
                             en : 'dolor sit amet'\n \
                         } \n \
                     }\n \
@@ -44,24 +44,18 @@ model.managers.object.create('table', {\n \
         ]\n \
     }\n \
 });",
-            desc : {
-                en : 'Creates a table with header,body,footer objects.',
-            },
+            desc : _tr("Creates a table with header,body,footer objects."),
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
+            },
+            blessed : {
+                container:true
             },
             attributes : [
                 {
                     name : 'body',
                     instanceof : function() { return data.objects.domain; }
-                },
-                {
-                    name:'container',
-                    type:'element',
-                    desc : {
-                        en : 'UL element containing the LI siblings.'
-                    }
                 },
                 {
                     name : 'footer',
@@ -70,46 +64,83 @@ model.managers.object.create('table', {\n \
                 {
                     name : 'header',
                     instanceof : function() { return data.objects.domain; }
+                },
+                {
+                    name : 'searchRow',
+                    instanceof : function() { return data.objects.row; },
+                    desc : _tr("A search row is always added to the body. Use .addColumn() to insert blank column or tbl.addSearchColumn() to insert a search column.")
                 }
             ],
             usage : {
                 instantiate : true,
+                decorateWithContainer:true,
                 attributes : [
                     {
-                        name:'container',
-                        type:'element',
-                        desc : {
-                            en : 'Container to append the instance into.',
-                            fr : 'Conteneur pour ajouter l\'instance en.'
+                        name : 'addSearchColumn',
+                        type : 'function',
+                        async: true,
+                        desc : _tr("Adds a search column to the built in search row."),
+                        attributes : [
+                            {
+                                type:'object',
+                                decorateWithOrder : function() { return data.objects.column; },
+                                attributes : [
+                                    {
+                                        name : 'content',
+                                        type : 'object',
+                                        desc: _tr("The DOM Element control or similar which takes input and calls .searchExec() to perform the search.")
+                                    },
+                                    {
+                                        name :'searchFn',
+                                        type :'function',
+                                        desc : _tr("On .searchExec(), this function is passed the column and should return true if a match is found.")
+                                    }
+                                ]
+                            }
+                        ],
+                        returns : {
+                            instanceof : function() { return data.objects.column; }
+                        }
+                    },
+                    {
+                        name:'addSearchColumns',
+                        type: 'function',
+                        async : true,
+                        desc : _tr("Calls .addSearchColumn() sequentially."),
+                        attributes : [
+                            {
+                                type: 'object',
+                                required:true,
+                                attributes : [{
+                                    instanceof : { name:'Array' }
+                                }]
+                            }
+                        ],
+                        returns : {
+                            attributes: [{
+                                instanceof : { name:'Array' }
+                            }]
                         }
                     },
                     {
                         name:'body',
-                        type:'Array',
-                        desc : {
-                            en : 'Creates rows on the fly. See Domain.addRow'
-                        }
+                        instanceof : { name:'Array' },
+                        desc : _tr("Calls .Domain.addRow() sequentially.")
+                    },
+                    {
+                        name:'execSearch',
+                        type:'function',
+                        desc:_tr("Executes the search mechanism. A column will only be searched if it has a .searchFn() function. See .addSearchColumn()")
                     },
                     {
                         name:'footer',
-                        type:'Array',
-                        desc: {
-                            en : 'Creates rows on the fly. See Domain.addRow'
-                        }
+                        instanceof : { name:'Array' },
+                        desc : _tr("Calls .Domain.addRow() sequentially.")
                     },
                     {
                         name : 'header',
-                        type : 'Array',
-                        desc: {
-                            en : 'Creates rows on the fly. See Domain.addRow',
-                        }
-                    },
-                    {
-                        name : 'searchable',
-                        type: 'boolean',
-                        desc : {
-                            en : 'Defines whether the contents of the table are searchable. Default is false.',
-                        }
+                        instanceof : { name:'Array' },
+                        desc : _tr("Calls .Domain.addRow() sequentially.")
                     }
                 ]
             }
@@ -119,76 +150,59 @@ model.managers.object.create('table', {\n \
 
             column : {
                 name : 'Column',
-                desc : {
-                    en : 'A column object for a row object.',
-                },
-                attributes : [
-                    {
-                        name:'element',
-                        type:'element',
-                        desc : {
-                            en : 'A TD DOM element.'
-                        }
-                    }
-                ]
+                blessed : {
+                    container:true
+                }
             },
 
             row : {
                 name : 'Row',
-                desc : {
-                    en : 'A row object for a Domain object.'
+                blessed : {
+                    container:true,
+                    children:['columns']
                 },
+                desc : _tr("A row object for a Domain object."),
                 attributes : [
-                    {
-                        name : 'columns',
-                        type : 'Array',
-                        desc : {
-                            en : 'Column objects belonging to the Row.'
-                        }
-                    },
-                    {
-                        name:'element',
-                        type:'element',
-                        desc : {
-                            en : 'A TR DOM element.'
-                        }
-                    },
                     {
                         name : 'addColumn',
                         type : 'function',
-                        desc : {
-                            en : 'Adds a Column.'
-                        },
+                        async: true,
+                        desc : _tr("Adds a Column to a Row."),
                         attributes : [
                             {
                                 type:'object',
+                                decorateWithOrder : function() { return data.objects.column; },
                                 attributes : [
                                     {
-                                        name:'append',
-                                        type:'element',
-                                        desc: {
-                                            en : 'Appends DOM elements or an HTMLFragment.'
-                                        }
-                                    },
-                                    {
-                                        name : 'lang',
+                                        name : 'content',
                                         type : 'object',
-                                        desc: {
-                                            en : 'Appends and manages a language literal.'
-                                        }
-                                    },
-                                    {
-                                        name : 'className',
-                                        type: 'string',
-                                        desc : {
-                                            en : 'Sets the className.'
-                                        }
+                                        desc: _tr("Appends a language literal, DOM element or text.")
                                     }
                                 ]
                             }
                         ],
                         returns : {
-                            'instanceof' : function() { return data.objects.column; }
+                            instanceof : function() { return data.objects.column; }
+                        }
+                    },
+                    {
+                        name:'addColumns',
+                        type: 'function',
+                        async : true,
+                        desc : _tr("Calls .addColumn() sequentially."),
+                        attributes : [
+                            {
+                                type: 'object',
+                                required:true,
+                                attributes : [{
+                                    instanceof : { name:'Array' }
+                                }]
+                            }
+                        ],
+                        returns : {
+                            attributes: [{
+                                instanceof : { name:'Array' }
+                            }]
                         }
                     }
                 ]
@@ -196,47 +210,26 @@ model.managers.object.create('table', {\n \
 
             domain : {
                 name : 'Domain',
-                desc : {
-                    en : 'Represents a header, body or footer object, which in turn contains Row objects.'
+                desc : _tr("Represents a header, body or footer object, which in turn contains Row objects."),
+                blessed : {
+                    container:true,
+                    children:['rows']
                 },
                 attributes : [
                     {
                         name : 'addRow',
                         type: 'function',
-                        desc : {
-                            en : 'Adds a Row object to the Domain',
-                        },
+                        async : true,
+                        desc : _tr("Adds a Row object to the Domain."),
                         attributes : [
                             {
                                 type: 'object',
+                                decorateWithOrder : function() { return data.objects.row; },
                                 attributes : [
                                     {
-                                        name : 'insertBefore',
-                                        instanceof : function() { return data.objects.row; },
-                                        desc : {
-                                            en : 'Inserts a row at a position other than the end. An index can be supplied instead of a current Row.'
-                                        }
-                                    },
-                                    {
-                                        name : 'searchable',
-                                        type: 'boolean',
-                                        desc : {
-                                            en : 'Defines whether the contents of the row are searchable.'
-                                        }
-                                    },
-                                    {
-                                        name : 'className',
-                                        type : 'string',
-                                        desc : {
-                                            en : 'Specifies the className for the row element.'
-                                        }
-                                    },
-                                    {
                                         name : 'columns',
-                                        type : 'Array',
-                                        desc : {
-                                            en : 'Inserts columns. See Row.addColumn.'
-                                        }
+                                        instanceof : { name:'Array' },
+                                        desc : _tr("Inserts columns sequentially. See Row.addColumn().")
                                     }
                                 ]
                             }
@@ -246,30 +239,25 @@ model.managers.object.create('table', {\n \
                         }
                     },
                     {
-                        name:'deleteRow',
-                        type:'function',
-                        desc : {
-                            en : 'Removes a Row object.'
-                        },
+                        name:'addRows',
+                        type: 'function',
+                        async : true,
+                        desc : _tr("Calls .addRow() sequentially."),
                         attributes : [
                             {
-                                instanceof : function() { return data.objects.row; },
+                                type: 'object',
+                                required:true,
+                                attributes : [{
+                                    instanceof : { name:'Array' }
+                                }]
                             }
-                        ]
-                    },
-                    {
-                        name:'element',
-                        type:'element',
-                        desc : {
-                            en : 'A THEAD, TBODY or TFOOT DOM element.'
+                        ],
+                        returns : {
+                            attributes: [{
+                                instanceof : { name:'Array' }
+                            }]
                         }
-                    },
-                    {
-                        name:'rows',
-                        type:'Array',
-                        desc : {
-                            en : 'Row objects belonging to the Domain.'
-                        }
+
                     }
                 ]
             }
