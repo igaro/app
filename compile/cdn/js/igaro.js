@@ -724,11 +724,11 @@
                 this.headers = p.headers;
               if (p.vars)
                 this.vars = p.vars;
-              if (p.withCredentials !== undefined)
+              if (typeof p.withCredentials === 'boolean')
                 this.withCredentials = p.withCredentials;
               if (p.form)
                 this.setForm(p.form);
-              if (p.silent)
+              if (typeof p.silent === 'boolean')
                 this.silent = p.silent;
               if (p.stash)
                 this.stash = p.stash;
@@ -743,7 +743,6 @@
                 var self = this,
                     xhr = this.xhr = new XMLHttpRequest(),
                     eventMgr = this.managers.event;
-                this.data = null;
                 this.res='';
                 this.withCredentials=false;
                 this.vars = {};
@@ -794,15 +793,16 @@
             };
             InstanceXhr.prototype.send = function() {
                 var self = this,
-                    action = self.action,
-                    xhr = self.xhr,
+                    action = this.action,
+                    xhr = this.xhr,
                     uri = this._uri,
-                    t = this.res;
+                    t = this.res,
+                    isPUTorPOST = /(PUT|POST)/.test(action);
                 if (! this._promise)
                     throw new Error('instance.xhr -> Can\t send() before exec(). Send() is only for re-executing a request.');
                 xhr.abort();
                 return this.managers.event.dispatch('start').then(function() {
-                    if (action==='GET' && uri.length) {
+                    if (! isPUTorPOST && uri.length) {
                         t += t.indexOf('?') > -1? '&' : '?';
                         t += uri;
                     }
@@ -814,7 +814,7 @@
                         if (v)
                             xhr.setRequestHeader(k,v);
                     });
-                    xhr.send(action!=='GET'? self._uri:null);
+                    xhr.send(isPUTorPOST? self._uri:null);
                 });
             };
             InstanceXhr.prototype.exec = function(action, p) {

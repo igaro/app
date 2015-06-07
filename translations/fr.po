@@ -3073,6 +3073,96 @@ msgstr ""
 msgid "Navigates to a space."
 msgstr ""
 
+msgid "Asynchronously fetches and returns data from a resource."
+msgstr ""
+
+msgid ""
+"Defines whether the content-type header returned by the transaction should "
+"match a particular value."
+msgstr ""
+
+msgid ""
+"An object literal of headers to be sent. May be a function to attain values "
+"on point of call."
+msgstr ""
+
+msgid "Calls .applyForm()."
+msgstr ""
+
+msgid ""
+"Prevents dispatch of the execution event which in turn prevents user "
+"awareness icons/animation (where available)."
+msgstr ""
+
+msgid "The resource, i.e URL, to load."
+msgstr ""
+
+msgid "Enables CORS over XHR."
+msgstr ""
+
+msgid ""
+"An object literal of name/value pairs to sent. May be a function to attain "
+"values on point of call."
+msgstr ""
+
+msgid "Aborts the XHR operation (if it is currently running)."
+msgstr ""
+
+msgid "Defines whether the last transaction was aborted."
+msgstr ""
+
+msgid ""
+"Enumerates over a form and caches the values to be sent. If the XHR is "
+"resent you must re-run this to send modified form data."
+msgstr ""
+
+msgid ""
+"A form to send. Element values will be enumerated once allowing you to keep "
+"the same values on resend. Call again to refresh."
+msgstr ""
+
+msgid "Sends a DELETE command to the server."
+msgstr ""
+
+msgid ""
+"Any of the instantiated properties can be set here to update the XHR before "
+"it is sent."
+msgstr ""
+
+msgid "Sends a HEAD command to the server."
+msgstr ""
+
+msgid ""
+"A literal containing headers to be sent with the transaction. May be a "
+"function to attain values on point of call."
+msgstr ""
+
+msgid "Sends a GET command to the server."
+msgstr ""
+
+msgid "Sends an OPTIONS command to the server."
+msgstr ""
+
+msgid "Sends a POST command to the server."
+msgstr ""
+
+msgid "Send a PUT command to the server."
+msgstr ""
+
+msgid "Sends a TRACE command to the server."
+msgstr ""
+
+msgid ""
+"A literal containing headers to be sent with the transaction. May also be a "
+"function for attaining values on point of call. For post"
+msgstr ""
+
+msgid "Enable CORS over XHR. Usual browser limitations apply."
+msgstr ""
+
+msgid "A reference to the XMLHttpRequest object."
+msgstr ""
+
 msgid "All main respository module documentation can be found on this page."
 msgstr ""
 
@@ -3229,7 +3319,7 @@ msgstr ""
 msgid "You can access this manager using <b>[object].managers.%[0]</b>."
 msgstr ""
 
-msgid "code"
+msgid "Code"
 msgstr ""
 
 msgid ""

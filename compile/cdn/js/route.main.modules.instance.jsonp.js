@@ -18,7 +18,9 @@ module.exports = function(app) {
                     c.insertBefore(dom.mk('div',null,JSON.stringify(data)), self);\n\
                     c.removeChild(self);\n\
                 }\n\
-            );\n\
+            ).catch(function(e) {;\n\
+                model.managers.debug.handle(e);\n\
+            });\n\
         });\n\
     });\n\
 });",

@@ -464,7 +464,7 @@ module.exports = function(app) {
 
             if (data.demo) {
                 domMgr.mk('h1',v,_tr("Demo"));
-                domMgr.mk('h2',v,_tr("code"));
+                domMgr.mk('h2',v,_tr("Code"));
                 var cc = domMgr.mk('p',v);
 
                 model.managers.object.create('pagemessage',{
@@ -476,11 +476,19 @@ module.exports = function(app) {
                 }).catch(function(e) {
                     debugMgr.handle(e);
                 });
-
                 domMgr.mk('pre',v, data.demo.trim(), 'democode');
                 domMgr.mk('h2',v,_tr("Output"));
                 var c = domMgr.mk('p',v);
-                eval(data.demo);
+                try {
+                    var r = eval(data.demo);
+                    if (r instanceof Promise) {
+                        r.catch(function (e) {
+                            debugMgr.handle(e);
+                        });
+                    }
+                } catch(e) {
+                    debugMgr.handle(e);
+                }
             }
 
             if (data.dependencies) {
