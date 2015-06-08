@@ -521,8 +521,10 @@
                 sort : function(o) {
                     var slice = o.slice,
                         on = o.on || function(o) { return o.innerHTML; },
-                        root = o.root || o.nodes[0].parentNode,
-                        nodes = Array.prototype.slice.call(o.nodes || o.root.childNodes);
+                        nodes = Array.prototype.slice.call(o.nodes || o.root.childNodes),
+                        root = o.root || (o.nodes.length? o.nodes[0].parentNode : null);
+                    if (! root)
+                        return;
                     if (slice)
                         nodes = nodes.slice(slice[0],slice[1]);
                     var insertBefore = nodes[nodes.length-1].nextElementSibling;

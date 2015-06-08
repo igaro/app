@@ -63,7 +63,7 @@ module.exports = function(app, params) {
         reset : function() {
             var self = this;
             return this.managers.store.set('env').then(function() {
-                self.isAuto = false;
+                self.isAuto = true;
                 return detect();
             });
         },
