@@ -1299,10 +1299,10 @@ msgid ""
 msgstr ""
 
 msgid ""
-"In this App, each time an instance.r start and end event fire we keep a "
-"tally and display an icon in the header. This is an example of monitoring by "
-"type and is accomplished via core.events, not through a manager. View route."
-"header.js and take a look at the code used to do this."
+"In this App, each time an instance.xhr start and end event fire a tally is "
+"kept and an icon is displayed in the header. This is an example of "
+"monitoring by type and is accomplished via core.events and not through a "
+"manager. route.header.js shows how this is done."
 msgstr ""
 
 msgid "app['core.events'].on('instance.xhr','start',fn);"
@@ -2963,6 +2963,40 @@ msgstr ""
 msgid "Displays a confirm or cancel dialog."
 msgstr ""
 
+msgid "Provides a Oauth2 credential mechanism for login services."
+msgstr ""
+
+msgid ""
+"A provider's oauth2 login page. Use [DEVID], [CALLBACKURL] and [SCOPE] to "
+"embed params."
+msgstr ""
+
+msgid ""
+"A URL to load once access is granted. This must fire a postMessage event "
+"containing the URL and should be blank."
+msgstr ""
+
+msgid ""
+"This identifies you to the provider. Typically you register your App with a "
+"provider and they provide this key."
+msgstr ""
+
+msgid ""
+"A provider may require you to define a scope which defines what access "
+"privileges you are seeking to attain."
+msgstr ""
+
+msgid "The name of the token to extract from the callback URL."
+msgstr ""
+
+msgid ""
+"Begins the authentication process. Any of the instantiation attributes can "
+"be passed to update the object."
+msgstr ""
+
+msgid "Defines whether the oauth2 process is in situ."
+msgstr ""
+
 msgid "Provides a styled message for display on a view."
 msgstr ""
 
@@ -3660,6 +3694,58 @@ msgid ""
 "The router provides .to() which is ideal for DOM event handlers. It contains "
 "a built in error handler. This function takes a path, search (?xxx), hash "
 "(#xxx) and state."
+msgstr ""
+
+msgid ""
+"Igaro App is the only Javascript Framework with zero public variables, "
+"effectively sandboxing it's libraries from code injection."
+msgstr ""
+
+msgid "Igaro App is <b>100%</b> secure."
+msgstr ""
+
+msgid ""
+"Initially index.html bootstraps igaro.js using a public variable. This is "
+"then removed and the only singular reference to the app is stored privately. "
+"Only modules loaded by Igaro App gain access to this variable, and since "
+"everything goes through it, the entire codebase is sandboxed from code "
+"injection."
+msgstr ""
+
+msgid "OAuth2 Credentials"
+msgstr ""
+
+msgid ""
+"Igaro App recommends using OAuth2 for authentication and provides a module, "
+"instance.oauth2, to make access to any provider simple."
+msgstr ""
+
+msgid "Automated Authentication"
+msgstr ""
+
+msgid ""
+"Igaro App supports automated authentication transparent to code (which needs "
+"no handling) and the user (no URL change or redirection)."
+msgstr ""
+
+msgid ""
+"A service which requires credentials emits a HTTP 401 which is captured and "
+"invokes an OAuth2 mechanism. Once complete the previous request and any that "
+"have came in since are then completed."
+msgstr ""
+
+msgid "Example"
+msgstr ""
+
+msgid ""
+"Place the code below into your app conf file and on any XHR request to a "
+"Google API, simply add auth:'google' to the stash."
+msgstr ""
+
+msgid "XHR CORS"
+msgstr ""
+
+msgid "Is fully supported."
 msgstr ""
 
 msgid ""

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- The icon can be used freely in both personal and commercial projects with no attribution required, but always appreciated. 
+You may NOT sub-license, resell, rent, redistribute or otherwise transfer the icon without express written permission from iconmonstr.com -->
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="512px" height="512px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+<path id="shield-27-icon" d="M256,50c-57.861,49.195-96.167,57-156.5,57c0,0,0,116.921,0,192.528c0,79,56.996,99.629,156.5,162.472
+	c99.504-62.843,156.5-83.472,156.5-162.472c0-75.607,0-192.528,0-192.528C352.167,107,313.861,99.195,256,50z M235.31,322.289
+	l-65.703-65.721l27.975-27.981l37.727,37.737l87.098-87.099l27.988,27.971L235.31,322.289z"/>
+</svg>

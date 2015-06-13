@@ -33,7 +33,7 @@ module.exports = function(app,params) {
         var domMgr = this.managers.dom,
             self = this,
             container = this.container = domMgr.mk('div',body,null, function() {
-                this.className = 'instance-modaldialog';
+                this.className = 'igaro-instance-modaldialog';
                 this.style.zIndex = zIndexAt;
                 if (! o.noClose) {
                     this.addEventListener('click', function(event) {

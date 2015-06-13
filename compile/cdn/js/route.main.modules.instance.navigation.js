@@ -30,7 +30,6 @@ model.managers.object.create('navigation', {\n \
 });",
             desc : {
                 en : 'Provides a universal navigation menu system using standard UL and LI elements with definable CSS styles.',
-                fr : 'Fournit un système de menu de navigation universelle utilisant des éléments UL et LI standards avec des styles CSS définissables.'
             },
             author : {
                 name:'Andrew Charnley',
@@ -44,7 +43,6 @@ model.managers.object.create('navigation', {\n \
                         type:'element',
                         desc : {
                             en : 'Container to append the instance into.',
-                            fr : 'Conteneur pour ajouter l\'instance en.'
                         }
                     },
                     {

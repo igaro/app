@@ -63,7 +63,7 @@ module.exports = function(app) {
                     domMgr.mk('pre',container,domMgr.mk('code',null,_tr("(object).managers.event.extend(this).on('eventName',fn);")));
                     domMgr.mk('h1',container,_tr("By Path/Type"));
                     domMgr.mk('p',container,_tr("Listening to the event manager on an instance will only provide events for that particular instance, not the instance type."));
-                    domMgr.mk('p',container,_tr("In this App, each time an instance.r start and end event fire we keep a tally and display an icon in the header. This is an example of monitoring by type and is accomplished via core.events, not through a manager. View route.header.js and take a look at the code used to do this."));
+                    domMgr.mk('p',container,_tr("In this App, each time an instance.xhr start and end event fire a tally is kept and an icon is displayed in the header. This is an example of monitoring by type and is accomplished via core.events and not through a manager. route.header.js shows how this is done."));
                     domMgr.mk('pre',container,domMgr.mk('code',null,_tr("app['core.events'].on('instance.xhr','start',fn);")));
                     return container;
                 })

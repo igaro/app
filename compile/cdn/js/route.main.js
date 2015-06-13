@@ -103,6 +103,7 @@ module.exports = function(app) {
                         ['bless', _tr("Bless")],
                         ['async', _tr("Async")],
                         ['events',_tr("Events")],
+                        ['security',_tr("Security")],
                         ['design', _tr("Design")],
                         ['routes', _tr("Routes")],
                         ['locale', _tr("Locale")],

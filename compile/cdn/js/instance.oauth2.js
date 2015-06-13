@@ -32,6 +32,7 @@ module.exports = function(app) {
         this.asRoot=true;
         this.container=function(dom) {
             return dom.mk('div',null,null,function() {
+                this.className = 'igaro-instance-oauth2';
                 if (o.className)
                     this.classList.add(o.className);
                 self.win = dom.mk('iframe',this);
@@ -47,12 +48,23 @@ module.exports = function(app) {
 		this.inProgress = false;
         setBits.call(this,o);
 		var self = this;
-		window.addEventListener('message', function(event) {
-            self._resolve({ token:url.getHashParam(self.tokenName,event.data) });
+		var msglist = function(event) {
+            var callbackUrl = self.callbackUrl,
+                tokenName = self.tokenName,
+                url = event.data;
+            if (url.substr(0,callbackUrl.length) === callbackUrl)
+                self._resolve({
+                    token:url.getParam(tokenName,url) || url.getHashParam(tokenName,url),
+                    url : url
+                });
+        };
+        window.addEventListener('message',msglist);
+        this.managers.event.on('destroy', function() {
+            window.removeEventListener('message', msglist);
         });
 	};
 
-    InstanceOAuth2.prototype.init = function(o) {
+    InstanceOauth2.prototype.init = function() {
         return this.managers.event.dispatch('init');
     };
 

@@ -89,6 +89,12 @@ body >.core-router >.main {
                             background-size:60%;
                         }
                     }
+                    >.security {
+                        >a:after {
+                            background: inline-image("route.main/security.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
                     >.compat {
                         >a:after {
                             background: inline-image("route.main/compat.svg") no-repeat 50% 65%;

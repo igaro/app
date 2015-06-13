@@ -8,7 +8,6 @@ build/
 .staging
 *.swp
 *.bak
-*.pot
 *.log
 node_modules
 tests/reports/
