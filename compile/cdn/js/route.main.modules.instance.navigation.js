@@ -1,77 +1,58 @@
-module.exports = function(app) {
+module.exports = function() {
+
+    'use strict';
 
     return function(model) {
 
         var data = {
 
-            demo : " \n \
-model.managers.object.create('navigation', {\n \
-    container:c, \n \
-    type:'tabs',\n \
-    pool: [\n \
-        {\n \
-            title : {\n \
-                en : '1'\n \
-            }\n \
-        },\n \
-        {\n \
-            title : {\n \
-                en : '2'\n \
-            }\n \
-        }\n \
-    ].map(function (o) {\n \
-        return {\n \
-            title:o.title,\n \
-            onClick: function() {\n \
-                this.setStatus('active');\n \
-            },\n \
-        };\n \
-    })\n \
+            demo : "model.managers.object.create('navigation', {\n\
+    container:c,\n\
+    onClick: function() {\n\
+        alert('Option Clicked');\n\
+        return Promise.resolve();\n\
+    },\n\
+    options: [\n\
+        {\n\
+            active : true,\n\
+            title : {\n\
+                en : '1'\n\
+            }\n\
+        },\n\
+        {\n\
+            title : {\n\
+                en : '2'\n\
+            }\n\
+        },\n\
+        {\n\
+            disabled : true,\n\
+            title : {\n\
+                en : '3'\n\
+            }\n\
+        }\n\
+    ]\n\
 });",
-            desc : {
-                en : 'Provides a universal navigation menu system using standard UL and LI elements with definable CSS styles.',
-            },
+            desc : _tr("Provides a universal navigation menu system using standard UL and LI elements."),
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
             },
+            blessed : {
+                container:true
+            },
             usage : {
                 instantiate : true,
+                decorateWithContainer : true,
                 attributes : [
-                    {
-                        name:'container',
-                        type:'element',
-                        desc : {
-                            en : 'Container to append the instance into.',
-                        }
-                    },
-                    {
-                        name:'type',
-                        type:'string',
-                        desc : {
-                            en : 'Defines the type of navigation. CSS styling relates to this value.'
-                        }
-                    },
-                    {
-                        name:'autosort',
-                        type:'boolean',
-                        desc: {
-                            en : 'Defines if options are ordered by title. Default is to inherit a sub menu value. Default for root is true.'
-                        }
-                    },
-                    {
-                        name : 'pool',
-                        type : 'Array',
-                        desc: {
-                            en : 'A presupplied list of options and optional submenu items.'
-                        }
-                    },
                     {
                         name : 'onClick',
                         type: 'function',
-                        desc : {
-                            en : 'A function to run when an option is selected.'
-                        }
+                        desc : _tr("A function to run when an Option is selected.")
+                    },
+                    {
+                        name : 'options',
+                        instanceof : { name: 'Array' },
+                        desc: _tr("Calls .addOption() sequentially.")
                     }
                 ]
             }
@@ -81,31 +62,34 @@ model.managers.object.create('navigation', {\n \
 
             menu : {
                 name : 'Menu',
-                desc : {
-                    en : 'A menu contains option objects.'
+                desc : _tr("A menu contains option objects."),
+                blessed : {
+                    container:true,
+                    children : ['options']
                 },
                 attributes : [
                     {
                         name : 'addOptions',
                         type : 'function',
-                        desc : {
-                            en : 'Shorthand for calling addOption repeatedly.'
-                        },
+                        desc : _tr("Calls .addOption() sequentially."),
                         attributes : [
                             {
-                                type:'Array',
-                                desc: {
-                                    en : 'A list of Options to iterate through. See addOption.'
-                                }
+                                type:'object',
+                                attributes : [{
+                                    instanceof : { name: 'Array' }
+                                }]
                             }
-                        ]
+                        ],
+                        returns : {
+                            attributes : [{
+                                instanceof : { name: 'Array' }
+                            }]
+                        }
                     },
                     {
                         name : 'addOption',
                         type : 'function',
-                        desc : {
-                            en : 'Adds an option to the menu.'
-                        },
+                        desc : _tr("Adds an option to the menu."),
                         attributes : [
                             {
                                 type:'object',
@@ -113,58 +97,22 @@ model.managers.object.create('navigation', {\n \
                                     {
                                         name : 'active',
                                         type : 'boolean',
-                                        desc : {
-                                            en : 'Sets the status to active.'
-                                        }
-                                    },
-                                    {
-                                        name : 'id',
-                                        type : 'string',
-                                        desc : {
-                                            en : 'An identifier for the option. Will be appended to className.'
-                                        }
-                                    },
-                                    {
-                                        name : 'insertBefore',
-                                        instanceof : function() { return data.objects.option; },
-                                        desc : {
-                                            en : 'To specify where the option should be inserted, specify another option.'
-                                        }
+                                        desc : _tr("Sets the status to active.")
                                     },
                                     {
                                         name : 'href',
                                         type : 'string',
-                                        desc : {
-                                            en : 'Instead of onClick you can set an href directly. Should be used only or external linking.'
-                                        }
+                                        desc : _tr("Sets the Element href, which may be used for display/seo purposes or actual navigation by setting onClick to open it.")
                                     },
                                     {
                                         name : 'onClick',
                                         type : 'function',
-                                        desc : {
-                                            en : 'If specified, will override the menu onClick handler.'
-                                        }
-                                    },
-                                    {
-                                        name : 'seo',
-                                        type : 'string',
-                                        desc : {
-                                            en : 'Appends a Google style #!/ onto the end of the ahref along with the href value. Use with onClick and href.'
-                                        }
-                                    },
-                                    {
-                                        name : 'status',
-                                        type : 'string',
-                                        desc : {
-                                            en : 'Default is inactive. Alternatively specify active or disabled.'
-                                        }
+                                        desc : _tr("If specified, will override the parent onClick handler.")
                                     },
                                     {
                                         name : 'title',
                                         type : 'string',
-                                        desc : {
-                                            en : 'Adds a label to the option\'s DOM element.'
-                                        }
+                                        desc : _tr("Adds a label to the option's DOM element.")
                                     }
                                 ]
                             }
@@ -172,85 +120,34 @@ model.managers.object.create('navigation', {\n \
                         returns : {
                             'instanceof' : function() { return data.objects.option; }
                         }
-                    },
-                    {
-                        name : 'removeOption',
-                        type : 'function',
-                        desc : {
-                            en : 'Removes an option from a Menu.'
-                        },
-                        attributes : [
-                            {
-                                'instanceof' : function() { return data.objects.option; }
-                            }
-                        ]
-                    },
-                    {
-                        name : 'removeOptions',
-                        type : 'function',
-                        desc : {
-                            en : 'Removes all options from a Menu.'
-                        },
-                    },
-                    {
-                        name : 'sort',
-                        type : 'function',
-                        desc : {
-                            en : 'If autosort is true will sort options by title. This is used internally when a new option is added.'
-                        },
-                        attributes : [
-                            {
-                                type:'boolean',
-                                attributes : [
-                                    {
-                                        desc: {
-                                            en : 'Optional boolean to set autosort before sort is executed.'
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
                     }
                 ]
             },
 
             option : {
                 name : 'Option',
-                desc : {
-                    en : 'An option manages the selection of a DOM element and an optional sub menu object.'
+                blessed : {
+                    container:true
                 },
+                desc : _tr("An option manages the selection of a DOM element and an optional sub menu object."),
                 attributes : [
                     {
                         name : 'addMenu',
                         type : 'function',
-                        desc : {
-                            en : 'Adds a menu to the Option.'
-                        },
+                        desc : _tr("Adds a menu to the Option."),
                         attributes : [
                             {
                                 type:'object',
                                 attributes : [
                                     {
-                                        name:'autosort',
-                                        type:'boolean',
-                                        desc: {
-                                            en : 'Defines if options are ordered by title. Default is false.'
-                                        }
-                                    },
-                                    {
-                                        name : 'pool',
-                                        type : 'Array',
-                                        desc: {
-                                            en : 'A presupplied list of options and optional submenu items.',
-                                            fr : ''
-                                        }
+                                        name : 'options',
+                                        instanceof  : { name: 'Array' },
+                                        desc: _tr("A presupplied list of options and optional submenu items.")
                                     },
                                     {
                                         name : 'onClick',
                                         type: 'function',
-                                        desc : {
-                                            en : 'A function to run when an option is selected.'
-                                        }
+                                        desc : _tr("A function to run when an option is selected.")
                                     }
                                 ]
                             }
@@ -260,41 +157,13 @@ model.managers.object.create('navigation', {\n \
                         }
                     },
                     {
-                        name : 'removeMenu',
-                        type : 'function',
-                        desc : {
-                            en : 'Removes a menu and any options from it.',
-                            fr : ''
-                        }
-                    },
-                    {
-                        name : 'setStatus',
+                        name : 'setActive',
+                        async : true,
                         type : 'function',
                         attributes : [
                             {
-                                type:'string',
-                                desc : {
-                                    en : 'Specify active, ianctive or disabled.'
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        name : 'toggle',
-                        type : 'function',
-                        desc : {
-                            en : 'Toggles the status between active and inactive.'
-                        }
-                    },
-                    {
-                        name : 'updateTitle',
-                        type : 'function',
-                        attributes : [
-                            {
-                                type : 'string',
-                                desc : {
-                                    en : 'Updates a title, or if null will remove any existing title on an option.',
-                                }
+                                type:'boolean',
+                                desc : _tr("If the Option is disabled this will have no effect.")
                             }
                         ]
                     }
@@ -305,47 +174,9 @@ model.managers.object.create('navigation', {\n \
 
         data.attributes = [
             {
-                name:'container',
-                type:'element',
-                desc : {
-                    en : 'Element containing the UI/LI siblings.',
-                    fr : ''
-                }
-            },
-            {
                 name:'menu',
                 type:'object',
                 instanceof: function() { return data.objects.menu; }
-            },
-            {
-                name:'type',
-                type:'object',
-                desc: {
-                    en : 'Defines the display style.',
-                    fr : ''
-                },
-                attributes : [
-                    {
-                        name : 'set',
-                        type : 'function',
-                        desc: {
-                            en : 'A language object to use for the message.',
-                            fr : ''
-                        },
-                        attributes : [
-                            {
-                                type:'string',
-                                attributes : [
-                                    {
-                                        desc: {
-                                            en : 'A name which matches the css class.'
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
             }
         ];
 

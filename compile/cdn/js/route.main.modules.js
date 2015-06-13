@@ -224,7 +224,7 @@ module.exports = function(app) {
                                 {
                                     name:"toggleVisibility",
                                     type:"function",
-                                    desc: _tr("Toggles whether the container ELement between shown and hidden.")
+                                    desc: _tr("Toggles whether the container Element between visible and hidden.")
                                 }
                             );
                         }

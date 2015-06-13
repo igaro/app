@@ -2963,6 +2963,54 @@ msgstr ""
 msgid "Displays a confirm or cancel dialog."
 msgstr ""
 
+msgid ""
+"Provides a universal navigation menu system using standard UL and LI "
+"elements."
+msgstr ""
+
+msgid "A function to run when an Option is selected."
+msgstr ""
+
+msgid "Calls .addOption() sequentially."
+msgstr ""
+
+msgid "A menu contains option objects."
+msgstr ""
+
+msgid "Adds an option to the menu."
+msgstr ""
+
+msgid "Sets the status to active."
+msgstr ""
+
+msgid ""
+"Sets the Element href, which may be used for display/seo purposes or actual "
+"navigation by setting onClick to open it."
+msgstr ""
+
+msgid "If specified, will override the parent onClick handler."
+msgstr ""
+
+msgid "Adds a label to the option's DOM element."
+msgstr ""
+
+msgid ""
+"An option manages the selection of a DOM element and an optional sub menu "
+"object."
+msgstr ""
+
+msgid "Adds a menu to the Option."
+msgstr ""
+
+msgid "A presupplied list of options and optional submenu items."
+msgstr ""
+
+msgid "A function to run when an option is selected."
+msgstr ""
+
+msgid "If the Option is disabled this will have no effect."
+msgstr ""
+
 msgid "Provides a Oauth2 credential mechanism for login services."
 msgstr ""
 
@@ -3370,7 +3418,7 @@ msgstr ""
 msgid "Shows the container Element."
 msgstr ""
 
-msgid "Toggles whether the container ELement between shown and hidden."
+msgid "Toggles whether the container Element between visible and hidden."
 msgstr ""
 
 msgid "A pool of child objects."

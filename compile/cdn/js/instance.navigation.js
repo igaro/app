@@ -14,10 +14,11 @@ module.exports = function(app) {
         arrayInsert = object.arrayInsert;
 
     var InstanceNavigationMenuOption = function(o) {
-        var self = this;
+        var self = this,
+            parent = o.parent;
         this.name = 'option';
         this.container = function (dom) {
-            return dom.mk('li',o.parent.container,null,function() {
+            return dom.mk('li',parent.container,null,function() {
                 if (o.className)
                     this.classList.add(o.className);
                 dom.mk('a',this,null,function() {

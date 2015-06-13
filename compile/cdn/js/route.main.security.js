@@ -42,7 +42,7 @@ events.on('instance.xhr','start', function(p) {\n\
     var o = p.x,\n\
         auth = o.stash.auth;\n\
     if (auth) \n\
-        o.headers['Authorization: Bearer '] = auths[auth].cred.token;\n\
+        o.headers['Authorization'] = 'Bearer '+auths[auth].cred.token;\n\
 });\n\
 events.on('instance.xhr','response', function(p) {\n\
     var o = p.x;\n\
