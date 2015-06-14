@@ -81,7 +81,7 @@ module.exports = function(app) {
                         var domMgr = list.managers.dom;
                         return domMgr.mk('section', null, [
                             domMgr.mk('h1', null, _tr('Insight')),
-                                domMgr.mk('p', null, _tr("You've made websites, responsive improvements and utilized AngularJS style frameworks to produce products where most your development time is spent resolving problems the framework has introduced. Now you're skeptical of anything with the word <i>framework</i> in it. You want more. Let's begin.")),
+                            domMgr.mk('p', null, _tr("HTML falters when we try to use it for declaring dynamic views in web-applications. So don't use it! The resulting environment is extraordinarily fast, readable, and quick to develop and learn. Other frameworks deal with HTML’s shortcomings by expanding it and introducing sync and data binding issues. They are incredible inefficient and add complexity to the problem rather than solving it. Igaro App reorganises your efforts. It's more dynamic than any other framework and will scale to whatever requirements you throw at it.")),
                             list.container
                         ]);
                     });
@@ -105,7 +105,7 @@ module.exports = function(app) {
                         var domMgr = list.managers.dom;
                         return domMgr.mk('section', null, [
                             domMgr.mk('h1', null, _tr("Documentation")),
-                            domMgr.mk('p', null, _tr("Learn, develop and deploy a single web app that works everywhere - in a web browser or on a mobile device. Herein you'll find documentation for all modules and a walthrough on Igaro App's underlying architecture.")),
+                            domMgr.mk('p', null, _tr("Learn how Igaro's architecture is key to the success of everything built upon it (you wouldn't build a house on a base of mud) and how it's radical departure from the norms will leave you coding faster, with greater productivity and no headache. All of Igaro App's modules are documented and come with demos.")),
                             list.container
                         ]);
                     });
@@ -120,7 +120,7 @@ module.exports = function(app) {
                         var domMgr = list.managers.dom;
                         return domMgr.mk('section', null, [
                             domMgr.mk('h1', null, _tr("Support")),
-                            domMgr.mk('p', null, _tr("Discuss ideas, get involved with Igaro App development, or seek help. Igaro App is an open platform and we'd love you to contribute.")),
+                            domMgr.mk('p', null, _tr("Discuss ideas, get involved with Igaro App development, or seek help.")),
                             list.container
                         ]);
                     });
