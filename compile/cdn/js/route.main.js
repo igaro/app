@@ -10,14 +10,12 @@ module.requires = [
 module.exports = function(app) {
 
     var language = app['core.language'],
-        router = app['core.router'],
-        Amd = app['instance.amd'];
+        router = app['core.router'];
 
     return function(model) {
 
         var managers = model.managers,
             domMgr = managers.dom,
-            debugMgr = managers.debug,
             objectMgr = managers.object,
             coreObject = app['core.object'];
 
@@ -83,7 +81,7 @@ module.exports = function(app) {
                             domMgr.mk('h1', null, _tr('Insight')),
                             domMgr.mk('p', null, _tr("HTML falters when we try to use it for declaring dynamic views in web-applications. So don't use it! The resulting environment is extraordinarily fast, readable, and quick to develop and learn. Other frameworks deal with HTML’s shortcomings by expanding it and introducing sync and data binding issues. They are incredible inefficient and add complexity to the problem rather than solving it. Igaro App reorganises your efforts. It's more dynamic than any other framework and will scale to whatever requirements you throw at it.")),
                             list.container
-                        ]);
+                        ],'first');
                     });
                 }),
 

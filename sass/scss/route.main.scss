@@ -32,6 +32,14 @@ body >.core-router >.main {
 
             >section {
 
+               &.first {
+                    background: inline-image("route.main/version.svg") no-repeat 87.5% 80%;
+                    background-size:30%;
+                    @media (max-width:1100px) {
+                        display:none;
+                    } 
+                }
+
                 >h1 {
                     margin-left: 10%;
                     margin-bottom:0.3em;
