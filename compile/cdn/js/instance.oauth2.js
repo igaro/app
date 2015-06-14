@@ -9,7 +9,7 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var url = app['core.url'],
+    var coreUrl = app['core.url'],
  		bless = app['core.object'].bless;
 
 	var setBits = function(p) {
@@ -30,6 +30,7 @@ module.exports = function(app) {
 	var InstanceOauth2 = function(o) {
         this.name='instance.oauth2';
         this.asRoot=true;
+		var self = this;
         this.container=function(dom) {
             return dom.mk('div',null,null,function() {
                 this.className = 'igaro-instance-oauth2';
@@ -47,14 +48,13 @@ module.exports = function(app) {
         bless.call(this,o);
 		this.inProgress = false;
         setBits.call(this,o);
-		var self = this;
 		var msglist = function(event) {
             var callbackUrl = self.callbackUrl,
                 tokenName = self.tokenName,
                 url = event.data;
             if (url.substr(0,callbackUrl.length) === callbackUrl)
                 self._resolve({
-                    token:url.getParam(tokenName,url) || url.getHashParam(tokenName,url),
+                    token:coreUrl.getParam(tokenName,url) || coreUrl.getHashParam(tokenName,url),
                     url : url
                 });
         };
@@ -73,18 +73,18 @@ module.exports = function(app) {
             setBits.call(this,o);
 		var self = this,
 			body = document.body,
-			win = this.win;
-    	win.src = this.authUrl
+            container = this.container;
+    	this.win.src = this.authUrl
 			.replace('[CALLBACKURL]', encodeURIComponent(this.callbackUrl))
 			.replace('[SCOPE]', encodeURIComponent(this.scope))
 			.replace('[DEVID]', encodeURIComponent(this.devid));
-    	body.appendChild(this.container);
+    	body.appendChild(container);
     	this.inProgress = true;
 		return new Promise(function(resolve) {
 			self._resolve = function(o) {
 				self.inProgress =  false;
-                if (self.container.parentNode)
-                    body.removeChild(self.container);
+                if (container.parentNode)
+                    body.removeChild(container);
 				resolve(o);
 			};
 		});

@@ -72,11 +72,6 @@ module.exports = function(app) {
                     id:model.path.join('.')+'.hintcode'
                 }),
 
-                objectMgr.create('pagemessage',{
-                    type:'warn',
-                    message: _tr("You're using Igaro App 1.00 Beta. Documentation and translations are currently incomplete."),
-                }),
-
                 objectMgr.create('list').then(function (list) {
                     return writeList([
                         ['overview', _tr("Overview")],
@@ -85,13 +80,8 @@ module.exports = function(app) {
                     ],list).then(function() {
                         var domMgr = list.managers.dom;
                         return domMgr.mk('section', null, [
-                            domMgr.mk('div',null,[
-                                'firefox','chrome','ie','android','ios','wm'
-                            ].map(function(id) {
-                                return domMgr.mk('div',null,null,'supported ' + id);
-                            }),'ani'),
                             domMgr.mk('h1', null, _tr('Insight')),
-                            domMgr.mk('p', null, _tr('An amazing SPA architecture, developed by professionals, loaded with features.')),
+                                domMgr.mk('p', null, _tr("You've made websites, responsive improvements and utilized AngularJS style frameworks to produce products where most your development time is spent resolving problems the framework has introduced. Now you're skeptical of anything with the word <i>framework</i> in it. You want more. Let's begin.")),
                             list.container
                         ]);
                     });
@@ -115,7 +105,7 @@ module.exports = function(app) {
                         var domMgr = list.managers.dom;
                         return domMgr.mk('section', null, [
                             domMgr.mk('h1', null, _tr("Documentation")),
-                            domMgr.mk('p', null, _tr("Learn, develop and deploy an app in a web browser or on a mobile device or emulator.")),
+                            domMgr.mk('p', null, _tr("Learn, develop and deploy a single web app that works everywhere - in a web browser or on a mobile device. Herein you'll find documentation for all modules and a walthrough on Igaro App's underlying architecture.")),
                             list.container
                         ]);
                     });
@@ -130,7 +120,7 @@ module.exports = function(app) {
                         var domMgr = list.managers.dom;
                         return domMgr.mk('section', null, [
                             domMgr.mk('h1', null, _tr("Support")),
-                            domMgr.mk('p', null, _tr("Discuss ideas, get involved with Igaro App development, or seek help.")),
+                            domMgr.mk('p', null, _tr("Discuss ideas, get involved with Igaro App development, or seek help. Igaro App is an open platform and we'd love you to contribute.")),
                             list.container
                         ]);
                     });

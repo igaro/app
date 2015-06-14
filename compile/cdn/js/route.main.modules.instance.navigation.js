@@ -93,6 +93,7 @@ module.exports = function() {
                         attributes : [
                             {
                                 type:'object',
+                                decorateWithOrder:function() { return data.objects.option; },
                                 attributes : [
                                     {
                                         name : 'active',

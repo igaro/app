@@ -3,20 +3,26 @@ module.exports = function(app) {
     return function(model) {
 
         var data = {
-            desc : _tr("Provides a Oauth2 credential mechanism for login services."),
+            desc : _tr("Provides a Oauth2 credential mechanism for login services. Note: the demo asks for a token, but this can be automated (see /security)."),
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
             },
             blessed:true,
-            demo : "dom.mk('button', c, { en: 'Get JSON' }, function() {\n\
+            demo : "dom.mk('button', c, { en: 'Get Google API Token' }, function() {\n\
     this.addEventListener('click', function () {\n\
         var self = this;\n\
-        model.managers.object.create('jsonp').then(function (jsonp) {\n\
-            return jsonp.get({ res:'http://en.wikipedia.org/w/api.php?format=json&action=query&titles=India&prop=revisions&rvprop=content' }).then(\n\
-                function(data) {\n\
-                    c.insertBefore(dom.mk('div',null,JSON.stringify(data)), self);\n\
-                    c.removeChild(self);\n\
+        model.managers.object.create('oauth2').then(function (oauth2) {\n\
+            return oauth2.exec({\n\
+    authUrl : 'https://accounts.google.com/o/oauth2/auth?response_type=token&scope=[SCOPE]&client_id=[DEVID]&redirect_uri=[CALLBACKURL]',\n\
+    callbackUrl : 'http://www.igaro.com/misc/oauth2callbackUrl.html',\n\
+    devid:'998965944286-o80o481vg1a888teboqpj8n5gr3dfuqi.apps.googleusercontent.com',\n\
+    scope:'profile',\n\
+    tokenName:'access_token'\n\
+            }).then(\n\
+                function(o) {\n\
+                    if (o.token)\n\
+                        dom.setContent(c, o.token);\n\
                 }\n\
             ).catch(function(e) {;\n\
                 model.managers.debug.handle(e);\n\
