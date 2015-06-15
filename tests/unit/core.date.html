@@ -52,11 +52,11 @@ testSuite = function(app) {
         before("Should switch to offset +"+v, function() {
             return module.setEnvOffset(v,false).then(function() {
                 assert.equal(module.envOffset,v);
-            }); 
+            });
         });
 
         it("Should return date using new offset", function() {
-            var d = new Date('2000-01-01 00:00:00'),
+            var d = new Date(2000,1,1),
                 n = module.userTz(d).valueOf();
             assert.equal(n,d.valueOf()+d.getTimezoneOffset()*60000+v*60000);
         });

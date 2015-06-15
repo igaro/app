@@ -14,12 +14,7 @@
     "server_path" : "./lib/selenium-server-standalone-2.45.0.jar",
     "log_path" : "./tests/log",
     "host" : "127.0.0.1",
-    "port" : 4444,
-    "cli_args" : {
-      "webdriver.chrome.driver" : "./lib/chromedriver",
-      "webdriver.ie.driver" : "",
-      "webdriver.firefox.profile" : ""
-    }
+    "port" : 4444
   },
 
   "test_settings" : {
@@ -38,45 +33,7 @@
         "javascriptEnabled" : true,
         "acceptSslCerts" : true
       }
-    },
-
-    "opera" : {
-      "launch_url" : "http://localhost",
-      "selenium_host" : "127.0.0.1",
-      "selenium_port" : 4444,
-      "silent" : true,
-      "disable_colors": false,
-      "screenshots" : {
-        "enabled" : false,
-        "path" : ""
-      },
-      "desiredCapabilities" : {
-        "browserName" : "opera",
-        "javascriptEnabled" : true,
-        "acceptSslCerts" : true
-      }
-    },
-
-    "chrome" : {
-      "launch_url" : "http://localhost",
-      "selenium_host" : "127.0.0.1",
-      "selenium_port" : 4444,
-      "silent" : true,
-      "disable_colors": false,
-      "screenshots" : {
-        "enabled" : false,
-        "path" : ""
-      },
-      "desiredCapabilities" : {
-        "browserName" : "chrome",
-        "chromeOptions": {
-          "args":["disable-web-security", "ignore-certificate-errors", "start-maximized"]
-        },
-        "javascriptEnabled" : true,
-        "acceptSslCerts" : true
-      }
     }
-
   }
 }
 

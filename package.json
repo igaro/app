@@ -27,6 +27,6 @@
   },
   "man": "",
   "scripts": {
-    "test": "./bin/nightwatch/bin/nightwatch -e firefox,chrome -c ./tests/nightwatch.json ./tests/src"
+    "test": "./bin/nightwatch/bin/nightwatch -e firefox -c ./tests/nightwatch.json ./tests/src"
   }
 }

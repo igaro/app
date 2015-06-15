@@ -1,30 +1,92 @@
 // * Routes *
 // Since all errors result in an error handle message we can assume if it exists something is wrong.
 // Many routes contain instances, so the basics of those are also tested.
-// Doesn't test hyperlinks and user interaction.
+// Doesn't cover hyperlinks and user interaction.
 //
-var self = this;
-[
-'overview','features','install','install.license',
-'structure','bless','async','events','design','routes','locale','mobile','compat','modules',
-// todo: module documentation
-'contact'
-].forEach(function(n) {
 
-    self['route.main.'+n] = function(browser) {
 
-      var x = n.replace(/\./g,'/');
-      browser
-        .url('http://localhost:3006/'+x)
+this['routes'] = function(browser) {
+
+    browser
+        .url('http://localhost:3006/')
         .waitForElementVisible('body', 1000)
         .pause(500)
         .assert.elementNotPresent('.igaro >.error')
-        .assert.elementNotPresent('.instance-modaldialog')
-        .end();
+        .assert.elementNotPresent('.igaro-instance-modaldialog');
 
-    };
+    var self = this;
+    [
+        'overview',
+        'features',
+        'install',
+        'install.license',
+        'structure',
+        'bless',
+        'async',
+        'events',
+        'security',
+        'design',
+        'routes',
+        'locale',
+        'mobile',
+        'compat',
+        'modules',
+        'contact'
+    ].concat(
+        [
+            '3rdparty.fastclick',
+            '3rdparty.hammer',
+            '3rdparty.jquery.2',
+            '3rdparty.moment',
+            '3rdparty.observe',
+            'conf.app',
+            'core.country',
+            'core.currency',
+            'core.date',
+            'core.debug',
+            'core.dom',
+            'core.events',
+            'core.file',
+            'core.html',
+            'core.language',
+            'core.object',
+            'core.router',
+            'core.store',
+            'core.url',
+            'instance.accordion',
+            'instance.amd',
+            'instance.bookmark',
+            'instance.date',
+            'instance.form.validate',
+            'instance.jsonp',
+            'instance.list',
+            'instance.modaldialog',
+            'instance.navigation',
+            'instance.oauth2',
+            'instance.pagemessage',
+            'instance.rte',
+            'instance.samespace',
+            'instance.table',
+            'instance.toast',
+            'instance.xhr',
+            'polyfill.es6.promises',
+            'polyfill.ie.8',
+            'polyfill.js.1.6',
+            'polyfill.js.1.8.1',
+            'polyfill.js.1.8.5',
+            'polyfill.js.classList'
+        ].map(function(x) { return 'modules/'+x; })
+    ).forEach(function(n) {
 
-});
+          browser
+            .url('http://localhost:3006/'+n)
+            .waitForElementVisible('body', 1000)
+            .pause(500)
+            .assert.elementNotPresent('.igaro >.error')
+            .assert.elementNotPresent('.igaro-instance-modaldialog')
 
+    });
 
+    browser.end();
 
+}
