@@ -9,6 +9,8 @@ If it can't do something for you, we want to know about it.
 Documentation is online and also forms the basis of the github repo you download locally.
 You'll instantly have an Igaro App to customize to your own requirements.
 
+The current release is: 1.0.0. Use git tag to show releases.
+
 ## Overview
 
 [http://app.igaro.com/overview](http://app.igaro.com/overview)
