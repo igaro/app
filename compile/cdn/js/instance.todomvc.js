@@ -24,7 +24,6 @@ module.exports = function(app) {
                 debugMgr = managers.debug;
             return dom.mk('li',o,null,function() {
                 self.checkbox = dom.mk('input[checkbox]',this,null,function() {
-                    this.checked = o.completed || false;
                     this.addEventListener('click',function() {
                         self.setCompleted(this.checked).catch(function(e) {
                             return debugMgr.handle(e);
@@ -47,8 +46,8 @@ module.exports = function(app) {
                 });
             });
         };
-        this.completed = o.completed || false;
         bless.call(this,o);
+        this.setCompleted(o.completed || false);
     };
     TodoMVCListItem.prototype.setCompleted = function(complete) {
         this.container.setAttribute('data-completed',complete);
