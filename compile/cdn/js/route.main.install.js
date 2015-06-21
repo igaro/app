@@ -10,8 +10,7 @@ module.exports = function(app) {
 
     return function(model) {
 
-        var view = model.view,
-            wrapper = model.wrapper,
+        var wrapper = model.wrapper,
             language = app['core.language'],
             domMgr = model.managers.dom,
             router = app['core.router'];

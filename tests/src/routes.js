@@ -5,7 +5,7 @@
 //
 
 
-this['routes'] = function(browser) {
+this.routes = function(browser) {
 
     browser
         .url('http://localhost:3006/')
@@ -14,12 +14,13 @@ this['routes'] = function(browser) {
         .assert.elementNotPresent('.igaro >.error')
         .assert.elementNotPresent('.igaro-instance-modaldialog');
 
-    var self = this;
     [
         'overview',
         'features',
         'install',
         'install.license',
+        'showcase',
+        'showcase.todomvc',
         'structure',
         'bless',
         'async',
@@ -83,7 +84,7 @@ this['routes'] = function(browser) {
             .waitForElementVisible('body', 1000)
             .pause(500)
             .assert.elementNotPresent('.igaro >.error')
-            .assert.elementNotPresent('.igaro-instance-modaldialog')
+            .assert.elementNotPresent('.igaro-instance-modaldialog');
 
     });
 

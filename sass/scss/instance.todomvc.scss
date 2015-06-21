@@ -1,4 +1,4 @@
-.instance-todomvc { 
+.instance-todomvc {
 
     max-width: 35em;
     padding:1em;
@@ -15,60 +15,28 @@
     >.header {
         position:relative;
         padding-bottom:0.5em;
-        border-bottom: 1px solid #ededed;
         >input[type="text"] {
             font-style:italic;
         }
-        >input[type="checkbox"] {
-            position: absolute;
-            top: -12px;
-            left: -8px;
-            width: 60px;
-            height: 34px;
-            text-align: center;
-            border: none;
-            background:none;
-            box-shadow:none;
-            -webkit-transform: rotate(90deg);
-            transform: rotate(90deg);
-            -webkit-appearance: none;
-            appearance: none;
-            &:hover {
-                outline:none;
-                box-shadow:none;
-                border:none;
-            }
-
-            &:before {
-                content: '❯';
-                font-size: 22px;
-                color: #e6e6e6;
-                padding: 10px 27px 10px 27px;
-            }
-
-            &:checked:before {
-                color: #737373;
-            }
-        }
-
     }
 
     >.header >input[type="text"], >.main >ul >li >span {
         border:none;
         box-shadow:none;
-        font: 140% 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size:140%;
         outline: none;
         &:hover {
             outline:none;
             box-shadow:none;
             border:none;
         }
+        margin-left:0.5em;
         width:80%;
-        margin-left:2.6em;
     }
 
     >.main {
         margin-bottom:1em;
+        border-top: 1px solid #ededed;
         >ul {
             padding-left:0;
             >li {
@@ -76,40 +44,11 @@
                 margin:0;
                 position:relative;
                 border-bottom: 1px solid #ededed;
-
-                >input[type="checkbox"] {
-                    width: 40px;
-                    height: auto;
-                    position: absolute;
-                    top: 0;
-                    bottom: 0;
-                    border: none;
-                    -webkit-appearance: none;
-                    appearance: none;
-                    &:hover {
-                        outline:none;
-                        border:none;
-                        box-shadow:none;
-                    }
-
-                    &:after {
-                        content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="20 -16 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#ededed" stroke-width="3"/></svg>');
-                    }
-
-                    &:checked:after {
-                        content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="20 -16 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#bddad5" stroke-width="3"/><path fill="#5dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>');
-                    }
-                }
-
                 list-style:none;
                 >button {
                     float:right;
-                    min-width:auto;
-                    width:1em;
-                    height:1em;
-                    border:0;
-                    outline:0;
-                    background:none;
+                    color: #cc9a9a;
+                    min-width:0;
                 }
             }
         }
@@ -118,12 +57,13 @@
     >.footer {
 
         font-size:90%;
+        line-height:normal;
         position:relative;
         text-align:center;
 
         >.filter {
             display:inline-block;
-            >button { 
+            >button {
                 min-width:0;
                 background:none;
             }
@@ -141,4 +81,39 @@
 
     }
 
+    &[data-filter="all"] {
+        >.footer >.filter >button:nth-child(1) {
+            border-color: rgba(175, 47, 47,.3);
+        }
+    }
+
+    &[data-filter="active"] {
+        >.main >ul >li[data-completed="true"] {
+            display:none;
+        }
+        >.footer >.filter >button:nth-child(2) {
+            border-color: rgba(175, 47, 47,.3);
+        }
+    }
+
+    &[data-filter="completed"] {
+        >.main >ul >li[data-completed="false"] {
+            display:none;
+        }
+        >.footer >.filter >button:nth-child(3) {
+            border-color: rgba(175, 47, 47,.3);
+        }
+    }
+
+    &[data-hasCompleted="false"] {
+        >.footer >button {
+            display:none;
+        }
+    }
+
+    &[data-hasItems="false"] {
+        >.header >input[type="checkbox"], >.main, >.footer {
+            display:none;
+        }
+    }
 }

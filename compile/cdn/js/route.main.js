@@ -74,7 +74,8 @@ module.exports = function(app) {
                     return writeList([
                         ['overview', _tr("Overview")],
                         ['features', _tr("Features")],
-                        ['install', _tr("Install")]
+                        ['install', _tr("Install")],
+                        ['showcase', _tr("Showcase")]
                     ],list).then(function() {
                         var domMgr = list.managers.dom;
                         return domMgr.mk('section', null, [

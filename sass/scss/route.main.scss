@@ -33,11 +33,11 @@ body >.core-router >.main {
             >section {
 
                &.first {
-                    background: inline-image("route.main/version.svg") no-repeat 86% 85%;
+                    background: inline-image("route.main/version.svg") no-repeat 97.5% 85%;
                     background-size:27%;
-                    @media (max-width:1100px) {
+                    @media (max-width:1300px) {
                         background:none;
-                    } 
+                    }
                 }
 
                 >h1 {

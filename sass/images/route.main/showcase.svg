@@ -1,1 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><path d="M126.4 118.99v343.01h327.484v-343.01h-327.484zm292.616 264.426h-257.746v-229.557h257.746v229.557zm-79.248-149.402c0 26.692-21.637 48.331-48.329 48.331-26.69 0-48.329-21.639-48.329-48.331 0-26.69 21.639-48.328 48.329-48.328 26.692 0 48.329 21.637 48.329 48.328zm-8.44 50.608c-11.263 8.896-25.224 13.832-39.89 13.832-14.835 0-28.931-5.053-40.246-14.117-29.824 10.943-43.144 49.208-43.144 66.675h165.932c0-17.318-13.42-55.306-42.652-66.39zm54.272-234.622v34.869h-292.616v313.141h-34.869v-348.01h327.485z"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- The icon can be used freely in both personal and commercial projects with no attribution required, but always appreciated. 
+You may NOT sub-license, resell, rent, redistribute or otherwise transfer the icon without express written permission from iconmonstr.com -->
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="512px" height="512px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+<path id="picture-multi-2-icon" d="M375.333,197.791L340.858,84.682L49.999,173.333l66.92,219.556l41.014-12.501v46.931h304.068
+	V197.791H375.333z M136.548,356.042L86.845,192.966l234.381-71.44l23.246,76.266H157.933v151.732L136.548,356.042z M432.479,397.797
+	H187.452V227.312h245.027V397.797z M226.454,273.137c0-12.443,10.088-22.533,22.533-22.533c12.441,0,22.529,10.09,22.529,22.533
+	c0,12.444-10.088,22.531-22.529,22.531C236.542,295.668,226.454,285.581,226.454,273.137z M340.739,273.857l-37.35,53.068
+	l-20.299-20.922l-57.275,65.076h179.031L340.739,273.857z"/>
+</svg>

@@ -2,4 +2,11 @@
 
 body >.core-router >.main >.showcase >.wrapper {
     @include layoutStandard;
+
+    >.todomvc {
+        max-width:400px;
+        height:183px;
+        background: inline-image("route.main.showcase/todomvc.jpg") no-repeat 0 0;
+        background-size:100%;
+    }
 }
