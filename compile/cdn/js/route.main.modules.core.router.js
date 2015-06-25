@@ -23,6 +23,31 @@ module.exports = function(app) {
                 },
                 attributes : [
                     {
+                        name:'addManager',
+                        type:'function',
+                        attributes: [
+                            {
+                                type:'string',
+                                required:true,
+                                attributes:[
+                                    {
+                                        desc: _tr("An identifier 'x' to use for the manager, which will be accessible under .managers[x].")
+                                    }
+                                ]
+                            },
+                            {
+                                type:'object',
+                                required:true,
+                                attributes:[
+                                    {
+                                        desc: _tr("The module containing the manager.")
+                                    }
+                                ]
+                            }
+                        ],
+                        desc : _tr("Because a route is self blessed, bless managers other than the default must be added manually. See core.object for further information.")
+                    },
+                    {
                         name:'addRoute',
                         type:'function',
                         attributes: [

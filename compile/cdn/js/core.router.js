@@ -46,6 +46,13 @@ module.exports = function(app) {
         this.cssElement=dom.mk('style',dom.head);
     };
 
+    CoreRouterRoute.prototype.addManager = function(name,module) {
+        if (this.managers[name])
+            throw new Error('Manager already appended. Unable to add twice.');
+        var m = this.managers[name] = module.createMgr(this);
+        return m;
+    };
+
     CoreRouterRoute.prototype.captureUri = function(c) {
         this.uriPieces = this.originalUri.slice(0,c).map(function(p) {
             return decodeURIComponent(p);
