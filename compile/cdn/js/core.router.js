@@ -248,6 +248,7 @@ module.exports = function(app) {
                     if(c.destroyOnLeave)
                         return c.destroy();
                     var s = document.body.scrollTop || document.documentElement.scrollTop;
+                    console.log(c.name, s);
                     c.scrollPosition = s < 0? 0 :s;
                 })
                 :
@@ -273,8 +274,6 @@ module.exports = function(app) {
                             });
                         });
                     }, Promise.resolve()).then(function() {
-                        if (c.scrollPosition !== false)
-                            document.body.scrollTop = document.documentElement.scrollTop = c.scrollPosition;
                         if (typeof state === 'boolean' && state === false) {
                             history.replaceState({ initial:true },null);
                         } else {
@@ -295,6 +294,8 @@ module.exports = function(app) {
                             }
                             history.pushState(state || {},null,urlPath);
                         }
+                        if (typeof c.scrollPosition === 'number')
+                            document.body.scrollTop = document.documentElement.scrollTop = c.scrollPosition;
                         return routerEventMgr.dispatch('to-loaded');
                     }).catch(function (e) {
                         if (typeof e === 'boolean' && e === -1600)
