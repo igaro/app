@@ -5,10 +5,10 @@ module.exports = function(grunt) {
     var stagingDir = '.staging';
     var buildDirs  = ['build/debug','build/deploy'];
     var mime = require('mime');
-    var beginPort = 3006; 
+    var beginPort = 3006;
     var config = {
         pkg: grunt.file.readJSON('package.json'),
-    
+
         watch : {
             changes: {
                 files: ['sass/**/*','compile/**/*','copy/**/*','translations/*.po'],
@@ -24,7 +24,7 @@ module.exports = function(grunt) {
 
         compass: {
             build: {
-                options: {              
+                options: {
                     config: 'compass.rb'
                 }
             }
@@ -41,7 +41,7 @@ module.exports = function(grunt) {
             app: {
                 files: [{
                     expand: true,
-                    cwd: stagingDir, 
+                    cwd: stagingDir,
                     src: ['**/*.js'],
                     dest: stagingDir
                 }]
@@ -54,7 +54,7 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: 'compile', 
+                        cwd: 'compile',
                         src: ['**'],
                         dest: stagingDir
                     }
@@ -65,7 +65,7 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: stagingDir, 
+                        cwd: stagingDir,
                         src: ['**'],
                         dest: buildDirs[0]
                     }
@@ -76,7 +76,7 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: stagingDir, 
+                        cwd: stagingDir,
                         src: ['**'],
                         dest: buildDirs[1]
                     }
@@ -144,9 +144,10 @@ module.exports = function(grunt) {
         config.connect[k] = {
             options: {
                 port : beginPort+i,
+                keepalive : grunt.option('keepalive') === 1,
                 base : k,
                 middleware: function(connect, options, middlewares) {
-                    middlewares.unshift(function(req, res, next) {
+                    middlewares.unshift(function(req, res) {
                         var url = req.originalUrl;
                         if (url.substr(0,5) === '/cdn/') {
                             var c = k+'/'+url;
