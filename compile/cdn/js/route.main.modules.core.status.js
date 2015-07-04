@@ -1,4 +1,8 @@
-module.exports = function(app) {
+//# sourceURL=route.main.modules.core.status.js
+
+module.exports = function() {
+
+    "use strict";
 
     return function(model) {
 

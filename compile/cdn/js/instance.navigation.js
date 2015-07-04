@@ -1,6 +1,4 @@
-(function() {
-
-'use strict';
+//# sourceURL=instance.navigation.js
 
 module.requires = [
     { name:'instance.navigation.css' },
@@ -8,6 +6,8 @@ module.requires = [
 ];
 
 module.exports = function(app) {
+
+    "use strict";
 
     var object = app['core.object'],
         bless = object.bless,
@@ -131,5 +131,3 @@ module.exports = function(app) {
     return InstanceNavigation;
 
 };
-
-})();

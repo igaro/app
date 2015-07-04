@@ -1,6 +1,3 @@
-(function () {
-
-'use strict';
 
 module.requires = [
     { name: 'route.main.modules.css' }
@@ -8,8 +5,11 @@ module.requires = [
 
 module.exports = function(app) {
 
+    'use strict';
+
     var language = app['core.language'],
-        router = app['core.router'];
+        router = app['core.router'],
+        dom = app['core.dom'];
 
     return function(model) {
 
@@ -52,7 +52,7 @@ module.exports = function(app) {
                             });
                             if (stash.activeFor) {
                                 container.className=stash.activeFor.container.className='';
-                                brows.forEach(function(br,i) {
+                                brows.forEach(function(br) {
                                     if (br.stash.belongsTo && br.stash.belongsTo.indexOf(row) !== -1) {
                                         br.destroy().catch(function (e) {
                                             return debugMgr.handle(e);
@@ -76,7 +76,6 @@ module.exports = function(app) {
 
                 var body=tbl.body,
                     brows=body.rows,
-                    domMgr = tbl.managers.dom,
                     attributes = meta.attributes? meta.attributes.slice(0) : [],
                     blessed = meta.blessed,
                     decorateWithOrder = meta.decorateWithOrder;
@@ -478,7 +477,7 @@ module.exports = function(app) {
                 });
                 domMgr.mk('pre',v, data.demo.trim(), 'democode');
                 domMgr.mk('h2',v,_tr("Output"));
-                var c = domMgr.mk('p',v);
+                var c = domMgr.mk('p',v); //jshint ignore:line
                 try {
                     var r = eval(data.demo);
                     if (r instanceof Promise) {
@@ -493,7 +492,7 @@ module.exports = function(app) {
 
             if (data.dependencies) {
                 domMgr.mk('h1',v,_tr("Dependencies"));
-                var p = domMgr.mk('p',v,null,function() {
+                domMgr.mk('p',v,null,function() {
                     var s = this;
                     data.dependencies.forEach(function(o) {
                         domMgr.mk('button',s,o).addEventListener('click', function(evt) {
@@ -649,5 +648,3 @@ module.exports = function(app) {
 
     };
 };
-
-})();

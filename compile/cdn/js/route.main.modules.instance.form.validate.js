@@ -1,8 +1,12 @@
+//# sourceURL=route.main.modules.instance.form.validate.js
+
 module.requires = [
     { name:'core.currency.js' }
 ];
 
-module.exports = function(app) {
+module.exports = function() {
+
+    "use strict";
 
     return function(model) {
 

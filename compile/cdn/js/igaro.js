@@ -1,3 +1,5 @@
+//# sourceURL=igaro.js
+
 (function () {
 
     "use strict";
@@ -22,7 +24,8 @@
             modules.push.apply(modules,libs.network);
 
         // touch libraries
-        if (libs.touch && ('ontouchstart' in window || navigator.maxTouchPoints || navigator.msMaxTouchPoints))
+        var maxTouchPoints = window.navigator.maxTouchPoints || window.navigator.msMaxTouchPoints;
+        if (libs.touch && ((maxTouchPoints === undefined && 'ontouchstart' in window) || (typeof maxTouchPoints === 'number' && maxTouchPoints > 1)))
             modules.push.apply(modules,libs.touch);
 
         // fonts

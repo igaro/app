@@ -1,3 +1,5 @@
+//# sourceURL=core.router.js
+
 (function() {
 
 'use strict';
@@ -248,7 +250,6 @@ module.exports = function(app) {
                     if(c.destroyOnLeave)
                         return c.destroy();
                     var s = document.body.scrollTop || document.documentElement.scrollTop;
-                    console.log(c.name, s);
                     c.scrollPosition = s < 0? 0 :s;
                 })
                 :

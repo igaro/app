@@ -1,3 +1,5 @@
+//# sourceURL=polyfill.ie.8.js
+
 if (!window.addEventListener) {
     var Event = function() { };
     Event.prototype.preventDefault = function () {

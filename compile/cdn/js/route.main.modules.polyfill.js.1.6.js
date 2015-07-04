@@ -1,4 +1,8 @@
-module.exports = function(app) {
+//# sourceURL=route.main.modules.polyfill.js.1.6.js
+
+module.exports = function() {
+
+    "use strict";
 
     return function(model) {
 

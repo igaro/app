@@ -1,4 +1,8 @@
-module.exports = function(app) {
+//# sourceURL=route.main.modules.core.router.js
+
+module.exports = function() {
+
+    "use strict";
 
     return function(route) {
 

@@ -1,12 +1,12 @@
-(function() {
-
-'use strict';
+//# sourceURL=instance.samespace.js
 
 module.requires = [
     { name:'instance.samespace.css' }
 ];
 
 module.exports = function(app) {
+
+    'use strict';
 
     var object = app['core.object'],
         bless = object.bless,
@@ -56,7 +56,7 @@ module.exports = function(app) {
         this.loop = typeof o.loop === 'boolean'? o.loop : true;
         managers.event.on('destroy', function() {
             if (self.timerRef)
-                clearInterval(self.timerRef);
+                window.clearInterval(self.timerRef);
         });
 
     };
@@ -68,7 +68,7 @@ module.exports = function(app) {
             self.addSpaces(spaces)
             :
             Promise.resolve()
-        ).then(function(spaces) {
+        ).then(function() {
             return (self.spaces.length?
                 self.to(self.spaces[0])
                 :
@@ -96,17 +96,17 @@ module.exports = function(app) {
 
     InstanceSameSpace.prototype.stop = function() {
         if (this.timerRef)
-            clearInterval(this.timerRef);
+            window.clearInterval(this.timerRef);
         this.canvas.setAttribute('status','stopped');
         return this.managers.event.dispatch('stop');
     };
 
     InstanceSameSpace.prototype.start = function() {
         if (this.timerRef)
-            clearInterval(this.timerRef);
+            window.clearInterval(this.timerRef);
         var self = this;
         this.canvas.setAttribute('status','playing');
-        this.timerRef = setInterval(function() {
+        this.timerRef = window.setInterval(function() {
             if (self.current === self.spaces.length-1 && ! self.loop)
                 return self.stop();
             var to = self.current === self.spaces.length-1? 0 : self.current+1;
@@ -136,7 +136,3 @@ module.exports = function(app) {
     return InstanceSameSpace;
 
 };
-
-})();
-
-

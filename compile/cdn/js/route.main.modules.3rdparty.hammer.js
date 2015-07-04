@@ -1,4 +1,8 @@
-module.exports = function(app) {
+//# sourceURL=route.main.modules.3rdparty.hammer.js
+
+module.exports = function() {
+
+    "use strict";
 
     return function(model) {
 

@@ -1,3 +1,5 @@
+//# sourceURL=3rdparty.hammer.js
+
 (function(window, document, exportName, undefined) {
   'use strict';
 

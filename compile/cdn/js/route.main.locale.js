@@ -1,8 +1,12 @@
+//# sourceURL=route.main.locale.js
+
 module.requires = [
     { name: 'route.main.locale.css' }
 ];
 
-module.exports = function(app) {
+module.exports = function() {
+
+    "use strict";
 
     return function(model) {
 

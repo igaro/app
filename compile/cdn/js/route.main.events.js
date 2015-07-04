@@ -1,12 +1,12 @@
-(function() {
-
-"use strict";
+//# sourceURL=route.main.events.js
 
 module.requires = [
     { name: 'route.main.events.css' }
 ];
 
 module.exports = function(app) {
+
+    "use strict";
 
     return function(model) {
 
@@ -73,5 +73,3 @@ module.exports = function(app) {
     };
 
 };
-
-})();

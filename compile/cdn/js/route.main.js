@@ -1,3 +1,5 @@
+//# sourceURL=route.main.js
+
 (function() {
 
 "use strict";
@@ -9,8 +11,7 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var language = app['core.language'],
-        router = app['core.router'];
+    var router = app['core.router'];
 
     return function(model) {
 

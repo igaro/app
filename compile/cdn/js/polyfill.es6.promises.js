@@ -1,4 +1,6 @@
-// promise polyfill
+//# sourceURL=polyfill.es6.promises.js
+
+// RSVP
 
 (function() {
 var define, requireModule, require, requirejs;

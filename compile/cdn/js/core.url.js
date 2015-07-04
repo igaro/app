@@ -1,8 +1,8 @@
-(function() {
+//# sourceURL=core.url.js
 
-'use strict';
+module.exports = function() {
 
-module.exports = function(app) {
+    "use strict";
 
     return {
 
@@ -13,7 +13,7 @@ module.exports = function(app) {
                 separator = '?';
             var vars = {};
             var regexp = new RegExp("["+separator+"&]+([^=&]+)=([^&]*)", "gi");
-            var parts = url.replace(regexp, function(m,key,value) {
+            url.replace(regexp, function(m,key,value) {
                 vars[key] = value;
             });
             return vars;
@@ -64,5 +64,3 @@ module.exports = function(app) {
     };
 
 };
-
-})();

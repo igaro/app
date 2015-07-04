@@ -1,4 +1,8 @@
-module.exports = function(app) {
+//# sourceURL=core.html.js
+
+module.exports = function() {
+
+    "use strict";
 
     return {
 

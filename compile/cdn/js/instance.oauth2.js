@@ -1,6 +1,4 @@
-(function() {
-
-'use strict';
+//# sourceURL=instance.oauth2.js
 
 module.requires = [
     { name: 'instance.oauth2.css' },
@@ -8,6 +6,8 @@ module.requires = [
 ];
 
 module.exports = function(app) {
+
+    "use strict";
 
     var coreUrl = app['core.url'],
  		bless = app['core.object'].bless;
@@ -93,5 +93,3 @@ module.exports = function(app) {
 	return InstanceOauth2;
 
 };
-
-})();

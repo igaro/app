@@ -1,8 +1,12 @@
+//# sourceURL=route.main.modules.instance.samespace.js
+
 module.requires = [
     { name: 'route.main.modules.instance.samespace.css' },
 ];
 
-module.exports = function(app) {
+module.exports = function() {
+
+    "use strict";
 
     return function(model) {
 

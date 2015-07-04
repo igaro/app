@@ -1,3 +1,5 @@
+//# sourceURL=route.main.install.license.js
+
 module.requires = [
     { name:'route.main.install.license.css' }
 ];

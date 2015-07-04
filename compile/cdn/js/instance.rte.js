@@ -1,8 +1,12 @@
+//# sourceURL=instance.rte.js
+
 module.requires = [
     { name:'instance.rte.css' }
 ];
 
 module.exports = function(app) {
+
+    "use strict";
 
     if (! ('contentEditable' in document.body))
         throw new Error({ incompatible:true, noobject:'contentEditable' });
@@ -30,7 +34,8 @@ module.exports = function(app) {
         var self = this,
             managers = this.managers,
             domMgr = managers.dom,
-            objectMgr = managers.object;
+            objectMgr = managers.object,
+            eventMgr = managers.event;
         return objectMgr.create('navigation',{
             container: self.container,
             parent:self
@@ -39,7 +44,7 @@ module.exports = function(app) {
             var onChange = function(dispatch) {
                 var raw = self.raw,
                     rte = self.rte;
-                clearTimeout(self.onChangeTimerid);
+                window.clearTimeout(self.onChangeTimerid);
                 if (self.inWYSIWYG) {
                     raw.value = rte.innerHTML;
                 } else {
@@ -47,7 +52,7 @@ module.exports = function(app) {
                 }
                 if (dispatch)
                     return eventMgr.dispatch('change', self.getHTML());
-                self.onChangeTimerid = setTimeout(function() {
+                self.onChangeTimerid = window.setTimeout(function() {
                     onChange(true);
                 },300);
             };
@@ -58,7 +63,7 @@ module.exports = function(app) {
                     pool:[],
                     container : domMgr.mk('div',t,null,'panels')
                 };
-                var rte = self.rte = domMgr.mk('div',t,null,function() {
+                self.rte = domMgr.mk('div',t,null,function() {
                     this.className = 'editable';
                     this.contentEditable = true;
                     this.styleWithCSS=false;
@@ -246,8 +251,7 @@ module.exports = function(app) {
     };
 
     InstanceRTE.prototype.addPanel = function(o) {
-        var self = this,
-            panels = this.panels,
+        var panels = this.panels,
             pc = panels.container.childNodes[1];
         return panels.menu.addOption({
             title:o.title,

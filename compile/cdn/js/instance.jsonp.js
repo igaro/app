@@ -1,8 +1,8 @@
-(function() {
-
-'use strict';
+//# sourceURL=instance.jsonp.js
 
 module.exports = function(app) {
+
+    'use strict';
 
     var bless = app['core.object'].bless,
         dom = app['core.dom'],
@@ -77,5 +77,3 @@ module.exports = function(app) {
     return InstanceJsonP;
 
 };
-
-})();

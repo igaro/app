@@ -1,14 +1,13 @@
-(function() {
-
-'use strict';
+//# sourceURL=instance.list.js
 
 module.requires = [
     { name: 'core.language.js' },
     { name: 'instance.list.css' }
 ];
 
-
 module.exports = function(app) {
+
+    "use strict";
 
     var object = app['core.object'],
         bless = object.bless,
@@ -93,5 +92,3 @@ module.exports = function(app) {
 
     return InstanceList;
 };
-
-})();

@@ -1,3 +1,5 @@
+//# sourceURL=3rdparty.fastclick.js
+
 (function () {
 	'use strict';
 

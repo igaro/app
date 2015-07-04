@@ -1,8 +1,12 @@
+//# sourceURL=route.main.compat.js
+
 module.requires = [
     { name: 'route.main.compat.css' },
 ];
 
-module.exports = function(app) {
+module.exports = function() {
+
+    "use strict";
 
     return function(model) {
 

@@ -1,3 +1,5 @@
+//# sourceURL=route.main.modules.instance.navigation.js
+
 module.exports = function() {
 
     'use strict';

@@ -1,6 +1,4 @@
-(function() {
-
-'use strict';
+//# sourceURL=instance.pagemessage.js
 
 module.requires = [
     { name:'instance.pagemessage.css' },
@@ -9,6 +7,8 @@ module.requires = [
 ];
 
 module.exports = function(app) {
+
+    "use strict";
 
     var bless = app['core.object'].bless;
 
@@ -63,5 +63,3 @@ module.exports = function(app) {
     return InstancePageMessage;
 
 };
-
-})();

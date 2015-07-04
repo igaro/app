@@ -1,18 +1,17 @@
-(function() {
-
-"use strict";
+//# sourceURL=route.main.async.js
 
 module.requires = [
     { name: 'route.main.async.css' }
 ];
 
-module.exports = function(app) {
+module.exports = function() {
+
+    "use strict";
 
     return function(model) {
 
         var wrapper = model.wrapper,
-            domMgr = model.managers.dom,
-            router = app['core.router'];
+            domMgr = model.managers.dom;
 
         model.stash.title= _tr("Asynchronous");
         model.stash.desc = _tr("Standard A+ Promises throughout, with an event driven architecture and sequencing.");
@@ -42,5 +41,3 @@ module.exports = function(app) {
     };
 
 };
-
-})();

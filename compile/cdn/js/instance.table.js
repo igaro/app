@@ -1,6 +1,4 @@
-(function() {
-
-'use strict';
+//# sourceURL=instance.table.js
 
 module.requires = [
     { name:'core.language.js'},
@@ -8,6 +6,8 @@ module.requires = [
 ];
 
 module.exports = function(app) {
+
+    "use strict";
 
     var object = app['core.object'],
         dom = app['core.dom'],
@@ -162,5 +162,3 @@ module.exports = function(app) {
 
     return InstanceTable;
 };
-
-})();

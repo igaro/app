@@ -1,12 +1,12 @@
-(function() {
-
-"use strict";
+//# sourceURL=route.location.js
 
 module.requires = [
     { name:'route.location.css' }
 ];
 
 module.exports = function(app) {
+
+    "use strict";
 
     var router = app['core.router'],
         dom = app['core.dom'];
@@ -30,8 +30,7 @@ module.exports = function(app) {
 
         // location
         domMgr.mk('div',wrapper,null, function() {
-            var self = this,
-                paths = domMgr.mk('div',this,null,'paths'),
+            var paths = domMgr.mk('div',this,null,'paths'),
                 params = domMgr.mk('div',this,null,'params'),
                 paramsw = domMgr.mk('div',params);
 
@@ -71,5 +70,3 @@ module.exports = function(app) {
     };
 
 };
-
-})();

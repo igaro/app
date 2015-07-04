@@ -1,15 +1,16 @@
 #Igaro App [http://app.igaro.com](http://app.igaro.com)
+=============
 
-Igaro App is a complete single page application stack using Javascript to allow you to build
-App's that work on everything and perform brilliantly. It's 100% free and uses only web standards.
+"Faster than Angular, more advanced than React."
 
-Igaro App aims to do everything out the box with 100% efficiency.
-If it can't do something for you, we want to know about it.
+Igaro App is a complete web-app framework using Javascript.
 
-Documentation is online and also forms the basis of the github repo you download locally.
-You'll instantly have an Igaro App to customize to your own requirements.
+Potentially the web's finest SPA framework. No limits. No disadvantages.
 
 The current release is: 1.0.0. Use git tag to show releases.
+
+Learn, Documentation
+-------
 
 ## Overview
 
@@ -67,9 +68,9 @@ The current release is: 1.0.0. Use git tag to show releases.
 
 Read [http://app.igaro.com/testing](http://app.igaro.com/testing) first.
 
-Run the test suite using npm test.
+Run the test suite by starting grunt and running npm test.
 
-Run unit tests individually by setting Firefox's about:config->security.fileuri.strict_origin_policy to false and opening the HTML file.
+You may individually tests by setting Firefox's about:config->security.fileuri.strict_origin_policy to false and opening the HTML file.
 
 ##  Modules
 

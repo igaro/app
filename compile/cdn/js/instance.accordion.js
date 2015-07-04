@@ -1,6 +1,4 @@
-(function() {
-
-'use strict';
+//# sourceURL=instance.accordion.js
 
 module.requires = [
     { name:'core.language.js'},
@@ -8,6 +6,8 @@ module.requires = [
 ];
 
 module.exports = function(app) {
+
+    "use strict";
 
     var object = app['core.object'],
         bless = object.bless,
@@ -118,6 +118,3 @@ module.exports = function(app) {
     };
     return InstanceAccordion;
 };
-
-
-})();

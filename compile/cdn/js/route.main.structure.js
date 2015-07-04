@@ -1,3 +1,5 @@
+//# sourceURL=route.main.structure.js
+
 (function () {
 
 "use strict";
@@ -90,7 +92,7 @@ module.exports = function(app) {
                                                 sections : [
                                                     {
                                                         title:'3rdparty.*.js',
-                                                        content:_tr("Provide third party code in a structured format. An example is JQuery. Some provide an interface to system features such as touch.")
+                                                        content:_tr("Provide third party code in a structured format. Some provide an interface to system features such as touch.")
                                                     },
                                                     {
                                                         title:'igaro.js',
@@ -158,10 +160,10 @@ module.exports = function(app) {
                     });
                 }),
 
-                Promise.resolve(domMgr.mk('h1',null,_tr("Module Layout"))),
-                Promise.resolve(domMgr.mk('p',null,_tr("Igaro modules export code via module.export while 3rd party code (i.e JQuery) may not. All have access to the app (private) and global settings (public) variable, so only load modules from locations you trust."))),
-                Promise.resolve(domMgr.mk('p',null,_tr("The name of the module dicatates its namespace in the app, i.e for type.name.js, what is exported will be available in app['type.name']."))),
-                Promise.resolve(domMgr.mk('p',null,_tr("Dependencies can be added to the requires list. Instance modules can be lazy loaded (initial load speed -v- possible lag later on, your call) and don't need to be added. A custom server/cdn can be supplied along with the module name (not shown)."))),
+                Promise.resolve(domMgr.mk('h1',null,_tr("Module Format"))),
+                Promise.resolve(domMgr.mk('p',null,_tr("Igaro modules use the CommonJS / NodeJS format. All modules have access to the private app variable, so only load modules from locations you trust."))),
+                Promise.resolve(domMgr.mk('p',null,_tr("The name of a module usually dictates its namespace in the app, i.e for 'type.name.js', what is exported will be available in app['type.name']."))),
+                Promise.resolve(domMgr.mk('p',null,_tr("Dependencies can be added to the module.requires list. Instance modules can be lazy loaded (initial load speed -v- possible lag later on, your call) and don't need to be added. A custom server/cdn can be supplied along with the module name (not shown)."))),
                 Promise.resolve(domMgr.mk('pre',null,domMgr.mk('code',null,"(function() {\n\
 'use strict';\n\
 module.requires = [\n\

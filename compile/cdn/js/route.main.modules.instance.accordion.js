@@ -1,4 +1,8 @@
-module.exports = function(app) {
+//# sourceURL=route.main.modules.instance.accordion.js
+
+module.exports = function() {
+
+    "use strict";
 
     return function(model) {
 

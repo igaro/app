@@ -1,3 +1,5 @@
+//# sourceURL=3rdparty.moment.js
+
 //! moment.js
 //! version : 2.6.0
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors

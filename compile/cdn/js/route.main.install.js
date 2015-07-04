@@ -1,3 +1,5 @@
+//# sourceURL=route.main.install.js
+
 (function () {
 
 "use strict";
@@ -7,6 +9,8 @@ module.requires = [
 ];
 
 module.exports = function(app) {
+
+    "use strict";
 
     return function(model) {
 

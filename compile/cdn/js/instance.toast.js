@@ -1,6 +1,4 @@
-(function() {
-
-'use strict';
+//# sourceURL=instance.toast.js
 
 module.requires = [
     { name: 'instance.toast.css' },
@@ -9,8 +7,11 @@ module.requires = [
 
 module.exports = function(app) {
 
+    "use strict";
+
     var language = app['core.language'],
-        dom = app['core.dom'];
+        dom = app['core.dom'],
+        bless = app['core.object'].bless;
 
     var showTime = {
         short : 2000,
@@ -34,7 +35,7 @@ module.exports = function(app) {
 
         // self destruct
         var self = this;
-        setTimeout(function() {
+        window.setTimeout(function() {
             self.destroy();
         }, showTime[duration]+200);
 
@@ -42,7 +43,7 @@ module.exports = function(app) {
         if (recentInstanceToastMessages.indexOf(str) > -1)
             return;
         recentInstanceToastMessages.push(str);
-        setTimeout(function() {
+        window.setTimeout(function() {
             recentInstanceToastMessages.splice(recentInstanceToastMessages.indexOf(str),1);
         },1000);
 
@@ -61,5 +62,3 @@ module.exports = function(app) {
     return InstanceToast;
 
 };
-
-})();

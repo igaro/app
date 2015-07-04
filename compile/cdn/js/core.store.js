@@ -1,15 +1,14 @@
-(function() {
+//# sourceURL=core.store.js
 
-'use strict';
+module.exports = function() {
 
-module.exports = function(app) {
+    "use strict";
 
     var CoreStoreMgr = function(parent) {
         this.parent = parent;
     };
     CoreStoreMgr.prototype.get = function(id,o) {
-        var self = this,
-            name = this.parent.name;
+        var name = this.parent.name;
         return Promise.resolve().then(function() {
             var type = o && o.type? store.providers[o.type] : store.defaultProvider;
             if (! type)
@@ -72,7 +71,7 @@ module.exports = function(app) {
                             ++k;
                             x = document.cookie.substring(j + id.length + k, j + id.length + k - 1);
                         }
-                        t = unescape(document.cookie.substring(j + id.length, j + id.length + k - 1));
+                        t = decodeURI(document.cookie.substring(j + id.length, j + id.length + k - 1));
                         done = true;
                     }
                     return JSON.parse(t);
@@ -84,7 +83,7 @@ module.exports = function(app) {
                         document.cookie = id + '=\'\';path=/;expires=Sun, 17-Jan-1980 00:00:00 GMT;\n';
                     } else {
                         value = JSON.stringify(value);
-                        document.cookie = id +'='+(expiry === null? escape(value)+';path=/;\n' : escape(value)+';path=/;expires='+expiry+';\n');
+                        document.cookie = id +'='+(expiry === null? encodeURI(value)+';path=/;\n' : encodeURI(value)+';path=/;expires='+expiry+';\n');
                     }
                 });
             }
@@ -97,13 +96,13 @@ module.exports = function(app) {
         {
             get : function(id) {
                 return Promise.resolve().then(function() {
-                    var v = localStorage.getItem(id);
+                    var v = window.localStorage.getItem(id);
                     if (v)
                         v = JSON.parse(v);
                     if (! v)
                         return;
                     if (v.expiry && v.expiry < new Date().getTime()) {
-                        localStorage.setItem(id,null);
+                        window.localStorage.setItem(id,null);
                         return;
                     }
                     return v.value;
@@ -112,7 +111,7 @@ module.exports = function(app) {
             set : function(id,value,expiry) {
                 return Promise.resolve().then(function() {
                     value = typeof value === 'undefined' || value === null? null : JSON.stringify({ value:value, expiry:expiry });
-                    localStorage.setItem(id,value);
+                    window.localStorage.setItem(id,value);
                 });
             }
         }
@@ -124,13 +123,13 @@ module.exports = function(app) {
         {
             get : function(id) {
                 return Promise.resolve().then(function() {
-                    var v = sessionStorage.getItem(id);
+                    var v = window.sessionStorage.getItem(id);
                     if (v)
                         v = JSON.parse(v);
                     if (! v)
                         return;
                     if (v.expiry && v.expiry < new Date().getTime()) {
-                        sessionStorage.setItem(id,null);
+                        window.sessionStorage.setItem(id,null);
                         return;
                     }
                     return v.value;
@@ -139,7 +138,7 @@ module.exports = function(app) {
             set : function(id,value,expiry) {
                 return Promise.resolve().then(function() {
                     value = typeof value === 'undefined' || value === null? null : JSON.stringify({ value:value, expiry:expiry });
-                    sessionStorage.setItem(id,value);
+                    window.sessionStorage.setItem(id,value);
                 });
             }
         }
@@ -151,5 +150,3 @@ module.exports = function(app) {
     return store;
 
 };
-
-})();

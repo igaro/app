@@ -1,6 +1,4 @@
-(function() {
-
-'use strict';
+//# sourceURL=conf.app.js
 
 module.requires = [
     { name: 'core.router.js' },
@@ -12,13 +10,16 @@ module.requires = [
 ];
 
 // block old browsers
-var ua = navigator.userAgent.toLowerCase();
+var ua = window.navigator.userAgent.toLowerCase();
 if (
     (ua.indexOf('msie') !== -1 && parseFloat(ua.split('msie')[1]) < 10) ||
     (ua.indexOf('android') !== -1 && parseFloat(ua.match(/android\s([0-9\.]*)/)[1]) < 4)
 ) throw { incompatible:true };
 
+
 module.exports = function(app, params) {
+
+    "use strict";
 
     var events = app['core.events'],
         Amd = app['instance.amd'],
@@ -29,8 +30,6 @@ module.exports = function(app, params) {
         country = app['core.country'],
         ModalDialog = app['instance.modaldialog'],
         Toast = app['instance.toast'];
-
-    var routerEventMgr = router.eventMgr;
 
     return Promise.all([
 
@@ -2358,16 +2357,16 @@ module.exports = function(app, params) {
       }).then(function() {
 
         // use native alert box if available
-        if (navigator.notification && navigator.notification.alert)
-            window.alert = navigator.notification.alert;
+        if (window.navigator.notification && window.navigator.notification.alert)
+            window.alert = window.navigator.notification.alert;
 
         // adds route.* files as a route provider
         router.addProvider({
-            handles:function(path) {
+            handles : function() {
                 return true;
             },
             url : params.repo,
-            fetch:function(o) {
+            fetch : function(o) {
                 var name = o.path.join('.');
                 return new Amd().get({
                     modules:[{ name: name+'.js' }]
@@ -2403,9 +2402,9 @@ module.exports = function(app, params) {
             } catch (e) {
                 // should never get here
                 try {
-                    alert(msg.en);
+                    window.alert(msg.en);
                 } catch(eX) {
-                    alert(eX);
+                    window.alert(eX);
                 }
                 displaying = false;
             }
@@ -2469,13 +2468,16 @@ module.exports = function(app, params) {
 
         // route XHR errors (404 etc) to Toast
         events.on('instance.xhr','error', function (o) {
-            var xhr = o.x.xhr,
-                c = xhr.getResponseHeader("Content-Type");
-            if (self.expectedContentType && c && c.indexOf('/'+o.expectedContentType) === -1) {
-                new Toast({
-                    message:_tr("Invalid Response")
-                });
-                return;
+            var x = o.x,
+                xhr = x.xhr;
+            if (x.expectedContentType) {
+                var c = xhr.getResponseHeader("Content-Type");
+                if (c && c.indexOf('/'+x.expectedContentType) === -1) {
+                    new Toast({
+                        message:_tr("Invalid Response")
+                    });
+                    return;
+                }
             }
             new Toast({
                 message:xhr.status === 0 && xhr.responseText.length === 0? _tr("Connection Refused") : xhr.statusText
@@ -2495,6 +2497,7 @@ module.exports = function(app, params) {
                     if (v.autoShow)
                         v.show();
                 });
+                var dom = app['core.dom'];
                 router.current = router.base = m[2];
                 // write page title & meta for current route and on route change (SEO)
                 var eF = function(element,n,model) {
@@ -2506,7 +2509,6 @@ module.exports = function(app, params) {
                 };
                 // title
                 var title = dom.head.getElementsByTagName('title')[0],
-                    orig = title.innerHTML,
                     set = function(model) {
                         return eF(title,'title',model);
                     };
@@ -2543,5 +2545,3 @@ module.exports = function(app, params) {
   });
 
 };
-
-})();

@@ -1,6 +1,4 @@
-(function() {
-
-"use strict";
+//# sourceURL=route.header.js
 
 module.requires = [
     { name:'route.header.css' },
@@ -12,11 +10,10 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var events = app['core.events'],
-        dom = app['core.dom'],
-        language = app['core.language'],
-        router = app['core.router'],
-        xcti = app['core.date'];
+    "use strict";
+
+    var dom = app['core.dom'],
+        router = app['core.router'];
 
     return function(model) {
 
@@ -214,7 +211,7 @@ module.exports = function(app) {
                         domMgr.mk('div', self);
                         model.on('instance.xhr','start', function () {
                             if (total === 0 && ! ref)
-                                ref=setTimeout(function() {
+                                ref=window.setTimeout(function() {
                                     dom.show(self);
                                 },350);
                             total++;
@@ -224,7 +221,7 @@ module.exports = function(app) {
                                 total--;
                             if (total !== 0)
                                 return;
-                            clearTimeout(ref);
+                            window.clearTimeout(ref);
                             ref=null;
                             dom.hide(self);
                         });
@@ -235,5 +232,3 @@ module.exports = function(app) {
 
     };
 };
-
-})();

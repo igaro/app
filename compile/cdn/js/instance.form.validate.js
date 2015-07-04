@@ -1,6 +1,4 @@
-(function() {
-
-'use strict';
+//# sourceURL=instance.form.validate.js
 
 module.requires = [
     { name:'instance.form.validate.css' },
@@ -9,8 +7,9 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var msgonevent,
-        bless = app['core.object'].bless,
+    "use strict";
+
+    var bless = app['core.object'].bless,
         dom = app['core.dom'];
 
     var l = {
@@ -61,14 +60,14 @@ module.exports = function(app) {
                     return self.onValidSubmit.call(self);
                 }
             }).catch(function() {
-                return self.managers.debug.handle(e);
+                return self.managers.debug.handle();
             });
         });
         form.addEventListener('change', function() {
             self.onFormModify();
         });
         // fix form init bug where DOM isn't ready to traverse elements
-        setTimeout(function() {
+        window.setTimeout(function() {
             self.addTextInputListeners();
         },200);
     };
@@ -132,7 +131,6 @@ module.exports = function(app) {
 
     InstanceFormValidate.prototype.check = function() {
         var self = this,
-            domMgr = this.managers.dom,
             eventMgr = self.managers.event,
             addMsg = function(n,l) {
                 self.displayError(n,l);
@@ -211,8 +209,7 @@ module.exports = function(app) {
             cl.remove("validation-fail");
             cl.remove("validation-ok");
         });
-        var self = this,
-            domMgr = this.managers.dom;
+        var self = this;
         return Promise.all(this.messages.map(function (element) {
             return dom.rm(element);
         })).then(function () {
@@ -224,5 +221,3 @@ module.exports = function(app) {
     return InstanceFormValidate;
 
 };
-
-})();

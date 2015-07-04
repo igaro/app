@@ -1,6 +1,4 @@
-(function() {
-
-'use strict';
+//# sourceURL=instance.date.js
 
 module.requires = [
     { name:'core.date.js'},
@@ -9,6 +7,8 @@ module.requires = [
 ];
 
 module.exports = function(app) {
+
+    "use strict";
 
     var date = app['core.date'],
         dom = app['core.dom'],
@@ -36,7 +36,7 @@ module.exports = function(app) {
                     m.lang(language.env);
                     self.format();
                 },
-                tzoffset : function(v) {
+                tzoffset : function() {
                     if (! self.ov)
                         self.offset(date.envOffset,true);
                 }
@@ -54,7 +54,7 @@ module.exports = function(app) {
         if (o.relative)
             this.relative();
         this.managers.event.on('destroy', function() {
-            removeInterval(self.__relHook);
+            window.removeInterval(self.__relHook);
         });
     };
 
@@ -93,7 +93,7 @@ module.exports = function(app) {
             dom.setContent(container,self.moment.fromNow());
         };
         f();
-        this.__relHook =  setInterval(f,1000);
+        this.__relHook =  window.setInterval(f,1000);
     };
 
     InstanceDate.prototype.format = function(f) {
@@ -105,7 +105,4 @@ module.exports = function(app) {
     return InstanceDate;
 
 };
-
-})();
-
 

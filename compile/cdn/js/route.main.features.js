@@ -1,9 +1,13 @@
+//# sourceURL=route.main.features.js
+
 module.requires = [
     { name: 'route.main.features.css' },
     { name: 'core.currency.js' }
 ];
 
 module.exports = function(app) {
+
+    "use strict";
 
     return function(model) {
 

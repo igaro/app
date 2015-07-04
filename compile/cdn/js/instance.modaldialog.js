@@ -1,6 +1,4 @@
-(function() {
-
-'use strict';
+//# sourceURL=instance.modaldialog.js
 
 module.requires = [
     { name:'instance.modaldialog.css' },
@@ -8,6 +6,8 @@ module.requires = [
 ];
 
 module.exports = function(app,params) {
+
+    "use strict";
 
     var zIndexAt = 999999,
         body = document.body,
@@ -23,7 +23,7 @@ module.exports = function(app,params) {
         params.conf.noBodyStyleOverflowReset = true;
     };
 
-    InstanceModalDialog.prototype.init = function(o) {
+    InstanceModalDialog.prototype.init = function() {
         return this.managers.event.dispatch('init');
     };
 
@@ -36,7 +36,7 @@ module.exports = function(app,params) {
                 this.className = 'igaro-instance-modaldialog';
                 this.style.zIndex = zIndexAt;
                 if (! o.noClose) {
-                    this.addEventListener('click', function(event) {
+                    this.addEventListener('click', function() {
                         return self.resolve();
                     });
                 }
@@ -112,7 +112,7 @@ module.exports = function(app,params) {
             });
 
             // give dom time to update
-            setTimeout(function() {
+            window.setTimeout(function() {
                 // focus singular button
                 if (myActions && myActions.length === 1)
                     myActions[0].focus();
@@ -168,5 +168,3 @@ module.exports = function(app,params) {
     return InstanceModalDialog;
 
 };
-
-})();

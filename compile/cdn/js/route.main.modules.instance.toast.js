@@ -1,4 +1,8 @@
-module.exports = function(app) {
+//# sourceURL=route.main.modules.instance.toast.js
+
+module.exports = function() {
+
+    "use strict";
 
     return function(model) {
 

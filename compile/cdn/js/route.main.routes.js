@@ -1,3 +1,5 @@
+//# sourceURL=route.main.routes.js
+
 (function() {
 
 "use strict";
@@ -6,12 +8,11 @@ module.requires = [
     { name: 'route.main.routes.css' }
 ];
 
-module.exports = function(app) {
+module.exports = function() {
 
     return function(model) {
 
-        var view = model.view,
-            wrapper = model.wrapper,
+        var wrapper = model.wrapper,
             domMgr = model.managers.dom;
 
         model.stash.title=_tr("Routes");

@@ -1,4 +1,4 @@
- 'use strict';
+//# sourceURL=polyfill.js.1.6.js
 
  if (!Array.prototype.map) {
   Array.prototype.map = function(callback, thisArg) {

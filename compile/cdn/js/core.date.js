@@ -1,12 +1,12 @@
-(function() {
-
-'use strict';
+//# sourceURL=core.date.js
 
 module.requires = [
     { name: 'core.store.js' }
 ];
 
 module.exports = function(app) {
+
+    "use strict";
 
     var store = app['core.store'],
         bless = app['core.object'].bless;
@@ -77,5 +77,3 @@ module.exports = function(app) {
     });
 
 };
-
-})();

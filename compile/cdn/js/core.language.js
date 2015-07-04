@@ -1,6 +1,4 @@
-(function() {
-
-'use strict';
+//# sourceURL=core.language.js
 
 module.requires = [
     { name: 'core.store.js' },
@@ -8,6 +6,8 @@ module.requires = [
 ];
 
 module.exports = function(app, params) {
+
+    "use strict";
 
     var store = app['core.store'],
         url = app['core.url'],
@@ -136,5 +136,3 @@ module.exports = function(app, params) {
 
     return language;
 };
-
-})();

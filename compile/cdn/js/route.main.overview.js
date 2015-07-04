@@ -1,3 +1,5 @@
+//# sourceURL=route.main.overview.js
+
 (function () {
 
 "use strict";
@@ -6,7 +8,7 @@ module.requires = [
 	{ name: 'route.main.overview.css' }
 ];
 
-module.exports = function(app) {
+module.exports = function() {
 
    	return function(model) {
 

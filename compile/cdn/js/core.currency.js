@@ -1,6 +1,4 @@
-(function() {
-
-'use strict';
+//# sourceURL=core.currency.js
 
 module.requires = [
     { name : 'core.currency.css' },
@@ -10,6 +8,8 @@ module.requires = [
 ];
 
 module.exports = function(app, params) {
+
+    "use strict";
 
     var store = app['core.store'],
         country = app['core.country'],
@@ -147,5 +147,3 @@ module.exports = function(app, params) {
     return currency;
 
 };
-
-})();

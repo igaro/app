@@ -1,13 +1,12 @@
-
-(function() {
-
-"use strict";
+//# sourceURL=route.main.bless.js
 
 module.requires = [
     { name: 'route.main.bless.css' }
 ];
 
 module.exports = function(app) {
+
+    "use strict";
 
     return function(model) {
 
@@ -78,5 +77,3 @@ module.exports = function(app) {
     };
 
 };
-
-})();

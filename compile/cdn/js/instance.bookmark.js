@@ -1,12 +1,16 @@
+//# sourceURL=instance.bookmark.js
+
 module.requires = [
     { name:'instance.bookmark.css' }
 ];
 
 module.exports = function(app) {
 
+    "use strict";
+
     var bless = app['core.object'].bless,
         dom = app['core.dom'];
-    
+
     var opts = [
         { name:'Delicious', url:'http://del.icio.us/post?url=<URL>&title=<TITLE>' },
         { name:'Digg', url:'http://digg.com/submit?url=<URL>&title=<TITLE>' },
@@ -19,16 +23,16 @@ module.exports = function(app) {
     var bookmark = function(o) {
         this.name='instance.bookmark';
         this.asRoot=true;
-        this.container = function(dom) { 
+        this.container = function(dom) {
             return dom.mk('ul',o,null,o.className);
         };
         bless.call(this,o);
-        this.setURL({ 
-            url:o.url? o.url : window.location.href, title:o.title 
-        });
     };
 
-    bookmark.prototype.init = function() {
+    bookmark.prototype.init = function(o) {
+        this.setURL({
+            url:o.url? o.url : window.location.href, title:o.title
+        });
         return this.managers.event.dispatch('init');
     };
 

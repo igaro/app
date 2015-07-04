@@ -1,3 +1,4 @@
+//# sourceURL=instance.todomvc.js
 
 (function() {
 

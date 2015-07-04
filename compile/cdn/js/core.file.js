@@ -1,4 +1,8 @@
-module.exports = function(app) {
+//# sourceURL=core.file.js
+
+module.exports = function() {
+
+    "use strict";
 
     return {
 
@@ -16,7 +20,7 @@ module.exports = function(app) {
 
         getExtension : function(f) {
             var e = /^.+\.([^.]+)$/.exec(f.toUpperCase());
-            return (e === null)? '' : e[1];
+            return e === null? '' : e[1];
         }
 
     };

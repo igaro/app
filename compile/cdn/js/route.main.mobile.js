@@ -1,3 +1,5 @@
+//# sourceURL=route.main.mobile.js
+
 (function() {
 
 "use strict";
@@ -62,25 +64,25 @@ module.exports = function(app) {
                             this.className = 'gesturedemo';
                             domMgr.mk('div',this, null, function() {
                                 var self = this,
-                                hammertime = new Hammer(this);
+                                hammertime = new window.Hammer(this);
                                 hammertime.get('pinch').set({ enable: true });
                                 hammertime.get('rotate').set({ enable: true });
-                                hammertime.on('pan', function(ev) {
+                                hammertime.on('pan', function() {
                                     self.className = 'pan';
                                 });
-                                hammertime.on('swipe', function(ev) {
+                                hammertime.on('swipe', function() {
                                     self.className = 'swipe';
                                 });
-                                hammertime.on('tap', function(ev) {
+                                hammertime.on('tap', function() {
                                     self.className = 'tap';
                                 });
-                                hammertime.on('doubletap', function(ev) {
+                                hammertime.on('doubletap', function() {
                                     self.className = 'doubletap';
                                 });
-                                hammertime.on('pinch', function(ev) {
+                                hammertime.on('pinch', function() {
                                     self.className = 'pinch';
                                 });
-                                hammertime.on('rotate', function(ev) {
+                                hammertime.on('rotate', function() {
                                     self.className = 'rotate';
                                 });
                             });

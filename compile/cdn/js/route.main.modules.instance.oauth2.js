@@ -1,4 +1,8 @@
-module.exports = function(app) {
+//# sourceURL=route.main.modules.instance.oauth2.js
+
+module.exports = function() {
+
+    "use strict";
 
     return function(model) {
 
@@ -8,7 +12,6 @@ module.exports = function(app) {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
             },
-            blessed:true,
             demo : "dom.mk('button', c, { en: 'Get Google API Token' }, function() {\n\
     this.addEventListener('click', function () {\n\
         var self = this;\n\
