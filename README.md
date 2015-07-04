@@ -65,13 +65,9 @@ Learn, Documentation
 
 [http://app.igaro.com/compat](http://app.igaro.com/compat)
 
-##  Test Suite
+##  Testing
 
-Read [http://app.igaro.com/testing](http://app.igaro.com/testing) first.
-
-Run the test suite by starting grunt and running npm test.
-
-You may individually tests by setting Firefox's about:config->security.fileuri.strict_origin_policy to false and opening the HTML file.
+[http://app.igaro.com/testing](http://app.igaro.com/testing)
 
 ##  Modules
 
