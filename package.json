@@ -23,10 +23,10 @@
     "nightwatch" : "^0"
   },
   "bin": {
-    "nightwatch": "./bin/nightwatch"
+    "nightwatch": "./node_modules/nightwatch/bin/nightwatch"
   },
   "man": "",
   "scripts": {
-    "test": "grunt build && { grunt connect --keepalive=1 & } && ./bin/nightwatch/bin/nightwatch -e firefox -c ./tests/nightwatch.json ./tests/src"
+    "test": "grunt build && { grunt connect --keepalive=1 & } && ./node_modules/nightwatch/bin/nightwatch -e firefox -c ./tests/nightwatch.json ./tests/src"
   }
 }
