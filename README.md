@@ -1,5 +1,6 @@
 #Igaro App [http://app.igaro.com](http://app.igaro.com)
 
+[ ![Codeship Status for igaro/app](https://codeship.com/projects/d521e620-04a0-0133-19ae-1a88c4115bd9/status?branch=master)](https://codeship.com/projects/89386)
 
 "Faster than Angular, more advanced than React."
 
