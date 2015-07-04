@@ -1,6 +1,6 @@
 #Igaro App [http://app.igaro.com](http://app.igaro.com)
-=============
 
+=============
 "Faster than Angular, more advanced than React."
 
 Igaro App is a complete web-app framework using Javascript.
@@ -8,6 +8,7 @@ Igaro App is a complete web-app framework using Javascript.
 Potentially the web's finest SPA framework. No limits. No disadvantages.
 
 The current release is: 1.0.0. Use git tag to show releases.
+=============
 
 Learn, Documentation
 -------
