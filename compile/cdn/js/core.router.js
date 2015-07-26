@@ -4,7 +4,7 @@
 
 'use strict';
 
-if (typeof history.pushState === 'undefined')
+if (typeof window.history.pushState === 'undefined')
     throw { incompatible:true, noobject:'history.pushState' };
 
 module.requires = [
@@ -15,8 +15,6 @@ module.requires = [
 module.exports = function(app) {
 
     var events = app['core.events'],
-        language = app['core.language'],
-        Amd = app['instance.amd'],
         dom = app['core.dom'],
         object = app['core.object'],
         bless = object.bless,
@@ -98,9 +96,9 @@ module.exports = function(app) {
             }).then(function(container) {
                 if (typeof container !== 'object')
                     return;
-                if ((!(container instanceof Node)) && container.container instanceof Node)
+                if ((!(container instanceof Node)) && container.container instanceof Node) //jshint ignore: line
                     container = container.container;
-                if (container instanceof Node)
+                if (container instanceof Node) // jshint ignore: line
                     o.container.appendChild(container);
             });
         }, Promise.resolve());
@@ -129,8 +127,6 @@ module.exports = function(app) {
     CoreRouterRoute.prototype.addRoute = function(o) {
         var pool = this.routes,
             self = this,
-            path = this.path,
-            silent = o.silent,
             name = o.name,
             g,
             fetcher;
@@ -157,10 +153,10 @@ module.exports = function(app) {
             fetcher = provider.fetch(g).then(
                 function(j) {
                     if (j.css)
-                        g.cssElement.innerHTML = css;
+                        g.cssElement.innerHTML = j.css;
                     var ret = j.js(g);
-                    if (ret && ret instanceof Promise) {
-                        return ret.then(function(h) {
+                    if (typeof ret === 'object' && ret instanceof Promise) {
+                        return ret.then(function() {
                             return g;
                         });
                     } else {
@@ -255,7 +251,7 @@ module.exports = function(app) {
                 :
                 Promise.resolve()
             ).then(function() {
-                return routerEventMgr.dispatch('to-begin').then(function (evt) {
+                return routerEventMgr.dispatch('to-begin').then(function () {
                     return ra.reduce(function(a,b,i) {
                         return a.then(function() {
                             return model.addRoute({
@@ -276,7 +272,7 @@ module.exports = function(app) {
                         });
                     }, Promise.resolve()).then(function() {
                         if (typeof state === 'boolean' && state === false) {
-                            history.replaceState({ initial:true },null);
+                            window.history.replaceState({ initial:true },null);
                         } else {
                             var urlPath = '/'+path.map(function(f) {
                                 return encodeURIComponent(f);
@@ -293,7 +289,7 @@ module.exports = function(app) {
                                     hash = hash();
                                 urlPath += '#'+hash;
                             }
-                            history.pushState(state || {},null,urlPath);
+                            window.history.pushState(state || {},null,urlPath);
                         }
                         if (typeof c.scrollPosition === 'number')
                             document.body.scrollTop = document.documentElement.scrollTop = c.scrollPosition;
@@ -306,7 +302,7 @@ module.exports = function(app) {
                         });
                     }).catch(function(e) {
                         // replace the url with whatever has managed to load
-                        history.replaceState({},null,router.current.getUrl());
+                        window.history.replaceState({},null,router.current.getUrl());
                         throw e;
                     });
                 });
@@ -330,7 +326,6 @@ module.exports = function(app) {
     mrv.show();
     document.body.appendChild(mrv.container);
 
-
     var f = function() {
         var w = window.location.pathname.trim().substr(1),
             s = window.location.search.split('&'),
@@ -344,7 +339,7 @@ module.exports = function(app) {
     if (document.location.protocol !== 'file:') {
         var wl = window.location;
         // add missing slash
-        history.replaceState(history.state,null,wl.href.replace(/\/?(\?|#|$)/, '/$1').substr(wl.protocol.length+wl.host.length+2));
+        window.history.replaceState(window.history.state,null,wl.href.replace(/\/?(\?|#|$)/, '/$1').substr(wl.protocol.length+wl.host.length+2));
         if (wl.pathname.length > 1) {
             events.on('','state.base', function() {
                 events.remove(this);

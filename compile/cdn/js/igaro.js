@@ -1012,10 +1012,14 @@
                 bless.call(this,o);
                 this.uid = Math.floor((Math.random() * 9999));
                 var mod = this.module = o.module,
-                    modname = this.module.name,
-                    e = /^.+\.([^.]+)$/.exec(modname.toLowerCase()),
-                    type=this.type = e === null? '' : e[1],
-                    file = this.file = mod.repo+'/'+(mod.nosub? '' : type+'/')+modname;
+                    modname = this.module.name;
+                if (! this.type) {
+                    // attempt to discover type from extension
+                    var e = /^.+\.([^.]+)$/.exec(modname.toLowerCase());
+                    this.type = e === null? '' : e[1];
+                }
+                var type = this.type;
+                this.file = mod.repo+'/'+(mod.nosub? '' : type+'/')+modname;
                 if (['css','js'].indexOf(type) === -1)
                     throw new Error('instance.amd can\'t handle file type: '+modname);
                 this.done = false;
