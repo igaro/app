@@ -67,7 +67,14 @@ if (!( "classList" in document.createElement("_"))) {
     s.src = __igaroapp.cdn + "/js/polyfill.js.classList.js";
     async = false;
     head.appendChild(s);
-} 
+}
+
+if (! Object.assign) {
+    s = document.createElement('script');
+    s.src = __igaroapp.cdn + "/js/polyfill.es6.object.assign.js";
+    async = false;
+    head.appendChild(s);
+}
 
 if (! window.Promise) {
     s = document.createElement('script');
