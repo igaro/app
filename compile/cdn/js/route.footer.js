@@ -36,7 +36,7 @@ module.exports = function(app) {
     	'toTop');
 
 		domMgr.mk('div',wrapper,[
-    		domMgr.mk('span', null, _tr("License: GNVv3"))
+    		domMgr.mk('span', null, _tr("License: GNUv3"))
     	],'license');
 
     	domMgr.mk('div',wrapper,[
