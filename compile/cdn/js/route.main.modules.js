@@ -524,7 +524,7 @@ module.exports = function(app) {
                             evt.preventDefault();
                             this.disabled = true;
                             var self= this;
-                            router.to(model.path+'/'+this.value).catch().then(function () {
+                            router.to(model.uriPath.concat(this.innerHTML)).catch().then(function () {
                                 self.disabled = false;
                             });
                         });
