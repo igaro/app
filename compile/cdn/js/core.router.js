@@ -43,7 +43,7 @@ module.exports = function(app) {
         this.defaultShowWrapper=true;
         this.autoShow = true;
         this.scrollPosition=0;
-        this.cssElement=dom.mk('style',dom.head);
+        this.modules = {};
     };
 
     CoreRouterRoute.prototype.addManager = function(name,module) {
@@ -143,6 +143,8 @@ module.exports = function(app) {
             });
             g.managers.event.on('destroy', function() {
                 pool.splice(pool.indexOf(g),1);
+                if (g.cssElement)
+                    g.managers.dom.rm(g.cssElement);
                 if (router.current === g)
                     router.current = g.parent;
             });
@@ -153,7 +155,7 @@ module.exports = function(app) {
             fetcher = provider.fetch(g).then(
                 function(j) {
                     if (j.css)
-                        g.cssElement.innerHTML = j.css;
+                        g.cssElement=dom.mk('style',dom.head, j.css);
                     var ret = j.js(g);
                     if (typeof ret === 'object' && ret instanceof Promise) {
                         return ret.then(function() {
