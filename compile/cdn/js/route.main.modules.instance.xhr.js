@@ -30,9 +30,9 @@ module.exports = function() {
                 instantiate : true,
                 attributes : [
                     {
-                        name:'expectedContent',
+                        name:'expectedContentType',
                         type:'string',
-                        desc:_tr("Defines whether the content-type header returned by the transaction should match a particular value.")
+                        desc:_tr("Defines whether the content-type header returned by the transaction should match a particular value, i.e 'json'.")
                     },
                     {
                         name:'headers',

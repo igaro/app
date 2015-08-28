@@ -7,8 +7,8 @@
     var app = {};
 
     // conf is in a global literal. Move ref into private then undef it.
-    var appConf = __igaroapp;
-    __igaroapp = undefined;
+    var appConf = __igaroapp; //jshint ignore:line
+    __igaroapp = undefined; //jshint ignore:line
 
     return Promise.resolve().then(function () {
 
@@ -534,7 +534,7 @@
                     nodes = nodes.sort(function(a, b) {
                         a = on(a);
                         b = on(b);
-                        return a == b? 0: (a > b ? 1 : -1);
+                        return a === b? 0: (a > b ? 1 : -1);
                     });
                     if (o.reverse)
                         nodes = nodes.reverse();
@@ -600,8 +600,7 @@
                     return new CoreObjectMgr(parent);
                 },
                 promiseSequencer : function(o,fn) {
-                    var self = this,
-                        r=[];
+                    var r=[];
                     return o.reduce(function(a,b) {
                         return a.then(function() {
                             return fn(b).then(function(g) {
@@ -721,7 +720,6 @@
                         noobject:'XMLHttpRequest'
                     }
                 };
-            var events = app['core.events'];
             var setBits = function(p) {
               if (p.res)
                 this.res = p.res;
@@ -737,7 +735,7 @@
                 this.silent = p.silent;
               if (p.stash)
                 this.stash = p.stash;
-              if (typeof p.expectedContentType !== undefined)
+              if (typeof p.expectedContentType !== 'undefined')
                 this.expectedContentType = p.expectedContentType;
             };
             var bless = app['core.object'].bless;
@@ -755,7 +753,6 @@
                 this.aborted = false;
                 this.headers = {};
                 this.formdata = {};
-                this.expectedContentType = null;
                 this.id = Math.floor((Math.random()*9999)+1);
                 if (o)
                     setBits.call(this,o);
@@ -823,8 +820,7 @@
                 });
             };
             InstanceXhr.prototype.exec = function(action, p) {
-                var xhr = this.xhr,
-                    self = this;
+                var self = this;
                 if (p)
                     setBits.call(this,p);
                 this.action = action;
@@ -880,22 +876,20 @@
                     return eventMgr.dispatch('end');
                 });
             };
-            InstanceXhr.prototype.applyForm = function(form, autorefresh) {
+            InstanceXhr.prototype.applyForm = function(form) {
                 var fd = this.formdata = {};
                 this.headers["Content-Type"] = "application/x-www-form-urlencoded";
                 Array.prototype.splice.call(form.elements).forEach(function (l) {
                     if (l.disabled)
                         return;
-                    if (l.type=="checkbox" && l.checked) {
+                    if (l.type === "checkbox" && l.checked) {
                         fd[l.name] = l.checked? 1:0;
-                    } else if (l.type=="select-one" && l.selectedIndex > -1) {
+                    } else if (l.type === "select-one" && l.selectedIndex > -1) {
                         if (l.options.length)
                             fd[l.name] = l.options[l.selectedIndex].value;
-                    } else if (l.type=="select-multiple") {
+                    } else if (l.type === "select-multiple") {
                         var t=l.options.map(function(s) {
-                            if (! s.selected)
-                                return;
-                            return s.value;
+                            return ! s.selected? null : s.value;
                         }).join('\n');
                         if (t.length)
                             fd[l.name] = t;
@@ -1070,7 +1064,7 @@
                         return eventMgr.dispatch('worker.error',e);
                     }).then(function(e) {
                         self.running = false;
-                        return eventMgr.dispatch('worker.end');
+                        return eventMgr.dispatch('worker.end', e);
                     });
                 });
             };
