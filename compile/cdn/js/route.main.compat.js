@@ -124,6 +124,25 @@ module.exports = function() {
                     {
                         columns : [
                             {
+                                content : ""
+                            },
+                            {
+                                content : "Mobile"
+                            },
+                            {
+                                content : "40+"
+                            },
+                            {
+                                className : "green"
+                            },
+                            {
+                                content : _tr("Tested as far back as version 40, but may work with earlier versions.")
+                            }
+                        ]
+                    },
+                    {
+                        columns : [
+                            {
                                 content : "Google"
                             },
                             {
