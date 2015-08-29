@@ -945,31 +945,45 @@
                     setBits.call(this,p);
                 return new Promise(function(resolve, reject) {
                     var swrks = self.workers = [];
-                    var chk = function() {
-                        return self.workers.every(function (w) {
+                    var chkComplete = function() {
+                        if (self.workers.every(function (w) {
                             return w.done;
-                        });
+                        })) {
+                            return end();
+                        }
                     };
-                    var sucEvt = events.on('instance.amd','worker.success', function(o) {
+                    var workerSucEvt = events.on('instance.amd','worker.success', function(o) {
                         if (swrks.indexOf(o.x) === -1)
                             return;
                         if (self.onProgress)
                             self.onProgress();
-                        if (chk())
-                            end();
+                        return chkComplete();
                     });
-                    var errEvt = events.on('instance.amd','worker.error', function(o) {
+                    // prevent race checking
+                    var checking = false;
+                    var amdComEvt = events.on('instance.amd','complete', function(o) {
+                        checking = true;
+                        if (! checking && o.x !== self)
+                            return chkComplete().catch().then(function() {
+                                checking = false;
+                            });
+                        checking = false;
+                    });
+                    var workerErrEvt = events.on('instance.amd','worker.error', function(o) {
                         if (swrks.indexOf(o.x) !== -1)
-                            end(o);
+                            return end(o);
                     });
                     var end = function(e) {
-                        events.remove(errEvt,'instance.amd','worker.error');
-                        events.remove(sucEvt,'instance.amd','worker.success');
-                        if (e) {
-                            reject(e);
-                        } else {
-                            resolve();
-                        }
+                        events.remove(workerErrEvt,'instance.amd','worker.error');
+                        events.remove(workerSucEvt,'instance.amd','worker.success');
+                        events.remove(amdComEvt,'instance.amd','complete');
+                        return self.managers.event.dispatch(e? 'error' : 'complete', e).then(function() {
+                            if (e) {
+                                reject(e);
+                            } else {
+                                resolve();
+                            }
+                        });
                     };
                     self.modules.forEach(function (m) {
                         if (typeof m.repo === 'undefined' && repo)
@@ -977,7 +991,7 @@
                         if (! m.requires)
                             m.requires = [];
                         var wk,
-                            n=m.name;
+                            n = m.name;
                         // if there's already a worker for this module, find it, else create one
                         if (! workers.some(function (w) {
                             if (w.module.name === n) {
@@ -997,8 +1011,7 @@
                             self.onProgress();
                         }
                     });
-                    if (chk())
-                        end();
+                    chkComplete();
                 });
             };
             var InstanceAmdWorker = function(o) {
@@ -1069,7 +1082,7 @@
                 });
             };
             InstanceAmdWorker.prototype.loaded = function() {
-                this.done=true;
+                this.done = true;
                 this.xhr = null; // gc
                 return this.managers.event.dispatch('worker.success');
             };
