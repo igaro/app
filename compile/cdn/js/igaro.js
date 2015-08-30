@@ -404,7 +404,7 @@
                             });
                             c=d;
                         }
-                        if (c)
+                        if (c !== null && typeof c !== 'undefined')
                             dom.setContent(r,c);
                     }
                     return r;

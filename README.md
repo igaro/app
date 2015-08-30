@@ -8,7 +8,7 @@ Igaro App is a complete web-app framework using Javascript.
 
 Potentially the web's finest SPA framework. No limits. No disadvantages.
 
-The current release is: 1.0.0. Use git tag to show releases.
+The current release is: 1.0.1. Use git tag to show releases.
 
 
 Learn, Documentation
