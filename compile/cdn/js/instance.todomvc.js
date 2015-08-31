@@ -212,7 +212,6 @@ module.exports = function(app) {
                 });
             });
             domMgr.mk('span',this,null,function() {
-                domMgr.mk('strong',this,0);
                 self.itemsleft = domMgr.mk('span',this);
             });
             domMgr.mk('button',this,"Clear completed","clear-completed").addEventListener('click',function() {
