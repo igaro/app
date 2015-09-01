@@ -29,7 +29,8 @@ module.exports = function(app, params) {
         currency = app['core.currency'],
         country = app['core.country'],
         ModalDialog = app['instance.modaldialog'],
-        Toast = app['instance.toast'];
+        Toast = app['instance.toast'],
+        dom = app['core.dom'];
 
     return Promise.all([
 
@@ -2484,6 +2485,20 @@ module.exports = function(app, params) {
             });
         });
 
+        // route loading overlay
+        dom.mk('div',null,null,function() {
+            var self = this,
+                rME = router.managers.event;
+            dom.mk('div',this,dom.mk('div'),'progress');
+            this.className = 'igaro-router-loading';
+            rME.on('to-in-progress', function() {
+                document.body.appendChild(self);
+            });
+            rME.on('to-end', function(e) {
+                if (e !== -1600)
+                    dom.rm(self);
+            });
+        });
 
         // setup page with core routes
         events.on('','state.init', function() {
@@ -2497,7 +2512,6 @@ module.exports = function(app, params) {
                     if (v.autoShow)
                         v.show();
                 });
-                var dom = app['core.dom'];
                 router.current = router.base = m[2];
                 // write page title & meta for current route and on route change (SEO)
                 var eF = function(element,n,model) {

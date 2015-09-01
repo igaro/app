@@ -295,17 +295,21 @@ module.exports = function(app) {
                         }
                         if (typeof c.scrollPosition === 'number')
                             document.body.scrollTop = document.documentElement.scrollTop = c.scrollPosition;
-                        return routerEventMgr.dispatch('to-loaded');
+                        return routerEventMgr.dispatch('to-loaded').then(function() {
+                            routerEventMgr.dispatch('to-end');
+                        });
                     }).catch(function (e) {
                         if (typeof e === 'boolean' && e === -1600)
-                            return;
+                            return routerEventMgr.dispatch('to-end', e);
                         return routerEventMgr.dispatch('to-error', e).then(function() {
                             throw e;
                         });
                     }).catch(function(e) {
                         // replace the url with whatever has managed to load
                         window.history.replaceState({},null,router.current.getUrl());
-                        throw e;
+                        return routerEventMgr.dispatch('to-end', e).then(function() {
+                            throw e;
+                        });
                     });
                 });
             }).catch(function (e) {
