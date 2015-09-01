@@ -2488,15 +2488,21 @@ module.exports = function(app, params) {
         // route loading overlay
         dom.mk('div',null,null,function() {
             var self = this,
-                rME = router.managers.event;
+                rME = router.managers.event,
+                body = document.body,
+                bodyStyle = body.style;
             dom.mk('div',this,dom.mk('div'),'progress');
             this.className = 'igaro-router-loading';
             rME.on('to-in-progress', function() {
-                document.body.appendChild(self);
+                bodyStyle.overflow = 'hidden';
+                body.appendChild(self);
             });
             rME.on('to-end', function(e) {
-                if (e !== -1600)
+                if (e !== -1600) {
+                    if (! params.conf.noBodyStyleOverflowReset)
+                        bodyStyle.overflow = '';
                     dom.rm(self);
+                }
             });
         });
 

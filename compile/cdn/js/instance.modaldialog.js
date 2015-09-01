@@ -76,7 +76,7 @@ module.exports = function(app,params) {
                 activeCnt--;
                 if (! activeCnt) {
                     bodyStyle.overflow = '';
-                    params.conf.noBodyStyleOverflowReset = true;
+                    params.conf.noBodyStyleOverflowReset = false;
                 }
                 resolve(action);
                 return self.destroy();
