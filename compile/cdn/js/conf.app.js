@@ -2412,6 +2412,27 @@ module.exports = function(app, params) {
             return debug.log.append(o.value,o.path,o.event);
         });
 
+        // route loading overlay
+        dom.mk('div',null,null,function() {
+            var self = this,
+                rME = router.managers.event,
+                body = document.body,
+                bodyStyle = body.style;
+            dom.mk('div',this,dom.mk('div'),'progress');
+            this.className = 'igaro-router-loading';
+            rME.on('to-in-progress', function() {
+                bodyStyle.overflow = 'hidden';
+                body.appendChild(self);
+            });
+            rME.on(['to-end','to-error'], function(o) {
+                if (o && o.value !== -1600) {
+                    if (! params.conf.noBodyStyleOverflowReset)
+                        bodyStyle.overflow = '';
+                    dom.rm(self);
+                }
+            });
+        });
+
         // handle router errors
         router.managers.event.on('to-error', function (o) {
             var v = o.value;
@@ -2482,27 +2503,6 @@ module.exports = function(app, params) {
             }
             new Toast({
                 message:xhr.status === 0 && xhr.responseText.length === 0? _tr("Connection Refused") : xhr.statusText
-            });
-        });
-
-        // route loading overlay
-        dom.mk('div',null,null,function() {
-            var self = this,
-                rME = router.managers.event,
-                body = document.body,
-                bodyStyle = body.style;
-            dom.mk('div',this,dom.mk('div'),'progress');
-            this.className = 'igaro-router-loading';
-            rME.on('to-in-progress', function() {
-                bodyStyle.overflow = 'hidden';
-                body.appendChild(self);
-            });
-            rME.on('to-end', function(e) {
-                if (e !== -1600) {
-                    if (! params.conf.noBodyStyleOverflowReset)
-                        bodyStyle.overflow = '';
-                    dom.rm(self);
-                }
             });
         });
 

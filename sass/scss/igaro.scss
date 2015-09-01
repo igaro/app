@@ -261,7 +261,7 @@ body {
 
     >.igaro-loading, >.igaro-router-loading {
         position:fixed;
-        z-index:99999999;
+        z-index:999990;
         top:0;
         left:0;
         right:0;
@@ -269,7 +269,7 @@ body {
         width:100%;
         display:table;
         >div {
-            z-index:99999999;
+            //z-index:99999999;
             position:relative;
             display:table-cell;
             vertical-align:middle;
