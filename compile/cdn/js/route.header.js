@@ -38,7 +38,7 @@ module.exports = function(app) {
                         },
                         {
                             className:'api',
-                            href : 'http://api.igaro.com',
+                            href : 'https://github.com/igaro/api',
                             onClick : function() {
                                 window.open(this.href);
                                 return Promise.resolve();
