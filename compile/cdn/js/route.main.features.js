@@ -136,7 +136,7 @@ module.exports = function(app) {
                         {
                             columns : [
                                 {
-                                    content : _tr("Multtasking")
+                                    content : _tr("Multitasking")
                                 },
                                 {
                                     content : _tr("Fully asychronous using Promises and no callbacks.")
