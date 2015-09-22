@@ -431,8 +431,13 @@
                     r.classList.add('core-dom-hide');
                 },
                 isHidden : function(r) {
-                    var s = r.style;
-                    return s.visibility === 'hidden' || s.display === 'none';
+                    r = r.parentNode;
+                    while (r) {
+                        var s = r.style;
+                        if (s.visibility !== 'hidden' && s.display !== 'none')
+                            r = r.parentNode;
+                    }
+                    return r !== document.body;
                 },
                 toggleVisibility : function(r) {
                     if (! (r instanceof Node))
