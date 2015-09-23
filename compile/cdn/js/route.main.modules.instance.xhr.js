@@ -93,6 +93,11 @@ module.exports = function() {
                     }]
                 },
                 {
+                    name:'connectionFailure',
+                    type:'boolean',
+                    desc:_tr("Defines whether the last transaction failed due to a connection failure.")
+                },
+                {
                     name:'delete',
                     type:'function',
                     async:true,

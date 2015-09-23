@@ -162,12 +162,6 @@
 
                 // remove an event by function
                 remove : function(fn,name,event) {
-                    //var obj = null;
-                    //if (typeof fn === 'object') {
-                    //    obj = fn;
-                    //    name = fn.name;
-                    //    event = fn.event;
-                    //}
                     var obj = fn;
                     var self = this;
                     if (fn instanceof Array) {
@@ -285,9 +279,9 @@
                 return appendDeps.call(c,this.x);
             };
             CoreEventMgr.prototype.on = function(evt,fn,o) {
+                var self = this;
                 if (! (evt instanceof Array))
                     evt = [evt];
-                var self = this;
                 evt.forEach(function(v) {
                     events.on(self.x.name,[v,self.x,self.deps],fn,o);
                 });
@@ -431,6 +425,12 @@
                     r.classList.add('core-dom-hide');
                 },
                 isHidden : function(r) {
+                    var t = r;
+                    while (t.parentNode && ! t.classList.contains('core-dom-hide')) {
+                        t = t.parentNode;
+                    }
+                    if (! (t instanceof HTMLDocument))
+                        return true;
                     var style = window.getComputedStyle(r);
                     return style.visibility === 'hidden' || style.display === 'none';
                 },
@@ -763,6 +763,7 @@
                 this.vars = {};
                 this.silent = false;
                 this.aborted = false;
+                this.connectionFailure = false;
                 this.headers = {};
                 this.formdata = {};
                 this.id = Math.floor((Math.random()*9999)+1);
@@ -775,13 +776,15 @@
                     eventMgr.dispatch('response').then(function(o) {
                         if (typeof o === 'object' && o.stopImmediatePropagation)
                             return;
-                        var responseText = xhr.responseText,
+                        var response = (! xhr.responseType) || xhr.responseType.match(/^.{0}$|text/)? xhr.responseText : xhr.response,
                             status = xhr.status;
-                        if (status === 200 || (status === 0 && responseText.length > 0)) {
+                        if (status === 0 && ! response.length)
+                            self.connectionFalure = true;
+                        if (status === 200 || (status === 0 && response.length > 0)) {
                             var cv = xhr.getResponseHeader("Content-Type");
                             if (self.expectedContentType && cv && cv.indexOf('/'+self.expectedContentType) === -1)
                                 throw(400);
-                            var data = ! cv || cv.indexOf('/json') === -1? responseText : JSON.parse(responseText);
+                            var data = ! cv || cv.indexOf('/json') === -1? response : JSON.parse(response);
                             self._promise.resolve(data,xhr);
                             return eventMgr.dispatch('success');
                         } else {
@@ -838,6 +841,7 @@
                 this.action = action;
                 this.abort();
                 this.aborted = false;
+                this.connectionFailure = false;
                 var vars = typeof self.vars === 'function'? self.vars(): self.vars;
                 this._uri = [vars,self.formdata].map(function (l) {
                     return Object.keys(l).map(function (k) {
