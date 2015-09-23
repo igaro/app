@@ -35,6 +35,9 @@ module.exports = function(app) {
         if (o.form)
             this.setForm(o.form);
         this.onValidSubmit = o.onValidSubmit;
+        this.managers.event.on('destroy', function() {
+            return this.clear();
+        });
     };
 
     InstanceFormValidate.prototype.init = function() {
@@ -120,7 +123,8 @@ module.exports = function(app) {
                     me.style.left=n.offsetLeft + 'px';
                     me.style.top= (n.clientHeight+n.offsetTop) + 'px';
                 };
-                self.resizeHooks.push(window.addEventListener('resize',pos));
+                self.resizeHooks.push(pos);
+                window.addEventListener('resize',pos);
                 pos();
             }));
             var cl = n.classList;
@@ -201,7 +205,7 @@ module.exports = function(app) {
     InstanceFormValidate.prototype.clear = function() {
         this.resizeHooks.forEach(function (h) {
             if (h)
-                window.removeEventListener(h);
+                window.removeEventListener('resize',h);
         });
         this.resizeHooks = [];
         this.getFormElements().forEach(function(o) {
