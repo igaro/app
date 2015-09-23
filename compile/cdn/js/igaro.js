@@ -431,13 +431,8 @@
                     r.classList.add('core-dom-hide');
                 },
                 isHidden : function(r) {
-                    r = r.parentNode;
-                    while (r) {
-                        var s = r.style;
-                        if (s.visibility !== 'hidden' && s.display !== 'none')
-                            r = r.parentNode;
-                    }
-                    return r !== document.body;
+                    var style = window.getComputedStyle(r);
+                    return style.visibility === 'hidden' || style.display === 'none';
                 },
                 toggleVisibility : function(r) {
                     if (! (r instanceof Node))
@@ -448,6 +443,18 @@
                     if (! (r instanceof Node))
                         throw new Error('No DOM element supplied');
                     r.classList.remove('core-dom-hide');
+                },
+                offset : function(r) {
+                    if (! (r instanceof Node))
+                        throw new Error('No DOM element supplied');
+                    var x = 0,
+                        y = 0;
+                    while(r) {
+                        x += (r.offsetLeft - r.scrollLeft + r.clientLeft);
+                        y += (r.offsetTop - r.scrollTop + r.clientTop);
+                        r = r.offsetParent;
+                    }
+                    return { x:x, y:y };
                 },
                 append : function(r,c,o) {
                     var self = this;

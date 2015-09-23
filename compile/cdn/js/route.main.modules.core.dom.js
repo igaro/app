@@ -77,6 +77,30 @@ module.exports = function() {
                     desc:_tr("Shortcut for accessing the body>head element.")
                 },
                 {
+                    name:'offset',
+                    type:'function',
+                    desc:_tr("Returns the computed offset position for an element."),
+                    attributes : [
+                        {
+                            type:'object',
+                            required:true,
+                            attributes : [
+                                {
+                                    desc: _tr("The element to check.")
+                                }
+                            ]
+                        }
+                    ],
+                    returns: {
+                        attributes : [
+                            {
+                                desc:_tr("Contains x and y keys."),
+                                type:'object'
+                            }
+                        ]
+                    }
+                },
+                {
                     name:'purge',
                     type:'function',
                     desc:_tr("Destroys an element, all child elements, and dereferences from dependencies."),
