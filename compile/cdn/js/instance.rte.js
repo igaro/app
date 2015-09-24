@@ -220,11 +220,7 @@ module.exports = function(app) {
                         })
                     };
                 })));
-
             });
-
-        }).then(function() {
-            return self.managers.event.dispatch('init');
         });
     };
 
@@ -241,7 +237,6 @@ module.exports = function(app) {
     InstanceRTE.prototype.getHTML = function() {
         return (this.inWYSIWYG? this.rte.innerHTML : this.raw.value).trim();
     };
-
 
     InstanceRTE.prototype.addPanels = function(o) {
         var self = this;
