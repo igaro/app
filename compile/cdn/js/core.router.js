@@ -85,7 +85,8 @@ module.exports = function(app) {
     };
 
     CoreRouterRoute.prototype.addSequence = function(o) {
-        var self = this;
+        var self = this,
+            values = [];
         return o.promises.reduce(function(sequence, cP) {
             return sequence.then(function() {
                 return cP;
@@ -94,6 +95,7 @@ module.exports = function(app) {
                     self.managers.debug.handle(e);
                 throw e;
             }).then(function(container) {
+                values.push(container);
                 if (typeof container !== 'object')
                     return;
                 if ((!(container instanceof Node)) && container.container instanceof Node) //jshint ignore: line
@@ -101,7 +103,9 @@ module.exports = function(app) {
                 if (container instanceof Node) // jshint ignore: line
                     o.container.appendChild(container);
             });
-        }, Promise.resolve());
+        }, Promise.resolve()).then(function() {
+            return values;
+        });
     };
 
     CoreRouterRoute.prototype.isBase = function() {

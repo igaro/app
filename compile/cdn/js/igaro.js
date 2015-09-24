@@ -733,22 +733,24 @@
                     }
                 };
             var setBits = function(p) {
-              if (p.res)
-                this.res = p.res;
-              if (p.headers)
-                this.headers = p.headers;
-              if (p.vars)
-                this.vars = p.vars;
-              if (typeof p.withCredentials === 'boolean')
-                this.withCredentials = p.withCredentials;
-              if (p.form)
-                this.setForm(p.form);
-              if (typeof p.silent === 'boolean')
-                this.silent = p.silent;
-              if (p.stash)
-                this.stash = p.stash;
-              if (typeof p.expectedContentType !== 'undefined')
-                this.expectedContentType = p.expectedContentType;
+                if (p.res)
+                    this.res = p.res;
+                if (p.headers)
+                    this.headers = p.headers;
+                if (p.vars)
+                    this.vars = p.vars;
+                if (typeof p.withCredentials === 'boolean')
+                    this.withCredentials = p.withCredentials;
+                if (p.form)
+                    this.setForm(p.form);
+                if (typeof p.silent === 'boolean')
+                    this.silent = p.silent;
+                if (p.stash)
+                    this.stash = p.stash;
+                if (typeof p.expectedContentType !== 'undefined')
+                    this.expectedContentType = p.expectedContentType;
+                if (p.responseType)
+                    this.xhr.responseType = p.responseType;
             };
             var bless = app['core.object'].bless;
             var InstanceXhr = function(o) {
@@ -778,7 +780,7 @@
                             return;
                         var response = (! xhr.responseType) || xhr.responseType.match(/^.{0}$|text/)? xhr.responseText : xhr.response,
                             status = xhr.status;
-                        if (status === 0 && ! response.length)
+                        if (status === 0 && (! response || response.length === 0))
                             self.connectionFalure = true;
                         if (status === 200 || (status === 0 && response.length > 0)) {
                             var cv = xhr.getResponseHeader("Content-Type");
