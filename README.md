@@ -2,14 +2,15 @@
 
 [ ![Codeship Status for igaro/app](https://codeship.com/projects/d521e620-04a0-0133-19ae-1a88c4115bd9/status?branch=master)](https://codeship.com/projects/89386)
 
-"Faster than Angular, more advanced than React."
+Igaro App is a complete web-app architecture using ES5/6 Javascript.
 
-Igaro App is a complete web-app framework using Javascript.
+"It's an architecture, not a framework."
 
-Potentially the web's finest SPA framework. No limits. No disadvantages.
+Ever envisaged a website where rendering and management is client side and server(s) only provide data?
 
-The current release is: 1.0.1. Use git tag to show releases.
+Note:
 
+This project uses readable code, without callbacks or closure abuse. Code flows (Promises are used everywhere), and so JSDoc is not used for documentation. Instead, all modules and functions are documented in the /modules section.
 
 Learn, Documentation
 -------
