@@ -11,35 +11,34 @@ module.exports = function(app, params) {
 
     var store = app['core.store'],
         url = app['core.url'],
-        bless = app['core.object'].bless;
+        coreObject = app['core.object'],
+        bless = coreObject.bless,
+        promiseSequencer = coreObject.promiseSequencer;
 
     var detect = function() {
         return language.managers.store.get('env').then(function (stored) {
-            return [
+            var set = false;
+            return promiseSequencer([
                 stored,
                 params.conf.localeLanguage,
                 url.getParam('localeLanguage'),
                 window.navigator.userLanguage || window.navigator.language,
                 'en-US',
                 'en'
-            ].reduce(
-                function(a,b,i) {
-                    return a.then(function() {
-                        return language.setEnv(b,true).then(
-                            function() {
-                                language.isAuto = i !== 0;
-                                throw null;
-                            },
-                            function () {}
-                        );
-                    });
-                },
-                Promise.resolve()
-            ).then(
+            ], function(b,i) {
+                if (! set)
+                    return language.setEnv(b,true).then(
+                        function() {
+                            language.isAuto = i !== 0;
+                            set = true;
+                        },
+                        function () { }
+                    );
+            }).then(
                 function () {
-                    throw new Error('Language failed to set');
-                },
-                function() { }
+                    if (! set)
+                        throw new Error('Language failed to set');
+                }
             );
         });
     };

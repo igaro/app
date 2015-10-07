@@ -11,12 +11,12 @@ var __igaroapp = {
     cdn : location.protocol === 'file:'? location.href+'/../cdn' : '/cdn',
     msgIncompatible : _tr("Your device or software is too old. Please upgrade."),
     msgErr : _tr("An unexpected error has occurred. Please email <b>app-support@igaro.com</b> for support."),
-    libs : { 
+    libs : {
         load :[
             { name:'conf.app.js' }
         ],
         local : [
-            { name:'3rdparty.fastclick.js' },       
+            { name:'3rdparty.fastclick.js' },
             { name:'3rdparty.cordova.css' }
         ],
         touch : [
@@ -115,7 +115,19 @@ loading[0].className='igaro-loading';
 bodyStyle.overflow = 'hidden';
 __igaroapp.init = {
     onProgress : function() {
-       loading[1].className='progress';
+        var l = loading[1].className='progress';
+        l = loading[2];
+        [
+            'Loading', // en
+            'Chargement', // french
+            'Cargando', // spanish
+            'جار التحميل', // arabic
+            '载入中' // chinese
+        ].forEach(function(txt) {
+            var p = document.createElement('p');
+            p.innerHTML = txt;
+            l.appendChild(p);
+        });
     },
     onReady : function(app,conf) {
         setTimeout(function() {
@@ -128,7 +140,7 @@ __igaroapp.init = {
         resetOverflow(conf);
         e = typeof e === 'object' && e.error && e.error.incompatible? conf.msgIncompatible : conf.msgErr;
         loading[2].innerHTML = Object.keys(e).map(function(n) {
-           return e[n]; 
+           return e[n];
         }).join("<p>");
     }
 };

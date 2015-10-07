@@ -1,6 +1,6 @@
 @import "../sass-global/mixins.scss";
 
-@-webkit-keyframes igaro-spin {
+/* @-webkit-keyframes igaro-spin {
 from { -webkit-transform: rotate(0deg); opacity: 0.2; }
 50% { -webkit-transform: rotate(180deg); opacity: 1; }
 to { -webkit-transform: rotate(360deg); opacity: 0.2; }
@@ -10,7 +10,21 @@ to { -webkit-transform: rotate(360deg); opacity: 0.2; }
 from { transform: rotate(0deg); opacity: 0.2; }
 50% { transform: rotate(180deg); opacity: 1; }
 to { transform: rotate(360deg); opacity: 0.2; }
+} */
+
+
+@-webkit-keyframes igaro-spin {
+from { opacity: 0.2; }
+50% { opacity: 1; }
+to { opacity: 0.2; }
 }
+
+@keyframes igaro-spin {
+from { opacity: 0.2; }
+50% { opacity: 1; }
+to { opacity: 0.2; }
+}
+
 
 * {
     box-sizing: border-box;
@@ -31,7 +45,7 @@ body {
     >noscript {
       text-align:center;
     }
-    
+
     pre {
         white-space: pre-wrap;
     }
@@ -274,22 +288,23 @@ body {
             display:table-cell;
             vertical-align:middle;
             text-align:center;
-            transition: all 1s;
+            //transition: all 1s;
             >div {
               margin:0 auto;
               display:inline-block;
             }
             &:not(.error) >div {
-                border: 1.2em solid #000;
-                border-right-color: transparent;
-                border-radius: 50%;
-                -webkit-animation: igaro-spin 1.35s linear infinite;
-                animation: igaro-spin 1.35s linear infinite;
-                width:12em;
-                height:12em;
+                //border: 1.2em solid #000;
+                //border-right-color: transparent;
+                //border-radius: 50%;
+                -webkit-animation: igaro-spin 1.5s ease-in-out infinite;
+                animation: igaro-spin 1.5s ease-in-out infinite;
+                //width:100%;
+                //height:100%;
+                font-size:2em;
             }
             &.progress >div {
-                border-left-color: transparent;
+                //border-left-color: transparent;
                 animation-duration: 1.15s;
                 -webkit-animation-duration: 1.15s;
             }
@@ -315,6 +330,7 @@ body {
 
     >.igaro-router-loading {
         background-color:rgba(0,0,0,.85);
+        color:#fff;
         >div >div {
             border-top-color:#fff !important;
             border-bottom-color:#fff !important;

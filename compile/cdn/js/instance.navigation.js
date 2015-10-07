@@ -44,8 +44,8 @@ module.exports = function(app) {
             });
         };
         bless.call(this,o);
-        this.managers.event.on('disabled', function() {
-           self.setActive(false);
+        this.managers.event.on('disable', function() {
+           self.setActive(self.disabled);
         });
         this.onClick = o.onClick;
         this.status = 0;
@@ -84,7 +84,6 @@ module.exports = function(app) {
         bless.call(this,o);
         this.onClick = o.onClick;
     };
-
     InstanceNavigationMenu.prototype.addOptions = function(o) {
         var self = this;
         return object.promiseSequencer(o,function(a) {
@@ -96,12 +95,9 @@ module.exports = function(app) {
         var t = new InstanceNavigationMenuOption(o);
         arrayInsert(this.options,t,o);
         return this.managers.event.dispatch('addOption',t).then(function() {
-            if (o.menu) {
-                return t.addMenu(o.menu).then(function() {
-                    return t;
-                });
-            }
-            return t;
+            return o.menu? t.addMenu(o.menu).then(function() {
+                return t;
+            }): t;
         });
     };
     InstanceNavigationMenu.prototype.clear = function(o) {
@@ -117,9 +113,12 @@ module.exports = function(app) {
             return dom.mk('nav',o,null,o.className);
         };
         bless.call(this,o);
-        this.menu = new InstanceNavigationMenu({
+        var menu = this.menu = new InstanceNavigationMenu({
             parent:this,
             onClick:o.onClick
+        });
+        this.managers.event.on('destroy', function() {
+            return menu.destroy();
         });
     };
     InstanceNavigation.prototype.init = function(o) {

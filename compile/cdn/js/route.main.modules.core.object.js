@@ -109,7 +109,7 @@ module.exports = function() {
                                 {
                                     name:'disabled',
                                     type:'boolean',
-                                    desc:_tr("The object state. Mainly used for DOM manipulation. No object properties are blocked, it is merely an indication which other methods can use to change logic. Default is false.")
+                                    desc:_tr("The object state. No object properties are blocked, it is merely an indication which other methods can use to switch logic. Default is false. Not to be confused with .isDisabled().")
                                 },
                                 {
                                     name:'hide',
@@ -120,6 +120,18 @@ module.exports = function() {
                                     name:'hidden',
                                     type:'boolean',
                                     desc:_tr("PARAM - Defines if the object should be hidden. Only applicable if the object has a container. Default is false.")
+                                },
+                                {
+                                    name:'isDisabled',
+                                    type:'function',
+                                    desc:_tr("Returns whether the object is disabled, propogating the check to the parent object. This is not to be confused with .disabled"),
+                                    returns: {
+                                        attributes : [
+                                            {
+                                                instanceof : { name:'Boolean' }
+                                            }
+                                        ]
+                                    }
                                 },
                                 {
                                     name:'managers',
@@ -226,7 +238,7 @@ module.exports = function() {
                             }
                         ]
                     }
-                },
+                }
             ]
         };
 

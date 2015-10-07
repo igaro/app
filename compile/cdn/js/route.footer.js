@@ -67,7 +67,7 @@ module.exports = function(app) {
                             return x;
                         });
                     }
-                ).catch(function () {});
+                ).catch(function () { });
             }),
 
             // open issues

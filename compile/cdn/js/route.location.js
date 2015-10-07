@@ -36,10 +36,10 @@ module.exports = function(app) {
 
             this.className = 'location';
             dom.hide(params);
-            router.managers.event.extend(model)
+            router.managers.event
                 .on('to-start', function() {
                     dom.hide(params);
-                })
+                }, { deps:[model] })
                 .on('to-in-progress', function() {
                     if (! router.isAtBase()) {
                         model.show();
@@ -63,7 +63,7 @@ module.exports = function(app) {
                     } else {
                         model.hide();
                     }
-                })
+                }, { deps:[model] })
             ;
         });
 

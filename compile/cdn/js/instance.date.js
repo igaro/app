@@ -48,8 +48,8 @@ module.exports = function(app) {
         } else {
             this.offset(date.envOffset,true);
         }
-        dateEventMgr.extend(this).on('setEnvOffset',erf.tzoffset);
-        languageEventMgr.extend(this).on('setEnv',erf.lang);
+        dateEventMgr.on('setEnvOffset',erf.tzoffset, { deps:[this] });
+        languageEventMgr.on('setEnv',erf.lang, { deps:[this] });
         erf.lang();
         if (o.relative)
             this.relative();

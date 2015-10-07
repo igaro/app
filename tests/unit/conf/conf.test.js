@@ -61,7 +61,7 @@ module.exports = function(app, params) {
 
         // debug handling
         var displaying = false;
-        events.on('core.debug','handle', function (o) {
+        events.rootEmitter.on('core.debug.handle', function (o) {
             document.body.classList.add('error');
             return debug.log.append(o.value,o.path,o.event);
         });

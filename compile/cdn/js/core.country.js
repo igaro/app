@@ -11,37 +11,36 @@ module.exports = function(app, params) {
 
     var store = app['core.store'],
         url = app['core.url'],
-        bless = app['core.object'].bless;
+        coreObject = app['core.object'],
+        bless = coreObject.bless,
+        promiseSequencer = coreObject.promiseSequencer;
 
     var detect = function() {
         var n = window.navigator.userLanguage || window.navigator.language;
         if (n.length > 3)
             n=n.substr(3);
         return country.managers.store.get('env').then(function (stored) {
-            return [
+            var set = false;
+            return promiseSequencer([
                 stored,
                 params.conf.localeCountry,
                 url.getParam('localeCountry'),
                 n,
                 'US'
-            ].reduce(
-                function(a,b,i) {
-                    return a.then(function() {
-                        return country.setEnv(b,true).then(
-                            function() {
-                                country.isAuto = i !== 0;
-                                throw null;
-                            },
-                            function () {}
-                        );
-                    });
-                },
-                Promise.resolve()
-            ).then(
+            ], function(b,i) {
+                if (! set)
+                    return country.setEnv(b,true).then(
+                        function() {
+                            country.isAuto = i !== 0;
+                            set = true;
+                        },
+                        function () { }
+                    );
+            }).then(
                 function () {
-                    throw new Error('Country failed to set');
-                },
-                function() { }
+                    if (! set)
+                        throw new Error('Country failed to set');
+                }
             );
         });
     };

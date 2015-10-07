@@ -13,7 +13,8 @@ module.exports = function(app) {
     "use strict";
 
     var dom = app['core.dom'],
-        router = app['core.router'];
+        router = app['core.router'],
+        rootEmitter = app['core.events'].rootEmitter;
 
     return function(model) {
 
@@ -96,11 +97,11 @@ module.exports = function(app) {
                                                 slice:[2]
                                             });
                                         };
-                                        mod.managers.event.extend(accordion)
-                                            .on('setEnv', sel)
-                                            .on('setPool', write);
-                                        app['core.language'].managers.event.extend(accordion)
-                                            .on('setEnv', sort);
+                                        mod.managers.event
+                                            .on('setEnv', sel, { deps:[accordion] })
+                                            .on('setPool', write, { deps:[accordion] });
+                                        app['core.language'].managers.event
+                                            .on('setEnv', sort, { deps:[accordion] });
                                         write();
                                         sel();
                                         sort();
@@ -205,24 +206,24 @@ module.exports = function(app) {
                     domMgr.mk('div',null,null,function() {
                         this.className = 'xhr';
                         dom.hide(this);
-                        var total=0,
+                        var total = 0,
                             ref,
                             self = this;
                         domMgr.mk('div', self);
-                        model.on('instance.xhr','start', function () {
+                        rootEmitter.on('instance.xhr.start', function () {
                             if (total === 0 && ! ref)
                                 ref=window.setTimeout(function() {
                                     dom.show(self);
                                 },350);
                             total++;
                         });
-                        model.on('instance.xhr','end', function() {
+                        rootEmitter.on('instance.xhr.end', function() {
                             if (total > 0)
                                 total--;
                             if (total !== 0)
                                 return;
                             window.clearTimeout(ref);
-                            ref=null;
+                            ref = null;
                             dom.hide(self);
                         });
                     })

@@ -21,7 +21,7 @@ module.exports = function(app, params) {
 
     "use strict";
 
-    var events = app['core.events'],
+    var rootEmitter = app['core.events'].rootEmitter,
         Amd = app['instance.amd'],
         router = app['core.router'],
         debug = app['core.debug'],
@@ -2386,7 +2386,7 @@ module.exports = function(app, params) {
 
         // debug handling
         var displaying = false;
-        events.on('core.debug','handle', function (o) {
+        rootEmitter.on('core.debug.handle', function (o) {
             var value = typeof o === 'object' && typeof o.value === 'object'? o.value : {},
                 error = value.error;
             if (displaying || error === 0)
@@ -2417,15 +2417,20 @@ module.exports = function(app, params) {
             var self = this,
                 rME = router.managers.event,
                 body = document.body,
-                bodyStyle = body.style;
-            dom.mk('div',this,dom.mk('div'),'progress');
+                bodyStyle = body.style,
+                ref;
+            dom.mk('div',this,dom.mk('div',null,_tr("Loading...")),'progress');
             this.className = 'igaro-router-loading';
             rME.on('to-in-progress', function() {
-                bodyStyle.overflow = 'hidden';
-                body.appendChild(self);
+                clearTimeout(ref);
+                ref = setTimeout(function() {
+                    bodyStyle.overflow = 'hidden';
+                    body.appendChild(self);
+                }, 700);
             });
             rME.on(['to-end','to-error'], function(o) {
-                if (o && o.value !== -1600) {
+                if (! o || o.value !== -1600) {
+                    clearTimeout(ref);
                     if (! params.conf.noBodyStyleOverflowReset)
                         bodyStyle.overflow = '';
                     dom.rm(self);
@@ -2435,29 +2440,27 @@ module.exports = function(app, params) {
 
         // handle router errors
         router.managers.event.on('to-error', function (o) {
-            var v = o.value;
-            if (typeof v === 'object' && v.value)
-              v = v.value;
-            if (! v)
-              return;
-            //invalid route
-            if (v.error === 404)
-                return new ModalDialog().alert({
-                    message: _tr("The page you requested does not exist.")
-                });
             // invalid url
-            if (v.uri)
+            if (o.uri)
                 return new ModalDialog().alert({
                     message: language.substitute(_tr("A problem with the URL was detected and loading aborted prematurely.\n\nError: %[0]"),o.uri)
                 });
+            // get the http xhr code
+            var httpCode = o;
+            while (typeof httpCode === 'object' && httpCode.error) {
+              httpCode = httpCode.error;
+            }
+            if (httpCode === 404)
+                return new ModalDialog().alert({
+                    message: _tr("The page you requested does not exist.")
+                });
+            // else handle
             return router.managers.debug.handle(o);
         });
 
         // capture 401 xhr errors (unauthorized) and begin oauth if for account
         var replay = [];
-
-        events.on('instance.xhr','response', function(p) {
-            var o = p.x;
+        rootEmitter.on('instance.xhr.response', function(o) {
             if (o.xhr.status !== 401 || ! o.stash || ! o.stash.account)
                 return;
             replay.push(o);
@@ -2546,7 +2549,7 @@ module.exports = function(app, params) {
             510 : _tr("Not Extended")
         };
 
-        events.on('instance.xhr','error', function (o) {
+        rootEmitter.on('instance.xhr.error', function (o) {
             var x = o.x,
                 xhr = x.xhr;
             if (x.expectedContentType) {
@@ -2564,7 +2567,7 @@ module.exports = function(app, params) {
         });
 
         // setup page with core routes
-        events.on('','state.init', function() {
+        rootEmitter.on('state.init', function() {
             // load initial routes
             return router.root.addRoutes(
                 ['header','location','main','footer'].map(function(name) {
@@ -2590,8 +2593,8 @@ module.exports = function(app, params) {
                         return eF(title,'title',model);
                     };
                 set(router.current);
-                router.managers.event.on('to-in-progress', function(o) {
-                    return set(o.value);
+                router.managers.event.on('to-in-progress', function(model) {
+                    return set(model);
                 });
                 // meta tags
                 ['description','keywords'].forEach(function(n) {
@@ -2599,14 +2602,14 @@ module.exports = function(app, params) {
                         this.name = n;
                         eF(this,n,router.current);
                         var self = this;
-                        router.managers.event.on('to-in-progress', function(o) {
-                            return eF(self,n,o.value);
+                        router.managers.event.on('to-in-progress', function(model) {
+                            return eF(self,n,model);
                         });
                     });
                 });
                 // handle error here
-                return events.dispatch('','state.base').then(function() {
-                    return events.dispatch('','state.ready');
+                return rootEmitter.dispatch('state.base').then(function() {
+                    return rootEmitter.dispatch('state.ready');
                 }).catch(function (e) {
                     // don't return the handle - doing so will prevent the parent model from displaying and will show the generic load error.
                     if (e !== 0) // connection issues are handled by a pageMessage

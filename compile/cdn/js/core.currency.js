@@ -19,30 +19,27 @@ module.exports = function(app, params) {
 
     var detect = function() {
         return currency.managers.store.get('env').then(function (stored) {
-            return [
+            var set = false;
+            return promiseSequencer([
                 stored,
                 params.conf.localeCurrency,
                 url.getParam('localeCurrency'),
-                country.env? country.pool[country.env].currency[0] : null,
+                country.env && country.pool[country.env] && country.pool[country.env].currency? country.pool[country.env].currency[0] : null,
                 'USD'
-            ].reduce(
-                function(a,b,i) {
-                    return a.then(function() {
-                        return currency.setEnv(b,true).then(
-                            function() {
-                                currency.isAuto = i !== 0;
-                                throw null;
-                            },
-                            function () {}
-                        );
-                    });
-                },
-                Promise.resolve()
-            ).then(
+            ], function(b,i) {
+                if (! set)
+                    return currency.setEnv(b,true).then(
+                        function() {
+                            currency.isAuto = i !== 0;
+                            set = true;
+                        },
+                        function () { }
+                    );
+            }).then(
                 function () {
-                    throw new Error('Currency failed to set');
-                },
-                function() { }
+                    if (! set)
+                        throw new Error('Currency failed to set');
+                }
             );
         });
     };
@@ -56,12 +53,10 @@ module.exports = function(app, params) {
         env : null,
         isAuto : null,
         pool : {},
-
         setPool : function(o) {
             this.pool = o;
             return this.managers.event.dispatch('setPool');
         },
-
         setEnv : function(id,noStore) {
             var self = this,
                 managers = self.managers;

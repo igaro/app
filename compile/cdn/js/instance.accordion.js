@@ -31,8 +31,9 @@ module.exports = function(app) {
             event.preventDefault();
             self.toggle();
         });
-        this.managers.event.on('disabled', function() {
-            return self.collapse();
+        this.managers.event.on('disable', function() {
+            if (this.disabled)
+                return self.collapse();
         });
         if (o.expand)
             this.expand();

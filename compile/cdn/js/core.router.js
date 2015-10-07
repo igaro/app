@@ -14,8 +14,7 @@ module.requires = [
 
 module.exports = function(app) {
 
-    var events = app['core.events'],
-        dom = app['core.dom'],
+    var dom = app['core.dom'],
         object = app['core.object'],
         bless = object.bless,
         arrayInsert = object.arrayInsert;
@@ -60,22 +59,8 @@ module.exports = function(app) {
         return this.uriPieces;
     };
 
-    CoreRouterRoute.prototype.on = function(name,evt,fn) {
-        var deps = [this],
-            target = null,
-            t;
-        if (typeof evt === 'string') {
-            t = evt;
-        } else {
-            if (! (evt instanceof Array))
-                throw new Error('CoreRouterRoute.on: second argument must be string or array');
-            t = evt.shift();
-            if (evt.length)
-                target = evt.shift();
-            if (evt.length)
-                deps.concat(evt.shift());
-        }
-        events.on(name,[t,target,deps],fn);
+    CoreRouterRoute.prototype.on = function(evt,fn,o) {
+        return this.managers.event.on(evt,fn,o);
     };
 
     CoreRouterRoute.prototype.getUrl = function() {
@@ -251,8 +236,12 @@ module.exports = function(app) {
                         throw -14443864;
                     if(c.destroyOnLeave)
                         return c.destroy();
-                    var s = document.body.scrollTop || document.documentElement.scrollTop;
-                    c.scrollPosition = s < 0? 0 :s;
+                    // disable route
+                    return c.disable().then(function() {
+                        // save scroll position
+                        var s = document.body.scrollTop || document.documentElement.scrollTop;
+                        c.scrollPosition = s < 0? 0 :s;
+                    });
                 })
                 :
                 Promise.resolve()
@@ -299,19 +288,19 @@ module.exports = function(app) {
                         }
                         if (typeof c.scrollPosition === 'number')
                             document.body.scrollTop = document.documentElement.scrollTop = c.scrollPosition;
-                        return routerEventMgr.dispatch('to-loaded').then(function() {
-                            routerEventMgr.dispatch('to-end');
+                        return routerEventMgr.dispatch('to-loaded', model).then(function() {
+                            routerEventMgr.dispatch('to-end', model);
                         });
                     }).catch(function (e) {
-                        if (typeof e === 'boolean' && e === -1600)
-                            return routerEventMgr.dispatch('to-end', e);
-                        return routerEventMgr.dispatch('to-error', e).then(function() {
-                            throw e;
-                        });
+                        // handle url user mind change code
+                        if (typeof e !== 'boolean' && e !== -1600)
+                            return routerEventMgr.dispatch('to-error', { x:model, error:e }).then(function() {
+                                throw e;
+                            });
                     }).catch(function(e) {
                         // replace the url with whatever has managed to load
                         window.history.replaceState({},null,router.current.getUrl());
-                        return routerEventMgr.dispatch('to-end', e).then(function() {
+                        return routerEventMgr.dispatch('to-end', { x:model, error:e }).then(function() {
                             throw e;
                         });
                     });
@@ -336,25 +325,25 @@ module.exports = function(app) {
     mrv.show();
     document.body.appendChild(mrv.container);
 
-    var f = function() {
+    // window URL change
+    var autoRouter = function() {
         var w = window.location.pathname.trim().substr(1),
             s = window.location.search.split('&'),
             h = window.location.hash;
         w = w.length? w.replace(/\/+$/, "").split('/') : [];
         return router.to(w,s,h,false);
     };
-
-    window.addEventListener('popstate', function() { f(); });
+    window.addEventListener('popstate', autoRouter);
 
     if (document.location.protocol !== 'file:') {
         var wl = window.location;
         // add missing slash
         window.history.replaceState(window.history.state,null,wl.href.replace(/\/?(\?|#|$)/, '/$1').substr(wl.protocol.length+wl.host.length+2));
         if (wl.pathname.length > 1) {
-            events.on('','state.base', function() {
-                events.remove(this);
+            app['core.events'].rootEmitter.on('state.base', function() {
                 // do not return, this prevents event aborting
-                f();
+                autoRouter();
+                return { removeEventListener: true };
             });
         }
     }

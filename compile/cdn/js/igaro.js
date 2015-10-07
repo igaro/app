@@ -55,8 +55,140 @@
         // further modules - must inc conf
         modules.push.apply(modules,libs.load);
 
+        // common private helpers
+        var promiseSequencer = function(o,fn) {
+            var r=[];
+            return o.reduce(function(a,b,i) {
+                return a.then(function() {
+                    return Promise.resolve().then(function() {
+                        return fn(b,i);
+                    }).then(function(g) {
+                        r.push(g);
+                        return g;
+                    });
+                });
+            }, Promise.resolve()).then(function() {
+                return r;
+            });
+        };
+
+        // core.events: built-in
+        (function() {
+            var eventEmitters = [];
+
+            var EventEmitter = function(parent) {
+                this.events = {};
+                this.parent = parent;
+                eventEmitters.push(this);
+            };
+
+            EventEmitter.prototype.destroy = function() {
+                eventEmitters.slice().splice(this,1);
+                this.events = {};
+                this.parent = null;
+                return Promise.resolve();
+            };
+
+            EventEmitter.prototype.on = function(evt,fn,o) {
+                var self = this;
+                if (evt instanceof Array) {
+                    return evt.forEach(function (n) {
+                        self.on(n,fn,o);
+                    });
+                }
+                var pool = this.events,
+                    p = { fn:fn, deps:o && o.deps? o.deps : [] };
+                if (! pool[evt])
+                    pool[evt] = [];
+                var m = pool[evt];
+                if (o && o.prepend) {
+                    m.unshift(p);
+                } else {
+                    m.push(p);
+                }
+                return this;
+            };
+
+            // remove an event by function or dependency
+            EventEmitter.prototype.remove = function(fn,event) {
+                var self = this;
+                if (fn instanceof Array) {
+                    return fn.forEach(function (f) {
+                        self.remove(f,event);
+                    });
+                }
+                var events = this.events;
+                (event? [event] : Object.keys(this.events)).forEach(function (key) {
+                    events[key].slice(0).forEach(function (evt, i) {
+                        if (evt.fn === fn || evt.deps.indexOf(fn) > -1)
+                            events[key].splice(i,1);
+                    });
+                });
+            };
+
+            EventEmitter.prototype.dispatch = function(evt, params) {
+                var self = this;
+                return promiseSequencer(this.events[evt] || [], function(t) {
+                    var r = null;
+                    try {
+                        r = t.fn.call(t, params);
+                    } catch(e) {
+                        console.error(e, t, t.fn);
+                        throw e;
+                    }
+                    var handleReturn = function(v) {
+                        if (typeof v !== 'object')
+                            return;
+                        if (v.removeEventListener)
+                            self.remove(t.fn,evt);
+                        if (v.stopImmediatePropagation)
+                            throw v;
+                    };
+                    if (r instanceof Promise)
+                        return r.then(function(a) {
+                            return handleReturn(a);
+                        });
+                    handleReturn(r);
+                // catch errors which aren't stopImmediatePropagation
+                }).catch(function(e) {
+                    if (typeof e === 'object' && ! e.stopImmediatePropagation)
+                        throw {
+                            event:evt,
+                            params:params,
+                            error:e,
+                        };
+                }).then(function(rV) {
+                    // check not asRoot, is representing an object, that object has a parent, and a Promise didn't return stopPropagation
+                    var parent = self.parent;
+                    if (! parent || parent.asRoot || ! parent.parent || rV.some(function(p) {
+                        return typeof p === 'object' && p.stopPropagation;
+                    })) return;
+                    // eventMgr representing an object. Propagate to parent eventMmg;
+                    var x = {
+                        value:params,
+                        x:parent
+                    };
+                    return parent.parent.managers.event.dispatch(parent.name+'.'+evt, x, self);
+                });
+            };
+
+            app['core.events'] = {
+                rootEmitter : new EventEmitter(),
+                createMgr : function(parent) {
+                    return new EventEmitter(parent);
+                },
+                clean : function(dep,name) {
+                    eventEmitters.forEach(function(eventEmitter) {
+                        return eventEmitter.remove(dep,name);
+                    });
+                }
+            };
+
+        })();
+
         // core.debug: built-in
         (function() {
+            var rootEmitter = app['core.events'].rootEmitter;
             var CoreDebugMgr = function(parent) {
                 this.parent = parent;
             };
@@ -79,11 +211,11 @@
                                 p += ':'+event;
                             console.error(p,value);
                         }
-                        return events.dispatch('core.debug','log.append',{ path:path, event:event, value:value });
+                        return rootEmitter.dispatch('core.debug.log.append',{ path:path, event:event, value:value });
                     }
                 },
                 handle : function(value,path,event) {
-                    return events.dispatch('core.debug','handle', { path:path, value:value, event:event });
+                    return rootEmitter.dispatch('core.debug.handle', { path:path, value:value, event:event });
                 },
                 createMgr : function(parent) {
                     return new CoreDebugMgr(parent);
@@ -91,238 +223,6 @@
             };
         })();
 
-        // core.events: built-in
-        (function() {
-            var debug = app['core.debug'];
-            var events = app['core.events'] = {
-                pool : {},
-                on : function(name,evt,fn,o) {
-                    var self = this;
-                    if (name instanceof Array) {
-                        return name.forEach(function (n) {
-                            self.on(n,evt,fn,o);
-                        });
-                    }
-                    var target = null,
-                        deps = [],
-                        ev;
-                    if (typeof evt === 'object') {
-                        ev = evt.shift();
-                        if (evt.length) {
-                            target = evt.shift();
-                            if (target)
-                                deps.push(target);
-                            if (evt.length)
-                                deps.concat(evt.shift());
-                        }
-                    } else {
-                        ev = evt;
-                    }
-                    var pool = this.pool,
-                        prepend = o && o.prepend === true,
-                        p = { fn:fn, target:target, deps:deps, name:name, evt:ev };
-                    if (! pool[name])
-                        pool[name] = {};
-                    if (! pool[name][ev])
-                        pool[name][ev] = [];
-                    var m = pool[name][ev];
-                    if (prepend) {
-                        m.unshift(p);
-                    } else {
-                        m.push(p);
-                    }
-                },
-
-                // removes dependencies from events and the event itself if the dependency is a target.
-                clean : function(dep, name, event) {
-                    var pool = this.pool,
-                    t = function(name) {
-                        var d = pool[name];
-                        var h = function(event) {
-                            var m = d[event];
-                            m.forEach(function(x,i) {
-                                x.deps.splice(x.deps.indexOf(dep), 1);
-                                if (x.target === dep)
-                                    m.splice(i,1);
-                            });
-                        };
-                        if (! event) {
-                            Object.keys(pool[name]).forEach(h);
-                        } else {
-                            h(event);
-                        }
-                    };
-                    if (typeof name !== 'string') {
-                        Object.keys(pool).forEach(t);
-                    } else {
-                        t(name);
-                    }
-                    return this;
-                },
-
-                // remove an event by function
-                remove : function(fn,name,event) {
-                    var obj = fn;
-                    var self = this;
-                    if (fn instanceof Array) {
-                        fn.forEach(function (f) {
-                            self.remove(f,name,event);
-                        });
-                        return;
-                    }
-                    var pool = this.pool,
-                    t = function(name) {
-                        var d = pool[name];
-                        var h = function(event) {
-                            var p = d[event];
-                            for (var i=0; i < p.length; ++i) {
-                                if ((obj && p[i] !== obj) || (! obj && p[i].fn !== fn))
-                                    continue;
-                                p.splice(i,1);
-                                break;
-                            }
-                        };
-                        if (! event) {
-                            Object.keys(pool[name]).forEach(h);
-                        } else {
-                            h(event);
-                        }
-                    };
-                    if (typeof name !== 'string') {
-                        Object.keys(pool).forEach(t);
-                    } else {
-                        t(name);
-                    }
-                    return this;
-                },
-                dispatch : function(name, evt, params) {
-                    var pool = this.pool,
-                        self = this,
-                        target = null,
-                        pn = pool[name],
-                        toCall = [];
-                    if (evt instanceof Array) {
-                        target=evt[1];
-                        evt = evt[0];
-                    }
-                    if (! pn || ! pn[evt])
-                        return Promise.resolve();
-                    pn[evt].forEach(function(t) {
-                        if (! t.target || target === t.target)
-                            toCall.push(t);
-                    });
-                    return toCall.reduce(function(a,t) {
-                        return a.then(function() {
-                            var r = null;
-                            if (! t || ! t.fn)
-                                return;
-                            try {
-                                r = t.fn.call(t, params);
-                            } catch(e) {
-                                if (window.console && debug.developer)
-                                    console.error(e, t, t.fn);
-                                throw e;
-                            }
-                            var handleReturn = function(v) {
-                                if (typeof v !== 'object')
-                                    return;
-                                if (v.removeEventListener)
-                                    self.remove(t.fn,name,evt);
-                                if (v.stopImmediatePropagation)
-                                    throw v;
-                            };
-                            if (r instanceof Promise)
-                                return r.then(function(a) {
-                                    handleReturn(a);
-                                });
-                            handleReturn(r);
-                        });
-                    }, Promise.resolve()).catch(function(e) {
-                        if (typeof e !== 'object' || ! e.stopImmediatePropagation)
-                            throw {
-                                name:name,
-                                process:evt,
-                                params:params,
-                                target:target,
-                                error:e,
-                            };
-                    });
-                }
-            };
-            var CoreEventMgr = function(x) {
-                this.deps = [];
-                if (! x)
-                    throw new Error('Event Manager must represent an object.');
-                this.x = x;
-            };
-            var appendDeps = function() {
-                var selfdeps = this.deps;
-                Array.prototype.slice.call(arguments).forEach(function (arg) {
-                    if (arg instanceof CoreEventMgr) {
-                        Array.prototype.push.apply(selfdeps, arg.deps);
-                    } else if (arg instanceof Array) {
-                        Array.prototype.push.apply(selfdeps, arg);
-                    } else {
-                        selfdeps.push(arg);
-                    }
-                });
-                return this;
-            };
-            CoreEventMgr.prototype.extend = function(deps) {
-                var c = new CoreEventMgr(this.x);
-                appendDeps.call(c,this.deps);
-                appendDeps.call(c,deps);
-                return c;
-            };
-            CoreEventMgr.prototype.createMgr = function(x) {
-                var c = new CoreEventMgr(x);
-                return appendDeps.call(c,this.x);
-            };
-            CoreEventMgr.prototype.on = function(evt,fn,o) {
-                var self = this;
-                if (! (evt instanceof Array))
-                    evt = [evt];
-                evt.forEach(function(v) {
-                    events.on(self.x.name,[v,self.x,self.deps],fn,o);
-                });
-                return this;
-            };
-            CoreEventMgr.prototype.remove = function(fn,evt) {
-                events.remove(fn,this.x.name,evt);
-                return this;
-            };
-            CoreEventMgr.prototype.clean = function(dep,evt) {
-                events.clean(dep,this.x.name,evt);
-                return this;
-            };
-            CoreEventMgr.prototype.dispatch = function(evt,value) {
-                var obj = this.x;
-                if (! obj && console)
-                    console.error({ error:'EventMgr represents no object.', mgr:this });
-                var parent = obj.parent,
-                    x = {
-                        value:value,
-                        x:obj
-                    };
-                return events.dispatch(obj.name,[evt,obj],x).then(function(o) {
-                    // send up the chain?
-                    if (typeof o === 'object' && (o.stopPropagation || o.stopImmediatePropagation))
-                        return o;
-                    if (parent && ! obj.asRoot)
-                        return parent.managers.event.dispatch(obj.name+'.'+evt, x, obj).then(function() {
-                            return o;
-                        });
-                    return o;
-                });
-            };
-            CoreEventMgr.prototype.destroy = function() {
-                this.x = null;
-                return Promise.resolve();
-            };
-            events.createMgr = function(x) {
-                return new CoreEventMgr(x);
-            };
-        })();
 
         // core.dom: built in
         (function() {
@@ -337,9 +237,9 @@
             };
             CoreDomMgr.prototype.mk = function(t,o,c,m) {
                 var r = dom.mk.call(this,t,o,c,m);
-                this.parent.managers.event.extend(r).on('destroy', function() {
+                this.parent.managers.event.on('destroy', function() {
                     return dom.rm(r);
-                });
+                }, { deps:[r] });
                 return r;
             };
             CoreDomMgr.prototype.destroy = function() {
@@ -410,11 +310,11 @@
                         throw new Error('core.dom -> core.language is not loaded.');
                     var xMgr = language.managers.event;
                     if (f)
-                        xMgr.clean(r.igaroPlaceholderFn,'setEnv');
+                        xMgr.remove(f,'setEnv');
                     f = r.igaroPlaceholderFn = function() {
                         r.placeholder = language.mapKey(l);
                     };
-                    xMgr.extend(r).on('setEnv', f);
+                    xMgr.on('setEnv', f, { deps:[r] });
                     f();
                 },
                 hide : function(r,v) {
@@ -481,19 +381,19 @@
                     if (! o)
                         this.purge(r,true);
                     r.innerHTML = '';
-                    var lf = r.igaroLangFn;
-                    if (lf) {
-                        app['core.language'].managers.event.clean(r);
-                        delete r.igaroLangFn;
-                    }
                     if (typeof c === 'object') {
                         if (c instanceof HTMLElement || c instanceof DocumentFragment) {
                             r.appendChild(c);
                         } else {
-                            // language literal
                             var language = app['core.language'];
                             if (! language)
                                 throw new Error('core.dom -> core.language is not loaded.');
+                            var xMgr = language.managers.event,
+                                lf = r.igaroLangFn;
+                            if (lf) {
+                                xMgr.remove(lf,'setEnv');
+                                delete r.igaroLangFn;
+                            }
                             var f = r.igaroLangFn = function() {
                                 if (r.nodeName === 'META') {
                                     r.content = language.mapKey(c);
@@ -503,7 +403,7 @@
                                     r.value = language.mapKey(c);
                                 }
                             };
-                            language.managers.event.extend(r).on('setEnv', f);
+                            xMgr.on('setEnv', f, { deps:[r] });
                             f();
                         }
                     } else {
@@ -611,19 +511,7 @@
                 createMgr : function(parent) {
                     return new CoreObjectMgr(parent);
                 },
-                promiseSequencer : function(o,fn) {
-                    var r=[];
-                    return o.reduce(function(a,b) {
-                        return a.then(function() {
-                            return fn(b).then(function(g) {
-                                r.push(g);
-                                return g;
-                            });
-                        });
-                    }, Promise.resolve()).then(function() {
-                        return r;
-                    });
-                },
+                promiseSequencer : promiseSequencer,
                 bless :  function(o) {
                     if (!o)
                         o = {};
@@ -649,7 +537,7 @@
                     }
                     // append managers
                     var mgrs = [
-                        ['event',parent?parent.managers.event : events],
+                        ['event',app['core.events']],
                         ['debug',app['core.debug']],
                         ['dom',app['core.dom']],
                         ['object',app['core.object']]
@@ -659,25 +547,32 @@
                         var mgr = thisManagers[o[0]] = o[1].createMgr(self);
                         return mgr;
                     });
-
                     // create child arrays
                     if (children) {
                         var eventMgr = self.managers.event;
                         Object.keys(children).forEach(function (k) {
                             var child = children[k],
                                 a = self[k] = [];
+                            // auto remove destroyed child
                             eventMgr.on(child+'.destroy', function(s) {
-                                a.splice(a.indexOf(s.value.x),1);
+                                a.splice(a.indexOf(s.x),1);
                             });
                         });
                         delete this.children;
                     }
-                    // parent->child autodestroy
-                    if (parent)
-                        parent.managers.event.on('destroy', function() {
-                            return self.destroy();
-                        });
                     var thisMgrsEvt = thisManagers.event;
+                    // parent->child event propagation
+                    if (parent) {
+                        var pme = parent.managers.event;
+                        // destroy
+                        pme.on('destroy', function() {
+                            return self.destroy();
+                        }, { deps:[self] });
+                        // disable
+                        pme.on('disable', function() {
+                            return thisMgrsEvt.dispatch('disable');
+                        }, { deps:[self] });
+                    }
                     this.destroy = function() {
                         // purge container beforehand to prevent any reapply
                         if (self.container) {
@@ -691,7 +586,6 @@
                                 return o.destroy();
                             })).then(function() {
                                 delete self.parent;
-                                return ;
                             });
                         });
                     };
@@ -702,6 +596,10 @@
                             container.setAttribute('disabled',v);
                             container.setAttribute('inert',v);
                         }
+                        return thisMgrsEvt.dispatch('disable',v);
+                    };
+                    this.isDisabled = function() {
+                        return this.disabled || (this.parent? this.parent.isDisabled() : false);
                     };
                     if (container) {
                         if (typeof container === 'function')
@@ -752,7 +650,8 @@
                 if (p.responseType)
                     this.xhr.responseType = p.responseType;
             };
-            var bless = app['core.object'].bless;
+            var bless = app['core.object'].bless,
+                rootEmitter = app['core.events'].rootEmitter;
             var InstanceXhr = function(o) {
                 this.name = 'instance.xhr';
                 this.asRoot = true;
@@ -775,7 +674,7 @@
                     if (xhr.readyState !== 4)
                         return;
                     self.lastUrlRequest = self.res;
-                    eventMgr.dispatch('response').then(function(o) {
+                    rootEmitter.dispatch('instance.xhr.response',self).then(function(o) {
                         if (typeof o === 'object' && o.stopImmediatePropagation)
                             return;
                         var response = (! xhr.responseType) || xhr.responseType.match(/^.{0}$|text/)? xhr.responseText : xhr.response,
@@ -788,7 +687,7 @@
                                 throw(400);
                             var data = ! cv || cv.indexOf('/json') === -1? response : JSON.parse(response);
                             self._promise.resolve(data,xhr);
-                            return eventMgr.dispatch('success');
+                            return rootEmitter.dispatch('instance.xhr.success',self);
                         } else {
                             throw(status);
                         }
@@ -796,9 +695,9 @@
                     }).catch(function (e) {
                         self._promise.reject({ error:e, x:self });
                         if (! self.silent)
-                            return eventMgr.dispatch('error', e);
+                            return rootEmitter.dispatch('instance.xhr.error', { x:self, error:e });
                     }).then(function() {
-                        return eventMgr.dispatch('end');
+                        return rootEmitter.dispatch('instance.xhr.end',self);
                     }).catch(function (e) {
                         return self.managers.debug.handle(e);
                     });
@@ -820,7 +719,7 @@
                 if (! this._promise)
                     throw new Error('instance.xhr -> Can\t send() before exec(). Send() is only for re-executing a request.');
                 xhr.abort();
-                return this.managers.event.dispatch('start').then(function() {
+                return rootEmitter.dispatch('instance.xhr.start',self).then(function() {
                     if (! isPUTorPOST && uri.length) {
                         t += t.indexOf('?') > -1? '&' : '?';
                         t += uri;
@@ -889,9 +788,9 @@
                     return Promise.resolve();
                 this.xhr.abort();
                 this.aborted = true;
-                var eventMgr = this.managers.event;
-                return eventMgr.dispatch('aborted').then(function() {
-                    return eventMgr.dispatch('end');
+                var self = this;
+                return rootEmitter.dispatch('instance.xhr.aborted',self).then(function() {
+                    return rootEmitter.dispatch('instance.xhr.end',self);
                 });
             };
             InstanceXhr.prototype.applyForm = function(form) {
@@ -923,7 +822,6 @@
         (function() {
             var repo = appConf.cdn,
                 InstanceXhr = app['instance.xhr'],
-                events = app['core.events'],
                 bless = app['core.object'].bless,
                 dom = app['core.dom'],
                 head = dom.head,
@@ -937,6 +835,7 @@
                 ].map(function(m,i) {
                     return { uid:i*-1-1, done:true, module: { name:m+'.js' }};
                 }),
+                workerEventChannel = new app['core.events'].createMgr(),
                 setBits = function(p) {
                     if (p.modules)
                         this.modules = p.modules;
@@ -958,51 +857,40 @@
                     setBits.call(this,o);
             };
             InstanceAmd.prototype.get = function(p) {
-                var self = this;
+                var self = this,
+                    swrks = self.workers = [];
                 if (p)
                     setBits.call(this,p);
                 return new Promise(function(resolve, reject) {
-                    var swrks = self.workers = [];
                     var chkComplete = function() {
-                        if (self.workers.every(function (w) {
+                        if (swrks.every(function (w) {
                             return w.done;
                         })) {
-                            return end();
+                            end();
+                            resolve();
                         }
                     };
-                    var workerSucEvt = events.on('instance.amd','worker.success', function(o) {
+                    var workerSucEvt = function(o) {
                         if (swrks.indexOf(o.x) === -1)
                             return;
                         if (self.onProgress)
                             self.onProgress();
-                        return chkComplete();
-                    });
-                    // prevent race checking
-                    var checking = false;
-                    var amdComEvt = events.on('instance.amd','complete', function(o) {
-                        checking = true;
-                        if (! checking && o.x !== self)
-                            return chkComplete().catch().then(function() {
-                                checking = false;
-                            });
-                        checking = false;
-                    });
-                    var workerErrEvt = events.on('instance.amd','worker.error', function(o) {
-                        if (swrks.indexOf(o.x) !== -1)
-                            return end(o);
-                    });
-                    var end = function(e) {
-                        events.remove(workerErrEvt,'instance.amd','worker.error');
-                        events.remove(workerSucEvt,'instance.amd','worker.success');
-                        events.remove(amdComEvt,'instance.amd','complete');
-                        return self.managers.event.dispatch(e? 'error' : 'complete', e).then(function() {
-                            if (e) {
-                                reject(e);
-                            } else {
-                                resolve();
-                            }
-                        });
+                        chkComplete();
                     };
+                    var workerErrEvt = function(o) {
+                        if (swrks.indexOf(o.x) > -1) {
+                            end();
+                            reject(o);
+                        }
+                    };
+                    var end = function() {
+                        workerEventChannel.remove(workerErrEvt,'error');
+                        workerEventChannel.remove(workerSucEvt,'success');
+                    };
+
+                    workerEventChannel.on('success', workerSucEvt);
+                    workerEventChannel.on('error', workerErrEvt);
+
                     self.modules.forEach(function (m) {
                         if (typeof m.repo === 'undefined' && repo)
                             m.repo = repo;
@@ -1029,6 +917,7 @@
                             self.onProgress();
                         }
                     });
+
                     chkComplete();
                 });
             };
@@ -1058,9 +947,8 @@
                     file = this.file,
                     type = this.type,
                     mod = this.module,
-                    eventMgr = this.managers.event,
                     self = this;
-                return  eventMgr.dispatch('worker.start').then(function() {
+                return  workerEventChannel.dispatch('start').then(function() {
                     return xhr.get({ res:file }).then(function(data) {
                         switch (type) {
                             case 'js':
@@ -1070,12 +958,13 @@
                                 };
                                 eval(data);
                                 var code = self.code = module.exports ? module.exports : null;
-                                return (module.requires.length?
-                                    new InstanceAmd().get({
-                                        repo:mod.depRepoRevert? repo : mod.repo,
-                                        modules:module.requires
-                                    })
-                                : Promise.resolve()).then(function() {
+                                return Promise.resolve().then(function() {
+                                    if (module.requires.length)
+                                        return new InstanceAmd().get({
+                                            repo:mod.depRepoRevert? repo : mod.repo,
+                                            modules:module.requires
+                                        });
+                                }).then(function() {
                                     var u = null,
                                         m = self.module.name,
                                         s = m.substr(0,m.length-3);
@@ -1084,36 +973,33 @@
                                     return (u instanceof Promise? u : Promise.resolve(u)).then(function (data) {
                                         if (data)
                                             app[s] = data;
-                                        return self.loaded();
                                     });
                                 });
                             case 'css':
                                 dom.mk('style',head,data);
-                                return self.loaded();
                         }
+                    }).then(function() {
+                        self.done = true;
+                        self.xhr = null; // gc
+                        return workerEventChannel.dispatch('success', { x: self });
                     }).catch(function (e) {
-                        return eventMgr.dispatch('worker.error',e);
+                        return workerEventChannel.dispatch('error', { x: self, error:e });
                     }).then(function(e) {
                         self.running = false;
-                        return eventMgr.dispatch('worker.end', e);
+                        return workerEventChannel.dispatch('end', { x: self, error:e });
                     });
                 });
-            };
-            InstanceAmdWorker.prototype.loaded = function() {
-                this.done = true;
-                this.xhr = null; // gc
-                return this.managers.event.dispatch('worker.success');
             };
         })();
 
         var InstanceAmd = app['instance.amd'],
-            events = app['core.events'];
+            rootEmitter = app['core.events'].rootEmitter;
         // load externals
         return new InstanceAmd().get({ modules:modules }).then(function() {
             var ii = appConf.init;
             if (ii && ii.onProgress)
                 ii.onProgress(app,appConf);
-            return events.dispatch('','state.init').then(function() {
+            return rootEmitter.dispatch('state.init').then(function() {
                 if (ii && ii.onReady)
                     ii.onReady(app,appConf);
                 return app;

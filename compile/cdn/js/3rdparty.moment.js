@@ -7961,7 +7961,7 @@ module.exports = function(app) {
     //moment.lang('en');
     var lang = app['core.language'];
     moment.lang(lang.env);
-    app['core.events'].on('core.language','code.set', function(code) {
+    app['core.language'].managers.event.on('setEnv', function(code) {
         moment.lang(code);
     });
 

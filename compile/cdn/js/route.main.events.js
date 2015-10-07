@@ -17,10 +17,10 @@ module.exports = function(app) {
             wrapper = model.wrapper;
 
         model.stash.title = _tr("Events");
-        model.stash.desc = _tr("Igaro App's event management system tracks dependencies and fires events up through parent objects. It's hugely powerful.");
+        model.stash.desc = _tr("Igaro App's event management system tracks dependencies and propagates events up through parent objects.");
 
         domMgr.mk('p',wrapper,_tr("Igaro App is <b>100%</b> event driven."));
-        domMgr.mk('p',wrapper,_tr("core.events is responsible for event management. It provides a manager to core.object's bless, and this is used extensively throughout the Igaro App framework."));
+        domMgr.mk('p',wrapper,_tr("core.events is responsible for event management. It provides a manager to core.object's bless, which is used extensively to provide objects with an Event Emitter. Unlike the EventEmitter you may know from NodeJS, this one propagates events up to parents, supports Promises, and events track dependencies."));
 
         return model.addSequence({
             container:wrapper,
@@ -28,43 +28,30 @@ module.exports = function(app) {
                 objectMgr.create('accordion', {
                     sections : [
                         {
-                            title:_tr("Path"),
-                            content:_tr("Typically taken from the object path attribute, as defined by core.object's bless.")
+                            title:_tr("on"),
+                            content:_tr("This registers an event handle onto an emitter. It takes three arguments; the event name, a function, and an object literal. The object literal defines whether the event is prepended and which dependencies should be linked to the event. This allows you to 'bolt on' events to other objects' event emitters without worrying about memory release.")
                         },
                         {
-                            title:_tr("Name"),
-                            content:_tr("Typically matches the name of the executing function.")
+                            title:_tr("dispatch"),
+                            content:_tr("A dispatch may be sent with a value. If the object is a child 'car' of another object 'warehouse', the parent will also receive the dispatch.")
                         },
                         {
-                            title:_tr("Target"),
-                            content:_tr("Defines if any event is for a particular object. Using the event manager provided by core.object's bless sets this automatically to the object.")
-                        },
-                        {
-                            title:_tr("Dependencies"),
-                            content:_tr("Allows the event to be cleaned/deregistered when any of the dependencies are destroyed.")
-                        },
-                        {
-                            title:_tr("Value"),
-                            content:_tr("Any value passed to the event and a reference to the target if applicable.")
+                            title:_tr("remove"),
+                            content:_tr("This removes an event either by its registered function or a dependency.")
                         }
                     ]
                 }).then(function(accordion) {
                     var container = document.createDocumentFragment(),
                         domMgr = accordion.managers.dom;
-                    domMgr.mk('h1',container,_tr("The Dispatch"));
+                    domMgr.mk('h1',container,_tr("The Event Emitter"));
                     domMgr.mk('p',container);
                     dom.append(container,accordion);
-                    domMgr.mk('h1',container,_tr("Parent & Children"));
-                    domMgr.mk('p',container,_tr("When an event dispatches on a child it propagates up through the parent. A rejected Promise or a literal containing stopPropagation can abort this."));
-                    domMgr.mk('p',container,_tr("As the event propagates the path and name change. This allows parents to listen for child events. For example an object with parent 'materials' of name 'metal' which dispatches an event of 'cut' of value true, will also dispatch an event on 'materials' called 'metal.cut'. The value will be replaced with a child reference and original value."));
-                    domMgr.mk('p',container,_tr("The .asRoot() flag prevents a child event dispatching on the parent. It is mostly used by instances. A parent has no need for these dispatches since it can access the instance event manager directly."));
-                    domMgr.mk('h1',container,_tr("By Instance/Singleton"));
-                    domMgr.mk('p',container,_tr("Listening to events on modules is accomplished by accessing the event manager on the object and calling extend on it. This adds your object as a dependency (should it later be destroyed the event will be cleaned up automatically)."));
-                    domMgr.mk('pre',container,domMgr.mk('code',null,_tr("(object).managers.event.extend(this).on('eventName',fn);")));
-                    domMgr.mk('h1',container,_tr("By Path/Type"));
-                    domMgr.mk('p',container,_tr("Listening to the event manager on an instance will only provide events for that particular instance, not the instance type."));
-                    domMgr.mk('p',container,_tr("In this App, each time an instance.xhr start and end event fire a tally is kept and an icon is displayed in the header. This is an example of monitoring by type and is accomplished via core.events and not through a manager. route.header.js shows how this is done."));
-                    domMgr.mk('pre',container,domMgr.mk('code',null,_tr("app['core.events'].on('instance.xhr','start',fn);")));
+                    domMgr.mk('h1',container,_tr("Event Termination"));
+                    domMgr.mk('p',container,_tr("The event emitter supports either a rejected Promise or an object literal containing { stopImmediatePropagation:true }. To prevent propagation through parents, return { stopPropagation:true }."));
+                    domMgr.mk('p',container,_tr("The .asRoot (see Bless) flag prevents a child event dispatching any further through a parent chain. It is mostly used by instances as a parent has no need for these dispatches. Some instances, such as instance.xhr fire events on the root emitter."));
+                    domMgr.mk('h1',container,_tr("Example"));
+                    domMgr.mk('p',container,_tr("At the bottom of this page is an instance.date formatted with moment.js. When you change the timezone or language of the this app using the settings icon at the top, moment.js has it's mode switched and instance.date.js refreshes it's DOM elements. Try it for yourself."));
+
                     return container;
                 })
             ]

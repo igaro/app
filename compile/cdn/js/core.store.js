@@ -96,13 +96,13 @@ module.exports = function() {
         {
             get : function(id) {
                 return Promise.resolve().then(function() {
-                    var v = window.localStorage.getItem(id);
+                    var v = localStorage.getItem(id);
                     if (v)
                         v = JSON.parse(v);
                     if (! v)
                         return;
                     if (v.expiry && v.expiry < new Date().getTime()) {
-                        window.localStorage.setItem(id,null);
+                        localStorage.setItem(id,null);
                         return;
                     }
                     return v.value;
@@ -111,7 +111,7 @@ module.exports = function() {
             set : function(id,value,expiry) {
                 return Promise.resolve().then(function() {
                     value = typeof value === 'undefined' || value === null? null : JSON.stringify({ value:value, expiry:expiry });
-                    window.localStorage.setItem(id,value);
+                    localStorage.setItem(id,value);
                 });
             }
         }
@@ -123,13 +123,13 @@ module.exports = function() {
         {
             get : function(id) {
                 return Promise.resolve().then(function() {
-                    var v = window.sessionStorage.getItem(id);
+                    var v = sessionStorage.getItem(id);
                     if (v)
                         v = JSON.parse(v);
                     if (! v)
                         return;
                     if (v.expiry && v.expiry < new Date().getTime()) {
-                        window.sessionStorage.setItem(id,null);
+                        sessionStorage.setItem(id,null);
                         return;
                     }
                     return v.value;
@@ -138,7 +138,7 @@ module.exports = function() {
             set : function(id,value,expiry) {
                 return Promise.resolve().then(function() {
                     value = typeof value === 'undefined' || value === null? null : JSON.stringify({ value:value, expiry:expiry });
-                    window.sessionStorage.setItem(id,value);
+                    sessionStorage.setItem(id,value);
                 });
             }
         }
