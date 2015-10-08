@@ -104,42 +104,40 @@ var body = document.body,
     resetOverflow = function(conf) {
         if (! conf.noBodyStyleOverflowReset)
             bodyStyle.overflow = '';
-    };
-    loading = [];
-[0,1,2].forEach(function(i) {
-    var d = document.createElement('div');
-    (i? loading[i-1] : body).appendChild(d);
-    loading.push(d);
-});
-loading[0].className='igaro-loading';
+    },
+    loading = document.createElement('div'),
+    loadingStatus = document.createElement('div');
 bodyStyle.overflow = 'hidden';
+loading.className = 'igaro-loading';
+body.appendChild(loading);
+loading.appendChild(loadingStatus);
+[
+    'Loading', // en
+    'Chargement', // french
+    'Cargando', // spanish
+    'جار التحميل', // arabic
+    '载入中' // chinese
+].forEach(function(txt) {
+    var p = document.createElement('p');
+    p.innerHTML = txt;
+    loadingStatus.appendChild(p);
+});
+
 __igaroapp.init = {
     onProgress : function() {
-        var l = loading[1].className='progress';
-        l = loading[2];
-        [
-            'Loading', // en
-            'Chargement', // french
-            'Cargando', // spanish
-            'جار التحميل', // arabic
-            '载入中' // chinese
-        ].forEach(function(txt) {
-            var p = document.createElement('p');
-            p.innerHTML = txt;
-            l.appendChild(p);
-        });
+        loadingStatus.className = 'progress';
     },
     onReady : function(app,conf) {
         setTimeout(function() {
-            body.removeChild(loading[0]);
+            body.removeChild(loading);
             resetOverflow(conf);
-        }, 50);
+        }, 20);
     },
     onError : function(app,conf,e) {
-        loading[1].className='error';
+        loadingStatus.className = 'error';
         resetOverflow(conf);
         e = typeof e === 'object' && e.error && e.error.incompatible? conf.msgIncompatible : conf.msgErr;
-        loading[2].innerHTML = Object.keys(e).map(function(n) {
+        loadingStatus.innerHTML = Object.keys(e).map(function(n) {
            return e[n];
         }).join("<p>");
     }
