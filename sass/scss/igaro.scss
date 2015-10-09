@@ -272,14 +272,15 @@ body {
             display:table-cell;
             vertical-align:middle;
             text-align:center;
-            //transition: all 1s;
+            transition: color 1s ease-in;
+            -webkit-transition: color 1s ease-in;
             >div {
               margin:0 auto;
               display:inline-block;
             }
             &:not(.error) {
+                font-size:2em;
                 >p {
-                    font-size:2em;
                     line-height:50%;
                     opacity:0.1;
                     -webkit-animation: igaro-loading 4s ease-in-out infinite;
@@ -302,8 +303,7 @@ body {
                 }
             }
             &.progress >p {
-                animation-duration:2.5s;
-                -webkit-animation-duration:2.5s;
+                color:#114e17;
             }
         }
     }
