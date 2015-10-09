@@ -309,6 +309,7 @@ body {
     }
 
     >.igaro-loading {
+        font-family: "Helvetica", "Verdana", "Arial"; // prevent dynamic font loading changing the font
         background-color:#fff;
         color:#000;
         >div {
