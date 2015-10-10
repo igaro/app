@@ -206,6 +206,23 @@ module.exports = function() {
                     async:true
                 },
                 {
+                    name:'debounce',
+                    type:'function',
+                    desc:_tr("Debounces an operation by reference and delay. Useful for form inputs fields."),
+                    attributes: [
+                        {
+                            type:'*',
+                            required:true,
+                            desc: _tr("A unique reference, typically the object being debounced."),
+                        },
+                        {
+                            type:'number',
+                            desc: _tr("The delay to debounce, typically before the Promise is resolved. This defaults to 300 (ms) which is typical for input[text] and similar fields.")
+                        }
+                    ],
+                    async:true
+                },
+                {
                     name:'promiseSequencer',
                     type:'function',
                     desc:_tr("Reduces an array of Promises synchronously. Returns an array containing the output from each Promise."),

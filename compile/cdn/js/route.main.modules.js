@@ -593,7 +593,7 @@ module.exports = function(app) {
                     ['core.file', _tr("Filename parsing.")],
                     ['core.html', _tr("HTML parsing, conversion.")],
                     ['core.language', _tr("Language support, formatting, related functionality.")],
-                    ['core.object', _tr("Bless and other object helper functionality.")],
+                    ['core.object', _tr("Bless, Promise sequencer, form debounce, Array insertion and other helpers.")],
                     ['core.router', _tr("Router, an MVC alternative using routes to build partials.")],
                     ['core.store', _tr("Session, local, cookie and remote store access.")],
                     ['core.url', _tr("URL parsing, related functionality.")],

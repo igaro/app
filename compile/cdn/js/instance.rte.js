@@ -14,8 +14,8 @@ module.exports = function(app) {
         throw new Error({ incompatible:true, noobject:'getSelection' });
 
     var dom = app['core.dom'],
-        object = app['core.object'],
-        bless = object.bless;
+        coreObject = app['core.object'],
+        bless = coreObject.bless;
 
     var InstanceRTE = function(o) {
         this.name = 'instance.rte';
@@ -26,7 +26,6 @@ module.exports = function(app) {
         bless.call(this,o);
         this.hasFocus = false;
         this.savedRange = null;
-        this.onChangeTimerid = null;
         this.inWYSIWYG = true;
     };
 
@@ -41,29 +40,26 @@ module.exports = function(app) {
             parent:self
         }).then(function(navMode) {
 
-            var onChange = function(dispatch) {
+            var onChange = function() {
                 var raw = self.raw,
                     rte = self.rte;
-                window.clearTimeout(self.onChangeTimerid);
                 if (self.inWYSIWYG) {
                     raw.value = rte.innerHTML;
                 } else {
                     rte.innerHTML = raw.value;
                 }
-                if (dispatch)
+                coreObject.debounce(self,300).then(function() {
                     return eventMgr.dispatch('change', self.getHTML());
-                self.onChangeTimerid = window.setTimeout(function() {
-                    onChange(true);
-                },300);
+                });
             };
 
             var wysiwyg = self.wysiwyg = domMgr.mk('div',self,null,function() {
-                var t = this;
+                var div = this;
                 self.panels = {
                     pool:[],
-                    container : domMgr.mk('div',t,null,'panels')
+                    container : domMgr.mk('div',div,null,'panels')
                 };
-                self.rte = domMgr.mk('div',t,null,function() {
+                self.rte = domMgr.mk('div',div,null,function() {
                     this.className = 'editable';
                     this.contentEditable = true;
                     this.styleWithCSS=false;
@@ -240,7 +236,7 @@ module.exports = function(app) {
 
     InstanceRTE.prototype.addPanels = function(o) {
         var self = this;
-        return object.promiseSequencer(o,function(a) {
+        return coreObject.promiseSequencer(o,function(a) {
             return self.addPanel(a);
         });
     };

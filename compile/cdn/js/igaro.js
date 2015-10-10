@@ -494,6 +494,8 @@
                 return Promise.resolve();
             };
 
+            var debounceStore=[];
+
             app['core.object'] = {
                 arrayInsert : function(a,v,o) {
                     if (! o)
@@ -507,6 +509,31 @@
                     } else {
                         a.push(v);
                     }
+                },
+                debounce : function(target,timeout) {
+                    return new Promise(function(resolve) {
+                        var place = function(into) {
+                            var ref = setTimeout(function() {
+                                resolve();
+                                debounceStore.splice(debounceStore.indexOf(into,1));
+                            },timeout || 300);
+                            if (into) {
+                                into.ref = ref;
+                            } else {
+                                into = { target:target, ref:ref };
+                                debounceStore.push(into);
+                            }
+                        };
+                        if (! debounceStore.slice().some(function(o) {
+                            if (o.target === target) {
+                                clearTimeout(o.ref);
+                                place(o);
+                                return true;
+                            }
+                        })) {
+                            place();
+                        }
+                    });
                 },
                 createMgr : function(parent) {
                     return new CoreObjectMgr(parent);
