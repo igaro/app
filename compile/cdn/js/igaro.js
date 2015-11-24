@@ -294,6 +294,8 @@
                         } else if (c instanceof Array) {
                             var d = document.createDocumentFragment();
                             c.forEach(function(k) {
+                                if ((! (k instanceof Node)) && k.container)
+                                    k = k.container;
                                 d.appendChild(k);
                             });
                             c=d;

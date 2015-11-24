@@ -41,12 +41,12 @@ module.exports = function(app,params) {
                     });
                 }
             }),
-            wrapper = domMgr.mk('div',container,null,function() {
+            wrapper = domMgr.mk('div',container,domMgr.mk('div',null,null,function() {
                 this.className = o.type || 'custom';
                 this.addEventListener('click', function(event) {
                     event.stopPropagation();
                 });
-            }),
+            })),
             myActions = o.actions || [];
 
         zIndexAt+=1;
@@ -59,18 +59,26 @@ module.exports = function(app,params) {
             if (o.header)
                 domMgr.mk('div',wrapper,o.header,'header');
 
-            var msg = o.message;
-            if (msg) {
-                if (typeof msg === 'object') {
-                    Object.keys(msg).forEach(function (k) {
-                        msg[k] = msg[k].replace(/\\n/g,"<br>");
-                    });
+            domMgr.mk('div',wrapper,null,function() {
+                var self = this,
+                    msg = o.message;
+                this.className = 'body';
+                if (msg) {
+                    if (typeof msg === 'object') {
+                        Object.keys(msg).forEach(function (k) {
+                            msg[k] = msg[k].replace(/\\n/g,"<br>");
+                        });
+                    }
+                    domMgr.mk('div',self,msg,'message');
                 }
-                domMgr.mk('div',wrapper,msg,'message');
-            }
 
-            if (o.custom) // custom elements
-                domMgr.mk('div',wrapper,o.custom,'custom');
+
+                if (o.custom)
+                    console.error(o.custom);
+
+                if (o.custom) // custom elements
+                    domMgr.mk('div',self,o.custom,'custom');
+            });
 
             self.resolve = function(action) {
                 activeCnt--;
@@ -129,6 +137,7 @@ module.exports = function(app,params) {
             {
                 type : 'action',
                 message : o.message,
+                custom: o.custom,
                 title: o.title,
                 actions : o.actions
             }
@@ -140,6 +149,7 @@ module.exports = function(app,params) {
             {
                 type : 'alert',
                 message : o.message,
+                custom: o.custom,
                 title : o.title,
                 actions : [
                     {
@@ -157,6 +167,7 @@ module.exports = function(app,params) {
         return this.custom({
             type : 'confirm',
             message : o.message,
+            custom: o.custom,
             title: o.title,
             actions : [confirmAction],
             addCancel : true
