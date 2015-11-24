@@ -1,48 +1,68 @@
 .instance-table {
-	border:1px solid #eee;
-	font-size:90%;
 
-	>thead { 
-		background:#444;
-		font-weight:bold;
-		color:#fafafb;
-		>tr >td { 
-			padding:0.7em; 
-			border:1px solid #777; 
-		}
-		>.searchable {
-			font-size:80%;
-			padding:0.3em;
-			background:#777;
-			>td >input { 
-				width:100%;
-				border:none;
-				background:#fafafa;
-				color:#222
-			}
-		}
-	}
+    overflow-x:auto;
+    max-width:100%;
+    width:100%;
 
-	>tbody {
-		background:#fff;
-		>tr {
-			>td.active { background:rgba(0,0,0,.05); border-color:#ddd; }
-			&.shade1 { background:rgba(0,0,0,.05); >td { border-color:#ddd; } }
-			&.shade2 { background:rgba(0,0,0,.1); >td { border-color:#ccc; } } 	
-			&.shade3 { background:rgba(0,0,0,.15); >td { border-color:#bbb; } } 	
-			&.shade4 { background:rgba(0,0,0,.2); >td { border-color:#aaa; } } 	
-			&.shade5 { background:rgba(0,0,0,.25); >td { border-color:#999; } } 	
-			&.shade6 { background:rgba(0,0,0,.3); >td { border-color:#888; } }								
-			>td { 
-				a { 
-					text-decoration:none; 
-					cursor:pointer;
-					&.active { font-weight:bold }
-				}
-				padding:0.5em; 
-				border:1px solid #f0f0f0;
-				vertical-align:top;
-			}
-		}
-	}
+    >table {
+        border:1px solid #eee;
+        font-size:90%;
+
+        >thead {
+            background:#444;
+            font-weight:bold;
+            color:#fafafb;
+            >tr >td {
+                padding:0.7em;
+                border:1px solid #777;
+            }
+            >.searchable {
+                font-size:80%;
+                padding:0.3em;
+                background:#777;
+                >td >input {
+                    width:100%;
+                    border:none;
+                    background:#fafafa;
+                    color:#222
+                }
+            }
+        }
+
+        >tbody {
+            background:#fff;
+            >tr {
+                >td.active { background:rgba(0,0,0,.05); border-color:#ddd; }
+                &.shade1 { background:rgba(0,0,0,.05); >td { border-color:#ddd; } }
+                &.shade2 { background:rgba(0,0,0,.1); >td { border-color:#ccc; } }
+                &.shade3 { background:rgba(0,0,0,.15); >td { border-color:#bbb; } }
+                &.shade4 { background:rgba(0,0,0,.2); >td { border-color:#aaa; } }
+                &.shade5 { background:rgba(0,0,0,.25); >td { border-color:#999; } }
+                &.shade6 { background:rgba(0,0,0,.3); >td { border-color:#888; } }
+                >td {
+
+                    &.green {
+                        background-color:rgba(0,255,0,.3);
+                    }
+                    &.orange {
+                        background-color:rgba(255,155,0,.3);
+                    }
+                    &.red {
+                        background-color:rgba(255,0,0,.3);
+                    }
+
+                    a {
+                        text-decoration:none;
+                        cursor:pointer;
+                        &.active {
+                            font-weight:bold;
+                        }
+                    }
+                    padding:0.5em;
+                    border:1px solid #f0f0f0;
+                    vertical-align:top;
+                }
+            }
+        }
+    }
 }

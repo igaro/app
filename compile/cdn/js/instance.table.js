@@ -53,7 +53,7 @@ module.exports = function(app) {
     var InstanceTableDomain = function(o) {
         this.name='domain';
         this.container=function(dom) {
-            return dom.mk(o.type,o.parent,null,o.className);
+            return dom.mk(o.type,o.parent.table,null,o.className);
         };
         this.children = {
             rows:'row'
@@ -82,15 +82,17 @@ module.exports = function(app) {
     };
 
     var InstanceTable = function(o) {
+        var self = this;
         this.name='instance.table';
         this.asRoot=true;
         this.container=function(dom) {
-            return dom.mk('table',o,null,o.className);
+            var table = self.table = dom.mk('table');
+            return dom.mk('div',o,table,o.className);
         };
         bless.call(this,o);
-        this.header = new InstanceTableDomain({ parent:this, type:'thead', className:o.header? o.header.className:null });
-        this.body = new InstanceTableDomain({ parent:this, type:'tbody', className:o.body? o.body.className:null });
-        this.footer = new InstanceTableDomain({ parent:this,type:'tfoot', className:o.footer? o.footer.className:null});
+        var header = self.header = new InstanceTableDomain({ parent:self, type:'thead', className:o.header? o.header.className:null });
+        var body = self.body = new InstanceTableDomain({ parent:self, type:'tbody', className:o.body? o.body.className:null });
+        var footer = self.footer = new InstanceTableDomain({ parent:self,type:'tfoot', className:o.footer? o.footer.className:null});
     };
 
     InstanceTable.prototype.init = function(o) {
