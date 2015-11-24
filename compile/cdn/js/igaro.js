@@ -386,6 +386,8 @@
                     if (typeof c === 'object') {
                         if (c instanceof HTMLElement || c instanceof DocumentFragment) {
                             r.appendChild(c);
+                        } else if (c.hasOwnProperty('container')) {
+                            r.appendChild(c.container);
                         } else {
                             var language = app['core.language'];
                             if (! language)
