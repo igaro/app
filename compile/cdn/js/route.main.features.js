@@ -194,6 +194,7 @@ module.exports = function(app) {
                     'samespace',
                     {
                         spaces:[0,1,2].map(function(x,i) { return { className:'a'+i }; }),
+                        effect:'fade',
                         start:true
                     }
                 ),
