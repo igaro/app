@@ -41,12 +41,12 @@ module.exports = function(app,params) {
                     });
                 }
             }),
-            wrapper = domMgr.mk('div',container,domMgr.mk('div',null,null,function() {
-                this.className = o.type || 'custom';
+            wrapper = domMgr.mk('div',container,null,function() {
+                domMgr.mk('div',this,null,o.type || 'custom');
                 this.addEventListener('click', function(event) {
                     event.stopPropagation();
                 });
-            })),
+            }),
             myActions = o.actions || [];
 
         zIndexAt+=1;
@@ -71,11 +71,6 @@ module.exports = function(app,params) {
                     }
                     domMgr.mk('div',self,msg,'message');
                 }
-
-
-                if (o.custom)
-                    console.error(o.custom);
-
                 if (o.custom) // custom elements
                     domMgr.mk('div',self,o.custom,'custom');
             });
