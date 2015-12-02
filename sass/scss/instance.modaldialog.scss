@@ -26,23 +26,26 @@
             background:#eee;
             >h1 {
                 margin:0;
-                padding:.7em; 
+                padding:.7em;
             }
         }
-        >.message, >.action, >.custom {
+        >.action {
             margin:1.6em;
         }
-        >.message, >.action {
+        >.body >.message, >.action {
             text-align:center;
         }
-		>.message, >.custom {
-			margin-bottom:1em;
-		}
-		>.custom {
-			input, select, button {
-				padding:.7em 1em;
-			}
-		}
+		>.body {
+            padding:1em 1em 0 1em;
+            >.message {
+                margin-bottom:1em;
+            }
+            >.custom {
+                input, select, button {
+                    padding:.7em 1em;
+                }
+            }
+        }
 
 		>.action {
 			input, select, button {
@@ -50,22 +53,27 @@
 			}
 
 			input + input, select + select, input + select, select + input, select + button, input + button, button + select, button + input { 
-				margin-left: 1em 
+				margin-left: 1em;
 			}
 		}
 
 	    @media screen and (max-width:900px) {
 			input, select, button {
-				margin-top:1em; 
+				margin-top:1em;
 				&:first-child {
-					margin-top:0; 
+					margin-top:0;
 				}
 				margin-left:0;
 				display:block;
 				width:100%;
 			}
-	        width:90%;   
-            >.message, >.action, >.custom {
+	        width:90%;
+            >.body {
+                >.message, >.custom {
+                    margin:.7em;
+                }
+            }
+            >.action {
                 margin:.7em;
             }
             >.header >h1 {

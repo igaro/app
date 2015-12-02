@@ -42,7 +42,7 @@ module.exports = function(app,params) {
                 }
             }),
             wrapper = domMgr.mk('div',container,null,function() {
-                domMgr.mk('div',this,null,o.type || 'custom');
+                this.className = o.type || 'custom';
                 this.addEventListener('click', function(event) {
                     event.stopPropagation();
                 });
