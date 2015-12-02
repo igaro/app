@@ -61,7 +61,7 @@ var self = this;
         'instance.table',
         'instance.toast',
         'instance.xhr',
-        'polyfill.es6.promises',
+        'polyfill.es6',
         'polyfill.ie.8',
         'polyfill.js.1.6',
         'polyfill.js.1.8.1',
