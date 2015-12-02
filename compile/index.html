@@ -63,15 +63,9 @@ if (!( "classList" in document.createElement("_"))) {
     head.appendChild(s);
 }
 
-if (! Object.assign) {
-    s = document.createElement('script');
-    s.src = __igaroapp.cdn + "/js/polyfill.es6.object.assign.js";
-    head.appendChild(s);
-}
-
 if (! window.Promise) {
     s = document.createElement('script');
-    s.src = __igaroapp.cdn + "/js/polyfill.es6.promises.js";
+    s.src = __igaroapp.cdn + "/js/polyfill.es6.js";
     head.appendChild(s);
 }
 

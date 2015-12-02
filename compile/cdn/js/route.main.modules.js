@@ -580,9 +580,7 @@ module.exports = function(app) {
                 rows : [
                     ['3rdparty.fastclick', _tr("Removes 300ms click delay on touch platforms.")],
                     ['3rdparty.hammer', _tr("Enables Tap, DoubleTap, Swipe, Drag, Pinch, and Rotate gesture events.")],
-                    ['3rdparty.jquery.2', _tr("Non-standard library. Some insist on using it.")],
                     ['3rdparty.moment', _tr("Date/time formatting using timezone and language.")],
-                    ['3rdparty.observe', _tr("Data binding with polyfill for browsers lacking Object.observe.")],
                     ['conf.app', _tr("Main configuration file.")],
                     ['core.country', _tr("Country support and related functionality.")],
                     ['core.currency', _tr("Currency support and related functionality.")],
@@ -613,7 +611,7 @@ module.exports = function(app) {
                     ['instance.table', _tr("Table display with row/column management.")],
                     ['instance.toast', _tr("Toast notification popup and auto hide.")],
                     ['instance.xhr', _tr("XHR (Ajax) functionality.")],
-                    ['polyfill.es6.promises', _tr("A+ Promises for async chainable processes.")],
+                    ['polyfill.es6', _tr("A+ Promises, Array and Object sugar helpers.")],
                     ['polyfill.ie.8', _tr("Polyfill for Internet Explorer 8.")],
                     ['polyfill.js.1.6', _tr("Polyfill ancient browsers to Mozilla 1.6 specification.")],
                     ['polyfill.js.1.8.1', _tr("Polyfill old browsers to Mozilla 1.8.1 specification.")],
