@@ -1,4 +1,5 @@
 @import "../sass-global/mixins.scss";
+@import "../sass-global/variables.scss";
 
 @-webkit-keyframes igaro-loading {
 from { opacity: 0.1; }
@@ -12,6 +13,41 @@ from { opacity: 0.1; }
 to { opacity: 0.1; }
 }
 
+/* Lights */
+@font-face {
+    font-family: 'Open Sans';
+    src: font-url('OpenSans/OpenSans-Lights-webfont.eot');
+    src: font-url('OpenSans/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         font-url('OpenSans/OpenSans-Light-webfont.woff') format('woff'),
+         font-url('OpenSans/OpenSans-Light-webfont.ttf') format('truetype'),
+         font-url('OpenSans/OpenSans-Light-webfont.svg#OpenSansRegular') format('svg');
+    font-weight: 200;
+    font-style: normal;
+}
+/* Regular */
+@font-face {
+    font-family: 'Open Sans';
+    src: font-url('OpenSans/OpenSans-Regular-webfont.eot');
+    src: font-url('OpenSans/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         font-url('OpenSans/OpenSans-Regular-webfont.woff') format('woff'),
+         font-url('OpenSans/OpenSans-Regular-webfont.ttf') format('truetype'),
+         font-url('OpenSans/OpenSans-Regular-webfont.svg#OpenSansRegular') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+/* Bold */
+@font-face {
+    font-family: 'Open Sans';
+    src: font-url('OpenSans/OpenSans-Bold-webfont.eot');
+    src: font-url('OpenSans/OpenSans-Bold-webfont.woff') format('woff'),
+         font-url('OpenSans/OpenSans-Bold-webfont.ttf') format('truetype'),
+         font-url('OpenSans/OpenSans-Bold-webfont.svg#OpenSansBold') format('svg'),
+         font-url('OpenSans/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+
 * {
     box-sizing: border-box;
 }
@@ -22,7 +58,7 @@ body {
     background-color:#fff;
     height:100%;
     color:#424347;
-    font-family: "Proxima Nova", "Open Sans", "Helvetica", "Arial";
+    font-family: "Open Sans", "Helvetica", "Arial";
     line-height:175%;
     font-size:12pt;
     -webkit-font-smoothing: antialiased;
