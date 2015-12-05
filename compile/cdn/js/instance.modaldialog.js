@@ -19,8 +19,6 @@ module.exports = function(app,params) {
         this.name='instance.modaldialog';
         this.asRoot=true;
         bless.call(this,o);
-        bodyStyle.overflow = 'hidden';
-        params.conf.noBodyStyleOverflowReset = true;
     };
 
     InstanceModalDialog.prototype.init = function() {
@@ -51,6 +49,8 @@ module.exports = function(app,params) {
 
         zIndexAt+=1;
         activeCnt++;
+        bodyStyle.overflow = 'hidden';
+        params.conf.noBodyStyleOverflowReset = true;
 
         return new Promise(function(resolve) {
 
@@ -88,6 +88,7 @@ module.exports = function(app,params) {
             // add cancel or close
             if (o.addCancel || ! myActions.length) {
                myActions.push({
+                    id:'close',
                     l:o.addCancel? _tr("Cancel") : _tr("Close")
                });
             }
