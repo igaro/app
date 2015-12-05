@@ -147,8 +147,9 @@ module.exports = function(grunt) {
                 base : k,
                 middleware: function(connect, options, middlewares) {
                     middlewares.unshift(function(req, res, next) {
-                        var url = req.originalUrl;
-                        if (url.substr(0,5) === '/cdn/') {
+                        var url = req.originalUrl,
+                            attr = url.substr(0,5);
+                        if (/(cdn|res)/.test(attr)) {
                             var c = k+'/'+url;
                             if (grunt.file.exists(c))
                                 return next();
