@@ -88,7 +88,6 @@ module.exports = function(app,params) {
             // add cancel or close
             if (o.addCancel || ! myActions.length) {
                myActions.push({
-                    id:'close',
                     l:o.addCancel? _tr("Cancel") : _tr("Close")
                });
             }
