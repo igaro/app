@@ -53,7 +53,7 @@ module.exports = function() {
                         name:'res',
                         required:true,
                         type:'string',
-                        desc : _tr("The resource, i.e URL, to load.")
+                        desc : _tr("The resource, i.e URL, to load. Note that you can also specify this instead of the configuration literal.")
                     },
                     {
                         name : 'withCredentials',
@@ -72,12 +72,18 @@ module.exports = function() {
                     name:'abort',
                     type:'function',
                     async:true,
-                    desc: _tr("Aborts the XHR operation (if it is currently running)."),
+                    desc: _tr("Aborts the XHR operation (if it is currently running). Note that once aborted some browsers such as IE will not allow the XHR to be reused."),
                 },
                 {
                     name:'aborted',
                     type:'boolean',
                     desc:_tr("Defines whether the last transaction was aborted.")
+
+                },
+                {
+                    name:'response',
+                    type:'boolean',
+                    desc:_tr("Indicates if a response was received.")
 
                 },
                 {

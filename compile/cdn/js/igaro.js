@@ -662,6 +662,15 @@
                     }
                 };
             var setBits = function(p) {
+                if (!p)
+                    return;
+                var type = typeof p;
+                if (type === 'string') {
+                    this.res = p;
+                    return;
+                }
+                if (type !== 'object')
+                    throw new TypeError('Config argument must be an object literal.');
                 if (p.res)
                     this.res = p.res;
                 if (p.headers)
@@ -683,12 +692,50 @@
             };
             var bless = app['core.object'].bless,
                 rootEmitter = app['core.events'].rootEmitter;
+            var onLoad = function() {
+                var self = this,
+                    xhr = this.xhr;
+                this.response = true;
+                this.lastUrlRequest = this.res;
+                rootEmitter.dispatch('instance.xhr.response',this).then(function(o) {
+                    if (typeof o === 'object' && o.stopImmediatePropagation)
+                        return;
+                    var response = (! xhr.responseType) || xhr.responseType.match(/^.{0}$|text/)? xhr.responseText : xhr.response,
+                        status = xhr.status;
+                    if (status === 0 && (! response || response.length === 0))
+                        self.connectionFalure = true;
+                    if (status === 200 || (status === 0 && response.length > 0)) {
+                        var cv = xhr.getResponseHeader("Content-Type");
+                        if (self.expectedContentType && cv && cv.indexOf('/'+self.expectedContentType) === -1)
+                            throw(400);
+                        var data = ! cv || cv.indexOf('/json') === -1? response : JSON.parse(response);
+                        self._promise.resolve(data,xhr);
+                        return rootEmitter.dispatch('instance.xhr.success',self);
+                    } else {
+                        throw(status);
+                    }
+
+                }).catch(function (e) {
+                    return onError.call(self,e);
+                }).then(function() {
+                    return rootEmitter.dispatch('instance.xhr.end',self);
+                }).catch(function (e) {
+                    return self.managers.debug.handle(e);
+                });
+            };
+            var onError = function() {
+                this.response = true;
+                this._promise.reject({ error:e, x:this });
+                if (! this.silent)
+                    return rootEmitter.dispatch('instance.xhr.error', { x:this, error:e });
+            };
             var InstanceXhr = function(o) {
                 this.name = 'instance.xhr';
                 this.asRoot = true;
                 bless.call(this,o);
                 var self = this,
                     xhr = this.xhr = new XMLHttpRequest(),
+                    response = false,
                     eventMgr = this.managers.event;
                 this.res='';
                 this.withCredentials=false;
@@ -697,45 +744,25 @@
                 this.aborted = false;
                 this.connectionFailure = false;
                 this.headers = {};
+                this.response = false;
                 this.formdata = {};
                 this.id = Math.floor((Math.random()*9999)+1);
-                if (o)
-                    setBits.call(this,o);
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState !== 4)
-                        return;
-                    self.lastUrlRequest = self.res;
-                    rootEmitter.dispatch('instance.xhr.response',self).then(function(o) {
-                        if (typeof o === 'object' && o.stopImmediatePropagation)
-                            return;
-                        var response = (! xhr.responseType) || xhr.responseType.match(/^.{0}$|text/)? xhr.responseText : xhr.response,
-                            status = xhr.status;
-                        if (status === 0 && (! response || response.length === 0))
-                            self.connectionFalure = true;
-                        if (status === 200 || (status === 0 && response.length > 0)) {
-                            var cv = xhr.getResponseHeader("Content-Type");
-                            if (self.expectedContentType && cv && cv.indexOf('/'+self.expectedContentType) === -1)
-                                throw(400);
-                            var data = ! cv || cv.indexOf('/json') === -1? response : JSON.parse(response);
-                            self._promise.resolve(data,xhr);
-                            return rootEmitter.dispatch('instance.xhr.success',self);
-                        } else {
-                            throw(status);
-                        }
-
-                    }).catch(function (e) {
-                        self._promise.reject({ error:e, x:self });
-                        if (! self.silent)
-                            return rootEmitter.dispatch('instance.xhr.error', { x:self, error:e });
-                    }).then(function() {
-                        return rootEmitter.dispatch('instance.xhr.end',self);
-                    }).catch(function (e) {
-                        return self.managers.debug.handle(e);
-                    });
-                };
+                setBits.call(this,o);
                 eventMgr.on('destroy',function() {
                     return self.abort();
                 });
+                // XHR 1
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4)
+                        onLoad.call(self);
+                };
+                // XHR 2
+                xhr.onload = function() {
+                    onLoad.call(self);
+                };
+                xhr.onerror = function(e) {
+                    onError.call(self,e);
+                };
             };
             InstanceXhr.prototype.init = function() {
                 return Promise.resolve();
@@ -749,7 +776,6 @@
                     isPUTorPOST = /(PUT|POST)/.test(action);
                 if (! this._promise)
                     throw new Error('instance.xhr -> Can\t send() before exec(). Send() is only for re-executing a request.');
-                xhr.abort();
                 return rootEmitter.dispatch('instance.xhr.start',self).then(function() {
                     if (! isPUTorPOST && uri.length) {
                         t += t.indexOf('?') > -1? '&' : '?';
@@ -763,15 +789,14 @@
                         if (v)
                             xhr.setRequestHeader(k,v);
                     });
+                    self.response = false;
                     xhr.send(isPUTorPOST? self._uri:null);
                 });
             };
             InstanceXhr.prototype.exec = function(action, p) {
                 var self = this;
-                if (p)
-                    setBits.call(this,p);
+                setBits.call(this,p);
                 this.action = action;
-                this.abort();
                 this.aborted = false;
                 this.connectionFailure = false;
                 var vars = typeof self.vars === 'function'? self.vars(): self.vars;
