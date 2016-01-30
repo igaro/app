@@ -17,12 +17,13 @@ module.exports = function(app) {
             dom = app['core.dom'];
 
         model.stash.title=_tr("Bless");
-        model.stash.description=_tr("Igaro App's bless decorates standard javascript objects providing two-way parent-child event management, managers, dependency tracking, abstraction, shared routines and dynamic functions.");
+        model.stash.description=_tr("Igaro App's bless decorates standard JavaScript objects. It provides cross channel parent-child event management, managers, dependency tracking and common functions.");
 
-        domMgr.mk('p',wrapper,_tr("Igaro App's bless decorates standard javascript objects providing two-way parent-child event management, managers, dependency tracking, abstraction, shared routines and dynamic functions."));
+        domMgr.mk('p',wrapper,_tr("Igaro App's bless decorates standard JavaScript objects. It provides two-way parent-child event management, managers, dependency tracking, abstraction, shared routines and dynamic functions."));
+        domMgr.mk('p',wrapper,_tr("Blessing is the glue behind Igaro App. It makes a standard JavaScript object smart by allowing it to communicate and take on responsibilities."));
         domMgr.mk('p',wrapper,_tr("Most objects bless themselves, and most objects in Igaro are blessed."));
         domMgr.mk('h1',wrapper,_tr("Usage"));
-        domMgr.mk('p',wrapper,_tr("Blessing an object is straight forward. Many attributes are within the <b>o</b> literal and are passed through while a few are set on the object prior to blessing. See the core.object module for what this literal may contain."));
+        domMgr.mk('p',wrapper,_tr("Blessing an object is accomplished with a single call. Most configuration attributes are held within a literal while a few can be set directly on the object prior to blessing."));
 
         domMgr.mk('pre',wrapper,domMgr.mk('code',null,"var InstanceMyWidget = function(o) {\
 \n   this.name = 'instance.mywidget';\
@@ -69,7 +70,7 @@ module.exports = function(app) {
         }).then(function(accordion) {
             var domMgr = accordion.managers.dom;
             domMgr.mk('h1',wrapper,_tr("Provides"));
-            domMgr.mk('p',wrapper,_tr("What bless provides for an object depends on what was available and passed to it at the point of blessing."));
+            domMgr.mk('p',wrapper,_tr("The features bless provides depends on the configuration passed to it."));
             dom.append(wrapper,accordion);
         });
 

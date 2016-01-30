@@ -81,12 +81,8 @@ module.exports = function(app) {
                 throw e;
             }).then(function(container) {
                 values.push(container);
-                if (typeof container !== 'object')
-                    return;
-                if ((!(container instanceof Node)) && container.container instanceof Node) //jshint ignore: line
-                    container = container.container;
-                if (container instanceof Node) // jshint ignore: line
-                    o.container.appendChild(container);
+                if (typeof container === 'object')
+                    dom.append(o.container, container);
             });
         }, Promise.resolve()).then(function() {
             return values;
