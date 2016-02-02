@@ -4,9 +4,17 @@ body >.core-router >.main >.showcase >.wrapper {
     @include layoutStandard;
 
     >.todomvc {
-        max-width:400px;
-        height:183px;
+
+        max-width:100%;
+        height:155px;
         background: inline-image("route.main.showcase/todomvc.jpg") no-repeat 0 0;
-        background-size:100%;
+        background-size:contain;
+    }
+
+    >.d1 {
+        max-width:100%;
+        height:174px;
+        background: inline-image("route.main.showcase/d1.png") no-repeat 0 0;
+        background-size:contain;
     }
 }
