@@ -27,9 +27,27 @@ module.exports = function(app) {
 
         domMgr.mk('div',wrapper,null,"todomvc");
 
-        domMgr.mk('button',wrapper,_tr("Show Igaro App Implementation")).addEventListener('click',function() {
-            router.to(model.uriPath.concat('todomvc'));
-        });
+        domMgr.mk('p',wrapper,
+            domMgr.mk('button',null,_tr("Show Igaro App Implementation"), function() {
+                this.addEventListener('click',function() {
+                    router.to(model.uriPath.concat('todomvc'));
+                });
+            })
+        );
+
+        domMgr.mk('h1',wrapper,"D1");
+
+        domMgr.mk('p',wrapper,_tr("The D1 is the worlds most efficient and robust Bicycle Dynamo to USB power converter. It's quick one page website uses many of Igaro App's built in widgets."));
+
+        domMgr.mk('div',wrapper,null,"d1");
+
+        domMgr.mk('p',wrapper,
+            domMgr.mk('button',null,_tr("Show D1 Homepage"), function() {
+                this.addEventListener('click',function() {
+                    window.open("http://d1.igaro.com");
+                });
+            })
+        );
 
     };
 
