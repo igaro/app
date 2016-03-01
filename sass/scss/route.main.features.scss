@@ -1,22 +1,13 @@
 @import "../sass-global/mixins.scss";
 
+@import "instance.table.scss";
+
 body >.core-router >.main >.features >.wrapper {
     @include layoutStandard;
 
-	>p >.instance-table >tbody >tr >td {
+	>p >.instance-table >table >tbody >tr >td {
 
-		&.green {
-			background-color:green;
-		}
-
-		&.red {
-			background-color:red;
-		}
-
-		&.orange {
-			background-color:orange;
-		}
-
+        @include instanceTableColStatus
     }
 
     .youtube {

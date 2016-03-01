@@ -1,3 +1,35 @@
+//# sourceURL=instance.table.css
+
+@import "font.glyph.awesome.scss";
+
+@mixin instanceTableColStatus {
+
+    &.green {
+        text-align:center;
+        >span {
+            @include fa-icon(check);
+        }
+        color:green;
+    }
+
+    &.red {
+        text-align:center;
+        color:red;
+        >span {
+            @include fa-icon(times);
+        }
+    }
+
+    &.orange {
+        text-align:center;
+        color:orange;
+        >span {
+            @include fa-icon(exclamation);
+        }
+    }
+}
+
+
 .instance-table {
 
     overflow-x:auto;
@@ -42,13 +74,13 @@
                 >td {
 
                     &.green {
-                        background-color:rgba(0,255,0,.3);
+                        color:rgba(0,255,0,.3);
                     }
                     &.orange {
-                        background-color:rgba(255,155,0,.3);
+                        color:rgba(255,155,0,.3);
                     }
                     &.red {
-                        background-color:rgba(255,0,0,.3);
+                        color:rgba(255,0,0,.3);
                     }
 
                     a {

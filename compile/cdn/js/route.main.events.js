@@ -19,8 +19,7 @@ module.exports = function(app) {
         model.stash.title = _tr("Events");
         model.stash.desc = _tr("Igaro App's event management system tracks dependencies and propagates events up through parent objects.");
 
-        domMgr.mk('p',wrapper,_tr("Igaro App is <b>100%</b> event driven."));
-        domMgr.mk('p',wrapper,_tr("core.events is responsible for event management. It provides a manager to core.object's bless, which is used extensively to provide objects with an Event Emitter. Unlike the EventEmitter you may know from NodeJS, this one propagates events up to parents, supports Promises, and events track dependencies."));
+        domMgr.mk('p',wrapper,_tr("<b>core.events</b> provides event management and a manager, which is used extensively by other modules to provide objects with an Event Emitter. This propagates events to parent objects, supports Promises, and tracks dependencies."));
 
         return model.addSequence({
             container:wrapper,
@@ -46,12 +45,21 @@ module.exports = function(app) {
                     domMgr.mk('h1',container,_tr("The Event Emitter"));
                     domMgr.mk('p',container);
                     dom.append(container,accordion);
+                    domMgr.mk('pre',container,domMgr.mk('code', null,"app['core.language'].on('setEnv',funcToExec, { deps:[this] });"));
+                    domMgr.mk('p',container,_tr("The code above demonstrates how to attach listeners to other objects event managers while retaining a dependency link. If the object <b>this</b> is destroyed, all event handles will be removed, including those on other event managers."));
                     domMgr.mk('h1',container,_tr("Event Termination"));
-                    domMgr.mk('p',container,_tr("The event emitter supports either a rejected Promise or an object literal containing { stopImmediatePropagation:true }. To prevent propagation through parents, return { stopPropagation:true }."));
-                    domMgr.mk('p',container,_tr("The .asRoot (see Bless) flag prevents a child event dispatching any further through a parent chain. It is mostly used by instances as a parent has no need for these dispatches. Some instances, such as instance.xhr fire events on the root emitter."));
+                    domMgr.mk('p',container,_tr("An Event Emitter supports either a throw, a rejected Promise, or an object literal containing <b>{ stopImmediatePropagation:true }</b>. To prevent propagation through parents, return <b>{ stopPropagation:true }</b>."));
+                    domMgr.mk('p',container,_tr("The <b>asRoot</b> (see Bless) flag prevents a child event dispatching up to a parent. It is mostly used by instances as a parent has no need for these dispatches."));
                     domMgr.mk('h1',container,_tr("Example"));
-                    domMgr.mk('p',container,_tr("At the bottom of this page is an instance.date formatted with moment.js. When you change the timezone or language of the this app using the settings icon at the top, moment.js has it's mode switched and instance.date.js refreshes it's DOM elements. Try it for yourself."));
+                    domMgr.mk('p',container,_tr("At the bottom of this page is an <b>instance.date</b>. If you change the timezone using the settings icon at the top it refreshes it's container element. This is accomplished by listening for the timezone change event on <b>core.date</b>."));
 
+                    domMgr.mk('p',container,null,function() {
+
+                        domMgr.mk('button',this,_tr("Next Chapter - Security")).addEventListener('click',function() {
+
+                            model.parent.to(['security']);
+                        });
+                    });
                     return container;
                 })
             ]

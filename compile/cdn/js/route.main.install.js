@@ -1,6 +1,6 @@
 //# sourceURL=route.main.install.js
 
-(function () {
+(function (env) {
 
 "use strict";
 
@@ -10,14 +10,11 @@ module.requires = [
 
 module.exports = function(app) {
 
-    "use strict";
-
     return function(model) {
 
         var wrapper = model.wrapper,
             language = app['core.language'],
-            domMgr = model.managers.dom,
-            router = app['core.router'];
+            domMgr = model.managers.dom;
 
         model.stash.title=_tr("Install");
         model.stash.description=_tr("Install in one step. It's free, and you'll instantly have an app ready to modify. Prepare to be impressed!");
@@ -27,11 +24,14 @@ module.exports = function(app) {
         domMgr.mk('p',wrapper,_tr("By installing Igaro App you are agreeing to the license under which this software is distributed."));
 
         domMgr.mk('p',wrapper,null,function() {
+
             domMgr.mk('button',this,_tr("Show Source")).addEventListener('click',function() {
+
                 window.open('https://github.com/igaro/app');
             });
             domMgr.mk('button',this,_tr("Show License")).addEventListener('click',function() {
-                router.to(model.uriPath.concat('license'));
+
+                model.to(['license']);
             });
         });
 
@@ -58,4 +58,4 @@ grunt",'gitcode'));
 
 };
 
-})();
+})(this);

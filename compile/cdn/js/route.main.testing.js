@@ -21,7 +21,7 @@ module.exports = function(app) {
         model.stash.title=_tr("Testing");
         model.stash.desc = _tr("End2End and Unit tests are included and run in web browsers via Selenium WebDriver.");
 
-        domMgr.mk('p',wrapper,_tr("Igaro App utilizes NightwatchJS for E2E testing via the Selenium WebDriver. Unit tests are performed by Mocha & Chai (also within the browser)."));
+        domMgr.mk('p',wrapper,_tr("Igaro App utilizes NightwatchJS for E2E testing via the Selenium WebDriver. Unit tests are performed by Mocha & Chai."));
         domMgr.mk('p',wrapper,language.substitute(_tr("Before launching the test suite the following requisites are required;")));
         domMgr.mk('p',wrapper,null, function() {
             domMgr.mk('ul',this,null, function() {
@@ -37,13 +37,20 @@ module.exports = function(app) {
 
         return objMgr.create('pagemessage', {
             type:'warn',
-            container:wrapper,
-            message:_tr("At time of writing the Selenium Firefox driver contains a bug preventing NightwatchJS from starting Selenium on demand.")
+            message:_tr("Testing is being overhauled to use PhantomJS, Mocha, Chai and Selenium directly within Node. Nightwatch will be removed."),
+            container:wrapper
         }).then(function() {
-            domMgr.mk('p',wrapper,_tr("Start Selenium as a background process then begin the test suite with the command below."));
+            domMgr.mk('p',wrapper,_tr("Begin the test suite using the command below."));
             domMgr.mk('pre',wrapper,domMgr.mk('code',null,"npm test"));
             domMgr.mk('p',wrapper,_tr("Customise and add your own E2E tests in the tests/src folder. Unit tests are found in tests/unit."));
-            domMgr.mk('p',wrapper,_tr("Run individual tests by setting Firefox's about:config->security.fileuri.strict_origin_policy to false and opening the HTML file directly."));
+            domMgr.mk('p',wrapper,_tr("Individual tests can be run in Firefox by setting about:config->security.fileuri.strict_origin_policy to false."));
+            domMgr.mk('p',wrapper,null,function() {
+
+                domMgr.mk('button',this,_tr("Next Chapter - Modules")).addEventListener('click',function() {
+
+                    model.parent.to(['modules']);
+                });
+            })
         });
 
     };

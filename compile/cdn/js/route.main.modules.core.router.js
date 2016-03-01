@@ -233,6 +233,12 @@ module.exports = function() {
                         desc : _tr("When a route has current scope the window scroll position will be saved to this value. If the user navigates away and returns later they'll be placed at the same position they left off. Set to false to disable.")
                     },
                     {
+                        name:'to',
+                        type:'function',
+                        desc: _tr("Same as the router .to() but used for relative navigation from the path of the route it is called on. See router .to() for args."),
+                        async:true
+                    },
+                    {
                         name:'uriPath',
                         instanceof: { name:'Array' },
                         desc : _tr("Represents the URL path once URI resources have been removed from it. This makes it useful for building a user navigation location bar."),
@@ -267,12 +273,10 @@ module.exports = function() {
                                 name:'fetch',
                                 type:'function',
                                 required:true,
+                                async:true,
                                 desc: _tr("Used to fetch the resource from a fileserver or API. The function should return a Promise containing the attributes specified."),
                                 returns : {
                                     attributes: [
-                                        {
-                                            instanceof: { name: 'Promise' }
-                                        },
                                         {
                                             name:'css',
                                             type:'string',
@@ -383,7 +387,7 @@ module.exports = function() {
                         }
                     ]
                 },
-                desc: _tr("Loads multiple resources by way of a URL beginning at the base route and enumerating through. Used for user actioned navigation. The current route can abort the load via its leave event if it returns { abort:true }. The events to-begin, to-in-progress and to-loaded() can be used to provide user feedback as routes load.")
+                desc: _tr("Loads multiple resources by way of a URL beginning at the base route and enumerating through. Used for user actioned navigation. The current route can abort the load via its leave event if it returns { abort:true }. The events to-begin, to-in-progress and to-loaded() can be used to provide user feedback as routes load. Note that rather than specify all arguments a single URL object provided by core.url can be passed instead.")
             }
         ];
 

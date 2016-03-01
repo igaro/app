@@ -17,24 +17,26 @@ module.exports = function(app) {
             dom = app['core.dom'];
 
         model.stash.title=_tr("Bless");
-        model.stash.description=_tr("Igaro App's bless decorates standard JavaScript objects. It provides cross channel parent-child event management, managers, dependency tracking and common functions.");
+        model.stash.description=_tr("Igaro App's bless decorates standard JavaScript objects. It provides managers, dependency tracking and common functions.");
 
-        domMgr.mk('p',wrapper,_tr("Igaro App's bless decorates standard JavaScript objects. It provides two-way parent-child event management, managers, dependency tracking, abstraction, shared routines and dynamic functions."));
-        domMgr.mk('p',wrapper,_tr("Blessing is the glue behind Igaro App. It makes a standard JavaScript object smart by allowing it to communicate and take on responsibilities."));
-        domMgr.mk('p',wrapper,_tr("Most objects bless themselves, and most objects in Igaro are blessed."));
+        domMgr.mk('p',wrapper,_tr("Igaro App's bless (part of <b>core.object</b>) decorates standard JavaScript objects. It provides managers (storage, events), dependency tracking, shared functionality and boilerplate. Objects usually bless themselves, and in Igaro App most objects are blessed."));
+        domMgr.mk('h1',wrapper,_tr("Managers"));
+        domMgr.mk('p',wrapper,_tr("A manager is a module (or part of) customized to a blessed object. Any module can offer managerial functionality, for example the <b>core.dom</b> module offers a function <b>mk</b> to create elements, but do the same using a dom manager on the blessed object and that element will automatically disappear if the blessed object is destroyed."));
+
         domMgr.mk('h1',wrapper,_tr("Usage"));
-        domMgr.mk('p',wrapper,_tr("Blessing an object is accomplished with a single call. Most configuration attributes are held within a literal while a few can be set directly on the object prior to blessing."));
+        domMgr.mk('p',wrapper,_tr("Blessing an object is accomplished with a single call. Most configuration attributes are held within an argument, while a few can be pre-set prior to call."));
 
-        domMgr.mk('pre',wrapper,domMgr.mk('code',null,"var InstanceMyWidget = function(o) {\
+        domMgr.mk('pre',wrapper,domMgr.mk('code',null,"var myWidget = function(o) {\
+\n\
 \n   this.name = 'instance.mywidget';\
-\n   this.asRoot = true;\
 \n   this.container = function(dom) {\
 \n        return dom.mk('div',o.container,null,o.className);\
 \n   };\
 \n   app['core.object'].bless.call(this,o);\
 \n}"));
 
-        domMgr.mk('p',wrapper,_tr("The .asRoot flag will be covered in the next chapter."));
+        domMgr.mk('p',wrapper,_tr("In the above example the object is given a namespace of <b>instance.mywidget</b>. This is used by several managers, for example the event manager as it fires events up the chain."));
+        domMgr.mk('p',wrapper,_tr("The power of bless will quickly become apparent when you start using Igaro App. Take your standard JavaScript object containing an array of child objects. When one of those objects is destroyed it should be removed from the array. Bless does this for you."));
 
         return objectMgr.create('accordion', {
             sections : [
@@ -70,8 +72,15 @@ module.exports = function(app) {
         }).then(function(accordion) {
             var domMgr = accordion.managers.dom;
             domMgr.mk('h1',wrapper,_tr("Provides"));
-            domMgr.mk('p',wrapper,_tr("The features bless provides depends on the configuration passed to it."));
+            domMgr.mk('p',wrapper,_tr("The features blessed to an object depend upon the configuration pre-set and passed. Some of the more common attributes are described below."));
             dom.append(wrapper,accordion);
+            domMgr.mk('p',wrapper,null,function() {
+
+                domMgr.mk('button',this,_tr("Next Chapter - Async")).addEventListener('click',function() {
+
+                    model.parent.to(['async']);
+                });
+            });
         });
 
     };

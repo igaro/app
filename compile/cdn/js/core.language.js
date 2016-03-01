@@ -15,21 +15,23 @@ module.exports = function(app, params) {
         bless = coreObject.bless,
         promiseSequencer = coreObject.promiseSequencer;
 
+    // detects the language to use
     var detect = function() {
+
         return language.managers.store.get('env').then(function (stored) {
+
             var set = false;
             return promiseSequencer([
                 stored,
                 params.conf.localeLanguage,
-                url.getParam('localeLanguage'),
+                url.getSearchValue('localeLanguage'),
                 window.navigator.userLanguage || window.navigator.language,
                 'en-US',
                 'en'
-            ], function(b,i) {
-                if (! set)
-                    return language.setEnv(b,true).then(
+            ], function(code,i) {
+                if (! set && code)
+                    return language.setEnv(code,true).then(
                         function() {
-                            language.isAuto = i !== 0;
                             set = true;
                         },
                         function () { }
@@ -43,6 +45,13 @@ module.exports = function(app, params) {
         });
     };
 
+    // case standarizer
+    var formatCode = function(id) {
+
+        return id.substr(0,3).toLowerCase()+id.substr(3).toUpperCase();
+    };
+
+    // service
     var language = {
 
         name:'core.language',
@@ -51,47 +60,80 @@ module.exports = function(app, params) {
         },
         env : null,
         rtl:false,
-        isAuto : null,
         pool : {},
 
+        /* Sets the language code pool
+         * @param {object} o - an object literal of codes. See app.conf for an example
+         * @returns {Promise}
+         */
         setPool : function(o) {
+
             this.pool = o;
             return this.managers.event.dispatch('setPool');
         },
 
-        reset : function() {
-            var self = this;
-            return this.managers.store.set('env').then(function() {
-                self.isAuto = true;
-                return detect();
-            });
-        },
-
+        /* Makes a language pool code active
+         * @param {string} id - the language code to use, i.e 'en-US'
+         * @param {boolean} [noStore] - don't store the code for persistance. Default false.
+         * @returns {Promise}
+         */
         setEnv : function(id,noStore) {
+
+            if (typeof id !== 'string')
+                throw new TypeError('First argument must be a string (language code)');
+
             var self = this,
                 managers = this.managers;
+
             return Promise.resolve().then(function () {
-                if (id.length > 2)
-                    id = id.substr(0,3)+id.substr(3).toUpperCase();
+
+                id = formatCode(id);
+
                 var o = self.pool[id];
                 if (! o)
                     throw { error:'Code is not in pool.', value:id, pool:self.pool };
+
                 self.env = id;
                 document.body.style.textAlign = o.rL? 'right' : 'left';
                 self.rtl = o.rtl === true;
-                if (! noStore)
-                    self.isAuto = false;
+
                 return (noStore? Promise.resolve() : managers.store.set('env',id)).then(function() {
                     return managers.event.dispatch('setEnv',id);
                 });
             });
         },
 
+        /* Resets the active code to the system default (usually browser supplied)
+         * @returns {Promise} containing the detected code
+         */
+        reset : function() {
+
+            return this.managers.store.set('env').then(function() {
+
+                return detect();
+            });
+        },
+
+        /* Gets a country literal object by its id
+         * @param {string} id - the country code to use
+         * @returns {Promise} containing the detected code
+         */
         getFromPoolById : function(id) {
+
+            if (typeof id !== 'string')
+                throw new TypeError('First argument must be a string (language code)');
+
+            id = formatCode(id);
             return this.pool[id];
         },
 
+        /* Language string substitution
+         * @param {string} id - containing \d or %[n] placeholders
+         * @param {string} id - text to place into holder. Can supply further arguments.
+         * @returns {string} the replaced strings
+         */
         substitute : function() {
+
             var args = Array.prototype.slice.call(arguments,0),
                 orig = args.shift(),
                 n = {};
@@ -106,29 +148,48 @@ module.exports = function(app, params) {
             return n;
         },
 
+        /* Language key mapper
+         * @param {(object|function)} c - containing or returning the object to use.
+         * @returns {string} the env language is used on the object to return the value, reverting to denomator and default language if unavailable.
+         */
         mapKey : function(c) {
-            if (!c)
-                throw new Error('No object!');
+
+            if (! /function|object/.test(typeof c))
+                throw new TypeError('First argument must be an object or function supplying it.');
+
             var l = language.env;
+
+            // functions can provide literal to use
             if (typeof c === 'function')
-                return c(l);
+                c = c();
+
+            // must now be an object
             if (typeof c !== 'object')
-                return c;
+                throw new TypeError('language mapKey can not work on a non object');
+
+            // try to fetch, try denominator
             if (l) {
                 if (c[l])
                     return c[l];
-                var t = l.split('-');
-                if (c[t[0]])
-                    return c[t[0]];
+                var t = l.split('-')[0],
+                    v = c[t];
+                if (v)
+                    return v;
             }
-            if ('en' in c)
+
+            // couldn't find, use English
+            if (c.en)
                 return c.en;
+
+            // key unsupported
             throw new Error('No language support:'+JSON.stringify(c));
         }
     };
 
+    // bless service
     bless.call(language);
 
+    // attempt to reapply active code incase it's been removed from the pool
     language.managers.event.on('setPool', function() {
         return detect();
     });

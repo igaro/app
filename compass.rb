@@ -6,7 +6,7 @@ http_path = "/";
 css_dir = ".staging/cdn/css";
 sass_dir = "sass/scss";
 images_dir = "sass/images";
-fonts_dir = "cdn/fonts";
+fonts_dir = "compile/cdn/fonts";
 
 # You can select your preferred output style here (can be overridden via the command line):
 output_style = :compressed;

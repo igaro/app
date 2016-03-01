@@ -169,23 +169,38 @@ module.exports = function(app) {
                 Promise.resolve().then(function() {
 
                     return [
+                        domMgr.mk('h1',null,_tr("The App")),
+                        domMgr.mk('p',null,_tr("Igaro App lives in a private variable, effectively sandboxing it from cross injection. It's supplied to modules as they are loaded.")),
+                        domMgr.mk('pre',null,domMgr.mk('code',null,"(function() {\n\
+    module.exports = function(app, params) {};\n\
+})();")),
                         domMgr.mk('h1',null,_tr("Module Format")),
-                        domMgr.mk('p',null,_tr("Igaro modules use a CommonJS (NodeJS) format. All modules have access to the private app variable, so only load modules from locations you trust.")),
-                        domMgr.mk('p',null,_tr("A module's filename usually corresponds to its namespace, so 'type.name.js' will be available at app['type.name'].")),
-                        domMgr.mk('p',null,_tr("Dependencies can be added to the module.requires list at the top of the file, however instance modules can be lazy loaded and need not. A custom path can be supplied to load outside of the local repository (not shown).")),
+                        domMgr.mk('p',null,_tr("Igaro modules use a CommonJS (NodeJS) format.")),
+                        domMgr.mk('p',null,_tr("A module's filename usually relates to its namespace, so whatever <b>type.name.js</b> exports will be available at <b>app['type.name']</b>.")),
+                        domMgr.mk('p',null,_tr("A module can define dependencies using <b>module.requires</b> (widgets can be lazy loaded). A path can be supplied to load modules outside of the local repository.")),
                         domMgr.mk('pre',null,domMgr.mk('code',null,"(function() {\n\
     'use strict';\n\
     module.requires = [\n\
-        { name : 'type.name.css' },\n\
+        { name : 'type.name.css', repo:'http://www.some-cdn.com' }\n\
     ];\n\
     module.exports = function(app, params) {\n\
         // return - usually a function or literal \n\
     };\n\
-    })();")),
-                        domMgr.mk('h1',null,_tr("Instances")),
-                        domMgr.mk('p',null,_tr("Instances (also know as widgets) can be called anything, but Igaro supplied instances are denoted by an instance.* filename.")),
-                        domMgr.mk('p',null,_tr("An instance module exports a function which is instantiated upon need. Although JavaScript's <b>new</b> keyword can do this, core.object's bless (covered in the next chapter) provides a helper to lazy load the module, call <b>new</b> and then a second constructor .init(). Unlike <b>new</b>, .init() is asynchronous.")),
-                        domMgr.mk('p',null,_tr("Using the icon at the top of this App view the code behind this page to learn how an accordion instance is added. Notice how instances can be children of instances?"))
+})();")),
+                        domMgr.mk('h1',null,_tr("Widgets")),
+                        domMgr.mk('p',null,_tr("Widgets (also know as instances because they are always instantiated) are typically denoted by an <b>instance.*</b> filename.")),
+                        domMgr.mk('p',null,_tr("JavaScript's <b>new</b> keyword can instantiate these, but the <b>core.object</b> module provides a helper to lazy load the module, instantiate, and call an aynchronous constructor <b>.init()</b>. Thus, a widget can be inserted using minimal code.")),
+                        domMgr.mk('pre',null,domMgr.mk('code',null,"this.managers.object.create('accordion').then(function(accordion) {\n\
+    \\\\ do something \n\
+});")),
+                        domMgr.mk('p',null,_tr("Wondering what <b>this.managers</b> is? In Igaro App every object is blessed with services, which provide two way communication, debugging, helpers and more - all tailored to the object. This is explained in greater detail on the Bless page.")),
+                        domMgr.mk('p',null,null,function() {
+
+                            domMgr.mk('button',this,_tr("Next Chapter - Bless")).addEventListener('click',function() {
+
+                                model.parent.to(['bless']);
+                            });
+                        })
                     ];
                 })
             ]

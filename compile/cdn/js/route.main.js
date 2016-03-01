@@ -20,34 +20,42 @@ module.exports = function(app) {
             objectMgr = managers.object,
             coreObject = app['core.object'];
 
-        model.stash.title = _tr("Igaro App Javascript Framework");
-        model.stash.description = _tr("Igaro App is a powerful Javascript framework for developing single page application websites (web-apps). Zero HTML, zero dependencies and beautifully engineered.");
+        model.stash.title = _tr("Igaro App JavaScript Framework");
+        model.stash.description = _tr("Igaro App is a powerful JavaScript framework for developing single page application websites (web-apps). Zero HTML, zero dependencies and beautifully engineered.");
         model.stash.keywords = _tr("javascript, spa, app, html5, framework");
 
         var wrapper = model.wrapper,
             header = domMgr.mk('div',wrapper,null,'header');
 
         // header
-        domMgr.mk('span',header,_tr("Welcome to <b>Igaro App</b> Javascript Framework"));
+        domMgr.mk('span',header, _tr("Welcome to <b>Igaro App</b> JavaScript Framework"));
 
         var writeList = function(pool,list) {
+
             return coreObject.promiseSequencer(pool,function(b) {
+
                 var id = b[0];
                 return list.addItem({
                     className:id,
                     content:function(dom) {
+
                         return dom.mk('a',null,null,function() {
+
                             var url = b[2];
                             if (url) {
+
                                 this.href = url;
                                 this.addEventListener('click', function (evt) {
+
                                     evt.preventDefault();
                                     window.open(url);
                                 });
                             } else {
-                                var a = model.uriPath.concat(id);
-                                this.href = a.join('/') + '/';
+
+                                var a = model.getUrl(id);
+                                this.href = a.toString();
                                 this.addEventListener('click', function (evt) {
+
                                     evt.preventDefault();
                                     router.to(a);
                                 });
@@ -72,24 +80,27 @@ module.exports = function(app) {
                 }),
 
                 objectMgr.create('list').then(function (list) {
+
                     return writeList([
                         ['overview', _tr("Overview")],
-                        ['features', _tr("Features")],
+                        ['features', _tr("Widgets")],
                         ['install', _tr("Install")],
                         ['showcase', _tr("Showcase")]
                     ],list).then(function() {
+
                         var domMgr = list.managers.dom;
                         return domMgr.mk('section', null, [
                             domMgr.mk('h1', null, _tr('Insight')),
-                            domMgr.mk('p', null, _tr("HTML falters when we try to use it for declaring dynamic views in web-applications. So don't use it! The resulting environment is extraordinarily fast, readable, and quick to develop and learn. Other frameworks deal with HTML’s shortcomings by expanding it and introducing sync and data binding issues. They are incredible inefficient and add complexity to the problem rather than solving it. Igaro App reorganises your efforts. It's more dynamic than any other framework and will scale to whatever requirements you throw at it.")),
+                            domMgr.mk('p', null, _tr("HTML falters when used for declaring dynamic views in web-applications, and most JavaScript frameworks deal with this shortcoming by introducing sync and data binding overheads. Looking for an alternative?")),
                             list.container
                         ],'first');
                     });
                 }),
 
                 objectMgr.create('list').then(function (list) {
+
                     return writeList([
-                        ['structure',_tr("Structure")],
+                        ['structure',_tr("Basics")],
                         ['bless', _tr("Bless")],
                         ['async', _tr("Async")],
                         ['events',_tr("Events")],
@@ -102,21 +113,24 @@ module.exports = function(app) {
                         ['testing',_tr("Testing")],
                         ['modules',_tr("Modules")]
                     ],list).then(function() {
+
                         var domMgr = list.managers.dom;
                         return domMgr.mk('section', null, [
                             domMgr.mk('h1', null, _tr("Documentation")),
-                            domMgr.mk('p', null, _tr("Learn how Igaro's architecture is key to the success of everything built upon it (you wouldn't build a house on a base of mud) and how it's radical departure from the norms will leave you coding faster, with greater productivity and no headache. All of Igaro App's modules are documented and come with demos.")),
+                            domMgr.mk('p', null, _tr("All Igaro App's modules are documented via JSDoc, but the online help is more exhaustive and comes with demos.")),
                             list.container
                         ]);
                     });
                 }),
 
                 objectMgr.create('list').then(function (list) {
+
                     return writeList([
                         ['forum',_tr("Forum"),'http://forum.igaro.com'],
                         ['report', _tr("Report"),'https://github.com/igaro/app/issues'],
                         ['contact', _tr("Contact")],
                     ],list).then(function() {
+
                         var domMgr = list.managers.dom;
                         return domMgr.mk('section', null, [
                             domMgr.mk('h1', null, _tr("Support")),

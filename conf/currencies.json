@@ -1,0 +1,23 @@
+{
+    "USD" : {
+        "symbol" : "$",
+        "name" : _tr("United States Dollar")
+    },
+    "GBP" : {
+        "symbol" : "£",
+        "name" : _tr("British Sterling")
+    },
+    "AUD" : {
+        "symbol" : "$",
+        "name" : _tr("Australian Dollar"),
+        "format" : function(v,o) {
+            var x = v <0? "-":"";
+            x += "A$"+currency.commarize(v < 0? v*-1: v);
+            return o && o.colorize? currency.colorize(v,x) : x;
+        }
+    },
+    "EUR" : {
+        "symbol" : "€",
+        "name" : _tr("Euro")
+    }
+}

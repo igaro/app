@@ -1,12 +1,12 @@
 //# sourceURL=igaro.js
 
-(function () {
+(function (env) {
 
     "use strict";
 
     var app = {};
 
-    // conf is in a global literal. Move ref into private then undef it.
+    // conf is initially held in a global. Move ref into private then undef it.
     var appConf = __igaroapp; //jshint ignore:line
     __igaroapp = undefined; //jshint ignore:line
 
@@ -48,8 +48,12 @@
             f=b("sans-serif");
             libs.fonts.forEach(function (font) {
                 var a = font.name;
-                if (! (d!==b(a+",monospace") || f!==b(a+",sans-serif") ||e!==b(a+",serif")))
-                    modules.push(font.module);
+                if (! (d!==b(a+",monospace") || f!==b(a+",sans-serif") ||e!==b(a+",serif"))) {
+                    font.name ='font.'+a.toLowerCase().replace(/\ /, function() {
+                        return '';
+                    })+'.css';
+                    modules.push(font);
+                }
             });
         }
 
@@ -58,49 +62,70 @@
 
         // include built in modules (via builder)
         (function() {
+
             var module = {};
             @@include('core.object.js');
-            app['core.object'] = module.exports(app);
-        }).call(window);
+            app['core.object'] = module.exports(app,appConf);
+        }).call(env);
+
         (function() {
+
             var module = {};
             @@include('core.events.js');
-            app['core.events'] = module.exports(app);
-        }).call(window);
+            app['core.events'] = module.exports(app,appConf);
+        }).call(env);
+
         (function() {
+
             var module = {};
             @@include('core.debug.js');
-            app['core.debug'] = module.exports(app);
-        }).call(window);
+            app['core.debug'] = module.exports(app,appConf);
+        }).call(env);
+
         (function() {
+
             var module = {};
             @@include('core.object.js');
-            app['core.object'] = module.exports(app);
-        }).call(window);
+            app['core.object'] = module.exports(app,appConf);
+        }).call(env);
+
         (function() {
+
             var module = {};
             @@include('core.dom.js');
-            app['core.dom'] = module.exports(app);
-        }).call(window);
+            app['core.dom'] = module.exports(app,appConf);
+        }).call(env);
+
         (function() {
+
             var module = {};
             @@include('instance.xhr.js');
-            app['instance.xhr'] = module.exports(app);
-        }).call(window);
+            app['instance.xhr'] = module.exports(app,appConf);
+        }).call(env);
+
         (function() {
+
             var module = {};
             @@include('instance.amd.js');
-            app['instance.amd'] = module.exports(app);
-        }).call(window);
+            app['instance.amd'] = module.exports(app,appConf);
+        }).call(env);
 
-        // load external modules
-        return new app['instance.amd']().get({ modules:modules }).then(function() {
-            var ii = appConf.init;
-            if (ii && ii.onProgress)
-                ii.onProgress(app,appConf);
+        // load requested modules
+        var ai = appConf.init || {};
+        return new app['instance.amd']().get({
+            modules:modules,
+            onProgress:ai.onProgress? function(v) {
+
+                ai.onProgress(app,appConf,v);
+            } : null
+        }).then(function(v) {
+
+            //if (ai.onProgress)
+            //    ai.onProgress(app,appConf,v);
             return app['core.events'].rootEmitter.dispatch('state.init').then(function() {
-                if (ii && ii.onReady)
-                    ii.onReady(app,appConf);
+
+                if (ai.onReady)
+                    ai.onReady(app,appConf);
                 return app;
             });
         });
@@ -108,19 +133,21 @@
     })['catch'](function (e) {
 
         try {
-            var ii = appConf.init;
-            if (ii && ii.onError)
-                ii.onError(app,appConf,e);
+
+            var init = appConf.init;
+            if (init && init.onError)
+                init.onError(app,appConf,e);
             return app['core.debug'].error(e);
         } catch(eN) {
-            throw { error:e, originalError:eN };
+
+            throw { error:eN, originalError:e };
         }
 
     })['catch'](function(e) {
 
-        // capture error in this handler ... and handle. Ideally shouldn't happen.
-        if (window && window.console)
-            console.error(e);
+        // capture error in this handler ... and handle (should only happen if core.debug threw).
+        if (env.console)
+            env.console.error(e);
     });
 
-})();
+})(this);

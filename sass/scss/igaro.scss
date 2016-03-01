@@ -13,41 +13,6 @@ from { opacity: 0.1; }
 to { opacity: 0.1; }
 }
 
-/* Lights */
-@font-face {
-    font-family: 'Open Sans';
-    src: font-url('OpenSans/OpenSans-Lights-webfont.eot');
-    src: font-url('OpenSans/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
-         font-url('OpenSans/OpenSans-Light-webfont.woff') format('woff'),
-         font-url('OpenSans/OpenSans-Light-webfont.ttf') format('truetype'),
-         font-url('OpenSans/OpenSans-Light-webfont.svg#OpenSansRegular') format('svg');
-    font-weight: 200;
-    font-style: normal;
-}
-/* Regular */
-@font-face {
-    font-family: 'Open Sans';
-    src: font-url('OpenSans/OpenSans-Regular-webfont.eot');
-    src: font-url('OpenSans/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-         font-url('OpenSans/OpenSans-Regular-webfont.woff') format('woff'),
-         font-url('OpenSans/OpenSans-Regular-webfont.ttf') format('truetype'),
-         font-url('OpenSans/OpenSans-Regular-webfont.svg#OpenSansRegular') format('svg');
-    font-weight: 400;
-    font-style: normal;
-}
-/* Bold */
-@font-face {
-    font-family: 'Open Sans';
-    src: font-url('OpenSans/OpenSans-Bold-webfont.eot');
-    src: font-url('OpenSans/OpenSans-Bold-webfont.woff') format('woff'),
-         font-url('OpenSans/OpenSans-Bold-webfont.ttf') format('truetype'),
-         font-url('OpenSans/OpenSans-Bold-webfont.svg#OpenSansBold') format('svg'),
-         font-url('OpenSans/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype');
-    font-weight: 700;
-    font-style: normal;
-}
-
-
 * {
     box-sizing: border-box;
 }
@@ -57,7 +22,7 @@ body {
     padding:0;
     background-color:#fff;
     height:100%;
-    color:#424347;
+    color:#111;
     font-family: "Open Sans", "Helvetica", "Arial";
     line-height:175%;
     font-size:12pt;
@@ -204,7 +169,10 @@ body {
       font-size:90%;
       &:hover { border:1px solid #CCC; border-top:1px solid #999; }
       &:focus { border-color:#2272b6; }
-      &:active { -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3); box-shadow: inset 0 1px 2px rgba(0,0,0,0.3); }
+      &:active { 
+        -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+        box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+        }
     }
 
     input:focus, select:focus, textarea:focus, button:focus, [contenteditable="true"]:focus {
@@ -348,17 +316,49 @@ body {
         background-color:#fff;
         color:#000;
         >div {
+
+            padding:1em;
+
             &.error {
-                background-color:#fff;
-                > div {
-                  padding:10em 1em 1em 1em;
-                  background-size:9em 9em;
-                  background-position: 50% 0;
+                margin:9em 1em 1em 1em;
+                background-position: 50% 4em;
+                background-repeat: no-repeat;
+                background-image: url("../images/igaro/error.gif");
+            }
+
+            &.working {
+                  background-position: 50% 50%;
                   background-repeat: no-repeat;
-                  background-image: inline-image("error.svg");
+                  background-image: inline-image("igaro/spinner.gif");
+            }
+
+            >.worker {
+
+                border-radius:0.2em;
+                border: 1px solid #eee;
+                margin-bottom:0.5em;
+
+                &:not(:last-child) {
+                    margin-right:0.5em;
+                }
+
+                >div {
+                    width:1em;
+                    height:1em;
+                }
+
+                >.done {
+                    background-color:$common-trafficlight-green;
+                    box-shadow: 0 0 0.4em $common-trafficlight-green;
+                }
+
+                >.working {
+                    background-color:$common-trafficlight-red;
+                    box-shadow: 0 0 0.4em $common-trafficlight-red;
                 }
             }
         }
+
     }
 
     >.igaro-router-loading {

@@ -2,6 +2,7 @@
 
 module.requires = [
     { name: 'route.main.compat.css' },
+    { name: 'font.glyph.awesome.css' }
 ];
 
 module.exports = function() {
@@ -62,7 +63,8 @@ module.exports = function() {
                                 content : "10+"
                             },
                             {
-                                className : "green"
+                                className : "green",
+                                content : '<span></span>'
                             },
                             {
                             }
@@ -78,10 +80,11 @@ module.exports = function() {
                                 content : "9"
                             },
                             {
-                                className : "red"
+                                className : "green",
+                                content : '<span></span>'
                             },
                             {
-                                content : _tr("Some modules lack support, especially router's .pushState. Can be made to work with some overhead.")
+                                content : _tr("Some modules may have reduced functionality.")
                             }
                         ]
                     },
@@ -95,10 +98,11 @@ module.exports = function() {
                                 content : "8"
                             },
                             {
-                                className : "red"
+                                className : "orange",
+                                content : '<span></span>'
                             },
                             {
-                                content : _tr("Many modules lack workaround support for missing features that can't be prototyped. Can be made to work with significant overhead.")
+                                content : _tr("Some widgets may be unavailable.")
                             }
                         ]
                     },
@@ -114,7 +118,8 @@ module.exports = function() {
                                 content : "10+"
                             },
                             {
-                                className : "green"
+                                className : "green",
+                                content : '<span></span>'
                             },
                             {
                                 content : _tr("Tested as far back as version 10, but may work with earlier versions.")
@@ -133,7 +138,8 @@ module.exports = function() {
                                 content : "40+"
                             },
                             {
-                                className : "green"
+                                className : "green",
+                                content : '<span></span>'
                             },
                             {
                                 content : _tr("Tested as far back as version 40, but may work with earlier versions.")
@@ -152,7 +158,8 @@ module.exports = function() {
                                 content : "15+"
                             },
                             {
-                                className : "green"
+                                className : "green",
+                                content : '<span></span>'
                             },
                             {
                                 content : _tr("Tested as far back as version 15, but may work with earlier versions.")
@@ -170,7 +177,8 @@ module.exports = function() {
                                 content : "4+"
                             },
                             {
-                                className : "green"
+                                className : "green",
+                                content : '<span></span>'
                             },
                             {
                             }
@@ -186,10 +194,11 @@ module.exports = function() {
                                 content : "3"
                             },
                             {
-                                className : "orange"
+                                className : "orange",
+                                content : '<span></span>'
                             },
                             {
-                                content : _tr("Mainly CSS related limitations.")
+                                content : _tr("Some widgets may have reduced functionality.")
                             }
                         ]
                     },
@@ -203,10 +212,11 @@ module.exports = function() {
                                 content : "2"
                             },
                             {
-                                className : "red"
+                                className : "red",
+                                content : '<span></span>'
                             },
                             {
-                                content : _tr("Missing support for many features, especially for CSS.")
+                                content : _tr("Some widgets may be unavailable.")
                             }
                         ]
                     },
@@ -222,7 +232,8 @@ module.exports = function() {
                                 content : "5+"
                             },
                             {
-                                className : "green"
+                                className : "green",
+                                content : '<span></span>'
                             },
                             {
                                 content : _tr("Tested as far back as version 5, but may work with earlier versions.")
@@ -240,7 +251,8 @@ module.exports = function() {
                                 content : "5+"
                             },
                             {
-                                className : "green"
+                                className : "green",
+                                content : '<span></span>'
                             },
                             {
                             }
@@ -256,10 +268,11 @@ module.exports = function() {
                                 content : "4"
                             },
                             {
-                                className : "orange"
+                                className : "orange",
+                                content : '<span></span>'
                             },
                             {
-                                content : _tr("Some missing features and many CSS issues. Not recommended.")
+                                content : _tr("Some widgets may have reduced functionality.")
                             }
                         ]
                     },
@@ -275,7 +288,8 @@ module.exports = function() {
                                 content : "10+"
                             },
                             {
-                                className : "green"
+                                className : "green",
+                                content : '<span></span>'
                             },
                             {
                                 content : _tr("Tested as far back as version 10, but may work with earlier versions.")

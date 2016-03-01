@@ -42,11 +42,6 @@ module.exports = function() {
                                 desc : _tr("By default a folder /js will be appended to the repo location. Pass true to disable this.")
                             },
                             {
-                                name:'onProgress',
-                                type:'function',
-                                desc : _tr("Callback for when a set of modules has completed. Given modules load may load there own dependencies it isn't possible to calculate a percentage.")
-                            },
-                            {
                                 name:'repo',
                                 type:'string',
                                 desc : _tr("The module will use the default or last loaded module repo value unless this is defined.")
@@ -58,8 +53,18 @@ module.exports = function() {
                                 attributes : [{
                                     instanceof: { name:'Array' }
                                 }]
-                            }
+                            },
+                            {
+                                name:'version',
+                                type:'string',
+                                desc : _tr("Supply a version to append to the request URL. This is in addition to the app build version.")
+                            },
                         ]
+                    },
+                    {
+                        name:'onProgress',
+                        type:'function',
+                        desc : _tr("Callback when progress is made. It includes workers for the request and child dependencies (and any dependencies they require).")
                     }
                 ]
             },

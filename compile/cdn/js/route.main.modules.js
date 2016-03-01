@@ -472,7 +472,7 @@ module.exports = function(app) {
                     container:cc,
                     hideable: true,
                     id:model.path.join('.')+'.democode'
-                }).catch(function(e) {
+                })['catch'](function(e) {
                     debugMgr.handle(e);
                 });
                 domMgr.mk('pre',v, data.demo.trim(), 'democode');
@@ -481,7 +481,7 @@ module.exports = function(app) {
                 try {
                     var r = eval(data.demo);
                     if (r instanceof Promise) {
-                        r.catch(function (e) {
+                        r['catch'](function (e) {
                             debugMgr.handle(e);
                         });
                     }
@@ -495,13 +495,8 @@ module.exports = function(app) {
                 domMgr.mk('p',v,null,function() {
                     var s = this;
                     data.dependencies.forEach(function(o) {
-                        domMgr.mk('button',s,o).addEventListener('click', function(evt) {
-                            evt.preventDefault();
-                            this.disabled = true;
-                            var self= this;
-                            router.to(model.path+'/'+this.value).catch().then(function () {
-                                self.disabled = false;
-                            });
+                        domMgr.mk('button',s,o).addEventListener('click', function() {
+                            model.to([this.textContent.slice(0,-3)]);
                         });
                     });
                 });
@@ -520,13 +515,8 @@ module.exports = function(app) {
                 domMgr.mk('p',v,null,function() {
                     var s = this;
                     data.related.sort().forEach(function(o) {
-                        domMgr.mk('button',s,o).addEventListener('click', function(evt) {
-                            evt.preventDefault();
-                            this.disabled = true;
-                            var self= this;
-                            router.to(model.uriPath.concat(this.innerHTML)).catch().then(function () {
-                                self.disabled = false;
-                            });
+                        domMgr.mk('button',s,o).addEventListener('click', function() {
+                            model.to([this.textContent.slice(0,-3)]);
                         });
                     });
                 });
@@ -547,7 +537,7 @@ module.exports = function(app) {
             if (data.extlinks) {
                 domMgr.mk('h1',v,_tr("External Links"));
                 data.extlinks.forEach(function(o) {
-                    var name,href;
+                    var name, href;
                     if (typeof o === 'string') {
                         name = href = o;
                     } else {
@@ -618,18 +608,21 @@ module.exports = function(app) {
                     ['polyfill.js.1.8.5', _tr("Polyfill deprecated browsers to Mozilla 1.8.5 specification.")],
                     ['polyfill.js.classList', _tr("Polyfill HTML5 classList helpers onto DOM elements.")],
                 ].map(function (o) {
-                    var n = o[0];
-                    var a = domMgr.mk('a',null,n,function() {
-                        this.href=n;
-                        this.addEventListener('click', function(evt) {
-                            evt.preventDefault();
-                            router.to(model.uriPath.concat(n));
-                        });
-                    });
+
+                    var module = o[0];
                     return {
                         columns : [
                             {
-                                content:a
+                                content : domMgr.mk('a',null,module,function() {
+
+                                    var url = model.getUrl(module);
+                                    this.href = url.toString();
+                                    this.addEventListener('click', function(evt) {
+
+                                        evt.preventDefault();
+                                        router.to(url);
+                                    });
+                                })
                             },
                             {
                                 content:o[1]
@@ -639,7 +632,9 @@ module.exports = function(app) {
                 })
             }
         }).then(function(tbl) {
+
             return tbl.addSearchColumns().then(function() {
+
                 return tbl;
             });
         });

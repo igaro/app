@@ -9,6 +9,7 @@ build/
 *.swp
 *.bak
 *.log
+*.pot
 node_modules
 tests/reports/
 tests/output/

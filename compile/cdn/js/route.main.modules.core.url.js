@@ -15,28 +15,123 @@ module.exports = function() {
             usage : {
                 class : true
             },
+            objects : {
+                url : {
+                    name : 'Url',
+                    desc : _tr("A URL object containing URI/Search/Hash and with functions to build a string representation."),
+                    attributes : [
+                        {
+                            name : 'path',
+                            instanceof: { name:'Array' },
+                            desc : _tr("URI pieces.")
+                        },
+                        {
+                            name : 'hash',
+                            type:'string',
+                            desc : _tr("Text after the URL #.")
+                        },
+                        {
+                            name : 'search',
+                            type:'object',
+                            desc : _tr("Key/value pairs after the URL ?.")
+                        },
+                        {
+                            name:'toString',
+                            type: 'function',
+                            async : true,
+                            desc : _tr("Converts the object into a URL string used for navigation."),
+                            returns : {
+                                attributes: [{
+                                    type:'string'
+                                }]
+                            }
+                        }
+                    ]
+                }
+            },
+
             attributes : [
                 {
-                    name:'getCurrent',
+                    name:'fromComponents',
                     type:'function',
                     attributes: [
                         {
                             type:'object',
-                            attributes : [
-                                {
-                                    name:'search',
-                                    type:'boolean',
-                                    desc: _tr("Pass false to strip the search data (after ?). Default is true.")
-                                },
-                                {
-                                    name:'path',
-                                    type:'boolean',
-                                    desc: _tr("Pass false to strip the path. Default is true.")
-                                }
-                            ]
+                            required:true,
+                            attributes : [{
+                                instanceof: { name:'Array' },
+                                desc: _tr("URI pieces.")
+                            }]
+                        },
+                        {
+                            type:'object',
+                            required:true,
+                            attributes : [{
+                                desc: _tr("Key/value pairs after the URL ?.")
+                            }]
+                        },
+                        {
+                            type:'string',
+                            required:true,
+                            attributes : [{
+                                desc : _tr("Text after the URL #.")
+                            }]
                         }
                     ],
-                    desc: _tr("Returns the current fully qualified domain name."),
+                    desc: _tr("Returns a new object representation for individual components."),
+                    returns: {
+                        attributes : [
+                            {
+                                instanceof : function() { return data.objects.url; }
+                            }
+                        ]
+                    }
+                },
+                {
+                    name:'fromUrl',
+                    type:'function',
+                    attributes: [
+                        {
+                            type:'string',
+                            required:true,
+                            attributes : [{
+                                desc: _tr("The URL to parse.")
+                            }]
+                        },
+                    ],
+                    desc: _tr("Returns a new object representation for the supplied URL."),
+                    returns: {
+                        attributes : [
+                            {
+                                instanceof : function() { return data.objects.url; }
+                            }
+                        ]
+                    }
+                },
+                {
+                    name:'getCurrent',
+                    type:'function',
+                    desc: _tr("Returns a new object representation for the current URL."),
+                    returns: {
+                        attributes : [
+                            {
+                                instanceof : function() { return data.objects.url; }
+                            }
+                        ]
+                    }
+               },
+               {
+                    name:'getHash',
+                    type:'function',
+                    attributes: [
+                        {
+                            type:'string',
+                            attributes : [{
+                                desc: _tr("The URL to parse. Defaults to the current URL.")
+                            }]
+                        },
+                    ],
+                    desc: _tr("Parses a string for params after the hash."),
                     returns: {
                         attributes : [
                             {
@@ -44,14 +139,33 @@ module.exports = function() {
                             }
                         ]
                     }
-                },
-                {
-                    name:'getHashParam',
+               },
+               {
+                    name:'getPath',
                     type:'function',
                     attributes: [
                         {
                             type:'string',
-                            required:true,
+                            attributes : [{
+                                desc: _tr("Optional URL to parse. Defaults to the current URL.")
+                            }]
+                        }
+                    ],
+                    desc: _tr("Parses the path URI within a URL into individual pieces."),
+                    returns: {
+                        attributes : [
+                            {
+                                instanceof: { name:'Array' },
+                            }
+                        ]
+                    }
+                },
+                {
+                    name:'getSearch',
+                    type:'function',
+                    attributes: [
+                        {
+                            type:'string',
                             attributes : [{
                                 desc: _tr("The name to search.")
                             }]
@@ -59,7 +173,7 @@ module.exports = function() {
                         {
                             type:'string',
                             attributes : [{
-                                desc: _tr("The URL to parse. Defaults to the current URL.")
+                                desc: _tr("Optional URL to parse. Defaults to the current URL.")
                             }]
                         }
                     ],
@@ -73,35 +187,14 @@ module.exports = function() {
                     }
                 },
                 {
-                    name:'getHashParams',
+                    name:'getSearchValue',
                     type:'function',
                     attributes: [
                         {
                             type:'string',
                             required:true,
                             attributes : [{
-                                desc: _tr("The URL to parse. Defaults to the current URL.")
-                            }]
-                        },
-                    ],
-                    desc: _tr("Parses a string for params after the hash."),
-                    returns: {
-                        attributes : [
-                            {
-                                type:'object'
-                            }
-                        ]
-                    }
-                },
-                {
-                    name:'getParam',
-                    type:'function',
-                    attributes: [
-                        {
-                            type:'string',
-                            required:true,
-                            attributes : [{
-                                desc: _tr("The name to search.")
+                                desc: _tr("The name to pull.")
                             }]
                         },
                         {
@@ -119,61 +212,6 @@ module.exports = function() {
                         ]
                     },
                     desc: _tr("Parses a string for params after the question mark and on match of a specific key returns the value.")
-                },
-                {
-                    name:'getParams',
-                    type:'function',
-                    attributes: [
-                        {
-                            type:'string',
-                            required:true,
-                            attributes : [{
-                                desc: _tr("The URL to parse. Defaults to the current URL.")
-                            }]
-                        },
-                    ],
-                    desc: _tr("Parses a string for params after the question mark."),
-                    returns: {
-                        attributes : [
-                            {
-                                type:'object'
-                            }
-                        ]
-                    }
-                },
-                {
-                    name:'replaceParam',
-                    type:'function',
-                    attributes: [
-                        {
-                            type:'string',
-                            required:true,
-                            attributes: [{
-                                desc: _tr("The name of to replace or append.")
-                            }]
-                        },
-                        {
-                            type:'string',
-                            required:true,
-                            attributes: [{
-                                desc: _tr("The value to use. If the value contains special characters pass encodeURIComponent(value) beforehand."),
-                            }]
-                        },
-                        {
-                            type:'string',
-                            attributes: [{
-                                desc: _tr("The URL to use (defaults to the current URL).")
-                            }]
-                        }
-                    ],
-                    returns : {
-                        attributes : [
-                            {
-                                type:'string'
-                            }
-                        ]
-                    },
-                    desc: _tr("Parses a URL and replaces or appends a new param, returning the new URL.")
                 }
             ]
         };

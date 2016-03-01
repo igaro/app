@@ -13,13 +13,12 @@ module.exports = function(app) {
     return function(model) {
 
         var wrapper = model.wrapper,
-            domMgr = model.managers.dom,
-            router = app['core.router'];
+            domMgr = model.managers.dom;
 
         model.stash.title=_tr("Showcase");
         model.stash.description=_tr("A showcase of App's and examples.");
 
-        domMgr.mk('p',wrapper,_tr("Igaro App is a new framework! We're on the lookout for examples where it's being used. Made something? Send us a link!"));
+        domMgr.mk('p',wrapper,_tr("Made something with Igaro App? Send us a link!"));
 
         domMgr.mk('h1',wrapper,"TodoMVC");
 
@@ -30,7 +29,7 @@ module.exports = function(app) {
         domMgr.mk('p',wrapper,
             domMgr.mk('button',null,_tr("Show Igaro App Implementation"), function() {
                 this.addEventListener('click',function() {
-                    router.to(model.uriPath.concat('todomvc'));
+                    model.to(['todomvc']);
                 });
             })
         );

@@ -22,21 +22,13 @@ module.exports = function(app) {
         model.stash.title=_tr("Mobile");
         model.stash.description=_tr("Ready for all mobile devices, with outstanding performance and one codebase for all platforms.");
 
-        domMgr.mk('p',wrapper,_tr("Igaro App is <b>100%</b> mobile ready."));
+        domMgr.mk('p',wrapper,_tr("Igaro App loads mobile and/or touch modules upon app load. It automatically detects the environment ensuring only relevant modules are loaded."));
 
-        domMgr.mk('p',wrapper,language.substitute(_tr("%[0] is utilized to access mobile device features such as camera, accelerometer and GPS."),'<a href="http://cordova.apache.org">Apache Cordova</a>'));
-        domMgr.mk('p',wrapper,null, function() {
-            domMgr.mk('ul',this,null, function() {
-                domMgr.mk('li',this,language.substitute(_tr("Within a terminal run %[0]"),'<b>cd cordova</b>'));
-                domMgr.mk('li',this,_tr("Install the platforms you wish to support."));
-                domMgr.mk('li',this,_tr("Deploy onto your device or emulator with <b>cordova run [ios][android][firefoxos]</b>. Note that by default the www folder contains files symlinked to the output/debug folder. You'll want to change this to output/deploy when you are ready to release your app."));
-                domMgr.mk('li',this,_tr("Customise splashscreens and icons within the same folder."));
-            });
-        });
+        domMgr.mk('p',wrapper,language.substitute(_tr("%[0] is utilized to access mobile device features such as camera, accelerometer and GPS. Many modules customise behaviour for native environments, such as <b>instance.toast</b> which switches to O/S popups."),'<a href="http://cordova.apache.org">Apache Cordova</a>'));
 
         domMgr.mk('h1',wrapper,_tr("Embedding Resources"));
 
-        domMgr.mk('p',wrapper,_tr("Compiling images and fonts into CSS reduces latency over slower networks and allows app's to perform with a native feel."));
+        domMgr.mk('p',wrapper,_tr("Compass SASS is included. Base64'ing images and fonts into CSS allowing app's to perform with a native feel."));
 
         domMgr.mk('button',wrapper,_tr("Demo")).addEventListener('click', function() {
             domMgr.mk('div',{ insertBefore:this },null, function() {
@@ -49,9 +41,9 @@ module.exports = function(app) {
 
         domMgr.mk('h1',wrapper,_tr("Touch & Gestures"));
 
-        domMgr.mk('p',wrapper,_tr("For touch screens the browser 300ms click delay is removed."));
+        domMgr.mk('p',wrapper,_tr("For touch screens, <b>3rdparty.fastclick</b> removes the browser 300ms click delay."));
 
-        domMgr.mk('p',wrapper,_tr("Gesture events are available via the 3rdparty.hammer library. If you have a touch screen, try some actions in the box below."));
+        domMgr.mk('p',wrapper,_tr("Gesture events are available via <b>3rdparty.hammer</b>. If you have a touch screen, try some actions in the box below."));
 
         return model.addSequence({
 
@@ -92,7 +84,17 @@ module.exports = function(app) {
                         type:'critical',
                         message : _tr("A touch screen has not been detected.")
                     });
-                })()
+                })(),
+                Promise.resolve(
+
+                    domMgr.mk('p',null,null,function() {
+
+                        domMgr.mk('button',this,_tr("Next Chapter - Compatibility")).addEventListener('click',function() {
+
+                            model.parent.to(['compat']);
+                        });
+                    })
+                )
             ]
         });
 

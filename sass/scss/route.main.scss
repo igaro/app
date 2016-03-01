@@ -56,7 +56,7 @@ body >.core-router >.main {
                     border-bottom: 1px solid #eee;
                     @include spacingbottom;
                 }
-                >.instance-list {
+                >.instance-list >ol {
                     @include pagemenu;
 
                     >.install {

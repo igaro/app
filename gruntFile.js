@@ -31,7 +31,7 @@ module.exports = function(grunt) {
 
         includereplace: {
             igarojs: {
-                src: stagingDir + '/cdn/js/igaro.js',
+                src: stagingDir + '/cdn/js/*.js',
                 dest: stagingDir + '/cdn/js'
             }
         },
@@ -154,9 +154,9 @@ module.exports = function(grunt) {
                 base : k,
                 middleware: function(connect, options, middlewares) {
                     middlewares.unshift(function(req, res, next) {
-                        var url = req.originalUrl,
+                        var url = req.originalUrl.split('?')[0],
                             attr = url.substr(0,5);
-                        if (/(cdn|res)/.test(attr)) {
+                        if (url.length) {
                             var c = k+'/'+url;
                             if (grunt.file.exists(c))
                                 return next();
