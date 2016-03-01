@@ -15,7 +15,9 @@ module.exports = function(app, params) {
         country = app['core.country'],
         dom = app['core.dom'],
         url = app['core.url'],
-        bless = app['core.object'].bless;
+        coreObject = app['core.object'],
+        bless = coreObject.bless,
+        promiseSequencer = coreObject.promiseSequencer;
 
     var detect = function() {
         return currency.managers.store.get('env').then(function (stored) {

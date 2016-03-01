@@ -11,6 +11,7 @@
     "grunt-contrib-compass": "^0.7.0",
     "grunt-contrib-copy": "^0",
     "grunt-contrib-clean": "^0",
+    "grunt-include-replace": "^0",
     "grunt-xgettext" : "^0",
     "grunt-po2json": "git://github.com/rockykitamura/grunt-po2json.git",
     "grunt-po2json-embed" : "^1.0.0",

@@ -29,6 +29,13 @@ module.exports = function(grunt) {
             }
         },
 
+        includereplace: {
+            igarojs: {
+                src: stagingDir + '/cdn/js/igaro.js',
+                dest: stagingDir + '/cdn/js'
+            }
+        },
+
         uglify: {
             options: {
                 mangle: {
@@ -177,9 +184,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-po2json-embed');
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-include-replace');
     grunt.loadNpmTasks('grunt-shell');
 
-    grunt.registerTask('build', ['clean:build','copy:stage','xgettext','shell:msgmerge','po2jsonEmbed','compass:build','copy:pre','uglify:app','copy:post']);
+    grunt.registerTask('build', ['clean:build','copy:stage','includereplace:igarojs', 'xgettext','shell:msgmerge','po2jsonEmbed','compass:build','copy:pre','uglify:app','copy:post']);
 
     grunt.registerTask('default', ['build','connect','watch']);
 };
