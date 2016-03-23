@@ -1,16 +1,25 @@
 @import "../sass-global/mixins.scss";
 @import "../sass-global/variables.scss";
 
-@-webkit-keyframes igaro-loading {
+@keyframes igaro-loading {
 from { opacity: 0.1; }
 50% { opacity: 1; }
 to { opacity: 0.1; }
 }
 
-@keyframes igaro-loading {
-from { opacity: 0.1; }
-50% { opacity: 1; }
-to { opacity: 0.1; }
+@keyframes zoomOut {
+  from {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+    transform: scale3d(.3, .3, .3);
+  }
+
+  to {
+    opacity: 0;
+  }
 }
 
 * {
@@ -26,7 +35,6 @@ body {
     font-family: "Open Sans", "Helvetica", "Arial";
     line-height:175%;
     font-size:12pt;
-    -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
 
     >noscript {
@@ -169,10 +177,9 @@ body {
       font-size:90%;
       &:hover { border:1px solid #CCC; border-top:1px solid #999; }
       &:focus { border-color:#2272b6; }
-      &:active { 
-        -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+      &:active {
         box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
-        }
+      }
     }
 
     input:focus, select:focus, textarea:focus, button:focus, [contenteditable="true"]:focus {
@@ -206,7 +213,6 @@ body {
       &:active {
         background-color: #1e4482;
         background: linear-gradient(color-stops(#2e5799 0%, #1e4482 100%));
-        -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
         box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
       }
     }
@@ -226,13 +232,11 @@ body {
         text-decoration: none;
         background-color: #f8f8f8;
         background: linear-gradient(color-stops(#f8f8f8 0%, #f1f1f1 100%));
-        -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
         box-shadow: 0 1px 1px rgba(0,0,0,0.1);
       }
       &:active {
         background-color: #f6f6f6;
         background: linear-gradient(color-stops(#f6f6f6 0%, #f1f1f1 100%));
-        -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
         box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
       }
     }
@@ -241,7 +245,6 @@ body {
 
     button[disabled],input[disabled],textarea[disabled],select[disabled],input[disabled]:hover,textarea[disabled]:hover,select[disabled]:hover {
         color:#AAA;
-        -webkit-box-shadow: none;
         text-shadow:none;
         -moz-box-shadow: none;
         box-shadow: none;
@@ -276,7 +279,6 @@ body {
             vertical-align:middle;
             text-align:center;
             transition: color 1s ease-in;
-            -webkit-transition: color 1s ease-in;
             >div {
               margin:0 auto;
               display:inline-block;
@@ -286,7 +288,6 @@ body {
                 >p {
                     line-height:50%;
                     opacity:0.1;
-                    -webkit-animation: igaro-loading 4s ease-in-out infinite;
                     animation: igaro-loading 4s ease-in-out infinite;
                     &:nth-child(1) {
                         animation-delay:0s;
@@ -321,15 +322,21 @@ body {
 
             &.error {
                 margin:9em 1em 1em 1em;
-                background-position: 50% 4em;
-                background-repeat: no-repeat;
-                background-image: url("../images/igaro/error.gif");
+                background: url("../images/igaro/error.gif") no-repeat 50% 4em;
             }
 
-            &.working {
-                  background-position: 50% 50%;
-                  background-repeat: no-repeat;
-                  background-image: inline-image("igaro/spinner.gif");
+            &.working, &.workers_done {
+                background-image: inline-image("igaro/spinner.gif");
+                background-position: 50% 50%;
+                background-repeat: no-repeat;
+            }
+
+            &.workers_done {
+                >div {
+                    animation-name: zoomOut;
+                    animation-duration: 5s;
+                    opacity:0;
+                }
             }
 
             >.worker {

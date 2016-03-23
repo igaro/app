@@ -101,32 +101,41 @@ var body = document.body,
     },
     loading = document.createElement('div'),
     loadingWrapper = document.createElement('div');
+    loadingWrapper.className = 'working';
     bodyStyle.overflow = 'hidden';
     loading.className = 'igaro-loading';
     loading.appendChild(loadingWrapper);
-    body.appendChild(loading);
+    body.appendChild(loading),
+    workers = [];
 
 __igaroapp.init = {
     onProgress : function(app,conf,v) {
-        loadingWrapper.textContent='';
-        if (v.workers[0].done && ! v.children) {
-
-            loadingWrapper.className = 'working';
+        if (workers.length && workers.every(function (worker) {
+            return worker.done;
+        })) {
+            loadingWrapper.className = 'workers_done';
             return;
         }
+        loadingWrapper.textContent='';
+        loadingWrapper.className = '';
         while (v) {
             v.workers.forEach(function(w) {
-                var p = document.createElement('div');
-                p.className = 'worker';
-                var i = document.createElement('div');
-                i.className = w.done? 'done' : 'working';
-                p.appendChild(i);
-                loadingWrapper.appendChild(p);
+                if (workers.indexOf(w) === -1)
+                    workers.push(w);
             });
             v = v.children;
         }
+        workers.forEach(function(w) {
+            var p = document.createElement('div');
+            p.className = 'worker';
+            var i = document.createElement('div');
+            i.className = w.done? 'done' : 'working';
+            p.appendChild(i);
+            loadingWrapper.appendChild(p);
+        });
     },
     onReady : function(app,conf) {
+        workers = null;
         setTimeout(function() {
             body.removeChild(loading);
             resetOverflow(conf);

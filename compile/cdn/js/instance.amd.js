@@ -217,10 +217,8 @@
             return workerEventChannel.dispatch('start').then(function() {
 
                 return xhr.get({ res:file }).then(function(data) {
-                    return onProgress().then(function(){
 
-                        return data;
-                    });
+                    return data;
 
                 }).then(function(data) {
 
