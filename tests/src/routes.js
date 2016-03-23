@@ -73,7 +73,7 @@ var self = this;
     self['route -> '+n] = function(browser) {
 
         browser
-            .url('http://localhost:3006/'+n)
+            .url('http://localhost:3006/#'+n)
             .waitForElementVisible('body', 1000)
             .pause(1000)
             .assert.elementNotPresent('.igaro >.error')
