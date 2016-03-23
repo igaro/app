@@ -176,6 +176,10 @@
                     if (opt && opt.rows)
                         return o[0].addRows(opt.rows);
                 }));
+            }).then(function() {
+
+                if (o.addSearchColumns)
+                    return self.addSearchColumns();
             });
         };
 

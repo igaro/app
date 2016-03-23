@@ -50,7 +50,7 @@ module.exports = function(app) {
 
                     model.parent.to(['modules']);
                 });
-            })
+            });
         });
 
     };

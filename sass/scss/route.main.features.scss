@@ -19,7 +19,37 @@ body >.core-router >.main >.features >.wrapper {
     	padding:0;
     }
 
-    .instance-samespace {
+    >.instance-list {
+
+        >ol {
+
+            >li {
+                width:128px;
+                height:128px;
+                display:inline-block;
+                &:not(:last-child) {
+                    margin-right:1em;
+                }
+            }
+
+    		>.elephant {
+	    		background: inline-image("route.main.features/elephant.png") no-repeat 50% 50%;
+	    	}
+    		>.dog {
+	    		background: inline-image("route.main.features/dog.png") no-repeat 50% 50%;
+	    	}
+	    	>.cat { 
+	    		background: inline-image("route.main.features/cat.png") no-repeat 50% 50%;
+	    	}
+	    	>.ladybug { 
+	    		background: inline-image("route.main.features/ladybug.png") no-repeat 50% 50%;
+	    	}
+        }
+
+    }
+
+
+    >.instance-samespace {
 
     	max-width:460px;
 

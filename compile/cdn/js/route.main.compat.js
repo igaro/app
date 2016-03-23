@@ -20,12 +20,16 @@ module.exports = function() {
             domMgr= managers.dom,
             objectMgr = managers.object;
 
-        domMgr.mk('p',wrapper,_tr("Igaro App is compatible with all modern web browsers and mobile devices."));
+        domMgr.mk('p',wrapper,_tr("Igaro App is compatible with the majority of web browsers going back to IE8, and mobile devices."));
 
-        domMgr.mk('p',wrapper,_tr("Modules are responsible for verifying requirements upon load. Upon an error a message is displayed to the user."));
+        domMgr.mk('h1',wrapper,_tr("Handling Requirements"));
+
+        domMgr.mk('p',wrapper,_tr("Modules are responsible for verifying requirements upon load and throwing an error if they are not met, which is handed and displayed to the user. Modules try to offer reduced functionality where possible."));
+
+        domMgr.mk('pre',wrapper,domMgr.mk('code',null,"if (! ('contentEditable' in document.body)) \n\
+    throw new Error({ incompatible:true, noobject:'contentEditable' });"));
 
         return objectMgr.create('table', {
-            container:wrapper,
             header : {
                 rows : [
                     {
@@ -299,6 +303,19 @@ module.exports = function() {
                 ]
             }
 
+        }).then(function(table) {
+
+            domMgr.mk('h1',wrapper,_tr("Compatibility Table"));
+
+            domMgr.mk('p',wrapper,table);
+
+            domMgr.mk('p',wrapper,null,function() {
+
+                domMgr.mk('button',this,_tr("Next Chapter - Testing")).addEventListener('click',function() {
+
+                    model.parent.to(['testing']);
+                });
+            });
         });
 
     };

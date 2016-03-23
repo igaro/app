@@ -23,68 +23,11 @@ module.exports = function(app) {
             debugMgr = managers.debug,
             objectMgr = managers.object;
 
-        domMgr.mk('p',wrapper,_tr("Igaro's comes with a stack full of widgets, and creating new widgets is easy!"));
+        domMgr.mk('p',wrapper,_tr("Igaro App comes with a stack full of widgets, and creating new widgets is easy!"));
 
         return model.addSequence({
             container:wrapper,
             promises:[
-
-                objectMgr.create('table', {
-                    header : {
-                        rows : [
-                            {
-                                columns : [
-                                    {
-                                        content : _tr("Domain")
-                                    },
-                                    {
-                                        content : _tr("Details")
-                                    },
-                                    {
-                                        content : _tr("Status")
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    body : {
-                        rows : [
-                            {
-                                columns : [
-                                    {
-                                        content : _tr("Security")
-                                    },
-                                    {
-                                        content : _tr("No public variables. Military-grade security. No memory leaks. Automatic oAuth initilization with Promise replay.")
-                                    },
-                                    {
-                                        className : 'green fa fa-check'
-                                    }
-                                ]
-                            },
-                            {
-                                columns : [
-                                    {
-                                        content : _tr("Dynamic")
-                                    },
-                                    {
-                                        content : _tr("Expandable with modules. Decoupled architecture based on events.")
-                                    },
-                                    {
-                                        className : 'green'
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                }).then(function(table) {
-
-                    var container = document.createDocumentFragment();
-                    domMgr.mk('h1',container,_tr("Table"));
-                    domMgr.mk('p',container,_tr("This example displays HTML elements within a common space using CSS3 effects to transition between each space. It's great for slideshows!"));
-                    dom.append(container,table);
-                    return container;
-                }),
 
                 // same space
                 objectMgr.create('samespace', {
@@ -130,6 +73,103 @@ module.exports = function(app) {
                         })['catch'](function(e) {
 
                             return debugMgr.handle(e);
+                        });
+                    });
+                    return container;
+                }),
+
+                // table
+                objectMgr.create('table', {
+                    addSearchColumns:true,
+                    header : {
+                        rows : [
+                            {
+                                columns : [
+                                    {
+                                        content : _tr("Make")
+                                    },
+                                    {
+                                        content : _tr("Model")
+                                    },
+                                    {
+                                        content : _tr("Type")
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    body : {
+                        rows : [
+                            {
+                                columns : [
+                                    {
+                                        content : "Ford"
+                                    },
+                                    {
+                                        content : "Mustang"
+                                    },
+                                    {
+                                        content : "Car"
+                                    }
+                                ]
+                            },
+                            {
+                                columns : [
+                                    {
+                                        content : "Jaguar"
+                                    },
+                                    {
+                                        content : "XK8"
+                                    },
+                                    {
+                                        content : "Car"
+                                    }
+                                ]
+                            },
+                            {
+                                columns : [
+                                    {
+                                        content : "Ford"
+                                    },
+                                    {
+                                        content : "Focus"
+                                    },
+                                    {
+                                        content : "Car"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }).then(function(table) {
+
+                    var container = document.createDocumentFragment();
+                    domMgr.mk('h1',container,_tr("Table"));
+                    domMgr.mk('p',container,_tr("Dynamic tables with filtering. Custom filters are supported."));
+                    dom.append(container,table);
+                    return container;
+                }),
+
+                // list
+                objectMgr.create('list', {
+
+                    items:['elephant','ladybug','dog','cat'].map(function(a) {
+
+                        return { className:a };
+                    })
+                }).then(function(list) {
+
+                    var container = document.createDocumentFragment(),
+                        domMgr = list.managers.dom,
+                        elephant = list.items[0];
+
+                    domMgr.mk('h1',container,_tr("Lists"));
+                    domMgr.mk('p',container,_tr("Create dynamic lists without data binding!"));
+                    dom.append(container,list);
+                    domMgr.mk('p',container,null,function() {
+                        domMgr.mk('button',this,_tr("Move Elephant")).addEventListener('click', function() {
+
+                            list.shift(elephant,1);
                         });
                     });
                     return container;
@@ -191,7 +231,7 @@ module.exports = function(app) {
                         domMgr = rte.managers.dom;
 
                     domMgr.mk('h1',container,_tr("Rich Text Editor"));
-                    domMgr.mk('p',container);
+                    domMgr.mk('p',container, _tr("Full HTML based editing within the App."));
                     dom.append(container,rte);
                     return container;
                 }),
@@ -221,7 +261,7 @@ module.exports = function(app) {
                         domMgr = accordion.managers.dom;
 
                     domMgr.mk('h1',container,_tr("Accordion"));
-                    domMgr.mk('p',container);
+                    domMgr.mk('p',container,_tr("Accordions can group items to reduce information overload."));
                     dom.append(container,accordion);
                     return container;
                 })
