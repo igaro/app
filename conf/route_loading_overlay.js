@@ -6,7 +6,7 @@ dom.mk('div',null,null,function() {
         body = document.body,
         bodyStyle = body.style,
         ref;
-    dom.mk('div',this,dom.mk('div',null,_tr("Loading...")),'progress');
+    dom.mk('div',this,dom.mk('p',null,_tr("Loading...")),'progress');
     this.className = 'igaro-router-loading';
     rME.on('to-in-progress', function() {
 

@@ -4,11 +4,11 @@
 /* Light */
 @font-face {
     font-family: 'Open Sans';
-    src: url("#{$cdn}/fonts/OpenSans/OpenSans-Light-webfont.eot");
-    src: url("#{$cdn}/fonts/OpenSans/OpenSans-Light-webfont.eot?#iefix") format('embedded-opentype'),
-         url("#{$cdn}/fonts/OpenSans/OpenSans-Light-webfont.woff") format('woff'),
-         url("#{$cdn}/fonts/OpenSans/OpenSans-Light-webfont.ttf") format('truetype'),
-         url("#{$cdn}/fonts/OpenSans/OpenSans-Light-webfont.svg#OpenSansLight") format('svg');
+    src: url("#{$cdn}fonts/OpenSans/OpenSans-Light-webfont.eot");
+    src: url("#{$cdn}fonts/OpenSans/OpenSans-Light-webfont.eot?#iefix") format('embedded-opentype'),
+         url("#{$cdn}fonts/OpenSans/OpenSans-Light-webfont.woff") format('woff'),
+         url("#{$cdn}fonts/OpenSans/OpenSans-Light-webfont.ttf") format('truetype'),
+         url("#{$cdn}fonts/OpenSans/OpenSans-Light-webfont.svg#OpenSansLight") format('svg');
     font-weight: 200;
     font-style: normal;
 }
@@ -16,11 +16,11 @@
 /* Regular */
 @font-face {
     font-family: 'Open Sans';
-    src: url("#{$cdn}/fonts/OpenSans/OpenSans-Regular-webfont.eot");
-    src: url("#{$cdn}/fonts/OpenSans/OpenSans-Regular-webfont.eot?#iefix") format('embedded-opentype'),
-         url("#{$cdn}/fonts/OpenSans/OpenSans-Regular-webfont.woff") format('woff'),
-         url("#{$cdn}/fonts/OpenSans/OpenSans-Regular-webfont.ttf") format('truetype'),
-         url("#{$cdn}/fonts/OpenSans/OpenSans-Regular-webfont.svg#OpenSansRegular") format('svg');
+    src: url("#{$cdn}fonts/OpenSans/OpenSans-Regular-webfont.eot");
+    src: url("#{$cdn}fonts/OpenSans/OpenSans-Regular-webfont.eot?#iefix") format('embedded-opentype'),
+         url("#{$cdn}fonts/OpenSans/OpenSans-Regular-webfont.woff") format('woff'),
+         url("#{$cdn}fonts/OpenSans/OpenSans-Regular-webfont.ttf") format('truetype'),
+         url("#{$cdn}fonts/OpenSans/OpenSans-Regular-webfont.svg#OpenSansRegular") format('svg');
     font-weight: 400;
     font-style: normal;
 }
@@ -28,11 +28,11 @@
 /* Bold */
 @font-face {
     font-family: 'Open Sans';
-    src: url("#{$cdn}/fonts/OpenSans/OpenSans-Bold-webfont.eot");
-    src: url("#{$cdn}/fonts/OpenSans/OpenSans-Bold-webfont.eot?#iefix") format('embedded-opentype'),
-         url("#{$cdn}/fonts/OpenSans/OpenSans-Bold-webfont.woff") format('woff'),
-         url("#{$cdn}/fonts/OpenSans/OpenSans-Bold-webfont.ttf") format('truetype'),
-         url("#{$cdn}/fonts/OpenSans/OpenSans-Bold-webfont.svg#OpenSansBold") format('svg');
+    src: url("#{$cdn}fonts/OpenSans/OpenSans-Bold-webfont.eot");
+    src: url("#{$cdn}fonts/OpenSans/OpenSans-Bold-webfont.eot?#iefix") format('embedded-opentype'),
+         url("#{$cdn}fonts/OpenSans/OpenSans-Bold-webfont.woff") format('woff'),
+         url("#{$cdn}fonts/OpenSans/OpenSans-Bold-webfont.ttf") format('truetype'),
+         url("#{$cdn}fonts/OpenSans/OpenSans-Bold-webfont.svg#OpenSansBold") format('svg');
     font-weight: 700;
     font-style: normal;
 }
