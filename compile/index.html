@@ -110,14 +110,13 @@ var body = document.body,
 
 __igaroapp.init = {
     onProgress : function(app,conf,v) {
+        loadingWrapper.className = '';
         if (workers.length && workers.every(function (worker) {
             return worker.done;
         })) {
             loadingWrapper.className = 'workers_done';
-            return;
         }
         loadingWrapper.textContent='';
-        loadingWrapper.className = '';
         while (v) {
             v.workers.forEach(function(w) {
                 if (workers.indexOf(w) === -1)
