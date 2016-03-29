@@ -4,7 +4,7 @@
 
 Igaro App is a complete web-app (SPA+) architecture using pure ES5/6 JavaScript, and zero dependencies.
 
-It's bleading edge and yet traditional, unbelievably fast, and works right back to IE8.
+It's bleeding edge and yet traditional, unbelievably fast, and works right back to IE8.
 
 ## Repo = App = Live Demo
 
