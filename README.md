@@ -14,6 +14,10 @@ The repo you download here is the App you'll have running on your local machine,
 
 All modules are comprehensibly documented in the /modules section within the demo and also via JSDoc.
 
+## Install
+
+npm build (will show the various options)
+
 ## History
 
 ###1.4

@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 
         watch : {
             changes: {
-                files: ['sass/**/*','compile/**/*','copy/**/*','translations/*.po'],
+                files: ['sass/**/*','compile/**/*','copy/**/*','etc/translations/*.po'],
                 tasks: ['build']
             }
         },
@@ -97,7 +97,7 @@ module.exports = function(grunt) {
                 },
                 options: {
                     functionName: '_tr',
-                    potFile: 'translations/messages.pot'
+                    potFile: 'etc/translations/messages.pot'
                 }
             }
         },
@@ -109,7 +109,7 @@ module.exports = function(grunt) {
                 },
                 options: {
                     functionName: '_tr',
-                    poFiles: 'translations',
+                    poFiles: 'etc/translations',
                 }
             }
         },
@@ -121,10 +121,10 @@ module.exports = function(grunt) {
             msgmerge: {
                 // todo: dynamic po file list would be better
               command: _.map(locales, function(locale) {
-                var po = "translations/" + locale + ".po";
+                var po = "etc/translations/" + locale + ".po";
                 return "if [ -f \"" + po + "\" ]; then\n" +
                        "    echo \"Updating " + po + "\"\n" +
-                       "    msgmerge -v " + po + " translations/messages.pot > .new.po.tmp\n" +
+                       "    msgmerge -v " + po + " etc/translations/messages.pot > .new.po.tmp\n" +
                        "    exitCode=$?\n" +
                        "    if [ $exitCode -ne 0 ]; then\n" +
                        "        echo \"Msgmerge failed with exit code $?\"\n" +

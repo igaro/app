@@ -1,0 +1,2257 @@
+{
+    "AD": {
+      "callingCode": [
+        "376"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Andorra"); }
+    },
+    "AE": {
+      "callingCode": [
+        "971"
+      ],
+      "currency": [
+        "AED"
+      ],
+      "name": function(l) { return l.gettext("United Arab Emirates"); },
+    },
+    "AF": {
+      "callingCode": [
+        "93"
+      ],
+      "currency": [
+        "AFN"
+      ],
+      "name": function(l) { return l.gettext("Afghanistan"); }
+    },
+    "AG": {
+      "callingCode": [
+        "1268"
+      ],
+      "currency": [
+        "XCD"
+      ],
+      "name": function(l) { return l.gettext("Antigua and Barbuda"); }
+    },
+    "AI": {
+      "callingCode": [
+        "1264"
+      ],
+      "currency": [
+        "XCD"
+      ],
+      "name": function(l) { return l.gettext("Anguilla"); },
+    },
+    "AL": {
+      "callingCode": [
+        "355"
+      ],
+      "currency": [
+        "ALL"
+      ],
+      "name": function(l) { return l.gettext("Albania"); }
+    },
+    "AM": {
+      "callingCode": [
+        "374"
+      ],
+      "currency": [
+        "AMD"
+      ],
+      "name": function(l) { return l.gettext("Armenia"); }
+    },
+    "AO": {
+      "callingCode": [
+        "244"
+      ],
+      "currency": [
+        "AOA"
+      ],
+      "name": function(l) { return l.gettext("Angola"); }
+    },
+    "AQ": {
+      "name": function(l) { return l.gettext("Antarctica"); }
+    },
+    "AR": {
+      "callingCode": [
+        "54"
+      ],
+      "currency": [
+        "ARS"
+      ],
+      "name": function(l) { return l.gettext("Argentina"); },
+    },
+    "AS": {
+      "callingCode": [
+        "1684"
+      ],
+      "currency": [
+        "USD"
+      ],
+      "name": function(l) { return l.gettext("American Samoa"); }
+    },
+    "AT": {
+      "callingCode": [
+        "43"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Austria"); }
+    },
+    "AU": {
+      "callingCode": [
+        "61"
+      ],
+      "currency": [
+        "AUD"
+      ],
+      "name": function(l) { return l.gettext("Australia"); }
+    },
+    "AW": {
+      "callingCode": [
+        "297"
+      ],
+      "currency": [
+        "AWG"
+      ],
+      "name": function(l) { return l.gettext("Aruba"); }
+    },
+    "AX": {
+      "callingCode": [
+        "358"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Åland Islands"); }
+    },
+    "AZ": {
+      "callingCode": [
+        "994"
+      ],
+      "currency": [
+        "AZN"
+      ],
+      "name": function(l) { return l.gettext("Azerbaijan"); }
+    },
+    "BA": {
+      "callingCode": [
+        "387"
+      ],
+      "currency": [
+        "BAM"
+      ],
+      "name": function(l) { return l.gettext("Bosnia and Herzegovina"); }
+    },
+    "BB": {
+      "callingCode": [
+        "1246"
+      ],
+      "currency": [
+        "BBD"
+      ],
+      "name": function(l) { return l.gettext("Barbados"); }
+    },
+    "BD": {
+      "callingCode": [
+        "880"
+      ],
+      "currency": [
+        "BDT"
+      ],
+      "name": function(l) { return l.gettext("Bangladesh"); }
+    },
+    "BE": {
+      "callingCode": [
+        "32"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Belgium"); }
+    },
+    "BF": {
+      "callingCode": [
+        "226"
+      ],
+      "currency": [
+        "XOF"
+      ],
+      "name": function(l) { return l.gettext("Burkina Faso"); }
+    },
+    "BG": {
+      "callingCode": [
+        "359"
+      ],
+      "currency": [
+        "BGN"
+      ],
+      "name": function(l) { return l.gettext("Bulgaria"); }
+    },
+    "BH": {
+      "callingCode": [
+        "973"
+      ],
+      "currency": [
+        "BHD"
+      ],
+      "name": function(l) { return l.gettext("Bahrain"); }
+    },
+    "BI": {
+      "callingCode": [
+        "257"
+      ],
+      "currency": [
+        "BIF"
+      ],
+      "name": function(l) { return l.gettext("Burundi"); }
+    },
+    "BJ": {
+      "callingCode": [
+        "229"
+      ],
+      "currency": [
+        "XOF"
+      ],
+      "name": function(l) { return l.gettext("Benin"); }
+    },
+    "BL": {
+      "callingCode": [
+        "590"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Saint Barthélemy"); }
+    },
+    "BM": {
+      "callingCode": [
+        "1441"
+      ],
+      "currency": [
+        "BMD"
+      ],
+      "name": function(l) { return l.gettext("Bermuda"); }
+    },
+    "BN": {
+      "callingCode": [
+        "673"
+      ],
+      "currency": [
+        "BND"
+      ],
+      "name": function(l) { return l.gettext("Brunei"); }
+    },
+    "BO": {
+      "callingCode": [
+        "591"
+      ],
+      "currency": [
+        "BOB",
+        "BOV"
+      ],
+      "name": function(l) { return l.gettext("Bolivia"); }
+    },
+    "BQ": {
+      "callingCode": [
+        "5997"
+      ],
+      "currency": [
+        "USD"
+      ],
+      "name": function(l) { return l.gettext("Bonaire"); }
+    },
+    "BR": {
+      "callingCode": [
+        "55"
+      ],
+      "currency": [
+        "BRL"
+      ],
+      "name": function(l) { return l.gettext("Brazil"); }
+    },
+    "BS": {
+      "callingCode": [
+        "1242"
+      ],
+      "currency": [
+        "BSD"
+      ],
+      "name": function(l) { return l.gettext("Bahamas"); },
+    },
+    "BT": {
+      "callingCode": [
+        "975"
+      ],
+      "currency": [
+        "BTN",
+        "INR"
+      ],
+      "name": function(l) { return l.gettext("Bhutan"); }
+    },
+    "BV": {
+      "currency": [
+        "NOK"
+      ],
+      "name": function(l) { return l.gettext("Bouvet Island"); }
+    },
+    "BW": {
+      "callingCode": [
+        "267"
+      ],
+      "currency": [
+        "BWP"
+      ],
+      "name": function(l) { return l.gettext("Botswana"); }
+    },
+    "BY": {
+      "callingCode": [
+        "375"
+      ],
+      "currency": [
+        "BYR"
+      ],
+      "name": function(l) { return l.gettext("Belarus"); }
+    },
+    "BZ": {
+      "callingCode": [
+        "501"
+      ],
+      "currency": [
+        "BZD"
+      ],
+      "name": function(l) { return l.gettext("Belize"); }
+    },
+    "CA": {
+      "callingCode": [
+        "1"
+      ],
+      "currency": [
+        "CAD"
+      ],
+      "name": function(l) { return l.gettext("Canada"); }
+    },
+    "CC": {
+      "callingCode": [
+        "61"
+      ],
+      "currency": [
+        "AUD"
+      ],
+      "name": function(l) { return l.gettext("Cocos (Keeling) Islands"); }
+    },
+    "CD": {
+      "callingCode": [
+        "243"
+      ],
+      "currency": [
+        "CDF"
+      ],
+      "name": function(l) { return l.gettext("DR Congo"); }
+    },
+    "CF": {
+      "callingCode": [
+        "236"
+      ],
+      "currency": [
+        "XAF"
+      ],
+      "name": function(l) { return l.gettext("Central African Republic"); }
+    },
+    "CG": {
+      "callingCode": [
+        "242"
+      ],
+      "currency": [
+        "XAF"
+      ],
+      "name": function(l) { return l.gettext("Republic of the Congo"); }
+    },
+    "CH": {
+      "callingCode": [
+        "41"
+      ],
+      "currency": [
+        "CHE",
+        "CHF",
+        "CHW"
+      ],
+      "name": function(l) { return l.gettext("Switzerland"); }
+    },
+    "CI": {
+      "callingCode": [
+        "225"
+      ],
+      "currency": [
+        "XOF"
+      ],
+      "name": function(l) { return l.gettext("Ivory Coast"); }
+    },
+    "CK": {
+      "callingCode": [
+        "682"
+      ],
+      "currency": [
+        "NZD"
+      ],
+      "name": function(l) { return l.gettext("Cook Islands"); }
+    },
+    "CL": {
+      "callingCode": [
+        "56"
+      ],
+      "currency": [
+        "CLF",
+        "CLP"
+      ],
+      "name": function(l) { return l.gettext("Chile"); }
+    },
+    "CM": {
+      "callingCode": [
+        "237"
+      ],
+      "currency": [
+        "XAF"
+      ],
+      "name": function(l) { return l.gettext("Cameroon"); }
+    },
+    "CN": {
+      "callingCode": [
+        "86"
+      ],
+      "currency": [
+        "CNY"
+      ],
+      "name": function(l) { return l.gettext("China"); }
+    },
+    "CO": {
+      "callingCode": [
+        "57"
+      ],
+      "currency": [
+        "COP"
+      ],
+      "name": function(l) { return l.gettext("Colombia"); }
+    },
+    "CR": {
+      "callingCode": [
+        "506"
+      ],
+      "currency": [
+        "CRC"
+      ],
+      "name": function(l) { return l.gettext("Costa Rica"); }
+    },
+    "CU": {
+      "callingCode": [
+        "53"
+      ],
+      "currency": [
+        "CUC",
+        "CUP"
+      ],
+      "name": function(l) { return l.gettext("Cuba"); }
+    },
+    "CV": {
+      "callingCode": [
+        "238"
+      ],
+      "currency": [
+        "CVE"
+      ],
+      "name": function(l) { return l.gettext("Cape Verde"); }
+    },
+    "CW": {
+      "callingCode": [
+        "5999"
+      ],
+      "currency": [
+        "ANG"
+      ],
+      "name": function(l) { return l.gettext("Curaçao"); }
+    },
+    "CX": {
+      "callingCode": [
+        "61"
+      ],
+      "currency": [
+        "AUD"
+      ],
+      "name": function(l) { return l.gettext("Christmas Island"); }
+    },
+    "CY": {
+      "callingCode": [
+        "357"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Cyprus"); }
+    },
+    "CZ": {
+      "callingCode": [
+        "420"
+      ],
+      "currency": [
+        "CZK"
+      ],
+      "name": function(l) { return l.gettext("Czech Republic"); }
+    },
+    "DE": {
+      "callingCode": [
+        "49"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Germany"); }
+    },
+    "DJ": {
+      "callingCode": [
+        "253"
+      ],
+      "currency": [
+        "DJF"
+      ],
+      "name": function(l) { return l.gettext("Djibouti"); }
+    },
+    "DK": {
+      "callingCode": [
+        "45"
+      ],
+      "currency": [
+        "DKK"
+      ],
+      "name": function(l) { return l.gettext("Denmark"); }
+    },
+    "DM": {
+      "callingCode": [
+        "1767"
+      ],
+      "currency": [
+        "XCD"
+      ],
+      "name": function(l) { return l.gettext("Dominica"); }
+    },
+    "DO": {
+      "callingCode": [
+        "1809",
+        "1829",
+        "1849"
+      ],
+      "currency": [
+        "DOP"
+      ],
+      "name": function(l) { return l.gettext("Dominican Republic"); }
+    },
+    "DZ": {
+      "callingCode": [
+        "213"
+      ],
+      "currency": [
+        "DZD"
+      ],
+      "name": function(l) { return l.gettext("Algeria"); }
+    },
+    "EC": {
+      "callingCode": [
+        "593"
+      ],
+      "currency": [
+        "USD"
+      ],
+      "name": function(l) { return l.gettext("Ecuador"); }
+    },
+    "EE": {
+      "callingCode": [
+        "372"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Estonia"); }
+    },
+    "EG": {
+      "callingCode": [
+        "20"
+      ],
+      "currency": [
+        "EGP"
+      ],
+      "name": function(l) { return l.gettext("Egypt"); }
+    },
+    "EH": {
+      "callingCode": [
+        "212"
+      ],
+      "currency": [
+        "MAD",
+        "DZD",
+        "MRO"
+      ],
+      "name": function(l) { return l.gettext("Western Sahara"); }
+    },
+    "ER": {
+      "callingCode": [
+        "291"
+      ],
+      "currency": [
+        "ERN"
+      ],
+      "name": function(l) { return l.gettext("Eritrea"); }
+    },
+    "ES": {
+      "callingCode": [
+        "34"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Spain"); }
+    },
+    "ET": {
+      "callingCode": [
+        "251"
+      ],
+      "currency": [
+        "ETB"
+      ],
+      "name": function(l) { return l.gettext("Ethiopia"); }
+    },
+    "FI": {
+      "callingCode": [
+        "358"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Finland"); }
+    },
+    "FJ": {
+      "callingCode": [
+        "679"
+      ],
+      "currency": [
+        "FJD"
+      ],
+      "name": function(l) { return l.gettext("Fiji"); }
+    },
+    "FK": {
+      "callingCode": [
+        "500"
+      ],
+      "currency": [
+        "FKP"
+      ],
+      "name": function(l) { return l.gettext("Falkland Islands"); }
+    },
+    "FM": {
+      "callingCode": [
+        "691"
+      ],
+      "currency": [
+        "USD"
+      ],
+      "name": function(l) { return l.gettext("Micronesia"); }
+    },
+    "FO": {
+      "callingCode": [
+        "298"
+      ],
+      "currency": [
+        "DKK"
+      ],
+      "name": function(l) { return l.gettext("Faroe Islands"); }
+    },
+    "FR": {
+      "callingCode": [
+        "33"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("France"); }
+    },
+    "GA": {
+      "callingCode": [
+        "241"
+      ],
+      "currency": [
+        "XAF"
+      ],
+      "name": function(l) { return l.gettext("Gabon"); }
+    },
+    "GB": {
+      "callingCode": [
+        "44"
+      ],
+      "currency": [
+        "GBP"
+      ],
+      "name": function(l) { return l.gettext("United Kingdom"); }
+    },
+    "GD": {
+      "callingCode": [
+        "1473"
+      ],
+      "currency": [
+        "XCD"
+      ],
+      "name": function(l) { return l.gettext("Grenada"); }
+    },
+    "GE": {
+      "callingCode": [
+        "995"
+      ],
+      "currency": [
+        "GEL"
+      ],
+      "name": function(l) { return l.gettext("Georgia"); }
+    },
+    "GF": {
+      "callingCode": [
+        "594"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("French Guiana"); }
+    },
+    "GG": {
+      "callingCode": [
+        "44"
+      ],
+      "currency": [
+        "GBP"
+      ],
+      "name": function(l) { return l.gettext("Guernsey"); }
+    },
+    "GH": {
+      "callingCode": [
+        "233"
+      ],
+      "currency": [
+        "GHS"
+      ],
+      "name": function(l) { return l.gettext("Ghana"); }
+    },
+    "GI": {
+      "callingCode": [
+        "350"
+      ],
+      "currency": [
+        "GIP"
+      ],
+      "name": function(l) { return l.gettext("Gibraltar"); }
+    },
+    "GL": {
+      "callingCode": [
+        "299"
+      ],
+      "currency": [
+        "DKK"
+      ],
+      "name": function(l) { return l.gettext("Greenland"); }
+    },
+    "GM": {
+      "callingCode": [
+        "220"
+      ],
+      "currency": [
+        "GMD"
+      ],
+      "name": function(l) { return l.gettext("Gambia"); }
+    },
+    "GN": {
+      "callingCode": [
+        "224"
+      ],
+      "currency": [
+        "GNF"
+      ],
+      "name": function(l) { return l.gettext("Guinea"); }
+    },
+    "GP": {
+      "callingCode": [
+        "590"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Guadeloupe"); }
+    },
+    "GQ": {
+      "callingCode": [
+        "240"
+      ],
+      "currency": [
+        "XAF"
+      ],
+      "name": function(l) { return l.gettext("Equatorial Guinea"); }
+    },
+    "GR": {
+      "callingCode": [
+        "30"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Greece"); }
+    },
+    "GS": {
+      "callingCode": [
+        "500"
+      ],
+      "currency": [
+        "GBP"
+      ],
+      "name": function(l) { return l.gettext("South Georgia"); }
+    },
+    "GT": {
+      "callingCode": [
+        "502"
+      ],
+      "currency": [
+        "GTQ"
+      ],
+      "name": function(l) { return l.gettext("Guatemala"); }
+    },
+    "GU": {
+      "callingCode": [
+        "1671"
+      ],
+      "currency": [
+        "USD"
+      ],
+      "name": function(l) { return l.gettext("Guam"); }
+    },
+    "GW": {
+      "callingCode": [
+        "245"
+      ],
+      "currency": [
+        "XOF"
+      ],
+      "name": function(l) { return l.gettext("Guinea-Bissau"); }
+    },
+    "GY": {
+      "callingCode": [
+        "592"
+      ],
+      "currency": [
+        "GYD"
+      ],
+      "name": function(l) { return l.gettext("Guyana"); }
+    },
+    "HK": {
+      "callingCode": [
+        "852"
+      ],
+      "currency": [
+        "HKD"
+      ],
+      "name": function(l) { return l.gettext("Hong Kong"); }
+    },
+    "HM": {
+      "currency": [
+        "AUD"
+      ],
+      "name": function(l) { return l.gettext("Heard Island and McDonald Islands"); }
+    },
+    "HN": {
+      "callingCode": [
+        "504"
+      ],
+      "currency": [
+        "HNL"
+      ],
+      "name": function(l) { return l.gettext("Honduras"); }
+    },
+    "HR": {
+      "callingCode": [
+        "385"
+      ],
+      "currency": [
+        "HRK"
+      ],
+      "name": function(l) { return l.gettext("Croatia"); }
+    },
+    "HT": {
+      "callingCode": [
+        "509"
+      ],
+      "currency": [
+        "HTG",
+        "USD"
+      ],
+      "name": function(l) { return l.gettext("Haiti"); }
+    },
+    "HU": {
+      "callingCode": [
+        "36"
+      ],
+      "currency": [
+        "HUF"
+      ],
+      "name": function(l) { return l.gettext("Hungary"); }
+    },
+    "ID": {
+      "callingCode": [
+        "62"
+      ],
+      "currency": [
+        "IDR"
+      ],
+      "name": function(l) { return l.gettext("Indonesia"); }
+    },
+    "IE": {
+      "callingCode": [
+        "353"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Ireland"); }
+    },
+    "IL": {
+      "callingCode": [
+        "972"
+      ],
+      "currency": [
+        "ILS"
+      ],
+      "name": function(l) { return l.gettext("Israel"); }
+    },
+    "IM": {
+      "callingCode": [
+        "44"
+      ],
+      "currency": [
+        "GBP"
+      ],
+      "name": function(l) { return l.gettext("Isle of Man"); }
+    },
+    "IN": {
+      "callingCode": [
+        "91"
+      ],
+      "currency": [
+        "INR"
+      ],
+      "name": function(l) { return l.gettext("India"); }
+    },
+    "IO": {
+      "callingCode": [
+        "246"
+      ],
+      "currency": [
+        "USD"
+      ],
+      "name": function(l) { return l.gettext("British Indian Ocean Territory"); }
+    },
+    "IQ": {
+      "callingCode": [
+        "964"
+      ],
+      "currency": [
+        "IQD"
+      ],
+      "name": function(l) { return l.gettext("Iraq"); }
+    },
+    "IR": {
+      "callingCode": [
+        "98"
+      ],
+      "currency": [
+        "IRR"
+      ],
+      "name": function(l) { return l.gettext("Iran"); }
+    },
+    "IS": {
+      "callingCode": [
+        "354"
+      ],
+      "currency": [
+        "ISK"
+      ],
+      "name": function(l) { return l.gettext("Iceland"); }
+    },
+    "IT": {
+      "callingCode": [
+        "39"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Italy"); }
+    },
+    "JE": {
+      "callingCode": [
+        "44"
+      ],
+      "currency": [
+        "GBP"
+      ],
+      "name": function(l) { return l.gettext("Jersey"); }
+    },
+    "JM": {
+      "callingCode": [
+        "1876"
+      ],
+      "currency": [
+        "JMD"
+      ],
+      "name": function(l) { return l.gettext("Jamaica"); }
+    },
+    "JO": {
+      "callingCode": [
+        "962"
+      ],
+      "currency": [
+        "JOD"
+      ],
+      "name": function(l) { return l.gettext("Jordan"); }
+    },
+    "JP": {
+      "callingCode": [
+        "81"
+      ],
+      "currency": [
+        "JPY"
+      ],
+      "name": function(l) { return l.gettext("Japan"); }
+    },
+    "KE": {
+      "callingCode": [
+        "254"
+      ],
+      "currency": [
+        "KES"
+      ],
+      "name": function(l) { return l.gettext("Kenya"); }
+    },
+    "KG": {
+      "callingCode": [
+        "996"
+      ],
+      "currency": [
+        "KGS"
+      ],
+      "name": function(l) { return l.gettext("Kyrgyzstan"); }
+    },
+    "KH": {
+      "callingCode": [
+        "855"
+      ],
+      "currency": [
+        "KHR"
+      ],
+      "name": function(l) { return l.gettext("Cambodia"); }
+    },
+    "KI": {
+      "callingCode": [
+        "686"
+      ],
+      "currency": [
+        "AUD"
+      ],
+      "name": function(l) { return l.gettext("Kiribati"); }
+    },
+    "KM": {
+      "callingCode": [
+        "269"
+      ],
+      "currency": [
+        "KMF"
+      ],
+      "name": function(l) { return l.gettext("Comoros"); }
+    },
+    "KN": {
+      "callingCode": [
+        "1869"
+      ],
+      "currency": [
+        "XCD"
+      ],
+      "name": function(l) { return l.gettext("Saint Kitts and Nevis"); },
+    },
+    "KP": {
+      "callingCode": [
+        "850"
+      ],
+      "currency": [
+        "KPW"
+      ],
+      "name": function(l) { return l.gettext("North Korea"); },
+    },
+    "KR": {
+      "callingCode": [
+        "82"
+      ],
+      "currency": [
+        "KRW"
+      ],
+      "name": function(l) { return l.gettext("South Korea"); }
+    },
+    "KW": {
+      "callingCode": [
+        "965"
+      ],
+      "currency": [
+        "KWD"
+      ],
+      "name": function(l) { return l.gettext("Kuwait"); }
+    },
+    "KY": {
+      "callingCode": [
+        "1345"
+      ],
+      "currency": [
+        "KYD"
+      ],
+      "name": function(l) { return l.gettext("Cayman Islands"); }
+    },
+    "KZ": {
+      "callingCode": [
+        "76",
+        "77"
+      ],
+      "currency": [
+        "KZT"
+      ],
+      "name": function(l) { return l.gettext("Kazakhstan"); }
+    },
+    "LA": {
+      "callingCode": [
+        "856"
+      ],
+      "currency": [
+        "LAK"
+      ],
+      "name": function(l) { return l.gettext("Laos"); }
+    },
+    "LB": {
+      "callingCode": [
+        "961"
+      ],
+      "currency": [
+        "LBP"
+      ],
+      "name": function(l) { return l.gettext("Lebanon"); }
+    },
+    "LC": {
+      "callingCode": [
+        "1758"
+      ],
+      "currency": [
+        "XCD"
+      ],
+      "name": function(l) { return l.gettext("Saint Lucia"); }
+    },
+    "LI": {
+      "callingCode": [
+        "423"
+      ],
+      "currency": [
+        "CHF"
+      ],
+      "name": function(l) { return l.gettext("Liechtenstein"); }
+    },
+    "LK": {
+      "callingCode": [
+        "94"
+      ],
+      "currency": [
+        "LKR"
+      ],
+      "name": function(l) { return l.gettext("Sri Lanka"); }
+    },
+    "LR": {
+      "callingCode": [
+        "231"
+      ],
+      "currency": [
+        "LRD"
+      ],
+      "name": function(l) { return l.gettext("Liberia"); }
+    },
+    "LS": {
+      "callingCode": [
+        "266"
+      ],
+      "currency": [
+        "LSL",
+        "ZAR"
+      ],
+      "name": function(l) { return l.gettext("Lesotho"); }
+    },
+    "LT": {
+      "callingCode": [
+        "370"
+      ],
+      "currency": [
+        "LTL"
+      ],
+      "name": function(l) { return l.gettext("Lithuania"); }
+    },
+    "LU": {
+      "callingCode": [
+        "352"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Luxembourg"); }
+    },
+    "LV": {
+      "callingCode": [
+        "371"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Latvia"); }
+    },
+    "LY": {
+      "callingCode": [
+        "218"
+      ],
+      "currency": [
+        "LYD"
+      ],
+      "name": function(l) { return l.gettext("Libya"); }
+    },
+    "MA": {
+      "callingCode": [
+        "212"
+      ],
+      "currency": [
+        "MAD"
+      ],
+      "name": function(l) { return l.gettext("Morocco"); }
+    },
+    "MC": {
+      "callingCode": [
+        "377"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Monaco"); }
+    },
+    "MD": {
+      "callingCode": [
+        "373"
+      ],
+      "currency": [
+        "MDL"
+      ],
+      "name": function(l) { return l.gettext("Moldova"); }
+    },
+    "ME": {
+      "callingCode": [
+        "382"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Montenegro"); }
+    },
+    "MF": {
+      "callingCode": [
+        "590"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Saint Martin"); }
+    },
+    "MG": {
+      "callingCode": [
+        "261"
+      ],
+      "currency": [
+        "MGA"
+      ],
+      "name": function(l) { return l.gettext("Madagascar"); }
+    },
+    "MH": {
+      "callingCode": [
+        "692"
+      ],
+      "currency": [
+        "USD"
+      ],
+      "name": function(l) { return l.gettext("Marshall Islands"); }
+    },
+    "MK": {
+      "callingCode": [
+        "389"
+      ],
+      "currency": [
+        "MKD"
+      ],
+      "name": function(l) { return l.gettext("Macedonia"); }
+    },
+    "ML": {
+      "callingCode": [
+        "223"
+      ],
+      "currency": [
+        "XOF"
+      ],
+      "name": function(l) { return l.gettext("Mali"); }
+    },
+    "MM": {
+      "callingCode": [
+        "95"
+      ],
+      "currency": [
+        "MMK"
+      ],
+      "name": function(l) { return l.gettext("Myanmar"); }
+    },
+    "MN": {
+      "callingCode": [
+        "976"
+      ],
+      "currency": [
+        "MNT"
+      ],
+      "name": function(l) { return l.gettext("Mongolia"); }
+    },
+    "MO": {
+      "callingCode": [
+        "853"
+      ],
+      "currency": [
+        "MOP"
+      ],
+      "name": function(l) { return l.gettext("Macau"); }
+    },
+    "MP": {
+      "callingCode": [
+        "1670"
+      ],
+      "currency": [
+        "USD"
+      ],
+      "name": function(l) { return l.gettext("Northern Mariana Islands"); }
+    },
+    "MQ": {
+      "callingCode": [
+        "596"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Martinique"); }
+    },
+    "MR": {
+      "callingCode": [
+        "222"
+      ],
+      "currency": [
+        "MRO"
+      ],
+      "name": function(l) { return l.gettext("Mauritania"); }
+    },
+    "MS": {
+      "callingCode": [
+        "1664"
+      ],
+      "currency": [
+        "XCD"
+      ],
+      "name": function(l) { return l.gettext("Montserrat"); }
+    },
+    "MT": {
+      "callingCode": [
+        "356"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Malta"); }
+    },
+    "MU": {
+      "callingCode": [
+        "230"
+      ],
+      "currency": [
+        "MUR"
+      ],
+      "name": function(l) { return l.gettext("Mauritius"); }
+    },
+    "MV": {
+      "callingCode": [
+        "960"
+      ],
+      "currency": [
+        "MVR"
+      ],
+      "name": function(l) { return l.gettext("Maldives"); }
+    },
+    "MW": {
+      "callingCode": [
+        "265"
+      ],
+      "currency": [
+        "MWK"
+      ],
+      "name": function(l) { return l.gettext("Malawi"); }
+    },
+    "MX": {
+      "callingCode": [
+        "52"
+      ],
+      "currency": [
+        "MXN"
+      ],
+      "name": function(l) { return l.gettext("Mexico"); }
+    },
+    "MY": {
+      "callingCode": [
+        "60"
+      ],
+      "currency": [
+        "MYR"
+      ],
+      "name": function(l) { return l.gettext("Malaysia"); }
+    },
+    "MZ": {
+      "callingCode": [
+        "258"
+      ],
+      "currency": [
+        "MZN"
+      ],
+      "name": function(l) { return l.gettext("Mozambique"); }
+    },
+    "NA": {
+      "callingCode": [
+        "264"
+      ],
+      "currency": [
+        "NAD",
+        "ZAR"
+      ],
+      "name": function(l) { return l.gettext("Namibia"); }
+    },
+    "NC": {
+      "callingCode": [
+        "687"
+      ],
+      "currency": [
+        "XPF"
+      ],
+      "name": function(l) { return l.gettext("New Caledonia"); }
+    },
+    "NE": {
+      "callingCode": [
+        "227"
+      ],
+      "currency": [
+        "XOF"
+      ],
+      "name": function(l) { return l.gettext("Niger"); }
+    },
+    "NF": {
+      "callingCode": [
+        "672"
+      ],
+      "currency": [
+        "AUD"
+      ],
+      "name": function(l) { return l.gettext("Norfolk Island"); }
+    },
+    "NG": {
+      "callingCode": [
+        "234"
+      ],
+      "currency": [
+        "NGN"
+      ],
+      "name": function(l) { return l.gettext("Nigeria"); }
+    },
+    "NI": {
+      "callingCode": [
+        "505"
+      ],
+      "currency": [
+        "NIO"
+      ],
+      "name": function(l) { return l.gettext("Nicaragua"); }
+    },
+    "NL": {
+      "callingCode": [
+        "31"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Netherlands"); }
+    },
+    "NO": {
+      "callingCode": [
+        "47"
+      ],
+      "currency": [
+        "NOK"
+      ],
+      "name": function(l) { return l.gettext("Norway"); }
+    },
+    "NP": {
+      "callingCode": [
+        "977"
+      ],
+      "currency": [
+        "NPR"
+      ],
+      "name": function(l) { return l.gettext("Nepal"); }
+    },
+    "NR": {
+      "callingCode": [
+        "674"
+      ],
+      "currency": [
+        "AUD"
+      ],
+      "name": function(l) { return l.gettext("Nauru"); }
+    },
+    "NU": {
+      "callingCode": [
+        "683"
+      ],
+      "currency": [
+        "NZD"
+      ],
+      "name": function(l) { return l.gettext("Niue"); }
+    },
+    "NZ": {
+      "callingCode": [
+        "64"
+      ],
+      "currency": [
+        "NZD"
+      ],
+      "name": function(l) { return l.gettext("New Zealand"); }
+    },
+    "OM": {
+      "callingCode": [
+        "968"
+      ],
+      "currency": [
+        "OMR"
+      ],
+      "name": function(l) { return l.gettext("Oman"); }
+    },
+    "PA": {
+      "callingCode": [
+        "507"
+      ],
+      "currency": [
+        "PAB",
+        "USD"
+      ],
+      "name": function(l) { return l.gettext("Panama"); }
+    },
+    "PE": {
+      "callingCode": [
+        "51"
+      ],
+      "currency": [
+        "PEN"
+      ],
+      "name": function(l) { return l.gettext("Peru"); }
+    },
+    "PF": {
+      "callingCode": [
+        "689"
+      ],
+      "currency": [
+        "XPF"
+      ],
+      "name": function(l) { return l.gettext("French Polynesia"); }
+    },
+    "PG": {
+      "callingCode": [
+        "675"
+      ],
+      "currency": [
+        "PGK"
+      ],
+      "name": function(l) { return l.gettext("Papua New Guinea"); }
+    },
+    "PH": {
+      "callingCode": [
+        "63"
+      ],
+      "currency": [
+        "PHP"
+      ],
+      "name": function(l) { return l.gettext("Philippines"); }
+    },
+    "PK": {
+      "callingCode": [
+        "92"
+      ],
+      "currency": [
+        "PKR"
+      ],
+      "name": function(l) { return l.gettext("Pakistan"); }
+    },
+    "PL": {
+      "callingCode": [
+        "48"
+      ],
+      "currency": [
+        "PLN"
+      ],
+      "name": function(l) { return l.gettext("Poland"); }
+    },
+    "PM": {
+      "callingCode": [
+        "508"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Saint Pierre and Miquelon"); }
+    },
+    "PN": {
+      "callingCode": [
+        "64"
+      ],
+      "currency": [
+        "NZD"
+      ],
+      "name": function(l) { return l.gettext("Pitcairn Islands"); }
+    },
+    "PR": {
+      "callingCode": [
+        "1787",
+        "1939"
+      ],
+      "currency": [
+        "USD"
+      ],
+      "name": function(l) { return l.gettext("Puerto Rico"); }
+    },
+    "PS": {
+      "callingCode": [
+        "970"
+      ],
+      "currency": [
+        "ILS"
+      ],
+      "name": function(l) { return l.gettext("Palestine"); }
+    },
+    "PT": {
+      "callingCode": [
+        "351"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Portugal"); }
+    },
+    "PW": {
+      "callingCode": [
+        "680"
+      ],
+      "currency": [
+        "USD"
+      ],
+      "name": function(l) { return l.gettext("Palau"); }
+    },
+    "PY": {
+      "callingCode": [
+        "595"
+      ],
+      "currency": [
+        "PYG"
+      ],
+      "name": function(l) { return l.gettext("Paraguay"); }
+    },
+    "QA": {
+      "callingCode": [
+        "974"
+      ],
+      "currency": [
+        "QAR"
+      ],
+      "name": function(l) { return l.gettext("Qatar"); }
+    },
+    "RE": {
+      "callingCode": [
+        "262"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Réunion"); }
+    },
+    "RO": {
+      "callingCode": [
+        "40"
+      ],
+      "currency": [
+        "RON"
+      ],
+      "name": function(l) { return l.gettext("Romania"); }
+    },
+    "RS": {
+      "callingCode": [
+        "381"
+      ],
+      "currency": [
+        "RSD"
+      ],
+      "name": function(l) { return l.gettext("Serbia"); }
+    },
+    "RU": {
+      "callingCode": [
+        "7"
+      ],
+      "currency": [
+        "RUB"
+      ],
+      "name": function(l) { return l.gettext("Russia"); }
+    },
+    "RW": {
+      "callingCode": [
+        "250"
+      ],
+      "currency": [
+        "RWF"
+      ],
+      "name": function(l) { return l.gettext("Rwanda"); }
+    },
+    "SA": {
+      "callingCode": [
+        "966"
+      ],
+      "currency": [
+        "SAR"
+      ],
+      "name": function(l) { return l.gettext("Saudi Arabia"); }
+    },
+    "SB": {
+      "callingCode": [
+        "677"
+      ],
+      "currency": [
+        "SDB"
+      ],
+      "name": function(l) { return l.gettext("Solomon Islands"); }
+    },
+    "SC": {
+      "callingCode": [
+        "248"
+      ],
+      "currency": [
+        "SCR"
+      ],
+      "name": function(l) { return l.gettext("Seychelles"); }
+    },
+    "SD": {
+      "callingCode": [
+        "249"
+      ],
+      "currency": [
+        "SDG"
+      ],
+      "name": function(l) { return l.gettext("Sudan"); }
+    },
+    "SE": {
+      "callingCode": [
+        "46"
+      ],
+      "currency": [
+        "SEK"
+      ],
+      "name": function(l) { return l.gettext("Sweden"); }
+    },
+    "SG": {
+      "callingCode": [
+        "65"
+      ],
+      "currency": [
+        "SGD"
+      ],
+      "name": function(l) { return l.gettext("Singapore"); }
+    },
+    "SH": {
+      "callingCode": [
+        "290"
+      ],
+      "currency": [
+        "SHP"
+      ],
+      "name": function(l) { return l.gettext("Saint Helena, Ascension and Tristan da Cunha"); }
+    },
+    "SI": {
+      "callingCode": [
+        "386"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Slovenia"); }
+    },
+    "SJ": {
+      "callingCode": [
+        "4779"
+      ],
+      "currency": [
+        "NOK"
+      ],
+      "name": function(l) { return l.gettext("Svalbard and Jan Mayen"); }
+    },
+    "SK": {
+      "callingCode": [
+        "421"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Slovakia"); }
+    },
+    "SL": {
+      "callingCode": [
+        "232"
+      ],
+      "currency": [
+        "SLL"
+      ],
+      "name": function(l) { return l.gettext("Sierra Leone"); }
+    },
+    "SM": {
+      "callingCode": [
+        "378"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("San Marino"); }
+    },
+    "SN": {
+      "callingCode": [
+        "221"
+      ],
+      "currency": [
+        "XOF"
+      ],
+      "name": function(l) { return l.gettext("Senegal"); }
+    },
+    "SO": {
+      "callingCode": [
+        "252"
+      ],
+      "currency": [
+        "SOS"
+      ],
+      "name": function(l) { return l.gettext("Somalia"); }
+    },
+    "SR": {
+      "callingCode": [
+        "597"
+      ],
+      "currency": [
+        "SRD"
+      ],
+      "name": function(l) { return l.gettext("Suriname"); }
+    },
+    "SS": {
+      "callingCode": [
+        "211"
+      ],
+      "currency": [
+        "SSP"
+      ],
+      "name": function(l) { return l.gettext("South Sudan"); }
+    },
+    "ST": {
+      "callingCode": [
+        "239"
+      ],
+      "currency": [
+        "STD"
+      ],
+      "name": function(l) { return l.gettext("São Tomé and Príncipe"); }
+    },
+    "SV": {
+      "callingCode": [
+        "503"
+      ],
+      "currency": [
+        "SVC",
+        "USD"
+      ],
+      "name": function(l) { return l.gettext("El Salvador"); }
+    },
+    "SX": {
+      "callingCode": [
+        "1721"
+      ],
+      "currency": [
+        "ANG"
+      ],
+      "name": function(l) { return l.gettext("Sint Maarten"); }
+    },
+    "SY": {
+      "callingCode": [
+        "963"
+      ],
+      "currency": [
+        "SYP"
+      ],
+      "name": function(l) { return l.gettext("Syria"); }
+    },
+    "SZ": {
+      "callingCode": [
+        "268"
+      ],
+      "currency": [
+        "SZL"
+      ],
+      "name": function(l) { return l.gettext("Swaziland"); }
+    },
+    "TC": {
+      "callingCode": [
+        "1649"
+      ],
+      "currency": [
+        "USD"
+      ],
+      "name": function(l) { return l.gettext("Turks and Caicos Islands"); }
+    },
+    "TD": {
+      "callingCode": [
+        "235"
+      ],
+      "currency": [
+        "XAF"
+      ],
+      "name": function(l) { return l.gettext("Chad"); }
+    },
+    "TF": {
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("French Southern and Antarctic Lands"); }
+    },
+    "TG": {
+      "callingCode": [
+        "228"
+      ],
+      "currency": [
+        "XOF"
+      ],
+      "name": function(l) { return l.gettext("Togo"); }
+    },
+    "TH": {
+      "callingCode": [
+        "66"
+      ],
+      "currency": [
+        "THB"
+      ],
+      "name": function(l) { return l.gettext("Thailand"); }
+    },
+    "TJ": {
+      "callingCode": [
+        "992"
+      ],
+      "currency": [
+        "TJS"
+      ],
+      "name": function(l) { return l.gettext("Tajikistan"); }
+    },
+    "TK": {
+      "callingCode": [
+        "690"
+      ],
+      "currency": [
+        "NZD"
+      ],
+      "name": function(l) { return l.gettext("Tokelau"); }
+    },
+    "TL": {
+      "callingCode": [
+        "670"
+      ],
+      "currency": [
+        "USD"
+      ],
+      "name": function(l) { return l.gettext("Timor-Leste"); }
+    },
+    "TM": {
+      "callingCode": [
+        "993"
+      ],
+      "currency": [
+        "TMT"
+      ],
+      "name": function(l) { return l.gettext("Turkmenistan"); }
+    },
+    "TN": {
+      "callingCode": [
+        "216"
+      ],
+      "currency": [
+        "TND"
+      ],
+      "name": function(l) { return l.gettext("Tunisia"); }
+    },
+    "TO": {
+      "callingCode": [
+        "676"
+      ],
+      "currency": [
+        "TOP"
+      ],
+      "name": function(l) { return l.gettext("Tonga"); }
+    },
+    "TR": {
+      "callingCode": [
+        "90"
+      ],
+      "currency": [
+        "TRY"
+      ],
+      "name": function(l) { return l.gettext("Turkey"); }
+    },
+    "TT": {
+      "callingCode": [
+        "1868"
+      ],
+      "currency": [
+        "TTD"
+      ],
+      "name": function(l) { return l.gettext("Trinidad and Tobago"); }
+    },
+    "TV": {
+      "callingCode": [
+        "688"
+      ],
+      "currency": [
+        "AUD"
+      ],
+      "name": function(l) { return l.gettext("Tuvalu"); }
+    },
+    "TW": {
+      "callingCode": [
+        "886"
+      ],
+      "currency": [
+        "TWD"
+      ],
+      "name": function(l) { return l.gettext("Taiwan"); }
+    },
+    "TZ": {
+      "callingCode": [
+        "255"
+      ],
+      "currency": [
+        "TZS"
+      ],
+      "name": function(l) { return l.gettext("Tanzania"); }
+    },
+    "UA": {
+      "callingCode": [
+        "380"
+      ],
+      "currency": [
+        "UAH"
+      ],
+      "name": function(l) { return l.gettext("Ukraine"); }
+    },
+    "UG": {
+      "callingCode": [
+        "256"
+      ],
+      "currency": [
+        "UGX"
+      ],
+      "name": function(l) { return l.gettext("Uganda"); }
+    },
+    "UM": {
+      "currency": [
+        "USD"
+      ],
+      "name": function(l) { return l.gettext("United States Minor Outlying Islands"); }
+    },
+    "US": {
+      "callingCode": [
+        "1"
+      ],
+      "currency": [
+        "USD",
+        "USN",
+        "USS"
+      ],
+      "name": function(l) { return l.gettext("United States"); }
+    },
+    "UY": {
+      "callingCode": [
+        "598"
+      ],
+      "currency": [
+        "UYI",
+        "UYU"
+      ],
+      "name": function(l) { return l.gettext("Uruguay"); }
+    },
+    "UZ": {
+      "callingCode": [
+        "998"
+      ],
+      "currency": [
+        "UZS"
+      ],
+      "name": function(l) { return l.gettext("Uzbekistan"); }
+    },
+    "VA": {
+      "callingCode": [
+        "3906698",
+        "379"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Vatican City"); }
+    },
+    "VC": {
+      "callingCode": [
+        "1784"
+      ],
+      "currency": [
+        "XCD"
+      ],
+      "name": function(l) { return l.gettext("Saint Vincent and the Grenadines"); }
+    },
+    "VE": {
+      "callingCode": [
+        "58"
+      ],
+      "currency": [
+        "VEF"
+      ],
+      "name": function(l) { return l.gettext("Venezuela"); }
+    },
+    "VG": {
+      "callingCode": [
+        "1284"
+      ],
+      "currency": [
+        "USD"
+      ],
+      "name": function(l) { return l.gettext("British Virgin Islands"); }
+    },
+    "VI": {
+      "callingCode": [
+        "1340"
+      ],
+      "currency": [
+        "USD"
+      ],
+      "name": function(l) { return l.gettext("United States Virgin Islands"); }
+    },
+    "VN": {
+      "callingCode": [
+        "84"
+      ],
+      "currency": [
+        "VND"
+      ],
+      "name": function(l) { return l.gettext("Vietnam"); }
+    },
+    "VU": {
+      "callingCode": [
+        "678"
+      ],
+      "currency": [
+        "VUV"
+      ],
+      "name": function(l) { return l.gettext("Vanuatu"); }
+    },
+    "WF": {
+      "callingCode": [
+        "681"
+      ],
+      "currency": [
+        "XPF"
+      ],
+      "name": function(l) { return l.gettext("Wallis and Futuna"); }
+    },
+    "WS": {
+      "callingCode": [
+        "685"
+      ],
+      "currency": [
+        "WST"
+      ],
+      "name": function(l) { return l.gettext("Samoa"); }
+    },
+    "XK": {
+      "callingCode": [
+        "377",
+        "381",
+        "386"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Kosovo"); }
+    },
+    "YE": {
+      "callingCode": [
+        "967"
+      ],
+      "currency": [
+        "YER"
+      ],
+      "name": function(l) { return l.gettext("Yemen"); }
+    },
+    "YT": {
+      "callingCode": [
+        "262"
+      ],
+      "currency": [
+        "EUR"
+      ],
+      "name": function(l) { return l.gettext("Mayotte"); }
+    },
+    "ZA": {
+      "callingCode": [
+        "27"
+      ],
+      "currency": [
+        "ZAR"
+      ],
+      "name": function(l) { return l.gettext("South Africa"); }
+    },
+    "ZM": {
+      "callingCode": [
+        "260"
+      ],
+      "currency": [
+        "ZMK"
+      ],
+      "name": function(l) { return l.gettext("Zambia"); }
+    },
+    "ZW": {
+      "callingCode": [
+        "263"
+      ],
+      "currency": [
+        "ZWL"
+      ],
+      "name": function(l) { return l.gettext("Zimbabwe"); }
+    }
+}

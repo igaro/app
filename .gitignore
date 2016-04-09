@@ -1,11 +1,9 @@
 .*
 *.sublime-workspace
 *.sublime-project
-output
 *~
-phonegap/platforms
-build/
-.staging
+target/
+tmp/
 *.swp
 *.bak
 *.log
@@ -13,5 +11,4 @@ build/
 node_modules
 tests/reports/
 tests/output/
-bin/
 lib/

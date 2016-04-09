@@ -1,0 +1,192 @@
+@import "../sass-global/mixins.scss";
+
+body >.core-router >.main {
+
+    height:100%;
+
+    .route {
+        height:100%;
+        >.wrapper {
+            height:100%;
+        }
+    }
+
+    >.wrapper {
+        >.header {
+            text-align:center;
+            @include pagepadding;
+            padding-left:0;
+            padding-right:0;
+            background:#fff;
+            border-bottom: 1px solid #dadadf;
+            @media (min-width:650px) {
+                font-size:150%;
+            }
+        }
+
+        >.main {
+
+            @include layoutStandard;
+
+            >section {
+
+               &.first {
+                    background: inline-image("route.main/version.svg") no-repeat 97.5% 85%;
+                    background-size:27%;
+                    @media (max-width:1300px) {
+                        background:none;
+                    }
+                }
+
+                >h1 {
+                    margin-left: 10%;
+                    margin-bottom:0.3em;
+                    font-size:270%;
+                    font-weight:200;
+                    @media (max-width: 440px) {
+                        margin-left:0;
+                    }
+                }
+                >p {
+                    margin:0;
+                }
+                &:not(:last-child) {
+                    border-bottom: 1px solid #eee;
+                    @include spacingbottom;
+                }
+                >.instance-list >ol {
+                    @include pagemenu;
+
+                    >.install {
+                        >a:after {
+                            background: inline-image("route.main/install.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.bless {
+                        >a:after {
+                            background: inline-image("route.main/bless.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.testing {
+                        >a:after {
+                            background: inline-image("route.main/testing.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.features {
+                        >a:after {
+                            background: inline-image("route.main/features.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.security {
+                        >a:after {
+                            background: inline-image("route.main/security.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.compat {
+                        >a:after {
+                            background: inline-image("route.main/compat.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.events {
+                        >a:after {
+                            background: inline-image("route.main/events.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.overview {
+                        >a:after {
+                            background: inline-image("route.main/overview.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.routes {
+                        >a:after {
+                            background: inline-image("route.main/routes.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.showcase {
+                        >a:after {
+                            background: inline-image("route.main/showcase.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.forum {
+                        >a:after {
+                            background: inline-image("route.main/forum.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.contact {
+                        >a:after {
+                            background: inline-image("route.main/contact.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.report {
+                        >a:after {
+                            background: inline-image("route.main/report.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.support {
+                        >a:after {
+                            background: inline-image("route.main/support.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.mobile {
+                        >a:after {
+                            background: inline-image("route.main/mobile.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.structure {
+                        >a:after {
+                            background: inline-image("route.main/structure.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.async {
+                        >a:after {
+                            background: inline-image("route.main/async.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.modules {
+                        >a:after {
+                            background: inline-image("route.main/modules.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.compatibility {
+                        >a:after {
+                            background: inline-image("route.main/compatibility.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.locale {
+                        >a:after {
+                            background: inline-image("route.main/locale.svg") no-repeat 50% 65%;
+                            background-size:60%;
+                        }
+                    }
+                    >.design {
+                        >a:after {
+                            background: inline-image("route.main/design.svg") no-repeat 50% 65%;
+                            background-size:55%;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}
+
