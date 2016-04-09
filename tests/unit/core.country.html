@@ -28,7 +28,7 @@ testSuite = function(app) {
                   "currency": [
                     "EUR",
                   ],
-                  "name": { en:"Fake Country" }
+                  "name": { function() { return this.tr((({ key:"Fake Country" }))); } }
                 },
                 "US": {
                   "callingCode": [
@@ -37,8 +37,7 @@ testSuite = function(app) {
                   "currency": [
                     "USD",
                   ],
-                  "name": { en:"United States" }
-                },
+                  "name":  function() { return this.tr((({ key:"United States" }))); } }
             });
         });
 

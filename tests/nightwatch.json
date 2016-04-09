@@ -1,7 +1,6 @@
 {
   "src_folders" : ["./tests/src"],
   "output_folder" : "./tests/reports",
-  "custom_commands_path" : "./tests/custom-commands",
   "custom_assertions_path" : "",
   "globals_path" : "",
   "live_output" : false,

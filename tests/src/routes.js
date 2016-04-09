@@ -4,6 +4,8 @@
 // Doesn't cover hyperlinks and user interaction.
 //
 
+"use strict";
+
 var self = this;
 
 [
@@ -31,7 +33,6 @@ var self = this;
         '3rdparty.fastclick',
         '3rdparty.hammer',
         '3rdparty.moment',
-        'conf.app',
         'core.country',
         'core.currency',
         'core.date',
@@ -73,14 +74,15 @@ var self = this;
     self['route -> '+n] = function(browser) {
 
         browser
-            .url('http://localhost:3006/#'+n)
+            .url('http://localhost:3006/#/'+n)
             .waitForElementVisible('body', 1000)
-            .pause(1000)
+            .pause(1500)
+            .assert.elementPresent('.core-router')
             .assert.elementNotPresent('.igaro >.error')
             .assert.elementNotPresent('.igaro-instance-modaldialog');
 
         browser.end();
 
-    }
+    };
 
 });

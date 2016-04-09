@@ -9,10 +9,9 @@ module.requires = [
     { name: 'instance.modaldialog.js' }
 ];
 
-module.exports = function(app, params) {
+module.exports = function(app) {
 
     var events = app['core.events'],
-        Amd = app['instance.amd'],
         debug = app['core.debug'],
         language = app['core.language'],
         currency = app['core.currency'],
@@ -22,7 +21,7 @@ module.exports = function(app, params) {
 
     // add supported languages - IETF
     language.setPool({
-        en : { 
+        en : {
             name:"English"
         }
       }),
@@ -36,7 +35,7 @@ module.exports = function(app, params) {
           "currency": [
             "EUR",
           ],
-          "name": { en:"France" }
+          "name": function() { return this.tr((({ key:"France" })));  }
         },
         "US": {
           "callingCode": [
@@ -45,7 +44,7 @@ module.exports = function(app, params) {
           "currency": [
             "USD",
           ],
-          "name": { en:"United States" }
+          "name": function() { return this.tr((({ key:"United States" })));  }
         },
       })
 
@@ -55,17 +54,15 @@ module.exports = function(app, params) {
       return currency.setPool({
           USD : {
               symbol : '$',
-              name : { en:"United States Dollar" }
+              name : function() { return this.tr((({ key:"United States Dollar" })));  }
           }
       }).then(function() {
 
         // debug handling
-        var displaying = false;
         events.rootEmitter.on('core.debug.handle', function (o) {
             document.body.classList.add('error');
             return debug.log.append(o.value,o.path,o.event);
         });
-
       });
 
   });

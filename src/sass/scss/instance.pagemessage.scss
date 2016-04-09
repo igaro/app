@@ -1,0 +1,92 @@
+@import "../sass-global/mixins.scss";
+
+@-webkit-keyframes instance-pagemessage-fadeIn {
+0% { opacity: 0; }
+100% { opacity: 1; }
+}
+
+@keyframes instance-pagemessage-fadeIn {
+0% { opacity: 0; }
+100% { opacity: 1; }
+}
+
+.instance-pagemessage {
+
+    @include spacingbottom;
+
+    &.hide {
+        display:none;
+    }
+
+    background-color:#fff;
+    border-radius:0.3em;
+    
+    >div {
+        -webkit-animation-name: instance-pagemessage-fadeIn;
+        animation-name: instance-pagemessage-fadeIn;
+        -webkit-animation-duration:0.5s;
+        animation-duration:0.5s;
+        display:table;
+        width:100%;
+        border-radius:0.3em;
+        border: 0.15em solid #ddd;
+        color:#111;
+        background-size:1.4em 1.4em !important;
+        background-repeat:no-repeat !important;
+        background-position:0.5em 50% !important;
+        line-height:normal;
+
+        >div {
+            padding:0.4em;
+        }
+
+        >div, >a {
+            display:table-cell;
+        }
+
+        &:not(.hideable) {
+            >a {
+                display:none;
+            }
+        }
+
+        >a {
+            background: inline-image("instance.pagemessage/close.svg") no-repeat 50% 50%;
+            background-size:1.4em 1.4em;
+            width:2.4em;
+            border-left:0.5em transparent solid;
+            &:hover {
+                cursor:pointer;
+            }
+        }
+    }
+
+    >.warn, >.error, >.default, >.info, >.ok, >.success, >.critical {
+        padding-left:2.3em;
+    }
+
+    >.warn, >.error {
+        //border-color: #b97b04;
+        border-color:rgba(185,123,4,.5);
+        background-image: inline-image("instance.pagemessage/warn.svg");
+    }
+
+    >.default, >.info {
+        //border-color: #242c61;
+        border-color:rgba(4,118,198,.5);
+        background-image: inline-image("instance.pagemessage/info.svg");
+    }
+
+    >.ok, >.success {
+        //border-color: #5eb518;
+        border-color:rgba(94,181,24,.5);
+        background-image: inline-image("instance.pagemessage/ok.svg");
+    }
+
+    >.critical {
+        //border-color: #9d0202;
+        border-color:rgba(157,2,2,.5);
+        background-image: inline-image("instance.pagemessage/critical.svg");
+    }
+
+}

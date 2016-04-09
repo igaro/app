@@ -23,12 +23,10 @@ testSuite = function(app) {
             return module.setPool({
                 XXX : {
                     symbol :'@',
-                    name : { en:'Fake Currency' }
-                },
+                    name :  function() { return this.tr((({ key:"Fake Currency" }))); } },
                 USD : {
                     symbol : '$',
-                    name : { en:"United States Dollar" }
-                }
+                    name :  function() { return this.tr((({ key:"United States Dollar" }))); }
             });
         });
 

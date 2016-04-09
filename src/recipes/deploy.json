@@ -1,0 +1,20 @@
+{
+
+    "watch" : {
+        "ignore" : ["pot","mo"]
+    },
+
+    "esLint" : {
+
+        "enabled":true,
+        "rules" : {
+
+        }
+    },
+
+    "uglify" : {
+
+        "fromString" : true
+    }
+}
+
