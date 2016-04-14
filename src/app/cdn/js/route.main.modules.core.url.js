@@ -7,7 +7,7 @@ module.exports = function() {
     return function(model) {
 
         var data = {
-            desc : function(l) { return l.gettext("Provides url and uri related functionality."); },
+            desc : function() { return this.gettext("Provides url and uri related functionality."); },
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
@@ -18,28 +18,28 @@ module.exports = function() {
             objects : {
                 url : {
                     name : 'Url',
-                    desc : function(l) { return l.gettext("A URL object containing URI/Search/Hash and with functions to build a string representation."); },
+                    desc : function() { return this.gettext("A URL object containing URI/Search/Hash and with functions to build a string representation."); },
                     attributes : [
                         {
                             name : 'path',
                             instanceof: { name:'Array' },
-                            desc : function(l) { return l.gettext("URI pieces."); }
+                            desc : function() { return this.gettext("URI pieces."); }
                         },
                         {
                             name : 'hash',
                             type:'string',
-                            desc : function(l) { return l.gettext("Text after the URL #."); }
+                            desc : function() { return this.gettext("Text after the URL #."); }
                         },
                         {
                             name : 'search',
                             type:'object',
-                            desc : function(l) { return l.gettext("Key/value pairs after the URL ?."); }
+                            desc : function() { return this.gettext("Key/value pairs after the URL ?."); }
                         },
                         {
                             name:'toString',
                             type: 'function',
                             async : true,
-                            desc : function(l) { return l.gettext("Converts the object into a URL string used for navigation."); },
+                            desc : function() { return this.gettext("Converts the object into a URL string used for navigation."); },
                             returns : {
                                 attributes: [{
                                     type:'string'
@@ -60,25 +60,25 @@ module.exports = function() {
                             required:true,
                             attributes : [{
                                 instanceof: { name:'Array' },
-                                desc: function(l) { return l.gettext("URI pieces."); }
+                                desc: function() { return this.gettext("URI pieces."); }
                             }]
                         },
                         {
                             type:'object',
                             required:true,
                             attributes : [{
-                                desc: function(l) { return l.gettext("Key/value pairs after the URL ?."); }
+                                desc: function() { return this.gettext("Key/value pairs after the URL ?."); }
                             }]
                         },
                         {
                             type:'string',
                             required:true,
                             attributes : [{
-                                desc : function(l) { return l.gettext("Text after the URL #."); }
+                                desc : function() { return this.gettext("Text after the URL #."); }
                             }]
                         }
                     ],
-                    desc: function(l) { return l.gettext("Returns a new object representation for individual components."); },
+                    desc: function() { return this.gettext("Returns a new object representation for individual components."); },
                     returns: {
                         attributes : [
                             {
@@ -95,11 +95,11 @@ module.exports = function() {
                             type:'string',
                             required:true,
                             attributes : [{
-                                desc: function(l) { return l.gettext("The URL to parse."); }
+                                desc: function() { return this.gettext("The URL to parse."); }
                             }]
                         },
                     ],
-                    desc: function(l) { return l.gettext("Returns a new object representation for the supplied URL."); },
+                    desc: function() { return this.gettext("Returns a new object representation for the supplied URL."); },
                     returns: {
                         attributes : [
                             {
@@ -111,7 +111,7 @@ module.exports = function() {
                 {
                     name:'getCurrent',
                     type:'function',
-                    desc: function(l) { return l.gettext("Returns a new object representation for the current URL."); },
+                    desc: function() { return this.gettext("Returns a new object representation for the current URL."); },
                     returns: {
                         attributes : [
                             {
@@ -127,11 +127,11 @@ module.exports = function() {
                         {
                             type:'string',
                             attributes : [{
-                                desc: function(l) { return l.gettext("The URL to parse. Defaults to the current URL."); }
+                                desc: function() { return this.gettext("The URL to parse. Defaults to the current URL."); }
                             }]
                         },
                     ],
-                    desc: function(l) { return l.gettext("Parses a string for params after the hash."); },
+                    desc: function() { return this.gettext("Parses a string for params after the hash."); },
                     returns: {
                         attributes : [
                             {
@@ -147,11 +147,11 @@ module.exports = function() {
                         {
                             type:'string',
                             attributes : [{
-                                desc: function(l) { return l.gettext("Optional URL to parse. Defaults to the current URL."); }
+                                desc: function() { return this.gettext("Optional URL to parse. Defaults to the current URL."); }
                             }]
                         }
                     ],
-                    desc: function(l) { return l.gettext("Parses the path URI within a URL into individual pieces."); },
+                    desc: function() { return this.gettext("Parses the path URI within a URL into individual pieces."); },
                     returns: {
                         attributes : [
                             {
@@ -167,17 +167,17 @@ module.exports = function() {
                         {
                             type:'string',
                             attributes : [{
-                                desc: function(l) { return l.gettext("The name to search."); }
+                                desc: function() { return this.gettext("The name to search."); }
                             }]
                         },
                         {
                             type:'string',
                             attributes : [{
-                                desc: function(l) { return l.gettext("Optional URL to parse. Defaults to the current URL."); }
+                                desc: function() { return this.gettext("Optional URL to parse. Defaults to the current URL."); }
                             }]
                         }
                     ],
-                    desc: function(l) { return l.gettext("Parses a string for params after the hash and on match of a specific key returns the value."); },
+                    desc: function() { return this.gettext("Parses a string for params after the hash and on match of a specific key returns the value."); },
                     returns: {
                         attributes : [
                             {
@@ -194,13 +194,13 @@ module.exports = function() {
                             type:'string',
                             required:true,
                             attributes : [{
-                                desc: function(l) { return l.gettext("The name to pull."); }
+                                desc: function() { return this.gettext("The name to pull."); }
                             }]
                         },
                         {
                             type:'string',
                             attributes : [{
-                                desc: function(l) { return l.gettext("The URL to parse. Defaults to the current URL."); }
+                                desc: function() { return this.gettext("The URL to parse. Defaults to the current URL."); }
                             }]
                         }
                     ],
@@ -211,7 +211,7 @@ module.exports = function() {
                             }
                         ]
                     },
-                    desc: function(l) { return l.gettext("Parses a string for params after the question mark and on match of a specific key returns the value."); }
+                    desc: function() { return this.gettext("Parses a string for params after the question mark and on match of a specific key returns the value."); }
                 }
             ]
         };

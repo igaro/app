@@ -7,7 +7,7 @@ module.exports = function() {
     return function(model) {
 
         var data = {
-            desc : function(l) { return l.gettext("Provides date and timezone functionality. Date strings should be ISO 8601 formatted. The timezone is determined from the system clock but can be overridden. ENV code is stored."); },
+            desc : function() { return this.gettext("Provides date and timezone functionality. Date strings should be ISO 8601 formatted. The timezone is determined from the system clock but can be overridden. ENV code is stored."); },
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
@@ -44,18 +44,18 @@ module.exports = function() {
                             type:'number',
                             required:true,
                             attributes : [{
-                                desc: function(l) { return l.gettext("The year value."); }
+                                desc: function() { return this.gettext("The year value."); }
                             }]
                         },
                         {
                             type:'number',
                             required:true,
                             attributes : [{
-                                desc: function(l) { return l.gettext("The month value."); }
+                                desc: function() { return this.gettext("The month value."); }
                             }]
                         }
                     ],
-                    desc: function(l) { return l.gettext("Returns the amount of days within a month for a given year."); },
+                    desc: function() { return this.gettext("Returns the amount of days within a month for a given year."); },
                 },
                 {
                     name:'isLeapYear',
@@ -72,44 +72,44 @@ module.exports = function() {
                             type:'number',
                             required:true,
                             attributes : [{
-                                desc: function(l) { return l.gettext("The year to check."); },
+                                desc: function() { return this.gettext("The year to check."); },
                             }]
                         }
                     ],
-                    desc: function(l) { return l.gettext("Returns true if the specified year is a leap."); }
+                    desc: function() { return this.gettext("Returns true if the specified year is a leap."); }
                 },
                 {
                     name:'envOffset',
                     type:'number',
-                    desc: function(l) { return l.gettext("Currently applied timezone offset in minutes from GMT."); }
+                    desc: function() { return this.gettext("Currently applied timezone offset in minutes from GMT."); }
                 },
                 {
                     name:'envOffsetAuto',
                     type:'boolean',
-                    desc: function(l) { return l.gettext("Defines whether the ENV has been determined automatically."); }
+                    desc: function() { return this.gettext("Defines whether the ENV has been determined automatically."); }
                 },
                 {
                     name:'resetEnvOffset',
                     type:'function',
-                    desc: function(l) { return l.gettext("Resets the timezone offset to the automatically determined value."); },
+                    desc: function() { return this.gettext("Resets the timezone offset to the automatically determined value."); },
                     async:true
                 },
                 {
                     name:'setEnvOffset',
                     type:'function',
-                    desc: function(l) { return l.gettext("Sets the timezone offset."); },
+                    desc: function() { return this.gettext("Sets the timezone offset."); },
                     attributes : [
                         {
                             type:'number',
                             required:true,
                             attributes:[{
-                                desc: function(l) { return l.gettext("Amount of minutes from GMT. Use null for system default."); }
+                                desc: function() { return this.gettext("Amount of minutes from GMT. Use null for system default."); }
                             }]
                         },
                         {
                             type:'boolean',
                             attributes:[{
-                                desc: function(l) { return l.gettext("Defines if the value should be stored. Default is true."); }
+                                desc: function() { return this.gettext("Defines if the value should be stored. Default is true."); }
                             }]
                         }
                     ],
@@ -130,14 +130,14 @@ module.exports = function() {
                             type:'object',
                             required:true,
                             attributes : [{
-                                desc: function(l) { return l.gettext("The value to convert. May also be a string respresentation."); },
+                                desc: function() { return this.gettext("The value to convert. May also be a string respresentation."); },
                                 instanceof : {
                                     name: 'Date'
                                 }
                             }],
                         }
                     ],
-                    desc: function(l) { return l.gettext("Returns a date object in the user's timezone."); }
+                    desc: function() { return this.gettext("Returns a date object in the user's timezone."); }
                 }
             ]
         };

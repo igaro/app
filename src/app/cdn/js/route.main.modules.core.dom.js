@@ -7,7 +7,7 @@ module.exports = function() {
     return function(model) {
 
         var data = {
-            desc : function(l) { return l.gettext("Provides DOM helpers to reduce repetitive coding. Automates dependency management and provides object destruction cleanup. Does not try to be JQuery."); },
+            desc : function() { return this.gettext("Provides DOM helpers to reduce repetitive coding. Automates dependency management and provides object destruction cleanup. Does not try to be JQuery."); },
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
@@ -21,35 +21,35 @@ module.exports = function() {
                 {
                     name:'append',
                     type:'function',
-                    desc:function(l) { return l.gettext("Appends an element into another optionally pre/appending before a sibling."); },
+                    desc:function() { return this.gettext("Appends an element into another optionally pre/appending before a sibling."); },
                     attributes : [
                         {
                             type:'object',
                             required:true,
                             attributes : [{
-                                desc: function(l) { return l.gettext("The container for the element to be appended into."); }
+                                desc: function() { return this.gettext("The container for the element to be appended into."); }
                             }]
                         },
                         {
                             type:'object',
                             required:true,
                             attributes : [{
-                                desc: function(l) { return l.gettext("An element or array of elements to append."); }
+                                desc: function() { return this.gettext("An element or array of elements to append."); }
                             }]
                         },
                         {
                             type:'object',
-                            desc : function(l) { return l.gettext("Optional parameters to insert before or after a sibling."); },
+                            desc : function() { return this.gettext("Optional parameters to insert before or after a sibling."); },
                             attributes:[
                                 {
                                     name:"insertAfter",
                                     type:"object",
-                                    desc:function(l) { return l.gettext("Specify a sibling element to insert after. Can also be a blessed object with a container element."); }
+                                    desc:function() { return this.gettext("Specify a sibling element to insert after. Can also be a blessed object with a container element."); }
                                 },
                                 {
                                     name:"insertBefore",
                                     type:"object",
-                                    desc:function(l) { return l.gettext("Specify a sibling element to insert before. Can also be a blessed object with a container element."); }
+                                    desc:function() { return this.gettext("Specify a sibling element to insert before. Can also be a blessed object with a container element."); }
                                 }
                             ]
                         }
@@ -58,14 +58,14 @@ module.exports = function() {
                 {
                     name:'empty',
                     type:'function',
-                    desc:function(l) { return l.gettext("Empties an element of any child elements or content."); },
+                    desc:function() { return this.gettext("Empties an element of any child elements or content."); },
                     attributes : [
                         {
                             type:'object',
                             required:true,
                             attributes : [
                                 {
-                                    desc: function(l) { return l.gettext("The element to empty."); }
+                                    desc: function() { return this.gettext("The element to empty."); }
                                 }
                             ]
                         }
@@ -74,19 +74,19 @@ module.exports = function() {
                 {
                     name:'head',
                     type:'object',
-                    desc:function(l) { return l.gettext("Shortcut for accessing the body>head element."); }
+                    desc:function() { return this.gettext("Shortcut for accessing the body>head element."); }
                 },
                 {
                     name:'offset',
                     type:'function',
-                    desc:function(l) { return l.gettext("Returns the computed offset position for an element."); },
+                    desc:function() { return this.gettext("Returns the computed offset position for an element."); },
                     attributes : [
                         {
                             type:'object',
                             required:true,
                             attributes : [
                                 {
-                                    desc: function(l) { return l.gettext("The element to check."); }
+                                    desc: function() { return this.gettext("The element to check."); }
                                 }
                             ]
                         }
@@ -94,7 +94,7 @@ module.exports = function() {
                     returns: {
                         attributes : [
                             {
-                                desc:function(l) { return l.gettext("Contains x and y keys."); },
+                                desc:function() { return this.gettext("Contains x and y keys."); },
                                 type:'object'
                             }
                         ]
@@ -103,14 +103,14 @@ module.exports = function() {
                 {
                     name:'purge',
                     type:'function',
-                    desc:function(l) { return l.gettext("Destroys an element, all child elements, and dereferences from dependencies."); },
+                    desc:function() { return this.gettext("Destroys an element, all child elements, and dereferences from dependencies."); },
                     attributes : [
                         {
                             type:'object',
                             required:true,
                             attributes : [
                                 {
-                                    desc: function(l) { return l.gettext("The element to remove."); }
+                                    desc: function() { return this.gettext("The element to remove."); }
                                 }
                             ]
                         },
@@ -118,7 +118,7 @@ module.exports = function() {
                             type:'boolean',
                             attributes : [
                                 {
-                                    desc: function(l) { return l.gettext("If true, the element isn't removed from it's parent. Default is false."); }
+                                    desc: function() { return this.gettext("If true, the element isn't removed from it's parent. Default is false."); }
                                 }
                             ]
                         }
@@ -127,11 +127,11 @@ module.exports = function() {
                 {
                     name:"isHidden",
                     type:"function",
-                    desc:function(l) { return l.gettext("Returns whether an element is hidden or visible."); },
+                    desc:function() { return this.gettext("Returns whether an element is hidden or visible."); },
                     returns: {
                         attributes : [
                             {
-                                desc:function(l) { return l.gettext("True for hidden, False for visible."); },
+                                desc:function() { return this.gettext("True for hidden, False for visible."); },
                                 type:'boolean'
                             }
                         ]
@@ -140,14 +140,14 @@ module.exports = function() {
                 {
                     name:"hide",
                     type:"function",
-                    desc:function(l) { return l.gettext("Hides an element."); },
+                    desc:function() { return this.gettext("Hides an element."); },
                     attributes : [
                         {
                             type:'object',
                             required:true,
                             attributes : [
                                 {
-                                    desc: function(l) { return l.gettext("The element to hide."); }
+                                    desc: function() { return this.gettext("The element to hide."); }
                                 }
                             ]
                         },
@@ -155,7 +155,7 @@ module.exports = function() {
                             type:'boolean',
                             attributes : [
                                 {
-                                    desc: function(l) { return l.gettext("Set to false to invert the operation (show the element). Default is true."); }
+                                    desc: function() { return this.gettext("Set to false to invert the operation (show the element). Default is true."); }
                                 }
                             ]
                         }
@@ -172,7 +172,7 @@ module.exports = function() {
                             }
                         ]
                     },
-                    desc:function(l) { return l.gettext("Creates and appends an element, optionally setting parameters and appending siblings into it."); },
+                    desc:function() { return this.gettext("Creates and appends an element, optionally setting parameters and appending siblings into it."); },
                     attributes : [
                         {
                             type:'*',
@@ -180,7 +180,7 @@ module.exports = function() {
                             required:true,
                             attributes : [
                                 {
-                                    desc: function(l) { return l.gettext("The tag name of the element to create, i.e 'div'. A type can also be set by use of brackets, i.e 'input[password]'"); }
+                                    desc: function() { return this.gettext("The tag name of the element to create, i.e 'div'. A type can also be set by use of brackets, i.e 'input[password]'"); }
                                 }
                             ]
                         },
@@ -189,7 +189,7 @@ module.exports = function() {
                             forManager:true,
                             attributes : [
                                 {
-                                    desc: function(l) { return l.gettext("Appending information. Accepts either an element or an object with a container attribute linked to an element. For the later, can take insertBefore and insertAfter attributes to define the ordering of how the element is to be added. These should be either elements or objects with a container attribute linking to one. This allows you to specify a blessed element."); }
+                                    desc: function() { return this.gettext("Appending information. Accepts either an element or an object with a container attribute linked to an element. For the later, can take insertBefore and insertAfter attributes to define the ordering of how the element is to be added. These should be either elements or objects with a container attribute linking to one. This allows you to specify a blessed element."); }
                                 }
                             ]
                         },
@@ -198,7 +198,7 @@ module.exports = function() {
                             forManager:true,
                             attributes : [
                                 {
-                                    desc : function(l) { return l.gettext("Defines the content to be appended into the element.Accepts an element, an array of elements, a string, or an "); }
+                                    desc : function() { return this.gettext("Defines the content to be appended into the element.Accepts an element, an array of elements, a string, or an "); }
                                 }
                             ]
                         },
@@ -207,7 +207,7 @@ module.exports = function() {
                             forManager:true,
                             attributes : [
                                 {
-                                    desc : function(l) { return l.gettext("May be a string to apppend to the element's className or a function. If the later, it will be called with the this keyword set to the element."); }
+                                    desc : function() { return this.gettext("May be a string to apppend to the element's className or a function. If the later, it will be called with the this keyword set to the element."); }
                                 }
                             ]
 
@@ -217,14 +217,14 @@ module.exports = function() {
                 {
                     name:'rm',
                     type:'function',
-                    desc:function(l) { return l.gettext("Removes an element from it's parent node."); },
+                    desc:function() { return this.gettext("Removes an element from it's parent node."); },
                     attributes : [
                         {
                             type:'object',
                             required:true,
                             attributes : [
                                 {
-                                    desc: function(l) { return l.gettext("The element to remove."); }
+                                    desc: function() { return this.gettext("The element to remove."); }
                                 }
                             ]
                         }
@@ -233,14 +233,14 @@ module.exports = function() {
                 {
                     name:'setContent',
                     type:'function',
-                    desc:function(l) { return l.gettext("Sets the content of an element, correctly handing dependencies in the process."); },
+                    desc:function() { return this.gettext("Sets the content of an element, correctly handing dependencies in the process."); },
                     attributes : [
                         {
                             type:'object',
                             required:true,
                             attributes : [
                                 {
-                                    desc: function(l) { return l.gettext("The element of which to set the content."); }
+                                    desc: function() { return this.gettext("The element of which to set the content."); }
                                 }
                             ]
                         },
@@ -249,7 +249,7 @@ module.exports = function() {
                             required:true,
                             attributes : [
                                 {
-                                    desc: function(l) { return l.gettext("Element, elements (in Array), string or language literal to use for the content."); }
+                                    desc: function() { return this.gettext("Element, elements (in Array), string or language literal to use for the content."); }
                                 }
                             ]
                         },
@@ -257,7 +257,7 @@ module.exports = function() {
                             type:'boolean',
                             attributes : [
                                 {
-                                    desc : function(l) { return l.gettext("By default the element will be purged of content prior to new content being written. If this value is true, the element will be cleared (shallow)."); }
+                                    desc : function() { return this.gettext("By default the element will be purged of content prior to new content being written. If this value is true, the element will be cleared (shallow)."); }
                                 }
                             ]
                         }
@@ -266,24 +266,24 @@ module.exports = function() {
                 {
                     name:'setPlaceholder',
                     type:'function',
-                    desc : function(l) { return l.gettext("Sets the placeholder value of an element. This is usually required for multi-language support."); },
+                    desc : function() { return this.gettext("Sets the placeholder value of an element. This is usually required for multi-language support."); },
                     attributes : [
                         {
                             type:'object',
                             required:true,
                             attributes: [
                                 {
-                                    desc: function(l) { return l.gettext("The element to set."); }
+                                    desc: function() { return this.gettext("The element to set."); }
                                 }
                             ],
-                            desc: function(l) { return l.gettext("Appends a debug event to storage and fires a core.debug event containing the data."); }
+                            desc: function() { return this.gettext("Appends a debug event to storage and fires a core.debug event containing the data."); }
                         },
                         {
                             type:'*',
                             required:true,
                             attributes: [
                                 {
-                                    desc: function(l) { return l.gettext("A string or a language literal."); }
+                                    desc: function() { return this.gettext("A string or a language literal."); }
                                 }
                             ],
                         },
@@ -292,7 +292,7 @@ module.exports = function() {
                 {
                     name:'sort',
                     type:'function',
-                    desc:function(l) { return l.gettext("Sorts child elements inside an element based on content or a function."); },
+                    desc:function() { return this.gettext("Sorts child elements inside an element based on content or a function."); },
                     attributes : [
                         {
                             type:'object',
@@ -301,27 +301,27 @@ module.exports = function() {
                                 {
                                     name:'nodes',
                                     instanceof : { name: 'Array' },
-                                    desc:function(l) { return l.gettext("Defines the node elements to be sorted. If not set, the root element should be instead."); }
+                                    desc:function() { return this.gettext("Defines the node elements to be sorted. If not set, the root element should be instead."); }
                                 },
                                 {
                                     name:'on',
                                     type: '*',
-                                    desc:function(l) { return l.gettext("If undefined uses the content of the child element, or define a custom function to use instead. The function will be passed the element as the first argument and follows the standard Array.sort() for legal return values."); }
+                                    desc:function() { return this.gettext("If undefined uses the content of the child element, or define a custom function to use instead. The function will be passed the element as the first argument and follows the standard Array.sort() for legal return values."); }
                                 },
                                 {
                                     name:'reverse',
                                     type:'boolean',
-                                    desc:function(l) { return l.gettext("Defines whether the order should be reversed."); }
+                                    desc:function() { return this.gettext("Defines whether the order should be reversed."); }
                                 },
                                 {
                                     name:'root',
                                     instanceof : { name: 'Element' },
-                                    desc:function(l) { return l.gettext("Defines the root element for which to traverse for children. This or nodes must be supplied."); }
+                                    desc:function() { return this.gettext("Defines the root element for which to traverse for children. This or nodes must be supplied."); }
                                 },
                                 {
                                     name: 'slice',
                                     instanceof :  { name: 'Array' },
-                                    desc:function(l) { return l.gettext("Defines whether the compiled list should be sliced. Accepts two values like Array.slice(). Use this to stick elements to the top of a sort"); }
+                                    desc:function() { return this.gettext("Defines whether the compiled list should be sliced. Accepts two values like Array.slice(). Use this to stick elements to the top of a sort"); }
                                 }
 
 
@@ -332,14 +332,14 @@ module.exports = function() {
                 {
                     name:'show',
                     type:'function',
-                    desc: function(l) { return l.gettext("Shows an element. Element must have been previously hidden with .hide(). Overriding styles and className strings are unsupported."); },
+                    desc: function() { return this.gettext("Shows an element. Element must have been previously hidden with .hide(). Overriding styles and className strings are unsupported."); },
                     attributes : [
                         {
                             type:'object',
                             required:true,
                             attributes : [
                                 {
-                                    desc: function(l) { return l.gettext("The element to show."); }
+                                    desc: function() { return this.gettext("The element to show."); }
                                 }
                             ]
                         }
@@ -348,13 +348,13 @@ module.exports = function() {
                 {
                     name:'toggleVisibility',
                     type:'function',
-                    desc:function(l) { return l.gettext("Toggles an elements visibility based on it's current status.."); },
+                    desc:function() { return this.gettext("Toggles an elements visibility based on it's current status.."); },
                     attributes : [
                         {
                             type:'object',
                             required:true,
                             attributes : [{
-                                desc: function(l) { return l.gettext("Calls .show() if hidden, or vice-versa."); }
+                                desc: function() { return this.gettext("Calls .show() if hidden, or vice-versa."); }
                             }]
                         }
                     ]

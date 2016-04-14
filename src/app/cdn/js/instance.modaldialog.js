@@ -102,7 +102,7 @@
                 // add cancel or close
                 if (o.addCancel || ! myActions.length) {
                    myActions.push({
-                        l:function(l) { return o.addCancel? l.gettext("Cancel") : l.gettext("Close"); }
+                        l:function() { return o.addCancel? this.gettext("Cancel") : this.gettext("Close"); }
                    });
                 }
 
@@ -182,7 +182,7 @@
                     title : o.title,
                     actions : [
                         {
-                            l : function(l) { return l.gettext("Ok"); }
+                            l : function() { return this.gettext("Ok"); }
                         }
                     ]
                 }
@@ -196,7 +196,7 @@
         InstanceModalDialog.prototype.confirm = function(o) {
 
             var confirmAction = {
-                l : function(l) { return l.gettext("Confirm"); }
+                l : function() { return this.gettext("Confirm"); }
             };
             return this.custom({
                 type : 'confirm',

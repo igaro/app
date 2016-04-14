@@ -9,7 +9,7 @@ module.exports = function(app) {
     return function(model) {
 
         var data = {
-            desc : function(l) { return l.gettext("This library prototypes classList, a group of functions for managing the CSS className property on Elements. The following features are provided; %[0]."); },
+            desc : function() { return this.gettext("This library prototypes classList, a group of functions for managing the CSS className property on Elements. The following features are provided; %[0]."); },
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'

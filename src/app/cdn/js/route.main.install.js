@@ -16,28 +16,28 @@ module.exports = function(app) {
             language = app['core.language'],
             domMgr = model.managers.dom;
 
-        model.stash.title=function(l) { return l.gettext("Install"); };
-        model.stash.description=function(l) { return l.gettext("Install in one step. It's free, and you'll instantly have an app ready to modify. Prepare to be impressed!"); };
+        model.stash.title=function() { return this.gettext("Install"); };
+        model.stash.description=function() { return this.gettext("Install in one step. It's free, and you'll instantly have an app ready to modify. Prepare to be impressed!"); };
 
-        domMgr.mk('p',wrapper,function(l) { return l.gettext("The following instructions assume a unix, linux or mac environment."); });
+        domMgr.mk('p',wrapper,function() { return this.gettext("The following instructions assume a unix, linux or mac environment."); });
 
-        domMgr.mk('p',wrapper,function(l) { return l.gettext("By installing Igaro App you are agreeing to the license under which this software is distributed."); });
+        domMgr.mk('p',wrapper,function() { return this.gettext("By installing Igaro App you are agreeing to the license under which this software is distributed."); });
 
         domMgr.mk('p',wrapper,null,function() {
 
-            domMgr.mk('button',this,function(l) { return l.gettext("Show Source"); }).addEventListener('click',function() {
+            domMgr.mk('button',this,function() { return this.gettext("Show Source"); }).addEventListener('click',function() {
 
                 window.open('https://github.com/igaro/app');
             });
-            domMgr.mk('button',this,function(l) { return l.gettext("Show License"); }).addEventListener('click',function() {
+            domMgr.mk('button',this,function() { return this.gettext("Show License"); }).addEventListener('click',function() {
 
                 model.to(['license']);
             });
         });
 
-        domMgr.mk('h1',wrapper,function(l) { return l.gettext("Install"); });
+        domMgr.mk('h1',wrapper,function() { return this.gettext("Install"); });
 
-        domMgr.mk('p',wrapper,function(l) { return l.gettext("Run the following in a terminal."); });
+        domMgr.mk('p',wrapper,function() { return this.gettext("Run the following in a terminal."); });
 
         domMgr.mk('pre',wrapper,domMgr.mk('code',null,"mkdir igaro \n\
 git clone https://github.com/igaro/app.git igaro/git\n\
@@ -48,11 +48,11 @@ cd igaro/git \n\
 npm install \n\
 grunt",'gitcode'));
 
-        domMgr.mk('h1',wrapper,function(l) { return l.gettext("Boom!"); });
+        domMgr.mk('h1',wrapper,function() { return this.gettext("Boom!"); });
 
-        domMgr.mk('p',wrapper,language.substitute(function(l) { return l.gettext("Igaro compiles into two modes; debug and deploy. A web server for each can be found on ports %[0] and %[1]. These will reload automatically as you work."); },'<a href="http://localhost:3006">3006</a>','<a href="http://localhost:3007">3007</a>'));
+        domMgr.mk('p',wrapper,language.substitute(function() { return this.gettext("Igaro compiles into two modes; debug and deploy. A web server for each can be found on ports %[0] and %[1]. These will reload automatically as you work."); },'<a href="http://localhost:3006">3006</a>','<a href="http://localhost:3007">3007</a>'));
 
-        domMgr.mk('p',wrapper,function(l) { return l.gettext("That's it. Now read as much of the documentation as you need, modify the route files behind this app, and create!"); });
+        domMgr.mk('p',wrapper,function() { return this.gettext("That's it. Now read as much of the documentation as you need, modify the route files behind this app, and create!"); });
 
     };
 

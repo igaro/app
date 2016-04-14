@@ -9,7 +9,7 @@ module.exports = function(app) {
     return function(model) {
 
         var data = {
-            desc :  function(l) { return l.gettext("This module prototypes Javascript 1.8.5 (IE9). The following are provided; %[0]."); },
+            desc :  function() { return this.gettext("This module prototypes Javascript 1.8.5 (IE9). The following are provided; %[0]."); },
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'

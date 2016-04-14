@@ -3,7 +3,8 @@
 /* Igaro App Builder
 
    This script builds Igaro App taking into account different configurations by way of "recipe" files.
-   It also launches services such as watchers and a httpd service.
+   It's like Gulp, but on steroids!
+   It also provides services such as watchers and httpd.
 
    Written by Andrew Charnley, igaro.com
 
@@ -22,6 +23,7 @@ var args = require("yargs").argv,
     recipe = args.recipe,
     fs = require("fs-extra"),
     sass = require("node-sass"),
+    sassXtra = require("node-sass-asset-functions"),
     watch = require('watch'),
     uglify = require('uglify-js'),
     jsxgettext = require('jsxgettext');
@@ -133,7 +135,8 @@ var httpd = function() {
     var express = require('express');
     var app = express();
     app.listen(servePort, function () {
-      console.info('Httpd:'+servePort);
+
+        console.info('Httpd:'+servePort);
     });
     app.use(express.static(targetRootDir));
 };
@@ -143,10 +146,10 @@ var httpd = function() {
 var watchers = function() {
 
     [
-        ['SASS',srcSassDir,'sass'],
+        ['SASS',srcSassDir + '/..' ,'sass'],
         ['APP',srcAppDir,'app'],
-        ['BUILTIN',srcAppDir,'app'],
-        ['CONF',srcAppDir,'app'],
+        ['BUILTIN',srcRootDir+'/builtin','app'],
+        ['CONF',srcRootDir+'/conf','app'],
         ['CP',srcCpDir,'cp']
     ].forEach(function(o) {
 
@@ -211,45 +214,44 @@ var build = {
         }).then(function(files) {
 
             // includes
-            var fetchers = [],
-                cache = {};
+            var cache = {};
+            var scanInc = function(data) {
 
-            files.forEach(function(file) {
+                // match pass
+                var matches = data.match(includeRegExp);
+                if (! (matches instanceof Array))
+                    return Promise.resolve(data);
 
-                var matches = file.data.match(includeRegExp);
-                if (matches instanceof Array) {
-                    matches.forEach(function(match) {
+                // cache files
+                return Promise.all(
+
+                    matches.map(function(match) {
 
                         var file = match.slice(11,-2);
+                        return readfile(srcRootDir + '/' + file).then(function(data) {
 
-                        fetchers.push(
-                            readfile(srcRootDir + '/' + file).then(function(data) {
-
-                                cache[file] = data;
-                            })
-                        );
-                    });
-                }
-            });
-
-            return Promise.all(fetchers).then(function() {
-
-                var scan = true;
-                while(scan) {
-                    scan = false;
-                    files.forEach(function(file) {
-
-                        file.data = file.data.replace(includeRegExp, function(match) {
-
-                            scan = true;
-                            return cache[match.slice(11,-2)];
+                            cache[file] = data;
                         });
-                    });
-                }
-            }).then(function() {
+                    })
 
-                return files;
-            });
+                // replace pass
+                ).then(function() {
+
+                    return scanInc(data.replace(includeRegExp, function(match) {
+
+                        return cache[match.slice(11,-2)];
+                    }));
+                });
+            };
+
+            return Promise.all(files.map(function(file) {
+
+                return scanInc(file.data).then(function(data) {
+
+                    file.data = data;
+                    return file;
+                });
+            }));
 
         }).then(function(files) {
 
@@ -369,6 +371,11 @@ var build = {
                         return new Promise(function(resolve,reject) {
 
                             sass.render({
+                                functions: sassXtra({
+
+                                    images_path: 'src/sass/images/',
+                                    fonts_path: 'src/sass/fonts/'
+                                }),
                                 file: srcSassDir + '/' + file,
                                 includePaths : [srcSassDir],
                                 outputStyle : minifyEnabled? 'compressed' : 'nested'

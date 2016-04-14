@@ -34,7 +34,7 @@ module.exports = function() {
         }\n\
     ]\n\
 });",
-            desc : function(l) { return l.gettext("Provides a universal navigation menu system using standard UL and LI elements."); },
+            desc : function() { return this.gettext("Provides a universal navigation menu system using standard UL and LI elements."); },
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
@@ -49,12 +49,12 @@ module.exports = function() {
                     {
                         name : 'onClick',
                         type: 'function',
-                        desc : function(l) { return l.gettext("A function to run when an Option is selected."); }
+                        desc : function() { return this.gettext("A function to run when an Option is selected."); }
                     },
                     {
                         name : 'options',
                         instanceof : { name: 'Array' },
-                        desc: function(l) { return l.gettext("Calls .addOption() sequentially."); }
+                        desc: function() { return this.gettext("Calls .addOption() sequentially."); }
                     }
                 ]
             }
@@ -64,7 +64,7 @@ module.exports = function() {
 
             menu : {
                 name : 'Menu',
-                desc : function(l) { return l.gettext("A menu contains option objects."); },
+                desc : function() { return this.gettext("A menu contains option objects."); },
                 blessed : {
                     container:true,
                     children : ['options']
@@ -73,7 +73,7 @@ module.exports = function() {
                     {
                         name : 'addOptions',
                         type : 'function',
-                        desc : function(l) { return l.gettext("Calls .addOption() sequentially."); },
+                        desc : function() { return this.gettext("Calls .addOption() sequentially."); },
                         attributes : [
                             {
                                 type:'object',
@@ -91,7 +91,7 @@ module.exports = function() {
                     {
                         name : 'addOption',
                         type : 'function',
-                        desc : function(l) { return l.gettext("Adds an option to the menu."); },
+                        desc : function() { return this.gettext("Adds an option to the menu."); },
                         attributes : [
                             {
                                 type:'object',
@@ -100,22 +100,22 @@ module.exports = function() {
                                     {
                                         name : 'active',
                                         type : 'boolean',
-                                        desc : function(l) { return l.gettext("Sets the status to active."); }
+                                        desc : function() { return this.gettext("Sets the status to active."); }
                                     },
                                     {
                                         name : 'href',
                                         type : 'string',
-                                        desc : function(l) { return l.gettext("Sets the Element href, which may be used for display/seo purposes or actual navigation by setting onClick to open it."); }
+                                        desc : function() { return this.gettext("Sets the Element href, which may be used for display/seo purposes or actual navigation by setting onClick to open it."); }
                                     },
                                     {
                                         name : 'onClick',
                                         type : 'function',
-                                        desc : function(l) { return l.gettext("If specified, will override the parent onClick handler."); }
+                                        desc : function() { return this.gettext("If specified, will override the parent onClick handler."); }
                                     },
                                     {
                                         name : 'title',
                                         type : 'string',
-                                        desc : function(l) { return l.gettext("Adds a label to the option's DOM element."); }
+                                        desc : function() { return this.gettext("Adds a label to the option's DOM element."); }
                                     }
                                 ]
                             }
@@ -132,12 +132,12 @@ module.exports = function() {
                 blessed : {
                     container:true
                 },
-                desc : function(l) { return l.gettext("An option manages the selection of a DOM element and an optional sub menu object."); },
+                desc : function() { return this.gettext("An option manages the selection of a DOM element and an optional sub menu object."); },
                 attributes : [
                     {
                         name : 'addMenu',
                         type : 'function',
-                        desc : function(l) { return l.gettext("Adds a menu to the Option."); },
+                        desc : function() { return this.gettext("Adds a menu to the Option."); },
                         attributes : [
                             {
                                 type:'object',
@@ -145,12 +145,12 @@ module.exports = function() {
                                     {
                                         name : 'options',
                                         instanceof  : { name: 'Array' },
-                                        desc: function(l) { return l.gettext("A presupplied list of options and optional submenu items."); }
+                                        desc: function() { return this.gettext("A presupplied list of options and optional submenu items."); }
                                     },
                                     {
                                         name : 'onClick',
                                         type: 'function',
-                                        desc : function(l) { return l.gettext("A function to run when an option is selected."); }
+                                        desc : function() { return this.gettext("A function to run when an option is selected."); }
                                     }
                                 ]
                             }
@@ -166,7 +166,7 @@ module.exports = function() {
                         attributes : [
                             {
                                 type:'boolean',
-                                desc : function(l) { return l.gettext("If the Option is disabled this will have no effect."); }
+                                desc : function() { return this.gettext("If the Option is disabled this will have no effect."); }
                             }
                         ]
                     }

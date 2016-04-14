@@ -20,15 +20,15 @@ module.exports = function(app) {
             objectMgr = managers.object,
             coreObject = app['core.object'];
 
-        model.stash.title = function(l) { return l.gettext("Igaro App JavaScript Framework"); };
-        model.stash.description = function(l) { return l.gettext("Igaro App is a powerful JavaScript framework for developing single page application websites (web-apps). Zero HTML, zero dependencies and beautifully engineered."); };
-        model.stash.keywords = function(l) { return l.gettext("javascript, spa, app, html5, framework"); };
+        model.stash.title = function() { return this.gettext("Igaro App JavaScript Framework"); };
+        model.stash.description = function() { return this.gettext("Igaro App is a powerful JavaScript framework for developing single page application websites (web-apps). Zero HTML, zero dependencies and beautifully engineered."); };
+        model.stash.keywords = function() { return this.gettext("javascript, spa, app, html5, framework"); };
 
         var wrapper = model.wrapper,
             header = domMgr.mk('div',wrapper,null,'header');
 
         // header
-        domMgr.mk('span',header, function(l) { return l.gettext("Welcome to <b>Igaro App</b> JavaScript Framework"); });
+        domMgr.mk('span',header, function() { return this.gettext("Welcome to <b>Igaro App</b> JavaScript Framework"); });
 
         var writeList = function(pool,list) {
 
@@ -74,7 +74,7 @@ module.exports = function(app) {
 
                 objectMgr.create('pagemessage',{
                     type:'info',
-                    message: function(l) { return l.gettext("You can view the code behind any page in this app by clicking the curly bracket icon in the header."); },
+                    message: function() { return this.gettext("You can view the code behind any page in this app by clicking the curly bracket icon in the header."); },
                     hideable: true,
                     id:model.path.join('.')+'.hintcode'
                 }),
@@ -82,16 +82,16 @@ module.exports = function(app) {
                 objectMgr.create('list').then(function (list) {
 
                     return writeList([
-                        ['overview', function(l) { return l.gettext("Overview"); }],
-                        ['features', function(l) { return l.gettext("Widgets"); }],
-                        ['install', function(l) { return l.gettext("Install"); }],
-                        ['showcase', function(l) { return l.gettext("Showcase"); }]
+                        ['overview', function() { return this.gettext("Overview"); }],
+                        ['features', function() { return this.gettext("Widgets"); }],
+                        ['install', function() { return this.gettext("Install"); }],
+                        ['showcase', function() { return this.gettext("Showcase"); }]
                     ],list).then(function() {
 
                         var domMgr = list.managers.dom;
                         return domMgr.mk('section', null, [
-                            domMgr.mk('h1', null, function(l) { return l.gettext("Insight"); }),
-                            domMgr.mk('p', null, function(l) { return l.gettext("HTML falters when used for declaring dynamic views in web-applications, and most JavaScript frameworks deal with this shortcoming by introducing sync and data binding overheads. Looking for an alternative?"); }),
+                            domMgr.mk('h1', null, function() { return this.gettext("Insight"); }),
+                            domMgr.mk('p', null, function() { return this.gettext("HTML falters when used for declaring dynamic views in web-applications, and most JavaScript frameworks deal with this shortcoming by introducing sync and data binding overheads. Looking for an alternative?"); }),
                             list.container
                         ],'first');
                     });
@@ -100,24 +100,24 @@ module.exports = function(app) {
                 objectMgr.create('list').then(function (list) {
 
                     return writeList([
-                        ['structure',function(l) { return l.gettext("Basics"); }],
-                        ['bless', function(l) { return l.gettext("Bless"); }],
-                        ['async', function(l) { return l.gettext("Async"); }],
-                        ['events',function(l) { return l.gettext("Events"); }],
-                        ['security',function(l) { return l.gettext("Security"); }],
-                        ['design', function(l) { return l.gettext("Design"); }],
-                        ['routes', function(l) { return l.gettext("Routes"); }],
-                        ['locale', function(l) { return l.gettext("Locale"); }],
-                        ['mobile', function(l) { return l.gettext("Mobile"); }],
-                        ['compat',function(l) { return l.gettext("Compatibility"); }],
-                        ['testing',function(l) { return l.gettext("Testing"); }],
-                        ['modules',function(l) { return l.gettext("Modules"); }]
+                        ['structure',function() { return this.gettext("Basics"); }],
+                        ['bless', function() { return this.gettext("Bless"); }],
+                        ['async', function() { return this.gettext("Async"); }],
+                        ['events',function() { return this.gettext("Events"); }],
+                        ['security',function() { return this.gettext("Security"); }],
+                        ['design', function() { return this.gettext("Design"); }],
+                        ['routes', function() { return this.gettext("Routes"); }],
+                        ['locale', function() { return this.gettext("Locale"); }],
+                        ['mobile', function() { return this.gettext("Mobile"); }],
+                        ['compat',function() { return this.gettext("Compatibility"); }],
+                        ['testing',function() { return this.gettext("Testing"); }],
+                        ['modules',function() { return this.gettext("Modules"); }]
                     ],list).then(function() {
 
                         var domMgr = list.managers.dom;
                         return domMgr.mk('section', null, [
-                            domMgr.mk('h1', null, function(l) { return l.gettext("Documentation"); }),
-                            domMgr.mk('p', null, function(l) { return l.gettext("All Igaro App's modules are documented via JSDoc, but the online help is more exhaustive and comes with demos."); }),
+                            domMgr.mk('h1', null, function() { return this.gettext("Documentation"); }),
+                            domMgr.mk('p', null, function() { return this.gettext("All Igaro App's modules are documented via JSDoc, but the online help is more exhaustive and comes with demos."); }),
                             list.container
                         ]);
                     });
@@ -126,15 +126,15 @@ module.exports = function(app) {
                 objectMgr.create('list').then(function (list) {
 
                     return writeList([
-                        ['forum',function(l) { return l.gettext("Forum"); },'http://forum.igaro.com'],
-                        ['report', function(l) { return l.gettext("Report"); },'https://github.com/igaro/app/issues'],
-                        ['contact', function(l) { return l.gettext("Contact"); }],
+                        ['forum',function() { return this.gettext("Forum"); },'http://forum.igaro.com'],
+                        ['report', function() { return this.gettext("Report"); },'https://github.com/igaro/app/issues'],
+                        ['contact', function() { return this.gettext("Contact"); }],
                     ],list).then(function() {
 
                         var domMgr = list.managers.dom;
                         return domMgr.mk('section', null, [
-                            domMgr.mk('h1', null, function(l) { return l.gettext("Support"); }),
-                            domMgr.mk('p', null, function(l) { return l.gettext("Discuss ideas, get involved with Igaro App development, or seek help."); }),
+                            domMgr.mk('h1', null, function() { return this.gettext("Support"); }),
+                            domMgr.mk('p', null, function() { return this.gettext("Discuss ideas, get involved with Igaro App development, or seek help."); }),
                             list.container
                         ]);
                     });

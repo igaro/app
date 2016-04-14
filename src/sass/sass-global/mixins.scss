@@ -25,7 +25,8 @@ $PAGE_PADDING_HALF_HEIGHT : 1%;
 }
 
 @mixin commongradient {
-    background: linear-gradient(color-stops(#FFF 0%, #F0F0F0 100%));
+    background-color: #fff;
+    background: linear-gradient(to bottom,#FFF 0%, #F0F0F0 100%);
 }
 
 @mixin commonboxshadow {
@@ -100,7 +101,6 @@ $PAGE_PADDING_HALF_HEIGHT : 1%;
             width:50%;
         }
 
-
         >a {
 
             color:#000;
@@ -113,7 +113,8 @@ $PAGE_PADDING_HALF_HEIGHT : 1%;
             }
 
             &:hover {
-                background: linear-gradient(color-stops(#F9F9F9 0%, #E0E0E0 100%));
+                background-color:#f9f9f9;
+                background: linear-gradient(to bottom,#F9F9F9 0%, #E0E0E0 100%);
                 border-top-color:#ccc;
                 border-left-color:#c5c5c5;
                 border-right-color:#c5c5c5;

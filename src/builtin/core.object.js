@@ -294,6 +294,6 @@
                 return new CoreObjectMgr(parent);
             }
         };
-    }
+    };
 
 })(this);

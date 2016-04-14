@@ -7,7 +7,8 @@
     module.exports = function() {
 
         // private
-        var providers = [];
+        var providers = [],
+            trier;
 
         /* Manager
          * @constructor
@@ -18,40 +19,54 @@
             this.parent = parent;
         };
 
-        /* Returns a value in a store
-         * @param {string} id - name of value to return, dot notation. Doesn't require object namespace
-         * @param {object} [o] - config literal to switch provider and potentially supply other flags to the provider
-         * @returns {*Promise} containg the held value
+        /* A helper to determine the store
+         *  @param {object] [o] config literal
+         *  @param {boolean} [required=false]
+         *  @returns {object} the store
          */
-        CoreStoreMgr.prototype.get = function(id,o) {
+        var determineStore = function(o, required) {
+
+            if (o && o.type) {
+                var type = providers[o.type];
+                if (! type) {
+                    if (required)
+                        throw new Error('core.store -> invalid provider or default not set.',type);
+                } else {
+                    return type;
+                }
+            }
+            return store.defaultProvider;
+        }
+
+        /* Returns a value in a store
+         * @param {string} id - name of value to return, dot notation, i.e local, session, cookie
+         * @param {object} [o] - config literal to switch provider and potentially supply other flags to the provider
+         * @param {boolean} [noFallback=false] - throws if the store is unavailable, else uses default
+         * @returns {Promise} containing the held value
+         */
+        CoreStoreMgr.prototype.get = function(id,o,noFallback) {
 
             var name = this.parent.name;
             return Promise.resolve().then(function() {
 
-                var type = o && o.type? providers[o.type] : store.defaultProvider;
-                if (! type)
-                    throw new Error('core.store -> invalid provider or default not set.',type);
-
-                return type.get(name+':'+id,o);
+                return determineStore(o,noFallback).get(name+':'+id,o);
             });
         };
 
         /* Sets a value in a store
-         * @param {string} id - name of value to set, dot notation. Doesn't require object namespace
+         * @param {string} id - name of value to set, dot notation, i.e local, session, cookie
          * @param {*} [value] - value to set. Null or undefined will delete the key.
          * @param {object} [o] - config literal to switch provider, set expiry date/time, and potentially supply other flags to the provider
+         * @param {boolean} [noFallback=false] - throws if the store is unavailable, else uses default
          * @returns {Promise} once set
          */
-        CoreStoreMgr.prototype.set = function(id,value,o) {
+        CoreStoreMgr.prototype.set = function(id,value,o,noFallback) {
 
             var name = this.parent.name;
             return Promise.resolve().then(function() {
 
-                var type = o && o.type? providers[o.type] : store.defaultProvider;
-                if (! type)
-                    throw new Error('core.store -> invalid provider or default not set.',type);
-
-                var expiry = o && o.expiry? o.expiry.getTime() : null;
+                var type = determineStore(o,noFallback),
+                    expiry = o && o.expiry? o.expiry.getTime() : null;
                 return type.set(name+':'+id,value,expiry,o);
             });
         };
@@ -104,6 +119,21 @@
             }
         };
 
+        // dummy provider
+        store.installProvider(
+            'dummy',
+            {
+                get : function() {
+
+                    return Promise.resolve(null);
+                },
+                set : function() {
+
+                    return Promise.resolve(null);
+                }
+            }
+        );
+
         // cookie provider
         store.installProvider(
             'cookie',
@@ -150,61 +180,75 @@
         );
 
         // local provider
-        store.installProvider(
-            'local',
-            {
-                get : function(id) {
-                    return Promise.resolve().then(function() {
-                        var v = localStorage.getItem(id);
-                        if (v)
-                            v = JSON.parse(v);
-                        if (! v)
-                            return;
-                        if (v.expiry && v.expiry < new Date().getTime()) {
-                            localStorage.setItem(id,null);
-                            return;
-                        }
-                        return v.value;
-                    });
-                },
-                set : function(id,value,expiry) {
-                    return Promise.resolve().then(function() {
-                        value = typeof value === 'undefined' || value === null? null : JSON.stringify({ value:value, expiry:expiry });
-                        localStorage.setItem(id,value);
-                    });
+        trier = null;
+        try {
+            trier = window.localStorage;
+        } catch(e) {
+        }
+        if (trier) {
+            store.installProvider(
+                'local',
+                {
+                    get : function(id) {
+                        return Promise.resolve().then(function() {
+                            var v = localStorage.getItem(id);
+                            if (v)
+                                v = JSON.parse(v);
+                            if (! v)
+                                return;
+                            if (v.expiry && v.expiry < new Date().getTime()) {
+                                localStorage.setItem(id,null);
+                                return;
+                            }
+                            return v.value;
+                        });
+                    },
+                    set : function(id,value,expiry) {
+                        return Promise.resolve().then(function() {
+                            value = typeof value === 'undefined' || value === null? null : JSON.stringify({ value:value, expiry:expiry });
+                            localStorage.setItem(id,value);
+                        });
+                    }
                 }
-            }
-        );
+            );
+        }
 
         // session provider
-        store.installProvider(
-            'session',
-            {
-                get : function(id) {
-                    return Promise.resolve().then(function() {
-                        var v = sessionStorage.getItem(id);
-                        if (v)
-                            v = JSON.parse(v);
-                        if (! v)
-                            return;
-                        if (v.expiry && v.expiry < new Date().getTime()) {
-                            sessionStorage.setItem(id,null);
-                            return;
-                        }
-                        return v.value;
-                    });
-                },
-                set : function(id,value,expiry) {
-                    return Promise.resolve().then(function() {
-                        value = typeof value === 'undefined' || value === null? null : JSON.stringify({ value:value, expiry:expiry });
-                        sessionStorage.setItem(id,value);
-                    });
+        trier = null;
+        try {
+            trier = window.sessionStorage;
+        } catch(e) {
+        }
+        if (trier) {
+            store.installProvider(
+                'session',
+                {
+                    get : function(id) {
+                        return Promise.resolve().then(function() {
+                            var v = sessionStorage.getItem(id);
+                            if (v)
+                                v = JSON.parse(v);
+                            if (! v)
+                                return;
+                            if (v.expiry && v.expiry < new Date().getTime()) {
+                                sessionStorage.setItem(id,null);
+                                return;
+                            }
+                            return v.value;
+                        });
+                    },
+                    set : function(id,value,expiry) {
+                        return Promise.resolve().then(function() {
+                            value = typeof value === 'undefined' || value === null? null : JSON.stringify({ value:value, expiry:expiry });
+                            sessionStorage.setItem(id,value);
+                        });
+                    }
                 }
-            }
-        );
+            );
+        }
 
         // default provider to: LOCAL STORAGE
-        store.defaultProvider = providers.local;
+        store.defaultProvider = providers.local || providers.dummy;
 
         return store;
     };

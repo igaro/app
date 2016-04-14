@@ -222,7 +222,7 @@
 
                     return domMgr.mk('input[text]',null,null, function() {
 
-                        dom.setPlaceholder(this,function(l) { return l.gettext("Search"); });
+                        dom.setPlaceholder(this,function() { return this.gettext("Search"); });
                         var s = this;
                         domMgr.parent.searchFn = function(column) {
 

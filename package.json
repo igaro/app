@@ -14,6 +14,7 @@
     "jsxgettext": "^0.8.2",
     "nightwatch": "^0",
     "node-sass": "^3.4.2",
+    "node-sass-asset-functions": "0.0.9",
     "nodeunit": "^0",
     "po2json": "^0.3",
     "uglify-js": "^2.6.2",

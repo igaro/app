@@ -48,7 +48,7 @@ model.managers.object.create('table', {\n \
         ]\n \
     }\n \
 });",
-            desc : function(l) { return l.gettext("Creates a table with header,body,footer objects."); },
+            desc : function() { return this.gettext("Creates a table with header,body,footer objects."); },
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
@@ -72,7 +72,7 @@ model.managers.object.create('table', {\n \
                 {
                     name : 'searchRow',
                     instanceof : function() { return data.objects.row; },
-                    desc : function(l) { return l.gettext("A search row is always added to the body. Use .addColumn() to insert blank column or tbl.addSearchColumn() to insert a search column."); }
+                    desc : function() { return this.gettext("A search row is always added to the body. Use .addColumn() to insert blank column or tbl.addSearchColumn() to insert a search column."); }
                 }
             ],
             usage : {
@@ -83,7 +83,7 @@ model.managers.object.create('table', {\n \
                         name : 'addSearchColumn',
                         type : 'function',
                         async: true,
-                        desc : function(l) { return l.gettext("Adds a search column to the built in search row."); },
+                        desc : function() { return this.gettext("Adds a search column to the built in search row."); },
                         attributes : [
                             {
                                 type:'object',
@@ -92,12 +92,12 @@ model.managers.object.create('table', {\n \
                                     {
                                         name : 'content',
                                         type : 'object',
-                                        desc: function(l) { return l.gettext("The DOM Element control or similar which takes input and calls .searchExec() to perform the search."); }
+                                        desc: function() { return this.gettext("The DOM Element control or similar which takes input and calls .searchExec() to perform the search."); }
                                     },
                                     {
                                         name :'searchFn',
                                         type :'function',
-                                        desc : function(l) { return l.gettext("On .searchExec(), this function is passed the column and should return true if a match is found."); }
+                                        desc : function() { return this.gettext("On .searchExec(), this function is passed the column and should return true if a match is found."); }
                                     }
                                 ]
                             }
@@ -110,7 +110,7 @@ model.managers.object.create('table', {\n \
                         name:'addSearchColumns',
                         type: 'function',
                         async : true,
-                        desc : function(l) { return l.gettext("Calls .addSearchColumn() sequentially."); },
+                        desc : function() { return this.gettext("Calls .addSearchColumn() sequentially."); },
                         attributes : [
                             {
                                 type: 'object',
@@ -129,22 +129,22 @@ model.managers.object.create('table', {\n \
                     {
                         name:'body',
                         instanceof : { name:'Array' },
-                        desc : function(l) { return l.gettext("Calls .Domain.addRow() sequentially."); }
+                        desc : function() { return this.gettext("Calls .Domain.addRow() sequentially."); }
                     },
                     {
                         name:'execSearch',
                         type:'function',
-                        desc:function(l) { return l.gettext("Executes the search mechanism. A column will only be searched if it has a .searchFn() function. See .addSearchColumn()"); }
+                        desc:function() { return this.gettext("Executes the search mechanism. A column will only be searched if it has a .searchFn() function. See .addSearchColumn()"); }
                     },
                     {
                         name:'footer',
                         instanceof : { name:'Array' },
-                        desc : function(l) { return l.gettext("Calls .Domain.addRow() sequentially."); }
+                        desc : function() { return this.gettext("Calls .Domain.addRow() sequentially."); }
                     },
                     {
                         name : 'header',
                         instanceof : { name:'Array' },
-                        desc : function(l) { return l.gettext("Calls .Domain.addRow() sequentially."); }
+                        desc : function() { return this.gettext("Calls .Domain.addRow() sequentially."); }
                     }
                 ]
             }
@@ -165,13 +165,13 @@ model.managers.object.create('table', {\n \
                     container:true,
                     children:['columns']
                 },
-                desc : function(l) { return l.gettext("A row object for a Domain object."); },
+                desc : function() { return this.gettext("A row object for a Domain object."); },
                 attributes : [
                     {
                         name : 'addColumn',
                         type : 'function',
                         async: true,
-                        desc : function(l) { return l.gettext("Adds a Column to a Row."); },
+                        desc : function() { return this.gettext("Adds a Column to a Row."); },
                         attributes : [
                             {
                                 type:'object',
@@ -180,7 +180,7 @@ model.managers.object.create('table', {\n \
                                     {
                                         name : 'content',
                                         type : 'object',
-                                        desc: function(l) { return l.gettext("Appends a language literal, DOM element or text."); }
+                                        desc: function() { return this.gettext("Appends a language literal, DOM element or text."); }
                                     }
                                 ]
                             }
@@ -193,7 +193,7 @@ model.managers.object.create('table', {\n \
                         name:'addColumns',
                         type: 'function',
                         async : true,
-                        desc : function(l) { return l.gettext("Calls .addColumn() sequentially."); },
+                        desc : function() { return this.gettext("Calls .addColumn() sequentially."); },
                         attributes : [
                             {
                                 type: 'object',
@@ -214,7 +214,7 @@ model.managers.object.create('table', {\n \
 
             domain : {
                 name : 'Domain',
-                desc : function(l) { return l.gettext("Represents a header, body or footer object, which in turn contains Row objects."); },
+                desc : function() { return this.gettext("Represents a header, body or footer object, which in turn contains Row objects."); },
                 blessed : {
                     container:true,
                     children:['rows']
@@ -224,7 +224,7 @@ model.managers.object.create('table', {\n \
                         name : 'addRow',
                         type: 'function',
                         async : true,
-                        desc : function(l) { return l.gettext("Adds a Row object to the Domain."); },
+                        desc : function() { return this.gettext("Adds a Row object to the Domain."); },
                         attributes : [
                             {
                                 type: 'object',
@@ -233,7 +233,7 @@ model.managers.object.create('table', {\n \
                                     {
                                         name : 'columns',
                                         instanceof : { name:'Array' },
-                                        desc : function(l) { return l.gettext("Inserts columns sequentially. See Row.addColumn()."); }
+                                        desc : function() { return this.gettext("Inserts columns sequentially. See Row.addColumn()."); }
                                     }
                                 ]
                             }
@@ -246,7 +246,7 @@ model.managers.object.create('table', {\n \
                         name:'addRows',
                         type: 'function',
                         async : true,
-                        desc : function(l) { return l.gettext("Calls .addRow() sequentially."); },
+                        desc : function() { return this.gettext("Calls .addRow() sequentially."); },
                         attributes : [
                             {
                                 type: 'object',

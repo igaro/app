@@ -8,7 +8,7 @@ module.exports = function() {
 
         var data = {
 
-            desc : function(l) { return l.gettext("A very simple status event emitter."); },
+            desc : function() { return this.gettext("A very simple status event emitter."); },
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
@@ -25,7 +25,7 @@ module.exports = function() {
                             type:'object',
                             required:true,
                             attributes:[{
-                                desc: function(l) { return l.gettext("Object to pass onto the event handler."); },
+                                desc: function() { return this.gettext("Object to pass onto the event handler."); },
                             }]
                         }
                     ]

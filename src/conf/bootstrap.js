@@ -1,5 +1,5 @@
 var body = document.body,
-    bodyStyle = body.style;
+    bodyStyle = body.style,
     resetOverflow = function(conf) {
         if (! conf.noBodyStyleOverflowReset)
             bodyStyle.overflow = '';
@@ -16,8 +16,8 @@ body.appendChild(loading);
 
 var appConf = {
     cdn : cdn,
-    msgIncompatible : function(l) { return l.gettext("Your device or software is too old. Please upgrade."); },
-    msgErr : function(l) { return l.gettext("An unexpected error has occurred.<p>Please email <b>app-support@igaro.com</b> for support."); },
+    msgIncompatible : function() { return this.gettext("Your device or software is too old. Please upgrade."); },
+    msgErr : function() { return this.gettext("An unexpected error has occurred.<p>Please email <b>app-support@igaro.com</b> for support."); },
     libs : {
         load :[
             { name:'conf.app.js' }

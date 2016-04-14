@@ -8,7 +8,7 @@ module.exports = function() {
 
         var data = {
 
-            desc : function(l) { return l.gettext("Provides language switching and related functionality. Supported languages are set via an API or configuration file. Uses IETF Tags. Env code is stored."); },
+            desc : function() { return this.gettext("Provides language switching and related functionality. Supported languages are set via an API or configuration file. Uses IETF Tags. Env code is stored."); },
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
@@ -35,11 +35,11 @@ module.exports = function() {
                             type:'string',
                             required:true,
                             attributes:[{
-                                desc: function(l) { return l.gettext("The code to match."); },
+                                desc: function() { return this.gettext("The code to match."); },
                             }]
                         }
                     ],
-                    desc: function(l) { return l.gettext("Returns an object literal from the pool for a specified code."); },
+                    desc: function() { return this.gettext("Returns an object literal from the pool for a specified code."); },
                     returns: {
                         attributes : [
                             {
@@ -51,7 +51,7 @@ module.exports = function() {
                 {
                     name:'env',
                     type:'string',
-                    desc: function(l) { return l.gettext("The currently applied currency code."); }
+                    desc: function() { return this.gettext("The currently applied currency code."); }
                 },
                 {
                     name:'mapKey',
@@ -61,7 +61,7 @@ module.exports = function() {
                             type:'*',
                             required:true,
                             attributes:[{
-                                desc: function(l) { return l.gettext("A structure containing language codes."); }
+                                desc: function() { return this.gettext("A structure containing language codes."); }
                             }]
                         }
                     ],
@@ -72,36 +72,36 @@ module.exports = function() {
                             }
                         ]
                     },
-                    desc: function(l) { return l.gettext("Executes a function then/or steps into an object literal using the current language code and returns what's there."); }
+                    desc: function() { return this.gettext("Executes a function then/or steps into an object literal using the current language code and returns what's there."); }
                 },
                 {
                     name:'pool',
                     type:'object',
-                    desc: function(l) { return l.gettext("A literal list of supported currency codes."); }
+                    desc: function() { return this.gettext("A literal list of supported currency codes."); }
                 },
                 {
                     name:'setEnv',
                     type:'function',
                     async:true,
-                    desc: function(l) { return l.gettext("Applies a currency code to the current environment."); },
+                    desc: function() { return this.gettext("Applies a currency code to the current environment."); },
                     attributes : [{
                         type:'string',
                         required:true,
                         attributes:[{
-                            desc: function(l) { return l.gettext("The code must exist in the current pool and is case sensitive."); },
+                            desc: function() { return this.gettext("The code must exist in the current pool and is case sensitive."); },
                         }]
                     }]
                 },
                 {
                     name:'setPool',
                     type:'function',
-                    desc: function(l) { return l.gettext("Sets supported currency data."); },
+                    desc: function() { return this.gettext("Sets supported currency data."); },
                     async:true,
                     attributes : [{
                         type:'string',
                         required:true,
                         attributes:[{
-                            desc: function(l) { return l.gettext("See conf.app.js for an example."); },
+                            desc: function() { return this.gettext("See conf.app.js for an example."); },
                         }]
                     }]
                 },

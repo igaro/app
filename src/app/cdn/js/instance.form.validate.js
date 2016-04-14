@@ -13,14 +13,14 @@ module.exports = function(app) {
         dom = app['core.dom'];
 
     var l = {
-        required : function(l) { return l.gettext("Value required"); },
-        pattern : function(l) { return l.gettext("Invalid value"); },
-        min : function(l) { return l.gettext("Value too low"); },
-        minLength : function(l) { return l.gettext("Length too small"); },
-        max : function(l) { return l.gettext("Value too high"); },
-        isNaN : function(l) { return l.gettext("Not a number"); },
-        email : function(l) { return l.gettext("Invalid email"); },
-        tel : function(l) { return l.gettext("Enter only digits"); }
+        required : function() { return this.gettext("Value required"); },
+        pattern : function() { return this.gettext("Invalid value"); },
+        min : function() { return this.gettext("Value too low"); },
+        minLength : function() { return this.gettext("Length too small"); },
+        max : function() { return this.gettext("Value too high"); },
+        isNaN : function() { return this.gettext("Not a number"); },
+        email : function() { return this.gettext("Invalid email"); },
+        tel : function() { return this.gettext("Enter only digits"); }
     };
 
     /* Validation Instance

@@ -7,7 +7,7 @@ module.exports = function() {
     return function(model) {
 
         var data = {
-            desc : function(l) { return l.gettext("This library works around the 300ms browser click delay. This module is included when running under a local file system / Cordova."); },
+            desc : function() { return this.gettext("This library works around the 300ms browser click delay. This module is included when running under a local file system / Cordova."); },
             usage : {
                 direct : true,
             },

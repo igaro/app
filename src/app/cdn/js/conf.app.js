@@ -33,19 +33,19 @@
             // add supported languages - IETF
             language.setPool(
 
-                @@include('conf/languages.json')
+                @@include('conf/languages.js')
             ),
 
             // add supported countries - ISO 3166-2
             country.setPool(
 
-                @@include('conf/countries.json')
+                @@include('conf/countries.js')
             ),
 
             // add supported currencies - ISO 4217
             currency.setPool(
 
-                @@include('conf/currencies.json')
+                @@include('conf/currencies.js')
             )
 
         ]).then(function () {
@@ -58,14 +58,14 @@
             @@include('conf/http_401_oauth.js');
 
             // route XHR errors (404 etc) to Toast
-            var httpCodeTextMap = @@include('conf/http_codes.json');
+            var httpCodeTextMap = @@include('conf/http_codes.js');
             @@include('conf/http_code_toast.js');
 
             // setup page with core routes
             rootEmitter.on('state.init', function() {
 
                 // conf
-                var init = @@include('conf/router_base.json');
+                var init = @@include('conf/router_base.js');
 
                 // define root path level
                 router.rootPathLevel = init.base.level;

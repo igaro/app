@@ -53,7 +53,7 @@ body >.core-router >.footer {
         >.wrapper { display:none !important; }
         height:0;
         background-color:none;
-    }	
+    }
 
 }
 
@@ -68,14 +68,14 @@ body:not([data-scrollPosition="0"]) >.core-router >.footer >.toTop {
 		position:absolute;
 		right:0;
 		bottom:8em;
-		background: linear-gradient(color-stops(#393832 0%, #111 100%));
+		background: #000;
 		display:inline-block;
 		box-shadow: 0 0em 1em 0.2em #444;
 		height:3em;
 		width:3em;
 		border-radius: 0.2em 0 0 0.2em;
-		transition: all 0.5s; 
-		-webkit-transition: all 0.5s; 
+		transition: all 0.5s;
+		-webkit-transition: all 0.5s;
 		>.navTop {
 			height:100%;
 			background: inline-image("route.footer/top.svg") no-repeat 50% 50%;

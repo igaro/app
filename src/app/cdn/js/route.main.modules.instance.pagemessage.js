@@ -25,7 +25,7 @@ model.managers.object.create('pagemessage', { \n \
         en : 'After closing this message try refreshing your page.', \n \
     } \n \
 });",
-            desc : function(l) { return l.gettext("Provides a styled message for display on a view."); },
+            desc : function() { return this.gettext("Provides a styled message for display on a view."); },
             blessed:{
                 container:true
             },
@@ -40,23 +40,23 @@ model.managers.object.create('pagemessage', { \n \
                     {
                         name:'id',
                         type:'string',
-                        desc : function(l) { return l.gettext("Used to retain a hidden state, where applicable."); }
+                        desc : function() { return this.gettext("Used to retain a hidden state, where applicable."); }
                     },
                     {
                         name:'hideable',
                         type:'boolean',
-                        desc : function(l) { return l.gettext("Allow the message to be permanently hidden."); }
+                        desc : function() { return this.gettext("Allow the message to be permanently hidden."); }
                     },
                     {
                         name:'message',
                         type:'object',
                         required:true,
-                        desc : function(l) { return l.gettext("A language literal to be displayed."); }
+                        desc : function() { return this.gettext("A language literal to be displayed."); }
                     },
                     {
                         name:'type',
                         type:'string',
-                        desc : function(l) { return l.gettext("Defines the style. Choose between; warn, info, error, default, success and ok, or make your own."); }
+                        desc : function() { return this.gettext("Defines the style. Choose between; warn, info, error, default, success and ok, or make your own."); }
                     }
                 ]
             }

@@ -148,6 +148,11 @@ module.exports = function(app, params) {
             return n;
         },
 
+        gettext : function(t) {
+
+            return t;
+        },
+
         /* Language key mapper
          * @param {(object|function)} c - containing or returning the object to use.
          * @returns {string} the env language is used on the object to return the value, reverting to denomator and default language if unavailable.

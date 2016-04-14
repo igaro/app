@@ -20,11 +20,11 @@ module.exports = function(app) {
             coreObject = app['core.object'],
             debugMgr = managers.debug;
 
-        model.stash.title=function(l) { return l.gettext("Modules"); };
-        model.stash.description=function(l) { return l.gettext("All main respository module documentation can be found on this page."); };
+        model.stash.title=function() { return this.gettext("Modules"); };
+        model.stash.description=function() { return this.gettext("All main respository module documentation can be found on this page."); };
 
-        domMgr.mk('h1',wrapper, function(l) { return l.gettext("Igaro Repository"); });
-        domMgr.mk('button',domMgr.mk('p',wrapper), function(l) { return l.gettext("View on Github"); }).addEventListener('click', function() {
+        domMgr.mk('h1',wrapper, function() { return this.gettext("Igaro Repository"); });
+        domMgr.mk('button',domMgr.mk('p',wrapper), function() { return this.gettext("View on Github"); }).addEventListener('click', function() {
             window.open('https://github.com/igaro/app');
         });
 
@@ -84,27 +84,27 @@ module.exports = function(app) {
                     attributes.push(
                         {
                             name:"className",
-                            desc: function(l) { return l.gettext("Appends a className onto the container."); },
+                            desc: function() { return this.gettext("Appends a className onto the container."); },
                             type:'object'
                         },
                         {
                             name:"container",
-                            desc: function(l) { return l.gettext("A container in which to append the new object's container. May be an Element or an object with a container."); },
+                            desc: function() { return this.gettext("A container in which to append the new object's container. May be an Element or an object with a container."); },
                             type:'object'
                         },
                         {
                             name:'prepend',
                             type:'boolean',
-                            desc:function(l) { return l.gettext("Inserts the new object's container at the beginning of the specified container."); }
+                            desc:function() { return this.gettext("Inserts the new object's container at the beginning of the specified container."); }
                         },
                         {
                             name:'insertAfter',
-                            desc:function(l) { return l.gettext("Inserts the new object's container after the index of a specified object. The object can be an Element or an object with a container."); },
+                            desc:function() { return this.gettext("Inserts the new object's container after the index of a specified object. The object can be an Element or an object with a container."); },
                             type:'object'
                         },
                         {
                             name:'insertBefore',
-                            desc:function(l) { return l.gettext("Inserts the new object's container before before the index of a specified object. The object can be an Element or an object with a container."); },
+                            desc:function() { return this.gettext("Inserts the new object's container before before the index of a specified object. The object can be an Element or an object with a container."); },
                             type:'object'
                         }
                     );
@@ -115,19 +115,19 @@ module.exports = function(app) {
                         {
                             name:'prepend',
                             type:'boolean',
-                            desc:function(l) { return l.gettext("Inserts any container and the object into the beginning of parent array(s)."); }
+                            desc:function() { return this.gettext("Inserts any container and the object into the beginning of parent array(s)."); }
                         }
                     );
                     if (typeof decorateWithOrder === 'function') {
                         attributes.push(
                             {
                                 name:'insertAfter',
-                                desc:function(l) { return l.gettext("Inserts any container and the object into parent array(s) after the index of a specified object."); },
+                                desc:function() { return this.gettext("Inserts any container and the object into parent array(s) after the index of a specified object."); },
                                 instanceof : decorateWithOrder
                             },
                             {
                                 name:'insertBefore',
-                                desc:function(l) { return l.gettext("Inserts any container and the object into parent array(s) before the index of a specified object."); },
+                                desc:function() { return this.gettext("Inserts any container and the object into parent array(s) before the index of a specified object."); },
                                 instanceof : decorateWithOrder
                             }
                         );
@@ -143,50 +143,50 @@ module.exports = function(app) {
                         {
                             name:"destroy",
                             async:true,
-                            desc: function(l) { return l.gettext("Call this to destroy the object. Cleanup (dependencies, DOM container, events, parent array removal) is automatic."); },
+                            desc: function() { return this.gettext("Call this to destroy the object. Cleanup (dependencies, DOM container, events, parent array removal) is automatic."); },
                             type:"function"
                         },
                         {
                             name:"disable",
                             type:"function",
-                            desc: function(l) { return l.gettext("Sets the disabled flag. This does not affect object functionality which should manually check the flag and adjust it's response. If the object has a container Element of an INPUT type then this will be disabled."); },
+                            desc: function() { return this.gettext("Sets the disabled flag. This does not affect object functionality which should manually check the flag and adjust it's response. If the object has a container Element of an INPUT type then this will be disabled."); },
                             attributes:[{
                                 type:'boolean',
                                 attributes:[{
-                                   desc:function(l) { return l.gettext("Define false to enable. Default is true."); }
+                                   desc:function() { return this.gettext("Define false to enable. Default is true."); }
                                 }]
                             }]
                         },
                         {
                             name:"disabled",
                             type:"boolean",
-                            desc: function(l) { return l.gettext("Indicates if the object is disabled."); }
+                            desc: function() { return this.gettext("Indicates if the object is disabled."); }
                         },
                         {
                             name:'managers',
-                            desc:function(l) { return l.gettext("Provides customised module functionality. See core.object documentation."); },
+                            desc:function() { return this.gettext("Provides customised module functionality. See core.object documentation."); },
                             type:'object',
                             attributes:managers.map(function(o) {
                                 return {
                                     name:o[0],
                                     type:'object',
-                                    desc:language.substitute(function(l) { return l.gettext("A manager. See %[0]."); }, o[1])
+                                    desc:language.substitute(function() { return this.gettext("A manager. See %[0]."); }, o[1])
                                 };
                             })
                         },
                         {
                             name:"name",
-                            desc: function(l) { return l.gettext("A value identifying the object type. Used by managers, for building the path, debugging, and events."); },
+                            desc: function() { return this.gettext("A value identifying the object type. Used by managers, for building the path, debugging, and events."); },
                             type:"string"
                         },
                         {
                             name:"parent",
-                            desc: function(l) { return l.gettext("Reference to the parent object, if applicable."); },
+                            desc: function() { return this.gettext("Reference to the parent object, if applicable."); },
                             type:'object'
                         },
                         {
                             name:"path",
-                            desc: function(l) { return l.gettext("An internal path to the object type which indicates the module it came from and it's location in the instantiation tree. Not to be confused with URL path."); },
+                            desc: function() { return this.gettext("An internal path to the object type which indicates the module it came from and it's location in the instantiation tree. Not to be confused with URL path."); },
                             instanceof : { name:'Array' }
                         }
                     );
@@ -196,34 +196,34 @@ module.exports = function(app) {
                             attributes.push(
                                 {
                                     name:"container",
-                                    desc: function(l) { return l.gettext("A container Element representing the object."); },
+                                    desc: function() { return this.gettext("A container Element representing the object."); },
                                     instanceof : { name:'Element' }
                                 },
                                 {
                                     name:"hide",
                                     type:"function",
-                                    desc: function(l) { return l.gettext("Hides the container Element."); },
+                                    desc: function() { return this.gettext("Hides the container Element."); },
                                     attributes:[{
                                         type:'boolean',
                                         attributes:[{
-                                           desc:function(l) { return l.gettext("Define false to show. Default is true."); }
+                                           desc:function() { return this.gettext("Define false to show. Default is true."); }
                                         }]
                                     }]
                                 },
                                 {
                                     name:"hidden",
                                     type:"boolean",
-                                    desc: function(l) { return l.gettext("Indicates if the container Element is hidden."); }
+                                    desc: function() { return this.gettext("Indicates if the container Element is hidden."); }
                                 },
                                 {
                                     name:"show",
                                     type:"function",
-                                    desc: function(l) { return l.gettext("Shows the container Element."); }
+                                    desc: function() { return this.gettext("Shows the container Element."); }
                                 },
                                 {
                                     name:"toggleVisibility",
                                     type:"function",
-                                    desc: function(l) { return l.gettext("Toggles whether the container Element between visible and hidden."); }
+                                    desc: function() { return this.gettext("Toggles whether the container Element between visible and hidden."); }
                                 }
                             );
                         }
@@ -232,7 +232,7 @@ module.exports = function(app) {
                                 attributes.push({
                                     name:o,
                                     instanceof : { name:'Array' },
-                                    desc:function(l) { return l.gettext("A pool of child objects."); }
+                                    desc:function() { return this.gettext("A pool of child objects."); }
                                 });
                             });
                         }
@@ -375,7 +375,7 @@ module.exports = function(app) {
             };
 
             var createTable = function(meta,container,manager) {
-                domMgr.mk('p',container,language.substitute(function(l) { return l.gettext("%[0] - required, %[1]underlined%[2] - asynchronous (%[3])"); },'<b>*</b>','<b><u>','</u></b>','<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>'));
+                domMgr.mk('p',container,language.substitute(function() { return this.gettext("%[0] - required, %[1]underlined%[2] - asynchronous (%[3])"); },'<b>*</b>','<b><u>','</u></b>','<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>'));
                 return objectMgr.create('table',{
                     container:container,
                     header : {
@@ -383,13 +383,13 @@ module.exports = function(app) {
                             {
                                 columns : [
                                     {
-                                        content : function(l) { return l.gettext("Name"); }
+                                        content : function() { return this.gettext("Name"); }
                                     },
                                     {
-                                        content : function(l) { return l.gettext("Type"); }
+                                        content : function() { return this.gettext("Type"); }
                                     },
                                     {
-                                        content : function(l) { return l.gettext("Description"); }
+                                        content : function() { return this.gettext("Description"); }
                                     }
                                 ]
                             }
@@ -406,69 +406,69 @@ module.exports = function(app) {
             m.stash.title= { en : m.name };
 
             if (data.desc) {
-                domMgr.mk('h1',v,function(l) { return l.gettext("Description"); });
+                domMgr.mk('h1',v,function() { return this.gettext("Description"); });
                 domMgr.mk('p',v,data.desc);
                 m.stash.description=data.desc;
             }
 
             if (data.embedded)
-                domMgr.mk('p',v,function(l) { return l.gettext("This module is embedded into igaro.js"); });
+                domMgr.mk('p',v,function() { return this.gettext("This module is embedded into igaro.js"); });
 
             if (data.download !== false) {
                 var l = data.download? data.download : 'https://github.com/igaro/app/blob/master/app/compile/js/'+m.name+'.js';
-                domMgr.mk('button',v,function(l) { return l.gettext("Download"); }).addEventListener('click', function() {
+                domMgr.mk('button',v,function() { return this.gettext("Download"); }).addEventListener('click', function() {
                     window.open(l);
                 });
             }
 
             if (data.usage) {
                 var u = data.usage;
-                domMgr.mk('h1',v,function(l) { return l.gettext("Usage"); });
+                domMgr.mk('h1',v,function() { return this.gettext("Usage"); });
                 if (u.instantiate || u.class) {
                     var n= 'app[\''+m.name+'\']';
                     if (u.attributes)
                         n += '(o)';
                     if (u.instantiate) {
-                        domMgr.mk('p',v,function(l) { return l.gettext("Blessed objects lazy load and instantiate via <b>[object].managers.object.create()</b>."); });
-                        domMgr.mk('p',v,language.substitute(function(l) { return l.gettext("Unblessed objects use <b>new %[0]</b>."); },n));
+                        domMgr.mk('p',v,function() { return this.gettext("Blessed objects lazy load and instantiate via <b>[object].managers.object.create()</b>."); });
+                        domMgr.mk('p',v,language.substitute(function() { return this.gettext("Unblessed objects use <b>new %[0]</b>."); },n));
                     } else {
-                        domMgr.mk('p',v,language.substitute(function(l) { return l.gettext("Access <b>%[0]</b> directly without instantiating."); },n));
+                        domMgr.mk('p',v,language.substitute(function() { return this.gettext("Access <b>%[0]</b> directly without instantiating."); },n));
                     }
                 } else if (u.direct) {
-                    domMgr.mk('p',v,function(l) { return l.gettext("Access the features of this library directly."); });
+                    domMgr.mk('p',v,function() { return this.gettext("Access the features of this library directly."); });
                 }
                 if (data.manager) {
-                    domMgr.mk('p',v, function(l) { return l.gettext("Provides a manager for a blessed object. See Manager below."); });
+                    domMgr.mk('p',v, function() { return this.gettext("Provides a manager for a blessed object. See Manager below."); });
                 }
                 if (u.attributes) {
-                    domMgr.mk('p',v, function(l) { return l.gettext("Where <b>o</b> is an object containing attributes from the following table."); });
+                    domMgr.mk('p',v, function() { return this.gettext("Where <b>o</b> is an object containing attributes from the following table."); });
                     createTable(u, domMgr.mk('p',v));
                 }
             }
 
             if (data.attributes || data.blessed) {
-                domMgr.mk('h1',v,function(l) { return l.gettext("Attributes"); });
+                domMgr.mk('h1',v,function() { return this.gettext("Attributes"); });
                 if (data.blessed)
                     showBlessed = true;
                 createTable(data, domMgr.mk('p',v));
             }
 
             if (data.manager) {
-                domMgr.mk('h1',v,function(l) { return l.gettext("Manager"); });
-                domMgr.mk('p',v,function(l) { return l.gettext("A blessed object can use this module as a manager. Functions shown here should be used over those of the same name in Attributes to reduce coding complexity and to aid automation and efficiency."); });
+                domMgr.mk('h1',v,function() { return this.gettext("Manager"); });
+                domMgr.mk('p',v,function() { return this.gettext("A blessed object can use this module as a manager. Functions shown here should be used over those of the same name in Attributes to reduce coding complexity and to aid automation and efficiency."); });
                 if (typeof data.manager === 'string')
-                    domMgr.mk('p',v,language.substitute(function(l) { return l.gettext("You can access this manager using <b>[object].managers.%[0]</b>."); },data.manager));
+                    domMgr.mk('p',v,language.substitute(function() { return this.gettext("You can access this manager using <b>[object].managers.%[0]</b>."); },data.manager));
                 createTable(data, domMgr.mk('p',v), true);
             }
 
             if (data.demo) {
-                domMgr.mk('h1',v,function(l) { return l.gettext("Demo"); });
-                domMgr.mk('h2',v,function(l) { return l.gettext("Code"); });
+                domMgr.mk('h1',v,function() { return this.gettext("Demo"); });
+                domMgr.mk('h2',v,function() { return this.gettext("Code"); });
                 var cc = domMgr.mk('p',v);
 
                 model.managers.object.create('pagemessage',{
                     type:'info',
-                    message: function(l) { return l.gettext("Hint: <b>c</b> is a container element. For blessed objects this will default to the objects container."); },
+                    message: function() { return this.gettext("Hint: <b>c</b> is a container element. For blessed objects this will default to the objects container."); },
                     container:cc,
                     hideable: true,
                     id:model.path.join('.')+'.democode'
@@ -476,7 +476,7 @@ module.exports = function(app) {
                     debugMgr.handle(e);
                 });
                 domMgr.mk('pre',v, data.demo.trim(), 'democode');
-                domMgr.mk('h2',v,function(l) { return l.gettext("Output"); });
+                domMgr.mk('h2',v,function() { return this.gettext("Output"); });
                 var c = domMgr.mk('p',v); //jshint ignore:line
                 try {
                     var r = eval(data.demo);
@@ -491,7 +491,7 @@ module.exports = function(app) {
             }
 
             if (data.dependencies) {
-                domMgr.mk('h1',v,function(l) { return l.gettext("Dependencies"); });
+                domMgr.mk('h1',v,function() { return this.gettext("Dependencies"); });
                 domMgr.mk('p',v,null,function() {
                     var s = this;
                     data.dependencies.forEach(function(o) {
@@ -511,7 +511,7 @@ module.exports = function(app) {
             }
 
             if (data.related) {
-                domMgr.mk('h1',v,function(l) { return l.gettext("Related"); });
+                domMgr.mk('h1',v,function() { return this.gettext("Related"); });
                 domMgr.mk('p',v,null,function() {
                     var s = this;
                     data.related.sort().forEach(function(o) {
@@ -523,7 +523,7 @@ module.exports = function(app) {
             }
 
             if (data.author) {
-                domMgr.mk('h1',v,function(l) { return l.gettext("Author"); });
+                domMgr.mk('h1',v,function() { return this.gettext("Author"); });
                 var d = data.author;
                 if (d instanceof Array) {
                     d.forEach(function (a) {
@@ -535,7 +535,7 @@ module.exports = function(app) {
             }
 
             if (data.extlinks) {
-                domMgr.mk('h1',v,function(l) { return l.gettext("External Links"); });
+                domMgr.mk('h1',v,function() { return this.gettext("External Links"); });
                 data.extlinks.forEach(function(o) {
                     var name, href;
                     if (typeof o === 'string') {
@@ -557,10 +557,10 @@ module.exports = function(app) {
                     {
                         columns : [
                             {
-                                content : function(l) { return l.gettext("Name"); }
+                                content : function() { return this.gettext("Name"); }
                             },
                             {
-                                content : function(l) { return l.gettext("Description"); }
+                                content : function() { return this.gettext("Description"); }
                             }
                         ]
                     }
@@ -568,45 +568,45 @@ module.exports = function(app) {
             },
             body : {
                 rows : [
-                    ['3rdparty.fastclick', function(l) { return l.gettext("Removes 300ms click delay on touch platforms."); }],
-                    ['3rdparty.hammer', function(l) { return l.gettext("Enables Tap, DoubleTap, Swipe, Drag, Pinch, and Rotate gesture events."); }],
-                    ['3rdparty.moment', function(l) { return l.gettext("Date/time formatting using timezone and language."); }],
-                    ['conf.app', function(l) { return l.gettext("Main configuration file."); }],
-                    ['core.country', function(l) { return l.gettext("Country support and related functionality."); }],
-                    ['core.currency', function(l) { return l.gettext("Currency support and related functionality."); }],
-                    ['core.date', function(l) { return l.gettext("Timezone selection, date related functionality."); }],
-                    ['core.debug', function(l) { return l.gettext("Centralised debug management."); }],
-                    ['core.dom', function(l) { return l.gettext("Provides DOM management and helpers."); }],
-                    ['core.events', function(l) { return l.gettext("Event management, registration and dispatcher."); }],
-                    ['core.file', function(l) { return l.gettext("Filename parsing."); }],
-                    ['core.html', function(l) { return l.gettext("HTML parsing, conversion."); }],
-                    ['core.language', function(l) { return l.gettext("Language support, formatting, related functionality."); }],
-                    ['core.object', function(l) { return l.gettext("Bless, Promise sequencer, form debounce, Array insertion and other helpers."); }],
-                    ['core.router', function(l) { return l.gettext("Router, an MVC alternative using routes to build partials."); }],
-                    ['core.store', function(l) { return l.gettext("Session, local, cookie and remote store access."); }],
-                    ['core.url', function(l) { return l.gettext("URL parsing, related functionality."); }],
-                    ['instance.accordion', function(l) { return l.gettext("Creates a list which can expand and collapse nodes."); }],
-                    ['instance.amd', function(l) { return l.gettext("Async loading of resources, NodeJS/Require style."); }],
-                    ['instance.bookmark', function(l) { return l.gettext("Basic social media bookmarking."); }],
-                    ['instance.date', function(l) { return l.gettext("Date display with language switching & timezone correction."); }],
-                    ['instance.form.validate', function(l) { return l.gettext("Form element value validation routines."); }],
-                    ['instance.jsonp', function(l) { return l.gettext("Retrieve JSON data without CORS limitation."); }],
-                    ['instance.list', function(l) { return l.gettext("LI list management with re-ordering functionality."); }],
-                    ['instance.modaldialog', function(l) { return l.gettext("Async dialog boxes with alert() and confirm() replacements."); }],
-                    ['instance.navigation', function(l) { return l.gettext("Navigation controls (tabs, dropdown etc)."); }],
-                    ['instance.oauth2', function(l) { return l.gettext("Handles the standard authentication credential sign-in process."); }],
-                    ['instance.pagemessage', function(l) { return l.gettext("Displays a formatted message."); }],
-                    ['instance.rte', function(l) { return l.gettext("Rich text data entry and display."); }],
-                    ['instance.samespace', function(l) { return l.gettext("Elements in same space with navigation and animation."); }],
-                    ['instance.table', function(l) { return l.gettext("Table display with row/column management."); }],
-                    ['instance.toast', function(l) { return l.gettext("Toast notification popup and auto hide."); }],
-                    ['instance.xhr', function(l) { return l.gettext("XHR (Ajax) functionality."); }],
-                    ['polyfill.es6', function(l) { return l.gettext("A+ Promises, Array and Object sugar helpers."); }],
-                    ['polyfill.ie.8', function(l) { return l.gettext("Polyfill for Internet Explorer 8."); }],
-                    ['polyfill.js.1.6', function(l) { return l.gettext("Polyfill ancient browsers to Mozilla 1.6 specification."); }],
-                    ['polyfill.js.1.8.1', function(l) { return l.gettext("Polyfill old browsers to Mozilla 1.8.1 specification."); }],
-                    ['polyfill.js.1.8.5', function(l) { return l.gettext("Polyfill deprecated browsers to Mozilla 1.8.5 specification."); }],
-                    ['polyfill.js.classList', function(l) { return l.gettext("Polyfill HTML5 classList helpers onto DOM elements."); }],
+                    ['3rdparty.fastclick', function() { return this.gettext("Removes 300ms click delay on touch platforms."); }],
+                    ['3rdparty.hammer', function() { return this.gettext("Enables Tap, DoubleTap, Swipe, Drag, Pinch, and Rotate gesture events."); }],
+                    ['3rdparty.moment', function() { return this.gettext("Date/time formatting using timezone and language."); }],
+                    ['conf.app', function() { return this.gettext("Main configuration file."); }],
+                    ['core.country', function() { return this.gettext("Country support and related functionality."); }],
+                    ['core.currency', function() { return this.gettext("Currency support and related functionality."); }],
+                    ['core.date', function() { return this.gettext("Timezone selection, date related functionality."); }],
+                    ['core.debug', function() { return this.gettext("Centralised debug management."); }],
+                    ['core.dom', function() { return this.gettext("Provides DOM management and helpers."); }],
+                    ['core.events', function() { return this.gettext("Event management, registration and dispatcher."); }],
+                    ['core.file', function() { return this.gettext("Filename parsing."); }],
+                    ['core.html', function() { return this.gettext("HTML parsing, conversion."); }],
+                    ['core.language', function() { return this.gettext("Language support, formatting, related functionality."); }],
+                    ['core.object', function() { return this.gettext("Bless, Promise sequencer, form debounce, Array insertion and other helpers."); }],
+                    ['core.router', function() { return this.gettext("Router, an MVC alternative using routes to build partials."); }],
+                    ['core.store', function() { return this.gettext("Session, local, cookie and remote store access."); }],
+                    ['core.url', function() { return this.gettext("URL parsing, related functionality."); }],
+                    ['instance.accordion', function() { return this.gettext("Creates a list which can expand and collapse nodes."); }],
+                    ['instance.amd', function() { return this.gettext("Async loading of resources, NodeJS/Require style."); }],
+                    ['instance.bookmark', function() { return this.gettext("Basic social media bookmarking."); }],
+                    ['instance.date', function() { return this.gettext("Date display with language switching & timezone correction."); }],
+                    ['instance.form.validate', function() { return this.gettext("Form element value validation routines."); }],
+                    ['instance.jsonp', function() { return this.gettext("Retrieve JSON data without CORS limitation."); }],
+                    ['instance.list', function() { return this.gettext("LI list management with re-ordering functionality."); }],
+                    ['instance.modaldialog', function() { return this.gettext("Async dialog boxes with alert() and confirm() replacements."); }],
+                    ['instance.navigation', function() { return this.gettext("Navigation controls (tabs, dropdown etc)."); }],
+                    ['instance.oauth2', function() { return this.gettext("Handles the standard authentication credential sign-in process."); }],
+                    ['instance.pagemessage', function() { return this.gettext("Displays a formatted message."); }],
+                    ['instance.rte', function() { return this.gettext("Rich text data entry and display."); }],
+                    ['instance.samespace', function() { return this.gettext("Elements in same space with navigation and animation."); }],
+                    ['instance.table', function() { return this.gettext("Table display with row/column management."); }],
+                    ['instance.toast', function() { return this.gettext("Toast notification popup and auto hide."); }],
+                    ['instance.xhr', function() { return this.gettext("XHR (Ajax) functionality."); }],
+                    ['polyfill.es6', function() { return this.gettext("A+ Promises, Array and Object sugar helpers."); }],
+                    ['polyfill.ie.8', function() { return this.gettext("Polyfill for Internet Explorer 8."); }],
+                    ['polyfill.js.1.6', function() { return this.gettext("Polyfill ancient browsers to Mozilla 1.6 specification."); }],
+                    ['polyfill.js.1.8.1', function() { return this.gettext("Polyfill old browsers to Mozilla 1.8.1 specification."); }],
+                    ['polyfill.js.1.8.5', function() { return this.gettext("Polyfill deprecated browsers to Mozilla 1.8.5 specification."); }],
+                    ['polyfill.js.classList', function() { return this.gettext("Polyfill HTML5 classList helpers onto DOM elements."); }],
                 ].map(function (o) {
 
                     var module = o[0];

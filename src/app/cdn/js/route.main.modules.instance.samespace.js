@@ -17,7 +17,7 @@ module.exports = function() {
     spaces:[0,1,2].map(function(x,i) { return { className:'a'+i }; }),\n\
     transparent:true\n\
 });",
-            desc : function(l) { return l.gettext("Provides a means for multiple elements to occupy the same space on a page with navigation and CSS3 transition effects."); },
+            desc : function() { return this.gettext("Provides a means for multiple elements to occupy the same space on a page with navigation and CSS3 transition effects."); },
             blessed: {
                 container:true,
                 children:['spaces']
@@ -37,27 +37,27 @@ module.exports = function() {
                     {
                         name:'delay',
                         type:'number',
-                        desc : function(l) { return l.gettext("In slideshow mode this is the delay between transitions, measured in milliseconds."); },
+                        desc : function() { return this.gettext("In slideshow mode this is the delay between transitions, measured in milliseconds."); },
                     },
                     {
                         name:'loop',
                         type:'boolean',
-                        desc : function(l) { return l.gettext("Set to true to loop when the navigation cycle reaches the end. Default is true."); }
+                        desc : function() { return this.gettext("Set to true to loop when the navigation cycle reaches the end. Default is true."); }
                     },
                     {
                         name:'spaces',
                         instanceof: { name:'Array' },
-                        desc : function(l) { return l.gettext("Calls .addSpaces()."); }
+                        desc : function() { return this.gettext("Calls .addSpaces()."); }
                     },
                     {
                         name:'start',
                         type:'boolean',
-                        desc: function(l) { return l.gettext("Auto starts the automated transitioning between spaces. Default is false."); }
+                        desc: function() { return this.gettext("Auto starts the automated transitioning between spaces. Default is false."); }
                     },
                     {
                         name:'transparent',
                         type:'boolean',
-                        desc : function(l) { return l.gettext("By default each space's canvas background is set to black. Supply true to disable."); }
+                        desc : function() { return this.gettext("By default each space's canvas background is set to black. Supply true to disable."); }
                     }
                 ]
             },
@@ -66,7 +66,7 @@ module.exports = function() {
                     name:'addSpace',
                     type:'function',
                     async : true,
-                    desc: function(l) { return l.gettext("Creates a Space object."); },
+                    desc: function() { return this.gettext("Creates a Space object."); },
                     returns : {
                         instanceof : function() { return data.objects.space; }
                     },
@@ -84,7 +84,7 @@ module.exports = function() {
                     name:'addSpaces',
                     type:'function',
                     async : true,
-                    desc: function(l) { return l.gettext("Calls .addSpace() in sequence."); },
+                    desc: function() { return this.gettext("Calls .addSpace() in sequence."); },
                     returns : {
                         attributes :[{
                             instanceof : { name:'Array' }
@@ -103,25 +103,25 @@ module.exports = function() {
                 {
                     name:'nav',
                     instanceof : { name:'Element' },
-                    desc : function(l) { return l.gettext("Navigation controls. See instance.samespace.css for customizing how and when this is displayed."); }
+                    desc : function() { return this.gettext("Navigation controls. See instance.samespace.css for customizing how and when this is displayed."); }
                 },
                 {
                     name:'stop',
                     type:'function',
                     async : true,
-                    desc: function(l) { return l.gettext("Stops the automated transitioning between spaces."); }
+                    desc: function() { return this.gettext("Stops the automated transitioning between spaces."); }
                 },
                 {
                     name:'start',
                     type:'function',
                     async: true,
-                    desc: function(l) { return l.gettext("Begins the automated transitioning between spaces."); }
+                    desc: function() { return this.gettext("Begins the automated transitioning between spaces."); }
                 },
                 {
                     name:'to',
                     type:'function',
                     async : true,
-                    desc: function(l) { return l.gettext("Navigates to a space."); },
+                    desc: function() { return this.gettext("Navigates to a space."); },
                     attributes : [
                         {
                             type:'element',

@@ -7,7 +7,7 @@ module.exports = function() {
     return function(model) {
 
         var data = {
-            desc : function(l) { return l.gettext("Moment is a date manipulation and display library. The library has been slightly modified to allow for exporting the library into the Igaro App namespace. Ideally you should access the functionality of this module through instance.date."); },
+            desc : function() { return this.gettext("Moment is a date manipulation and display library. The library has been slightly modified to allow for exporting the library into the Igaro App namespace. Ideally you should access the functionality of this module through instance.date."); },
             usage : {
                 class : true
             },

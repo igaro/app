@@ -7,7 +7,7 @@
         var events = app['core.events'];
 
         // private function to dive into an object and return its container, if it's not a Node object member already
-        var pQ = function(o) {
+        var getContainer = function(o) {
 
             if (!(o instanceof HTMLElement || o instanceof DocumentFragment) && o.container)
                 return o.container;
@@ -94,7 +94,15 @@
                 }
                 if (typeof c !== 'undefined' && c !== null) {
                     if (typeof c === 'function') {
-                        c = c(self);
+                        var coreLang = app['core.language'];
+                        try {
+                            c = c.call(coreLang,self);
+                        } catch(e) {
+
+                            if (! e && typeof e === 'object')
+                                e.noCoreLanguage = true;
+                            throw e;
+                        }
                     } else if (c instanceof Array) {
                         var d = document.createDocumentFragment();
                         c.forEach(function(k) {
@@ -113,24 +121,26 @@
 
             /* Sets the placeholder attribute for a DOM element and listens to language change
              * @param {Node} r - DOM element
-             * @param {object} l - language literal
+             * @param {function} setter - to return content string
              * @returns {null}
              */
-            setPlaceholder : function(r,l) {
+            setPlaceholder : function(r,getter) {
 
-                var f = r.igaroPlaceholderFn;
-                var language = app['core.language'];
+                var setter = r.igaroPlaceholderFn,
+                    language = app['core.language'],
+                    xMgr = language.managers.event;
+                if (typeof getter !== 'function')
+                    throw new TypeError('Second argument must be of type function.');
                 if (! language)
                     throw new Error('core.dom -> core.language is not loaded.');
-                var xMgr = language.managers.event;
-                if (f)
-                    xMgr.remove(f,'setEnv');
-                f = r.igaroPlaceholderFn = function() {
+                if (setter)
+                    xMgr.remove(setter,'setEnv');
+                setter = r.igaroPlaceholderFn = function() {
 
-                    r.placeholder = language.mapKey(l);
+                    r.placeholder = getter.call(language);
                 };
-                xMgr.on('setEnv', f, { deps:[r] });
-                f();
+                xMgr.on('setEnv', setter, { deps:[r] });
+                setter();
             },
 
             /* Hides a DOM element - shortcut className appender
@@ -153,13 +163,13 @@
              */
             isHidden : function(r) {
 
-                var t = r;
+                var t = r,
+                    style = window.getComputedStyle(r);
                 while (t.parentNode && ! t.classList.contains('core-dom-hide')) {
                     t = t.parentNode;
                 }
                 if (! (t instanceof HTMLDocument))
                     return true;
-                var style = window.getComputedStyle(r);
                 return style.visibility === 'hidden' || style.display === 'none';
             },
 
@@ -191,10 +201,10 @@
              */
             offset : function(r) {
 
-                if (! (r instanceof Node))
-                    throw new TypeError('No DOM element supplied');
                 var x = 0,
                     y = 0;
+                if (! (r instanceof Node))
+                    throw new TypeError('No DOM element supplied');
                 while(r) {
                     x += (r.offsetLeft - r.scrollLeft + r.clientLeft);
                     y += (r.offsetTop - r.scrollTop + r.clientTop);
@@ -216,12 +226,12 @@
 
                         self.append(r,a,o);
                     });
-                r = pQ(r);
-                c = pQ(c);
+                r = getContainer(r);
+                c = getContainer(c);
                 if (o && o.insertBefore) {
-                    r.insertBefore(c,pQ(o.insertBefore));
+                    r.insertBefore(c,getContainer(o.insertBefore));
                 } else if (o && o.insertAfter) {
-                    var insertAfter = pQ(o.insertAfter);
+                    var insertAfter = getContainer(o.insertAfter);
                     if (insertAfter.nextElementSibling) {
                         r.insertBefore(c, insertAfter.nextElementSibling);
                     } else {
@@ -234,45 +244,53 @@
 
             /* Sets a DOM Elements content
              * @param {Node} r - DOM element to control
-             * @param {(Node|string|object)} c - DOM Elements, text or a language literal
+             * @param {(Node|string|object|function)} c - DOM Elements, text or a language literal
              * @param {boolean} purge - whether to clear the control, default true
              * @returns {null}
              */
             setContent : function(r,c,purge) {
 
+                var type = typeof c;
+                if (! (r instanceof Node))
+                    throw new TypeError("First argument must be instanceof Node");
                 if (! purge)
-                    this.purge(r,true);
+                    dom.purge(r,true);
                 r.textContent = '';
-                if (typeof c === 'object') {
-                    if (c instanceof HTMLElement || c instanceof DocumentFragment) {
-                        r.appendChild(c);
-                    } else if (c.hasOwnProperty('container')) {
-                        r.appendChild(c.container);
-                    } else {
-                        var language = app['core.language'];
+
+                switch (type) {
+                    case 'object':
+                        if (c instanceof HTMLElement || c instanceof DocumentFragment) {
+                            r.appendChild(c);
+                        } else if (c.hasOwnProperty('container')) {
+                            r.appendChild(c.container);
+                        }
+                        break;
+                    case 'function':
+                        var language = app['core.language'],
+                            xMgr = language.managers.event,
+                            lf = r.igaroLangFn;
                         if (! language)
                             throw new Error('core.dom -> core.language is not loaded.');
-                        var xMgr = language.managers.event,
-                            lf = r.igaroLangFn;
                         if (lf) {
                             xMgr.remove(lf,'setEnv');
                             delete r.igaroLangFn;
                         }
                         var f = r.igaroLangFn = function() {
 
+                            var v = c.call(language);
                             if (r.nodeName === 'META') {
-                                r.content = language.mapKey(c);
+                                r.content = v;
                             } else if (! (r.nodeName === 'INPUT' && r.type && r.type === 'submit') && 'innerHTML' in r) {
-                                r.innerHTML = language.mapKey(c);
-                            } else if ('value' in r) {
-                                r.value = language.mapKey(c);
+                                r.innerHTML = v;
+                            } else if (r.value) {
+                                r.value = v;
                             }
                         };
                         xMgr.on('setEnv', f, { deps:[r] });
                         f();
-                    }
-                } else {
-                    r.innerHTML = c;
+                        break;
+                    default:
+                        r.innerHTML = c;
                 }
             },
 
@@ -285,6 +303,8 @@
 
                 var self = this,
                     node = element.lastChild;
+                if (! (element instanceof Node))
+                    throw new TypeError("First argument must be instanceof Node");
                 while (node) {
                     self.purge(node);
                     events.clean(node);
@@ -302,9 +322,9 @@
              */
             empty : function(element) {
 
-                while (element.firstChild)
-                    element.removeChild(element.firstChild);
-                element.innerHTML = '';
+                if (! (element instanceof Node))
+                    throw new TypeError("First argument must be instanceof Node");
+                element.textContent = '';
             },
 
             /* Removes a DOM element from its parent Node
