@@ -245,21 +245,26 @@
             /* Sets a DOM Elements content
              * @param {Node} r - DOM element to control
              * @param {(Node|string|object|function)} c - DOM Elements, text or a language literal
-             * @param {boolean} purge - whether to clear the control, default true
+             * @param {boolean} purge=true - whether to clear the control, default true
              * @returns {null}
              */
             setContent : function(r,c,purge) {
 
-                var type = typeof c;
+                var self = this,
+                    type = typeof c;
                 if (! (r instanceof Node))
                     throw new TypeError("First argument must be instanceof Node");
-                if (! purge)
-                    dom.purge(r,true);
-                r.textContent = '';
-
+                if (purge !== false) {
+                    this.purge(r,true);
+                    r.textContent = '';
+                }
                 switch (type) {
                     case 'object':
-                        if (c instanceof HTMLElement || c instanceof DocumentFragment) {
+                        if (c instanceof Array) {
+                            c.forEach(function(o) {
+                                self.setContent(r,o,false);
+                            });
+                        } else if (c instanceof HTMLElement || c instanceof DocumentFragment) {
                             r.appendChild(c);
                         } else if (c.hasOwnProperty('container')) {
                             r.appendChild(c.container);
