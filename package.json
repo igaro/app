@@ -1,6 +1,6 @@
 {
   "name": "igaro-app",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/igaro/app.git"
@@ -26,7 +26,12 @@
   },
   "man": "",
   "scripts": {
-    "test": "grunt build && { grunt connect --keepalive=1 & } && ./node_modules/nightwatch/bin/nightwatch -e firefox -c ./tests/nightwatch.json ./tests/src",
+    "pretest": "fuser -k 3006/tcp && node build.js --recipe=devel --serve=3006 &",
+    "test": "sleep 5 && ./node_modules/nightwatch/bin/nightwatch -e firefox -c ./tests/nightwatch.json ./tests/src",
+    "posttest": "fuser -k 3006/tcp",
     "build": "node build.js [<args>]"
+  },
+  "dependencies": {
+    "eslint": "^2.12.0"
   }
 }

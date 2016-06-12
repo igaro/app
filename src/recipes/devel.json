@@ -1,4 +1,11 @@
 {
 
+    "esLint" : {
+
+        "enabled":true,
+        "rules" : {
+
+        }
+    }
 
 }

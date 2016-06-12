@@ -14,9 +14,9 @@
 */
 
 // node version check
-var nodeVersion = parseFloat(process.version.slice(1));
-if (nodeVersion < 5.8)
-    throw new Error("NodeJS 5.8+ is required to run this script. The current version is "+nodeVersion);
+var nodeVersion = process.version.slice(1).split('.');
+if (nodeVersion[0] < 5 && nodeVersion[1] < 8)
+    throw new Error("NodeJS 5.8+ is required to run this script. The current version is "+nodeVersion.join('.'));
 
 // main vars
 var args = require("yargs").argv,
@@ -24,9 +24,10 @@ var args = require("yargs").argv,
     fs = require("fs-extra"),
     sass = require("node-sass"),
     sassXtra = require("node-sass-asset-functions"),
-    watch = require('watch'),
-    uglify = require('uglify-js'),
-    jsxgettext = require('jsxgettext');
+    watch = require("watch"),
+    uglify = require("uglify-js"),
+    jsxgettext = require("jsxgettext"),
+    linter = require("eslint").linter;
 
 // get recipes
 var recipes = fs.readdirSync("src/recipes").map(function(recipe) {
@@ -117,16 +118,25 @@ var getTime = function() {
     return date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
 };
 
+var consoleColor = function(txt,code) {
+
+    console.info('\x1b['+code+'m', txt,'\x1b[0m');
+}
+
 var consoleInfo = function(txt) {
 
-    console.info('\x1b[32m', getTime(), txt,'\x1b[0m');
+    consoleColor(txt,32);
 };
 
 var consoleError = function(txt) {
 
-    console.info('\x1b[31m', getTime(), txt,'\x1b[0m');
+    consoleColor(txt,31);
 };
 
+var consoleWarn = function(txt) {
+
+    consoleColor(txt,33);
+};
 
 /* HTTPD -------------------------------------------------------------- */
 
@@ -177,7 +187,7 @@ var build = {
 
     app : function() {
 
-        consoleInfo("APP:0");
+        var start = process.hrtime();
         return new Promise(function(resolve,reject) {
 
             // walk tree
@@ -290,11 +300,20 @@ var build = {
         }).then(function(files) {
 
             // lint
-            if (recipeConf.jsLint) {
+            if (recipeConf.esLint.enabled) {
+                files.forEach(function(file) {
 
+                    linter.verify(file.data, recipeConf.esLint.rules).forEach(function(message) {
 
+                        message.fileName = file.name;
+                        if (message.fatal) {
+                            consoleError(message);
+                            throw null;
+                        }
+                        consoleWarn(message);
+                    });
+                });
             }
-
             return files;
 
         }).then(function(files) {
@@ -307,13 +326,13 @@ var build = {
 
         }).then(function() {
 
-            consoleInfo("APP:1");
+            consoleInfo("APP ("+ process.hrtime(start)[0]+'.'+(process.hrtime(start)[1] / 1000000).toFixed(0) + "s)");
         });
     },
 
     cp : function(f,deleted) {
 
-        consoleInfo("CP:0");
+        var start = process.hrtime();
         return Promise.resolve().then(function() {
 
             if (f) {
@@ -351,13 +370,15 @@ var build = {
             });
         }).then(function() {
 
-            consoleInfo("CP:1" + (f? ':'+f + (deleted? ' (deleted)' : '') : ''));
+            consoleInfo("CP" + (f? ':'+f + (deleted? ' (deleted)' : '') : '') + " ("+ process.hrtime(start)[0]+'.'+(process.hrtime(start)[1] / 1000000).toFixed(0) + "s)");
+            process.hrtime();
         });
     },
 
     sass : function() {
 
-        consoleInfo("SASS:0");
+        var start = process.hrtime();
+
         return mkdir(targetCssDir).then(function() {
 
             return readdir(srcSassDir).then(function(files) {
@@ -397,7 +418,8 @@ var build = {
             });
         }).then(function() {
 
-            consoleInfo("SASS:1");
+            consoleInfo("SASS ("+ process.hrtime(start)[0]+'.'+(process.hrtime(start)[1] / 1000000).toFixed(0) + "s)");
+            process.hrtime();
         });
     }
 };
