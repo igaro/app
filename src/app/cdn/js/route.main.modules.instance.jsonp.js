@@ -7,7 +7,7 @@ module.exports = function() {
     return function(model) {
 
         var data = {
-            desc : function() { return this.gettext("Asynchronously fetch JSON from a resource without hitting CORS restrictions."); },
+            desc : function() { return this.tr((({ key:"Asynchronously fetch JSON from a resource without hitting CORS restrictions." }))); },
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
@@ -35,13 +35,13 @@ module.exports = function() {
                         name:'callbackName',
                         required:false,
                         type:'string',
-                        desc : function() { return this.gettext("For when the resource requires a callback name other than 'callback'."); }
+                        desc : function() { return this.tr((({ key:"For when the resource requires a callback name other than 'callback'." }))); }
                     },
                     {
                         name:'res',
                         required:true,
                         type:'string',
-                        desc : function() { return this.gettext("The resource to load."); }
+                        desc : function() { return this.tr((({ key:"The resource to load." }))); }
                     }
                 ]
             },
@@ -49,17 +49,17 @@ module.exports = function() {
                 {
                     name:'abort',
                     type:'function',
-                    desc: function() { return this.gettext("Aborts the operation (if currently running."); }
+                    desc: function() { return this.tr((({ key:"Aborts the operation (if currently running." }))); }
                 },
                 {
                     name:'get',
                     type:'function',
                     async:true,
-                    desc: function() { return this.gettext("Begins the request."); },
+                    desc: function() { return this.tr((({ key:"Begins the request." }))); },
                     attributes : [{
                         type:'object',
                         attributes : [{
-                            desc: function() { return this.gettext("Any of the instantiated data can be set here to update the XHR before it is sent."); }
+                            desc: function() { return this.tr((({ key:"Any of the instantiated data can be set here to update the XHR before it is sent." }))); }
                         }]
                     }]
                 }

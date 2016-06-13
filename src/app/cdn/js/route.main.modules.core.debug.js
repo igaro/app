@@ -7,7 +7,7 @@ module.exports = function() {
     return function(model) {
 
         var data = {
-            desc : function() { return this.gettext("Handles debug messages and fires an event when one comes in."); },
+            desc : function() { return this.tr((({ key:"Handles debug messages and fires an event when one comes in." }))); },
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
@@ -22,10 +22,10 @@ module.exports = function() {
                 {
                     name:'developer',
                     type:'boolean',
-                    desc: function() { return this.gettext("Defines whether the framework is in debug mode."); },
+                    desc: function() { return this.tr((({ key:"Defines whether the framework is in debug mode." }))); },
                     attributes: [
                         {
-                            desc: function() { return this.gettext("True for enabled, False for disabled."); },
+                            desc: function() { return this.tr((({ key:"True for enabled, False for disabled." }))); },
                         }
                     ]
                 },
@@ -34,26 +34,26 @@ module.exports = function() {
                     type:'function',
                     async:true,
                     forManager:true,
-                    desc:function() { return this.gettext("A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands."); },
+                    desc:function() { return this.tr((({ key:"A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands." }))); },
                     attributes : [
                         {
                             type:'*',
                             required:true,
                             forManager:true,
                             attributes: [{
-                                desc: function() { return this.gettext("The error object or value."); }
+                                desc: function() { return this.tr((({ key:"The error object or value." }))); }
                             }]
                         },
                         {
                             type:'string',
                             attributes: [{
-                                desc: function() { return this.gettext("The scope path name."); }
+                                desc: function() { return this.tr((({ key:"The scope path name." }))); }
                             }]
                         },
                         {
                             type:'string',
                             attributes: [{
-                                desc : function() { return this.gettext("The scope event name"); }
+                                desc : function() { return this.tr((({ key:"The scope event name" }))); }
                             }]
                         }
                     ]
@@ -71,14 +71,14 @@ module.exports = function() {
                                     type:'string',
                                     required:true,
                                     attributes:[{
-                                        desc: function() { return this.gettext("The module name."); }
+                                        desc: function() { return this.tr((({ key:"The module name." }))); }
                                     }]
                                 },
                                 {
                                     type:'string',
                                     required:true,
                                     attributes:[{
-                                        desc: function() { return this.gettext("The event name."); }
+                                        desc: function() { return this.tr((({ key:"The event name." }))); }
                                     }]
                                 },
                                 {
@@ -86,11 +86,11 @@ module.exports = function() {
                                     required:true,
                                     forManager:true,
                                     attributes:[{
-                                        desc: function() { return this.gettext("A value to pass to functions registered to receive the debug event. You can pass anything here."); },
+                                        desc: function() { return this.tr((({ key:"A value to pass to functions registered to receive the debug event. You can pass anything here." }))); },
                                     }]
                                 }
                             ],
-                            desc: function() { return this.gettext("Appends a debug event to storage and fires a core.debug event containing the data."); },
+                            desc: function() { return this.tr((({ key:"Appends a debug event to storage and fires a core.debug event containing the data." }))); },
                             async:true
                         }
                     ]

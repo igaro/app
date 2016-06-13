@@ -1,5 +1,9 @@
 {
 
+    "watch" : {
+        "ignore" : ["pot","mo"]
+    },
+
     "esLint" : {
 
         "enabled":true,

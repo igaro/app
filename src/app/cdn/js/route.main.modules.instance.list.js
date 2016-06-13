@@ -21,7 +21,7 @@ module.exports = function() {
         l.shift(x,1); \n\
     });\n\
 });",
-            desc : function() { return this.gettext("Provides an array like list mapped to a UL and LI elements."); },
+            desc : function() { return this.tr((({ key:"Provides an array like list mapped to a UL and LI elements." }))); },
             blessed: {
                 container:true,
                 children:["items"]
@@ -41,7 +41,7 @@ module.exports = function() {
                     {
                         name:'items',
                         instanceof: { name:'Array' },
-                        desc : function() { return this.gettext("Initial items to use for the list. See addItem() for attributes."); }
+                        desc : function() { return this.tr((({ key:"Initial items to use for the list. See addItem() for attributes." }))); }
                     }
                 ]
             },
@@ -57,7 +57,7 @@ module.exports = function() {
                     returns : {
                         instanceof: function() { return data.objects.item; },
                     },
-                    desc : function() { return this.gettext("Creates a new Item object."); },
+                    desc : function() { return this.tr((({ key:"Creates a new Item object." }))); },
                     attributes : [
                         {
                             type:'object',
@@ -67,7 +67,7 @@ module.exports = function() {
                                 {
                                     name:'content',
                                     type:'object',
-                                    desc: function() { return this.gettext("The content to supply to the DOM creator (see core.dom.mk)."); }
+                                    desc: function() { return this.tr((({ key:"The content to supply to the DOM creator (see core.dom.mk)." }))); }
                                 }
                             ]
                         }
@@ -77,7 +77,7 @@ module.exports = function() {
                     name:'addItems',
                     async:true,
                     type:'function',
-                    desc : function() { return this.gettext("Calls .addItem() in sequence."); },
+                    desc : function() { return this.tr((({ key:"Calls .addItem() in sequence." }))); },
                     returns : {
                         attributes: [{
                             instanceof: { name:'Array' }
@@ -90,7 +90,7 @@ module.exports = function() {
                             attributes:[
                                 {
                                     instanceof: { name:'Array' },
-                                    desc: function() { return this.gettext("Items to insert."); }
+                                    desc: function() { return this.tr((({ key:"Items to insert." }))); }
                                 }
                             ]
                         }
@@ -99,20 +99,20 @@ module.exports = function() {
                 {
                     name:'shift',
                     type:'function',
-                    desc : function() { return this.gettext("Moves an object in the list by a number of places."); },
+                    desc : function() { return this.tr((({ key:"Moves an object in the list by a number of places." }))); },
                     attributes:[
                         {
                             type:'object',
                             required:true,
                             attributes:[{
-                                desc: function() { return this.gettext("The object in the list to move."); }
+                                desc: function() { return this.tr((({ key:"The object in the list to move." }))); }
                             }]
                         },
                         {
                             type:'number',
                             required:true,
                             attributes:[{
-                                desc: function() { return this.gettext("The number of places to move the item in the list up or down.."); }
+                                desc: function() { return this.tr((({ key:"The number of places to move the item in the list up or down.." }))); }
                             }]
                         }
                     ]

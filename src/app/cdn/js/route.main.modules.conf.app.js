@@ -7,7 +7,7 @@ module.exports = function() {
     return function(model) {
 
         var data = {
-            desc : function() { return this.gettext("This file configures other modules such as setting supported locale, links events, registers route handlers and customizes the Igaro App framework."); },
+            desc : function() { return this.tr((({ key:"This file configures other modules such as setting supported locale, links events, registers route handlers and customizes the Igaro App framework." }))); },
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'

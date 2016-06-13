@@ -7,7 +7,7 @@ module.exports = function() {
     return function(model) {
 
         var data = {
-            desc : function() { return this.gettext("Provides file related functionality and formatting."); },
+            desc : function() { return this.tr((({ key:"Provides file related functionality and formatting." }))); },
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
@@ -24,7 +24,7 @@ module.exports = function() {
                             type:'string',
                             required:true,
                             attributes : [{
-                                desc: function() { return this.gettext("The filename to process."); }
+                                desc: function() { return this.tr((({ key:"The filename to process." }))); }
                             }]
                         }
                     ],
@@ -35,7 +35,7 @@ module.exports = function() {
                             }
                         ]
                     },
-                    desc: function() { return this.gettext("Returns a filename extension."); }
+                    desc: function() { return this.tr((({ key:"Returns a filename extension." }))); }
                 },
                 {
                     name:'formatSize',
@@ -45,7 +45,7 @@ module.exports = function() {
                             type:'number',
                             required:true,
                             attributes : [{
-                                desc: function() { return this.gettext("The filesize in bytes."); }
+                                desc: function() { return this.tr((({ key:"The filesize in bytes." }))); }
                             }]
                         }
                     ],
@@ -56,7 +56,7 @@ module.exports = function() {
                             }
                         ]
                     },
-                    desc: function() { return this.gettext("Returns a formatted file size, i.e 12Kb, 35Mb, 120Gb."); }
+                    desc: function() { return this.tr((({ key:"Returns a formatted file size, i.e 12Kb, 35Mb, 120Gb." }))); }
                 }
             ]
         };

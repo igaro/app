@@ -14,8 +14,8 @@ module.exports = function(app) {
         var wrapper = model.wrapper,
             currency = app['core.currency'];
 
-        model.stash.title = function() { return this.gettext("Widgets"); };
-        model.stash.desc = function() { return this.gettext("The highest performing Javascript framework - read to see what Igaro App offers you."); };
+        model.stash.title = function() { return this.tr((({ key:"Widgets" }))); };
+        model.stash.desc = function() { return this.tr((({ key:"The highest performing Javascript framework - read to see what Igaro App offers you." }))); };
 
         var managers = model.managers,
             domMgr= managers.dom,
@@ -23,7 +23,7 @@ module.exports = function(app) {
             debugMgr = managers.debug,
             objectMgr = managers.object;
 
-        domMgr.mk('p',wrapper,function() { return this.gettext("Igaro App comes with a stack full of widgets, and creating new widgets is easy!"); });
+        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"Igaro App comes with a stack full of widgets, and creating new widgets is easy!" }))); });
 
         return model.addSequence({
             container:wrapper,
@@ -40,8 +40,8 @@ module.exports = function(app) {
                 ).then(function(samespace) {
 
                     var container = document.createDocumentFragment();
-                    domMgr.mk('h1',container,function() { return this.gettext("Same Space"); });
-                    domMgr.mk('p',container,function() { return this.gettext("This example displays HTML elements within a common space using CSS3 effects to transition between each space. It's great for slideshows!"); });
+                    domMgr.mk('h1',container,function() { return this.tr((({ key:"Same Space" }))); });
+                    domMgr.mk('p',container,function() { return this.tr((({ key:"This example displays HTML elements within a common space using CSS3 effects to transition between each space. It's great for slideshows!" }))); });
                     dom.append(container,samespace);
                     return container;
                 }),
@@ -55,8 +55,8 @@ module.exports = function(app) {
                         debugMgr = managers.debug;
 
                     domMgr.mk('h1',container,'AJAX (XHR)');
-                    domMgr.mk('p',container,function() { return this.gettext("This example contacts the Youtube API, which returns JSON. From it a video is loaded."); });
-                    domMgr.mk('button',container,function() { return this.gettext("Fetch"); }).addEventListener('click', function() {
+                    domMgr.mk('p',container,function() { return this.tr((({ key:"This example contacts the Youtube API, which returns JSON. From it a video is loaded." }))); });
+                    domMgr.mk('button',container,function() { return this.tr((({ key:"Fetch" }))); }).addEventListener('click', function() {
 
                         var self = this;
                         xhr.get({
@@ -86,13 +86,13 @@ module.exports = function(app) {
                             {
                                 columns : [
                                     {
-                                        content : function() { return this.gettext("Make"); }
+                                        content : function() { return this.tr((({ key:"Make" }))); }
                                     },
                                     {
-                                        content : function() { return this.gettext("Model"); }
+                                        content : function() { return this.tr((({ key:"Model" }))); }
                                     },
                                     {
-                                        content : function() { return this.gettext("Type"); }
+                                        content : function() { return this.tr((({ key:"Type" }))); }
                                     }
                                 ]
                             }
@@ -144,8 +144,8 @@ module.exports = function(app) {
                 }).then(function(table) {
 
                     var container = document.createDocumentFragment();
-                    domMgr.mk('h1',container,function() { return this.gettext("Table"); });
-                    domMgr.mk('p',container,function() { return this.gettext("Dynamic tables with filtering. Custom filters are supported."); });
+                    domMgr.mk('h1',container,function() { return this.tr((({ key:"Table" }))); });
+                    domMgr.mk('p',container,function() { return this.tr((({ key:"Dynamic tables with filtering. Custom filters are supported." }))); });
                     dom.append(container,table);
                     return container;
                 }),
@@ -163,11 +163,11 @@ module.exports = function(app) {
                         domMgr = list.managers.dom,
                         elephant = list.items[0];
 
-                    domMgr.mk('h1',container,function() { return this.gettext("Lists"); });
-                    domMgr.mk('p',container,function() { return this.gettext("Create dynamic lists without data binding!"); });
+                    domMgr.mk('h1',container,function() { return this.tr((({ key:"Lists" }))); });
+                    domMgr.mk('p',container,function() { return this.tr((({ key:"Create dynamic lists without data binding!" }))); });
                     dom.append(container,list);
                     domMgr.mk('p',container,null,function() {
-                        domMgr.mk('button',this,function() { return this.gettext("Move Elephant"); }).addEventListener('click', function() {
+                        domMgr.mk('button',this,function() { return this.tr((({ key:"Move Elephant" }))); }).addEventListener('click', function() {
 
                             list.shift(elephant,1);
                         });
@@ -184,13 +184,13 @@ module.exports = function(app) {
                         objectMgr = managers.object,
                         debugMgr = managers.debug;
 
-                    domMgr.mk('h1',container,function() { return this.gettext("Form Validation"); });
-                    domMgr.mk('p',container,function() { return this.gettext("Try entering an invalid currency denomination into the box below."); });
+                    domMgr.mk('h1',container,function() { return this.tr((({ key:"Form Validation" }))); });
+                    domMgr.mk('p',container,function() { return this.tr((({ key:"Try entering an invalid currency denomination into the box below." }))); });
                     domMgr.mk('form',container,null,function() {
 
                         this.className = 'currencycheck';
                         formValidate.setForm(this);
-                        domMgr.mk('label',this,function() { return this.gettext("Deposit"); });
+                        domMgr.mk('label',this,function() { return this.tr((({ key:"Deposit" }))); });
                         var form = this,
                             v = domMgr.mk('input[text]',this,null,function() {
 
@@ -198,16 +198,16 @@ module.exports = function(app) {
                                 this.name='amount';
                                 this.required = true;
                             });
-                        domMgr.mk('input[submit]',this,function() { return this.gettext("Transfer"); });
+                        domMgr.mk('input[submit]',this,function() { return this.tr((({ key:"Transfer" }))); });
                         formValidate.rules = [
                             [
                               'amount',
                               function(v) {
 
                                   if (! currency.validate(v))
-                                    return function() { return this.gettext("Invalid amount"); };
+                                    return function() { return this.tr((({ key:"Invalid amount" }))); };
                                   if (v === 0)
-                                    return function() { return this.gettext("Must be positive"); };
+                                    return function() { return this.tr((({ key:"Must be positive" }))); };
                               }
                             ]
                         ];
@@ -215,7 +215,7 @@ module.exports = function(app) {
 
                             v.value='';
                             return objectMgr.create('toast',{
-                                message: function() { return this.gettext("Transaction Successful"); }
+                                message: function() { return this.tr((({ key:"Transaction Successful" }))); }
                             })['catch'](function (e) {
 
                                 return debugMgr.handle(e);
@@ -230,8 +230,8 @@ module.exports = function(app) {
                     var container = document.createDocumentFragment(),
                         domMgr = rte.managers.dom;
 
-                    domMgr.mk('h1',container,function() { return this.gettext("Rich Text Editor"); });
-                    domMgr.mk('p',container, function() { return this.gettext("Full HTML based editing within the App."); });
+                    domMgr.mk('h1',container,function() { return this.tr((({ key:"Rich Text Editor" }))); });
+                    domMgr.mk('p',container, function() { return this.tr((({ key:"Full HTML based editing within the App." }))); });
                     dom.append(container,rte);
                     return container;
                 }),
@@ -239,19 +239,19 @@ module.exports = function(app) {
                 objectMgr.create('accordion', {
                     sections : [
                         {
-                            title:function() { return this.gettext("Suppliers"); },
-                            content:function() { return this.gettext("Acme Ltd is bankrupt."); }
+                            title:function() { return this.tr((({ key:"Suppliers" }))); },
+                            content:function() { return this.tr((({ key:"Acme Ltd is bankrupt." }))); }
                         },
                         {
-                            title:function() { return this.gettext("Contractors"); },
-                            content:function() { return this.gettext("Don is off sick, again."); }
+                            title:function() { return this.tr((({ key:"Contractors" }))); },
+                            content:function() { return this.tr((({ key:"Don is off sick, again." }))); }
                         },
                         {
-                            title:function() { return this.gettext("Materials"); },
-                            content:function() { return this.gettext("Were stolen yesterday evening."); }
+                            title:function() { return this.tr((({ key:"Materials" }))); },
+                            content:function() { return this.tr((({ key:"Were stolen yesterday evening." }))); }
                         },
                         {
-                            title:function() { return this.gettext("Accounts"); },
+                            title:function() { return this.tr((({ key:"Accounts" }))); },
                             disabled:true
                         }
                     ]
@@ -260,8 +260,8 @@ module.exports = function(app) {
                     var container = document.createDocumentFragment(),
                         domMgr = accordion.managers.dom;
 
-                    domMgr.mk('h1',container,function() { return this.gettext("Accordion"); });
-                    domMgr.mk('p',container,function() { return this.gettext("Accordions can group items to reduce information overload."); });
+                    domMgr.mk('h1',container,function() { return this.tr((({ key:"Accordion" }))); });
+                    domMgr.mk('p',container,function() { return this.tr((({ key:"Accordions can group items to reduce information overload." }))); });
                     dom.append(container,accordion);
                     return container;
                 })

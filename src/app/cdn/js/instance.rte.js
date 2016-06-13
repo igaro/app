@@ -169,7 +169,7 @@
                         [
                             // main panel
                             {
-                                title:function() { return this.gettext("Main"); },
+                                title:function() { return this.tr((({ key:"Main" }))); },
                                 active:true,
                                 content:domMgr.mk('div',null,null,function() {
 
@@ -184,15 +184,15 @@
                                             self.execCommand('formatblock', this.options[this.selectedIndex].value);
                                             this.selectedIndex=0;
                                         });
-                                        domMgr.mk('option',this,function() { return this.gettext("Style"); });
-                                        domMgr.mk('option',this,function() { return this.gettext("Paragraph"); }).value = 'p';
-                                        domMgr.mk('option',this,function() { return this.gettext("Heading 1"); }).value = 'h1';
-                                        domMgr.mk('option',this,function() { return this.gettext("Heading 2"); }).value = 'h2';
-                                        domMgr.mk('option',this,function() { return this.gettext("Heading 3"); }).value = 'h3';
-                                        domMgr.mk('option',this,function() { return this.gettext("Heading 4"); }).value = 'h4';
-                                        domMgr.mk('option',this,function() { return this.gettext("Heading 5"); }).value = 'h5';
-                                        domMgr.mk('option',this,function() { return this.gettext("Heading 6"); }).value = 'h6';
-                                        domMgr.mk('option',this,function() { return this.gettext("Formatted"); }).value = 'pre';
+                                        domMgr.mk('option',this,function() { return this.tr((({ key:"Style" }))); });
+                                        domMgr.mk('option',this,function() { return this.tr((({ key:"Paragraph" }))); }).value = 'p';
+                                        domMgr.mk('option',this,function() { return this.tr((({ key:"Heading 1" }))); }).value = 'h1';
+                                        domMgr.mk('option',this,function() { return this.tr((({ key:"Heading 2" }))); }).value = 'h2';
+                                        domMgr.mk('option',this,function() { return this.tr((({ key:"Heading 3" }))); }).value = 'h3';
+                                        domMgr.mk('option',this,function() { return this.tr((({ key:"Heading 4" }))); }).value = 'h4';
+                                        domMgr.mk('option',this,function() { return this.tr((({ key:"Heading 5" }))); }).value = 'h5';
+                                        domMgr.mk('option',this,function() { return this.tr((({ key:"Heading 6" }))); }).value = 'h6';
+                                        domMgr.mk('option',this,function() { return this.tr((({ key:"Formatted" }))); }).value = 'pre';
                                     });
                                     var self2 = this;
                                     var opts = [
@@ -235,7 +235,7 @@
 
                             // character
                             {
-                                title:function() { return this.gettext("Character"); },
+                                title:function() { return this.tr((({ key:"Character" }))); },
                                 content:domMgr.mk('div',null,null,function() {
 
                                     this.className='character';
@@ -253,9 +253,9 @@
                         // colors
                         .concat(
                             [
-                                ['backcolor', function() { return this.gettext("Backcolor"); }],
-                                ['forecolor', function() { return this.gettext("Forecolor"); }],
-                                ['hilitecolor', function() { return this.gettext("Highlight"); }]
+                                ['backcolor', function() { return this.tr((({ key:"Backcolor" }))); }],
+                                ['forecolor', function() { return this.tr((({ key:"Forecolor" }))); }],
+                                ['hilitecolor', function() { return this.tr((({ key:"Highlight" }))); }]
                             ]
 
                         // ready data

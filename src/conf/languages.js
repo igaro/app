@@ -1,33 +1,16 @@
 {
     "en" : {
-        "name":"English"
+        "name":"English",
+        "pluralForms" : {
+            "count":2,
+            "logic":"n === 1? 1:0"
+        }
     },
-    "fr" : {
-        "name":"Français"
-    },
-    "de" : {
-        "name":"Deutsch"
-    },
-    "id" : {
-        "name":"Bahasa Indonesia"
-    },
-    "zh-CN" : {
-        "name":"简体中文"
-    },
-    "ar" : {
-        "name":"Arabic",
-        "rtl":true
-    },
-    "pl" : {
-        "name":"Polish"
-    },
-    "ru" : {
-        "name": "Русский"
-    },
-    "pt" : {
-        "name": "Português"
-    },
-    "es" : {
-        "name": "Español"
+    "en-GB" : {
+        "name":"English (British)",
+        "pluralForms" : {
+            "count":2,
+            "logic":"n === 1? 1:0"
+        }
     }
 }

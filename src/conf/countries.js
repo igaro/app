@@ -6,7 +6,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Andorra"); }
+      "name": function() { return this.tr((({ key:"Andorra" }))); }
     },
     "AE": {
       "callingCode": [
@@ -15,7 +15,7 @@
       "currency": [
         "AED"
       ],
-      "name": function() { return this.gettext("United Arab Emirates"); },
+      "name": function() { return this.tr((({ key:"United Arab Emirates" }))); },
     },
     "AF": {
       "callingCode": [
@@ -24,7 +24,7 @@
       "currency": [
         "AFN"
       ],
-      "name": function() { return this.gettext("Afghanistan"); }
+      "name": function() { return this.tr((({ key:"Afghanistan" }))); }
     },
     "AG": {
       "callingCode": [
@@ -33,7 +33,7 @@
       "currency": [
         "XCD"
       ],
-      "name": function() { return this.gettext("Antigua and Barbuda"); }
+      "name": function() { return this.tr((({ key:"Antigua and Barbuda" }))); }
     },
     "AI": {
       "callingCode": [
@@ -42,7 +42,7 @@
       "currency": [
         "XCD"
       ],
-      "name": function() { return this.gettext("Anguilla"); },
+      "name": function() { return this.tr((({ key:"Anguilla" }))); },
     },
     "AL": {
       "callingCode": [
@@ -51,7 +51,7 @@
       "currency": [
         "ALL"
       ],
-      "name": function() { return this.gettext("Albania"); }
+      "name": function() { return this.tr((({ key:"Albania" }))); }
     },
     "AM": {
       "callingCode": [
@@ -60,7 +60,7 @@
       "currency": [
         "AMD"
       ],
-      "name": function() { return this.gettext("Armenia"); }
+      "name": function() { return this.tr((({ key:"Armenia" }))); }
     },
     "AO": {
       "callingCode": [
@@ -69,10 +69,10 @@
       "currency": [
         "AOA"
       ],
-      "name": function() { return this.gettext("Angola"); }
+      "name": function() { return this.tr((({ key:"Angola" }))); }
     },
     "AQ": {
-      "name": function() { return this.gettext("Antarctica"); }
+      "name": function() { return this.tr((({ key:"Antarctica" }))); }
     },
     "AR": {
       "callingCode": [
@@ -81,7 +81,7 @@
       "currency": [
         "ARS"
       ],
-      "name": function() { return this.gettext("Argentina"); },
+      "name": function() { return this.tr((({ key:"Argentina" }))); },
     },
     "AS": {
       "callingCode": [
@@ -90,7 +90,7 @@
       "currency": [
         "USD"
       ],
-      "name": function() { return this.gettext("American Samoa"); }
+      "name": function() { return this.tr((({ key:"American Samoa" }))); }
     },
     "AT": {
       "callingCode": [
@@ -99,7 +99,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Austria"); }
+      "name": function() { return this.tr((({ key:"Austria" }))); }
     },
     "AU": {
       "callingCode": [
@@ -108,7 +108,7 @@
       "currency": [
         "AUD"
       ],
-      "name": function() { return this.gettext("Australia"); }
+      "name": function() { return this.tr((({ key:"Australia" }))); }
     },
     "AW": {
       "callingCode": [
@@ -117,7 +117,7 @@
       "currency": [
         "AWG"
       ],
-      "name": function() { return this.gettext("Aruba"); }
+      "name": function() { return this.tr((({ key:"Aruba" }))); }
     },
     "AX": {
       "callingCode": [
@@ -126,7 +126,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Åland Islands"); }
+      "name": function() { return this.tr((({ key:"Åland Islands" }))); }
     },
     "AZ": {
       "callingCode": [
@@ -135,7 +135,7 @@
       "currency": [
         "AZN"
       ],
-      "name": function() { return this.gettext("Azerbaijan"); }
+      "name": function() { return this.tr((({ key:"Azerbaijan" }))); }
     },
     "BA": {
       "callingCode": [
@@ -144,7 +144,7 @@
       "currency": [
         "BAM"
       ],
-      "name": function() { return this.gettext("Bosnia and Herzegovina"); }
+      "name": function() { return this.tr((({ key:"Bosnia and Herzegovina" }))); }
     },
     "BB": {
       "callingCode": [
@@ -153,7 +153,7 @@
       "currency": [
         "BBD"
       ],
-      "name": function() { return this.gettext("Barbados"); }
+      "name": function() { return this.tr((({ key:"Barbados" }))); }
     },
     "BD": {
       "callingCode": [
@@ -162,7 +162,7 @@
       "currency": [
         "BDT"
       ],
-      "name": function() { return this.gettext("Bangladesh"); }
+      "name": function() { return this.tr((({ key:"Bangladesh" }))); }
     },
     "BE": {
       "callingCode": [
@@ -171,7 +171,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Belgium"); }
+      "name": function() { return this.tr((({ key:"Belgium" }))); }
     },
     "BF": {
       "callingCode": [
@@ -180,7 +180,7 @@
       "currency": [
         "XOF"
       ],
-      "name": function() { return this.gettext("Burkina Faso"); }
+      "name": function() { return this.tr((({ key:"Burkina Faso" }))); }
     },
     "BG": {
       "callingCode": [
@@ -189,7 +189,7 @@
       "currency": [
         "BGN"
       ],
-      "name": function() { return this.gettext("Bulgaria"); }
+      "name": function() { return this.tr((({ key:"Bulgaria" }))); }
     },
     "BH": {
       "callingCode": [
@@ -198,7 +198,7 @@
       "currency": [
         "BHD"
       ],
-      "name": function() { return this.gettext("Bahrain"); }
+      "name": function() { return this.tr((({ key:"Bahrain" }))); }
     },
     "BI": {
       "callingCode": [
@@ -207,7 +207,7 @@
       "currency": [
         "BIF"
       ],
-      "name": function() { return this.gettext("Burundi"); }
+      "name": function() { return this.tr((({ key:"Burundi" }))); }
     },
     "BJ": {
       "callingCode": [
@@ -216,7 +216,7 @@
       "currency": [
         "XOF"
       ],
-      "name": function() { return this.gettext("Benin"); }
+      "name": function() { return this.tr((({ key:"Benin" }))); }
     },
     "BL": {
       "callingCode": [
@@ -225,7 +225,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Saint Barthélemy"); }
+      "name": function() { return this.tr((({ key:"Saint Barthélemy" }))); }
     },
     "BM": {
       "callingCode": [
@@ -234,7 +234,7 @@
       "currency": [
         "BMD"
       ],
-      "name": function() { return this.gettext("Bermuda"); }
+      "name": function() { return this.tr((({ key:"Bermuda" }))); }
     },
     "BN": {
       "callingCode": [
@@ -243,7 +243,7 @@
       "currency": [
         "BND"
       ],
-      "name": function() { return this.gettext("Brunei"); }
+      "name": function() { return this.tr((({ key:"Brunei" }))); }
     },
     "BO": {
       "callingCode": [
@@ -253,7 +253,7 @@
         "BOB",
         "BOV"
       ],
-      "name": function() { return this.gettext("Bolivia"); }
+      "name": function() { return this.tr((({ key:"Bolivia" }))); }
     },
     "BQ": {
       "callingCode": [
@@ -262,7 +262,7 @@
       "currency": [
         "USD"
       ],
-      "name": function() { return this.gettext("Bonaire"); }
+      "name": function() { return this.tr((({ key:"Bonaire" }))); }
     },
     "BR": {
       "callingCode": [
@@ -271,7 +271,7 @@
       "currency": [
         "BRL"
       ],
-      "name": function() { return this.gettext("Brazil"); }
+      "name": function() { return this.tr((({ key:"Brazil" }))); }
     },
     "BS": {
       "callingCode": [
@@ -280,7 +280,7 @@
       "currency": [
         "BSD"
       ],
-      "name": function() { return this.gettext("Bahamas"); },
+      "name": function() { return this.tr((({ key:"Bahamas" }))); },
     },
     "BT": {
       "callingCode": [
@@ -290,13 +290,13 @@
         "BTN",
         "INR"
       ],
-      "name": function() { return this.gettext("Bhutan"); }
+      "name": function() { return this.tr((({ key:"Bhutan" }))); }
     },
     "BV": {
       "currency": [
         "NOK"
       ],
-      "name": function() { return this.gettext("Bouvet Island"); }
+      "name": function() { return this.tr((({ key:"Bouvet Island" }))); }
     },
     "BW": {
       "callingCode": [
@@ -305,7 +305,7 @@
       "currency": [
         "BWP"
       ],
-      "name": function() { return this.gettext("Botswana"); }
+      "name": function() { return this.tr((({ key:"Botswana" }))); }
     },
     "BY": {
       "callingCode": [
@@ -314,7 +314,7 @@
       "currency": [
         "BYR"
       ],
-      "name": function() { return this.gettext("Belarus"); }
+      "name": function() { return this.tr((({ key:"Belarus" }))); }
     },
     "BZ": {
       "callingCode": [
@@ -323,7 +323,7 @@
       "currency": [
         "BZD"
       ],
-      "name": function() { return this.gettext("Belize"); }
+      "name": function() { return this.tr((({ key:"Belize" }))); }
     },
     "CA": {
       "callingCode": [
@@ -332,7 +332,7 @@
       "currency": [
         "CAD"
       ],
-      "name": function() { return this.gettext("Canada"); }
+      "name": function() { return this.tr((({ key:"Canada" }))); }
     },
     "CC": {
       "callingCode": [
@@ -341,7 +341,7 @@
       "currency": [
         "AUD"
       ],
-      "name": function() { return this.gettext("Cocos (Keeling) Islands"); }
+      "name": function() { return this.tr((({ key:"Cocos (Keeling) Islands" }))); }
     },
     "CD": {
       "callingCode": [
@@ -350,7 +350,7 @@
       "currency": [
         "CDF"
       ],
-      "name": function() { return this.gettext("DR Congo"); }
+      "name": function() { return this.tr((({ key:"DR Congo" }))); }
     },
     "CF": {
       "callingCode": [
@@ -359,7 +359,7 @@
       "currency": [
         "XAF"
       ],
-      "name": function() { return this.gettext("Central African Republic"); }
+      "name": function() { return this.tr((({ key:"Central African Republic" }))); }
     },
     "CG": {
       "callingCode": [
@@ -368,7 +368,7 @@
       "currency": [
         "XAF"
       ],
-      "name": function() { return this.gettext("Republic of the Congo"); }
+      "name": function() { return this.tr((({ key:"Republic of the Congo" }))); }
     },
     "CH": {
       "callingCode": [
@@ -379,7 +379,7 @@
         "CHF",
         "CHW"
       ],
-      "name": function() { return this.gettext("Switzerland"); }
+      "name": function() { return this.tr((({ key:"Switzerland" }))); }
     },
     "CI": {
       "callingCode": [
@@ -388,7 +388,7 @@
       "currency": [
         "XOF"
       ],
-      "name": function() { return this.gettext("Ivory Coast"); }
+      "name": function() { return this.tr((({ key:"Ivory Coast" }))); }
     },
     "CK": {
       "callingCode": [
@@ -397,7 +397,7 @@
       "currency": [
         "NZD"
       ],
-      "name": function() { return this.gettext("Cook Islands"); }
+      "name": function() { return this.tr((({ key:"Cook Islands" }))); }
     },
     "CL": {
       "callingCode": [
@@ -407,7 +407,7 @@
         "CLF",
         "CLP"
       ],
-      "name": function() { return this.gettext("Chile"); }
+      "name": function() { return this.tr((({ key:"Chile" }))); }
     },
     "CM": {
       "callingCode": [
@@ -416,7 +416,7 @@
       "currency": [
         "XAF"
       ],
-      "name": function() { return this.gettext("Cameroon"); }
+      "name": function() { return this.tr((({ key:"Cameroon" }))); }
     },
     "CN": {
       "callingCode": [
@@ -425,7 +425,7 @@
       "currency": [
         "CNY"
       ],
-      "name": function() { return this.gettext("China"); }
+      "name": function() { return this.tr((({ key:"China" }))); }
     },
     "CO": {
       "callingCode": [
@@ -434,7 +434,7 @@
       "currency": [
         "COP"
       ],
-      "name": function() { return this.gettext("Colombia"); }
+      "name": function() { return this.tr((({ key:"Colombia" }))); }
     },
     "CR": {
       "callingCode": [
@@ -443,7 +443,7 @@
       "currency": [
         "CRC"
       ],
-      "name": function() { return this.gettext("Costa Rica"); }
+      "name": function() { return this.tr((({ key:"Costa Rica" }))); }
     },
     "CU": {
       "callingCode": [
@@ -453,7 +453,7 @@
         "CUC",
         "CUP"
       ],
-      "name": function() { return this.gettext("Cuba"); }
+      "name": function() { return this.tr((({ key:"Cuba" }))); }
     },
     "CV": {
       "callingCode": [
@@ -462,7 +462,7 @@
       "currency": [
         "CVE"
       ],
-      "name": function() { return this.gettext("Cape Verde"); }
+      "name": function() { return this.tr((({ key:"Cape Verde" }))); }
     },
     "CW": {
       "callingCode": [
@@ -471,7 +471,7 @@
       "currency": [
         "ANG"
       ],
-      "name": function() { return this.gettext("Curaçao"); }
+      "name": function() { return this.tr((({ key:"Curaçao" }))); }
     },
     "CX": {
       "callingCode": [
@@ -480,7 +480,7 @@
       "currency": [
         "AUD"
       ],
-      "name": function() { return this.gettext("Christmas Island"); }
+      "name": function() { return this.tr((({ key:"Christmas Island" }))); }
     },
     "CY": {
       "callingCode": [
@@ -489,7 +489,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Cyprus"); }
+      "name": function() { return this.tr((({ key:"Cyprus" }))); }
     },
     "CZ": {
       "callingCode": [
@@ -498,7 +498,7 @@
       "currency": [
         "CZK"
       ],
-      "name": function() { return this.gettext("Czech Republic"); }
+      "name": function() { return this.tr((({ key:"Czech Republic" }))); }
     },
     "DE": {
       "callingCode": [
@@ -507,7 +507,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Germany"); }
+      "name": function() { return this.tr((({ key:"Germany" }))); }
     },
     "DJ": {
       "callingCode": [
@@ -516,7 +516,7 @@
       "currency": [
         "DJF"
       ],
-      "name": function() { return this.gettext("Djibouti"); }
+      "name": function() { return this.tr((({ key:"Djibouti" }))); }
     },
     "DK": {
       "callingCode": [
@@ -525,7 +525,7 @@
       "currency": [
         "DKK"
       ],
-      "name": function() { return this.gettext("Denmark"); }
+      "name": function() { return this.tr((({ key:"Denmark" }))); }
     },
     "DM": {
       "callingCode": [
@@ -534,7 +534,7 @@
       "currency": [
         "XCD"
       ],
-      "name": function() { return this.gettext("Dominica"); }
+      "name": function() { return this.tr((({ key:"Dominica" }))); }
     },
     "DO": {
       "callingCode": [
@@ -545,7 +545,7 @@
       "currency": [
         "DOP"
       ],
-      "name": function() { return this.gettext("Dominican Republic"); }
+      "name": function() { return this.tr((({ key:"Dominican Republic" }))); }
     },
     "DZ": {
       "callingCode": [
@@ -554,7 +554,7 @@
       "currency": [
         "DZD"
       ],
-      "name": function() { return this.gettext("Algeria"); }
+      "name": function() { return this.tr((({ key:"Algeria" }))); }
     },
     "EC": {
       "callingCode": [
@@ -563,7 +563,7 @@
       "currency": [
         "USD"
       ],
-      "name": function() { return this.gettext("Ecuador"); }
+      "name": function() { return this.tr((({ key:"Ecuador" }))); }
     },
     "EE": {
       "callingCode": [
@@ -572,7 +572,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Estonia"); }
+      "name": function() { return this.tr((({ key:"Estonia" }))); }
     },
     "EG": {
       "callingCode": [
@@ -581,7 +581,7 @@
       "currency": [
         "EGP"
       ],
-      "name": function() { return this.gettext("Egypt"); }
+      "name": function() { return this.tr((({ key:"Egypt" }))); }
     },
     "EH": {
       "callingCode": [
@@ -592,7 +592,7 @@
         "DZD",
         "MRO"
       ],
-      "name": function() { return this.gettext("Western Sahara"); }
+      "name": function() { return this.tr((({ key:"Western Sahara" }))); }
     },
     "ER": {
       "callingCode": [
@@ -601,7 +601,7 @@
       "currency": [
         "ERN"
       ],
-      "name": function() { return this.gettext("Eritrea"); }
+      "name": function() { return this.tr((({ key:"Eritrea" }))); }
     },
     "ES": {
       "callingCode": [
@@ -610,7 +610,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Spain"); }
+      "name": function() { return this.tr((({ key:"Spain" }))); }
     },
     "ET": {
       "callingCode": [
@@ -619,7 +619,7 @@
       "currency": [
         "ETB"
       ],
-      "name": function() { return this.gettext("Ethiopia"); }
+      "name": function() { return this.tr((({ key:"Ethiopia" }))); }
     },
     "FI": {
       "callingCode": [
@@ -628,7 +628,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Finland"); }
+      "name": function() { return this.tr((({ key:"Finland" }))); }
     },
     "FJ": {
       "callingCode": [
@@ -637,7 +637,7 @@
       "currency": [
         "FJD"
       ],
-      "name": function() { return this.gettext("Fiji"); }
+      "name": function() { return this.tr((({ key:"Fiji" }))); }
     },
     "FK": {
       "callingCode": [
@@ -646,7 +646,7 @@
       "currency": [
         "FKP"
       ],
-      "name": function() { return this.gettext("Falkland Islands"); }
+      "name": function() { return this.tr((({ key:"Falkland Islands" }))); }
     },
     "FM": {
       "callingCode": [
@@ -655,7 +655,7 @@
       "currency": [
         "USD"
       ],
-      "name": function() { return this.gettext("Micronesia"); }
+      "name": function() { return this.tr((({ key:"Micronesia" }))); }
     },
     "FO": {
       "callingCode": [
@@ -664,7 +664,7 @@
       "currency": [
         "DKK"
       ],
-      "name": function() { return this.gettext("Faroe Islands"); }
+      "name": function() { return this.tr((({ key:"Faroe Islands" }))); }
     },
     "FR": {
       "callingCode": [
@@ -673,7 +673,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("France"); }
+      "name": function() { return this.tr((({ key:"France" }))); }
     },
     "GA": {
       "callingCode": [
@@ -682,7 +682,7 @@
       "currency": [
         "XAF"
       ],
-      "name": function() { return this.gettext("Gabon"); }
+      "name": function() { return this.tr((({ key:"Gabon" }))); }
     },
     "GB": {
       "callingCode": [
@@ -691,7 +691,7 @@
       "currency": [
         "GBP"
       ],
-      "name": function() { return this.gettext("United Kingdom"); }
+      "name": function() { return this.tr((({ key:"United Kingdom" }))); }
     },
     "GD": {
       "callingCode": [
@@ -700,7 +700,7 @@
       "currency": [
         "XCD"
       ],
-      "name": function() { return this.gettext("Grenada"); }
+      "name": function() { return this.tr((({ key:"Grenada" }))); }
     },
     "GE": {
       "callingCode": [
@@ -709,7 +709,7 @@
       "currency": [
         "GEL"
       ],
-      "name": function() { return this.gettext("Georgia"); }
+      "name": function() { return this.tr((({ key:"Georgia" }))); }
     },
     "GF": {
       "callingCode": [
@@ -718,7 +718,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("French Guiana"); }
+      "name": function() { return this.tr((({ key:"French Guiana" }))); }
     },
     "GG": {
       "callingCode": [
@@ -727,7 +727,7 @@
       "currency": [
         "GBP"
       ],
-      "name": function() { return this.gettext("Guernsey"); }
+      "name": function() { return this.tr((({ key:"Guernsey" }))); }
     },
     "GH": {
       "callingCode": [
@@ -736,7 +736,7 @@
       "currency": [
         "GHS"
       ],
-      "name": function() { return this.gettext("Ghana"); }
+      "name": function() { return this.tr((({ key:"Ghana" }))); }
     },
     "GI": {
       "callingCode": [
@@ -745,7 +745,7 @@
       "currency": [
         "GIP"
       ],
-      "name": function() { return this.gettext("Gibraltar"); }
+      "name": function() { return this.tr((({ key:"Gibraltar" }))); }
     },
     "GL": {
       "callingCode": [
@@ -754,7 +754,7 @@
       "currency": [
         "DKK"
       ],
-      "name": function() { return this.gettext("Greenland"); }
+      "name": function() { return this.tr((({ key:"Greenland" }))); }
     },
     "GM": {
       "callingCode": [
@@ -763,7 +763,7 @@
       "currency": [
         "GMD"
       ],
-      "name": function() { return this.gettext("Gambia"); }
+      "name": function() { return this.tr((({ key:"Gambia" }))); }
     },
     "GN": {
       "callingCode": [
@@ -772,7 +772,7 @@
       "currency": [
         "GNF"
       ],
-      "name": function() { return this.gettext("Guinea"); }
+      "name": function() { return this.tr((({ key:"Guinea" }))); }
     },
     "GP": {
       "callingCode": [
@@ -781,7 +781,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Guadeloupe"); }
+      "name": function() { return this.tr((({ key:"Guadeloupe" }))); }
     },
     "GQ": {
       "callingCode": [
@@ -790,7 +790,7 @@
       "currency": [
         "XAF"
       ],
-      "name": function() { return this.gettext("Equatorial Guinea"); }
+      "name": function() { return this.tr((({ key:"Equatorial Guinea" }))); }
     },
     "GR": {
       "callingCode": [
@@ -799,7 +799,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Greece"); }
+      "name": function() { return this.tr((({ key:"Greece" }))); }
     },
     "GS": {
       "callingCode": [
@@ -808,7 +808,7 @@
       "currency": [
         "GBP"
       ],
-      "name": function() { return this.gettext("South Georgia"); }
+      "name": function() { return this.tr((({ key:"South Georgia" }))); }
     },
     "GT": {
       "callingCode": [
@@ -817,7 +817,7 @@
       "currency": [
         "GTQ"
       ],
-      "name": function() { return this.gettext("Guatemala"); }
+      "name": function() { return this.tr((({ key:"Guatemala" }))); }
     },
     "GU": {
       "callingCode": [
@@ -826,7 +826,7 @@
       "currency": [
         "USD"
       ],
-      "name": function() { return this.gettext("Guam"); }
+      "name": function() { return this.tr((({ key:"Guam" }))); }
     },
     "GW": {
       "callingCode": [
@@ -835,7 +835,7 @@
       "currency": [
         "XOF"
       ],
-      "name": function() { return this.gettext("Guinea-Bissau"); }
+      "name": function() { return this.tr((({ key:"Guinea-Bissau" }))); }
     },
     "GY": {
       "callingCode": [
@@ -844,7 +844,7 @@
       "currency": [
         "GYD"
       ],
-      "name": function() { return this.gettext("Guyana"); }
+      "name": function() { return this.tr((({ key:"Guyana" }))); }
     },
     "HK": {
       "callingCode": [
@@ -853,13 +853,13 @@
       "currency": [
         "HKD"
       ],
-      "name": function() { return this.gettext("Hong Kong"); }
+      "name": function() { return this.tr((({ key:"Hong Kong" }))); }
     },
     "HM": {
       "currency": [
         "AUD"
       ],
-      "name": function() { return this.gettext("Heard Island and McDonald Islands"); }
+      "name": function() { return this.tr((({ key:"Heard Island and McDonald Islands" }))); }
     },
     "HN": {
       "callingCode": [
@@ -868,7 +868,7 @@
       "currency": [
         "HNL"
       ],
-      "name": function() { return this.gettext("Honduras"); }
+      "name": function() { return this.tr((({ key:"Honduras" }))); }
     },
     "HR": {
       "callingCode": [
@@ -877,7 +877,7 @@
       "currency": [
         "HRK"
       ],
-      "name": function() { return this.gettext("Croatia"); }
+      "name": function() { return this.tr((({ key:"Croatia" }))); }
     },
     "HT": {
       "callingCode": [
@@ -887,7 +887,7 @@
         "HTG",
         "USD"
       ],
-      "name": function() { return this.gettext("Haiti"); }
+      "name": function() { return this.tr((({ key:"Haiti" }))); }
     },
     "HU": {
       "callingCode": [
@@ -896,7 +896,7 @@
       "currency": [
         "HUF"
       ],
-      "name": function() { return this.gettext("Hungary"); }
+      "name": function() { return this.tr((({ key:"Hungary" }))); }
     },
     "ID": {
       "callingCode": [
@@ -905,7 +905,7 @@
       "currency": [
         "IDR"
       ],
-      "name": function() { return this.gettext("Indonesia"); }
+      "name": function() { return this.tr((({ key:"Indonesia" }))); }
     },
     "IE": {
       "callingCode": [
@@ -914,7 +914,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Ireland"); }
+      "name": function() { return this.tr((({ key:"Ireland" }))); }
     },
     "IL": {
       "callingCode": [
@@ -923,7 +923,7 @@
       "currency": [
         "ILS"
       ],
-      "name": function() { return this.gettext("Israel"); }
+      "name": function() { return this.tr((({ key:"Israel" }))); }
     },
     "IM": {
       "callingCode": [
@@ -932,7 +932,7 @@
       "currency": [
         "GBP"
       ],
-      "name": function() { return this.gettext("Isle of Man"); }
+      "name": function() { return this.tr((({ key:"Isle of Man" }))); }
     },
     "IN": {
       "callingCode": [
@@ -941,7 +941,7 @@
       "currency": [
         "INR"
       ],
-      "name": function() { return this.gettext("India"); }
+      "name": function() { return this.tr((({ key:"India" }))); }
     },
     "IO": {
       "callingCode": [
@@ -950,7 +950,7 @@
       "currency": [
         "USD"
       ],
-      "name": function() { return this.gettext("British Indian Ocean Territory"); }
+      "name": function() { return this.tr((({ key:"British Indian Ocean Territory" }))); }
     },
     "IQ": {
       "callingCode": [
@@ -959,7 +959,7 @@
       "currency": [
         "IQD"
       ],
-      "name": function() { return this.gettext("Iraq"); }
+      "name": function() { return this.tr((({ key:"Iraq" }))); }
     },
     "IR": {
       "callingCode": [
@@ -968,7 +968,7 @@
       "currency": [
         "IRR"
       ],
-      "name": function() { return this.gettext("Iran"); }
+      "name": function() { return this.tr((({ key:"Iran" }))); }
     },
     "IS": {
       "callingCode": [
@@ -977,7 +977,7 @@
       "currency": [
         "ISK"
       ],
-      "name": function() { return this.gettext("Iceland"); }
+      "name": function() { return this.tr((({ key:"Iceland" }))); }
     },
     "IT": {
       "callingCode": [
@@ -986,7 +986,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Italy"); }
+      "name": function() { return this.tr((({ key:"Italy" }))); }
     },
     "JE": {
       "callingCode": [
@@ -995,7 +995,7 @@
       "currency": [
         "GBP"
       ],
-      "name": function() { return this.gettext("Jersey"); }
+      "name": function() { return this.tr((({ key:"Jersey" }))); }
     },
     "JM": {
       "callingCode": [
@@ -1004,7 +1004,7 @@
       "currency": [
         "JMD"
       ],
-      "name": function() { return this.gettext("Jamaica"); }
+      "name": function() { return this.tr((({ key:"Jamaica" }))); }
     },
     "JO": {
       "callingCode": [
@@ -1013,7 +1013,7 @@
       "currency": [
         "JOD"
       ],
-      "name": function() { return this.gettext("Jordan"); }
+      "name": function() { return this.tr((({ key:"Jordan" }))); }
     },
     "JP": {
       "callingCode": [
@@ -1022,7 +1022,7 @@
       "currency": [
         "JPY"
       ],
-      "name": function() { return this.gettext("Japan"); }
+      "name": function() { return this.tr((({ key:"Japan" }))); }
     },
     "KE": {
       "callingCode": [
@@ -1031,7 +1031,7 @@
       "currency": [
         "KES"
       ],
-      "name": function() { return this.gettext("Kenya"); }
+      "name": function() { return this.tr((({ key:"Kenya" }))); }
     },
     "KG": {
       "callingCode": [
@@ -1040,7 +1040,7 @@
       "currency": [
         "KGS"
       ],
-      "name": function() { return this.gettext("Kyrgyzstan"); }
+      "name": function() { return this.tr((({ key:"Kyrgyzstan" }))); }
     },
     "KH": {
       "callingCode": [
@@ -1049,7 +1049,7 @@
       "currency": [
         "KHR"
       ],
-      "name": function() { return this.gettext("Cambodia"); }
+      "name": function() { return this.tr((({ key:"Cambodia" }))); }
     },
     "KI": {
       "callingCode": [
@@ -1058,7 +1058,7 @@
       "currency": [
         "AUD"
       ],
-      "name": function() { return this.gettext("Kiribati"); }
+      "name": function() { return this.tr((({ key:"Kiribati" }))); }
     },
     "KM": {
       "callingCode": [
@@ -1067,7 +1067,7 @@
       "currency": [
         "KMF"
       ],
-      "name": function() { return this.gettext("Comoros"); }
+      "name": function() { return this.tr((({ key:"Comoros" }))); }
     },
     "KN": {
       "callingCode": [
@@ -1076,7 +1076,7 @@
       "currency": [
         "XCD"
       ],
-      "name": function() { return this.gettext("Saint Kitts and Nevis"); },
+      "name": function() { return this.tr((({ key:"Saint Kitts and Nevis" }))); },
     },
     "KP": {
       "callingCode": [
@@ -1085,7 +1085,7 @@
       "currency": [
         "KPW"
       ],
-      "name": function() { return this.gettext("North Korea"); },
+      "name": function() { return this.tr((({ key:"North Korea" }))); },
     },
     "KR": {
       "callingCode": [
@@ -1094,7 +1094,7 @@
       "currency": [
         "KRW"
       ],
-      "name": function() { return this.gettext("South Korea"); }
+      "name": function() { return this.tr((({ key:"South Korea" }))); }
     },
     "KW": {
       "callingCode": [
@@ -1103,7 +1103,7 @@
       "currency": [
         "KWD"
       ],
-      "name": function() { return this.gettext("Kuwait"); }
+      "name": function() { return this.tr((({ key:"Kuwait" }))); }
     },
     "KY": {
       "callingCode": [
@@ -1112,7 +1112,7 @@
       "currency": [
         "KYD"
       ],
-      "name": function() { return this.gettext("Cayman Islands"); }
+      "name": function() { return this.tr((({ key:"Cayman Islands" }))); }
     },
     "KZ": {
       "callingCode": [
@@ -1122,7 +1122,7 @@
       "currency": [
         "KZT"
       ],
-      "name": function() { return this.gettext("Kazakhstan"); }
+      "name": function() { return this.tr((({ key:"Kazakhstan" }))); }
     },
     "LA": {
       "callingCode": [
@@ -1131,7 +1131,7 @@
       "currency": [
         "LAK"
       ],
-      "name": function() { return this.gettext("Laos"); }
+      "name": function() { return this.tr((({ key:"Laos" }))); }
     },
     "LB": {
       "callingCode": [
@@ -1140,7 +1140,7 @@
       "currency": [
         "LBP"
       ],
-      "name": function() { return this.gettext("Lebanon"); }
+      "name": function() { return this.tr((({ key:"Lebanon" }))); }
     },
     "LC": {
       "callingCode": [
@@ -1149,7 +1149,7 @@
       "currency": [
         "XCD"
       ],
-      "name": function() { return this.gettext("Saint Lucia"); }
+      "name": function() { return this.tr((({ key:"Saint Lucia" }))); }
     },
     "LI": {
       "callingCode": [
@@ -1158,7 +1158,7 @@
       "currency": [
         "CHF"
       ],
-      "name": function() { return this.gettext("Liechtenstein"); }
+      "name": function() { return this.tr((({ key:"Liechtenstein" }))); }
     },
     "LK": {
       "callingCode": [
@@ -1167,7 +1167,7 @@
       "currency": [
         "LKR"
       ],
-      "name": function() { return this.gettext("Sri Lanka"); }
+      "name": function() { return this.tr((({ key:"Sri Lanka" }))); }
     },
     "LR": {
       "callingCode": [
@@ -1176,7 +1176,7 @@
       "currency": [
         "LRD"
       ],
-      "name": function() { return this.gettext("Liberia"); }
+      "name": function() { return this.tr((({ key:"Liberia" }))); }
     },
     "LS": {
       "callingCode": [
@@ -1186,7 +1186,7 @@
         "LSL",
         "ZAR"
       ],
-      "name": function() { return this.gettext("Lesotho"); }
+      "name": function() { return this.tr((({ key:"Lesotho" }))); }
     },
     "LT": {
       "callingCode": [
@@ -1195,7 +1195,7 @@
       "currency": [
         "LTL"
       ],
-      "name": function() { return this.gettext("Lithuania"); }
+      "name": function() { return this.tr((({ key:"Lithuania" }))); }
     },
     "LU": {
       "callingCode": [
@@ -1204,7 +1204,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Luxembourg"); }
+      "name": function() { return this.tr((({ key:"Luxembourg" }))); }
     },
     "LV": {
       "callingCode": [
@@ -1213,7 +1213,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Latvia"); }
+      "name": function() { return this.tr((({ key:"Latvia" }))); }
     },
     "LY": {
       "callingCode": [
@@ -1222,7 +1222,7 @@
       "currency": [
         "LYD"
       ],
-      "name": function() { return this.gettext("Libya"); }
+      "name": function() { return this.tr((({ key:"Libya" }))); }
     },
     "MA": {
       "callingCode": [
@@ -1231,7 +1231,7 @@
       "currency": [
         "MAD"
       ],
-      "name": function() { return this.gettext("Morocco"); }
+      "name": function() { return this.tr((({ key:"Morocco" }))); }
     },
     "MC": {
       "callingCode": [
@@ -1240,7 +1240,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Monaco"); }
+      "name": function() { return this.tr((({ key:"Monaco" }))); }
     },
     "MD": {
       "callingCode": [
@@ -1249,7 +1249,7 @@
       "currency": [
         "MDL"
       ],
-      "name": function() { return this.gettext("Moldova"); }
+      "name": function() { return this.tr((({ key:"Moldova" }))); }
     },
     "ME": {
       "callingCode": [
@@ -1258,7 +1258,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Montenegro"); }
+      "name": function() { return this.tr((({ key:"Montenegro" }))); }
     },
     "MF": {
       "callingCode": [
@@ -1267,7 +1267,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Saint Martin"); }
+      "name": function() { return this.tr((({ key:"Saint Martin" }))); }
     },
     "MG": {
       "callingCode": [
@@ -1276,7 +1276,7 @@
       "currency": [
         "MGA"
       ],
-      "name": function() { return this.gettext("Madagascar"); }
+      "name": function() { return this.tr((({ key:"Madagascar" }))); }
     },
     "MH": {
       "callingCode": [
@@ -1285,7 +1285,7 @@
       "currency": [
         "USD"
       ],
-      "name": function() { return this.gettext("Marshall Islands"); }
+      "name": function() { return this.tr((({ key:"Marshall Islands" }))); }
     },
     "MK": {
       "callingCode": [
@@ -1294,7 +1294,7 @@
       "currency": [
         "MKD"
       ],
-      "name": function() { return this.gettext("Macedonia"); }
+      "name": function() { return this.tr((({ key:"Macedonia" }))); }
     },
     "ML": {
       "callingCode": [
@@ -1303,7 +1303,7 @@
       "currency": [
         "XOF"
       ],
-      "name": function() { return this.gettext("Mali"); }
+      "name": function() { return this.tr((({ key:"Mali" }))); }
     },
     "MM": {
       "callingCode": [
@@ -1312,7 +1312,7 @@
       "currency": [
         "MMK"
       ],
-      "name": function() { return this.gettext("Myanmar"); }
+      "name": function() { return this.tr((({ key:"Myanmar" }))); }
     },
     "MN": {
       "callingCode": [
@@ -1321,7 +1321,7 @@
       "currency": [
         "MNT"
       ],
-      "name": function() { return this.gettext("Mongolia"); }
+      "name": function() { return this.tr((({ key:"Mongolia" }))); }
     },
     "MO": {
       "callingCode": [
@@ -1330,7 +1330,7 @@
       "currency": [
         "MOP"
       ],
-      "name": function() { return this.gettext("Macau"); }
+      "name": function() { return this.tr((({ key:"Macau" }))); }
     },
     "MP": {
       "callingCode": [
@@ -1339,7 +1339,7 @@
       "currency": [
         "USD"
       ],
-      "name": function() { return this.gettext("Northern Mariana Islands"); }
+      "name": function() { return this.tr((({ key:"Northern Mariana Islands" }))); }
     },
     "MQ": {
       "callingCode": [
@@ -1348,7 +1348,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Martinique"); }
+      "name": function() { return this.tr((({ key:"Martinique" }))); }
     },
     "MR": {
       "callingCode": [
@@ -1357,7 +1357,7 @@
       "currency": [
         "MRO"
       ],
-      "name": function() { return this.gettext("Mauritania"); }
+      "name": function() { return this.tr((({ key:"Mauritania" }))); }
     },
     "MS": {
       "callingCode": [
@@ -1366,7 +1366,7 @@
       "currency": [
         "XCD"
       ],
-      "name": function() { return this.gettext("Montserrat"); }
+      "name": function() { return this.tr((({ key:"Montserrat" }))); }
     },
     "MT": {
       "callingCode": [
@@ -1375,7 +1375,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Malta"); }
+      "name": function() { return this.tr((({ key:"Malta" }))); }
     },
     "MU": {
       "callingCode": [
@@ -1384,7 +1384,7 @@
       "currency": [
         "MUR"
       ],
-      "name": function() { return this.gettext("Mauritius"); }
+      "name": function() { return this.tr((({ key:"Mauritius" }))); }
     },
     "MV": {
       "callingCode": [
@@ -1393,7 +1393,7 @@
       "currency": [
         "MVR"
       ],
-      "name": function() { return this.gettext("Maldives"); }
+      "name": function() { return this.tr((({ key:"Maldives" }))); }
     },
     "MW": {
       "callingCode": [
@@ -1402,7 +1402,7 @@
       "currency": [
         "MWK"
       ],
-      "name": function() { return this.gettext("Malawi"); }
+      "name": function() { return this.tr((({ key:"Malawi" }))); }
     },
     "MX": {
       "callingCode": [
@@ -1411,7 +1411,7 @@
       "currency": [
         "MXN"
       ],
-      "name": function() { return this.gettext("Mexico"); }
+      "name": function() { return this.tr((({ key:"Mexico" }))); }
     },
     "MY": {
       "callingCode": [
@@ -1420,7 +1420,7 @@
       "currency": [
         "MYR"
       ],
-      "name": function() { return this.gettext("Malaysia"); }
+      "name": function() { return this.tr((({ key:"Malaysia" }))); }
     },
     "MZ": {
       "callingCode": [
@@ -1429,7 +1429,7 @@
       "currency": [
         "MZN"
       ],
-      "name": function() { return this.gettext("Mozambique"); }
+      "name": function() { return this.tr((({ key:"Mozambique" }))); }
     },
     "NA": {
       "callingCode": [
@@ -1439,7 +1439,7 @@
         "NAD",
         "ZAR"
       ],
-      "name": function() { return this.gettext("Namibia"); }
+      "name": function() { return this.tr((({ key:"Namibia" }))); }
     },
     "NC": {
       "callingCode": [
@@ -1448,7 +1448,7 @@
       "currency": [
         "XPF"
       ],
-      "name": function() { return this.gettext("New Caledonia"); }
+      "name": function() { return this.tr((({ key:"New Caledonia" }))); }
     },
     "NE": {
       "callingCode": [
@@ -1457,7 +1457,7 @@
       "currency": [
         "XOF"
       ],
-      "name": function() { return this.gettext("Niger"); }
+      "name": function() { return this.tr((({ key:"Niger" }))); }
     },
     "NF": {
       "callingCode": [
@@ -1466,7 +1466,7 @@
       "currency": [
         "AUD"
       ],
-      "name": function() { return this.gettext("Norfolk Island"); }
+      "name": function() { return this.tr((({ key:"Norfolk Island" }))); }
     },
     "NG": {
       "callingCode": [
@@ -1475,7 +1475,7 @@
       "currency": [
         "NGN"
       ],
-      "name": function() { return this.gettext("Nigeria"); }
+      "name": function() { return this.tr((({ key:"Nigeria" }))); }
     },
     "NI": {
       "callingCode": [
@@ -1484,7 +1484,7 @@
       "currency": [
         "NIO"
       ],
-      "name": function() { return this.gettext("Nicaragua"); }
+      "name": function() { return this.tr((({ key:"Nicaragua" }))); }
     },
     "NL": {
       "callingCode": [
@@ -1493,7 +1493,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Netherlands"); }
+      "name": function() { return this.tr((({ key:"Netherlands" }))); }
     },
     "NO": {
       "callingCode": [
@@ -1502,7 +1502,7 @@
       "currency": [
         "NOK"
       ],
-      "name": function() { return this.gettext("Norway"); }
+      "name": function() { return this.tr((({ key:"Norway" }))); }
     },
     "NP": {
       "callingCode": [
@@ -1511,7 +1511,7 @@
       "currency": [
         "NPR"
       ],
-      "name": function() { return this.gettext("Nepal"); }
+      "name": function() { return this.tr((({ key:"Nepal" }))); }
     },
     "NR": {
       "callingCode": [
@@ -1520,7 +1520,7 @@
       "currency": [
         "AUD"
       ],
-      "name": function() { return this.gettext("Nauru"); }
+      "name": function() { return this.tr((({ key:"Nauru" }))); }
     },
     "NU": {
       "callingCode": [
@@ -1529,7 +1529,7 @@
       "currency": [
         "NZD"
       ],
-      "name": function() { return this.gettext("Niue"); }
+      "name": function() { return this.tr((({ key:"Niue" }))); }
     },
     "NZ": {
       "callingCode": [
@@ -1538,7 +1538,7 @@
       "currency": [
         "NZD"
       ],
-      "name": function() { return this.gettext("New Zealand"); }
+      "name": function() { return this.tr((({ key:"New Zealand" }))); }
     },
     "OM": {
       "callingCode": [
@@ -1547,7 +1547,7 @@
       "currency": [
         "OMR"
       ],
-      "name": function() { return this.gettext("Oman"); }
+      "name": function() { return this.tr((({ key:"Oman" }))); }
     },
     "PA": {
       "callingCode": [
@@ -1557,7 +1557,7 @@
         "PAB",
         "USD"
       ],
-      "name": function() { return this.gettext("Panama"); }
+      "name": function() { return this.tr((({ key:"Panama" }))); }
     },
     "PE": {
       "callingCode": [
@@ -1566,7 +1566,7 @@
       "currency": [
         "PEN"
       ],
-      "name": function() { return this.gettext("Peru"); }
+      "name": function() { return this.tr((({ key:"Peru" }))); }
     },
     "PF": {
       "callingCode": [
@@ -1575,7 +1575,7 @@
       "currency": [
         "XPF"
       ],
-      "name": function() { return this.gettext("French Polynesia"); }
+      "name": function() { return this.tr((({ key:"French Polynesia" }))); }
     },
     "PG": {
       "callingCode": [
@@ -1584,7 +1584,7 @@
       "currency": [
         "PGK"
       ],
-      "name": function() { return this.gettext("Papua New Guinea"); }
+      "name": function() { return this.tr((({ key:"Papua New Guinea" }))); }
     },
     "PH": {
       "callingCode": [
@@ -1593,7 +1593,7 @@
       "currency": [
         "PHP"
       ],
-      "name": function() { return this.gettext("Philippines"); }
+      "name": function() { return this.tr((({ key:"Philippines" }))); }
     },
     "PK": {
       "callingCode": [
@@ -1602,7 +1602,7 @@
       "currency": [
         "PKR"
       ],
-      "name": function() { return this.gettext("Pakistan"); }
+      "name": function() { return this.tr((({ key:"Pakistan" }))); }
     },
     "PL": {
       "callingCode": [
@@ -1611,7 +1611,7 @@
       "currency": [
         "PLN"
       ],
-      "name": function() { return this.gettext("Poland"); }
+      "name": function() { return this.tr((({ key:"Poland" }))); }
     },
     "PM": {
       "callingCode": [
@@ -1620,7 +1620,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Saint Pierre and Miquelon"); }
+      "name": function() { return this.tr((({ key:"Saint Pierre and Miquelon" }))); }
     },
     "PN": {
       "callingCode": [
@@ -1629,7 +1629,7 @@
       "currency": [
         "NZD"
       ],
-      "name": function() { return this.gettext("Pitcairn Islands"); }
+      "name": function() { return this.tr((({ key:"Pitcairn Islands" }))); }
     },
     "PR": {
       "callingCode": [
@@ -1639,7 +1639,7 @@
       "currency": [
         "USD"
       ],
-      "name": function() { return this.gettext("Puerto Rico"); }
+      "name": function() { return this.tr((({ key:"Puerto Rico" }))); }
     },
     "PS": {
       "callingCode": [
@@ -1648,7 +1648,7 @@
       "currency": [
         "ILS"
       ],
-      "name": function() { return this.gettext("Palestine"); }
+      "name": function() { return this.tr((({ key:"Palestine" }))); }
     },
     "PT": {
       "callingCode": [
@@ -1657,7 +1657,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Portugal"); }
+      "name": function() { return this.tr((({ key:"Portugal" }))); }
     },
     "PW": {
       "callingCode": [
@@ -1666,7 +1666,7 @@
       "currency": [
         "USD"
       ],
-      "name": function() { return this.gettext("Palau"); }
+      "name": function() { return this.tr((({ key:"Palau" }))); }
     },
     "PY": {
       "callingCode": [
@@ -1675,7 +1675,7 @@
       "currency": [
         "PYG"
       ],
-      "name": function() { return this.gettext("Paraguay"); }
+      "name": function() { return this.tr((({ key:"Paraguay" }))); }
     },
     "QA": {
       "callingCode": [
@@ -1684,7 +1684,7 @@
       "currency": [
         "QAR"
       ],
-      "name": function() { return this.gettext("Qatar"); }
+      "name": function() { return this.tr((({ key:"Qatar" }))); }
     },
     "RE": {
       "callingCode": [
@@ -1693,7 +1693,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Réunion"); }
+      "name": function() { return this.tr((({ key:"Réunion" }))); }
     },
     "RO": {
       "callingCode": [
@@ -1702,7 +1702,7 @@
       "currency": [
         "RON"
       ],
-      "name": function() { return this.gettext("Romania"); }
+      "name": function() { return this.tr((({ key:"Romania" }))); }
     },
     "RS": {
       "callingCode": [
@@ -1711,7 +1711,7 @@
       "currency": [
         "RSD"
       ],
-      "name": function() { return this.gettext("Serbia"); }
+      "name": function() { return this.tr((({ key:"Serbia" }))); }
     },
     "RU": {
       "callingCode": [
@@ -1720,7 +1720,7 @@
       "currency": [
         "RUB"
       ],
-      "name": function() { return this.gettext("Russia"); }
+      "name": function() { return this.tr((({ key:"Russia" }))); }
     },
     "RW": {
       "callingCode": [
@@ -1729,7 +1729,7 @@
       "currency": [
         "RWF"
       ],
-      "name": function() { return this.gettext("Rwanda"); }
+      "name": function() { return this.tr((({ key:"Rwanda" }))); }
     },
     "SA": {
       "callingCode": [
@@ -1738,7 +1738,7 @@
       "currency": [
         "SAR"
       ],
-      "name": function() { return this.gettext("Saudi Arabia"); }
+      "name": function() { return this.tr((({ key:"Saudi Arabia" }))); }
     },
     "SB": {
       "callingCode": [
@@ -1747,7 +1747,7 @@
       "currency": [
         "SDB"
       ],
-      "name": function() { return this.gettext("Solomon Islands"); }
+      "name": function() { return this.tr((({ key:"Solomon Islands" }))); }
     },
     "SC": {
       "callingCode": [
@@ -1756,7 +1756,7 @@
       "currency": [
         "SCR"
       ],
-      "name": function() { return this.gettext("Seychelles"); }
+      "name": function() { return this.tr((({ key:"Seychelles" }))); }
     },
     "SD": {
       "callingCode": [
@@ -1765,7 +1765,7 @@
       "currency": [
         "SDG"
       ],
-      "name": function() { return this.gettext("Sudan"); }
+      "name": function() { return this.tr((({ key:"Sudan" }))); }
     },
     "SE": {
       "callingCode": [
@@ -1774,7 +1774,7 @@
       "currency": [
         "SEK"
       ],
-      "name": function() { return this.gettext("Sweden"); }
+      "name": function() { return this.tr((({ key:"Sweden" }))); }
     },
     "SG": {
       "callingCode": [
@@ -1783,7 +1783,7 @@
       "currency": [
         "SGD"
       ],
-      "name": function() { return this.gettext("Singapore"); }
+      "name": function() { return this.tr((({ key:"Singapore" }))); }
     },
     "SH": {
       "callingCode": [
@@ -1792,7 +1792,7 @@
       "currency": [
         "SHP"
       ],
-      "name": function() { return this.gettext("Saint Helena, Ascension and Tristan da Cunha"); }
+      "name": function() { return this.tr((({ key:"Saint Helena, Ascension and Tristan da Cunha" }))); }
     },
     "SI": {
       "callingCode": [
@@ -1801,7 +1801,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Slovenia"); }
+      "name": function() { return this.tr((({ key:"Slovenia" }))); }
     },
     "SJ": {
       "callingCode": [
@@ -1810,7 +1810,7 @@
       "currency": [
         "NOK"
       ],
-      "name": function() { return this.gettext("Svalbard and Jan Mayen"); }
+      "name": function() { return this.tr((({ key:"Svalbard and Jan Mayen" }))); }
     },
     "SK": {
       "callingCode": [
@@ -1819,7 +1819,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Slovakia"); }
+      "name": function() { return this.tr((({ key:"Slovakia" }))); }
     },
     "SL": {
       "callingCode": [
@@ -1828,7 +1828,7 @@
       "currency": [
         "SLL"
       ],
-      "name": function() { return this.gettext("Sierra Leone"); }
+      "name": function() { return this.tr((({ key:"Sierra Leone" }))); }
     },
     "SM": {
       "callingCode": [
@@ -1837,7 +1837,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("San Marino"); }
+      "name": function() { return this.tr((({ key:"San Marino" }))); }
     },
     "SN": {
       "callingCode": [
@@ -1846,7 +1846,7 @@
       "currency": [
         "XOF"
       ],
-      "name": function() { return this.gettext("Senegal"); }
+      "name": function() { return this.tr((({ key:"Senegal" }))); }
     },
     "SO": {
       "callingCode": [
@@ -1855,7 +1855,7 @@
       "currency": [
         "SOS"
       ],
-      "name": function() { return this.gettext("Somalia"); }
+      "name": function() { return this.tr((({ key:"Somalia" }))); }
     },
     "SR": {
       "callingCode": [
@@ -1864,7 +1864,7 @@
       "currency": [
         "SRD"
       ],
-      "name": function() { return this.gettext("Suriname"); }
+      "name": function() { return this.tr((({ key:"Suriname" }))); }
     },
     "SS": {
       "callingCode": [
@@ -1873,7 +1873,7 @@
       "currency": [
         "SSP"
       ],
-      "name": function() { return this.gettext("South Sudan"); }
+      "name": function() { return this.tr((({ key:"South Sudan" }))); }
     },
     "ST": {
       "callingCode": [
@@ -1882,7 +1882,7 @@
       "currency": [
         "STD"
       ],
-      "name": function() { return this.gettext("São Tomé and Príncipe"); }
+      "name": function() { return this.tr((({ key:"São Tomé and Príncipe" }))); }
     },
     "SV": {
       "callingCode": [
@@ -1892,7 +1892,7 @@
         "SVC",
         "USD"
       ],
-      "name": function() { return this.gettext("El Salvador"); }
+      "name": function() { return this.tr((({ key:"El Salvador" }))); }
     },
     "SX": {
       "callingCode": [
@@ -1901,7 +1901,7 @@
       "currency": [
         "ANG"
       ],
-      "name": function() { return this.gettext("Sint Maarten"); }
+      "name": function() { return this.tr((({ key:"Sint Maarten" }))); }
     },
     "SY": {
       "callingCode": [
@@ -1910,7 +1910,7 @@
       "currency": [
         "SYP"
       ],
-      "name": function() { return this.gettext("Syria"); }
+      "name": function() { return this.tr((({ key:"Syria" }))); }
     },
     "SZ": {
       "callingCode": [
@@ -1919,7 +1919,7 @@
       "currency": [
         "SZL"
       ],
-      "name": function() { return this.gettext("Swaziland"); }
+      "name": function() { return this.tr((({ key:"Swaziland" }))); }
     },
     "TC": {
       "callingCode": [
@@ -1928,7 +1928,7 @@
       "currency": [
         "USD"
       ],
-      "name": function() { return this.gettext("Turks and Caicos Islands"); }
+      "name": function() { return this.tr((({ key:"Turks and Caicos Islands" }))); }
     },
     "TD": {
       "callingCode": [
@@ -1937,13 +1937,13 @@
       "currency": [
         "XAF"
       ],
-      "name": function() { return this.gettext("Chad"); }
+      "name": function() { return this.tr((({ key:"Chad" }))); }
     },
     "TF": {
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("French Southern and Antarctic Lands"); }
+      "name": function() { return this.tr((({ key:"French Southern and Antarctic Lands" }))); }
     },
     "TG": {
       "callingCode": [
@@ -1952,7 +1952,7 @@
       "currency": [
         "XOF"
       ],
-      "name": function() { return this.gettext("Togo"); }
+      "name": function() { return this.tr((({ key:"Togo" }))); }
     },
     "TH": {
       "callingCode": [
@@ -1961,7 +1961,7 @@
       "currency": [
         "THB"
       ],
-      "name": function() { return this.gettext("Thailand"); }
+      "name": function() { return this.tr((({ key:"Thailand" }))); }
     },
     "TJ": {
       "callingCode": [
@@ -1970,7 +1970,7 @@
       "currency": [
         "TJS"
       ],
-      "name": function() { return this.gettext("Tajikistan"); }
+      "name": function() { return this.tr((({ key:"Tajikistan" }))); }
     },
     "TK": {
       "callingCode": [
@@ -1979,7 +1979,7 @@
       "currency": [
         "NZD"
       ],
-      "name": function() { return this.gettext("Tokelau"); }
+      "name": function() { return this.tr((({ key:"Tokelau" }))); }
     },
     "TL": {
       "callingCode": [
@@ -1988,7 +1988,7 @@
       "currency": [
         "USD"
       ],
-      "name": function() { return this.gettext("Timor-Leste"); }
+      "name": function() { return this.tr((({ key:"Timor-Leste" }))); }
     },
     "TM": {
       "callingCode": [
@@ -1997,7 +1997,7 @@
       "currency": [
         "TMT"
       ],
-      "name": function() { return this.gettext("Turkmenistan"); }
+      "name": function() { return this.tr((({ key:"Turkmenistan" }))); }
     },
     "TN": {
       "callingCode": [
@@ -2006,7 +2006,7 @@
       "currency": [
         "TND"
       ],
-      "name": function() { return this.gettext("Tunisia"); }
+      "name": function() { return this.tr((({ key:"Tunisia" }))); }
     },
     "TO": {
       "callingCode": [
@@ -2015,7 +2015,7 @@
       "currency": [
         "TOP"
       ],
-      "name": function() { return this.gettext("Tonga"); }
+      "name": function() { return this.tr((({ key:"Tonga" }))); }
     },
     "TR": {
       "callingCode": [
@@ -2024,7 +2024,7 @@
       "currency": [
         "TRY"
       ],
-      "name": function() { return this.gettext("Turkey"); }
+      "name": function() { return this.tr((({ key:"Turkey" }))); }
     },
     "TT": {
       "callingCode": [
@@ -2033,7 +2033,7 @@
       "currency": [
         "TTD"
       ],
-      "name": function() { return this.gettext("Trinidad and Tobago"); }
+      "name": function() { return this.tr((({ key:"Trinidad and Tobago" }))); }
     },
     "TV": {
       "callingCode": [
@@ -2042,7 +2042,7 @@
       "currency": [
         "AUD"
       ],
-      "name": function() { return this.gettext("Tuvalu"); }
+      "name": function() { return this.tr((({ key:"Tuvalu" }))); }
     },
     "TW": {
       "callingCode": [
@@ -2051,7 +2051,7 @@
       "currency": [
         "TWD"
       ],
-      "name": function() { return this.gettext("Taiwan"); }
+      "name": function() { return this.tr((({ key:"Taiwan" }))); }
     },
     "TZ": {
       "callingCode": [
@@ -2060,7 +2060,7 @@
       "currency": [
         "TZS"
       ],
-      "name": function() { return this.gettext("Tanzania"); }
+      "name": function() { return this.tr((({ key:"Tanzania" }))); }
     },
     "UA": {
       "callingCode": [
@@ -2069,7 +2069,7 @@
       "currency": [
         "UAH"
       ],
-      "name": function() { return this.gettext("Ukraine"); }
+      "name": function() { return this.tr((({ key:"Ukraine" }))); }
     },
     "UG": {
       "callingCode": [
@@ -2078,13 +2078,13 @@
       "currency": [
         "UGX"
       ],
-      "name": function() { return this.gettext("Uganda"); }
+      "name": function() { return this.tr((({ key:"Uganda" }))); }
     },
     "UM": {
       "currency": [
         "USD"
       ],
-      "name": function() { return this.gettext("United States Minor Outlying Islands"); }
+      "name": function() { return this.tr((({ key:"United States Minor Outlying Islands" }))); }
     },
     "US": {
       "callingCode": [
@@ -2095,7 +2095,7 @@
         "USN",
         "USS"
       ],
-      "name": function() { return this.gettext("United States"); }
+      "name": function() { return this.tr((({ key:"United States" }))); }
     },
     "UY": {
       "callingCode": [
@@ -2105,7 +2105,7 @@
         "UYI",
         "UYU"
       ],
-      "name": function() { return this.gettext("Uruguay"); }
+      "name": function() { return this.tr((({ key:"Uruguay" }))); }
     },
     "UZ": {
       "callingCode": [
@@ -2114,7 +2114,7 @@
       "currency": [
         "UZS"
       ],
-      "name": function() { return this.gettext("Uzbekistan"); }
+      "name": function() { return this.tr((({ key:"Uzbekistan" }))); }
     },
     "VA": {
       "callingCode": [
@@ -2124,7 +2124,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Vatican City"); }
+      "name": function() { return this.tr((({ key:"Vatican City" }))); }
     },
     "VC": {
       "callingCode": [
@@ -2133,7 +2133,7 @@
       "currency": [
         "XCD"
       ],
-      "name": function() { return this.gettext("Saint Vincent and the Grenadines"); }
+      "name": function() { return this.tr((({ key:"Saint Vincent and the Grenadines" }))); }
     },
     "VE": {
       "callingCode": [
@@ -2142,7 +2142,7 @@
       "currency": [
         "VEF"
       ],
-      "name": function() { return this.gettext("Venezuela"); }
+      "name": function() { return this.tr((({ key:"Venezuela" }))); }
     },
     "VG": {
       "callingCode": [
@@ -2151,7 +2151,7 @@
       "currency": [
         "USD"
       ],
-      "name": function() { return this.gettext("British Virgin Islands"); }
+      "name": function() { return this.tr((({ key:"British Virgin Islands" }))); }
     },
     "VI": {
       "callingCode": [
@@ -2160,7 +2160,7 @@
       "currency": [
         "USD"
       ],
-      "name": function() { return this.gettext("United States Virgin Islands"); }
+      "name": function() { return this.tr((({ key:"United States Virgin Islands" }))); }
     },
     "VN": {
       "callingCode": [
@@ -2169,7 +2169,7 @@
       "currency": [
         "VND"
       ],
-      "name": function() { return this.gettext("Vietnam"); }
+      "name": function() { return this.tr((({ key:"Vietnam" }))); }
     },
     "VU": {
       "callingCode": [
@@ -2178,7 +2178,7 @@
       "currency": [
         "VUV"
       ],
-      "name": function() { return this.gettext("Vanuatu"); }
+      "name": function() { return this.tr((({ key:"Vanuatu" }))); }
     },
     "WF": {
       "callingCode": [
@@ -2187,7 +2187,7 @@
       "currency": [
         "XPF"
       ],
-      "name": function() { return this.gettext("Wallis and Futuna"); }
+      "name": function() { return this.tr((({ key:"Wallis and Futuna" }))); }
     },
     "WS": {
       "callingCode": [
@@ -2196,7 +2196,7 @@
       "currency": [
         "WST"
       ],
-      "name": function() { return this.gettext("Samoa"); }
+      "name": function() { return this.tr((({ key:"Samoa" }))); }
     },
     "XK": {
       "callingCode": [
@@ -2207,7 +2207,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Kosovo"); }
+      "name": function() { return this.tr((({ key:"Kosovo" }))); }
     },
     "YE": {
       "callingCode": [
@@ -2216,7 +2216,7 @@
       "currency": [
         "YER"
       ],
-      "name": function() { return this.gettext("Yemen"); }
+      "name": function() { return this.tr((({ key:"Yemen" }))); }
     },
     "YT": {
       "callingCode": [
@@ -2225,7 +2225,7 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.gettext("Mayotte"); }
+      "name": function() { return this.tr((({ key:"Mayotte" }))); }
     },
     "ZA": {
       "callingCode": [
@@ -2234,7 +2234,7 @@
       "currency": [
         "ZAR"
       ],
-      "name": function() { return this.gettext("South Africa"); }
+      "name": function() { return this.tr((({ key:"South Africa" }))); }
     },
     "ZM": {
       "callingCode": [
@@ -2243,7 +2243,7 @@
       "currency": [
         "ZMK"
       ],
-      "name": function() { return this.gettext("Zambia"); }
+      "name": function() { return this.tr((({ key:"Zambia" }))); }
     },
     "ZW": {
       "callingCode": [
@@ -2252,6 +2252,6 @@
       "currency": [
         "ZWL"
       ],
-      "name": function() { return this.gettext("Zimbabwe"); }
+      "name": function() { return this.tr((({ key:"Zimbabwe" }))); }
     }
 }

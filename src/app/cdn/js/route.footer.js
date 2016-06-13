@@ -36,7 +36,7 @@ module.exports = function(app) {
     	'toTop');
 
 		domMgr.mk('div',wrapper,[
-    		domMgr.mk('span', null, function() { return this.gettext("License: LGPLv3"); })
+    		domMgr.mk('span', null, function() { return this.tr((({ key:"License: LGPLv3" }))); })
     	],'license');
 
     	domMgr.mk('div',wrapper,[
@@ -56,7 +56,7 @@ module.exports = function(app) {
                             return x.name === 'app';
                         });
                         var x = domMgr.mk('div',null,null,'lastupdate');
-                        domMgr.mk('span',x, function() { return this.gettext("Updated:"); });
+                        domMgr.mk('span',x, function() { return this.tr((({ key:"Updated:" }))); });
                         return model.managers.object.create('date', {
                             date:data[0].updated_at,
                             format:'LLLL',
@@ -82,7 +82,7 @@ module.exports = function(app) {
                         });
                         return domMgr.mk('div',null,null,function() {
                             this.className = 'openissues';
-                            domMgr.mk('span',this, function() { return this.gettext("Open Issues:"); });
+                            domMgr.mk('span',this, function() { return this.tr((({ key:"Open Issues:" }))); });
                             domMgr.mk('a',this,data[0].open_issues).href='https://github.com/igaro/app/issues';
                         });
                     }

@@ -17,7 +17,7 @@ model.managers.object.create('accordion',{ \n \
         { title: { en:'3' }, content:{ en : 'Red' }, disabled:true } \n \
     ] \n \
 });",
-            desc : function() { return this.gettext("Creates a list that can expand and collapse nodes. Useful to condense information for when navigation is important or where space is limited."); },
+            desc : function() { return this.tr((({ key:"Creates a list that can expand and collapse nodes. Useful to condense information for when navigation is important or where space is limited." }))); },
             blessed: {
                 container:true,
                 children:['sections']
@@ -38,7 +38,7 @@ model.managers.object.create('accordion',{ \n \
                     {
                         name:'multiExpand',
                         type:'boolean',
-                        desc:function() { return this.gettext("Pass true to allow more than one section to expand. If false (default) then open sections contract prior to another section opening."); }
+                        desc:function() { return this.tr((({ key:"Pass true to allow more than one section to expand. If false (default) then open sections contract prior to another section opening." }))); }
                     },
                     {
                         name:'sections',
@@ -46,7 +46,7 @@ model.managers.object.create('accordion',{ \n \
                         attributes : [{
                             instanceof : { name:'Array' }
                         }],
-                        desc : function() { return this.gettext("Initial sections to create. Calls .addSections() with the list."); }
+                        desc : function() { return this.tr((({ key:"Initial sections to create. Calls .addSections() with the list." }))); }
                     }
                 ]
             },
@@ -59,7 +59,7 @@ model.managers.object.create('accordion',{ \n \
                     name:'addSection',
                     type:'function',
                     async:true,
-                    desc : function() { return this.gettext("Adds a new section to the accordion."); },
+                    desc : function() { return this.tr((({ key:"Adds a new section to the accordion." }))); },
                     returns : {
                         instanceof: function() { return data.objects.section; },
                     },
@@ -72,17 +72,17 @@ model.managers.object.create('accordion',{ \n \
                                 {
                                     name:'content',
                                     type:'object',
-                                    desc: function() { return this.gettext("A language literal, content or other Element."); }
+                                    desc: function() { return this.tr((({ key:"A language literal, content or other Element." }))); }
                                 },
                                 {
                                     name:'expand',
                                     type:'boolean',
-                                    desc:function() { return this.gettext("Sets the initial mode to be expanded."); }
+                                    desc:function() { return this.tr((({ key:"Sets the initial mode to be expanded." }))); }
                                 },
                                 {
                                     name:'title',
                                     type:'object',
-                                    desc: function() { return this.gettext("A language literal or string."); }
+                                    desc: function() { return this.tr((({ key:"A language literal or string." }))); }
                                 }
                             ]
                         }
@@ -92,7 +92,7 @@ model.managers.object.create('accordion',{ \n \
                     name:'addSections',
                     type:'function',
                     async:true,
-                    desc: function() { return this.gettext("Calls .addSection() with each item in the array and returns the added sections."); },
+                    desc: function() { return this.tr((({ key:"Calls .addSection() with each item in the array and returns the added sections." }))); },
                     attributes : [{
                         type:'object',
                         attributes : [{
@@ -109,13 +109,13 @@ model.managers.object.create('accordion',{ \n \
                     name:'collapseAll',
                     type:'function',
                     async:true,
-                    desc: function() { return this.gettext("Collapses all sections"); },
+                    desc: function() { return this.tr((({ key:"Collapses all sections" }))); },
                 },
                 {
                     name:'expandAll',
                     type:'function',
                     async:true,
-                    desc: function() { return this.gettext("Expands all sections. multiExpand must be enabled for this to work."); },
+                    desc: function() { return this.tr((({ key:"Expands all sections. multiExpand must be enabled for this to work." }))); },
                 }
             ]
         };

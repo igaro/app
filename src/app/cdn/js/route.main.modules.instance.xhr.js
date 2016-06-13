@@ -7,7 +7,7 @@ module.exports = function() {
     return function(model) {
 
         var data = {
-            desc : function() { return this.gettext("Asynchronously fetches and returns data from a resource."); },
+            desc : function() { return this.tr((({ key:"Asynchronously fetches and returns data from a resource." }))); },
             blessed:true,
             author : {
                 name:'Andrew Charnley',
@@ -32,38 +32,38 @@ module.exports = function() {
                     {
                         name:'expectedContentType',
                         type:'string',
-                        desc:function() { return this.gettext("Defines whether the content-type header returned by the transaction should match a particular value, i.e 'json'."); }
+                        desc:function() { return this.tr((({ key:"Defines whether the content-type header returned by the transaction should match a particular value, i.e 'json'." }))); }
                     },
                     {
                         name:'headers',
                         type:'*',
-                        desc: function() { return this.gettext("An object literal of headers to be sent. May be a function to attain values on point of call."); }
+                        desc: function() { return this.tr((({ key:"An object literal of headers to be sent. May be a function to attain values on point of call." }))); }
                     },
                     {
                         name:'form',
                         instanceof : { name:'Element' },
-                        desc : function() { return this.gettext("Calls .applyForm()."); },
+                        desc : function() { return this.tr((({ key:"Calls .applyForm()." }))); },
                     },
                     {
                         name:'silent',
                         type:'boolean',
-                        desc:function() { return this.gettext("Prevents dispatch of the execution event which in turn prevents user awareness icons/animation (where available)."); }
+                        desc:function() { return this.tr((({ key:"Prevents dispatch of the execution event which in turn prevents user awareness icons/animation (where available)." }))); }
                     },
                     {
                         name:'res',
                         required:true,
                         type:'string',
-                        desc : function() { return this.gettext("The resource, i.e URL, to load. Note that you can also specify this instead of the configuration literal."); }
+                        desc : function() { return this.tr((({ key:"The resource, i.e URL, to load. Note that you can also specify this instead of the configuration literal." }))); }
                     },
                     {
                         name : 'withCredentials',
                         type : 'boolean',
-                        desc : function() { return this.gettext("Enables CORS over XHR."); }
+                        desc : function() { return this.tr((({ key:"Enables CORS over XHR." }))); }
                     },
                     {
                         name:'vars',
                         type:'*',
-                        desc: function() { return this.gettext("An object literal of name/value pairs to sent. May be a function to attain values on point of call."); }
+                        desc: function() { return this.tr((({ key:"An object literal of name/value pairs to sent. May be a function to attain values on point of call." }))); }
                     }
                 ]
             },
@@ -72,46 +72,46 @@ module.exports = function() {
                     name:'abort',
                     type:'function',
                     async:true,
-                    desc: function() { return this.gettext("Aborts the XHR operation (if it is currently running). Note that once aborted some browsers such as IE will not allow the XHR to be reused."); },
+                    desc: function() { return this.tr((({ key:"Aborts the XHR operation (if it is currently running). Note that once aborted some browsers such as IE will not allow the XHR to be reused." }))); },
                 },
                 {
                     name:'aborted',
                     type:'boolean',
-                    desc:function() { return this.gettext("Defines whether the last transaction was aborted."); }
+                    desc:function() { return this.tr((({ key:"Defines whether the last transaction was aborted." }))); }
 
                 },
                 {
                     name:'response',
                     type:'boolean',
-                    desc:function() { return this.gettext("Indicates if a response was received."); }
+                    desc:function() { return this.tr((({ key:"Indicates if a response was received." }))); }
 
                 },
                 {
                     name:'applyForm',
                     type:'function',
-                    desc : function() { return this.gettext("Enumerates over a form and caches the values to be sent. If the XHR is resent you must re-run this to send modified form data."); },
+                    desc : function() { return this.tr((({ key:"Enumerates over a form and caches the values to be sent. If the XHR is resent you must re-run this to send modified form data." }))); },
                     attributes : [{
                         type:'object',
                         attributes: [{
                             instanceof : { name:'Element' },
-                            desc : function() { return this.gettext("A form to send. Element values will be enumerated once allowing you to keep the same values on resend. Call again to refresh."); }
+                            desc : function() { return this.tr((({ key:"A form to send. Element values will be enumerated once allowing you to keep the same values on resend. Call again to refresh." }))); }
                         }]
                     }]
                 },
                 {
                     name:'connectionFailure',
                     type:'boolean',
-                    desc:function() { return this.gettext("Defines whether the last transaction failed due to a connection failure."); }
+                    desc:function() { return this.tr((({ key:"Defines whether the last transaction failed due to a connection failure." }))); }
                 },
                 {
                     name:'delete',
                     type:'function',
                     async:true,
-                    desc: function() { return this.gettext("Sends a DELETE command to the server."); },
+                    desc: function() { return this.tr((({ key:"Sends a DELETE command to the server." }))); },
                     attributes : [{
                         type:'object',
                         attributes : [{
-                            desc: function() { return this.gettext("Any of the instantiated properties can be set here to update the XHR before it is sent."); }
+                            desc: function() { return this.tr((({ key:"Any of the instantiated properties can be set here to update the XHR before it is sent." }))); }
                         }]
                     }],
                 },
@@ -119,28 +119,28 @@ module.exports = function() {
                     name:'head',
                     type:'function',
                     async:true,
-                    desc: function() { return this.gettext("Sends a HEAD command to the server."); },
+                    desc: function() { return this.tr((({ key:"Sends a HEAD command to the server." }))); },
                     attributes : [{
                         type:'object',
                         attributes : [{
-                            desc: function() { return this.gettext("Any of the instantiated properties can be set here to update the XHR before it is sent."); }
+                            desc: function() { return this.tr((({ key:"Any of the instantiated properties can be set here to update the XHR before it is sent." }))); }
                         }]
                     }]
                 },
                 {
                     name:'headers',
                     type:'*',
-                    desc:function() { return this.gettext("A literal containing headers to be sent with the transaction. May be a function to attain values on point of call."); }
+                    desc:function() { return this.tr((({ key:"A literal containing headers to be sent with the transaction. May be a function to attain values on point of call." }))); }
                 },
                 {
                     name:'get',
                     type:'function',
                     async:true,
-                    desc: function() { return this.gettext("Sends a GET command to the server."); },
+                    desc: function() { return this.tr((({ key:"Sends a GET command to the server." }))); },
                     attributes : [{
                         type:'object',
                         attributes : [{
-                            desc: function() { return this.gettext("Any of the instantiated properties can be set here to update the XHR before it is sent."); }
+                            desc: function() { return this.tr((({ key:"Any of the instantiated properties can be set here to update the XHR before it is sent." }))); }
                         }]
                     }]
                 },
@@ -148,11 +148,11 @@ module.exports = function() {
                     name:'options',
                     type:'function',
                     async:true,
-                    desc: function() { return this.gettext("Sends an OPTIONS command to the server."); },
+                    desc: function() { return this.tr((({ key:"Sends an OPTIONS command to the server." }))); },
                     attributes : [{
                         type:'object',
                         attributes : [{
-                            desc: function() { return this.gettext("Any of the instantiated properties can be set here to update the XHR before it is sent."); }
+                            desc: function() { return this.tr((({ key:"Any of the instantiated properties can be set here to update the XHR before it is sent." }))); }
                         }]
                     }]
                 },
@@ -160,11 +160,11 @@ module.exports = function() {
                     name:'post',
                     type:'function',
                     async:true,
-                    desc: function() { return this.gettext("Sends a POST command to the server."); },
+                    desc: function() { return this.tr((({ key:"Sends a POST command to the server." }))); },
                     attributes : [{
                         type:'object',
                         attributes : [{
-                            desc: function() { return this.gettext("Any of the instantiated properties can be set here to update the XHR before it is sent."); }
+                            desc: function() { return this.tr((({ key:"Any of the instantiated properties can be set here to update the XHR before it is sent." }))); }
                         }]
                     }]
                 },
@@ -172,11 +172,11 @@ module.exports = function() {
                     name:'put',
                     type:'function',
                     async:true,
-                    desc: function() { return this.gettext("Send a PUT command to the server."); },
+                    desc: function() { return this.tr((({ key:"Send a PUT command to the server." }))); },
                     attributes : [{
                         type:'object',
                         attributes : [{
-                            desc: function() { return this.gettext("Any of the instantiated properties can be set here to update the XHR before it is sent."); }
+                            desc: function() { return this.tr((({ key:"Any of the instantiated properties can be set here to update the XHR before it is sent." }))); }
                         }]
                     }]
                 },
@@ -184,28 +184,28 @@ module.exports = function() {
                     name:'trace',
                     type:'function',
                     async:true,
-                    desc:  function() { return this.gettext("Sends a TRACE command to the server."); },
+                    desc:  function() { return this.tr((({ key:"Sends a TRACE command to the server." }))); },
                     attributes : [{
                         type:'object',
                         attributes : [{
-                            desc: function() { return this.gettext("Any of the instantiated properties can be set here to update the XHR before it is sent."); }
+                            desc: function() { return this.tr((({ key:"Any of the instantiated properties can be set here to update the XHR before it is sent." }))); }
                         }]
                     }]
                 },
                 {
                     name:'vars',
                     type:'*',
-                    desc:function() { return this.gettext("A literal containing headers to be sent with the transaction. May also be a function for attaining values on point of call. For post"); }
+                    desc:function() { return this.tr((({ key:"A literal containing headers to be sent with the transaction. May also be a function for attaining values on point of call. For post" }))); }
                 },
                 {
                     name:'withCredentials',
                     type:'boolean',
-                    desc : function() { return this.gettext("Enable CORS over XHR. Usual browser limitations apply."); }
+                    desc : function() { return this.tr((({ key:"Enable CORS over XHR. Usual browser limitations apply." }))); }
                 },
                 {
                     name:'xhr',
                     instanceof: { name:'XMLHttpRequest' },
-                    desc : function() { return this.gettext("A reference to the XMLHttpRequest object."); }
+                    desc : function() { return this.tr((({ key:"A reference to the XMLHttpRequest object." }))); }
                 }
             ],
 

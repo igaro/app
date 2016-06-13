@@ -7,7 +7,7 @@ module.exports = function() {
     return function(model) {
 
         var data = {
-            desc : function() { return this.gettext("Storage routines for cookie, localStorage, sessionStorage and API's."); },
+            desc : function() { return this.tr((({ key:"Storage routines for cookie, localStorage, sessionStorage and API's." }))); },
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
@@ -20,21 +20,21 @@ module.exports = function() {
                 {
                     name:'defaultprovider',
                     type:'object',
-                    desc : function() { return this.gettext("Links to the object in the provider array which provides the default storage routine."); },
+                    desc : function() { return this.tr((({ key:"Links to the object in the provider array which provides the default storage routine." }))); },
                 },
                 {
                     name:'get',
                     type:'function',
                     forManager:true,
                     onlyManager:true,
-                    desc : function() { return this.gettext("Retrieves a value from a storage system."); },
+                    desc : function() { return this.tr((({ key:"Retrieves a value from a storage system." }))); },
                     attributes: [
                         {
                             type:'string',
                             required:true,
                             forManager:true,
                             attributes:[{
-                                desc: function() { return this.gettext("The id to match."); }
+                                desc: function() { return this.tr((({ key:"The id to match." }))); }
                             }]
                         },
                         {
@@ -45,7 +45,7 @@ module.exports = function() {
                             	{
 	                            	type:'string',
 	                            	name:'type',
-	                                desc: function() { return this.gettext("Defines the provider. Use 'cookie', 'local', 'session' or a custom provider. Default is 'local'."); }
+	                                desc: function() { return this.tr((({ key:"Defines the provider. Use 'cookie', 'local', 'session' or a custom provider. Default is 'local'." }))); }
                             	}
                             ]
                         }
@@ -55,13 +55,13 @@ module.exports = function() {
                 {
                     name:'getProviderById',
                     type:'function',
-                    desc : function() { return this.gettext("Returns a provider by it's unique id, such as 'cookie'."); },
+                    desc : function() { return this.tr((({ key:"Returns a provider by it's unique id, such as 'cookie'." }))); },
                     attributes: [
                         {
                             type:'string',
                             required:true,
                             attributes:[{
-                                desc: function() { return this.gettext("The id to match."); }
+                                desc: function() { return this.tr((({ key:"The id to match." }))); }
                             }]
                         }
                     ],
@@ -76,13 +76,13 @@ module.exports = function() {
                 {
                     name:'installProvider',
                     type:'function',
-                    desc : function() { return this.gettext("Installs and returns a new provider. Typically this is used for adding API storage methods."); },
+                    desc : function() { return this.tr((({ key:"Installs and returns a new provider. Typically this is used for adding API storage methods." }))); },
                     attributes: [
                         {
                             type:'string',
                             required:true,
                             attributes:[{
-                                desc: function() { return this.gettext("A name to use as a unique identifier."); }
+                                desc: function() { return this.tr((({ key:"A name to use as a unique identifier." }))); }
                             }]
                         },
                         {
@@ -93,13 +93,13 @@ module.exports = function() {
                                     name:'get',
                                     type:'function',
                                     required:true,
-                                    desc: function() { return this.gettext("The getter routine for the provider."); },
+                                    desc: function() { return this.tr((({ key:"The getter routine for the provider." }))); },
                                     attributes: [
                                         {
                                             type:'string',
                                             required:true,
                                             attributes:[{
-                                                desc: function() { return this.gettext("The unique id of the value to be retrieved."); }
+                                                desc: function() { return this.tr((({ key:"The unique id of the value to be retrieved." }))); }
                                             }]
                                         }
                                     ],
@@ -109,19 +109,19 @@ module.exports = function() {
                                     name:'set',
                                     type:'function',
                                     required:true,
-                                    desc: function() { return this.gettext("The setter routine for the provider."); },
+                                    desc: function() { return this.tr((({ key:"The setter routine for the provider." }))); },
                                     attributes: [
                                         {
                                             type:'string',
                                             required:true,
                                             attributes:[{
-                                                desc: function() { return this.gettext("The unique id of the value to be retrieved."); }
+                                                desc: function() { return this.tr((({ key:"The unique id of the value to be retrieved." }))); }
                                             }]
                                         },
                                         {
                                             type:'*',
                                             attributes:[{
-                                                desc: function() { return this.gettext("The value to be stored. Typically a provider will delete any matching key if this value is undefined or null."); }
+                                                desc: function() { return this.tr((({ key:"The value to be stored. Typically a provider will delete any matching key if this value is undefined or null." }))); }
                                             }]
                                         },
                                         {
@@ -129,7 +129,7 @@ module.exports = function() {
                                             attributes:[
                                                 {
                                                     instanceof: { name:'Date' },
-                                                    desc: function() { return this.gettext("Defines a date/time when the value to be stored should expire. Typically if no value is supplied the provider will store the value indefinitely."); }
+                                                    desc: function() { return this.tr((({ key:"Defines a date/time when the value to be stored should expire. Typically if no value is supplied the provider will store the value indefinitely." }))); }
                                                 }
                                             ]
                                         }
@@ -150,28 +150,28 @@ module.exports = function() {
                 {
                     name:'providers',
                     instanceof : { name:'Array' },
-                    desc : function() { return this.gettext("A pool for storage mechanisms. Cookie, localStorage and sessionStorage are built in."); }
+                    desc : function() { return this.tr((({ key:"A pool for storage mechanisms. Cookie, localStorage and sessionStorage are built in." }))); }
                 },
                 {
                     name:'set',
                     type:'function',
                     forManager:true,
                     onlyManager:true,
-                    desc: function() { return this.gettext("Saves a value to a storage system."); },
+                    desc: function() { return this.tr((({ key:"Saves a value to a storage system." }))); },
                     attributes: [
                         {
                             type:'string',
                             forManager:true,
                             required:true,
                             attributes:[{
-                                desc: function() { return this.gettext("The id to use."); }
+                                desc: function() { return this.tr((({ key:"The id to use." }))); }
                             }]
                         },
                         {
                             type:'*',
                             forManager:true,
                             attributes:[{
-                                desc: function() { return this.gettext("The value to store. Undefined removes the record."); }
+                                desc: function() { return this.tr((({ key:"The value to store. Undefined removes the record." }))); }
                             }]
                         },
                         {
@@ -182,12 +182,12 @@ module.exports = function() {
                             	{
 	                            	name:'expiry',
 	                            	instanceof: { name: 'Date' },
-	                                desc: function() { return this.gettext("Specify a value to expire the data at a set time. "); }
+	                                desc: function() { return this.tr((({ key:"Specify a value to expire the data at a set time. " }))); }
                             	},
                             	{
 	                            	name:'type',
 	                            	type:'string',
-	                                desc: function() { return this.gettext("Defines the provider. Use 'cookie', 'local', 'session' or a custom provider. Default is 'local'."); }
+	                                desc: function() { return this.tr((({ key:"Defines the provider. Use 'cookie', 'local', 'session' or a custom provider. Default is 'local'." }))); }
                             	},
                             ]
                         },

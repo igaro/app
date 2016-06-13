@@ -16,8 +16,8 @@ body.appendChild(loading);
 
 var appConf = {
     cdn : cdn,
-    msgIncompatible : function() { return this.gettext("Your device or software is too old. Please upgrade."); },
-    msgErr : function() { return this.gettext("An unexpected error has occurred.<p>Please email <b>app-support@igaro.com</b> for support."); },
+    msgIncompatible : function() { return this.tr((({ key:"Your device or software is too old. Please upgrade." }))); },
+    msgErr : function() { return this.tr((({ key:"An unexpected error has occurred.<p>Please email <b>app-support@igaro.com</b> for support." }))); },
     libs : {
         load :[
             { name:'conf.app.js' }

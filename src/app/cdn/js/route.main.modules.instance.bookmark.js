@@ -9,7 +9,7 @@ module.exports = function() {
         var data = {
 
             demo : "model.managers.object.create('bookmark', { container:c }) ",
-            desc : function() { return this.gettext("Provides a simple bookmark toolbar for the major social platforms."); },
+            desc : function() { return this.tr((({ key:"Provides a simple bookmark toolbar for the major social platforms." }))); },
             blessed:true,
             usage : {
                 instantiate : true,
@@ -17,12 +17,12 @@ module.exports = function() {
                     {
                         name:'url',
                         type:'string',
-                        desc : function() { return this.gettext("The URL to bookmark. Defaults to the current."); }
+                        desc : function() { return this.tr((({ key:"The URL to bookmark. Defaults to the current." }))); }
                     },
                     {
                         name:'title',
                         type:'string',
-                        desc : function() { return this.gettext("Title to pass over to the external service."); }
+                        desc : function() { return this.tr((({ key:"Title to pass over to the external service." }))); }
                     },
                     {
                         name:'container',
@@ -30,7 +30,7 @@ module.exports = function() {
                         attributes:[{
                             instanceof: { name:'Element' }
                         }],
-                        desc : function() { return this.gettext("Container to append the instance into."); }
+                        desc : function() { return this.tr((({ key:"Container to append the instance into." }))); }
                     }
                 ]
             },
@@ -43,7 +43,7 @@ module.exports = function() {
                 {
                     name:'setURL',
                     type:'function',
-                    desc: function() { return this.gettext("Sets the URL and optional title to pass over to the external service."); },
+                    desc: function() { return this.tr((({ key:"Sets the URL and optional title to pass over to the external service." }))); },
                     attributes : [
                         {
                             type:'object',
@@ -51,12 +51,12 @@ module.exports = function() {
                                 {
                                     name:'url',
                                     type:'string',
-                                    desc : function() { return this.gettext("URL to bookmark. Defaults to the current."); }
+                                    desc : function() { return this.tr((({ key:"URL to bookmark. Defaults to the current." }))); }
                                 },
                                 {
                                     name:'title',
                                     type:'string',
-                                    desc : function() { return this.gettext("Title to pass over."); }
+                                    desc : function() { return this.tr((({ key:"Title to pass over." }))); }
                                 }
                             ]
                         }

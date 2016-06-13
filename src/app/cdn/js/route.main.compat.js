@@ -13,18 +13,18 @@ module.exports = function() {
 
         var wrapper = model.wrapper;
 
-        model.stash.title = function() { return this.gettext("Compatibiity"); };
-        model.stash.desc = function() { return this.gettext("Igaro App works with any recent browser and platform. This page contains the list."); };
+        model.stash.title = function() { return this.tr((({ key:"Compatibiity" }))); };
+        model.stash.desc = function() { return this.tr((({ key:"Igaro App works with any recent browser and platform. This page contains the list." }))); };
 
         var managers = model.managers,
             domMgr= managers.dom,
             objectMgr = managers.object;
 
-        domMgr.mk('p',wrapper,function() { return this.gettext("Igaro App is compatible with the majority of web browsers going back to IE8, and mobile devices."); });
+        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"Igaro App is compatible with the majority of web browsers going back to IE8, and mobile devices." }))); });
 
-        domMgr.mk('h1',wrapper,function() { return this.gettext("Handling Requirements"); });
+        domMgr.mk('h1',wrapper,function() { return this.tr((({ key:"Handling Requirements" }))); });
 
-        domMgr.mk('p',wrapper,function() { return this.gettext("Modules are responsible for verifying requirements upon load and throwing an error if they are not met, which is handed and displayed to the user. Modules try to offer reduced functionality where possible."); });
+        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"Modules are responsible for verifying requirements upon load and throwing an error if they are not met, which is handed and displayed to the user. Modules try to offer reduced functionality where possible." }))); });
 
         domMgr.mk('pre',wrapper,domMgr.mk('code',null,"if (! ('contentEditable' in document.body)) \n\
     throw new Error({ incompatible:true, noobject:'contentEditable' });"));
@@ -35,19 +35,19 @@ module.exports = function() {
                     {
                         columns : [
                             {
-                                content : function() { return this.gettext("Company"); }
+                                content : function() { return this.tr((({ key:"Company" }))); }
                             },
                             {
-                                content : function() { return this.gettext("Software"); }
+                                content : function() { return this.tr((({ key:"Software" }))); }
                             },
                             {
-                                content : function() { return this.gettext("Version"); }
+                                content : function() { return this.tr((({ key:"Version" }))); }
                             },
                             {
-                                content : function() { return this.gettext("Status"); }
+                                content : function() { return this.tr((({ key:"Status" }))); }
                             },
                             {
-                                content : function() { return this.gettext("Remarks"); }
+                                content : function() { return this.tr((({ key:"Remarks" }))); }
                             }
                         ]
                     }
@@ -88,7 +88,7 @@ module.exports = function() {
                                 content : '<span></span>'
                             },
                             {
-                                content : function() { return this.gettext("Some modules may have reduced functionality."); }
+                                content : function() { return this.tr((({ key:"Some modules may have reduced functionality." }))); }
                             }
                         ]
                     },
@@ -106,7 +106,7 @@ module.exports = function() {
                                 content : '<span></span>'
                             },
                             {
-                                content : function() { return this.gettext("Some widgets may be unavailable."); }
+                                content : function() { return this.tr((({ key:"Some widgets may be unavailable." }))); }
                             }
                         ]
                     },
@@ -126,7 +126,7 @@ module.exports = function() {
                                 content : '<span></span>'
                             },
                             {
-                                content : function() { return this.gettext("Tested as far back as version 10, but may work with earlier versions."); }
+                                content : function() { return this.tr((({ key:"Tested as far back as version 10, but may work with earlier versions." }))); }
                             }
                         ]
                     },
@@ -146,7 +146,7 @@ module.exports = function() {
                                 content : '<span></span>'
                             },
                             {
-                                content : function() { return this.gettext("Tested as far back as version 40, but may work with earlier versions."); }
+                                content : function() { return this.tr((({ key:"Tested as far back as version 40, but may work with earlier versions." }))); }
                             }
                         ]
                     },
@@ -166,7 +166,7 @@ module.exports = function() {
                                 content : '<span></span>'
                             },
                             {
-                                content : function() { return this.gettext("Tested as far back as version 15, but may work with earlier versions."); }
+                                content : function() { return this.tr((({ key:"Tested as far back as version 15, but may work with earlier versions." }))); }
                             }
                         ]
                     },
@@ -202,7 +202,7 @@ module.exports = function() {
                                 content : '<span></span>'
                             },
                             {
-                                content : function() { return this.gettext("Some widgets may have reduced functionality."); }
+                                content : function() { return this.tr((({ key:"Some widgets may have reduced functionality." }))); }
                             }
                         ]
                     },
@@ -220,7 +220,7 @@ module.exports = function() {
                                 content : '<span></span>'
                             },
                             {
-                                content : function() { return this.gettext("Some widgets may be unavailable."); }
+                                content : function() { return this.tr((({ key:"Some widgets may be unavailable." }))); }
                             }
                         ]
                     },
@@ -240,7 +240,7 @@ module.exports = function() {
                                 content : '<span></span>'
                             },
                             {
-                                content : function() { return this.gettext("Tested as far back as version 5, but may work with earlier versions."); }
+                                content : function() { return this.tr((({ key:"Tested as far back as version 5, but may work with earlier versions." }))); }
                             }
                         ]
                     },
@@ -276,17 +276,17 @@ module.exports = function() {
                                 content : '<span></span>'
                             },
                             {
-                                content : function() { return this.gettext("Some widgets may have reduced functionality."); }
+                                content : function() { return this.tr((({ key:"Some widgets may have reduced functionality." }))); }
                             }
                         ]
                     },
                     {
                         columns : [
                             {
-                                content:function() { return this.gettext("Opera Software"); }
+                                content:function() { return this.tr((({ key:"Opera Software" }))); }
                             },
                             {
-                                content:function() { return this.gettext("Opera"); }
+                                content:function() { return this.tr((({ key:"Opera" }))); }
                             },
                             {
                                 content : "10+"
@@ -296,7 +296,7 @@ module.exports = function() {
                                 content : '<span></span>'
                             },
                             {
-                                content : function() { return this.gettext("Tested as far back as version 10, but may work with earlier versions."); }
+                                content : function() { return this.tr((({ key:"Tested as far back as version 10, but may work with earlier versions." }))); }
                             }
                         ]
                     }
@@ -305,13 +305,13 @@ module.exports = function() {
 
         }).then(function(table) {
 
-            domMgr.mk('h1',wrapper,function() { return this.gettext("Compatibility Table"); });
+            domMgr.mk('h1',wrapper,function() { return this.tr((({ key:"Compatibility Table" }))); });
 
             domMgr.mk('p',wrapper,table);
 
             domMgr.mk('p',wrapper,null,function() {
 
-                domMgr.mk('button',this,function() { return this.gettext("Next Chapter - Testing"); }).addEventListener('click',function() {
+                domMgr.mk('button',this,function() { return this.tr((({ key:"Next Chapter - Testing" }))); }).addEventListener('click',function() {
 
                     model.parent.to(['testing']);
                 });

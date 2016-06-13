@@ -18,7 +18,7 @@ dom.mk('button',c,{ \n \
         }}); \n \
     }); \n \
 });",
-            desc : function() { return this.gettext("Provides asynchronous dialog screens which force a user action. A replacement for alert() and confirm()."); },
+            desc : function() { return this.tr((({ key:"Provides asynchronous dialog screens which force a user action. A replacement for alert() and confirm()." }))); },
             blessed:true,
             author : {
                 name:'Andrew Charnley',
@@ -34,10 +34,10 @@ dom.mk('button',c,{ \n \
                     returns : {
                         attributes : [{
                             async:true,
-                            desc : function() { return this.gettext("Resolves when the user selects an action. The action is returned."); }
+                            desc : function() { return this.tr((({ key:"Resolves when the user selects an action. The action is returned." }))); }
                         }]
                     },
-                    desc: function() { return this.gettext("Displays a list of actions."); },
+                    desc: function() { return this.tr((({ key:"Displays a list of actions." }))); },
                     async:true,
                     attributes : [
                         {
@@ -46,16 +46,16 @@ dom.mk('button',c,{ \n \
                                 {
                                     name : 'message',
                                     type : 'object',
-                                    desc: function() { return this.gettext("A language literal to use for the message."); }
+                                    desc: function() { return this.tr((({ key:"A language literal to use for the message." }))); }
                                 },
                                 {
                                     name : 'actions',
                                     type : 'Array',
-                                    desc: function() { return this.gettext("Specifies actions to be included. A cancel action will always be appended."); },
+                                    desc: function() { return this.tr((({ key:"Specifies actions to be included. A cancel action will always be appended." }))); },
                                     attributes : [
                                         {
                                             name : 'l',
-                                            desc :  function() { return this.gettext("A language literal to use for the action."); }
+                                            desc :  function() { return this.tr((({ key:"A language literal to use for the action." }))); }
                                         }
                                     ]
                                 }
@@ -67,7 +67,7 @@ dom.mk('button',c,{ \n \
                     name:'alert',
                     type:'function',
                     async:true,
-                    desc: function() { return this.gettext("Displays an alert dialog."); },
+                    desc: function() { return this.tr((({ key:"Displays an alert dialog." }))); },
                     attributes : [
                         {
                             type:'object',
@@ -75,7 +75,7 @@ dom.mk('button',c,{ \n \
                                 {
                                     name : 'message',
                                     type : 'object',
-                                    desc: function() { return this.gettext("A language literal to use for the message."); }
+                                    desc: function() { return this.tr((({ key:"A language literal to use for the message." }))); }
                                 }
                             ]
                         }
@@ -90,7 +90,7 @@ dom.mk('button',c,{ \n \
                             type:'boolean',
                         }]
                     },
-                    desc: function() { return this.gettext("Displays a confirm or cancel dialog."); },
+                    desc: function() { return this.tr((({ key:"Displays a confirm or cancel dialog." }))); },
                     attributes : [
                         {
                             type:'object',
@@ -98,7 +98,7 @@ dom.mk('button',c,{ \n \
                                 {
                                     name : 'message',
                                     type : 'object',
-                                    desc: function() { return this.gettext("A language literal to use for the message."); }
+                                    desc: function() { return this.tr((({ key:"A language literal to use for the message." }))); }
                                 }
                             ]
                         }

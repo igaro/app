@@ -8,7 +8,7 @@ module.exports = function() {
 
         var data = {
 
-            desc : function() { return this.gettext("Provides currency switching and related functionality. Supported currencies are set via an API or configuration file. Uses ISO 4217. ENV code is stored."); },
+            desc : function() { return this.tr((({ key:"Provides currency switching and related functionality. Supported currencies are set via an API or configuration file. Uses ISO 4217. ENV code is stored." }))); },
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
@@ -35,11 +35,11 @@ module.exports = function() {
                             type:'float',
                             required:true,
                             attributes : [{
-                                desc: function() { return this.gettext("The value to process."); }
+                                desc: function() { return this.tr((({ key:"The value to process." }))); }
                             }]
                         },
                     ],
-                    desc: function() { return this.gettext("Takes a denomination and formats it to two decimal places."); },
+                    desc: function() { return this.tr((({ key:"Takes a denomination and formats it to two decimal places." }))); },
                     returns: {
                         attributes : [
                             {
@@ -56,11 +56,11 @@ module.exports = function() {
                             type:'string',
                             required:true,
                             attributes:[{
-                                desc: function() { return this.gettext("The code to match."); },
+                                desc: function() { return this.tr((({ key:"The code to match." }))); },
                             }]
                         }
                     ],
-                    desc: function() { return this.gettext("Returns an object literal from the pool for a specified code."); },
+                    desc: function() { return this.tr((({ key:"Returns an object literal from the pool for a specified code." }))); },
                     returns: {
                         attributes : [
                             {
@@ -72,40 +72,40 @@ module.exports = function() {
                 {
                     name:'env',
                     type:'string',
-                    desc: function() { return this.gettext("The currently applied currency code."); }
+                    desc: function() { return this.tr((({ key:"The currently applied currency code." }))); }
                 },
                 {
                     name:'isAuto',
                     type:'boolean',
-                    desc: function() { return this.gettext("Defines if the current ENV is automatically chosen."); }
+                    desc: function() { return this.tr((({ key:"Defines if the current ENV is automatically chosen." }))); }
                 },
                 {
                     name:'pool',
                     type:'object',
-                    desc: function() { return this.gettext("A literal list of supported currency codes."); }
+                    desc: function() { return this.tr((({ key:"A literal list of supported currency codes." }))); }
                 },
                 {
                     name:'reset',
                     type:'function',
-                    desc: function() { return this.gettext("Resets the ENV to the automatically defined value."); },
+                    desc: function() { return this.tr((({ key:"Resets the ENV to the automatically defined value." }))); },
                     async:true,
                 },
                 {
                     name:'setEnv',
                     type:'function',
-                    desc: function() { return this.gettext("Sets the currently applied currency code."); },
+                    desc: function() { return this.tr((({ key:"Sets the currently applied currency code." }))); },
                     attributes : [
                         {
                             type:'string',
                             required:true,
                             attributes:[{
-                                desc: function() { return this.gettext("The code must exist in the current pool and is case sensitive."); },
+                                desc: function() { return this.tr((({ key:"The code must exist in the current pool and is case sensitive." }))); },
                             }]
                         },
                         {
                             type:'boolean',
                             attributes:[{
-                                desc: function() { return this.gettext("Defines whether the value should be saved. Default is true."); },
+                                desc: function() { return this.tr((({ key:"Defines whether the value should be saved. Default is true." }))); },
                             }]
                         }
                     ],
@@ -114,12 +114,12 @@ module.exports = function() {
                 {
                     name:'setPool',
                     type:'function',
-                    desc: function() { return this.gettext("Sets the supported currency codes."); },
+                    desc: function() { return this.tr((({ key:"Sets the supported currency codes." }))); },
                     attributes : [{
                         type:'string',
                         required:true,
                         attributes:[{
-                            desc: function() { return this.gettext("See conf.app.js for an example."); },
+                            desc: function() { return this.tr((({ key:"See conf.app.js for an example." }))); },
                         }]
                     }],
                     async:true
@@ -127,13 +127,13 @@ module.exports = function() {
                 {
                     name:'substitute',
                     type:'function',
-                    desc: function() { return this.gettext("Parses each key on a literal replacing %[n] with any arguments."); },
+                    desc: function() { return this.tr((({ key:"Parses each key on a literal replacing %[n] with any arguments." }))); },
                     attributes : [{
                         type:'object',
                         required:true,
                         attributes:[{
                             instanceof : { name: 'Array' },
-                            desc: function() { return this.gettext("The first element is the object literal, Further elements correspond to the value of n."); },
+                            desc: function() { return this.tr((({ key:"The first element is the object literal, Further elements correspond to the value of n." }))); },
                         }]
                     }],
                     returns: {
@@ -159,17 +159,17 @@ module.exports = function() {
                             type:'float',
                             required:true,
                             attributes : [{
-                                desc: function() { return this.gettext("The value to validate."); },
+                                desc: function() { return this.tr((({ key:"The value to validate." }))); },
                             }]
                         },
                         {
                             type:'boolean',
                             attributes : [{
-                                desc: function() { return this.gettext("Allow negative values. Default is false."); },
+                                desc: function() { return this.tr((({ key:"Allow negative values. Default is false." }))); },
                             }]
                         }
                     ],
-                    desc: function() { return this.gettext("Takes a denomination and returns true if the value has no fraction or is of two decimal place."); }
+                    desc: function() { return this.tr((({ key:"Takes a denomination and returns true if the value has no fraction or is of two decimal place." }))); }
                 }
             ]
         };

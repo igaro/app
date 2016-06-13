@@ -9,7 +9,7 @@ module.exports = function() {
         var data = {
 
             demo : "model.managers.object.create('rte', { container:c })",
-            desc : function() { return this.gettext("Provides data input via a rich text formatted display and html conversion."); },
+            desc : function() { return this.tr((({ key:"Provides data input via a rich text formatted display and html conversion." }))); },
             blessed: {
                 container:true
             },
@@ -20,12 +20,12 @@ module.exports = function() {
                     {
                         name:'html',
                         type:'string',
-                        desc : function() { return this.gettext("An initial value to insert into the container."); }
+                        desc : function() { return this.tr((({ key:"An initial value to insert into the container." }))); }
                     },
                     {
                         name:'onChange',
                         type:'function',
-                        desc : function() { return this.gettext("A callback function to be triggered upon data change. Returns the raw data."); }
+                        desc : function() { return this.tr((({ key:"A callback function to be triggered upon data change. Returns the raw data." }))); }
                     }
                 ]
             },
@@ -33,14 +33,14 @@ module.exports = function() {
                 {
                     name:'addPanel',
                     type:'function',
-                    desc: function() { return this.gettext("Appends a new panel (plugin) into the RTE view allowing to expand on the basic functionality."); },
+                    desc: function() { return this.tr((({ key:"Appends a new panel (plugin) into the RTE view allowing to expand on the basic functionality." }))); },
                     attributes : [
                         {
                             type:'object',
                             required:true,
                             attributes : [
                                 {
-                                    desc: function() { return this.gettext("A language literal for the tab."); }
+                                    desc: function() { return this.tr((({ key:"A language literal for the tab." }))); }
                                 }
                             ]
                         },
@@ -50,7 +50,7 @@ module.exports = function() {
                             attributes : [
                                 {
                                     instanceof : { name:"Element" },
-                                    desc: function() { return this.gettext("A div to be displayed when the tab is activated."); }
+                                    desc: function() { return this.tr((({ key:"A div to be displayed when the tab is activated." }))); }
                                 }
                             ]
                         },
@@ -58,7 +58,7 @@ module.exports = function() {
                             type:'boolean',
                             attributes : [
                                 {
-                                    desc: function() { return this.gettext("Defines whether the panel should be set as current. Default is false."); }
+                                    desc: function() { return this.tr((({ key:"Defines whether the panel should be set as current. Default is false." }))); }
                                 }
                             ]
                         }
@@ -67,14 +67,14 @@ module.exports = function() {
                 {
                     name:'execCommand',
                     type:'function',
-                    desc: function() { return this.gettext("Directly executes a command on the WYSIWYG container. See ECMA spec."); },
+                    desc: function() { return this.tr((({ key:"Directly executes a command on the WYSIWYG container. See ECMA spec." }))); },
                     attributes : [
                         {
                             type:'string',
                             required:true,
                             attributes : [
                                 {
-                                    desc : function() { return this.gettext("Command to pass to the RTE."); }
+                                    desc : function() { return this.tr((({ key:"Command to pass to the RTE." }))); }
                                 }
                             ]
                         },
@@ -82,7 +82,7 @@ module.exports = function() {
                             type:'*',
                             attributes : [
                                 {
-                                    desc : function() { return this.gettext("Attribute to pass with the RTE command."); }
+                                    desc : function() { return this.tr((({ key:"Attribute to pass with the RTE command." }))); }
                                 }
                             ]
                         }
@@ -91,7 +91,7 @@ module.exports = function() {
                 {
                     name:'getHTML',
                     type:'function',
-                    desc: function() { return this.gettext("Returns the current HTML trimmed of white space."); },
+                    desc: function() { return this.tr((({ key:"Returns the current HTML trimmed of white space." }))); },
                     returns : {
                         attributes : [{
                             type:'string'
@@ -101,7 +101,7 @@ module.exports = function() {
                 {
                     name:'insertHTML',
                     type:'function',
-                    desc: function() { return this.gettext("Inserts HTML at the current cursor position."); },
+                    desc: function() { return this.tr((({ key:"Inserts HTML at the current cursor position." }))); },
                     attributes : [
                         {
                             required:true,
@@ -111,7 +111,7 @@ module.exports = function() {
                 },
                 {
                     name:'raw',
-                    desc : function() { return this.gettext("Element containing the raw code."); },
+                    desc : function() { return this.tr((({ key:"Element containing the raw code." }))); },
                     instanceof : {
                         name:'Element'
                     }
@@ -121,7 +121,7 @@ module.exports = function() {
                     instanceof : {
                         name:'Element'
                     },
-                    desc : function() { return this.gettext("Element (contentEditable) containing the WYSIWYG."); }
+                    desc : function() { return this.tr((({ key:"Element (contentEditable) containing the WYSIWYG." }))); }
                 },
             ],
             author : {

@@ -20,15 +20,16 @@ module.exports = function(app) {
             objectMgr = managers.object,
             coreObject = app['core.object'];
 
-        model.stash.title = function() { return this.gettext("Igaro App JavaScript Framework"); };
-        model.stash.description = function() { return this.gettext("Igaro App is a powerful JavaScript framework for developing single page application websites (web-apps). Zero HTML, zero dependencies and beautifully engineered."); };
-        model.stash.keywords = function() { return this.gettext("javascript, spa, app, html5, framework"); };
+        model.stash.title = function() { return this.tr((({ key:"Igaro App JavaScript Framework" }))); };
+        model.stash.titletest = function() { return this.tr((({ key:"One \" Framework", plural:"Two Things" })),3); };
+        model.stash.description = function() { return this.tr((({ key:"Igaro App is a powerful JavaScript framework for developing single page application websites (web-apps). Zero HTML, zero dependencies and beautifully engineered." }))); };
+        model.stash.keywords = function() { return this.tr((({ key:"javascript, spa, app, html5, framework" }))); };
 
         var wrapper = model.wrapper,
             header = domMgr.mk('div',wrapper,null,'header');
 
         // header
-        domMgr.mk('span',header, function() { return this.gettext("Welcome to <b>Igaro App</b> JavaScript Framework"); });
+        domMgr.mk('span',header, function() { return this.tr((({ key:"Welcome to <b>Igaro App</b> JavaScript Framework" }))); });
 
         var writeList = function(pool,list) {
 
@@ -74,7 +75,7 @@ module.exports = function(app) {
 
                 objectMgr.create('pagemessage',{
                     type:'info',
-                    message: function() { return this.gettext("You can view the code behind any page in this app by clicking the curly bracket icon in the header."); },
+                    message: function() { return this.tr((({ key:"You can view the code behind any page in this app by clicking the curly bracket icon in the header." }))); },
                     hideable: true,
                     id:model.path.join('.')+'.hintcode'
                 }),
@@ -82,16 +83,16 @@ module.exports = function(app) {
                 objectMgr.create('list').then(function (list) {
 
                     return writeList([
-                        ['overview', function() { return this.gettext("Overview"); }],
-                        ['features', function() { return this.gettext("Widgets"); }],
-                        ['install', function() { return this.gettext("Install"); }],
-                        ['showcase', function() { return this.gettext("Showcase"); }]
+                        ['overview', function() { return this.tr((({ key:"Overview" }))); }],
+                        ['features', function() { return this.tr((({ key:"Widgets" }))); }],
+                        ['install', function() { return this.tr((({ key:"Install" }))); }],
+                        ['showcase', function() { return this.tr((({ key:"Showcase" }))); }]
                     ],list).then(function() {
 
                         var domMgr = list.managers.dom;
                         return domMgr.mk('section', null, [
-                            domMgr.mk('h1', null, function() { return this.gettext("Insight"); }),
-                            domMgr.mk('p', null, function() { return this.gettext("HTML falters when used for declaring dynamic views in web-applications, and most JavaScript frameworks deal with this shortcoming by introducing sync and data binding overheads. Looking for an alternative?"); }),
+                            domMgr.mk('h1', null, function() { return this.tr((({ key:"Insight" }))); }),
+                            domMgr.mk('p', null, function() { return this.tr((({ key:"HTML falters when used for declaring dynamic views in web-applications, and most JavaScript frameworks deal with this shortcoming by introducing sync and data binding overheads. Looking for an alternative?" }))); }),
                             list.container
                         ],'first');
                     });
@@ -100,24 +101,24 @@ module.exports = function(app) {
                 objectMgr.create('list').then(function (list) {
 
                     return writeList([
-                        ['structure',function() { return this.gettext("Basics"); }],
-                        ['bless', function() { return this.gettext("Bless"); }],
-                        ['async', function() { return this.gettext("Async"); }],
-                        ['events',function() { return this.gettext("Events"); }],
-                        ['security',function() { return this.gettext("Security"); }],
-                        ['design', function() { return this.gettext("Design"); }],
-                        ['routes', function() { return this.gettext("Routes"); }],
-                        ['locale', function() { return this.gettext("Locale"); }],
-                        ['mobile', function() { return this.gettext("Mobile"); }],
-                        ['compat',function() { return this.gettext("Compatibility"); }],
-                        ['testing',function() { return this.gettext("Testing"); }],
-                        ['modules',function() { return this.gettext("Modules"); }]
+                        ['structure',function() { return this.tr((({ key:"Basics" }))); }],
+                        ['bless', function() { return this.tr((({ key:"Bless" }))); }],
+                        ['async', function() { return this.tr((({ key:"Async" }))); }],
+                        ['events',function() { return this.tr((({ key:"Events" }))); }],
+                        ['security',function() { return this.tr((({ key:"Security" }))); }],
+                        ['design', function() { return this.tr((({ key:"Design" }))); }],
+                        ['routes', function() { return this.tr((({ key:"Routes" }))); }],
+                        ['locale', function() { return this.tr((({ key:"Locale" }))); }],
+                        ['mobile', function() { return this.tr((({ key:"Mobile" }))); }],
+                        ['compat',function() { return this.tr((({ key:"Compatibility" }))); }],
+                        ['testing',function() { return this.tr((({ key:"Testing" }))); }],
+                        ['modules',function() { return this.tr((({ key:"Modules" }))); }]
                     ],list).then(function() {
 
                         var domMgr = list.managers.dom;
                         return domMgr.mk('section', null, [
-                            domMgr.mk('h1', null, function() { return this.gettext("Documentation"); }),
-                            domMgr.mk('p', null, function() { return this.gettext("All Igaro App's modules are documented via JSDoc, but the online help is more exhaustive and comes with demos."); }),
+                            domMgr.mk('h1', null, function() { return this.tr((({ key:"Documentation" }))); }),
+                            domMgr.mk('p', null, function() { return this.tr((({ key:"All Igaro App's modules are documented via JSDoc, but the online help is more exhaustive and comes with demos." }))); }),
                             list.container
                         ]);
                     });
@@ -126,15 +127,15 @@ module.exports = function(app) {
                 objectMgr.create('list').then(function (list) {
 
                     return writeList([
-                        ['forum',function() { return this.gettext("Forum"); },'http://forum.igaro.com'],
-                        ['report', function() { return this.gettext("Report"); },'https://github.com/igaro/app/issues'],
-                        ['contact', function() { return this.gettext("Contact"); }],
+                        ['forum',function() { return this.tr((({ key:"Forum" }))); },'http://forum.igaro.com'],
+                        ['report', function() { return this.tr((({ key:"Report" }))); },'https://github.com/igaro/app/issues'],
+                        ['contact', function() { return this.tr((({ key:"Contact" }))); }],
                     ],list).then(function() {
 
                         var domMgr = list.managers.dom;
                         return domMgr.mk('section', null, [
-                            domMgr.mk('h1', null, function() { return this.gettext("Support"); }),
-                            domMgr.mk('p', null, function() { return this.gettext("Discuss ideas, get involved with Igaro App development, or seek help."); }),
+                            domMgr.mk('h1', null, function() { return this.tr((({ key:"Support" }))); }),
+                            domMgr.mk('p', null, function() { return this.tr((({ key:"Discuss ideas, get involved with Igaro App development, or seek help." }))); }),
                             list.container
                         ]);
                     });

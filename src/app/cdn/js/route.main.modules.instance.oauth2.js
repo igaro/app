@@ -7,7 +7,7 @@ module.exports = function() {
     return function(model) {
 
         var data = {
-            desc : function() { return this.gettext("Provides a Oauth2 credential mechanism for login services. Note: the demo asks for a token, but this can be automated (see /security)."); },
+            desc : function() { return this.tr((({ key:"Provides a Oauth2 credential mechanism for login services. Note: the demo asks for a token, but this can be automated (see /security)." }))); },
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
@@ -40,30 +40,30 @@ module.exports = function() {
                         name:'authUrl',
                         required:true,
                         type:'string',
-                        desc : function() { return this.gettext("A provider's oauth2 login page. Use [DEVID], [CALLBACKURL] and [SCOPE] to embed params."); }
+                        desc : function() { return this.tr((({ key:"A provider's oauth2 login page. Use [DEVID], [CALLBACKURL] and [SCOPE] to embed params." }))); }
                     },
                     {
                         name:'callbackUrl',
                         required:true,
                         type:'string',
-                        desc : function() { return this.gettext("A URL to load once access is granted. This must fire a postMessage event containing the URL and should be blank."); }
+                        desc : function() { return this.tr((({ key:"A URL to load once access is granted. This must fire a postMessage event containing the URL and should be blank." }))); }
                     },
                     {
                         name:'devid',
                         required : true,
                         type:'string',
-                        desc: function() { return this.gettext("This identifies you to the provider. Typically you register your App with a provider and they provide this key."); }
+                        desc: function() { return this.tr((({ key:"This identifies you to the provider. Typically you register your App with a provider and they provide this key." }))); }
                     },
                     {
                         name:'scope',
                         type:'string',
-                        desc : function() { return this.gettext("A provider may require you to define a scope which defines what access privileges you are seeking to attain."); }
+                        desc : function() { return this.tr((({ key:"A provider may require you to define a scope which defines what access privileges you are seeking to attain." }))); }
                     },
                     {
                         name:'tokenName',
                         required:true,
                         type:'string',
-                        desc : function() { return this.gettext("The name of the token to extract from the callback URL."); }
+                        desc : function() { return this.tr((({ key:"The name of the token to extract from the callback URL." }))); }
                     }
                 ]
             },
@@ -73,18 +73,18 @@ module.exports = function() {
                     name:'exec',
                     type:'function',
                     async:true,
-                    desc: function() { return this.gettext("Begins the authentication process. Any of the instantiation attributes can be passed to update the object."); },
+                    desc: function() { return this.tr((({ key:"Begins the authentication process. Any of the instantiation attributes can be passed to update the object." }))); },
                     attributes : [{
                         type:'object',
                         attributes : [{
-                            desc: function() { return this.gettext("Any of the instantiated data can be set here to update the XHR before it is sent."); }
+                            desc: function() { return this.tr((({ key:"Any of the instantiated data can be set here to update the XHR before it is sent." }))); }
                         }]
                     }]
                 },
                 {
                     name:'inProgress',
                     type:'boolean',
-                    desc: function() { return this.gettext("Defines whether the oauth2 process is in situ."); }
+                    desc: function() { return this.tr((({ key:"Defines whether the oauth2 process is in situ." }))); }
                 }
             ],
 

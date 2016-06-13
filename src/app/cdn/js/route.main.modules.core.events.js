@@ -8,7 +8,7 @@ module.exports = function() {
 
         var data = {
 
-            desc : function() { return this.gettext("Dispatches events and manages handles to functions."); },
+            desc : function() { return this.tr((({ key:"Dispatches events and manages handles to functions." }))); },
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
@@ -23,13 +23,13 @@ module.exports = function() {
                     name:'clean',
                     type:'function',
                     forManager:false,
-                    desc: function() { return this.gettext("Removes events on all event emitters where the registered function or a dependency matches the supplied value."); },
+                    desc: function() { return this.tr((({ key:"Removes events on all event emitters where the registered function or a dependency matches the supplied value." }))); },
                     attributes : [
                         {
                             type:'*',
                             required:true,
                             attributes : [{
-                                desc: function() { return this.gettext("An object or function."); }
+                                desc: function() { return this.tr((({ key:"An object or function." }))); }
                             }]
                         }
                     ]
@@ -37,7 +37,7 @@ module.exports = function() {
                 {
                     name:'rootEmitter',
                     type:'object',
-                    desc: function() { return this.gettext("Contains a root Emitter used for system wide events. The root Emitter is a Manager (see below)."); },
+                    desc: function() { return this.tr((({ key:"Contains a root Emitter used for system wide events. The root Emitter is a Manager (see below)." }))); },
                 },
                 {
                     name:'dispatch',
@@ -52,18 +52,18 @@ module.exports = function() {
                             forManager:true,
                             onlyManager:true,
                             attributes : [{
-                                desc: function() { return this.gettext("The event name.."); }
+                                desc: function() { return this.tr((({ key:"The event name.." }))); }
                             }]
                         },
                         {
                             type:'*',
                             forManager:true,
                             attributes : [{
-                                desc: function() { return this.gettext("An object or value to pass on to each event handler."); }
+                                desc: function() { return this.tr((({ key:"An object or value to pass on to each event handler." }))); }
                             }]
                         }
                     ],
-                    desc: function() { return this.gettext("Triggers registered event handlers. A handler may return an object literal or a Promise, which in turn may return { stopPropagation:true } to prevent the event firing up the chain or { stopImmediatePropagation } to prevent the event reaching further sibling handlers. If { removeEventListener:true } is returned the event handler will be removed."); }
+                    desc: function() { return this.tr((({ key:"Triggers registered event handlers. A handler may return an object literal or a Promise, which in turn may return { stopPropagation:true } to prevent the event firing up the chain or { stopImmediatePropagation } to prevent the event reaching further sibling handlers. If { removeEventListener:true } is returned the event handler will be removed." }))); }
                 },
                 {
                     name:'on',
@@ -77,7 +77,7 @@ module.exports = function() {
                             forManager:true,
                             attributes: [
                                 {
-                                    desc: function() { return this.gettext("The event name. An array can be passed instead to add a handler to multiple events."); }
+                                    desc: function() { return this.tr((({ key:"The event name. An array can be passed instead to add a handler to multiple events." }))); }
                                 }
                             ]
                         },
@@ -87,7 +87,7 @@ module.exports = function() {
                             forManager:true,
                             attributes: [
                                 {
-                                    desc: function() { return this.gettext("Function to execute on event trigger."); }
+                                    desc: function() { return this.tr((({ key:"Function to execute on event trigger." }))); }
                                 }
                             ]
                         },
@@ -98,12 +98,12 @@ module.exports = function() {
                                 {
                                     name:'prepend',
                                     type:'boolean',
-                                    desc: function() { return this.gettext("Defines whether the event handler should be added to the beginning of the array. Use if the function may cancel propagation."); }
+                                    desc: function() { return this.tr((({ key:"Defines whether the event handler should be added to the beginning of the array. Use if the function may cancel propagation." }))); }
                                 },
                                 {
                                     name:'deps',
                                     type:'Array',
-                                    desc: function() { return this.gettext("An event can be linked to dependencies. Use this to automatically clear up handlers when objects are destroyed."); }
+                                    desc: function() { return this.tr((({ key:"An event can be linked to dependencies. Use this to automatically clear up handlers when objects are destroyed." }))); }
                                 }
                             ]
                         }
@@ -112,11 +112,11 @@ module.exports = function() {
                         attributes : [
                             {
                                 type:'object',
-                                desc:function() { return this.gettext("The event manager is returned allowing for linked actions."); }
+                                desc:function() { return this.tr((({ key:"The event manager is returned allowing for linked actions." }))); }
                             }
                         ]
                     },
-                    desc: function() { return this.gettext("Registers a callback using the module name and event."); }
+                    desc: function() { return this.tr((({ key:"Registers a callback using the module name and event." }))); }
                 },
                 {
                     name:'remove',
@@ -129,14 +129,14 @@ module.exports = function() {
                             required:true,
                             forManager:true,
                             attributes : [{
-                                desc: function() { return this.gettext("The function previously registered."); }
+                                desc: function() { return this.tr((({ key:"The function previously registered." }))); }
                             }]
                         },
                         {
                             type:'string',
                             forManager:true,
                             attributes : [{
-                                desc: function() { return this.gettext("The event name to be used to lookup the function. This makes the lookup faster and prevents the function being deregistered from all event names."); }
+                                desc: function() { return this.tr((({ key:"The event name to be used to lookup the function. This makes the lookup faster and prevents the function being deregistered from all event names." }))); }
                             }]
                         }
                     ],
@@ -144,11 +144,11 @@ module.exports = function() {
                         attributes : [
                             {
                                 type:'object',
-                                desc:function() { return this.gettext("The event manager is returned allowing for linked actions."); }
+                                desc:function() { return this.tr((({ key:"The event manager is returned allowing for linked actions." }))); }
                             }
                         ]
                     },
-                    desc: function() { return this.gettext("Deregisters a function from the event pool."); }
+                    desc: function() { return this.tr((({ key:"Deregisters a function from the event pool." }))); }
                 }
             ]
         };

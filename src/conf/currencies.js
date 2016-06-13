@@ -1,15 +1,15 @@
 {
     "USD" : {
         "symbol" : "$",
-        "name" : function() { return this.gettext("United States Dollar"); }
+        "name" : function() { return this.tr((({ key:"United States Dollar" }))); }
     },
     "GBP" : {
         "symbol" : "£",
-        "name" : function() { return this.gettext("British Sterling"); }
+        "name" : function() { return this.tr((({ key:"British Sterling" }))); }
     },
     "AUD" : {
         "symbol" : "$",
-        "name" : function() { return this.gettext("Australian Dollar"); },
+        "name" : function() { return this.tr((({ key:"Australian Dollar" }))); },
         "format" : function(v,o) {
             var x = v <0? "-":"";
             x += "A$"+currency.commarize(v < 0? v*-1: v);
@@ -18,6 +18,6 @@
     },
     "EUR" : {
         "symbol" : "€",
-        "name" : function() { return this.gettext("Euro"); }
+        "name" : function() { return this.tr((({ key:"Euro" }))); }
     }
 }

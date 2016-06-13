@@ -7,7 +7,7 @@ module.exports = function() {
     return function(model) {
 
         var data = {
-            desc : function() { return this.gettext("This library provides touch events and is loaded when a touch screen is detected."); },
+            desc : function() { return this.tr((({ key:"This library provides touch events and is loaded when a touch screen is detected." }))); },
             usage : {
                 direct : true
             },

@@ -12,7 +12,7 @@ module.exports = function() {
             blessed: {
                 container:true
             },
-            desc : function() { return this.gettext("Provides a managed date with automatic display and timezone conversion. By default uses 3rdparty.moment.js for formatting to the user locale."); },
+            desc : function() { return this.tr((({ key:"Provides a managed date with automatic display and timezone conversion. By default uses 3rdparty.moment.js for formatting to the user locale." }))); },
             usage : {
                 instantiate : true,
                 decorateWithContainer:true,
@@ -21,33 +21,33 @@ module.exports = function() {
                         name:'date',
                         instanceof : { name:'Date' },
                         required:true,
-                        desc: function() { return this.gettext("The date to use."); }
+                        desc: function() { return this.tr((({ key:"The date to use." }))); }
                     },
                     {
                         name:'format',
                         type:'string',
-                        desc : function() { return this.gettext("The format used to stringify the date object. See MomentJS for codes."); },
+                        desc : function() { return this.tr((({ key:"The format used to stringify the date object. See MomentJS for codes." }))); },
                         required:true
                     },
                     {
                         name:'countDown',
                         type:'number',
-                        desc:function() { return this.gettext("For relative time, will show a countdown when the delta is less than or equal to this value."); }
+                        desc:function() { return this.tr((({ key:"For relative time, will show a countdown when the delta is less than or equal to this value." }))); }
                     },
                     {
                         name:'countUp',
                         type:'number',
-                        desc:function() { return this.gettext("For relative time,  will show a countup when the delta is less than or equal to this value."); }
+                        desc:function() { return this.tr((({ key:"For relative time,  will show a countup when the delta is less than or equal to this value." }))); }
                     },
                     {
                         name:'offset',
                         type:'number',
-                        desc : function() { return this.gettext("By default the timezone offset will be read from core.date.js. To set a specific timezone specify the +- minutes here."); }
+                        desc : function() { return this.tr((({ key:"By default the timezone offset will be read from core.date.js. To set a specific timezone specify the +- minutes here." }))); }
                     },
                     {
                         name:'relative',
                         type:'boolean',
-                        desc : function() { return this.gettext("Set to true to enable relative time."); }
+                        desc : function() { return this.tr((({ key:"Set to true to enable relative time." }))); }
                     }
                 ]
             },
@@ -59,7 +59,7 @@ module.exports = function() {
                 {
                     name:'set',
                     type:'function',
-                    desc: function() { return this.gettext("Sets the date."); },
+                    desc: function() { return this.tr((({ key:"Sets the date." }))); },
                     attributes : [
                         {
                             required:true,
@@ -73,18 +73,18 @@ module.exports = function() {
                 {
                     name:'offset',
                     type:'function',
-                    desc: function() { return this.gettext("Sets the timezone offset."); },
+                    desc: function() { return this.tr((({ key:"Sets the timezone offset." }))); },
                     attributes : [
                         {
                             type:'number',
                             attributes: [{
-                                desc: function() { return this.gettext("+- 15 minute blocks."); }
+                                desc: function() { return this.tr((({ key:"+- 15 minute blocks." }))); }
                             }]
                         },
                         {
                             type:'boolean',
                             attributes: [{
-                                desc:function() { return this.gettext("By default the offset is stored. Use true to disable."); }
+                                desc:function() { return this.tr((({ key:"By default the offset is stored. Use true to disable." }))); }
                             }]
                         }
                     ]
@@ -92,13 +92,13 @@ module.exports = function() {
                 {
                     name:'format',
                     type:'function',
-                    desc: function() { return this.gettext("Formats the stringified version of the date."); },
+                    desc: function() { return this.tr((({ key:"Formats the stringified version of the date." }))); },
                     attributes : [
                         {
                             type:'string',
                             required:true,
                             attributes:[{
-                                desc: function() { return this.gettext("The formatting code to pass to the plugin."); }
+                                desc: function() { return this.tr((({ key:"The formatting code to pass to the plugin." }))); }
                             }]
                         }
                     ]
@@ -106,7 +106,7 @@ module.exports = function() {
                 {
                     name:'relative',
                     type:'function',
-                    desc: function() { return this.gettext("Begins a countdown/count up (if the time difference is within range)."); }
+                    desc: function() { return this.tr((({ key:"Begins a countdown/count up (if the time difference is within range)." }))); }
                 }
             ],
             related : [

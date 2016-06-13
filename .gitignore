@@ -8,6 +8,8 @@ tmp/
 *.bak
 *.log
 **/*.pot
+**/*.po
+**/*.mo
 node_modules
 tests/reports/
 tests/output/

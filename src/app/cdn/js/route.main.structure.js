@@ -18,10 +18,10 @@ module.exports = function(app) {
             dom = app['core.dom'],
             objectMgr = managers.object;
 
-        model.stash.title=function() { return this.gettext("Structure"); };
-        model.stash.description = function() { return this.gettext("Describes the files and folders that make up Igaro App. You'll use this structure as you customize and add your own files."); };
+        model.stash.title=function() { return this.tr((({ key:"Structure" }))); };
+        model.stash.description = function() { return this.tr((({ key:"Describes the files and folders that make up Igaro App. You'll use this structure as you customize and add your own files." }))); };
 
-        domMgr.mk('p',wrapper,function() { return this.gettext("This may be your first introduction to Igaro App, and if it is, welcome!"); });
+        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"This may be your first introduction to Igaro App, and if it is, welcome!" }))); });
 
         return model.addSequence({
             container:wrapper,
@@ -29,7 +29,7 @@ module.exports = function(app) {
 
                 objectMgr.create('accordion').then(function(accordion) {
                     var domMgr = accordion.managers.dom;
-                    domMgr.mk('h1',wrapper,function() { return this.gettext("Files & Folders"); });
+                    domMgr.mk('h1',wrapper,function() { return this.tr((({ key:"Files & Folders" }))); });
                     domMgr.mk('p',wrapper);
                     dom.append(wrapper,accordion);
 
@@ -40,17 +40,17 @@ module.exports = function(app) {
                     }).then(function(section) {
 
                         var managers = section.managers;
-                        managers.dom.mk('p',section.content,function() { return this.gettext("Contains the output from the build process."); });
+                        managers.dom.mk('p',section.content,function() { return this.tr((({ key:"Contains the output from the build process." }))); });
                         return managers.object.create('accordion', {
                             container:section.content,
                             sections : [
                                 {
-                                    title:function() { return this.gettext("debug"); },
-                                    content:function() { return this.gettext("The output folder for the debug compliation process."); }
+                                    title:function() { return this.tr((({ key:"debug" }))); },
+                                    content:function() { return this.tr((({ key:"The output folder for the debug compliation process." }))); }
                                 },
                                 {
-                                    title:function() { return this.gettext("deploy"); },
-                                    content:function() { return this.gettext("The output folder for the deploy compilation process."); }
+                                    title:function() { return this.tr((({ key:"deploy" }))); },
+                                    content:function() { return this.tr((({ key:"The output folder for the deploy compilation process." }))); }
                                 }
                             ]
                         });
@@ -62,14 +62,14 @@ module.exports = function(app) {
                         }).then(function(section) {
 
                             var managers = section.managers;
-                            managers.dom.mk('p',section.content,function() { return this.gettext("Contains files to be compiled and optionally compressed into the build folder."); });
+                            managers.dom.mk('p',section.content,function() { return this.tr((({ key:"Contains files to be compiled and optionally compressed into the build folder." }))); });
 
                             return managers.object.create('accordion', {
                                 container:section.content,
                                 sections : [
                                     {
-                                        title:function() { return this.gettext("index.html"); },
-                                        content:function() { return this.gettext("Defines the location of the cdn folder, loads polyfill libraries, provides a loading screen, and defines a container for the app."); }
+                                        title:function() { return this.tr((({ key:"index.html" }))); },
+                                        content:function() { return this.tr((({ key:"Defines the location of the cdn folder, loads polyfill libraries, provides a loading screen, and defines a container for the app." }))); }
                                     }
                                 ]
                             }).then(function(accordion) {
@@ -77,12 +77,12 @@ module.exports = function(app) {
                                 // cdn
                                 return accordion.addSection(
                                     {
-                                        title:function() { return this.gettext("cdn"); }
+                                        title:function() { return this.tr((({ key:"cdn" }))); }
                                     }
                                 ).then(function(section) {
 
                                     var managers = section.managers;
-                                    managers.dom.mk('p',section.content,function() { return this.gettext("Contains files for relative path serving or for a cdn server."); });
+                                    managers.dom.mk('p',section.content,function() { return this.tr((({ key:"Contains files for relative path serving or for a cdn server." }))); });
 
                                     return managers.object.create('accordion', {
                                         container:section.content
@@ -94,38 +94,38 @@ module.exports = function(app) {
                                         }).then(function(section) {
 
                                             var managers = section.managers;
-                                            managers.dom.mk('p',section.content,function() { return this.gettext("Contains the framework and modules."); });
+                                            managers.dom.mk('p',section.content,function() { return this.tr((({ key:"Contains the framework and modules." }))); });
 
                                             return managers.object.create('accordion', {
                                                 container:section.content,
                                                 sections : [
                                                     {
                                                         title:'3rdparty.*.js',
-                                                        content:function() { return this.gettext("Provide third party code in a structured format. Some provide an interface to system features such as touch."); }
+                                                        content:function() { return this.tr((({ key:"Provide third party code in a structured format. Some provide an interface to system features such as touch." }))); }
                                                     },
                                                     {
                                                         title:'igaro.js',
-                                                        content:function() { return this.gettext("Provides built-in modules and loads any additional modules. Errors are trapped, handed, potentially reported to an API, and the user is notified."); }
+                                                        content:function() { return this.tr((({ key:"Provides built-in modules and loads any additional modules. Errors are trapped, handed, potentially reported to an API, and the user is notified." }))); }
                                                     },
                                                     {
                                                         title:'conf.*.js',
-                                                        content:function() { return this.gettext("Configures the app, modules, and bridge events. They don't provide functionality or output to the DOM."); }
+                                                        content:function() { return this.tr((({ key:"Configures the app, modules, and bridge events. They don't provide functionality or output to the DOM." }))); }
                                                     },
                                                     {
                                                         title:'core.*.js',
-                                                        content:function() { return this.gettext("Libraries, not instantiable, which provide global functionality. Typically required by other modules via module.requires. Don't contain language or output to the DOM."); }
+                                                        content:function() { return this.tr((({ key:"Libraries, not instantiable, which provide global functionality. Typically required by other modules via module.requires. Don't contain language or output to the DOM." }))); }
                                                     },
                                                     {
                                                         title:'instance.*.js',
-                                                        content:function() { return this.gettext("Returns an instantable function. May provide a DOM feature in form of a widget or provide functionality such as AJAX. Instantiated, used once, then destroyed."); }
+                                                        content:function() { return this.tr((({ key:"Returns an instantable function. May provide a DOM feature in form of a widget or provide functionality such as AJAX. Instantiated, used once, then destroyed." }))); }
                                                     },
                                                     {
                                                         title:'polyfix.*.js',
-                                                        content:function() { return this.gettext("Prototypes missing Javascript functionality for older web browsers. Loaded by index.html if required. Modern browsers don't require them."); }
+                                                        content:function() { return this.tr((({ key:"Prototypes missing Javascript functionality for older web browsers. Loaded by index.html if required. Modern browsers don't require them." }))); }
                                                     },
                                                     {
                                                         title:'route.*.js',
-                                                        content:function() { return this.gettext("Provides router model data which is used to build and manage a view. Returns a single function which is used as a singleton."); }
+                                                        content:function() { return this.tr((({ key:"Provides router model data which is used to build and manage a view. Returns a single function which is used as a singleton." }))); }
                                                     }
                                                ]
                                             });
@@ -140,23 +140,23 @@ module.exports = function(app) {
                         return accordion.addSections([
                             {
                                 title:'copy',
-                                content:function() { return this.gettext("Any files/folders here are copied over to the build folder after compilation."); }
+                                content:function() { return this.tr((({ key:"Any files/folders here are copied over to the build folder after compilation." }))); }
                             },
                             {
                                 title:'cordova',
-                                content:function() { return this.gettext("Contains an Apache cordova project for deploying the app onto mobile devices."); }
+                                content:function() { return this.tr((({ key:"Contains an Apache cordova project for deploying the app onto mobile devices." }))); }
                             },
                             {
                                 title:'sass',
-                                content:function() { return this.gettext("Scss files are compiled into css. Typically a file corresponds to a javascript module of the same name. igaro.scss contains an initial style base but doesn't necessarily style the app, which will load further stylesheets."); }
+                                content:function() { return this.tr((({ key:"Scss files are compiled into css. Typically a file corresponds to a javascript module of the same name. igaro.scss contains an initial style base but doesn't necessarily style the app, which will load further stylesheets." }))); }
                             },
                             {
                                 title:'tests',
-                                content:function() { return this.gettext("Contains E2E test configuration and scripts for NightwatchJS."); }
+                                content:function() { return this.tr((({ key:"Contains E2E test configuration and scripts for NightwatchJS." }))); }
                             },
                             {
                                 title:'translations',
-                                content:function() { return this.gettext("Translation files produced by the compiler and translation files generated by translators are stored here and merged upon the build process."); }
+                                content:function() { return this.tr((({ key:"Translation files produced by the compiler and translation files generated by translators are stored here and merged upon the build process." }))); }
                             }
                         ]);
 
@@ -169,15 +169,15 @@ module.exports = function(app) {
                 Promise.resolve().then(function() {
 
                     return [
-                        domMgr.mk('h1',null,function() { return this.gettext("The App"); }),
-                        domMgr.mk('p',null,function() { return this.gettext("Igaro App lives in a private variable, effectively sandboxing it from cross injection. It's supplied to modules as they are loaded."); }),
+                        domMgr.mk('h1',null,function() { return this.tr((({ key:"The App" }))); }),
+                        domMgr.mk('p',null,function() { return this.tr((({ key:"Igaro App lives in a private variable, effectively sandboxing it from cross injection. It's supplied to modules as they are loaded." }))); }),
                         domMgr.mk('pre',null,domMgr.mk('code',null,"(function() {\n\
     module.exports = function(app, params) {};\n\
 })();")),
-                        domMgr.mk('h1',null,function() { return this.gettext("Module Format"); }),
-                        domMgr.mk('p',null,function() { return this.gettext("Igaro modules use a CommonJS (NodeJS) format."); }),
-                        domMgr.mk('p',null,function() { return this.gettext("A module's filename usually relates to its namespace, so whatever <b>type.name.js</b> exports will be available at <b>app['type.name']</b>."); }),
-                        domMgr.mk('p',null,function() { return this.gettext("A module can define dependencies using <b>module.requires</b> (widgets can be lazy loaded). A path can be supplied to load modules outside of the local repository."); }),
+                        domMgr.mk('h1',null,function() { return this.tr((({ key:"Module Format" }))); }),
+                        domMgr.mk('p',null,function() { return this.tr((({ key:"Igaro modules use a CommonJS (NodeJS) format." }))); }),
+                        domMgr.mk('p',null,function() { return this.tr((({ key:"A module's filename usually relates to its namespace, so whatever <b>type.name.js</b> exports will be available at <b>app['type.name']</b>." }))); }),
+                        domMgr.mk('p',null,function() { return this.tr((({ key:"A module can define dependencies using <b>module.requires</b> (widgets can be lazy loaded). A path can be supplied to load modules outside of the local repository." }))); }),
                         domMgr.mk('pre',null,domMgr.mk('code',null,"(function() {\n\
     'use strict';\n\
     module.requires = [\n\
@@ -187,16 +187,16 @@ module.exports = function(app) {
         // return - usually a function or literal \n\
     };\n\
 })();")),
-                        domMgr.mk('h1',null,function() { return this.gettext("Widgets"); }),
-                        domMgr.mk('p',null,function() { return this.gettext("Widgets (also know as instances because they are always instantiated) are typically denoted by an <b>instance.*</b> filename."); }),
-                        domMgr.mk('p',null,function() { return this.gettext("JavaScript's <b>new</b> keyword can instantiate these, but the <b>core.object</b> module provides a helper to lazy load the module, instantiate, and call an aynchronous constructor <b>.init()</b>. Thus, a widget can be inserted using minimal code."); }),
+                        domMgr.mk('h1',null,function() { return this.tr((({ key:"Widgets" }))); }),
+                        domMgr.mk('p',null,function() { return this.tr((({ key:"Widgets (also know as instances because they are always instantiated) are typically denoted by an <b>instance.*</b> filename." }))); }),
+                        domMgr.mk('p',null,function() { return this.tr((({ key:"JavaScript's <b>new</b> keyword can instantiate these, but the <b>core.object</b> module provides a helper to lazy load the module, instantiate, and call an aynchronous constructor <b>.init()</b>. Thus, a widget can be inserted using minimal code." }))); }),
                         domMgr.mk('pre',null,domMgr.mk('code',null,"this.managers.object.create('accordion').then(function(accordion) {\n\
     \\\\ do something \n\
 });")),
-                        domMgr.mk('p',null,function() { return this.gettext("Wondering what <b>this.managers</b> is? In Igaro App every object is blessed with services, which provide two way communication, debugging, helpers and more - all tailored to the object. This is explained in greater detail on the Bless page."); }),
+                        domMgr.mk('p',null,function() { return this.tr((({ key:"Wondering what <b>this.managers</b> is? In Igaro App every object is blessed with services, which provide two way communication, debugging, helpers and more - all tailored to the object. This is explained in greater detail on the Bless page." }))); }),
                         domMgr.mk('p',null,null,function() {
 
-                            domMgr.mk('button',this,function() { return this.gettext("Next Chapter - Bless"); }).addEventListener('click',function() {
+                            domMgr.mk('button',this,function() { return this.tr((({ key:"Next Chapter - Bless" }))); }).addEventListener('click',function() {
 
                                 model.parent.to(['bless']);
                             });

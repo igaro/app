@@ -102,7 +102,7 @@
                 // add cancel or close
                 if (o.addCancel || ! myActions.length) {
                    myActions.push({
-                        l:function() { return o.addCancel? this.gettext("Cancel") : this.gettext("Close"); }
+                        l:function() { return o.addCancel? this.tr((({ key:"Cancel" }))) : this.gettext((( { key:"Close" }))); }
                    });
                 }
 
@@ -182,7 +182,7 @@
                     title : o.title,
                     actions : [
                         {
-                            l : function() { return this.gettext("Ok"); }
+                            l : function() { return this.tr((({ key:"Ok" }))); }
                         }
                     ]
                 }
@@ -196,7 +196,7 @@
         InstanceModalDialog.prototype.confirm = function(o) {
 
             var confirmAction = {
-                l : function() { return this.gettext("Confirm"); }
+                l : function() { return this.tr((({ key:"Confirm" }))); }
             };
             return this.custom({
                 type : 'confirm',

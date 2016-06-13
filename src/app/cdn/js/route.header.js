@@ -64,7 +64,7 @@ module.exports = function(app) {
                                         });
                                         var write = function() {
                                             select.options.length = 0;
-                                            domMgr.mk('option',select,function() { return this.gettext("Automatic"); });
+                                            domMgr.mk('option',select,function() { return this.tr((({ key:"Automatic" }))); });
                                             domMgr.mk('option',select).disabled = true;
                                             Object.keys(mod.pool).forEach(function (o) {
                                                 domMgr.mk('option',select,mod.pool[o].name).value = o;
@@ -102,15 +102,15 @@ module.exports = function(app) {
                                     [
                                         [
                                             'language',
-                                            function() { return this.gettext("Language"); }
+                                            function() { return this.tr((({ key:"Language" }))); }
                                         ],
                                         [
                                             'country',
-                                            function() { return this.gettext("Country"); }
+                                            function() { return this.tr((({ key:"Country" }))); }
                                         ],
                                         [
                                             'currency',
-                                            function() { return this.gettext("Currency"); }
+                                            function() { return this.tr((({ key:"Currency" }))); }
                                         ]
                                     ].forEach(function(o) {
                                         accordion.addSection({
@@ -121,12 +121,12 @@ module.exports = function(app) {
                                         });
                                     });
                                     accordion.addSection({
-                                        title:function() { return this.gettext("Timezone"); },
+                                        title:function() { return this.tr((({ key:"Timezone" }))); },
                                         content:domMgr.mk('select',null,null, function() {
                                             var self = this, h,v,m,y,
                                                 date = app['core.date'],
                                                 offset = date.envOffsetAuto? null : date.envOffset;
-                                            domMgr.mk('option',self,function() { return this.gettext("Automatic"); });
+                                            domMgr.mk('option',self,function() { return this.tr((({ key:"Automatic" }))); });
                                             domMgr.mk('option',self).disabled = true;
                                             var eF = function() {
                                                 y = this.value = (h*60+m)*-1;
@@ -173,7 +173,7 @@ module.exports = function(app) {
                                     });
                                     return modal.custom({
                                         noCancel:true,
-                                        title:function() { return this.gettext("Locale"); },
+                                        title:function() { return this.tr((({ key:"Locale" }))); },
                                         custom:accordion.container
                                     });
                                 });

@@ -8,7 +8,7 @@ module.exports = function() {
 
         var data = {
 
-            desc : function() { return this.gettext("Provides HTML related functionality and formatting."); },
+            desc : function() { return this.tr((({ key:"Provides HTML related functionality and formatting." }))); },
             author : {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
@@ -32,11 +32,11 @@ module.exports = function() {
                             type:'string',
                             required:true,
                             attributes : [{
-                                desc: function() { return this.gettext("The value to process."); }
+                                desc: function() { return this.tr((({ key:"The value to process." }))); }
                             }]
                         }
                     ],
-                    desc: function() { return this.gettext("Converts HTML special characters into print code."); }
+                    desc: function() { return this.tr((({ key:"Converts HTML special characters into print code." }))); }
                 },
                 {
                     name:'to',
@@ -53,11 +53,11 @@ module.exports = function() {
                             type:'string',
                             required:true,
                             attributes : [{
-                                desc: function() { return this.gettext("The value to process."); }
+                                desc: function() { return this.tr((({ key:"The value to process." }))); }
                             }]
                         }
                     ],
-                    desc: function() { return this.gettext("Formats special characters into HTML code."); }
+                    desc: function() { return this.tr((({ key:"Formats special characters into HTML code." }))); }
                 },
                 {
                     name:'strip',
@@ -74,11 +74,11 @@ module.exports = function() {
                             type:'string',
                             required:true,
                             attributes : [{
-                                desc: function() { return this.gettext("The value to process."); }
+                                desc: function() { return this.tr((({ key:"The value to process." }))); }
                             }]
                         }
                     ],
-                    desc: function() { return this.gettext("Strips HTML from a string."); }
+                    desc: function() { return this.tr((({ key:"Strips HTML from a string." }))); }
                 }
             ]
 

@@ -19,18 +19,18 @@ module.exports = function(app) {
             dom = app['core.dom'],
             language = app['core.language'];
 
-        model.stash.title=function() { return this.gettext("Mobile"); };
-        model.stash.description=function() { return this.gettext("Ready for all mobile devices, with outstanding performance and one codebase for all platforms."); };
+        model.stash.title=function() { return this.tr((({ key:"Mobile" }))); };
+        model.stash.description=function() { return this.tr((({ key:"Ready for all mobile devices, with outstanding performance and one codebase for all platforms." }))); };
 
-        domMgr.mk('p',wrapper,function() { return this.gettext("Igaro App loads mobile and/or touch modules upon app load. It automatically detects the environment ensuring only relevant modules are loaded."); });
+        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"Igaro App loads mobile and/or touch modules upon app load. It automatically detects the environment ensuring only relevant modules are loaded." }))); });
 
-        domMgr.mk('p',wrapper,language.substitute(function() { return this.gettext("%[0] is utilized to access mobile device features such as camera, accelerometer and GPS. Many modules customise behaviour for native environments, such as <b>instance.toast</b> which switches to O/S popups."); },'<a href="http://cordova.apache.org">Apache Cordova</a>'));
+        domMgr.mk('p',wrapper,language.substitute(function() { return this.tr((({ key:"%[0] is utilized to access mobile device features such as camera, accelerometer and GPS. Many modules customise behaviour for native environments, such as <b>instance.toast</b> which switches to O/S popups." }))); },'<a href="http://cordova.apache.org">Apache Cordova</a>'));
 
-        domMgr.mk('h1',wrapper,function() { return this.gettext("Embedding Resources"); });
+        domMgr.mk('h1',wrapper,function() { return this.tr((({ key:"Embedding Resources" }))); });
 
-        domMgr.mk('p',wrapper,function() { return this.gettext("Compass SASS is included. Base64'ing images and fonts into CSS allowing app's to perform with a native feel."); });
+        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"Compass SASS is included. Base64'ing images and fonts into CSS allowing app's to perform with a native feel." }))); });
 
-        domMgr.mk('button',wrapper,function() { return this.gettext("Demo"); }).addEventListener('click', function() {
+        domMgr.mk('button',wrapper,function() { return this.tr((({ key:"Demo" }))); }).addEventListener('click', function() {
             domMgr.mk('div',{ insertBefore:this },null, function() {
                 this.className = 'embeddedresdemo';
                 domMgr.mk('div', this);
@@ -39,11 +39,11 @@ module.exports = function(app) {
             dom.rm(this);
         });
 
-        domMgr.mk('h1',wrapper,function() { return this.gettext("Touch & Gestures"); });
+        domMgr.mk('h1',wrapper,function() { return this.tr((({ key:"Touch & Gestures" }))); });
 
-        domMgr.mk('p',wrapper,function() { return this.gettext("For touch screens, <b>3rdparty.fastclick</b> removes the browser 300ms click delay."); });
+        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"For touch screens, <b>3rdparty.fastclick</b> removes the browser 300ms click delay." }))); });
 
-        domMgr.mk('p',wrapper,function() { return this.gettext("Gesture events are available via <b>3rdparty.hammer</b>. If you have a touch screen, try some actions in the box below."); });
+        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"Gesture events are available via <b>3rdparty.hammer</b>. If you have a touch screen, try some actions in the box below." }))); });
 
         return model.addSequence({
 
@@ -82,14 +82,14 @@ module.exports = function(app) {
                     }
                     return objMgr.create('pagemessage', {
                         type:'critical',
-                        message : function() { return this.gettext("A touch screen has not been detected."); }
+                        message : function() { return this.tr((({ key:"A touch screen has not been detected." }))); }
                     });
                 })(),
                 Promise.resolve(
 
                     domMgr.mk('p',null,null,function() {
 
-                        domMgr.mk('button',this,function() { return this.gettext("Next Chapter - Compatibility"); }).addEventListener('click',function() {
+                        domMgr.mk('button',this,function() { return this.tr((({ key:"Next Chapter - Compatibility" }))); }).addEventListener('click',function() {
 
                             model.parent.to(['compat']);
                         });
