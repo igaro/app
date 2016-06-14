@@ -29,11 +29,11 @@ module.exports = function() {
 
         domMgr.mk('p',wrapper,function() { return this.tr((({ key:"The build script extracts strings and metadata from source files and updates a standard .pot file. At the same time strings and metadata from .po files are embedded into the original translation object. The applicable string is pulled at runtime based upon the users current language choice." }))); });
 
-        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"The example below shows a simple use case. The text inside the paragraph will automatically update if the user switches language." }))) });
+        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"The example below shows a simple use case. The text inside the paragraph will automatically update if the user switches language." }))); });
 
         domMgr.mk('pre',wrapper,domMgr.mk('code', null,'domMgr.mk("p",wrapper,function() { return this.tr((({ key:"This text will be translated" }))); }'));
 
-        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"All of gettext's features are supported including pluralisation with language rulesets, comments and context switching." }))) });
+        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"All of gettext's features are supported including pluralization with language rulesets, comments and context switching." })));  });
 
         domMgr.mk('pre',wrapper,domMgr.mk('code', null,'((({ key:"%[n] apple", plural:"%[n] apples", comment:"It\'s for fruit!", context:"bad fruit" })),17)'));
 

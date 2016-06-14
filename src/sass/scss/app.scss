@@ -7,21 +7,6 @@ from { opacity: 0; }
 to { opacity: 0; }
 }
 
-@keyframes igaro-zoomOut {
-  from {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-    transform: scale3d(.3, .3, .3);
-  }
-
-  to {
-    opacity: 0;
-  }
-}
-
 * {
     box-sizing: border-box;
 }
@@ -313,11 +298,6 @@ body {
             }
 
             &.workers_done {
-                >div {
-                    animation-name: igaro-zoomOut;
-                    animation-duration: 5s;
-                    opacity:0;
-                }
                 background-position: 50% 70%;
             }
 

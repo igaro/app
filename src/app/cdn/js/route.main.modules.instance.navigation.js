@@ -17,20 +17,14 @@ module.exports = function() {
     options: [\n\
         {\n\
             active : true,\n\
-            title : {\n\
-                en : '1'\n\
-            }\n\
+            title : function() { return this.tr({ key:'1' }); }\n\
         },\n\
         {\n\
-            title : {\n\
-                en : '2'\n\
-            }\n\
+            title : function() { return this.tr({ key:'2' }); }\n\
         },\n\
         {\n\
             disabled : true,\n\
-            title : {\n\
-                en : '3'\n\
-            }\n\
+            title : function() { return this.tr({ key:'3' }); }\n\
         }\n\
     ]\n\
 });",

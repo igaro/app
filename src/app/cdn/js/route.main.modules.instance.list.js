@@ -11,9 +11,9 @@ module.exports = function() {
             demo : "model.managers.object.create('list',{ \n\
     container:c,\n\
     items : [\n\
-        { content:{ en : '1' }},\n\
-        { content:{ en : '2' }},\n\
-        { content:{ en : '3' }}\n\
+        { content: function() { return this.tr({ key:'1' }); }},\n\
+        { content: function() { return this.tr({ key:'2' }); }},\n\
+        { content: function() { return this.tr({ key:'3' }); }}\n\
     ] \n \
 }).then(function(l) {\n\
     var x = l.items[0];\n\

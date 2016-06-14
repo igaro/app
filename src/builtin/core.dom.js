@@ -1,4 +1,4 @@
-(function(env) {
+(function() {
 
     "use strict";
 
@@ -137,7 +137,7 @@
                     xMgr.remove(setter,'setEnv');
                 setter = r.igaroPlaceholderFn = function() {
 
-                    r.placeholder = getter.call(language);
+                    r.placeholder = getter.call({ tr: language.tr, substitute:language.substitute });
                 };
                 xMgr.on('setEnv', setter, { deps:[r] });
                 setter();
@@ -243,7 +243,7 @@
             },
 
             /* Sets a DOM Elements content
-             * @param {Node} r - DOM element to control
+             * @param {Node|object} r - DOM element to control or object containing a container
              * @param {(Node|string|object|function)} c - DOM Elements, text or a language literal
              * @param {boolean} purge=true - whether to clear the control, default true
              * @returns {null}
@@ -252,8 +252,11 @@
 
                 var self = this,
                     type = typeof c;
+                
+                if (typeof r === 'object' && r.container)
+                    r = r.container;
                 if (! (r instanceof Node))
-                    throw new TypeError("First argument must be instanceof Node");
+                    throw new TypeError("First argument must be instanceof Node or an object with a container attribute containing one");
                 if (purge !== false) {
                     this.purge(r,true);
                     r.textContent = '';
@@ -282,7 +285,7 @@
                         }
                         var f = r.igaroLangFn = function() {
 
-                            var v = c.call(language);
+                            var v = c.call({ tr: language.tr, substitute:language.substitute });
                             if (r.nodeName === 'META') {
                                 r.content = v;
                             } else if (! (r.nodeName === 'INPUT' && r.type && r.type === 'submit') && 'innerHTML' in r) {

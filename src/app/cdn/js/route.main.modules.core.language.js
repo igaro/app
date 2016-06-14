@@ -54,27 +54,6 @@ module.exports = function() {
                     desc: function() { return this.tr((({ key:"The currently applied currency code." }))); }
                 },
                 {
-                    name:'mapKey',
-                    type:'function',
-                    attributes: [
-                        {
-                            type:'*',
-                            required:true,
-                            attributes:[{
-                                desc: function() { return this.tr((({ key:"A structure containing language codes." }))); }
-                            }]
-                        }
-                    ],
-                    returns: {
-                        attributes : [
-                            {
-                                type:'string'
-                            }
-                        ]
-                    },
-                    desc: function() { return this.tr((({ key:"Executes a function then/or steps into an object literal using the current language code and returns what's there." }))); }
-                },
-                {
                     name:'pool',
                     type:'object',
                     desc: function() { return this.tr((({ key:"A literal list of supported currency codes." }))); }
@@ -105,7 +84,33 @@ module.exports = function() {
                         }]
                     }]
                 },
-
+                {
+                    name:'tr',
+                    type:'function',
+                    attributes: [
+                        {
+                            type:'object',
+                            required:true,
+                            attributes:[{
+                                desc: function() { return this.tr((({ key:"An object containing translation data by way of attributes; key, plural, context and comment, and a dictionary if the builder embedded one or an API returned one. Note: the builder will only extract strings where the object is wrapped in double brackets, so the call must match .tr((({" }))); }
+                            }]
+                        },
+                        {
+                            type:'number',
+                            attributes:[{
+                                desc: function() { return this.tr((({ key:"A pluralization value." }))); }
+                            }]
+                        }
+                    ],
+                    returns: {
+                        attributes : [
+                            {
+                                type:'string'
+                            }
+                        ]
+                    },
+                    desc: function() { return this.tr((({ key:"Selects the correct translation from a dictionary for a key, context and pluralization value." }))); }
+                }
             ]
         };
 

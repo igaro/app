@@ -15,7 +15,7 @@ module.exports = function() {
     form: dom.mk('form',c, dom.mk('input[text]',null,null,function() {\n\
         this.name='amount';\n\
         this.required=true;\n\
-        dom.setPlaceholder(this, { en:'Currency Amount' });\n\
+        dom.setPlaceholder(this,  function() { return this.tr({ key:'Currency Amount' }); });\n\
     })),\n\
     rules: [['amount',function(v) { \n\
         if (! app['core.currency'].validate(v)) {\n\

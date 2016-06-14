@@ -12,7 +12,7 @@ module.exports = function() {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
             },
-            demo : "dom.mk('button', c, { en: 'Get Google API Token' }, function() {\n\
+            demo : "dom.mk('button', c,  function() { return this.tr({ key:'Get Google API Token' }); }, function() {\n\
     this.addEventListener('click', function () {\n\
         var self = this;\n\
         model.managers.object.create('oauth2').then(function (oauth2) {\n\

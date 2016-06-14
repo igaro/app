@@ -50,6 +50,41 @@ module.exports = function(app, params) {
         return id.substr(0,3).toLowerCase()+id.substr(3).toUpperCase();
     };
 
+    /* Language key mapper
+     * @param {(object|function)} c - containing or returning the object to use.
+     * @returns {string} the env language is used on the object to return the value, reverting to denomator and default language if unavailable.
+     */
+    var getCurrentIdForDict = function(c) {
+
+        if (! /function|object/.test(typeof c))
+            throw new TypeError('First argument must be an object or function supplying it.');
+
+        var l = language.env,
+            pool = language.pool;
+
+        // functions can provide literal to use
+        if (typeof c === 'function')
+            c = c();
+
+        // must now be an object
+        if (typeof c !== 'object')
+            throw new TypeError('language mapKey can not work on a non object');
+
+        // try to fetch, try denominator
+        if (l) {
+            if (c[l])
+                return l;
+            var t = l.split('-')[0],
+                v = c[t];
+            if (v && pool[v])
+                return t;
+        }
+
+        // couldn't find, use English
+        if (c.en && pool.en)
+            return 'en';
+    };
+
     // service
     var language = {
 
@@ -151,22 +186,15 @@ module.exports = function(app, params) {
          */
         substitute : function() {
 
-            var args = Array.prototype.slice.call(arguments,0),
-                orig = args.shift(),
-                n = {};
-            Object.keys(orig).forEach(function (k) {
-                n[k] = orig[k].replace(/\%\[[\d]\]/g, function(m,v) {
-                    v = args[parseInt(m.substr(0,m.length-1).substr(2))];
-                    if (typeof v === 'object')
-                        return v[k] || m;
-                    return typeof v !== 'undefined' && v !== null? v : m;
-                });
+            var args = Array.prototype.slice.call(arguments,0);
+            return args.shift().replace(/\%\[[\d]\]/g, function(m,v) {
+                v = args[parseInt(m.substr(0,m.length-1).substr(2))];
+                return typeof v !== 'undefined' && v !== null? v : m;
             });
-            return n;
         },
 
-        /* Translation (using gettext data)
-         * @param {object} data - containing a key, data and hopefully a gettext dictionary containing translation data
+        /* Translation (using gettext data) - exposed via core.dom, do not use 'this'
+         * @param {object} data - containing a key, optional plural, comment and context, and hopefully a gettext dictionary containing translation data
          * @returns {number} [pluralCnt] - the number used to pick the correct phase, ie apple (1) and apples (0,2+) - for most languages.
          * @returns {string} containing translated text
          */
@@ -175,89 +203,52 @@ module.exports = function(app, params) {
 			if (typeof data !== 'object')
 				throw new TypeError("First argument must be of type object");
 
-            var hasPluralCnt = false;
+			if (typeof data.key !== 'string')
+				throw new TypeError("First argument object must contain a key attribute of type string");
 
-            if (pluralCnt !== null && pluralCnt !== undefined && typeof pluralCnt !== 'number') {
-                console.error(pluralCnt);
-				throw new TypeError("Second argument must be of type number");
-            } else {
-                hasPluralCnt = true;
+            var hasPluralCnt = false;
+            if (pluralCnt !== null && pluralCnt !== undefined) {
+                if (typeof pluralCnt !== 'number') {
+                    throw new TypeError("Second argument must be of type number");
+                } else {
+                    hasPluralCnt = true;
+                }
             }
 
             // basic plural index
-			var pluralIndex = hasPluralCnt? 1:0,
+			var pluralIndex = hasPluralCnt? 0:1,
                 key = data.key,
                 dict = data.dict;
 
 			// gettext data support
             if (dict) {
-                var langId = this.getCurrentIdForDict(dict),
-                    lang = this.pool[langId];
+                var langId = getCurrentIdForDict(dict),
+                    lang = language.pool[langId];
 
 			    pluralIndex = hasPluralCnt? lang.pluralForms.logic(pluralCnt) : 1;
 
                 // select language
                 dict = dict[langId];
 
+                // try to map and return
                 var mapping = dict[pluralIndex];
                 if (typeof mapping === 'string' && mapping.length)
                     return mapping;
+
+                // force English pluralization
+                if (pluralIndex > 1)
+                    pluralIndex = 0;
+            } else {
+
+                // basic English pluralization
+                if (pluralCnt === 1)
+                    pluralIndex = 1;
             }
 
-			// English style singular/plural with the index passed in.
-			if (pluralIndex > 1)
-                pluralIndex = 0;
+			// pick from the raw keys
             return [data.plural || key, key][pluralIndex];
 		},
 
-        /* Language key mapper
-         * @param {(object|function)} c - containing or returning the object to use.
-         * @returns {string} the env language is used on the object to return the value, reverting to denomator and default language if unavailable.
-         */
-        getCurrentIdForDict : function(c) {
-
-            if (! /function|object/.test(typeof c))
-                throw new TypeError('First argument must be an object or function supplying it.');
-
-            var l = language.env,
-				pool = this.pool;
-
-            // functions can provide literal to use
-            if (typeof c === 'function')
-                c = c();
-
-            // must now be an object
-            if (typeof c !== 'object')
-                throw new TypeError('language mapKey can not work on a non object');
-
-            // try to fetch, try denominator
-            if (l) {
-                if (c[l])
-                    return l;
-                var t = l.split('-')[0],
-                    v = c[t];
-                if (v && pool[v])
-                    return t;
-            }
-
-            // couldn't find, use English
-            if (c.en && pool.en)
-                return 'en';
-        },
-
-        /* Language key mapper
-         * @param {(object|function)} c - containing or returning the object to use.
-         * @returns {string} the env language is used on the object to return the value, reverting to denomator and default language if unavailable.
-         */
-        mapKey : function(c) {
-
-			var id = this.getCurrentIdForDict(c);
-			if (id)
-				return c[id];
-
-            // key unsupported
-            throw new Error('No language support (' +id+ ') in dictionary:'+JSON.stringify(c));
-        }
     };
 
     // bless service

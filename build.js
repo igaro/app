@@ -32,8 +32,9 @@ var args = require("yargs").argv,
     linter = require("eslint").linter;
 
 // get recipes
-var recipes = fs.readdirSync("src/recipes").map(function(recipe) {
-
+var recipes = fs.readdirSync("src/recipes").filter(function(recipe) {
+    return recipe.slice(-5) === '.json';
+}).map(function(recipe) {
     return recipe.slice(0,-5);
 });
 

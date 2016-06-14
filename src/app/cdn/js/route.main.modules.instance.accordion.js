@@ -8,15 +8,14 @@ module.exports = function() {
 
         var data = {
 
-            demo : " \n \
-model.managers.object.create('accordion',{ \n \
-    container:c, \n \
-    sections : [ \n \
-        { title: { en:'1' }, content:{ en : 'Blue' }}, \n \
-        { title: { en:'2' }, content:{ en : 'Black' }}, \n \
-        { title: { en:'3' }, content:{ en : 'Red' }, disabled:true } \n \
-    ] \n \
-});",
+            demo : 'model.managers.object.create("accordion",{\n\
+    container:c,\n\
+    sections : [\n\
+        { title: function() { return this.tr({ key:"1" }); }, content:function() { return this.tr({ key:"Blue" }); } },\n\
+        { title: function() { return this.tr({ key:"2" }); }, content:function() { return this.tr({ key:"Black" }); } },\n\
+        { title: function() { return this.tr({ key:"3" }); }, content:function() { return this.tr({ key:"Red" }); }, disabled:true }\n\
+    ]\n\
+});',
             desc : function() { return this.tr((({ key:"Creates a list that can expand and collapse nodes. Useful to condense information for when navigation is important or where space is limited." }))); },
             blessed: {
                 container:true,

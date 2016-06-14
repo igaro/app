@@ -13,7 +13,7 @@ module.exports = function() {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
             },
-            demo : "dom.mk('button', c, { en: 'Get JSON', }).addEventListener('click', function () {\n\
+            demo : "dom.mk('button', c,  function() { return this.tr((({ key:'Get JSON' }))); }).addEventListener('click', function () {\n\
     var self = this;\n\
     model.managers.object.create('xhr').then(function (xhr) {\n\
         return xhr.get({ res:'http://www.igaro.com/misc/demo.json' }).then(\n\

@@ -8,7 +8,7 @@ module.exports = function() {
 
         var data = {
 
-            demo : "model.managers.object.create('date', { container:c, countUp:15, date:new Date(), relative:true, format:'LLLL' })",
+            demo : "model.managers.object.create('date', { container:c, countUp:150, date:new Date(), relative:true, format:'LLLL' })",
             blessed: {
                 container:true
             },

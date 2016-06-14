@@ -1,6 +1,6 @@
 //# sourceURL=route.location.js
 
-(function(env) {
+(function() {
 
     "use strict";
 

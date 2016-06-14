@@ -1,6 +1,8 @@
 //# sourceURL=instance.date.js
 
-(function(env) {
+(function() {
+
+    "use strict";
 
     module.requires = [
         { name:'core.date.js'},
@@ -9,8 +11,6 @@
     ];
 
     module.exports = function(app) {
-
-        "use strict";
 
         var date = app['core.date'],
             dom = app['core.dom'],
@@ -74,7 +74,7 @@
 
             this.managers.event.on('destroy', function() {
 
-                removeInterval(self.__relHook);
+                window.removeInterval(self.__relHook);
             });
         };
 
@@ -82,7 +82,7 @@
          * @param {object} [o] config literal
          * @returns {Promise}
          */
-        InstanceDate.prototype.init = function(o) {
+        InstanceDate.prototype.init = function() {
 
             return this.managers.event.dispatch('init');
         };
@@ -131,15 +131,15 @@
                     if (diff < 0 && self.countUp >= (diff*-1)) {
 
                         diff *= -1;
-                        return dom.setContent(container, function(l) {
+                        return dom.setContent(container, function() {
 
-                            return l.substitute(l.ngettext("%[0] seconds ago",diff));
+                            return this.substitute(this.tr((({ key:"%[0] second ago", plural:"%[0] seconds ago" })),diff),diff);
                         });
                     } else if (diff > 0 && diff <= self.countDown) {
 
-                        return dom.setContent(container,function(l) {
+                        return dom.setContent(container,function() {
 
-                            return l.substitute(l.ngettext("%[0] seconds",diff));
+                            return this.substitute(this.tr((({ key:"%[0] second", plural:"%[0] seconds" })),diff),diff);
                         });
                     }
                 }

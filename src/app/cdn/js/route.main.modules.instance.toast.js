@@ -8,9 +8,9 @@ module.exports = function() {
 
         var data = {
 
-            demo : "model.managers.dom.mk('button',c, { en:'Execute' }).addEventListener('click', function() {\n\
+            demo : "model.managers.dom.mk('button',c,  function() { return this.tr((({ key:'Execute' }))); }).addEventListener('click', function() {\n\
     model.managers.object.create('toast', {\n\
-        message:{ en: 'Successful' }\n\
+        message: function() { return this.tr({ key:'Successful' }); }}\n\
     }).catch(function (e) {\n\
         model.managers.debug.handle(e);\n\
     });\n\

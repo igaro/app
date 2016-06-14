@@ -240,7 +240,7 @@ module.exports = function() {
                             required:true,
                             attributes : [
                                 {
-                                    desc: function() { return this.tr((({ key:"The element of which to set the content." }))); }
+                                    desc: function() { return this.tr((({ key:"The element of which to set the content. It can also be an object with a container attribute (i.e instance widget)." }))); }
                                 }
                             ]
                         },

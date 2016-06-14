@@ -2,6 +2,8 @@
 
 (function(env) {
 
+    "use strict";
+
     module.requires = [
         { name: 'instance.toast.css' },
         { name: 'core.language.js' }
@@ -9,10 +11,7 @@
 
     module.exports = function(app) {
 
-        "use strict";
-
-        var language = app['core.language'],
-            dom = app['core.dom'],
+        var dom = app['core.dom'],
             bless = app['core.object'].bless;
 
         var showTime = {
@@ -61,7 +60,7 @@
 
             // phonegap InstanceToast plugin
             if (env.plugins && env.plugins.toast)
-                return env.plugins.toast.show(typeof txt === 'object'? language.mapKey(txt) : txt,duration,position);
+                return env.plugins.toast.show(typeof txt === 'function'? txt() : txt,duration,position);
 
             // html
             domMgr.mk('div',container,txt,duration);

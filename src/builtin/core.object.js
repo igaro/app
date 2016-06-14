@@ -1,11 +1,10 @@
-(function(env) {
+(function() {
 
     "use strict";
 
     module.exports = function(app) {
 
         var events = app['core.events'],
-            dom = app['core.dom'],
             debounceStore=[];
 
         // common private helpers

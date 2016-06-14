@@ -54,7 +54,7 @@ module.exports = function(app) {
                                 container.className=stash.activeFor.container.className='';
                                 brows.forEach(function(br) {
                                     if (br.stash.belongsTo && br.stash.belongsTo.indexOf(row) !== -1) {
-                                        br.destroy().catch(function (e) {
+                                        br.destroy()['catch'](function (e) {
                                             return debugMgr.handle(e);
                                         });
                                     }
@@ -67,7 +67,7 @@ module.exports = function(app) {
                             }
                             stash.activeFor=col;
                             container.className = this.className = 'active';
-                            addRows(meta,row,manager,null,tbl).catch(function (e) {
+                            addRows(meta,row,manager,null,tbl)['catch'](function (e) {
                                 return debugMgr.handle(e);
                             });
                         });
@@ -170,7 +170,7 @@ module.exports = function(app) {
                                 return {
                                     name:o[0],
                                     type:'object',
-                                    desc:language.substitute(function() { return this.tr((({ key:"A manager. See %[0]." }))); }, o[1])
+                                    desc:function() { return this.substitute(this.tr((({ key:"A manager. See %[0]." }))), o[1]); }
                                 };
                             })
                         },
@@ -267,7 +267,7 @@ module.exports = function(app) {
                         insertAfter:at,
                         columns:[
                             {
-                                content:s.name? { en: s.name + (s.required? ' *' : '') } : null
+                                content:s.name? s.name + (s.required? ' *' : '') : null
                             }
                         ]
                     }).then(function(row) {
@@ -313,13 +313,9 @@ module.exports = function(app) {
                                         if (m.blessed)
                                             showBlessed = true;
                                         if (m.desc) {
-                                            var q = JSON.parse(JSON.stringify(m.desc));
-                                            if (s.desc) {
-                                                Object.keys(q).forEach(function(k) {
-                                                    if (s.desc[k])
-                                                        q[k] += ' '+s.desc[k];
-                                                });
-                                            }
+                                            var q = [domMgr.mk('p',null,m.desc)]; //JSON.parse(JSON.stringify(m.desc));
+                                            if (s.desc)
+                                                q.push(domMgr.mk('p',null,s.desc));
                                             dom.setContent(rr, q);
                                         }
                                     } else {
@@ -375,7 +371,7 @@ module.exports = function(app) {
             };
 
             var createTable = function(meta,container,manager) {
-                domMgr.mk('p',container,language.substitute(function() { return this.tr((({ key:"%[0] - required, %[1]underlined%[2] - asynchronous (%[3])" }))); },'<b>*</b>','<b><u>','</u></b>','<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>'));
+                domMgr.mk('p',container,function() { return this.substitute(this.tr((({ key:"%[0] - required, %[1]underlined%[2] - asynchronous (%[3])" }))),'<b>*</b>','<b><u>','</u></b>','<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>'); });
                 return objectMgr.create('table',{
                     container:container,
                     header : {
@@ -396,14 +392,16 @@ module.exports = function(app) {
                         ]
                     }
                 }).then(function (tbl) {
+
                     return addRows(meta,null,manager,true,tbl);
-                }).catch(function(e) {
+                })['catch'](function(e) {
+
                     return debugMgr.handle(e);
                 });
             };
 
             var v = m.wrapper;
-            m.stash.title= { en : m.name };
+            m.stash.title= m.name;
 
             if (data.desc) {
                 domMgr.mk('h1',v,function() { return this.tr((({ key:"Description" }))); });
@@ -430,9 +428,10 @@ module.exports = function(app) {
                         n += '(o)';
                     if (u.instantiate) {
                         domMgr.mk('p',v,function() { return this.tr((({ key:"Blessed objects lazy load and instantiate via <b>[object].managers.object.create()</b>." }))); });
-                        domMgr.mk('p',v,language.substitute(function() { return this.tr((({ key:"Unblessed objects use <b>new %[0]</b>." }))); },n));
+                        domMgr.mk('p',v,function() { return this.substitute(this.tr((({ key:"Unblessed objects use <b>new %[0]</b>." }))),n); });
                     } else {
-                        domMgr.mk('p',v,language.substitute(function() { return this.tr((({ key:"Access <b>%[0]</b> directly without instantiating." }))); },n));
+                        console.error('hereh');
+                        domMgr.mk('p',v,function() { return this.substitute(this.tr((({ key:"Access <b>%[0]</b> directly without instantiating." }))),n); });
                     }
                 } else if (u.direct) {
                     domMgr.mk('p',v,function() { return this.tr((({ key:"Access the features of this library directly." }))); });
@@ -468,10 +467,20 @@ module.exports = function(app) {
 
                 model.managers.object.create('pagemessage',{
                     type:'info',
-                    message: function() { return this.tr((({ key:"Hint: <b>c</b> is a container element. For blessed objects this will default to the objects container." }))); },
+                    message: function() { return this.tr((({ key:"<b>c</b> is a container element. For blessed objects this will default to the objects container." }))); },
                     container:cc,
                     hideable: true,
                     id:model.path.join('.')+'.democode'
+                })['catch'](function(e) {
+                    debugMgr.handle(e);
+                });
+
+                model.managers.object.create('pagemessage',{
+                    type:'info',
+                    message: function() { return this.tr((({ key:"Translations are inactive due to the use of a single bracket <b>_tr({</b> instead of three <b>_tr((({</b>." }))); },
+                    container:cc,
+                    hideable: true,
+                    id:model.path.join('.')+'.democodenotr'
                 })['catch'](function(e) {
                     debugMgr.handle(e);
                 });
