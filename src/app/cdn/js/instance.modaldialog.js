@@ -1,6 +1,8 @@
 //# sourceURL=instance.modaldialog.js
 
-(function(env) {
+(function() {
+
+    "use strict";
 
     module.requires = [
         { name:'instance.modaldialog.css' },
@@ -8,8 +10,6 @@
     ];
 
     module.exports = function(app,params) {
-
-        "use strict";
 
         var zIndexAt = 999999,
             body = document.body,
@@ -126,7 +126,7 @@
                             }
                             this.addEventListener('click', function() {
 
-                                self.resolve(action).catch(function (e) {
+                                self.resolve(action)['catch'](function (e) {
 
                                     self.managers.debug.handle(e);
                                 });

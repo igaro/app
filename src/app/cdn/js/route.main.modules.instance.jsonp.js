@@ -22,7 +22,7 @@ module.exports = function() {
                     c.insertBefore(dom.mk("div",null,JSON.stringify(data)), self);\n\
                     c.removeChild(self);\n\
                 }\n\
-            ).catch(function(e) {;\n\
+            )["catch"](function(e) {;\n\
                 model.managers.debug.handle(e);\n\
             });\n\
         });\n\

@@ -1,6 +1,6 @@
 //# sourceURL=instance.todomvc.js
 
-(function(env) {
+(function() {
 
     'use strict';
 
@@ -41,7 +41,7 @@
 
                         this.addEventListener('click',function() {
 
-                            self.setCompleted(this.checked).catch(function(e) {
+                            self.setCompleted(this.checked)['catch'](function(e) {
 
                                 return debugMgr.handle(e);
                             });

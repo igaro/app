@@ -58,7 +58,7 @@ module.exports = function(app) {
                                         name = 'core.'+name;
                                         var mod = app[name];
                                         select.addEventListener('change', function() {
-                                            (this.selectedIndex === 0? mod.reset() : mod.setEnv(this.options[this.selectedIndex].value)).catch(function(e) {
+                                            (this.selectedIndex === 0? mod.reset() : mod.setEnv(this.options[this.selectedIndex].value))['catch'](function(e) {
                                                 return debugMgr.handle(e);
                                             });
                                         });
@@ -164,7 +164,7 @@ module.exports = function(app) {
                                                 }
                                             });
                                             this.addEventListener('change', function() {
-                                                (this.selectedIndex === 0? date.resetEnvOffset() : date.setEnvOffset(parseInt(this.options[this.selectedIndex].value))).catch(function(e) {
+                                                (this.selectedIndex === 0? date.resetEnvOffset() : date.setEnvOffset(parseInt(this.options[this.selectedIndex].value)))['catch'](function(e) {
                                                     return debugMgr.handle(e);
                                                 });
                                             });
@@ -177,7 +177,7 @@ module.exports = function(app) {
                                         custom:accordion.container
                                     });
                                 });
-                            }).catch(function(e) {
+                            })['catch'](function(e) {
                                 return managers.debug.handle(e);
                             });
                         });

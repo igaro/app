@@ -22,7 +22,7 @@ module.exports = function() {
                 c.removeChild(self);\n\
             }\n\
         );\n\
-    }).catch(function(e) {\n\
+    })['catch'](function(e) {\n\
         return model.managers.debug.handle(e);\n\
     });\n\
 });",

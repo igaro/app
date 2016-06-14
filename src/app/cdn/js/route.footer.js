@@ -19,7 +19,7 @@ module.exports = function(app) {
             router = app['core.router'];
 
         // save scroll for top button
-        var saveScroll = function(event) {
+        var saveScroll = function() {
             var db = document.body,
                 v = db.scrollTop || document.documentElement.scrollTop;
             db.setAttribute('data-scrollPosition', v<0? 0:v);
@@ -67,7 +67,7 @@ module.exports = function(app) {
                             return x;
                         });
                     }
-                ).catch(function () { });
+                )['catch'](function () { });
             }),
 
             // open issues
@@ -86,7 +86,7 @@ module.exports = function(app) {
                             domMgr.mk('a',this,data[0].open_issues).href='https://github.com/igaro/app/issues';
                         });
                     }
-                ).catch(function () {});
+                )['catch'](function () {});
             }),
 
             // bookmark

@@ -27,7 +27,7 @@ module.exports = function() {
                     if (o.token)\n\
                         dom.setContent(c, o.token);\n\
                 }\n\
-            ).catch(function(e) {;\n\
+            )['catch'](function(e) {;\n\
                 model.managers.debug.handle(e);\n\
             });\n\
         });\n\
