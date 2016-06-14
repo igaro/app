@@ -8,26 +8,25 @@ module.requires = [
     { name: 'route.main.testing.css' }
 ];
 
-module.exports = function(app) {
+module.exports = function() {
 
     return function(model) {
 
         var wrapper = model.wrapper,
             managers = model.managers,
             domMgr = managers.dom,
-            objMgr = managers.object,
-            language = app['core.language'];
+            objMgr = managers.object;
 
         model.stash.title=function() { return this.tr((({ key:"Testing" }))); };
         model.stash.desc = function() { return this.tr((({ key:"End2End and Unit tests are included and run in web browsers via Selenium WebDriver." }))); };
 
         domMgr.mk('p',wrapper,function() { return this.tr((({ key:"Igaro App utilizes NightwatchJS for E2E testing via the Selenium WebDriver. Unit tests are performed by Mocha & Chai." }))); });
-        domMgr.mk('p',wrapper,language.substitute(function() { return this.tr((({ key:"Before launching the test suite the following requisites are required;" }))); }));
+        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"Before launching the test suite the following requisites are required;" }))); });
         domMgr.mk('p',wrapper,null, function() {
             domMgr.mk('ul',this,null, function() {
-                domMgr.mk('li',this,language.substitute(function() { return this.tr((({ key:"Download %[0] into the lib folder." }))); },'<a href="http://selenium-release.storage.googleapis.com/index.html">Selenium</a>'));
-                domMgr.mk('li',this,language.substitute(function() { return this.tr((({ key:"For Chrome support, download the %[0]Selenium driver%[1] into the lib folder." }))); },'<a href="https://code.google.com/p/selenium/wiki/ChromeDriver">','</a>'));
-                domMgr.mk('li',this,language.substitute(function() { return this.tr((({ key:"For Internet Explorer support, download the %[0]Selenium driver%[1] into the lib folder." }))); },'<a href="https://code.google.com/p/selenium/wiki/InternetExplorerDriver">','</a>'));
+                domMgr.mk('li',this,function() { return this.substitute(this.tr((({ key:"Download %[0] into the lib folder." }))),'<a href="http://selenium-release.storage.googleapis.com/index.html">Selenium</a>'); });
+                domMgr.mk('li',this,function() { return this.substitute(this.tr((({ key:"For Chrome support, download the %[0]Selenium driver%[1] into the lib folder." }))),'<a href="https://code.google.com/p/selenium/wiki/ChromeDriver">','</a>'); });
+                domMgr.mk('li',this,function() { return this.substitute(this.tr((({ key:"For Internet Explorer support, download the %[0]Selenium driver%[1] into the lib folder." }))),'<a href="https://code.google.com/p/selenium/wiki/InternetExplorerDriver">','</a>'); });
                 domMgr.mk('li',this,function() { return this.tr((({ key:"Verify the tests/nightwatch.json and package.json files match your browser support requirements and the Selenium version matches what you downloaded." }))); });
             });
         });
@@ -52,9 +51,7 @@ module.exports = function(app) {
                 });
             });
         });
-
     };
-
 };
 
 })();

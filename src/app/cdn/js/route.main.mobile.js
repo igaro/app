@@ -16,15 +16,14 @@ module.exports = function(app) {
             managers = model.managers,
             domMgr = managers.dom,
             objMgr = managers.object,
-            dom = app['core.dom'],
-            language = app['core.language'];
+            dom = app['core.dom'];
 
         model.stash.title=function() { return this.tr((({ key:"Mobile" }))); };
         model.stash.description=function() { return this.tr((({ key:"Ready for all mobile devices, with outstanding performance and one codebase for all platforms." }))); };
 
         domMgr.mk('p',wrapper,function() { return this.tr((({ key:"Igaro App loads mobile and/or touch modules upon app load. It automatically detects the environment ensuring only relevant modules are loaded." }))); });
 
-        domMgr.mk('p',wrapper,language.substitute(function() { return this.tr((({ key:"%[0] is utilized to access mobile device features such as camera, accelerometer and GPS. Many modules customise behaviour for native environments, such as <b>instance.toast</b> which switches to O/S popups." }))); },'<a href="http://cordova.apache.org">Apache Cordova</a>'));
+        domMgr.mk('p',wrapper,function() { return this.substitute(this.tr((({ key:"%[0] is utilized to access mobile device features such as camera, accelerometer and GPS. Many modules customise behaviour for native environments, such as <b>instance.toast</b> which switches to O/S popups." }))),'<a href="http://cordova.apache.org">Apache Cordova</a>'); });
 
         domMgr.mk('h1',wrapper,function() { return this.tr((({ key:"Embedding Resources" }))); });
 

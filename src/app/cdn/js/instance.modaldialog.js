@@ -102,7 +102,7 @@
                 // add cancel or close
                 if (o.addCancel || ! myActions.length) {
                    myActions.push({
-                        l:function() { return o.addCancel? this.tr((({ key:"Cancel" }))) : this.gettext((( { key:"Close" }))); }
+                        l:function() { return o.addCancel? this.tr((({ key:"Cancel" }))) : this.tr((( { key:"Close" }))); }
                    });
                 }
 

@@ -1,6 +1,6 @@
 //# sourceURL=route.main.install.js
 
-(function (env) {
+(function () {
 
 "use strict";
 
@@ -8,12 +8,11 @@ module.requires = [
     { name: 'route.main.install.css' }
 ];
 
-module.exports = function(app) {
+module.exports = function() {
 
     return function(model) {
 
         var wrapper = model.wrapper,
-            language = app['core.language'],
             domMgr = model.managers.dom;
 
         model.stash.title=function() { return this.tr((({ key:"Install" }))); };
@@ -37,22 +36,19 @@ module.exports = function(app) {
 
         domMgr.mk('h1',wrapper,function() { return this.tr((({ key:"Install" }))); });
 
-        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"Run the following in a terminal." }))); });
+        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"Make sure you have Node 5.8+ installed and then run the following in a terminal." }))); });
 
         domMgr.mk('pre',wrapper,domMgr.mk('code',null,"mkdir igaro \n\
 git clone https://github.com/igaro/app.git igaro/git\n\
-npm install grunt-cli \n\
-sudo gem update --system \n\
-sudo gem install compass \n\
 cd igaro/git \n\
 npm install \n\
-grunt",'gitcode'));
+./build --recipe=devel --serve=3006 --watch",'gitcode'));
 
         domMgr.mk('h1',wrapper,function() { return this.tr((({ key:"Boom!" }))); });
 
-        domMgr.mk('p',wrapper,language.substitute(function() { return this.tr((({ key:"Igaro compiles into two modes; debug and deploy. A web server for each can be found on ports %[0] and %[1]. These will reload automatically as you work." }))); },'<a href="http://localhost:3006">3006</a>','<a href="http://localhost:3007">3007</a>'));
+        domMgr.mk('p',wrapper,function() { return this.substitute(this.tr((({ key:"The build script uses recipes to cater for different environments and the app is now available on port %[0]. The code will rebuild as you code." }))),'<a href="http://localhost:3006">3006</a>','<a href="http://localhost:3007">3007</a>'); });
 
-        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"That's it. Now read as much of the documentation as you need, modify the route files behind this app, and create!" }))); });
+        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"That's it. Now read as much of the documentation as you need and dive in!" }))); });
 
     };
 

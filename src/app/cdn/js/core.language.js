@@ -186,8 +186,13 @@ module.exports = function(app, params) {
          */
         substitute : function() {
 
-            var args = Array.prototype.slice.call(arguments,0);
-            return args.shift().replace(/\%\[[\d]\]/g, function(m,v) {
+            var args = Array.prototype.slice.call(arguments,0),
+                str = args.shift();
+
+            if (typeof str !== 'string')
+                throw new TypeError("First argument must be of type string");
+
+            return str.replace(/\%\[[\d]\]/g, function(m,v) {
                 v = args[parseInt(m.substr(0,m.length-1).substr(2))];
                 return typeof v !== 'undefined' && v !== null? v : m;
             });
