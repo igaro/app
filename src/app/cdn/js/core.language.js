@@ -9,13 +9,9 @@ module.exports = function(app, params) {
 
     "use strict";
 
-	// default delimiter for content lookup
-	var context_delimiter = params.langContextDelimiter || String.fromCharCode(4);
-
     var store = app['core.store'],
         url = app['core.url'],
         coreObject = app['core.object'],
-        bless = coreObject.bless,
         promiseSequencer = coreObject.promiseSequencer;
 
     // detects the language to use
@@ -31,7 +27,7 @@ module.exports = function(app, params) {
                 window.navigator.userLanguage || window.navigator.language,
                 'en-US',
                 'en'
-            ], function(code,i) {
+            ], function(code) {
                 if (! set && code)
                     return language.setEnv(code,true).then(
                         function() {
@@ -149,7 +145,7 @@ module.exports = function(app, params) {
         },
 
         /* Language string substitution
-         * @param {string} id - containing \d or %[n] placeholders
+         * @param {string} id - containing %[n] placeholders
          * @param {string} id - text to place into holder. Can supply further arguments.
          * @returns {string} the replaced strings
          */
@@ -191,7 +187,6 @@ module.exports = function(app, params) {
             // basic plural index
 			var pluralIndex = hasPluralCnt? 1:0,
                 key = data.key,
-                mapping = null,
                 dict = data.dict;
 
 			// gettext data support
@@ -266,7 +261,7 @@ module.exports = function(app, params) {
     };
 
     // bless service
-    bless.call(language);
+    coreObject.bless.call(language);
 
     // attempt to reapply active code incase it's been removed from the pool
     language.managers.event.on('setPool', function() {

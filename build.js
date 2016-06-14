@@ -28,7 +28,6 @@ var args = require("yargs").argv,
     sassXtra = require("node-sass-asset-functions"),
     watch = require("watch"),
     uglify = require("uglify-js"),
-    jsxgettext = require("jsxgettext"),
     po2json = require("po2json"),
     linter = require("eslint").linter;
 
@@ -78,11 +77,11 @@ var pullTrData = function(str) {
     str = "(function() { return " + str.slice(6,-2) + "; })()";
     try {
         var obj = eval(str);
+        return obj;
     } catch(e) {
         throw "Translation failure ("+e+ ") at: "+str;
     }
-    return obj;
-}
+};
 
 var makePotHeader = function() {
 
@@ -148,8 +147,11 @@ var mkdir = function(dir) {
 
         fs.mkdirs(dir, function(err) {
 
-          if (err) reject(err)
-          else resolve()
+            if (err) {
+                reject(err);
+            } else {
+                 resolve();
+            }
         });
     });
 };
@@ -165,9 +167,11 @@ var readdir = function(dir,filter) {
                     return file.slice(-1 - filter.length) === '.'+filter;
                 });
             }
-
-          if (err) reject(err)
-          else resolve(files)
+            if (err) {
+                reject(err);
+            } else {
+                 resolve(files);
+            }
         });
     });
 };
@@ -177,8 +181,11 @@ var readfile = function(file) {
     return new Promise(function(resolve,reject) {
 
         fs.readFile(file,function(err, data) {
-            if (err) reject(err)
-            else resolve(data.toString('utf8'))
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data.toString('utf8'));
+            }
         });
     });
 };
@@ -190,23 +197,20 @@ var writefile = function(file,data) {
         return new Promise(function(resolve,reject) {
 
             fs.writeFile(file,data,function(err) {
-                if (err) reject(err)
-                else resolve()
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
             });
         });
     });
 };
 
-var getTime = function() {
-
-    var date = new Date();
-    return date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
-};
-
 var consoleColor = function(txt,code) {
 
     console.info('\x1b['+code+'m',txt,'\x1b[0m');
-}
+};
 
 var consoleInfo = function(txt) {
 
@@ -291,14 +295,15 @@ var build = {
             fs.walk(srcAppDir)
               .on('data', function(file) {
 
-                files.push(file.path)
+                files.push(file.path);
               })
               .on('end', function() {
 
                 resolve(files);
               })
               .on('error', function(err) {
-                reject(err)
+
+                reject(err);
               });
         }).then(function(files) {
 
@@ -371,7 +376,7 @@ var build = {
                     var name = match.slice(7,-2),
                         value = recipeConf[name];
                     if (! value)
-                        throw new Error("Entry missing from recipe: "+name)
+                        throw new Error("Entry missing from recipe: "+name);
                     return value;
                 });
             });
@@ -403,9 +408,10 @@ var build = {
                             pot[key] = [];
                         // store source and comment information
                         pot[key].push([file.name,re.lastIndex,obj]);
-                    };
+                    }
                 });
             });
+
 
             var lang = {};
             return Promise.all([
@@ -451,7 +457,8 @@ var build = {
                         })) {
                             data.forEach(function(x) {
 
-                                x[2].context >>> {};
+                                if (! x[2].context)
+                                    x[2].context = {};
                                 a += potMakeSection(b,[x]);
                             });
                         } else {
@@ -505,6 +512,23 @@ var build = {
 
         }).then(function(files) {
 
+            // minify
+            if (minifyEnabled) {
+                var conf = recipeConf.uglify,
+                    origSize = 0,
+                    nowSize = 0;
+                files.forEach(function(file) {
+
+                    origSize += file.data.length;
+                    file.data = uglify.minify(file.data, conf).code;
+                    nowSize += file.data.length;
+                });
+                consoleInfo("JavaScript Minified ("+ ((nowSize/origSize)*100).toFixed(1) + "%)");
+            }
+            return files;
+
+        }).then(function(files) {
+
             // write files
             return Promise.all(files.map(function(file) {
 
@@ -534,7 +558,7 @@ var build = {
                                 return reject(err);
                             resolve();
                         });
-                    };
+                    }
 
                     fs.copy(f, target, { clobber:true }, function(err) {
 
@@ -597,7 +621,7 @@ var build = {
                                     resolve();
                                 });
                             });
-                        })
+                        });
                     })
                 );
             });

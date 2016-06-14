@@ -10,6 +10,11 @@
         "rules" : {
 
         }
+    },
+
+    "uglify" : {
+
+        "fromString" : true
     }
 
 }

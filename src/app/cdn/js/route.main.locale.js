@@ -27,18 +27,17 @@ module.exports = function() {
 
         domMgr.mk('h1',wrapper,function() { return this.tr((({ key:"Translation (getText)" }))); });
 
-        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"The build manager updates a standard .pot file as the codebase is edited and includes .po files as they are created. The applicable string is pulled at runtime and many helper functions such as <b>dom.mk</b> register the event handle for you." }))); });
+        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"The build script extracts strings and metadata from source files and updates a standard .pot file. At the same time strings and metadata from .po files are embedded into the original translation object. The applicable string is pulled at runtime based upon the users current language choice." }))); });
 
-        domMgr.mk('pre',wrapper,domMgr.mk('code', null,'domMgr.mk("p",wrapper,_tr_("This text will be translated by the builder and inserted by the app. It will react to the core.language setEnv event."));'));
+        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"The example below shows a simple use case. The text inside the paragraph will automatically update if the user switches language." }))) });
 
-        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"The builder switches the translation for a literal of IETF tags." }))); });
+        domMgr.mk('pre',wrapper,domMgr.mk('code', null,'domMgr.mk("p",wrapper,function() { return this.tr((({ key:"This text will be translated" }))); }'));
 
-        domMgr.mk('pre',wrapper,domMgr.mk('code',null,'{\
-\n    en : "Good Morning",\
-\n    fr : "Bonjour"\
-\n}'));
+        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"All of gettext's features are supported including pluralisation with language rulesets, comments and context switching." }))) });
 
-        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"<b>core.language</b> provides getText parsing routines including support for both %[n] (where n is an integer) and %d (next argument) placeholders." }))); });
+        domMgr.mk('pre',wrapper,domMgr.mk('code', null,'((({ key:"%[n] apple", plural:"%[n] apples", comment:"It\'s for fruit!", context:"bad fruit" })),17)'));
+
+        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"<b>core.language</b> provides ordered substitution support for %[n] (where n is an integer) placeholders." }))); });
 
         domMgr.mk('p',wrapper,null,function() {
 
