@@ -22,7 +22,7 @@ The repository you download here is fully featured App you'll soon have running 
 
 By reading some of the documentation and using your natural inquisitiveness to change things you'll quickly get to grips and be on your way.
 
-Igaro App is just "plain old object orientated JavaScript", with some easy to use spice (read about [http://app.igaro.com/#/bless](Bless) if you want a taste!).
+Igaro App is just "plain old object orientated JavaScript", with some easy to use spice (read about [Bless](http://app.igaro.com/#/bless) if you want a taste!).
 
 ## Documentation
 
