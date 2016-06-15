@@ -1,6 +1,6 @@
 {
     "en" : {
-        "name":"English",
+        "name":"English (U.S)",
         "pluralForms" : {
             "count":2,
             "logic":"n === 1? 1:0"

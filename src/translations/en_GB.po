@@ -1,0 +1,3535 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: PO-Revision-Date: YEAR-MO-DA HO:MI+ZONELanguage:MIME-Version: 1.0Content-Type: text/plain; charset=utf-8Content-Transfer-Encoding: 8bitPOT-Creation-Date: 2016-05-15 18:56+0000\n"
+"POT-Creation-Date: 2016-05-15 18:56+0000\n"
+"PO-Revision-Date: 2016-06-15 19:57+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.date.js:115
+msgid "%[0] second ago"
+msgid_plural "%[0] seconds ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.date.js:107
+msgid "%[0] second"
+msgid_plural "%[0] seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.form.validate.js:75
+msgid "Value required"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.form.validate.js:73
+msgid "Invalid value"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.form.validate.js:69
+msgid "Value too low"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.form.validate.js:78
+msgid "Length too small"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.form.validate.js:70
+msgid "Value too high"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.form.validate.js:70
+msgid "Not a number"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.form.validate.js:71
+msgid "Invalid email"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.form.validate.js:73
+msgid "Enter only digits"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.modaldialog.js:87
+msgid "Cancel"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.modaldialog.js:76
+msgid "Ok"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.modaldialog.js:69
+msgid "Confirm"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.rte.js:84
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.routes.js:88
+msgid "Main"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.rte.js:111
+msgid "Style"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.rte.js:115
+msgid "Paragraph"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.rte.js:115
+msgid "Heading 1"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.rte.js:115
+msgid "Heading 2"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.rte.js:115
+msgid "Heading 3"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.rte.js:115
+msgid "Heading 4"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.rte.js:115
+msgid "Heading 5"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.rte.js:115
+msgid "Heading 6"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.rte.js:115
+msgid "Formatted"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.rte.js:89
+msgid "Character"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.rte.js:97
+msgid "Backcolor"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.rte.js:97
+msgid "Forecolor"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.rte.js:99
+msgid "Highlight"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/instance.table.js:96
+msgid "Search"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.footer.js:87
+msgid "License: LGPLv3"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.footer.js:94
+msgid "Updated:"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.footer.js:105
+msgid "Open Issues:"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.header.js:121
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.header.js:119
+msgid "Automatic"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.header.js:94
+msgid "Language"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.header.js:93
+msgid "Country"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.header.js:94
+msgid "Currency"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.header.js:96
+msgid "Timezone"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.header.js:94
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:83
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.locale.js:74
+msgid "Locale"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.async.js:81
+msgid "Asynchronous"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.async.js:151
+msgid "Standard A+ Promises throughout, with an event driven architecture and sequencing."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.async.js:148
+msgid "Igaro App has an asynchronous architecture and employs standard A+ Promises."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.async.js:348
+msgid "Functions typically dispatch an event at the end of execution, which includes a reference to itself and a passed value. While events are synchronous in chain and hierarchy, each event may contain asynchronous code. For this reason the majority of functions return a Promise."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.async.js:93
+msgid "ES6 Promise Standard"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.async.js:110
+msgid "Standard Promises are used throughout."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.async.js:87
+msgid "Learn More"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.async.js:83
+msgid "Sequencing"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.async.js:192
+msgid "Promises can become verbose, especially for sequencing (applying the output from multiple Promises with retained order)."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.async.js:303
+msgid "The <b>core.object</b> module provides <b>promiseSequencer()</b> to reduce Promises while <b>addSequence()</b> provided by <b>core.router</b> is similar but also appends DOM elements (or the container element for a blessed object)."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.async.js:167
+msgid "Most widgets provide pluralized creation functions like <b>addItem()</b> and <b>addItems()</b>."
+msgstr "Most widgets provide pluralised creation functions like <b>addItem()</b> and <b>addItems()</b>."
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.async.js:99
+msgid "Next Chapter - Events"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:73
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:81
+msgid "Bless"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:194
+msgid "Igaro App's bless decorates standard JavaScript objects. It provides managers, dependency tracking and common functions."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:333
+msgid "Igaro App's bless (part of <b>core.object</b>) decorates standard JavaScript objects. It provides managers (storage, events), dependency tracking, shared functionality and boilerplate. Objects usually bless themselves, and in Igaro App most objects are blessed."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:81
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:76
+msgid "Managers"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:412
+msgid "A manager is a module (or part of) customized to a blessed object. Any module can offer managerial functionality, for example the <b>core.dom</b> module offers a function <b>mk</b> to create elements, but do the same using a dom manager on the blessed object and that element will automatically disappear if the blessed object is destroyed."
+msgstr "A manager is a module (or part of) customised to a blessed object. Any module can offer managerial functionality, for example the <b>core.dom</b> module offers a function <b>mk</b> to create elements, but do the same using a dom manager on the blessed object and that element will automatically disappear if the blessed object is destroyed."
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:78
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:80
+msgid "Usage"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:227
+msgid "Blessing an object is accomplished with a single call. Most configuration attributes are held within an argument, while a few can be pre-set prior to call."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:250
+msgid "In the above example the object is given a namespace of <b>instance.mywidget</b>. This is used by several managers, for example the event manager as it fires events up the chain."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:327
+msgid "The power of bless will quickly become apparent when you start using Igaro App. Take your standard JavaScript object containing an array of child objects. When one of those objects is destroyed it should be removed from the array. Bless does this for you."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:74
+msgid "Parent"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:216
+msgid "A reference to a parent object is stored on the child (while this introduces a circular dependency, it's taken care of when the object destructs)."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:72
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:96
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:88
+msgid "Name"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:187
+msgid "An object is given a name which can be used to uniquely identify it or it's type. Not to be confused with instanceof!"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:72
+msgid "Path"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:355
+msgid "A path is used to identify the objects location by way of it's hierarchical position. It's built using the name. Although an object may belong to another it's path may stop at the child, it doesn't necessarily have to resolve all the way to root. This is one usage of the .asRoot flag."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:73
+msgid "Stash"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:122
+msgid "Holds data that may not be attributes of the object."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:423
+msgid "A manager is a module that uses the blessed decorations to enhance it's functions and/or to provide helper functions linking the blessed object as a dependency. Common managers include events, debugging, object creation and dom. Additional managers can be supplied at time of blessing, i.e if the module requires a store. Any module can offer a manager."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:75
+msgid "Helpers"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:177
+msgid "If a container is provided, helpers will be added to the object. These include show/hide and disable/inert."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:78
+msgid "Destructor"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:250
+msgid "A destructor is appended which when called will wipe dependencies, circular references, children, dom elements and events and will fire an event allowing dependents to do the same."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:85
+msgid "Provides"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:215
+msgid "The features blessed to an object depend upon the configuration pre-set and passed. Some of the more common attributes are described below."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.bless.js:102
+msgid "Next Chapter - Async"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:83
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:89
+msgid "Compatibility"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:151
+msgid "Igaro App works with any recent browser and platform. This page contains the list."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:168
+msgid "Igaro App is compatible with the majority of web browsers going back to IE8, and mobile devices."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:94
+msgid "Handling Requirements"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:277
+msgid "Modules are responsible for verifying requirements upon load and throwing an error if they are not met, which is handed and displayed to the user. Modules try to offer reduced functionality where possible."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:91
+msgid "Company"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:92
+msgid "Software"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:91
+msgid "Version"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:90
+msgid "Status"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:91
+msgid "Remarks"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:128
+msgid "Some modules may have reduced functionality."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:116
+msgid "Some widgets may be unavailable."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:153
+msgid "Tested as far back as version 10, but may work with earlier versions."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:153
+msgid "Tested as far back as version 40, but may work with earlier versions."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:153
+msgid "Tested as far back as version 15, but may work with earlier versions."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:128
+msgid "Some widgets may have reduced functionality."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:152
+msgid "Tested as far back as version 5, but may work with earlier versions."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:96
+msgid "Opera Software"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:87
+msgid "Opera"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:96
+msgid "Compatibility Table"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.compat.js:104
+msgid "Next Chapter - Testing"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.contact.js:76
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:85
+msgid "Contact"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.contact.js:206
+msgid "Persons actively involved in Igaro App development have an email which is the quoted value found by their name followed by @igaro.com."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.contact.js:88
+msgid "Lead Developers"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.contact.js:160
+msgid "The <b>Freenode #igaro</b> channel is used by the developers to bounce around new ideas."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.contact.js:143
+msgid "If nobody is around ask your question and check back later for a reply."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.contact.js:89
+msgid "Priority Service"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.contact.js:150
+msgid "The priority service is offered to those requiring a guaranteed service level."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.contact.js:157
+msgid "Members receive a unique email address and a response within a pre-agreed time frame."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.contact.js:84
+msgid "Enquire"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.design.js:74
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:83
+msgid "Design"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.design.js:190
+msgid "Only the best frameworks can do away with HTML. No templates or MVC, instead consistency and staggering performance."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.design.js:273
+msgid "Igaro App used <b>no HTML templating</b>, meaning operations that cause performance penalties; getElementById, getElementsByClassName, getElementsByTagName, querySelector[all], wont slow down your app."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.design.js:391
+msgid "Until recently the trend was to decouple JavaScript from HTML using data binding (Angular) and later to redraw containers (React). Igaro goes one step further by directly associating HTML containers with JavaScript objects, in effect removing the need for HTML and shifting the style aspect over to smart CSS selectors."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.design.js:82
+msgid "Templates"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.design.js:349
+msgid "Igaro App has no template engine (you are free to use one if you must). Instead it uses the concept of routes to build partials (non-navable) and pages (navable). On the downside, Igaro App is less suited for development teams that use casual developers to do templating work."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.design.js:76
+msgid "DOM"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.design.js:315
+msgid "The <b>core.dom</b> module provides functionality and a manager (for blessed objects). These are used to cut down on repetitive DOM manipulation work and permit the creation of elements while setting attributes, events and insertion in one go."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.design.js:305
+msgid "The <b>mk</b> function creates elements, appends (or inserts before or after), sets content (which can be a language literal) or appends other elements into it, and sets the className or accepts a function to provide further control."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.design.js:357
+msgid "The module is little more than sugar for the native DOM API, which you are still recommended to use where it makes sense to do so. It doesn't aim to replace the API (aka jQuery), so there's no className manipulation - which is where you'd use the standard <b>Element.classList</b> API."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.design.js:99
+msgid "Next Chapter - Routes"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.events.js:76
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:82
+msgid "Events"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.events.js:173
+msgid "Igaro App's event management system tracks dependencies and propagates events up through parent objects."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.events.js:302
+msgid "<b>core.events</b> provides event management and a manager, which is used extensively by other modules to provide objects with an Event Emitter. This propagates events to parent objects, supports Promises, and tracks dependencies."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.events.js:78
+msgid "on"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.events.js:422
+msgid "This registers an event handle onto an emitter. It takes three arguments; the event name, a function, and an object literal. The object literal defines whether the event is prepended and which dependencies should be linked to the event. This allows you to 'bolt on' events to other objects' event emitters without worrying about memory release."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.events.js:84
+msgid "dispatch"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.events.js:219
+msgid "A dispatch may be sent with a value. If the object is a child 'car' of another object 'warehouse', the parent will also receive the dispatch."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.events.js:82
+msgid "remove"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.events.js:150
+msgid "This removes an event either by its registered function or a dependency."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.events.js:104
+msgid "The Event Emitter"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.events.js:320
+msgid "The code above demonstrates how to attach listeners to other objects event managers while retaining a dependency link. If the object <b>this</b> is destroyed, all event handles will be removed, including those on other event managers."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.events.js:104
+msgid "Event Termination"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.events.js:301
+msgid "An Event Emitter supports either a throw, a rejected Promise, or an object literal containing <b>{ stopImmediatePropagation:true }</b>. To prevent propagation through parents, return <b>{ stopPropagation:true }</b>."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.events.js:248
+msgid "The <b>asRoot</b> (see Bless) flag prevents a child event dispatching up to a parent. It is mostly used by instances as a parent has no need for these dispatches."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.events.js:94
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.security.js:80
+msgid "Example"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.events.js:324
+msgid "At the bottom of this page is an <b>instance.date</b>. If you change the timezone using the settings icon at the top it refreshes it's container element. This is accomplished by listening for the timezone change event on <b>core.date</b>."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.events.js:113
+msgid "Next Chapter - Security"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:77
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:86
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:93
+msgid "Widgets"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:153
+msgid "The highest performing Javascript framework - read to see what Igaro App offers you."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:151
+msgid "Igaro App comes with a stack full of widgets, and creating new widgets is easy!"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:97
+msgid "Same Space"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:223
+msgid "This example displays HTML elements within a common space using CSS3 effects to transition between each space. It's great for slideshows!"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:171
+msgid "This example contacts the Youtube API, which returns JSON. From it a video is loaded."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:96
+msgid "Fetch"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:96
+msgid "Make"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:97
+msgid "Model"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:96
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:96
+msgid "Type"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:92
+msgid "Table"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:146
+msgid "Dynamic tables with filtering. Custom filters are supported."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:92
+msgid "Lists"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:128
+msgid "Create dynamic lists without data binding!"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:103
+msgid "Move Elephant"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:102
+msgid "Form Validation"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:151
+msgid "Try entering an invalid currency denomination into the box below."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:96
+msgid "Deposit"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:105
+msgid "Transfer"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:99
+msgid "Invalid amount"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:101
+msgid "Must be positive"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:105
+msgid "Transaction Successful"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:103
+msgid "Rich Text Editor"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:126
+msgid "Full HTML based editing within the App."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:85
+msgid "Suppliers"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:99
+msgid "Acme Ltd is bankrupt."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:87
+msgid "Contractors"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:101
+msgid "Don is off sick, again."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:85
+msgid "Materials"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:108
+msgid "Were stolen yesterday evening."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:84
+msgid "Accounts"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:96
+msgid "Accordion"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.features.js:144
+msgid "Accordions can group items to reduce information overload."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.install.js:75
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.install.js:80
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:85
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.routes.js:90
+msgid "Install"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.install.js:180
+msgid "Install in one step. It's free, and you'll instantly have an app ready to modify. Prepare to be impressed!"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.install.js:139
+msgid "The following instructions assume a unix, linux or mac environment."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.install.js:169
+msgid "By installing Igaro App you are agreeing to the license under which this software is distributed."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.install.js:89
+msgid "Show Source"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.install.js:90
+msgid "Show License"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.install.js:152
+msgid "Make sure you have Node 5.8+ installed and then run the following in a terminal."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.install.js:78
+msgid "Boom!"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.install.js:227
+msgid "The build script uses recipes to cater for different environments and the app is now available on port %[0]. This will rebuild as you code."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.install.js:145
+msgid "That's it. Now read as much of the documentation as you need and dive in!"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.install.license.js:75
+msgid "License"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.install.license.js:74
+msgid "Igaro App"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.install.license.js:99
+msgid "Copyright (C) 2015 Andrew Charnley"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.install.license.js:158
+msgid "Third party modules (3rdparty.*) may be licensed under alternative open-source licenses."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.install.license.js:318
+msgid "This program is free software: you can redistribute it and/or modify it under the terms of the Lesser GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.install.license.js:311
+msgid "This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the Lesser GNU Affero General Public License for more details."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.install.license.js:211
+msgid "You should have received a copy of the Lesser GNU Affero General Public License along with this program. If not, see http://www.gnu.org/licenses/."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:100
+msgid "Igaro App JavaScript Framework"
+msgstr ""
+
+# comment here
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:111
+msgid "One \" Framework"
+msgid_plural "Two Things"
+msgstr[0] "One selection"
+msgstr[1] "Two selections"
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:237
+msgid "Igaro App is a powerful JavaScript framework for developing single page application websites (web-apps). Zero HTML, zero dependencies and beautifully engineered."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:111
+msgid "javascript, spa, app, html5, framework"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:123
+msgid "Welcome to <b>Igaro App</b> JavaScript Framework"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:170
+msgid "You can view the code behind any page in this app by clicking the curly bracket icon in the header."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:87
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.overview.js:80
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.routes.js:91
+msgid "Overview"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:87
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.js:76
+msgid "Showcase"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:99
+msgid "Insight"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:296
+msgid "HTML falters when used for declaring dynamic views in web-applications, and most JavaScript frameworks deal with this shortcoming by introducing sync and data binding overheads. Looking for an alternative?"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:85
+msgid "Basics"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:81
+msgid "Async"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:86
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.security.js:78
+msgid "Security"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:83
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.routes.js:74
+msgid "Routes"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:83
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.mobile.js:74
+msgid "Mobile"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:84
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.testing.js:75
+msgid "Testing"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:84
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:75
+msgid "Modules"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:105
+msgid "Documentation"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:201
+msgid "All Igaro App's modules are documented via JSDoc, but the online help is more exhaustive and comes with demos."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:80
+msgid "Forum"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:83
+msgid "Report"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:99
+msgid "Support"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.js:160
+msgid "Discuss ideas, get involved with Igaro App development, or seek help."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.locale.js:210
+msgid "Which framework offers multiple language, currency, country and timezone support without restarting it's core? Igaro App. And that's it."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.locale.js:335
+msgid "Igaro App provides <b>core.country</b>, <b>core.language</b>, <b>core.currency</b> and <b>core.date</b> (timezone offset) for seamless locale support. International recognized standards; ISO 3166.1, IETF and ISO 4217 are employed. Right-to-Left text is supported."
+msgstr "Igaro App provides <b>core.country</b>, <b>core.language</b>, <b>core.currency</b> and <b>core.date</b> (timezone offset) for seamless locale support. International recognised standards; ISO 3166.1, IETF and ISO 4217 are employed. Right-to-Left text is supported."
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.locale.js:82
+msgid "Selection"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.locale.js:306
+msgid "The users country is sourced from the OS/browser and from this the most likely language and currency is derived and selected. If a language is unavailable the numerator is tried, followed by the app default, and then the fallback, en."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.locale.js:158
+msgid "Dates are formatted using the user's timezone, which is also sourced from the browser."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.locale.js:264
+msgid "Locale can be set manually and is applied in realtime without any need to restart the app / refresh the page. Modules fire events on which other objects can register to reconfigure themselves."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.locale.js:94
+msgid "Translation (getText)"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.locale.js:363
+msgid "The build script extracts strings and metadata from source files and updates a standard .pot file. At the same time strings and metadata from .po files are embedded into the original translation object. The applicable string is pulled at runtime based upon the users current language choice."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.locale.js:201
+msgid "The example below shows a simple use case. The text inside the paragraph will automatically update if the user switches language."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.locale.js:148
+msgid "This text will be translated"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.locale.js:191
+msgid "All of gettext's features are supported including pluralization with language rulesets, comments and context switching."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.locale.js:177
+msgid "<b>core.language</b> provides ordered substitution support for %[n] (where n is an integer) placeholders."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.locale.js:99
+msgid "Next Chapter - Mobile"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.mobile.js:168
+msgid "Ready for all mobile devices, with outstanding performance and one codebase for all platforms."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.mobile.js:214
+msgid "Igaro App loads mobile and/or touch modules upon app load. It automatically detects the environment ensuring only relevant modules are loaded."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.mobile.js:294
+msgid "%[0] is utilized to access mobile device features such as camera, accelerometer and GPS. Many modules customise behaviour for native environments, such as <b>instance.toast</b> which switches to O/S popups."
+msgstr "%[0] is utilised to access mobile device features such as camera, accelerometer and GPS. Many modules customise behaviour for native environments, such as <b>instance.toast</b> which switches to O/S popups."
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.mobile.js:92
+msgid "Embedding Resources"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.mobile.js:180
+msgid "Compass SASS is included. Base64'ing images and fonts into CSS allowing app's to perform with a native feel."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.mobile.js:81
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:79
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.todomvc.js:77
+msgid "Demo"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.mobile.js:89
+msgid "Touch & Gestures"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.mobile.js:155
+msgid "For touch screens, <b>3rdparty.fastclick</b> removes the browser 300ms click delay."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.mobile.js:191
+msgid "Gesture events are available via <b>3rdparty.hammer</b>. If you have a touch screen, try some actions in the box below."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.mobile.js:113
+msgid "A touch screen has not been detected."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.mobile.js:118
+msgid "Next Chapter - Compatibility"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.3rdparty.fastclick.js:191
+msgid "This library works around the 300ms browser click delay. This module is included when running under a local file system / Cordova."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.3rdparty.hammer.js:142
+msgid "This library provides touch events and is loaded when a touch screen is detected."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.3rdparty.moment.js:297
+msgid "Moment is a date manipulation and display library. The library has been slightly modified to allow for exporting the library into the Igaro App namespace. Ideally you should access the functionality of this module through instance.date."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.conf.app.js:208
+msgid "This file configures other modules such as setting supported locale, links events, registers route handlers and customizes the Igaro App framework."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.country.js:213
+msgid "Provides country switching and related functionality. Supported countries are set via an API or configuration file. Uses ISO 3166-1. ENV code is stored."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.country.js:98
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.currency.js:98
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.language.js:98
+msgid "The code to match."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.country.js:129
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.currency.js:129
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.language.js:129
+msgid "Returns an object literal from the pool for a specified code."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.country.js:103
+msgid "The currently applied country code."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.country.js:119
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.currency.js:119
+msgid "Defines if the current ENV is automatically chosen."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.country.js:110
+msgid "A literal list of supported country codes."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.country.js:118
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.currency.js:118
+msgid "Resets the ENV to the automatically defined value."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.country.js:108
+msgid "Sets the currently applied country code."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.country.js:142
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.currency.js:142
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.language.js:138
+msgid "The code must exist in the current pool and is case sensitive."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.country.js:139
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.currency.js:139
+msgid "Defines whether the value should be saved. Default is true."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.country.js:101
+msgid "Sets the supported country codes."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.country.js:107
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.currency.js:107
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.language.js:107
+msgid "See conf.app.js for an example."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.currency.js:213
+msgid "Provides currency switching and related functionality. Supported currencies are set via an API or configuration file. Uses ISO 4217. ENV code is stored."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.currency.js:101
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.html.js:101
+msgid "The value to process."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.currency.js:126
+msgid "Takes a denomination and formats it to two decimal places."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.currency.js:104
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.language.js:104
+msgid "The currently applied currency code."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.currency.js:111
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.language.js:111
+msgid "A literal list of supported currency codes."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.currency.js:109
+msgid "Sets the currently applied currency code."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.currency.js:102
+msgid "Sets the supported currency codes."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.currency.js:131
+msgid "Parses each key on a literal replacing %[n] with any arguments."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.currency.js:163
+msgid "The first element is the object literal, Further elements correspond to the value of n."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.currency.js:102
+msgid "The value to validate."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.currency.js:120
+msgid "Allow negative values. Default is false."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.currency.js:162
+msgid "Takes a denomination and returns true if the value has no fraction or is of two decimal place."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.date.js:237
+msgid "Provides date and timezone functionality. Date strings should be ISO 8601 formatted. The timezone is determined from the system clock but can be overridden. ENV code is stored."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.date.js:95
+msgid "The year value."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.date.js:96
+msgid "The month value."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.date.js:127
+msgid "Returns the amount of days within a month for a given year."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.date.js:98
+msgid "The year to check."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.date.js:113
+msgid "Returns true if the specified year is a leap."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.date.js:122
+msgid "Currently applied timezone offset in minutes from GMT."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.date.js:126
+msgid "Defines whether the ENV has been determined automatically."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.date.js:133
+msgid "Resets the timezone offset to the automatically determined value."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.date.js:93
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.date.js:93
+msgid "Sets the timezone offset."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.date.js:136
+msgid "Amount of minutes from GMT. Use null for system default."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.date.js:135
+msgid "Defines if the value should be stored. Default is true."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.date.js:139
+msgid "The value to convert. May also be a string respresentation."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.date.js:113
+msgid "Returns a date object in the user's timezone."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.debug.js:121
+msgid "Handles debug messages and fires an event when one comes in."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.debug.js:115
+msgid "Defines whether the framework is in debug mode."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.debug.js:113
+msgid "True for enabled, False for disabled."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.debug.js:183
+msgid "A generic error handling mechanism for functions that don't do it themselves. Useful for hyperlink invoked commands."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.debug.js:106
+msgid "The error object or value."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.debug.js:100
+msgid "The scope path name."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.debug.js:101
+msgid "The scope event name"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.debug.js:96
+msgid "The module name."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.debug.js:95
+msgid "The event name."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.debug.js:175
+msgid "A value to pass to functions registered to receive the debug event. You can pass anything here."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.debug.js:150
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:158
+msgid "Appends a debug event to storage and fires a core.debug event containing the data."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:210
+msgid "Provides DOM helpers to reduce repetitive coding. Automates dependency management and provides object destruction cleanup. Does not try to be JQuery."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:141
+msgid "Appends an element into another optionally pre/appending before a sibling."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:130
+msgid "The container for the element to be appended into."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:122
+msgid "An element or array of elements to append."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:133
+msgid "Optional parameters to insert before or after a sibling."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:180
+msgid "Specify a sibling element to insert after. Can also be a blessed object with a container element."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:181
+msgid "Specify a sibling element to insert before. Can also be a blessed object with a container element."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:119
+msgid "Empties an element of any child elements or content."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:105
+msgid "The element to empty."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:112
+msgid "Shortcut for accessing the body>head element."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:119
+msgid "Returns the computed offset position for an element."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:105
+msgid "The element to check."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:101
+msgid "Contains x and y keys."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:143
+msgid "Destroys an element, all child elements, and dereferences from dependencies."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:106
+msgid "The element to remove."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:154
+msgid "If true, the element isn't removed from it's parent. Default is false."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:115
+msgid "Returns whether an element is hidden or visible."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:114
+msgid "True for hidden, False for visible."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:84
+msgid "Hides an element."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:104
+msgid "The element to hide."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:157
+msgid "Set to false to invert the operation (show the element). Default is true."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:160
+msgid "Creates and appends an element, optionally setting parameters and appending siblings into it."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:198
+msgid "The tag name of the element to create, i.e 'div'. A type can also be set by use of brackets, i.e 'input[password]'"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:448
+msgid "Appending information. Accepts either an element or an object with a container attribute linked to an element. For the later, can take insertBefore and insertAfter attributes to define the ordering of how the element is to be added. These should be either elements or objects with a container attribute linking to one. This allows you to specify a blessed element."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:195
+msgid "Defines the content to be appended into the element.Accepts an element, an array of elements, a string, or an "
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:227
+msgid "May be a string to apppend to the element's className or a function. If the later, it will be called with the this keyword set to the element."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:108
+msgid "Removes an element from it's parent node."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:145
+msgid "Sets the content of an element, correctly handing dependencies in the process."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:199
+msgid "The element of which to set the content. It can also be an object with a container attribute (i.e instance widget)."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:164
+msgid "Element, elements (in Array), string or language literal to use for the content."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:231
+msgid "By default the element will be purged of content prior to new content being written. If this value is true, the element will be cleared (shallow)."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:163
+msgid "Sets the placeholder value of an element. This is usually required for multi-language support."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:103
+msgid "The element to set."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:115
+msgid "A string or a language literal."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:137
+msgid "Sorts child elements inside an element based on content or a function."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:170
+msgid "Defines the node elements to be sorted. If not set, the root element should be instead."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:303
+msgid "If undefined uses the content of the child element, or define a custom function to use instead. The function will be passed the element as the first argument and follows the standard Array.sort() for legal return values."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:128
+msgid "Defines whether the order should be reversed."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:175
+msgid "Defines the root element for which to traverse for children. This or nodes must be supplied."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:221
+msgid "Defines whether the compiled list should be sliced. Accepts two values like Array.slice(). Use this to stick elements to the top of a sort"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:197
+msgid "Shows an element. Element must have been previously hidden with .hide(). Overriding styles and className strings are unsupported."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:104
+msgid "The element to show."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:128
+msgid "Toggles an elements visibility based on it's current status.."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.dom.js:119
+msgid "Calls .show() if hidden, or vice-versa."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.events.js:112
+msgid "Dispatches events and manages handles to functions."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.events.js:178
+msgid "Removes events on all event emitters where the registered function or a dependency matches the supplied value."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.events.js:102
+msgid "An object or function."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.events.js:163
+msgid "Contains a root Emitter used for system wide events. The root Emitter is a Manager (see below)."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.events.js:96
+msgid "The event name.."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.events.js:132
+msgid "An object or value to pass on to each event handler."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.events.js:414
+msgid "Triggers registered event handlers. A handler may return an object literal or a Promise, which in turn may return { stopPropagation:true } to prevent the event firing up the chain or { stopImmediatePropagation } to prevent the event reaching further sibling handlers. If { removeEventListener:true } is returned the event handler will be removed."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.events.js:167
+msgid "The event name. An array can be passed instead to add a handler to multiple events."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.events.js:121
+msgid "Function to execute on event trigger."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.events.js:208
+msgid "Defines whether the event handler should be added to the beginning of the array. Use if the function may cancel propagation."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.events.js:195
+msgid "An event can be linked to dependencies. Use this to automatically clear up handlers when objects are destroyed."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.events.js:137
+msgid "The event manager is returned allowing for linked actions."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.events.js:121
+msgid "Registers a callback using the module name and event."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.events.js:115
+msgid "The function previously registered."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.events.js:225
+msgid "The event name to be used to lookup the function. This makes the lookup faster and prevents the function being deregistered from all event names."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.events.js:111
+msgid "Deregisters a function from the event pool."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.file.js:112
+msgid "Provides file related functionality and formatting."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.file.js:104
+msgid "The filename to process."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.file.js:97
+msgid "Returns a filename extension."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.file.js:102
+msgid "The filesize in bytes."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.file.js:121
+msgid "Returns a formatted file size, i.e 12Kb, 35Mb, 120Gb."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.html.js:112
+msgid "Provides HTML related functionality and formatting."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.html.js:117
+msgid "Converts HTML special characters into print code."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.html.js:110
+msgid "Formats special characters into HTML code."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.html.js:94
+msgid "Strips HTML from a string."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.language.js:213
+msgid "Provides language switching and related functionality. Supported languages are set via an API or configuration file. Uses IETF Tags. Env code is stored."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.language.js:119
+msgid "Applies a currency code to the current environment."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.language.js:97
+msgid "Sets supported currency data."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.language.js:365
+msgid "An object containing translation data by way of attributes; key, plural, context and comment, and a dictionary if the builder embedded one or an API returned one. Note: the builder will only extract strings where the object is wrapped in double brackets, so the call must match .tr((({"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.language.js:102
+msgid "A pluralization value."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.language.js:161
+msgid "Selects the correct translation from a dictionary for a key, context and pluralization value."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:144
+msgid "Provides Igaro's bless mechanism and helper functions for objects such as Promises."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:156
+msgid "Pushes a value into an array either at the end or before/after an already appended value."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:103
+msgid "The array to manipulate."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:118
+msgid "The value to use for the insertion."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:149
+msgid "If defined, the insertion will occur after the index of the value."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:150
+msgid "If defined, the insertion will occur before the index of the value."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:127
+msgid "Adds the item at the beginning of the array."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:841
+msgid "Configures an object with additional attributes and functionality based on current object attributes and supplied arguments. This function must be accessed with .call, with the first argument being the object to be blessed. Several arguments. This function does not return a value, but for the purposes of documentation the return value of this function describes the features that may be added to an object, the list of which depends on the pre-attributes of the object and the arguments supplied to this function call. OBJECT has the value read from the object. PARAM means the value is read from the argument literal passed to bless(). Both OBJECT & PARAM mean both locations are tried (in stated order). Most PARAM attributes are added to the object using the same name."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:245
+msgid "OBJECT - Defines whether the object should act as Root even if it has a parent. One such use is the event manager uses this to prevent events propagating further."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:270
+msgid "OBJECT - Creates arrays on the object using the keys of this object. The key name should match that of the child object bless name. When a child is destroyed it is removed from the array."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:121
+msgid "OBJECT - A DOM element for the object."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:215
+msgid "A destructor method that automatically cleans the object for memory collection, destroys any child objects and removes dependencies."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:176
+msgid "Switches the object's state. This is mainly used to prevent DOM data entry and events firing."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:149
+msgid "Defines if the object should be disabled. Default is true."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:263
+msgid "The object state. No object properties are blocked, it is merely an indication which other methods can use to switch logic. Default is false. Not to be confused with .isDisabled()."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:215
+msgid "A shortcut to app['core.dom'].hide() using the objects container element. This function is only added if the object has a container."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:195
+msgid "PARAM - Defines if the object should be hidden. Only applicable if the object has a container. Default is false."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:208
+msgid "Returns whether the object is disabled, propogating the check to the parent object. This is not to be confused with .disabled"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:498
+msgid "OBJECT - Managers use the blessed values to customize their operation and response. All blessed objects are given a core.debug, core.dom, core.event and core.object manager. Additional managers are loaded by defining an array, with each element being an array containing a name to use for accessing the manager and the providing object, i.e to load a store manager use; this.managers = [['store',app['core.store']]."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:232
+msgid "OBJECT - A name used to define the object type. If the object is a singleton (route) then this value is unique, else it is shared across object type."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:242
+msgid "OBJECT - Normally this is not defined as the path is otherwise automatically build by iterating through the parent objects. It is a collection of .name values."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:230
+msgid "PARAM|OBJECT - Defines how the object relates to another. This is used to define a parent-child relationship. This is accessible via object.parent."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:215
+msgid "A shortcut to app['core.dom'].show() using the objects container element. This function is only added if the object has a container."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:174
+msgid "PARAM - Defines a stash object to store on the object. This is accessible via object.stash."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:179
+msgid "Creates a new object (by default from an instance module), automatically loading a providing module if required."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:186
+msgid "The first argument may also be a string, in which case the value represents the name of the object to create. "
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:158
+msgid "Defines the name of the object. Usually this matches the x in instance.x.js"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:180
+msgid "By default the module where the object resides is 'instance.'. Specify a custom module name here."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:195
+msgid "The repo to use for loading the module (if it is currently unloaded). See instance.amd for further information."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:135
+msgid "Object instantiation attributes. Usually an object literal."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:144
+msgid "Debounces an operation by reference and delay. Useful for form inputs fields."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:133
+msgid "A unique reference, typically the object being debounced."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:219
+msgid "The delay to debounce, typically before the Promise is resolved. This defaults to 300 (ms) which is typical for input[text] and similar fields."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:168
+msgid "Reduces an array of Promises synchronously. Returns an array containing the output from each Promise."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:111
+msgid "The array of Promises to reduce."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.object.js:121
+msgid "The function to call for each Promise."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:368
+msgid "Provides a Router framework to manage navigation and storage of routes. A route represents a resource and may contain child routes. Routes can be loaded from API & file servers transparently to the user and don't necessarily correspond to the URI that the user sees. They may form a page or a partial on it."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:174
+msgid "An identifier 'x' to use for the manager, which will be accessible under .managers[x]."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:122
+msgid "The module containing the manager."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:208
+msgid "Because a route is self blessed, bless managers other than the default must be added manually. See core.object for further information."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:240
+msgid "The name of the route to load. The source provider decides how to handle this. For file based routes typically the name corresponds to the sub resource."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:129
+msgid "Loads the route without user indications."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:363
+msgid "Attempts to load a child route. Any route that goes out of scope has a leave event fired on it. If a route is loaded and/or comes into scope an enter event is fired on it. An init event is fired on it only when it is loaded. Use these events to pause timers, set-up the view and keep state."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:120
+msgid "Adds routes by calling .addRoute() in sequence."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:238
+msgid "Reduces an array of promises and adds container elements (if any) using the reducing order. For an example see file route.main.js. If a promise rejects it is ignored."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:122
+msgid "The array of promises to execute."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:189
+msgid "The container for which to append the returned values into. Defaults to the route's wrapper Element."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:172
+msgid "Determines if a view will be automatically shown if requested via user navigation. Default is true."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:141
+msgid "Inline CSS provided by the route's provider. Automatically appended."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:209
+msgid "If a view is cached and it's children are displayed they will be automatically hidden when the view is reshown. Set to false to disable."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:174
+msgid "When a child view is displayed the wrapper of it's parent is usually hidden. Set to false to disable."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:136
+msgid "By default a route's wrapper is shown. Set to false to disable."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:148
+msgid "By default a route is cached and retains state. Disable by setting to true."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:105
+msgid "Returns a Route matching a name."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:117
+msgid "Handling name for the Route."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:105
+msgid "Hides all child route containers."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:113
+msgid "A collection of meta data for the route."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:134
+msgid "A uniquely identifying name. Not to be used for user display."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:220
+msgid "References core.events.on() but registers the route as a dependency to reduce code overhead. For blessed objects, use the .extend() method instead."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:141
+msgid "Represents the URL path for this route, including captured URI data."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:117
+msgid "Takes an Array of Routes in which to destroy."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:103
+msgid "A pool of loaded child routes."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:283
+msgid "When a route has current scope the window scroll position will be saved to this value. If the user navigates away and returns later they'll be placed at the same position they left off. Set to false to disable."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:200
+msgid "Same as the router .to() but used for relative navigation from the path of the route it is called on. See router .to() for args."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:208
+msgid "Represents the URL path once URI resources have been removed from it. This makes it useful for building a user navigation location bar."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:213
+msgid "The URI data extracted for this route. It is a cache for .captureUri(), which should be run by the route when it loads to capture it's data."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:201
+msgid "The container element contains a wrapper and normally view elements append into it. Child routes go directly into the container."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:101
+msgid "Appends a route provider to the pool."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:99
+msgid "Contains the configuration."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:206
+msgid "Used to fetch the resource from a fileserver or API. The function should return a Promise containing the attributes specified."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:115
+msgid "The style for the route."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:220
+msgid "The route setup function responsible for building a view. See any route.* file for an example. The function may return a Promise."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:135
+msgid "Determines if the provider is a handler for a resource."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:119
+msgid "The path of the requested resource."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:187
+msgid "A base route with it's container most likely appended into that of the root route. The base represents the root of the URL."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:133
+msgid "References the last successfully loaded route from any call to .to()."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:151
+msgid "Determines whether the current route is that of the base route, aka at root of the URL."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:130
+msgid "Pool of route providers. Note: the discoverer traverses backwards."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:209
+msgid "A root route with it's container appended into document.body. The root will normally have common header, main and footer routes appended into it."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:213
+msgid "Values represent a URL path which is handled by a source provider. The path may contain URI data which will be parsed out by route logic."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:228
+msgid "Search data to append after ? in the URL. This can be a function to compile the value dynamically or an array which will be joined using the = operator."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:185
+msgid "Hash data to append after # in the URL. This can be a function to compile the value dynamtically or a string."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:164
+msgid "Supply a state to push into the browsers history. This is data which moves with the URL."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.router.js:387
+msgid "Loads multiple resources by way of a URL beginning at the base route and enumerating through. Used for user actioned navigation. The current route can abort the load via its leave event if it returns { abort:true }. Note that rather than specify all arguments a single URL object provided by core.url may be passed instead."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.status.js:96
+msgid "A very simple status event emitter."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.status.js:118
+msgid "Object to pass onto the event handler."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.store.js:129
+msgid "Storage routines for cookie, localStorage, sessionStorage and API's."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.store.js:154
+msgid "Links to the object in the provider array which provides the default storage routine."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.store.js:109
+msgid "Retrieves a value from a storage system."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.store.js:96
+msgid "The id to match."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.store.js:177
+msgid "Defines the provider. Use 'cookie', 'local', 'session' or a custom provider. Default is 'local'."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.store.js:124
+msgid "Returns a provider by it's unique id, such as 'cookie'."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.store.js:160
+msgid "Installs and returns a new provider. Typically this is used for adding API storage methods."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.store.js:117
+msgid "A name to use as a unique identifier."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.store.js:120
+msgid "The getter routine for the provider."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.store.js:139
+msgid "The unique id of the value to be retrieved."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.store.js:120
+msgid "The setter routine for the provider."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.store.js:205
+msgid "The value to be stored. Typically a provider will delete any matching key if this value is undefined or null."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.store.js:244
+msgid "Defines a date/time when the value to be stored should expire. Typically if no value is supplied the provider will store the value indefinitely."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.store.js:153
+msgid "A pool for storage mechanisms. Cookie, localStorage and sessionStorage are built in."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.store.js:102
+msgid "Saves a value to a storage system."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.store.js:94
+msgid "The id to use."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.store.js:129
+msgid "The value to store. Undefined removes the record."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.store.js:131
+msgid "Specify a value to expire the data at a set time. "
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:104
+msgid "Provides url and uri related functionality."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:161
+msgid "A URL object containing URI/Search/Hash and with functions to build a string representation."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:88
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:91
+msgid "URI pieces."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:98
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:102
+msgid "Text after the URL #."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:109
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:112
+msgid "Key/value pairs after the URL ?."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:135
+msgid "Converts the object into a URL string used for navigation."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:130
+msgid "Returns a new object representation for individual components."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:97
+msgid "The URL to parse."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:125
+msgid "Returns a new object representation for the supplied URL."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:124
+msgid "Returns a new object representation for the current URL."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:126
+msgid "The URL to parse. Defaults to the current URL."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:110
+msgid "Parses a string for params after the hash."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:131
+msgid "Optional URL to parse. Defaults to the current URL."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:124
+msgid "Parses the path URI within a URL into individual pieces."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:99
+msgid "The name to search."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:159
+msgid "Parses a string for params after the hash and on match of a specific key returns the value."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:97
+msgid "The name to pull."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.core.url.js:168
+msgid "Parses a string for params after the question mark and on match of a specific key returns the value."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.accordion.js:202
+msgid "Creates a list that can expand and collapse nodes. Useful to condense information for when navigation is important or where space is limited."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.accordion.js:95
+msgid "Expands the section."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.accordion.js:97
+msgid "Collapses the section."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.accordion.js:203
+msgid "Pass true to allow more than one section to expand. If false (default) then open sections contract prior to another section opening."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.accordion.js:136
+msgid "Initial sections to create. Calls .addSections() with the list."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.accordion.js:105
+msgid "Adds a new section to the accordion."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.accordion.js:129
+msgid "A language literal, content or other Element."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.accordion.js:120
+msgid "Sets the initial mode to be expanded."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.accordion.js:113
+msgid "A language literal or string."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.accordion.js:147
+msgid "Calls .addSection() with each item in the array and returns the added sections."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.accordion.js:90
+msgid "Collapses all sections"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.accordion.js:135
+msgid "Expands all sections. multiExpand must be enabled for this to work."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.amd.js:172
+msgid "Asynchronously loads modules and there dependencies using XHR and appends Igaro App modules into the namespace."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.amd.js:187
+msgid "The repository (i.e URL) from which to load files. Defaults to the location where the application was loaded from."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.amd.js:136
+msgid "Modules to load. Each is represented by an object in the array."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.amd.js:131
+msgid "The name of the module excluding any file extension."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.amd.js:170
+msgid "By default a folder /js will be appended to the repo location. Pass true to disable this."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.amd.js:169
+msgid "The module will use the default or last loaded module repo value unless this is defined."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.amd.js:213
+msgid "A module usually defines its dependencies, but they can also be specified here. A dependency follows the same format as this object."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.amd.js:173
+msgid "Supply a version to append to the request URL. This is in addition to the app build version."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.amd.js:200
+msgid "Callback when progress is made. It includes workers for the request and child dependencies (and any dependencies they require)."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.amd.js:246
+msgid "Any of the instantiated attributes can be passed here to update the instance before executing the Promise, else the default or previously set values will be used."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.bookmark.js:127
+msgid "Provides a simple bookmark toolbar for the major social platforms."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.bookmark.js:118
+msgid "The URL to bookmark. Defaults to the current."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.bookmark.js:116
+msgid "Title to pass over to the external service."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.bookmark.js:111
+msgid "Container to append the instance into."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.bookmark.js:137
+msgid "Sets the URL and optional title to pass over to the external service."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.bookmark.js:126
+msgid "URL to bookmark. Defaults to the current."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.bookmark.js:104
+msgid "Title to pass over."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.date.js:202
+msgid "Provides a managed date with automatic display and timezone conversion. By default uses 3rdparty.moment.js for formatting to the user locale."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.date.js:88
+msgid "The date to use."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.date.js:142
+msgid "The format used to stringify the date object. See MomentJS for codes."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.date.js:163
+msgid "For relative time, will show a countdown when the delta is less than or equal to this value."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.date.js:162
+msgid "For relative time,  will show a countup when the delta is less than or equal to this value."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.date.js:191
+msgid "By default the timezone offset will be read from core.date.js. To set a specific timezone specify the +- minutes here."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.date.js:109
+msgid "Set to true to enable relative time."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.date.js:82
+msgid "Sets the date."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.date.js:100
+msgid "+- 15 minute blocks."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.date.js:132
+msgid "By default the offset is stored. Use true to disable."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.date.js:112
+msgid "Formats the stringified version of the date."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.date.js:122
+msgid "The formatting code to pass to the plugin."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.date.js:137
+msgid "Begins a countdown/count up (if the time difference is within range)."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.form.validate.js:197
+msgid "Provides form validation with native support for number, min, max, email, tel, pattern, required and length. Custom rules are supported."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.form.validate.js:124
+msgid "The amount of errors to show at once. Default is 1."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.form.validate.js:122
+msgid "A form element containing the inputs to validate."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.form.validate.js:144
+msgid "Defines whether the validation should run in realtime. Default is true."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.form.validate.js:144
+msgid "If validation passes the form will execute this function on submission."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.form.validate.js:125
+msgid "The routine to run on any form element value change."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.form.validate.js:120
+msgid "The element which failed validation."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.form.validate.js:131
+msgid "A message pertaining to the validation failure."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.form.validate.js:263
+msgid "Custom rules in addition to basic rules that will be enumerated through to check if the form is valid. A rule may be asynchronous. When invalid the function should return a language literal."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.form.validate.js:156
+msgid "Adds onInput event listeners to text inputs. Use after adding new elements to the form."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.form.validate.js:156
+msgid "Runs the validation rules and displays validation messages on those elements that fail."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.form.validate.js:107
+msgid "A valid pass is denoted by true."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.form.validate.js:112
+msgid "Clears the form of any validation messages."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.form.validate.js:144
+msgid "Update the validation routine by applying a new function to this attribute."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.form.validate.js:111
+msgid "Hooks up a form to the validation process."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.jsonp.js:137
+msgid "Asynchronously fetch JSON from a resource without hitting CORS restrictions."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.jsonp.js:91
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:91
+msgid "Get JSON"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.jsonp.js:142
+msgid "For when the resource requires a callback name other than 'callback'."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.jsonp.js:94
+msgid "The resource to load."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.jsonp.js:111
+msgid "Aborts the operation (if currently running."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.jsonp.js:87
+msgid "Begins the request."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.jsonp.js:157
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.oauth2.js:157
+msgid "Any of the instantiated data can be set here to update the XHR before it is sent."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.list.js:120
+msgid "Provides an array like list mapped to a UL and LI elements."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.list.js:137
+msgid "Initial items to use for the list. See addItem() for attributes."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.list.js:95
+msgid "Creates a new Item object."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.list.js:143
+msgid "The content to supply to the DOM creator (see core.dom.mk)."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.list.js:98
+msgid "Calls .addItem() in sequence."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.list.js:100
+msgid "Items to insert."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.list.js:119
+msgid "Moves an object in the list by a number of places."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.list.js:111
+msgid "The object in the list to move."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.list.js:142
+msgid "The number of places to move the item in the list up or down.."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.modaldialog.js:165
+msgid "Provides asynchronous dialog screens which force a user action. A replacement for alert() and confirm()."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.modaldialog.js:142
+msgid "Resolves when the user selects an action. The action is returned."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.modaldialog.js:95
+msgid "Displays a list of actions."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.modaldialog.js:126
+msgid "A language literal to use for the message."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.modaldialog.js:158
+msgid "Specifies actions to be included. A cancel action will always be appended."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.modaldialog.js:135
+msgid "A language literal to use for the action."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.modaldialog.js:93
+msgid "Displays an alert dialog."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.modaldialog.js:104
+msgid "Displays a confirm or cancel dialog."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.navigation.js:139
+msgid "Provides a universal navigation menu system using standard UL and LI elements."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.navigation.js:118
+msgid "A function to run when an Option is selected."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.navigation.js:104
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.navigation.js:105
+msgid "Calls .addOption() sequentially."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.navigation.js:96
+msgid "A menu contains option objects."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.navigation.js:100
+msgid "Adds an option to the menu."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.navigation.js:115
+msgid "Sets the status to active."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.navigation.js:206
+msgid "Sets the Element href, which may be used for display/seo purposes or actual navigation by setting onClick to open it."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.navigation.js:144
+msgid "If specified, will override the parent onClick handler."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.navigation.js:130
+msgid "Adds a label to the option's DOM element."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.navigation.js:146
+msgid "An option manages the selection of a DOM element and an optional sub menu object."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.navigation.js:99
+msgid "Adds a menu to the Option."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.navigation.js:145
+msgid "A presupplied list of options and optional submenu items."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.navigation.js:134
+msgid "A function to run when an option is selected."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.navigation.js:109
+msgid "Makes an option an active selection."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.navigation.js:132
+msgid "If the Option is disabled this will have no effect."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.oauth2.js:195
+msgid "Provides a Oauth2 credential mechanism for login services. Note: the demo asks for a token, but this can be automated (see /security)."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.oauth2.js:160
+msgid "A provider's oauth2 login page. Use [DEVID], [CALLBACKURL] and [SCOPE] to embed params."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.oauth2.js:185
+msgid "A URL to load once access is granted. This must fire a postMessage event containing the URL and should be blank."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.oauth2.js:183
+msgid "This identifies you to the provider. Typically you register your App with a provider and they provide this key."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.oauth2.js:181
+msgid "A provider may require you to define a scope which defines what access privileges you are seeking to attain."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.oauth2.js:128
+msgid "The name of the token to extract from the callback URL."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.oauth2.js:174
+msgid "Begins the authentication process. Any of the instantiation attributes can be passed to update the object."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.oauth2.js:114
+msgid "Defines whether the oauth2 process is in situ."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.pagemessage.js:109
+msgid "Provides a styled message for display on a view."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.pagemessage.js:121
+msgid "Used to retain a hidden state, where applicable."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.pagemessage.js:116
+msgid "Allow the message to be permanently hidden."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.pagemessage.js:108
+msgid "A language literal to be displayed."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.pagemessage.js:169
+msgid "Defines the style. Choose between; warn, info, error, default, success and ok, or make your own."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.rte.js:135
+msgid "Provides data input via a rich text formatted display and html conversion."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.rte.js:119
+msgid "An initial value to insert into the container."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.rte.js:148
+msgid "A callback function to be triggered upon data change. Returns the raw data."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.rte.js:161
+msgid "Appends a new panel (plugin) into the RTE view allowing to expand on the basic functionality."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.rte.js:115
+msgid "A language literal for the tab."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.rte.js:132
+msgid "A div to be displayed when the tab is activated."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.rte.js:153
+msgid "Defines whether the panel should be set as current. Default is false."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.rte.js:136
+msgid "Directly executes a command on the WYSIWYG container. See ECMA spec."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.rte.js:112
+msgid "Command to pass to the RTE."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.rte.js:124
+msgid "Attribute to pass with the RTE command."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.rte.js:116
+msgid "Returns the current HTML trimmed of white space."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.rte.js:112
+msgid "Inserts HTML at the current cursor position."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.rte.js:101
+msgid "Element containing the raw code."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.rte.js:118
+msgid "Element (contentEditable) containing the WYSIWYG."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.samespace.js:179
+msgid "Provides a means for multiple elements to occupy the same space on a page with navigation and CSS3 transition effects."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.samespace.js:155
+msgid "In slideshow mode this is the delay between transitions, measured in milliseconds."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.samespace.js:152
+msgid "Set to true to loop when the navigation cycle reaches the end. Default is true."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.samespace.js:92
+msgid "Calls .addSpaces()."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.samespace.js:145
+msgid "Auto starts the automated transitioning between spaces. Default is false."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.samespace.js:155
+msgid "By default each space's canvas background is set to black. Supply true to disable."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.samespace.js:91
+msgid "Creates a Space object."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.samespace.js:98
+msgid "Calls .addSpace() in sequence."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.samespace.js:164
+msgid "Navigation controls. See instance.samespace.css for customizing how and when this is displayed."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.samespace.js:117
+msgid "Stops the automated transitioning between spaces."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.samespace.js:118
+msgid "Begins the automated transitioning between spaces."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.samespace.js:89
+msgid "Navigates to a space."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.table.js:109
+msgid "Creates a table with header,body,footer objects."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.table.js:202
+msgid "A search row is always added to the body. Use .addColumn() to insert blank column or tbl.addSearchColumn() to insert a search column."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.table.js:121
+msgid "Adds a search column to the built in search row."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.table.js:187
+msgid "The DOM Element control or similar which takes input and calls .searchExec() to perform the search."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.table.js:185
+msgid "On .searchExec(), this function is passed the column and should return true if a match is found."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.table.js:111
+msgid "Calls .addSearchColumn() sequentially."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.table.js:109
+msgid "Calls .Domain.addRow() sequentially."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.table.js:189
+msgid "Executes the search mechanism. A column will only be searched if it has a .searchFn() function. See .addSearchColumn()"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.table.js:98
+msgid "A row object for a Domain object."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.table.js:96
+msgid "Adds a Column to a Row."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.table.js:136
+msgid "Appends a language literal, DOM element or text."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.table.js:105
+msgid "Calls .addColumn() sequentially."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.table.js:144
+msgid "Represents a header, body or footer object, which in turn contains Row objects."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.table.js:105
+msgid "Adds a Row object to the Domain."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.table.js:139
+msgid "Inserts columns sequentially. See Row.addColumn()."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.table.js:102
+msgid "Calls .addRow() sequentially."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.toast.js:160
+msgid "Provides a popup notification message using native OS features where available with a CSS fallback."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.toast.js:139
+msgid "Language literal containing the message to display. Keep it short."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.toast.js:134
+msgid "Currently only long and short are supplied. Default is short."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.toast.js:192
+msgid "Used to define where the message is displayed. Default is bottom center. Native toast's may not permit position change."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:117
+msgid "Asynchronously fetches and returns data from a resource."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:183
+msgid "Defines whether the content-type header returned by the transaction should match a particular value, i.e 'json'."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:165
+msgid "An object literal of headers to be sent. May be a function to attain values on point of call."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:92
+msgid "Calls .applyForm()."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:184
+msgid "Prevents dispatch of the execution event which in turn prevents user awareness icons/animation (where available)."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:178
+msgid "The resource, i.e URL, to load. Note that you can also specify this instead of the configuration literal."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:95
+msgid "Enables CORS over XHR."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:171
+msgid "An object literal of name/value pairs to sent. May be a function to attain values on point of call."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:201
+msgid "Aborts the XHR operation (if it is currently running). WARNING: some browsers such as IE8 will not allow an aborted XHR to be reused."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:116
+msgid "Defines whether the last transaction was aborted."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:104
+msgid "Indicates if a response was received."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:149
+msgid "Handles a request. You may wish to use one of the shortcuts (.get, .post) instead."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:120
+msgid "A valid HTTP method such as GET or POST"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:130
+msgid "Any of the instantiating options can be set here."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:210
+msgid "Sends a request. You shouldn't need to use this directly as it's mainly for .exec(). Use .exec() or one of the shortcuts (.get, .post) instead."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:195
+msgid "Enumerates over a form and caches the values to be sent. If the XHR is resent you must re-run this to send modified form data."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:202
+msgid "A form to send. Element values will be enumerated once allowing you to keep the same values on resend. Call again to refresh."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:139
+msgid "Defines whether the last transaction failed due to a connection failure."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:105
+msgid "Sends a DELETE command to the server."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:163
+msgid "Any of the instantiated properties can be set here to update the XHR before it is sent."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:103
+msgid "Sends a HEAD command to the server."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:181
+msgid "A literal containing headers to be sent with the transaction. May be a function to attain values on point of call."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:102
+msgid "Sends a GET command to the server."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:107
+msgid "Sends an OPTIONS command to the server."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:103
+msgid "Sends a POST command to the server."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:101
+msgid "Send a PUT command to the server."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:105
+msgid "Sends a TRACE command to the server."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:199
+msgid "A literal containing headers to be sent with the transaction. May also be a function for attaining values on point of call. For post"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:123
+msgid "Enable CORS over XHR. Usual browser limitations apply."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.instance.xhr.js:110
+msgid "A reference to the XMLHttpRequest object."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:142
+msgid "All main respository module documentation can be found on this page."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:90
+msgid "Igaro Repository"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:107
+msgid "View on Github"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:115
+msgid "Appends a className onto the container."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:183
+msgid "A container in which to append the new object's container. May be an Element or an object with a container."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:154
+msgid "Inserts the new object's container at the beginning of the specified container."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:208
+msgid "Inserts the new object's container after the index of a specified object. The object can be an Element or an object with a container."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:216
+msgid "Inserts the new object's container before before the index of a specified object. The object can be an Element or an object with a container."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:150
+msgid "Inserts any container and the object into the beginning of parent array(s)."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:175
+msgid "Inserts any container and the object into parent array(s) after the index of a specified object."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:176
+msgid "Inserts any container and the object into parent array(s) before the index of a specified object."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:190
+msgid "Call this to destroy the object. Cleanup (dependencies, DOM container, events, parent array removal) is automatic."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:287
+msgid "Sets the disabled flag. This does not affect object functionality which should manually check the flag and adjust it's response. If the object has a container Element of an INPUT type then this will be disabled."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:122
+msgid "Define false to enable. Default is true."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:112
+msgid "Indicates if the object is disabled."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:147
+msgid "Provides customised module functionality. See core.object documentation."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:119
+msgid "A manager. See %[0]."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:176
+msgid "A value identifying the object type. Used by managers, for building the path, debugging, and events."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:122
+msgid "Reference to the parent object, if applicable."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:230
+msgid "An internal path to the object type which indicates the module it came from and it's location in the instantiation tree. Not to be confused with URL path."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:128
+msgid "A container Element representing the object."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:112
+msgid "Hides the container Element."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:128
+msgid "Define false to show. Default is true."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:129
+msgid "Indicates if the container Element is hidden."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:112
+msgid "Shows the container Element."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:149
+msgid "Toggles whether the container Element between visible and hidden."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:107
+msgid "A pool of child objects."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:128
+msgid "<b>Event:</b> %[0]"
+msgid_plural "<b>Events:</b> %[0]"
+msgstr[0] ""
+msgstr[1] ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:155
+msgid "%[0] - required, %[1]underlined%[2] - asynchronous (%[3])"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:103
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:86
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:95
+msgid "Description"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:111
+msgid "This module is embedded into igaro.js"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:87
+msgid "Download"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:169
+msgid "Blessed objects lazy load and instantiate via <b>[object].managers.object.create()</b>."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:136
+msgid "Unblessed objects use <b>new %[0]</b>."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:148
+msgid "Access <b>%[0]</b> directly without instantiating."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:123
+msgid "Access the features of this library directly."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:138
+msgid "Provides a manager for a blessed object. See Manager below."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:154
+msgid "Where <b>o</b> is an object containing attributes from the following table."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:85
+msgid "Attributes"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:82
+msgid "Manager"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:268
+msgid "A blessed object can use this module as a manager. Functions shown here should be used over those of the same name in Attributes to reduce coding complexity and to aid automation and efficiency."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:158
+msgid "You can access this manager using <b>[object].managers.%[0]</b>."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:79
+msgid "Code"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:167
+msgid "<b>c</b> is a container element. For blessed objects this will default to the objects container."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:177
+msgid "Translations are inactive due to the use of a single bracket <b>_tr({</b> instead of three <b>_tr((({</b>."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:81
+msgid "Output"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:87
+msgid "Dependencies"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:82
+msgid "Related"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:81
+msgid "Author"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:89
+msgid "External Links"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:130
+msgid "Removes 300ms click delay on touch platforms."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:152
+msgid "Enables Tap, DoubleTap, Swipe, Drag, Pinch, and Rotate gesture events."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:131
+msgid "Date/time formatting using timezone and language."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:99
+msgid "Main configuration file."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:121
+msgid "Country support and related functionality."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:123
+msgid "Currency support and related functionality."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:123
+msgid "Timezone selection, date related functionality."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:106
+msgid "Centralised debug management."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:111
+msgid "Provides DOM management and helpers."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:124
+msgid "Event management, registration and dispatcher."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:93
+msgid "Filename parsing."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:101
+msgid "HTML parsing, conversion."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:132
+msgid "Language support, formatting, related functionality."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:153
+msgid "Bless, Promise sequencer, form debounce, Array insertion and other helpers."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:136
+msgid "Router, an MVC alternative using routes to build partials."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:124
+msgid "Session, local, cookie and remote store access."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:110
+msgid "URL parsing, related functionality."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:136
+msgid "Creates a list which can expand and collapse nodes."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:128
+msgid "Async loading of resources, NodeJS/Require style."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:115
+msgid "Basic social media bookmarking."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:139
+msgid "Date display with language switching & timezone correction."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:128
+msgid "Form element value validation routines."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:124
+msgid "Retrieve JSON data without CORS limitation."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:130
+msgid "LI list management with re-ordering functionality."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:146
+msgid "Async dialog boxes with alert() and confirm() replacements."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:127
+msgid "Navigation controls (tabs, dropdown etc)."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:145
+msgid "Handles the standard authentication credential sign-in process."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:116
+msgid "Displays a formatted message."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:112
+msgid "Rich text data entry and display."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:138
+msgid "Elements in same space with navigation and animation."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:122
+msgid "Table display with row/column management."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:120
+msgid "Toast notification popup and auto hide."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:104
+msgid "XHR (Ajax) functionality."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:123
+msgid "A+ Promises, Array and Object sugar helpers."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:113
+msgid "Polyfill for Internet Explorer 8."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:137
+msgid "Polyfill ancient browsers to Mozilla 1.6 specification."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:137
+msgid "Polyfill old browsers to Mozilla 1.8.1 specification."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:144
+msgid "Polyfill deprecated browsers to Mozilla 1.8.5 specification."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.js:139
+msgid "Polyfill HTML5 classList helpers onto DOM elements."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.polyfill.es6.js:145
+msgid "This module prototypes some ES6 features. The following features are provided; %[0]."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.polyfill.ie.8.js:235
+msgid "This library prototypes missing IE8 functionality. Due to deficiencies with IE8/9 (CORS,CSS3,SVG), both are unsupported by Igaro App and probably won't work well out the box."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.polyfill.js.1.6.js:149
+msgid "This module: prototypes Javascript 1.6 (IE8). The following features are provided; %[0]."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.polyfill.js.1.8.1.js:141
+msgid "This module prototypes Javascript 1.8.1 (IE9). The following are provided; %[0]"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.polyfill.js.1.8.5.js:142
+msgid "This module prototypes Javascript 1.8.5 (IE9). The following are provided; %[0]."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.modules.polyfill.js.classList.js:212
+msgid "This library prototypes classList, a group of functions for managing the CSS className property on Elements. The following features are provided; %[0]."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.overview.js:190
+msgid "Igaro App is a JavaScript web-app framework for developing scalable, responsive and dynamic web and mobile apps."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.overview.js:242
+msgid "Igaro App is a JavaScript web-app framework for developing scalable web and mobile apps. It's declarative in design and uses ECMA standards, with minimal abstraction."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.overview.js:113
+msgid "ES5/6 Object Orientated JavaScript."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.overview.js:130
+msgid "Superior error handling and asynchronous techniques."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.overview.js:124
+msgid "Event driven architecture and modular plugins."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.overview.js:113
+msgid "Extreme performance and efficiency."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.overview.js:124
+msgid "Built to last, not to be flavour of the month."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.overview.js:86
+msgid "100% Free"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.overview.js:128
+msgid "No lock-ins or premium product. Open Source License."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.overview.js:82
+msgid "Where"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.overview.js:209
+msgid "Igaro App can be served to a web browser right the way back to IE8, distributed through an app store, or bundled on removeable media."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.routes.js:222
+msgid "Igaro App's router is dynamic and loads routes from file systems and API's. It's a beautiful way to serve pages be it for a website or a mobile app."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.routes.js:327
+msgid "Igaro App provides <b>core.router</b> to serve pages, and a page is represented by a navable route. A route contains display logic and events but doesn't necessarily have to be navable, which allows partials (parts of a page) to also be built from routes."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.routes.js:215
+msgid "By default routes are cached and retain state. State retention does not use <b>history.pushState</b>, and compatibiity is provided back to IE8."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.routes.js:84
+msgid "Root"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.routes.js:85
+msgid "Header"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.routes.js:91
+msgid "Features"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.routes.js:85
+msgid "footer"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.routes.js:76
+msgid "URL"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.routes.js:214
+msgid "A URL may contain a combination of route and URI data. A route instructs the router to capture URI data, which is in turn stored on the route."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.routes.js:225
+msgid "For the URL above 'books' and 'pages' are routes. The book route captures the book id. The router then skips this URI piece and loads 'pages' as a route."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.routes.js:381
+msgid "Although the path may look like a folder structure to the user, the actual location of these routes is determined by a provider. Providers allow multiple API's to serve routing data. There availability can be determined by any measure, which could be as simple as using a server closest to the users location."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.routes.js:210
+msgid "The simple provider code shown above handles any route by way of <b>instance.amd</b>, using the default repo as the location to load from."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.routes.js:84
+msgid "Navigation"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.routes.js:261
+msgid "<b>core.router</b> provides <b>to()</b> which is ideal for DOM event handlers as it contains built in error handling. The same function is available on routes for relative based navigation."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.routes.js:99
+msgid "Next Chapter - Locale"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.security.js:198
+msgid "Igaro App is the only Javascript Framework with zero public variables, effectively sandboxing it's libraries from code injection."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.security.js:452
+msgid "Initially <b>index.html</b> bootstraps <b>index.js</b> using a public variable (there's no way around this). This is then removed and the only singular reference to the app is stored privately. Only modules loaded by the app gain access to this variable meaning the entire codebase is sandboxed from code injection. That's right, there's nothing added to the <b>window</b> object!"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.security.js:84
+msgid "Credentials"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.security.js:161
+msgid "Igaro App recommends using OAuth2 for authentication and provides <b>instance.oauth2</b>."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.security.js:83
+msgid "Automation"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.security.js:206
+msgid "Igaro App supports automated authentication transparent to code (which needs no handling) and the user (no URL change or redirection)."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.security.js:262
+msgid "A service which requires credentials emits a HTTP 401 which is captured and invokes an OAuth2 mechanism. Once complete the previous request and any that have came in since are then actioned."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.security.js:294
+msgid "The code below adds automated credential handling to the app. An entry for <i>google</i> has been added, all that requires adding is the developer id and other details described in the <b>instance.oauth2</b> documentation."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.security.js:77
+msgid "CORS"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.security.js:126
+msgid "<b>instance.xhr</b> supports CORS (browser dependent)."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.security.js:99
+msgid "Next Chapter - Design"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.js:107
+msgid "A showcase of App's and examples."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.js:118
+msgid "Made something with Igaro App? Send us a link!"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.js:119
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.todomvc.js:119
+msgid "The TodoMVC project aims to compare Frameworks."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.js:107
+msgid "Show Igaro App Implementation"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.js:228
+msgid "The D1 is the worlds most efficient and robust Bicycle Dynamo to USB power converter. It's quick one page website uses many of Igaro App's built in widgets."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.js:94
+msgid "Show D1 Homepage"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.todomvc.js:75
+msgid "TodoMVC"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.todomvc.js:107
+msgid "An example of the TodoMVC Widget."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.todomvc.js:147
+msgid "The code for this widget isn't documented but is relatively easy to follow."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.todomvc.js:88
+msgid "Spec Divergence"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.todomvc.js:125
+msgid "The CSS has been improved using CSS3 selectors."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.todomvc.js:153
+msgid "The CSS input overlays have bee removed (they didn't work well in Firefox)."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.todomvc.js:143
+msgid "The delete button doesn't use :hover, as touch users wont see it."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.todomvc.js:151
+msgid "Item edit uses contentEditable instead of a separate input[text] element."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.todomvc.js:84
+msgid "Limitations"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.todomvc.js:144
+msgid "It doesn't use Igaro App's multi-language features (English only)."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.todomvc.js:178
+msgid "It will show the same todo items across all routes (it doesn't support a route having unique items)."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.showcase.todomvc.js:116
+msgid "Routing for filters isn't implemented."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:77
+msgid "Structure"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:198
+msgid "Describes the files and folders that make up Igaro App. You'll use this structure as you customize and add your own files."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:144
+msgid "This may be your first introduction to Igaro App, and if it is, welcome!"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:100
+msgid "Files & Folders"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:149
+msgid "Contains files pertaining to the build process."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:83
+msgid "app"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:160
+msgid "The root for the app and containing JavaScript files that are to be processed."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:186
+msgid "Contains content that may be served locally or via a CDN. This includes lazy loaded app modules."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:195
+msgid "The main bootstrap JavaScript file which when processed will contain the configuration file data."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:218
+msgid "Provide third party code in a structured format. Some provide an interface to system features such as touch."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:276
+msgid "Libraries, not instantiable, which provide global functionality. Typically required by other modules via module.requires. Don't contain language or output to the DOM."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:268
+msgid "Returns an instantable function. May provide a DOM feature in form of a widget or provide functionality such as AJAX. Instantiated, used once, then destroyed."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:247
+msgid "Prototypes missing Javascript functionality for older web browsers. Loaded by index.html if required. Modern browsers don't require them."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:234
+msgid "Provides router model data which is used to build and manage a view. Returns a single function which is used as a singleton."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:184
+msgid "Mandatory modules which would otherise be placed in the src/app/cdn/js folder are placed here."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:219
+msgid "Contains configuration files which specify locale data (or where to fetch it from) as well as global services and event triggers."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:173
+msgid "Files which should be added to the build without any processing can be placed here."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:323
+msgid "Recipes instruct the builder to create a tailored release specific to the environment in which the app is to be run. For example developers will most likely want debugging enabled while the final release will most likely be minified."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:319
+msgid "Scss files are compiled into css. Typically a file corresponds to a JavaScript module of the same name. app.scss contains an initial style base but doesn't necessarily style the app, which will carried out by further stylesheets."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:175
+msgid "Contains a gettext .pot file template with parsed keys and any .po translation files."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:140
+msgid "Contains output from build process recipes (customizable)."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:143
+msgid "Contains E2E test configuration and scripts for NightwatchJS."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:93
+msgid "The App"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:216
+msgid "Igaro App lives in a private variable, effectively sandboxing it from cross injection. It's supplied to modules as they are loaded."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:99
+msgid "Module Format"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:130
+msgid "Igaro modules use a CommonJS (NodeJS) format."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:224
+msgid "A module's filename usually relates to its namespace, so whatever <b>type.name.js</b> exports will be available at <b>app['type.name']</b>."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:248
+msgid "A module can define dependencies using <b>module.requires</b> (widgets can be lazy loaded). A path can be supplied to load modules outside of the local repository."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:210
+msgid "Widgets (also know as instances because they are always instantiated) are typically denoted by an <b>instance.*</b> filename."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:332
+msgid "JavaScript's <b>new</b> keyword can instantiate these, but the <b>core.object</b> module provides a helper to lazy load the module, instantiate, and call an aynchronous constructor <b>.init()</b>. Thus, a widget can be inserted using minimal code."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:326
+msgid "Wondering what <b>this.managers</b> is? In Igaro App every object is blessed with services, which provide two way communication, debugging, helpers and more - all tailored to the object. This is explained in greater detail on the Bless page."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:95
+msgid "Bootstrap"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:415
+msgid "The file <b>index.html</b> loads <b>index.js</b> and handles a no JavaScript condition. <b>index.js</b> contains CDN path logic and loads the bootstrap CSS stylesheet, JavaScript polyfills, Apache Cordova (if available) and <b>exec.js</b>. At this point the environment is ready with ES5 and ES6 features and the app can now load."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:413
+msgid "<b>exec.js</b> does most of the heavy lifting. It's processed to contain the built in modules and configuration files. The configuration files customize core modules, define global services and event triggers, and tell the app what it should do. Typically an app loads route files/data (header,main,footer) from a CDN or an API."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.structure.js:114
+msgid "Next Chapter - Bless"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.testing.js:152
+msgid "End2End and Unit tests are included and run in web browsers via Selenium WebDriver."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.testing.js:189
+msgid "Igaro App utilizes NightwatchJS for E2E testing via the Selenium WebDriver. Unit tests are performed by Mocha & Chai."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.testing.js:142
+msgid "Before launching the test suite the following requisites are required;"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.testing.js:128
+msgid "Download %[0] into the lib folder."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.testing.js:171
+msgid "For Chrome support, download the %[0]Selenium driver%[1] into the lib folder."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.testing.js:182
+msgid "For Internet Explorer support, download the %[0]Selenium driver%[1] into the lib folder."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.testing.js:227
+msgid "Verify the tests/nightwatch.json and package.json files match your browser support requirements and the Selenium version matches what you downloaded."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.testing.js:95
+msgid "Running & Adding Tests"
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.testing.js:182
+msgid "Testing is being overhauled to use PhantomJS, Mocha, Chai and Selenium directly within Node. Nightwatch will be removed."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.testing.js:121
+msgid "Begin the test suite using the command below."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.testing.js:173
+msgid "Customise and add your own E2E tests in the tests/src folder. Unit tests are found in tests/unit."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.testing.js:187
+msgid "Individual tests can be run in Firefox by setting about:config->security.fileuri.strict_origin_policy to false."
+msgstr ""
+
+#: /home/andrew/igaro/git/app/src/app/cdn/js/route.main.testing.js:104
+msgid "Next Chapter - Modules"
+msgstr ""
+
+#~ msgid "Hello world"
+#~ msgstr "Howdy There!"
+
+#~ msgid "Hello world "
+
+#~ msgid_plural "Hello world %3"
+#~ msgstr[0] "Ok it worked"
+#~ msgstr[1] "Yeah ok then"

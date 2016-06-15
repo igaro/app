@@ -2,9 +2,7 @@
 
 [ ![Codeship Status for igaro/app](https://codeship.com/projects/d521e620-04a0-0133-19ae-1a88c4115bd9/status?branch=master)](https://codeship.com/projects/89386)
 
-Igaro App is a complete web-app (SPA+) architecture using only the native ES5/6 JavaScript API.
-
-It's designed by and for professionals. Tired of lesser frameworks like Angular? Try this!
+Igaro App is a comprehensive web-app (SPA+) architecture using native ES5/6 JavaScript API.
 
 ## Repo = App = Live Demo
 
@@ -35,8 +33,9 @@ To use the devel recipe, launch a web server on localhost:3006, minify the JavaS
 
 ###1.5
 - Full GetText language translation support
-- new native build system (requires Node 5.8+). Grunt removed
-- split configuration files in prep for removing the demo from the core
+- new native build system (requires Node 5.8+) for spectacular speed. Grunt removed
+- split configuration files in prep for removing demo files from the core (1.6)
+- documentation improvements including event lists
 
 ###1.4
 - core.router -> IE8+ support, URL object support, relative navigation
