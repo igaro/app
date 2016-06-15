@@ -2,7 +2,7 @@
 *.sublime-workspace
 *.sublime-project
 *~
-target/
+target
 tmp/
 *.swp
 *.bak

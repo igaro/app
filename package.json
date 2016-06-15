@@ -18,7 +18,8 @@
     "po2json": "^0.3.2",
     "uglify-js": "^2.6.2",
     "watch": "^0.17.1",
-    "yargs": "^4.3.2"
+    "yargs": "^4.3.2",
+    "nightwatch": "^0.9.3"
   },
   "bin": {
     "nightwatch": "./node_modules/nightwatch/bin/nightwatch"
@@ -28,5 +29,7 @@
     "pretest": "fuser -k 3006/tcp && node build.js --recipe=devel --serve=3006 &",
     "test": "sleep 5 && ./node_modules/nightwatch/bin/nightwatch -e firefox -c ./tests/nightwatch.json ./tests/src",
     "posttest": "fuser -k 3006/tcp"
+  },
+  "dependencies": {
   }
 }
