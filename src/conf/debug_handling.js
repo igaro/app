@@ -22,7 +22,7 @@ rootEmitter.on('core.debug.handle', function (o) {
     } catch (e) {
         // should never get here
         try {
-            env.alert(msg.en);
+            env.alert("A fatal error occured.");
         } catch(eX) {
             env.alert(eX);
         }

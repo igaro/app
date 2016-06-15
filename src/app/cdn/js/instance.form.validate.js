@@ -30,6 +30,7 @@ module.exports = function(app) {
      */
     var InstanceFormValidate = function(o) {
 
+        var self = this;
         this.name = 'instance.form.validation';
         this.asRoot = true;
         bless.call(this,o);
@@ -40,7 +41,8 @@ module.exports = function(app) {
         this.resizeHooks = [];
         this.onValidSubmit = o.onValidSubmit;
         this.managers.event.on('destroy', function() {
-            return this.clear();
+
+            return self.clear();
         });
         if (o.form)
             this.setForm(o.form);
@@ -51,7 +53,7 @@ module.exports = function(app) {
      * @param {object} [o] config literal
      * @returns {Promise}
      */
-    InstanceFormValidate.prototype.init = function(o) {
+    InstanceFormValidate.prototype.init = function() {
 
         return this.managers.event.dispatch('init');
     };

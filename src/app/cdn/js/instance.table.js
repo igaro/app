@@ -1,6 +1,8 @@
 //# sourceURL=instance.table.js
 
-(function(env) {
+(function() {
+
+    "use strict";
 
     module.requires = [
         { name:'core.language.js'},
@@ -8,8 +10,6 @@
     ];
 
     module.exports = function(app) {
-
-        "use strict";
 
         var object = app['core.object'],
             dom = app['core.dom'],
@@ -217,16 +217,17 @@
 
             var self = this;
             o = o || {};
+
             if (! o.content) {
                 o.content = function(domMgr) {
 
                     return domMgr.mk('input[text]',null,null, function() {
 
+                        var _self = this;
                         dom.setPlaceholder(this,function() { return this.tr((({ key:"Search" }))); });
-                        var s = this;
                         domMgr.parent.searchFn = function(column) {
 
-                            var v = s.value.toLowerCase().trim();
+                            var v = _self.value.toLowerCase().trim();
                             if (v.length === 0)
                                 return true;
                             return column.container.innerHTML.toLowerCase().match(v);

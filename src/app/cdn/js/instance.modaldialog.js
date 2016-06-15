@@ -75,15 +75,8 @@
                         msg = o.message;
 
                     this.className = 'body';
-                    if (msg) {
-                        if (typeof msg === 'object') {
-                            Object.keys(msg).forEach(function (k) {
-
-                                msg[k] = msg[k].replace(/\\n/g,"<br>");
-                            });
-                        }
-                        domMgr.mk('div',self,msg,'message');
-                    }
+                    if (msg)
+                        domMgr.mk('div',self,function() { return msg.call(this).replace(/\\n/g,"<br>"); },'message');
                     if (o.custom) // custom elements
                         domMgr.mk('div',self,o.custom,'custom');
                 });

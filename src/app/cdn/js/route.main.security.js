@@ -19,7 +19,7 @@ module.exports = function() {
         model.stash.title = function() { return this.tr((({ key:"Security" }))); };
         model.stash.desc = function() { return this.tr((({ key:"Igaro App is the only Javascript Framework with zero public variables, effectively sandboxing it's libraries from code injection." }))); };
 
-        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"Initially <b>index.html</b> bootstraps <b>igaro.js</b> using a public variable (there's no way around this). This is then removed and the only singular reference to the app is stored privately. Only modules loaded by the app gain access to this variable meaning the entire codebase is sandboxed from code injection. That's right, there's nothing added to the <b>window</b> object!" }))); });
+        domMgr.mk('p',wrapper,function() { return this.tr((({ key:"Initially <b>index.html</b> bootstraps <b>index.js</b> using a public variable (there's no way around this). This is then removed and the only singular reference to the app is stored privately. Only modules loaded by the app gain access to this variable meaning the entire codebase is sandboxed from code injection. That's right, there's nothing added to the <b>window</b> object!" }))); });
 
         domMgr.mk('h1',wrapper,function() { return this.tr((({ key:"Credentials" }))); });
         domMgr.mk('p',wrapper,function() { return this.tr((({ key:"Igaro App recommends using OAuth2 for authentication and provides <b>instance.oauth2</b>." }))); });

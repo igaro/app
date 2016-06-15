@@ -227,6 +227,7 @@ module.exports = function(app, params) {
 
 			// gettext data support
             if (dict) {
+
                 var langId = getCurrentIdForDict(dict),
                     lang = language.pool[langId];
 
@@ -236,10 +237,11 @@ module.exports = function(app, params) {
                 dict = dict[langId];
 
                 // try to map and return
-                var mapping = dict[pluralIndex];
-                if (typeof mapping === 'string' && mapping.length)
-                    return mapping;
-
+                if (dict) {
+                    var mapping = dict[pluralIndex];
+                    if (typeof mapping === 'string' && mapping.length)
+                        return mapping;
+                }
                 // force English pluralization
                 if (pluralIndex > 1)
                     pluralIndex = 0;

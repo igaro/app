@@ -92,30 +92,8 @@
                         m.call(r);
                         break;
                 }
-                if (typeof c !== 'undefined' && c !== null) {
-                    if (typeof c === 'function') {
-                        var coreLang = app['core.language'];
-                        try {
-                            c = c.call(coreLang,self);
-                        } catch(e) {
-
-                            if (! e && typeof e === 'object')
-                                e.noCoreLanguage = true;
-                            throw e;
-                        }
-                    } else if (c instanceof Array) {
-                        var d = document.createDocumentFragment();
-                        c.forEach(function(k) {
-
-                            if ((! (k instanceof Node)) && k.container)
-                                k = k.container;
-                            d.appendChild(k);
-                        });
-                        c=d;
-                    }
-                    if (c !== null && typeof c !== 'undefined')
-                        dom.setContent(r,c);
-                }
+                if (c)
+                    dom.setContent.call(this,r,c);
                 return r;
             },
 
@@ -126,7 +104,8 @@
              */
             setPlaceholder : function(r,getter) {
 
-                var setter = r.igaroPlaceholderFn,
+                var self = this,
+                    setter = r.igaroPlaceholderFn,
                     language = app['core.language'],
                     xMgr = language.managers.event;
                 if (typeof getter !== 'function')
@@ -137,7 +116,7 @@
                     xMgr.remove(setter,'setEnv');
                 setter = r.igaroPlaceholderFn = function() {
 
-                    r.placeholder = getter.call({ tr: language.tr, substitute:language.substitute });
+                    r.placeholder = getter.call({ tr: language.tr, substitute:language.substitute }, self);
                 };
                 xMgr.on('setEnv', setter, { deps:[r] });
                 setter();
@@ -252,20 +231,20 @@
 
                 var self = this,
                     type = typeof c;
-                
+
                 if (typeof r === 'object' && r.container)
                     r = r.container;
                 if (! (r instanceof Node))
                     throw new TypeError("First argument must be instanceof Node or an object with a container attribute containing one");
                 if (purge !== false) {
-                    this.purge(r,true);
+                    dom.purge.call(self,r,true);
                     r.textContent = '';
                 }
                 switch (type) {
                     case 'object':
                         if (c instanceof Array) {
                             c.forEach(function(o) {
-                                self.setContent(r,o,false);
+                                dom.setContent.call(self,r,o,false);
                             });
                         } else if (c instanceof HTMLElement || c instanceof DocumentFragment) {
                             r.appendChild(c);
@@ -279,23 +258,37 @@
                             lf = r.igaroLangFn;
                         if (! language)
                             throw new Error('core.dom -> core.language is not loaded.');
-                        if (lf) {
-                            xMgr.remove(lf,'setEnv');
-                            delete r.igaroLangFn;
-                        }
-                        var f = r.igaroLangFn = function() {
+                        var getContent = function() {
 
-                            var v = c.call({ tr: language.tr, substitute:language.substitute });
-                            if (r.nodeName === 'META') {
-                                r.content = v;
-                            } else if (! (r.nodeName === 'INPUT' && r.type && r.type === 'submit') && 'innerHTML' in r) {
-                                r.innerHTML = v;
-                            } else if (r.value) {
-                                r.value = v;
-                            }
+                            return c.call({ tr: language.tr, substitute:language.substitute },self);
                         };
-                        xMgr.on('setEnv', f, { deps:[r] });
-                        f();
+                        var content = getContent();
+                        // is it language?
+                        if (typeof content === 'string') {
+
+                            if (lf) {
+                                xMgr.remove(lf,'setEnv');
+                                delete r.igaroLangFn;
+                            }
+                            // updates the element text on lang env change
+                            var setLang = r.igaroLangFn = function() {
+
+                                var v = content || getContent();
+                                content = null;
+                                if (r.nodeName === 'META') {
+                                    r.content = v;
+                                } else if (! (r.nodeName === 'INPUT' && r.type && r.type === 'submit') && 'innerHTML' in r) {
+                                    r.innerHTML = v;
+                                } else if (r.value) {
+                                    r.value = v;
+                                }
+                            };
+                            xMgr.on('setEnv', setLang, { deps:[r] });
+                            setLang();
+                        } else {
+                            // function returned something else, probably a DOM Element, Array of...
+                            dom.setContent.call(self,r,content,false);
+                        }
                         break;
                     default:
                         r.innerHTML = c;
