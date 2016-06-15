@@ -46,7 +46,7 @@ npm install \n\
 
         domMgr.mk('h1',wrapper,function() { return this.tr((({ key:"Boom!" }))); });
 
-        domMgr.mk('p',wrapper,function() { return this.substitute(this.tr((({ key:"The build script uses recipes to cater for different environments and the app is now available on port %[0]. The code will rebuild as you code." }))),'<a href="http://localhost:3006">3006</a>','<a href="http://localhost:3007">3007</a>'); });
+        domMgr.mk('p',wrapper,function() { return this.substitute(this.tr((({ key:"The build script uses recipes to cater for different environments and the app is now available on port %[0]. This will rebuild as you code." }))),'<a href="http://localhost:3006">3006</a>','<a href="http://localhost:3007">3007</a>'); });
 
         domMgr.mk('p',wrapper,function() { return this.tr((({ key:"That's it. Now read as much of the documentation as you need and dive in!" }))); });
 
