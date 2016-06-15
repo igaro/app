@@ -49,9 +49,7 @@ module.exports = function() {
 
         domMgr.mk('p',wrapper,
             domMgr.mk('ul',wrapper,[
-                domMgr.mk('li',null,function() { return this.tr((({ key:"It doesn't use Igaro App's multi-language features (English only)." }))); }),
-                domMgr.mk('li',null,function() { return this.tr((({ key:"It will show the same todo items across all routes (it doesn't support a route having unique items)." }))); }),
-                domMgr.mk('li',null,function() { return this.tr((({ key:"Routing for filters isn't implemented." }))); }),
+                domMgr.mk('li',null,function() { return this.tr((({ key:"Routing for filters isn't implemented." }))); })
             ])
         );
 

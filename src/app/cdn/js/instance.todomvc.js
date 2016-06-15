@@ -12,8 +12,16 @@
     module.exports = function(app) {
 
         var object = app['core.object'],
+            dom = app['core.dom'],
             bless = object.bless,
             arrayInsert = object.arrayInsert;
+
+/*------------------------------------------------------------------------------------------------*/
+
+        var makeIncompleteStr = function(incomplete) {
+
+            return this.substitute(this.tr((({ key:"%[0] item left", plural:"%[0] items left" })),incomplete),incomplete);
+        };
 
 /*------------------------------------------------------------------------------------------------*/
 
@@ -28,16 +36,16 @@
             o.container = o.parent.container;
 
             // called by bless
-            this.container = function(dom) {
+            this.container = function(domMgr) {
 
                 var managers = self.managers,
                     debugMgr = managers.debug;
 
                 // li Element
-                return dom.mk('li',o,null,function() {
+                return domMgr.mk('li',o,null,function() {
 
                     // saves checkbox onto object
-                    self.checkbox = dom.mk('input[checkbox]',this,null,function() {
+                    self.checkbox = domMgr.mk('input[checkbox]',this,null,function() {
 
                         this.addEventListener('click',function() {
 
@@ -49,7 +57,7 @@
                     });
 
                     // saves span onto object
-                    self.desc = dom.mk('span',this,o.desc, function() {
+                    self.desc = domMgr.mk('span',this,o.desc, function() {
 
                         this.contentEditable = true;
                         this.addEventListener('input', function() {
@@ -62,7 +70,7 @@
                     });
 
                     // delete button
-                    dom.mk('button',this,'x').addEventListener('click', function() {
+                    domMgr.mk('button',this,'x').addEventListener('click', function() {
 
                         self.destroy()['catch'](function(e) {
                             return debugMgr.handle(e);
@@ -107,9 +115,9 @@
             this.managers   = {
                 store:app['core.store']
             };
-            this.container = function(dom) {
+            this.container = function(domMgr) {
 
-                return dom.mk('ul',this,null,"todo-list");
+                return domMgr.mk('ul',this,null,"todo-list");
             };
 
             bless.call(this,o);
@@ -208,15 +216,15 @@
         /* Toggles the state of multiple items. Saves manually for efficiency.
          * @returns {Promise}
          */
-        TodoMVCList.prototype.toggleCompleted = function(v) {
+        TodoMVCList.prototype.toggleCompleted = function(status) {
 
             var self = this;
             this.nosave = true;
             return Promise.all([
                 this.items.slice(0).map(function (o) {
 
-                    if (! o.completed && v || o.completed && ! v)
-                        return o.setCompleted(v);
+                    if (! o.completed && status || o.completed && ! status)
+                        return o.setCompleted(status);
                 })
             ]).then(function() {
 
@@ -230,12 +238,10 @@
          */
         TodoMVCList.prototype.countIncomplete = function() {
 
-            return this.items.reduce(function(a,o) {
+            return this.items.filter(function(item) {
 
-                if (o.completed)
-                    a++;
-                return a;
-            },0);
+                return ! item.completed;
+            }).length;
         };
 
 /*------------------------------------------------------------------------------------------------*/
@@ -336,7 +342,10 @@
 
                 domMgr.mk('span',this,null,function() {
 
-                    self.itemsleft = domMgr.mk('span',this);
+                    self.itemsleft = domMgr.mk('span',this,function() {
+
+                        return makeIncompleteStr.call(this,list.countIncomplete());
+                    });
                 });
 
                 domMgr.mk('button',this,"Clear completed",function() {
@@ -369,7 +378,7 @@
                     itemCnt = list.items.length;
                 container.setAttribute('data-hasItems', itemCnt !== 0);
                 container.setAttribute('data-hasCompleted', itemCnt-incomplete !== 0);
-                self.itemsleft.innerHTML = incomplete === 1? "1 item left" : incomplete + " items left";
+                dom.setContent(self.itemsleft, function() { return makeIncompleteStr.call(this,list.countIncomplete()); });
             };
 
             managers.event.on('list.save',exec);

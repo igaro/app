@@ -2,15 +2,31 @@
 
 [ ![Codeship Status for igaro/app](https://codeship.com/projects/d521e620-04a0-0133-19ae-1a88c4115bd9/status?branch=master)](https://codeship.com/projects/89386)
 
-Igaro App is a comprehensive web-app (SPA+) architecture using native ES5/6 JavaScript API.
+Igaro App is a web-app (SPA+) architecture using native ES5/6 JavaScript API.
+
+## Why Igaro App?
+
+Are you tired of JavaScript frameworks that promise you the world and demo it to you with a simple "Hello World" data binding example?
+
+Are you weary of investing time and energy learning the quirks of a framework only to find that when it comes to building something substantial it causes you pain?
+
+Are you a developer that prefers structure and performance over rapid "kick it out the door" development?
+
+Do you want to use the native ES5/ES6 JavaScript API without JQuery, Loadash and a hundred other dependencies?
+
+If so, welcome to Igaro App!
 
 ## Repo = App = Live Demo
 
-The repo you download here is the App you'll have running on your local machine, and which is continuously deployed to: [http://app.igaro.com](http://app.igaro.com)
+The repository you download here is fully featured App you'll soon have running on your local machine, and which is continuously deployed to: [http://app.igaro.com](http://app.igaro.com)
+
+By reading some of the documentation and using your natural inquisitiveness to change things you'll quickly get to grips and be on your way.
+
+Igaro App is just "plain old object orientated JavaScript", with some easy to use spice (read about [http://app.igaro.com/#/bless](Bless) if you want a taste!).
 
 ## Documentation
 
-All modules are comprehensibly documented in the /modules section within the demo and also inline via JSDoc.
+All modules are comprehensibly documented in the /modules section within the app and also inline via JSDoc.
 
 ## Install & Build
 
@@ -27,7 +43,6 @@ A native script builds the system using recipes (i.e develop, deploy). To list t
 To use the devel recipe, launch a web server on localhost:3006, minify the JavaScript and watch for file changes as you work use;
 
 `./build.js --recipe=devel --serve=3006 --minify --watch`
-
 
 ## History
 

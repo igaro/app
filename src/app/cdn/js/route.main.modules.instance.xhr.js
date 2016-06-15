@@ -13,19 +13,19 @@ module.exports = function() {
                 name:'Andrew Charnley',
                 link:'http://www.igaro.com/ppl/ac'
             },
-            demo : "dom.mk('button', c,  function() { return this.tr((({ key:'Get JSON' }))); }).addEventListener('click', function () {\n\
+            demo : 'dom.mk("button", c,  function() { return this.tr({ key:"Get JSON" }); }).addEventListener("click", function () {\n\
     var self = this;\n\
-    model.managers.object.create('xhr').then(function (xhr) {\n\
-        return xhr.get({ res:'http://www.igaro.com/misc/demo.json' }).then(\n\
+    model.managers.object.create("xhr").then(function (xhr) {\n\
+        return xhr.get({ res:"http://www.igaro.com/misc/demo.json" }).then(\n\
             function(data) {\n\
-                c.insertBefore(dom.mk('div',null,JSON.stringify(data)), self);\n\
+                c.insertBefore(dom.mk("div",null,JSON.stringify(data)), self);\n\
                 c.removeChild(self);\n\
             }\n\
         );\n\
-    })['catch'](function(e) {\n\
+    })["catch"](function(e) {\n\
         return model.managers.debug.handle(e);\n\
     });\n\
-});",
+});',
             usage : {
                 instantiate : true,
                 attributes : [
