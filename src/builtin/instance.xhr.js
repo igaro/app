@@ -1,4 +1,4 @@
-(function(env) {
+(function() {
 
     'use strict';
 
@@ -99,7 +99,7 @@
         };
 
         // common error function
-        var onError = function() {
+        var onError = function(e) {
 
             this.response = true;
             this._promise.reject({ error:e, x:this });
@@ -119,7 +119,6 @@
 
             var self = this,
                 xhr = this.xhr = new XMLHttpRequest(),
-                response = false,
                 eventMgr = this.managers.event;
 
             this.res='';

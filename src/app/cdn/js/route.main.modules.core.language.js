@@ -63,6 +63,7 @@ module.exports = function() {
                     type:'function',
                     async:true,
                     desc: function() { return this.tr((({ key:"Applies a currency code to the current environment." }))); },
+                    events:['setEnv'],
                     attributes : [{
                         type:'string',
                         required:true,
@@ -76,6 +77,7 @@ module.exports = function() {
                     type:'function',
                     desc: function() { return this.tr((({ key:"Sets supported currency data." }))); },
                     async:true,
+                    events:['setPool'],
                     attributes : [{
                         type:'string',
                         required:true,

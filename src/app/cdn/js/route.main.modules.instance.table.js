@@ -171,6 +171,7 @@ model.managers.object.create('table', {\n \
                         name : 'addColumn',
                         type : 'function',
                         async: true,
+                        events:['addColumn'],
                         desc : function() { return this.tr((({ key:"Adds a Column to a Row." }))); },
                         attributes : [
                             {
@@ -224,6 +225,7 @@ model.managers.object.create('table', {\n \
                         name : 'addRow',
                         type: 'function',
                         async : true,
+                        events:['addRow'],
                         desc : function() { return this.tr((({ key:"Adds a Row object to the Domain." }))); },
                         attributes : [
                             {

@@ -94,6 +94,7 @@ module.exports = function() {
                     name:'setEnv',
                     type:'function',
                     desc: function() { return this.tr((({ key:"Sets the currently applied currency code." }))); },
+                    events:['setEnv'],
                     attributes : [
                         {
                             type:'string',
@@ -114,6 +115,7 @@ module.exports = function() {
                 {
                     name:'setPool',
                     type:'function',
+                    events:['setPool'],
                     desc: function() { return this.tr((({ key:"Sets the supported currency codes." }))); },
                     attributes : [{
                         type:'string',

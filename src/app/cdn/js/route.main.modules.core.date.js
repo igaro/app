@@ -113,6 +113,7 @@ module.exports = function() {
                             }]
                         }
                     ],
+                    events:['setEnvOffset'],
                     async:true
                 },
                 {

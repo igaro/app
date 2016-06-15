@@ -73,6 +73,7 @@ module.exports = function() {
                                 ]
                             }
                         ],
+                        events:['addRoute','leave','enter','init'],
                         async:true,
                         returns: {
                             attributes:[
@@ -81,7 +82,7 @@ module.exports = function() {
                                 }
                             ]
                         },
-                        desc : function() { return this.tr((({ key:"Attempts to load a child route. If loaded an enter event is fired on the routes event manager. Use this to force code reload. An init event is fired the first time a route is loaded. Use this to set-up a view and parameters that keep state." }))); }
+                        desc : function() { return this.tr((({ key:"Attempts to load a child route. Any route that goes out of scope has a leave event fired on it. If a route is loaded and/or comes into scope an enter event is fired on it. An init event is fired on it only when it is loaded. Use these events to pause timers, set-up the view and keep state." }))); }
                     },
                     {
                         name:'addRoutes',
@@ -256,7 +257,7 @@ module.exports = function() {
                 ]
             }
 
-        },
+        };
 
         data.attributes = [
             {
@@ -352,6 +353,7 @@ module.exports = function() {
             {
                 name:'to',
                 type:'function',
+                events:['to-begin','to-error','to-in-progress','to-end','to-loaded'],
                 attributes: [
                     {
                         type:'object',
@@ -387,7 +389,7 @@ module.exports = function() {
                         }
                     ]
                 },
-                desc: function() { return this.tr((({ key:"Loads multiple resources by way of a URL beginning at the base route and enumerating through. Used for user actioned navigation. The current route can abort the load via its leave event if it returns { abort:true }. The events to-begin, to-in-progress and to-loaded() can be used to provide user feedback as routes load. Note that rather than specify all arguments a single URL object provided by core.url can be passed instead." }))); }
+                desc: function() { return this.tr((({ key:"Loads multiple resources by way of a URL beginning at the base route and enumerating through. Used for user actioned navigation. The current route can abort the load via its leave event if it returns { abort:true }. Note that rather than specify all arguments a single URL object provided by core.url may be passed instead." }))); }
             }
         ];
 

@@ -1,6 +1,8 @@
 //# sourceURL=instance.oauth2.js
 
-(function(env) {
+(function() {
+
+    "use strict";
 
     module.requires = [
         { name: 'instance.oauth2.css' },
@@ -8,8 +10,6 @@
     ];
 
     module.exports = function(app) {
-
-        "use strict";
 
         var coreUrl = app['core.url'],
             bless = app['core.object'].bless;

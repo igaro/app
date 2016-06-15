@@ -11,13 +11,18 @@ body >.core-router >.main >.modules {
 
         @include layoutStandard;
 
-		>p >table {
+		>p >.instance-table >table {
 			>tbody {
-				>tr {		
-					>td { 
+				>tr {
+					>td {
 						&:not(:last-child) {
 							white-space:nowrap;
 						}
+                        >.events {
+                            margin-top:0.3em;
+                            padding-top:0.3em;
+                            border-top: 1px dashed #ddd;
+                        }
 					}
 				}
 			}

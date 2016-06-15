@@ -53,6 +53,7 @@ module.exports = function() {
                 {
                     name:'addItem',
                     async:true,
+                    events:['addItem'],
                     type:'function',
                     returns : {
                         instanceof: function() { return data.objects.item; },

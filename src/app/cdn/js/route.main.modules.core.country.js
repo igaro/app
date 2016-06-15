@@ -73,6 +73,7 @@ module.exports = function() {
                     name:'setEnv',
                     type:'function',
                     desc: function() { return this.tr((({ key:"Sets the currently applied country code." }))); },
+                    events:['setEnv'],
                     attributes : [
                         {
                             type:'string',
@@ -94,6 +95,7 @@ module.exports = function() {
                     name:'setPool',
                     type:'function',
                     desc: function() { return this.tr((({ key:"Sets the supported country codes." }))); },
+                    events:['setPool'],
                     attributes : [{
                         type:'string',
                         required:true,

@@ -13,7 +13,7 @@ module.exports = function() {
 
         var wrapper = model.wrapper;
 
-        model.stash.title = function() { return this.tr((({ key:"Compatibiity" }))); };
+        model.stash.title = function() { return this.tr((({ key:"Compatibility" }))); };
         model.stash.desc = function() { return this.tr((({ key:"Igaro App works with any recent browser and platform. This page contains the list." }))); };
 
         var managers = model.managers,

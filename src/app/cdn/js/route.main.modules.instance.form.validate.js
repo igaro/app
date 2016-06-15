@@ -94,6 +94,7 @@ module.exports = function() {
                     name:'check',
                     async:true,
                     type:'function',
+                    events:['validated'],
                     desc : function() { return this.tr((({ key:"Runs the validation rules and displays validation messages on those elements that fail." }))); },
                     returns : {
                         attributes:[{
@@ -106,6 +107,7 @@ module.exports = function() {
                     name:'clear',
                     async:true,
                     type:'function',
+                    events:['clear'],
                     desc : function() { return this.tr((({ key:"Clears the form of any validation messages." }))); }
                 },
                 {

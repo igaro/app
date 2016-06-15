@@ -72,7 +72,8 @@ module.exports = function() {
                     name:'abort',
                     type:'function',
                     async:true,
-                    desc: function() { return this.tr((({ key:"Aborts the XHR operation (if it is currently running). Note that once aborted some browsers such as IE will not allow the XHR to be reused." }))); },
+                    events:['instance.xhr.aborted','instance.xhr.end'],
+                    desc: function() { return this.tr((({ key:"Aborts the XHR operation (if it is currently running). WARNING: some browsers such as IE8 will not allow an aborted XHR to be reused." }))); },
                 },
                 {
                     name:'aborted',
@@ -84,7 +85,35 @@ module.exports = function() {
                     name:'response',
                     type:'boolean',
                     desc:function() { return this.tr((({ key:"Indicates if a response was received." }))); }
-
+                },
+                {
+                    name:'exec',
+                    type:'function',
+                    async:true,
+                    events:['instance.xhr.send','instance.xhr.success','instance.xhr.error','instance.xhr.response','instance.xhr.end'],
+                    desc:function() { return this.tr((({ key:"Handles a request. You may wish to use one of the shortcuts (.get, .post) instead." }))); },
+                    attributes : [
+                        {
+                            type:'string',
+                            required:true,
+                            attributes: [{
+                                desc : function() { return this.tr((({ key:"A valid HTTP method such as GET or POST" }))); }
+                            }]
+                        },
+                        {
+                            type:'object',
+                            attributes: [{
+                                desc : function() { return this.tr((({ key:"Any of the instantiating options can be set here." }))); }
+                            }]
+                        },
+                    ]
+                },
+                {
+                    name:'send',
+                    type:'function',
+                    async:true,
+                    events:['instance.xhr.send','instance.xhr.success','instance.xhr.error','instance.xhr.response','instance.xhr.end'],
+                    desc:function() { return this.tr((({ key:"Sends a request. You shouldn't need to use this directly as it's mainly for .exec(). Use .exec() or one of the shortcuts (.get, .post) instead." }))); }
                 },
                 {
                     name:'applyForm',

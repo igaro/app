@@ -7,8 +7,7 @@ module.exports = function(app) {
 
     'use strict';
 
-    var language = app['core.language'],
-        router = app['core.router'],
+    var router = app['core.router'],
         dom = app['core.dom'];
 
     return function(model) {
@@ -144,7 +143,8 @@ module.exports = function(app) {
                             name:"destroy",
                             async:true,
                             desc: function() { return this.tr((({ key:"Call this to destroy the object. Cleanup (dependencies, DOM container, events, parent array removal) is automatic." }))); },
-                            type:"function"
+                            type:"function",
+                            events:['destroy']
                         },
                         {
                             name:"disable",
@@ -278,9 +278,19 @@ module.exports = function(app) {
                             row.container.classList.add('shade'+stash.belongsTo.length);
                         }
                         return row.addColumn().then(function(cc) {
-                            var domMgr = cc.managers.dom;
+                            var domMgr = cc.managers.dom,
+                                content = [],
+                                events = s.events;
+                            if (s.desc)
+                                content.push(domMgr.mk('div',null,s.desc));
+                            if (events && events.length) {
+                                content.push(domMgr.mk('div',null,function() {
+
+                                    return this.substitute(this.tr((({ key:"<b>Event:</b> %[0]", plural:"<b>Events:</b> %[0]"})),events.length),events.sort().join(', '));
+                                },'events'));
+                            }
                             return row.addColumn({
-                                content:s.desc?s.desc:null
+                                content: content.length? content : null
                             }).then(function(rr) {
                                 cc.stash.hyperlinks = [];
                                 var returns = s.returns;
@@ -313,10 +323,9 @@ module.exports = function(app) {
                                         if (m.blessed)
                                             showBlessed = true;
                                         if (m.desc) {
-                                            var q = [domMgr.mk('p',null,m.desc)]; //JSON.parse(JSON.stringify(m.desc));
+                                            var q = [domMgr.mk('p',null,m.desc)];
                                             if (s.desc)
                                                 q.push(domMgr.mk('p',null,s.desc));
-                                            dom.setContent(rr, q);
                                         }
                                     } else {
                                         var sa = m.name;
@@ -430,7 +439,6 @@ module.exports = function(app) {
                         domMgr.mk('p',v,function() { return this.tr((({ key:"Blessed objects lazy load and instantiate via <b>[object].managers.object.create()</b>." }))); });
                         domMgr.mk('p',v,function() { return this.substitute(this.tr((({ key:"Unblessed objects use <b>new %[0]</b>." }))),n); });
                     } else {
-                        console.error('hereh');
                         domMgr.mk('p',v,function() { return this.substitute(this.tr((({ key:"Access <b>%[0]</b> directly without instantiating." }))),n); });
                     }
                 } else if (u.direct) {
@@ -456,7 +464,7 @@ module.exports = function(app) {
                 domMgr.mk('h1',v,function() { return this.tr((({ key:"Manager" }))); });
                 domMgr.mk('p',v,function() { return this.tr((({ key:"A blessed object can use this module as a manager. Functions shown here should be used over those of the same name in Attributes to reduce coding complexity and to aid automation and efficiency." }))); });
                 if (typeof data.manager === 'string')
-                    domMgr.mk('p',v,language.substitute(function() { return this.tr((({ key:"You can access this manager using <b>[object].managers.%[0]</b>." }))); },data.manager));
+                    domMgr.mk('p',v,function() { return this.substitute(this.tr((({ key:"You can access this manager using <b>[object].managers.%[0]</b>." }))),data.manager); });
                 createTable(data, domMgr.mk('p',v), true);
             }
 

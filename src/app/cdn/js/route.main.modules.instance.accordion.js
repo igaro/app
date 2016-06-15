@@ -26,7 +26,23 @@ module.exports = function() {
                     name:'Section',
                     blessed : {
                         container:true
-                    }
+                    },
+                    attributes : [
+                        {
+                            name:'expand',
+                            type:'function',
+                            async:true,
+                            events:['expand'],
+                            desc:function() { return this.tr((({ key:"Expands the section." }))); }
+                        },
+                        {
+                            name:'collapse',
+                            type:'function',
+                            async:true,
+                            events:['collapse'],
+                            desc:function() { return this.tr((({ key:"Collapses the section." }))); }
+                        }
+                    ]
                 }
             },
 
@@ -58,6 +74,7 @@ module.exports = function() {
                     name:'addSection',
                     type:'function',
                     async:true,
+                    events:['addSection'],
                     desc : function() { return this.tr((({ key:"Adds a new section to the accordion." }))); },
                     returns : {
                         instanceof: function() { return data.objects.section; },
@@ -107,6 +124,7 @@ module.exports = function() {
                 {
                     name:'collapseAll',
                     type:'function',
+                    events:['collapseAll'],
                     async:true,
                     desc: function() { return this.tr((({ key:"Collapses all sections" }))); },
                 },
@@ -114,6 +132,7 @@ module.exports = function() {
                     name:'expandAll',
                     type:'function',
                     async:true,
+                    events:['expandAll'],
                     desc: function() { return this.tr((({ key:"Expands all sections. multiExpand must be enabled for this to work." }))); },
                 }
             ]

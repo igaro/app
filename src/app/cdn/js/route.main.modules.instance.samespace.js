@@ -66,6 +66,7 @@ module.exports = function() {
                     name:'addSpace',
                     type:'function',
                     async : true,
+                    events:['addSpace'],
                     desc: function() { return this.tr((({ key:"Creates a Space object." }))); },
                     returns : {
                         instanceof : function() { return data.objects.space; }
@@ -109,18 +110,21 @@ module.exports = function() {
                     name:'stop',
                     type:'function',
                     async : true,
+                    events:['stop'],
                     desc: function() { return this.tr((({ key:"Stops the automated transitioning between spaces." }))); }
                 },
                 {
                     name:'start',
                     type:'function',
                     async: true,
+                    events:['start'],
                     desc: function() { return this.tr((({ key:"Begins the automated transitioning between spaces." }))); }
                 },
                 {
                     name:'to',
                     type:'function',
                     async : true,
+                    events:['to'],
                     desc: function() { return this.tr((({ key:"Navigates to a space." }))); },
                     attributes : [
                         {

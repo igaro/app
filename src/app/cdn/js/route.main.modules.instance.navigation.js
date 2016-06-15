@@ -67,6 +67,7 @@ module.exports = function() {
                     {
                         name : 'addOptions',
                         type : 'function',
+                        async : true,
                         desc : function() { return this.tr((({ key:"Calls .addOption() sequentially." }))); },
                         attributes : [
                             {
@@ -85,6 +86,8 @@ module.exports = function() {
                     {
                         name : 'addOption',
                         type : 'function',
+                        events:['addOption'],
+                        async:true,
                         desc : function() { return this.tr((({ key:"Adds an option to the menu." }))); },
                         attributes : [
                             {
@@ -156,6 +159,8 @@ module.exports = function() {
                     {
                         name : 'setActive',
                         async : true,
+                        events: ['setActive'],
+                        desc : function() { return this.tr((({ key:"Makes an option an active selection." }))); },
                         type : 'function',
                         attributes : [
                             {
