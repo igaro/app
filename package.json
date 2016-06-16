@@ -29,7 +29,7 @@
   },
   "man": "",
   "scripts": {
-    "pretest": "./tests/init.js",
+    "pretest": "pwd && ./tests/init.sh",
     "test": "sleep 8 && ./node_modules/nightwatch/bin/nightwatch -e firefox -c ./tests/nightwatch.json ./tests/src",
     "posttest": "fuser -k 3006/tcp"
   },
