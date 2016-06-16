@@ -221,35 +221,30 @@ module.exports = function(app, params) {
             }
 
             // basic plural index
-			var pluralIndex = hasPluralCnt? 0:1,
+			var pluralIndex = hasPluralCnt? pluralCnt === 1? 1:0:1,
                 key = data.key,
                 dict = data.dict;
 
 			// gettext data support
             if (dict) {
+                var langId = getCurrentIdForDict(dict);
+                if (langId) {
+                    if (pluralCnt)
+                        pluralIndex = language.pool[langId].pluralForms.logic(pluralCnt);
 
-                var langId = getCurrentIdForDict(dict),
-                    lang = language.pool[langId];
+                    // select language
+                    dict = dict[langId];
 
-			    pluralIndex = hasPluralCnt? lang.pluralForms.logic(pluralCnt) : 1;
-
-                // select language
-                dict = dict[langId];
-
-                // try to map and return
-                if (dict) {
+                    // try to map and return
                     var mapping = dict[pluralIndex];
-                    if (typeof mapping === 'string' && mapping.length)
+                    if (typeof mapping === 'string' && mapping.length) {
                         return mapping;
+                    } else {
+                        // force English pluralization
+                        if (pluralIndex > 1)
+                            pluralIndex = 0;
+                    }
                 }
-                // force English pluralization
-                if (pluralIndex > 1)
-                    pluralIndex = 0;
-            } else {
-
-                // basic English pluralization
-                if (pluralCnt === 1)
-                    pluralIndex = 1;
             }
 
 			// pick from the raw keys

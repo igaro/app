@@ -1,4 +1,5 @@
 {
+    "0" : function() { return this.tr((({ key:"No Connection" }))); },
     "101" : function() { return this.tr((({ key:"Switching Protocols" }))); },
     "102" : function() { return this.tr((({ key:"Processing" }))); },
     "200" : function() { return this.tr((({ key:"OK" }))); },

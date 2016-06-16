@@ -100,8 +100,6 @@ return Promise.resolve().then(function () {
         app['instance.amd'] = module.exports(app,appConf);
     }).call(env);
 
-
-
     // load requested modules
     var ai = appConf.init || {};
     return new app['instance.amd']().get({

@@ -183,8 +183,10 @@ module.exports = function(app) {
                         domMgr.mk('p',null,function() { return this.tr((({ key:"Wondering what <b>this.managers</b> is? In Igaro App every object is blessed with services, which provide two way communication, debugging, helpers and more - all tailored to the object. This is explained in greater detail on the Bless page." }))); }),
 
                         domMgr.mk('h1',null,function() { return this.tr((({ key:"Bootstrap" }))); }),
-                        domMgr.mk('p',null,function() { return this.tr((({ key:"The file <b>index.html</b> loads <b>index.js</b> and handles a no JavaScript condition. <b>index.js</b> contains CDN path logic and loads the bootstrap CSS stylesheet, JavaScript polyfills, Apache Cordova (if available) and <b>exec.js</b>. At this point the environment is ready with ES5 and ES6 features and the app can now load." }))); }),
-                        domMgr.mk('p',null,function() { return this.tr((({ key:"<b>exec.js</b> does most of the heavy lifting. It's processed to contain the built in modules and configuration files. The configuration files customize core modules, define global services and event triggers, and tell the app what it should do. Typically an app loads route files/data (header,main,footer) from a CDN or an API." }))); }),
+                        domMgr.mk('p',null,function() { return this.tr((({ key:"The file <b>index.html</b> loads <b>index.js</b> and handles a no JavaScript condition. <b>index.js</b> appends the bootstrap CSS and appends or embeds; CDN path logic, JavaScript polyfills, Apache Cordova (if available), <b>bootstrap.js</b> and <b>exec.js</b>." }))); }),
+                        domMgr.mk('p',null,function() { return this.tr((({ key:"At this point the environment is ready with ES5 and ES6 features and the app can now load." }))); }),
+                        domMgr.mk('p',null,function() { return this.tr((({ key:"<b>bootstrap.js</b> tells the app which configuration file to use, defines basics like core fonts and sets up a loading screen. You may define multiple configurations and swap them out here (it's also possible to swap configuration file dynamically via a URL query parameter should you ever need it)." }))); }),
+                        domMgr.mk('p',null,function() { return this.tr((({ key:"<b>exec.js</b> does most of the heavy lifting. It's compiled to contain the built in modules and loads the configuration file specified in <b>bootstrap.js</b>. The configuration file is compiled from other configuration files which customize core modules, define global services and event triggers, and gives the app a purpose. Typically an app is configured to load route files/data (header,main,footer) from a CDN or an API once <b>exec.js</b> has fired an event to indicate all modules and dependencies are loaded and configuration is complete." }))); }),
 
                         domMgr.mk('p',null,null,function() {
 
@@ -198,9 +200,7 @@ module.exports = function(app) {
             ]
 
         });
-
     };
-
 };
 
 })();

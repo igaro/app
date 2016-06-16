@@ -588,7 +588,7 @@ module.exports = function(app) {
                     ['3rdparty.fastclick', function() { return this.tr((({ key:"Removes 300ms click delay on touch platforms." }))); }],
                     ['3rdparty.hammer', function() { return this.tr((({ key:"Enables Tap, DoubleTap, Swipe, Drag, Pinch, and Rotate gesture events." }))); }],
                     ['3rdparty.moment', function() { return this.tr((({ key:"Date/time formatting using timezone and language." }))); }],
-                    ['conf.app', function() { return this.tr((({ key:"Main configuration file." }))); }],
+                    ['conf.app', function() { return this.tr((({ key:"Bundles all the config files together. Since order is important these are specified manually." }))); }],
                     ['core.country', function() { return this.tr((({ key:"Country support and related functionality." }))); }],
                     ['core.currency', function() { return this.tr((({ key:"Currency support and related functionality." }))); }],
                     ['core.date', function() { return this.tr((({ key:"Timezone selection, date related functionality." }))); }],

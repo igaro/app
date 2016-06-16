@@ -29,8 +29,7 @@
     // initial config, including loading screen and custom load modules.
     @@include('conf/bootstrap.js');
 
-    // loader for built in and custom modules above, usng the config above.
-    // Will load conf.app.js which defines the apps behaviour
+    // loader for built in and custom modules above, usng the config file defined in bootstrap.
     @@include('builtin/exec.js');
 
 })(this);
