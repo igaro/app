@@ -12,12 +12,10 @@
   "homepage": "http://app.igaro.com",
   "devDependencies": {
     "express": "^4.13.4",
-    "fs-extra": "^0.26.7",
+    "fs-extra": "^0.30",
     "eslint": "^2.12.0",
-    "nightwatch": "^0",
     "node-sass": "^3.4.2",
     "node-sass-asset-functions": "0.0.9",
-    "nodeunit": "^0",
     "po2json": "^0.3.2",
     "uglify-js": "^2.6.2",
     "watch": "^0.17.1",
@@ -29,7 +27,7 @@
   },
   "man": "",
   "scripts": {
-    "pretest": "ls && ./tests/init.sh",
+    "pretest": "./tests/init.sh",
     "test": "sleep 8 && ./node_modules/nightwatch/bin/nightwatch -e firefox -c ./tests/nightwatch.json ./tests/src",
     "posttest": "fuser -k 3006/tcp"
   },
