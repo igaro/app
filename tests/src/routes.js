@@ -77,6 +77,7 @@ var self = this;
             .url('http://localhost:3006/#/'+n)
             .waitForElementVisible('body', 1000)
             .pause(1500)
+            .assert.elementPresent('.core-router')
             .assert.elementNotPresent('.igaro >.error')
             .assert.elementNotPresent('.igaro-instance-modaldialog');
 
