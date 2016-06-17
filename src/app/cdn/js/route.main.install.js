@@ -42,7 +42,7 @@ module.exports = function() {
 git clone https://github.com/igaro/app.git igaro/git\n\
 cd igaro/git \n\
 npm install \n\
-./build --recipe=devel --serve=3006 --watch",'gitcode'));
+./build.js --recipe=devel --serve=3006 --watch",'gitcode'));
 
         domMgr.mk('h1',wrapper,function() { return this.tr((({ key:"Boom!" }))); });
 
