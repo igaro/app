@@ -2,9 +2,9 @@
 var head = dom.head,
     title = head.getElementsByTagName('title')[0],
     // write page title & meta for current route and on route change (SEO)
-    eF = function(element,n,model) {
+    eF = function(element,n,model,backup) {
 
-        var c = model.stash[n];
+        var c = model.stash[n] || model.stash[backup];
         if (! c)
             return dom.rm(element);
         dom.setContent(element,c);
@@ -13,7 +13,7 @@ var head = dom.head,
     set = function(model) {
 
         head.appendChild(title);
-        return eF(title,'title',model);
+        return eF(title,'fulltitle',model,'title');
     };
 
 // no title on html loader?

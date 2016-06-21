@@ -23,6 +23,7 @@ module.exports = function(app) {
             domMgr = managers.dom;
 
         domMgr.mk('div',wrapper,null,'logo').addEventListener('click', function() {
+
             router.to([]);
         });
 
@@ -189,7 +190,7 @@ module.exports = function(app) {
                         this.className = 'code';
                         this.addEventListener('click',function(event) {
                             event.preventDefault();
-                            window.open('https://github.com/igaro/app/blob/master/compile/cdn/js/'+router.current.path.join('.')+'.js');
+                            window.open('https://github.com/igaro/app/blob/master/src/app/cdn/js/'+router.current.path.join('.')+'.js');
                         });
                     })
                 ),

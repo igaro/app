@@ -71,14 +71,12 @@
 
                 domMgr.mk('div',wrapper,null,function() {
 
-                    var self = this,
-                        msg = o.message;
-
+                    var msg = o.message;
                     this.className = 'body';
                     if (msg)
-                        domMgr.mk('div',self,function() { return msg.call(this).replace(/\\n/g,"<br>"); },'message');
+                        domMgr.mk('div',this,function() { return msg.call(this,domMgr); },'message');
                     if (o.custom) // custom elements
-                        domMgr.mk('div',self,o.custom,'custom');
+                        domMgr.mk('div',this,o.custom,'custom');
                 });
 
                 self.resolve = function(action) {
