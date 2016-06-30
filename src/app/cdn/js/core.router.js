@@ -77,8 +77,7 @@
         CoreRouterRoute.prototype.uriPath = function() {
 
             var parent = this,
-                path = [],
-                rootPathLevel = router.rootPathLevel;
+                path = [];
 
             while (parent && ! parent.isAtBase()) {
 
@@ -218,7 +217,7 @@
 
             return this.routes.find(function(route) {
 
-                return pool[i].name === name;
+                return route.name === name;
             });
         };
 
@@ -409,19 +408,20 @@
              */
             to : function(a,b,c,d) {
 
-                if (a instanceof coreUrl.__CoreURLMgr) {
+                var path,search,hash,noPush;
 
-                    var path = a.path,
-                        search =a.search,
-                        hash = a.hash,
-                        noPush = b;
+                if (a instanceof coreUrl.__CoreURLMgr) {
+                    path = a.path;
+                    search =a.search;
+                    hash = a.hash;
+                    noPush = b;
 
                 } else if (a instanceof Array) {
 
-                    var path = a,
-                        search = b,
-                        hash = c,
-                        noPush = d;
+                    path = a;
+                    search = b;
+                    hash = c;
+                    noPush = d;
                 } else {
 
                     throw new TypeError("First argument must be instance of CoreURLMgr or Array");
@@ -432,9 +432,10 @@
                 var base = router.base.path.slice(1),
                     paths = path? base.concat(path) : base,
                     model = this.root,
-                    c = this.current,
                     v = this.requestId,
                     routerEventMgr = router.managers.event;
+
+                c = this.current;
 
                 // attempt to leave the current route
                 return (c?
@@ -522,7 +523,7 @@
 
                                 // apply
                                 manageHashChangeListener(false);
-                                env.location.hash = '#' + urlPath;
+                                env.location.hash = '#!' + urlPath;
                                 setTimeout(function() {
 
                                     manageHashChangeListener(true);
@@ -608,7 +609,6 @@
         if (document.location.protocol !== 'file:') {
 
             var path = coreUrl.getPath();
-
             if (path.length) {
                 app['core.events'].rootEmitter.on('state.base', function() {
 

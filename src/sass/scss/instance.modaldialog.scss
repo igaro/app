@@ -53,7 +53,7 @@
 			}
 		}
 
-	    @media screen and (max-width:900px) {
+	    @media (max-width:900px) {
 			input, select, button {
 				margin-top:1em;
 				&:first-child {
@@ -63,9 +63,11 @@
 				display:block;
 				width:100%;
 			}
-	        width:90%;   
-            >.message, >.action, >.custom {
-                margin:.7em;
+	        width:90%;
+            >.body {
+                >.message, >.action, >.custom {
+                    margin:.7em;
+                }
             }
             >.header >h1 {
                 padding:.3em;

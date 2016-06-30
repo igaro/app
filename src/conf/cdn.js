@@ -1,1 +1,1 @@
-var cdn = location.protocol === 'file:'? location.href+'/../cdn' : '/cdn';
+var cdn = location.protocol === 'file:'? location.href+'/../cdn' : 'cdn';

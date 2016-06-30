@@ -9,7 +9,7 @@
      */
     var getCurrent = function() {
 
-        return env.location.hash.substr(1);
+        return env.location.hash.substr(2);
     };
 
     /* Holds a url
@@ -33,7 +33,7 @@
      */
     CoreURLMgr.prototype.toString = function() {
 
-        var url = '#/' + this.path.join('/'),
+        var url = '#!/' + this.path.join('/'),
             hash = this.hash,
             search = this.search;
 
@@ -66,7 +66,7 @@
                 if (! url)
                     url = getCurrent();
                 // rm hash & search & split
-                return url.split('#')[0].split('?')[0].split('/').reduce(function(a,b) {
+                return url.split('#!')[0].split('?')[0].split('/').reduce(function(a,b) {
 
                     if (b.length)
                         a.push(b);
@@ -83,7 +83,7 @@
                 if (! url)
                     url = getCurrent();
                 // rm hash and get search
-                url = url.split('#')[0].split('?')[1];
+                url = url.split('#!')[0].split('?')[1];
                 // exists?
                 if (! url)
                     return {};
@@ -109,7 +109,7 @@
                 return this.getSearch(url)[name];
             },
 
-            /* Returns the hash from a url (or currrent)
+            /* Returns the hash from a url (or current)
              * @param {string} [url] - optional url to parse
              * @returns {string} hash value
              */
@@ -117,7 +117,7 @@
 
                 if (! url)
                     url = getCurrent();
-                return  url.split('#')[1];
+                return  url.split('#!')[1];
             },
 
             /* Returns manager for a url
