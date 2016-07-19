@@ -4,8 +4,6 @@
 
         "use strict";
 
-        console.error(11, params.version);
-
         var repo = appConf.cdn,
             InstanceXhr = app['instance.xhr'],
             bless = app['core.object'].bless,
