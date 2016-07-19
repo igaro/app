@@ -17,8 +17,8 @@
 
 // node version check
 var nodeVersion = process.version.slice(1).split('.');
-if (nodeVersion[0] < 5 && nodeVersion[1] < 8)
-    throw new Error("NodeJS 5.8+ is required to run this script. The current version is "+nodeVersion.join('.'));
+if (nodeVersion[0] < 4 && nodeVersion[1] < 3)
+    throw new Error("NodeJS 4.3+ is required to run this script. The current version is "+nodeVersion.join('.'));
 
 // main vars
 var args = require("yargs").argv,
@@ -65,6 +65,9 @@ var srcRootDir = __dirname + '/src',
 var includeRegExp = /\@\@include\((.*?)\)/g,
     varRegExp = /\@\@var\((.*?)\)/g,
     trRegExp = function() { return /\.tr\(\(\(\{(.*?)\}\)\)/g; };
+
+// pkg meta (useful for version number)
+var packageMeta = require(__dirname + "/package.json");
 
 /* HELPERS ------------------------------------------------------------ */
 
@@ -369,6 +372,7 @@ var build = {
 
             // embed vars
             recipeConf.buildTs = new Date().getTime();
+            recipeConf.version = packageMeta.version || 0;
 
             files.forEach(function(file) {
 

@@ -33,7 +33,8 @@ var appConf = {
             { name:'Open Sans' }
         ]
     },
-    version: "@@VAR{version}",
+    version: "@@var('version')",
+    buildTs: "@@var('buildTs')",
     timestamp : new Date(),
     debug : true,
     init : {

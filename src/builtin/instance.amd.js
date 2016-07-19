@@ -4,12 +4,14 @@
 
         "use strict";
 
+        console.error(11, params.version);
+
         var repo = appConf.cdn,
             InstanceXhr = app['instance.xhr'],
             bless = app['core.object'].bless,
             dom = app['core.dom'],
             head = dom.head,
-            version = encodeURIComponent(params.version),
+            appVerStr = "appBuildTs="+encodeURIComponent(params.buildTs)+"&appVersion="+encodeURIComponent(params.version),
             workers = [
                 'core.events',
                 'core.object',
@@ -185,7 +187,7 @@
                 file += 'v='+modVersion+'&';
 
             // add app version
-            file += 'av='+version;
+            file += appVerStr;
 
             this.file = file;
 

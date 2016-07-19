@@ -7,10 +7,11 @@
 
     // helpers
     var head = document.getElementsByTagName('head')[0],
+        appVerStr = "?appBuildTs="+encodeURIComponent("@@var('buildTs')")+"&appVersion="+encodeURIComponent("@@var('version')"),
         append = function(file) {
             var isCSS = file.slice(-4) === '.css',
                 s = document.createElement(isCSS? 'link' : 'script');
-            s[isCSS? 'href' : 'src'] = cdn+'/'+file+"?va=@@var('buildTs')";
+            s[isCSS? 'href' : 'src'] = cdn+'/'+file+appVerStr;
             if (isCSS)
                 s.rel = "stylesheet";
             head.appendChild(s);
