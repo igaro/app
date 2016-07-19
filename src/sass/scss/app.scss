@@ -292,13 +292,9 @@ body {
             }
 
             &.working, &.workers_done {
-                background-image: inline-image("igaro/spinner.gif");
-                background-position: 50% 50%;
-                background-repeat: no-repeat;
             }
 
             &.workers_done {
-                background-position: 50% 70%;
             }
 
             >.worker {
