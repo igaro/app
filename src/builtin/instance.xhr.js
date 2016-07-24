@@ -39,7 +39,7 @@
             if (typeof o.withCredentials === 'boolean')
                 this.withCredentials = o.withCredentials;
             if (o.form)
-                this.setForm(o.form);
+                this.applyForm(o.form);
             if (typeof o.silent === 'boolean')
                 this.silent = o.silent;
             if (o.stash)
@@ -199,12 +199,12 @@
          * @param {object} [o] - optional config literal. See constructor, setBits and online help for attributes.
          * @returns {Promise} containing data
          */
-        InstanceXhr.prototype.exec = function(action, o) {
+        InstanceXhr.prototype.exec = function(action,o) {
+
+            setBits.call(this,o);
 
             var self = this,
                 vars = this.vars;
-
-            setBits.call(this,o);
 
             if (typeof vars === 'function')
                 vars = vars();
@@ -329,9 +329,9 @@
 
             var fd = this.formdata = {};
             this.headers["Content-Type"] = "application/x-www-form-urlencoded";
-            Array.prototype.splice.call(form.elements).forEach(function (d,l) {
+            Array.prototype.slice.call(form.elements).forEach(function(l) {
 
-                if (l.disabled)
+                if (l.disabled || ! l.name)
                     return;
 
                 if (l.type === "checkbox" && l.checked) {

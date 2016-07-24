@@ -129,8 +129,12 @@ module.exports = function(app) {
 
         return Array.prototype.slice.call(this.form.elements).map(function(ctl) {
 
-            if (! /BUTTON|FIELDSET/.test(ctl.nodeName.toUpperCase()))
+            var nodeName = ctl.nodeName.toUpperCase();
+            if ((! /BUTTON|FIELDSET/.test(nodeName)) && (! (nodeName === 'INPUT' && ctl.type.toUpperCase() === 'SUBMIT')))
+                return ctl;
+        }).filter(function(ctl) {
 
+            if (ctl)
                 return ctl;
         });
     };
@@ -156,19 +160,19 @@ module.exports = function(app) {
 
     /* Displays an error near a control
      * @param {object} ctl - form control
-     * @param {object} msg - language literal to pull text from
+     * @param {function} msg - providing language key
      * @returns {null}
      */
     InstanceFormValidate.prototype.displayError = function(ctl, msg) {
 
-        if (this.errorDisplayAmount && this.errorDisplayAmount < this.messages.length)
+        if (this.errorDisplayAmount && this.errorDisplayAmount <= this.messages.length)
             return;
 
         if (! (ctl instanceof Node))
             throw new TypeError("First argument must be an instance of Node");
 
-        if (typeof msg !== 'object')
-            throw new TypeError("Second argument must be an object");
+        if (typeof msg !== 'function')
+            throw new TypeError("Second argument must be a function");
 
         var self = this,
             domMgr = this.managers.dom,
@@ -242,13 +246,14 @@ module.exports = function(app) {
                     if (typeof element.min !== 'undefined' && value < parseInt(element.min))
                         return addMsg(element, l.min);
 
-                    if (typeof element.max !== 'undefined' && value < parseInt(element.max))
+                    if (typeof element.max !== 'undefined' && value > parseInt(element.max))
                         return addMsg(element, l.max);
-                }
+                } else {
 
-                // range
-                if (typeof element.min !== 'undefined' && value.length < element.min)
-                    return addMsg(element, l.minLength);
+                    // range
+                    if (typeof element.min !== 'undefined' && value.length < element.min)
+                        return addMsg(element, l.minLength);
+                }
 
                 // pattern
                 if (element.pattern && ! new RegExp(element.pattern).test(value))
