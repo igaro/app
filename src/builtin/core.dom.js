@@ -277,10 +277,14 @@
                                 content = null;
                                 if (r.nodeName === 'META') {
                                     r.content = v;
-                                } else if (! (r.nodeName === 'INPUT' && r.type && r.type === 'submit') && 'innerHTML' in r) {
-                                    r.innerHTML = v;
-                                } else if (r.value) {
+                                } else if (r.nodeName === 'OPTGROUP') {
+                                    r.label = v;
+                                } else if (r.nodeName === 'INPUT' && r.type && r.type === 'submit') {
                                     r.value = v;
+                                } else if ('innerHTML' in r) {
+                                    r.innerHTML = v;
+                                } else {
+                                    throw { error:"Unable to set language due to unrecognized node type", node:r };
                                 }
                             };
                             xMgr.on('setEnv', setLang, { deps:[r] });
