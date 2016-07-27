@@ -99,7 +99,8 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.tr((({ key:"Austria" }))); }
+      "name": function() { return this.tr((({ key:"Austria" }))); },
+      "eu": true
     },
     "AU": {
       "callingCode": [
@@ -171,7 +172,8 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.tr((({ key:"Belgium" }))); }
+      "name": function() { return this.tr((({ key:"Belgium" }))); },
+      "eu": true
     },
     "BF": {
       "callingCode": [
@@ -189,7 +191,8 @@
       "currency": [
         "BGN"
       ],
-      "name": function() { return this.tr((({ key:"Bulgaria" }))); }
+      "name": function() { return this.tr((({ key:"Bulgaria" }))); },
+      "eu": true
     },
     "BH": {
       "callingCode": [
@@ -489,7 +492,8 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.tr((({ key:"Cyprus" }))); }
+      "name": function() { return this.tr((({ key:"Cyprus" }))); },
+      "eu": true
     },
     "CZ": {
       "callingCode": [
@@ -498,7 +502,8 @@
       "currency": [
         "CZK"
       ],
-      "name": function() { return this.tr((({ key:"Czech Republic" }))); }
+      "name": function() { return this.tr((({ key:"Czech Republic" }))); },
+      "eu": true
     },
     "DE": {
       "callingCode": [
@@ -507,7 +512,8 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.tr((({ key:"Germany" }))); }
+      "name": function() { return this.tr((({ key:"Germany" }))); },
+      "eu": true
     },
     "DJ": {
       "callingCode": [
@@ -525,7 +531,8 @@
       "currency": [
         "DKK"
       ],
-      "name": function() { return this.tr((({ key:"Denmark" }))); }
+      "name": function() { return this.tr((({ key:"Denmark" }))); },
+      "eu": true
     },
     "DM": {
       "callingCode": [
@@ -572,7 +579,8 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.tr((({ key:"Estonia" }))); }
+      "name": function() { return this.tr((({ key:"Estonia" }))); },
+      "eu": true
     },
     "EG": {
       "callingCode": [
@@ -610,7 +618,8 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.tr((({ key:"Spain" }))); }
+      "name": function() { return this.tr((({ key:"Spain" }))); },
+      "eu": true
     },
     "ET": {
       "callingCode": [
@@ -628,7 +637,8 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.tr((({ key:"Finland" }))); }
+      "name": function() { return this.tr((({ key:"Finland" }))); },
+      "eu": true
     },
     "FJ": {
       "callingCode": [
@@ -673,7 +683,8 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.tr((({ key:"France" }))); }
+      "name": function() { return this.tr((({ key:"France" }))); },
+      "eu": true
     },
     "GA": {
       "callingCode": [
@@ -691,7 +702,8 @@
       "currency": [
         "GBP"
       ],
-      "name": function() { return this.tr((({ key:"United Kingdom" }))); }
+      "name": function() { return this.tr((({ key:"United Kingdom" }))); },
+      "eu": true
     },
     "GD": {
       "callingCode": [
@@ -799,7 +811,8 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.tr((({ key:"Greece" }))); }
+      "name": function() { return this.tr((({ key:"Greece" }))); },
+      "eu": true
     },
     "GS": {
       "callingCode": [
@@ -877,7 +890,8 @@
       "currency": [
         "HRK"
       ],
-      "name": function() { return this.tr((({ key:"Croatia" }))); }
+      "name": function() { return this.tr((({ key:"Croatia" }))); },
+      "eu": true
     },
     "HT": {
       "callingCode": [
@@ -896,7 +910,8 @@
       "currency": [
         "HUF"
       ],
-      "name": function() { return this.tr((({ key:"Hungary" }))); }
+      "name": function() { return this.tr((({ key:"Hungary" }))); },
+      "eu": true
     },
     "ID": {
       "callingCode": [
@@ -914,7 +929,8 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.tr((({ key:"Ireland" }))); }
+      "name": function() { return this.tr((({ key:"Ireland" }))); },
+      "eu": true
     },
     "IL": {
       "callingCode": [
@@ -986,7 +1002,8 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.tr((({ key:"Italy" }))); }
+      "name": function() { return this.tr((({ key:"Italy" }))); },
+      "eu": true
     },
     "JE": {
       "callingCode": [
@@ -1195,7 +1212,8 @@
       "currency": [
         "LTL"
       ],
-      "name": function() { return this.tr((({ key:"Lithuania" }))); }
+      "name": function() { return this.tr((({ key:"Lithuania" }))); },
+      "eu": true
     },
     "LU": {
       "callingCode": [
@@ -1204,7 +1222,8 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.tr((({ key:"Luxembourg" }))); }
+      "name": function() { return this.tr((({ key:"Luxembourg" }))); },
+      "eu": true
     },
     "LV": {
       "callingCode": [
@@ -1213,7 +1232,8 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.tr((({ key:"Latvia" }))); }
+      "name": function() { return this.tr((({ key:"Latvia" }))); },
+      "eu": true
     },
     "LY": {
       "callingCode": [
@@ -1375,7 +1395,8 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.tr((({ key:"Malta" }))); }
+      "name": function() { return this.tr((({ key:"Malta" }))); },
+      "eu": true
     },
     "MU": {
       "callingCode": [
@@ -1493,7 +1514,8 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.tr((({ key:"Netherlands" }))); }
+      "name": function() { return this.tr((({ key:"Netherlands" }))); },
+      "eu": true
     },
     "NO": {
       "callingCode": [
@@ -1611,7 +1633,8 @@
       "currency": [
         "PLN"
       ],
-      "name": function() { return this.tr((({ key:"Poland" }))); }
+      "name": function() { return this.tr((({ key:"Poland" }))); },
+      "eu": true
     },
     "PM": {
       "callingCode": [
@@ -1657,7 +1680,8 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.tr((({ key:"Portugal" }))); }
+      "name": function() { return this.tr((({ key:"Portugal" }))); },
+      "eu": true
     },
     "PW": {
       "callingCode": [
@@ -1702,7 +1726,8 @@
       "currency": [
         "RON"
       ],
-      "name": function() { return this.tr((({ key:"Romania" }))); }
+      "name": function() { return this.tr((({ key:"Romania" }))); },
+      "eu": true
     },
     "RS": {
       "callingCode": [
@@ -1774,7 +1799,8 @@
       "currency": [
         "SEK"
       ],
-      "name": function() { return this.tr((({ key:"Sweden" }))); }
+      "name": function() { return this.tr((({ key:"Sweden" }))); },
+      "eu": true
     },
     "SG": {
       "callingCode": [
@@ -1801,7 +1827,8 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.tr((({ key:"Slovenia" }))); }
+      "name": function() { return this.tr((({ key:"Slovenia" }))); },
+      "eu": true
     },
     "SJ": {
       "callingCode": [
@@ -1819,7 +1846,8 @@
       "currency": [
         "EUR"
       ],
-      "name": function() { return this.tr((({ key:"Slovakia" }))); }
+      "name": function() { return this.tr((({ key:"Slovakia" }))); },
+      "eu": true
     },
     "SL": {
       "callingCode": [
