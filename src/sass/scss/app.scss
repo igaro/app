@@ -80,6 +80,7 @@ body {
       }
 
       fieldset {
+        vertical-align:top;
         background-color: #FAFAFA;
         border: 1px solid #CCC;
         @include corners;
