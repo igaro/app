@@ -319,13 +319,13 @@
         };
 
         /* Applies elements on a form to be sent with the request and sets the encoding header
-         * @param {object} form - HTML FORM Element
+         * @param {object} form - HTML FORM Element or literal impersonation with form.elements as Array
          * @returns {null}
          */
         InstanceXhr.prototype.applyForm = function(form) {
 
-            if (!(form instanceof Node) || ! form.elements)
-                throw new TypeError("First argument must be an HTML FORM Element");
+            if (typeof form !== 'object' || ! form.elements)
+                throw new TypeError("First argument must be an HTML FORM Element or an object with elements key");
 
             var fd = this.formdata = {};
             this.headers["Content-Type"] = "application/x-www-form-urlencoded";
