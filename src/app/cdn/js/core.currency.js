@@ -160,7 +160,7 @@
                 if (isNeg)
                     t *= -1;
                 t+= '';
-                var o = t.split('.',2);
+                var o = v.split('.',2);
                 t = o[0]
                     .split('')
                     .reverse()
@@ -181,6 +181,7 @@
              * @returns {object} span dom element
              */
             colorize : function(v,q) {
+
                 v = parseFloat(v);
                 return dom.mk('span',null,q,function() {
                     if (v !== 0)
@@ -188,16 +189,17 @@
                 });
             },
 
-            /* A helper which commerizes, adds a symbol and colourizes
+            /* A helper which commarizes, adds a symbol and colourizes
              * @param {(number|float|string)} v - value to format
              * @param {*} [o] - a config literal to switch ops on/off
              * @returns {object} span dom element
              */
             format : function(v,o) {
+
                 v = o && o.noNormalize? parseFloat(v) : this.normalize(v);
                 var c = o && o.type? o.type : this.env,
                     f = this.pool[c].format,
-                    q = f? f(v,o) : (v < 0? '-': '') + this.pool[c].symbol + this.commarize(v < 0? v*-1 : v);
+                    q = f? f.call(this,v,o) : (v < 0? '-': '') + this.pool[c].symbol + this.commarize(Number(v < 0? v*-1 : v).toFixed(2));
                 if (o && o.colorize)
                     q = this.colorize(v, q);
                 return dom.mk('span',null,q,'core-currency-formatted');
