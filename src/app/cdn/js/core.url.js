@@ -4,14 +4,6 @@
 
     "use strict";
 
-    /* Gets the current location (held in hash)
-     * @returns {string}
-     */
-    var getCurrent = function() {
-
-        return env.location.hash.substr(2);
-    };
-
     /* Holds a url
      * @constructor
      */
@@ -36,24 +28,35 @@
         var url = '#!/' + this.path.join('/'),
             hash = this.hash,
             search = this.search;
-
         if (search) {
             url += '?' + Object.keys(search).map(function(pair) {
 
                 return encodeURIComponent(pair[0])+'='+encodeURIComponent(pair[1]);
             }).join('&');
         }
-
         if (hash)
             url += '#'+hash;
-
         return url;
     };
 
     module.exports = function() {
 
+        /* Gets the current location (held in hash)
+         * @returns {string}
+         */
+        var getCurrent = function() {
+
+            var location = env.location,
+                escapedFrag = coreUrl.getSearchValue("_escaped_fragment_",location.href);
+
+            if (escapedFrag)
+                location.hash = '#!'+escapedFrag;
+
+            return location.hash.substr(2);
+        };
+
         // service
-        return {
+        var coreUrl = {
 
             __CoreURLMgr : CoreURLMgr,
 
@@ -66,7 +69,7 @@
                 if (! url)
                     url = getCurrent();
                 // rm hash & search & split
-                return url.split('#!')[0].split('?')[0].split('/').reduce(function(a,b) {
+                return url.split('#')[0].split('?')[0].split('/').reduce(function(a,b) {
 
                     if (b.length)
                         a.push(b);
@@ -83,12 +86,12 @@
                 if (! url)
                     url = getCurrent();
                 // rm hash and get search
-                url = url.split('#!')[0].split('?')[1];
+                url = url.split('#')[0].split('?')[1];
                 // exists?
                 if (! url)
                     return {};
                 // split
-                return url.split.reduce(function(a,b) {
+                return url.split('&').reduce(function(a,b) {
 
                     var v = b.split('=');
                     a[decodeURIComponent(v[0])] = decodeURIComponent(v[1]) || true;
@@ -106,7 +109,7 @@
                 if (! name)
                     throw new TypeError("First argument must be defined");
 
-                return this.getSearch(url)[name];
+                return coreUrl.getSearch(url)[name];
             },
 
             /* Returns the hash from a url (or current)
@@ -117,7 +120,7 @@
 
                 if (! url)
                     url = getCurrent();
-                return  url.split('#!')[1];
+                return  url.split('#')[1];
             },
 
             /* Returns manager for a url
@@ -129,7 +132,7 @@
                 if (typeof url !== 'string')
                     throw new TypeError("First argument must be of type string.");
 
-                return new CoreURLMgr(this.getPath(url),this.getSearch(url),this.getHash(url));
+                return new CoreURLMgr(coreUrl.getPath(url),coreUrl.getSearch(url),coreUrl.getHash(url));
             },
 
             /* Returns manager for current url
@@ -137,7 +140,7 @@
              */
             getCurrent : function() {
 
-                return new CoreURLMgr(this.getPath(),this.getSearch(),this.getHash());
+                return new CoreURLMgr(coreUrl.getPath(),coreUrl.getSearch(),coreUrl.getHash());
             },
 
             /* Makes a manager from components
@@ -152,6 +155,8 @@
             }
 
         };
+
+        return coreUrl;
     };
 
 })(this);
