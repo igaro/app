@@ -13,7 +13,7 @@ module.exports = function(app) {
         dom = app['core.dom'];
 
     var l = {
-        required : function() { return this.tr((({ key:"Value required" }))); },
+        required : function() { return this.tr((({ key:"Required" }))); },
         pattern : function() { return this.tr((({ key:"Invalid value" }))); },
         min : function() { return this.tr((({ key:"Value too low" }))); },
         minLength : function() { return this.tr((({ key:"Length too small" }))); },
@@ -66,7 +66,7 @@ module.exports = function(app) {
 
         var self = this;
         this.form = form;
-        this.__allowThrough = false;
+        //this.__allowThrough = false;
         form.setAttribute('novalidate',true);
         form.classList.add('instance-form-validate');
 
@@ -74,25 +74,27 @@ module.exports = function(app) {
         form.addEventListener('submit', function(event) {
 
             event.preventDefault();
-            if (self.__allowThough) {
-                self.__allowThrough = false;
-                return false;
-            }
-            event.stopImmediatePropagation();
+            //if (self.__allowThough) {
+            //    self.__allowThrough = false;
+            //    return false;
+            //}
             return self.check().then(function(valid) {
 
-                if (valid) {
-                    self.__allowThrough = true;
-                    return self.onValidSubmit.call(self);
+                if (! valid) {
+                    //self.__allowThrough = true;
+                //} else {
+                    event.stopImmediatePropagation();
                 }
-            })['catch'](function() {
+            })['catch'](function(e) {
 
-                return self.managers.debug.handle();
+                event.stopImmediatePropagation();
+                return self.managers.debug.handle(e);
             });
         });
 
         // event: change
         form.addEventListener('change', function() {
+
             self.onFormModify();
         });
 
@@ -222,7 +224,7 @@ module.exports = function(app) {
 
                 element.classList.add('validation-ok');
 
-                var value = element.nodeName === 'SELECT'? element.options[element.selectedIndex].value  : element.value.trim(),
+                var value = element.nodeName === 'SELECT'? (element.selectedIndex === -1? "": element.options[element.selectedIndex].value) : element.value.trim(),
                     type = element.type? element.type.toLowerCase() : null;
 
                 // required
