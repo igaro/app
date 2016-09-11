@@ -1,3 +1,5 @@
+"use strict";
+
 var body = document.body,
     bodyStyle = body.style,
     resetOverflow = function(conf) {
@@ -11,11 +13,12 @@ var body = document.body,
 loadingWrapper.className = 'working';
 loading.className = 'igaro-loading';
 loading.appendChild(loadingWrapper);
-bodyStyle.overflow = 'hidden',
+bodyStyle.overflow = 'hidden';
+
 body.appendChild(loading);
 
-var appConf = {
-    cdn : cdn,
+var appConf = { //jshint ignore:line
+    cdn : cdn, //jshint ignore:line
     msgIncompatible : function() { return this.tr((({ key:"Your device or software is too old. Please upgrade." }))); },
     msgErr : function() { return this.tr((({ key:"An unexpected error has occurred.<p>Please email <b>app-support@igaro.com</b> for support." }))); },
     libs : {
@@ -46,11 +49,12 @@ var appConf = {
                 loadingWrapper.className = 'workers_done';
             }
             loadingWrapper.textContent='';
+            var wrkHandler = function(w) {
+                if (workers.indexOf(w) === -1)
+                    workers.push(w);
+            };
             while (v) {
-                v.workers.forEach(function(w) {
-                    if (workers.indexOf(w) === -1)
-                        workers.push(w);
-                });
+                v.workers.forEach(wrkHandler);
                 v = v.children;
             }
             workers.forEach(function(w) {
@@ -73,9 +77,18 @@ var appConf = {
             loadingWrapper.className = 'error';
             resetOverflow(conf);
             e = typeof e === 'object' && e.error && e.error.incompatible? conf.msgIncompatible : conf.msgErr;
-            loadingWrapper.innerHTML = Object.keys(e).map(function(n) {
-               return e[n];
-            }).join("<p>");
+            loadingWrapper.innerHTML = typeof e === 'function'? e.call(app["core.language"] || {
+                tr : function(data) { return data.key; },
+                substitute : function() {
+
+                    var args = Array.prototype.slice.call(arguments,0),
+                        str = args.shift();
+                    return str.replace(/\%\[[\d]\]/g, function(m,v) {
+                        v = args[parseInt(m.substr(0,m.length-1).substr(2))];
+                        return typeof v !== 'undefined' && v !== null? v : m;
+                    });
+                }
+            }) : e;
         }
     }
 };

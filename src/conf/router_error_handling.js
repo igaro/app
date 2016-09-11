@@ -10,10 +10,15 @@ router.managers.event.on('to-error', function (o) {
     while (typeof httpCode === 'object' && httpCode.error) {
       httpCode = httpCode.error;
     }
-    if (httpCode === 404)
+    if (httpCode === 404) {
+        if (env.navigator && /bot|googlebot|crawler|spider|robot|crawling/.test(env.navigator.userAgent)) {
+            window.location.href = '/404';
+            return;
+        }
         return new ModalDialog().alert({
             message: function() { return this.tr((({ key:"The page you requested does not exist." }))); }
         });
+    }
     // else handle
     return router.managers.debug.handle(o);
 });

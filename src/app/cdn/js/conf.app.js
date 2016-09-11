@@ -95,12 +95,12 @@
                     return rootEmitter.dispatch('state.base').then(function() {
 
                         return rootEmitter.dispatch('state.ready');
-                    })['catch'](function (e) {
-
-                        // don't return the handle - doing so will prevent the parent model from displaying and will show the generic load error.
-                        if (e !== 0) // connection issues are handled by a pageMessage
-                            debug.handle(e);
                     });
+                })['catch'](function (e) {
+
+                    // don't return the handle - doing so will prevent the parent model from displaying and will show the generic load error.
+                    if (e !== 0) // connection issues are handled by a pageMessage
+                        debug.handle(e);
                 }).then(function() {
 
                     return { removeEventListener:true };
