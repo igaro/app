@@ -40,9 +40,6 @@
                 if (this.disabled)
                     return self.collapse();
             });
-            if (o.expand)
-                this.expand();
-
             dt.addEventListener('click', function(event) {
                 event.preventDefault();
                 self.toggle();
@@ -108,13 +105,16 @@
         InstanceAccordion.prototype.init = function(o) {
 
             var self = this;
-            return (o.sections?
-                self.addSections(o.sections)
-                :
-                Promise.resolve()
-            ).then(function() {
+            return Promise.resolve().then(function() {
 
-                return self.managers.event.dispatch('init');
+                if (o.sections)
+                    return self.addSections(o.sections);
+            }).then(function() {
+
+                return self.managers.event.dispatch('init').then(function() {
+                    if (o.expand)
+                        return self.expandAll();
+                });
             });
         };
 
@@ -142,7 +142,9 @@
             var s = new InstanceAccordionSection(o);
             arrayInsert(this.sections,s,o);
             return this.managers.event.dispatch('addSection',s).then(function() {
-
+                if (o.expand)
+                    return s.expand();
+            }).then(function() {
                 return s;
             });
         };
