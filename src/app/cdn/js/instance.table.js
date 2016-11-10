@@ -25,9 +25,9 @@
         var InstanceTableDomainRowColumn = function(o) {
 
             this.name='column';
-            this.container=function(dom) {
+            this.container=function(domMgr) {
 
-                return dom.mk('td',o,o.content,o.className);
+                return domMgr.mk('td',o,o.content,o.className);
             };
             bless.call(this,o);
         };
@@ -42,9 +42,9 @@
 
             o = o || {};
             this.name = 'row';
-            this.container=function(dom) {
+            this.container=function(domMgr) {
 
-                return dom.mk('tr',o,null,o.className);
+                return domMgr.mk('tr',o,null,o.className);
             };
             this.children = {
                 columns:'column'
@@ -92,9 +92,9 @@
 
             o = o || {};
             this.name='domain';
-            this.container=function(dom) {
+            this.container=function(domMgr) {
 
-                return dom.mk(o.type,o.parent.table,null,o.className);
+                return domMgr.mk(o.type,o.parent.table,null,o.className);
             };
             this.children = {
                 rows:'row'
@@ -148,10 +148,10 @@
             o = o || {};
             this.name='instance.table';
             this.asRoot=true;
-            this.container=function(dom) {
+            this.container=function(domMgr) {
 
                 var table = self.table = dom.mk('table');
-                return dom.mk('div',o,table,o.className);
+                return domMgr.mk('div',o,table,o.className);
             };
             bless.call(this,o);
             self.header = new InstanceTableDomain({ parent:self, type:'thead', className:o.header? o.header.className:null });
@@ -221,7 +221,7 @@
             if (! o.content) {
                 o.content = function(domMgr) {
 
-                    return domMgr.mk('input[text]',null,null, function() {
+                    return dom.mk('input[text]',null,null, function() {
 
                         var _self = this;
                         dom.setPlaceholder(this,function() { return this.tr((({ key:"Search" }))); });

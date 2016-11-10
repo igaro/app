@@ -19,28 +19,30 @@ module.exports = function(app, params) {
 
         return language.managers.store.get('env').then(function (stored) {
 
-            var set = false;
-            return promiseSequencer([
+            var pool = [
                 stored,
                 params.conf.localeLanguage,
                 url.getSearchValue('localeLanguage'),
                 window.navigator.userLanguage || window.navigator.language,
                 'en-US',
                 'en'
-            ], function(code) {
-                if (! set && code)
-                    return language.setEnv(code,true).then(
-                        function() {
-                            set = true;
-                        },
-                        function () { }
-                    );
-            }).then(
-                function () {
-                    if (! set)
-                        throw new Error('Language failed to set');
-                }
-            );
+            ].filter(function(v) {
+                return typeof v === 'string' && v.length;
+            });
+
+            return promiseSequencer(pool, function(code) {
+                return Promise.resolve().then(function() {
+                    return language.setEnv(code,true).then(function() {
+                        throw { id:22976543 };
+                    });
+                })['catch'](function (e) {
+                    if (typeof e !== 'object' || e.id !== 38628137)
+                        throw e;
+                });
+            })['catch'](function(e) {
+                if (typeof e !== 'object' || e.id !== 22976543)
+                    throw { e:e, error:'Language failed to set', attempted:pool, pool:language.pool };
+            });
         });
     };
 
@@ -129,29 +131,25 @@ module.exports = function(app, params) {
          * @param {boolean} [noStore] - don't store the code for persistance. Default false.
          * @returns {Promise}
          */
-        setEnv : function(id,noStore) {
+        setEnv : function(id, noStore) {
 
             if (typeof id !== 'string')
                 throw new TypeError('First argument must be a string (language code)');
 
-            var self = this,
-                managers = this.managers;
+            id = formatCode(id);
 
-            return Promise.resolve().then(function () {
+            var o = this.pool[id];
+            if (! o)
+                throw { id:38628137, error:'Code is not in pool.', value:id, pool:this.pool };
 
-                id = formatCode(id);
+            this.env = id;
+            document.body.style.textAlign = o.rL? 'right' : 'left';
+            this.rtl = o.rtl === true;
 
-                var o = self.pool[id];
-                if (! o)
-                    throw { error:'Code is not in pool.', value:id, pool:self.pool };
+            var managers = this.managers;
+            return (noStore? Promise.resolve() : managers.store.set('env',id)).then(function() {
 
-                self.env = id;
-                document.body.style.textAlign = o.rL? 'right' : 'left';
-                self.rtl = o.rtl === true;
-
-                return (noStore? Promise.resolve() : managers.store.set('env',id)).then(function() {
-                    return managers.event.dispatch('setEnv',id);
-                });
+                return managers.event.dispatch('setEnv',id);
             });
         },
 

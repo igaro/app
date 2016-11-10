@@ -6,10 +6,13 @@
 
     module.requires = [
         { name:'instance.modaldialog.css' },
-        { name:'core.language.js' }
+        { name:'core.language.js' },
+        { name:'core.dom.js' },
     ];
 
     module.exports = function(app,params) {
+
+        var dom = app['core.dom'];
 
         var zIndexAt = 999999,
             body = document.body,
@@ -47,7 +50,7 @@
                         });
                     }
                 }),
-                wrapper = domMgr.mk('div',container,null,function() {
+                wrapper = dom.mk('div',container,null,function() {
 
                     this.className = o.type || 'custom';
                     this.addEventListener('click', function(event) {
@@ -65,11 +68,11 @@
             return new Promise(function(resolve) {
 
                 if (o.title)
-                    o.header = domMgr.mk('h1',null,o.title);
+                    o.header = dom.mk('h1',null,o.title);
                 if (o.header)
                     domMgr.mk('div',wrapper,o.header,'header');
 
-                domMgr.mk('div',wrapper,null,function() {
+                dom.mk('div',wrapper,null,function() {
 
                     var msg = o.message;
                     this.className = 'body';

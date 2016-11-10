@@ -13,9 +13,9 @@ var self = this;
     'overview',
     'features',
     'install',
-    'install.license',
+    'install/license',
     'showcase',
-    'showcase.todomvc',
+    'showcase/todomvc',
     'structure',
     'bless',
     'async',
@@ -74,7 +74,7 @@ var self = this;
     self['route -> '+n] = function(browser) {
 
         browser
-            .url('http://localhost:3006/#/'+n)
+            .url('http://localhost:3006/'+n)
             .waitForElementVisible('body', 1000)
             .pause(1500)
             .assert.elementPresent('.core-router')
@@ -84,5 +84,4 @@ var self = this;
         browser.end();
 
     };
-
 });

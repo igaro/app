@@ -1,6 +1,6 @@
 //# sourceURL=core.store.js
 
-(function(env) {
+(function() {
 
     "use strict";
 
@@ -36,7 +36,7 @@
                 }
             }
             return store.defaultProvider;
-        }
+        };
 
         /* Returns a value in a store
          * @param {string} id - name of value to return, dot notation, i.e local, session, cookie

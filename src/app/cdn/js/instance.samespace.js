@@ -1,6 +1,8 @@
 //# sourceURL=instance.samespace.js
 
-(function(env) {
+(function() {
+
+    'use strict';
 
     module.requires = [
         { name:'instance.samespace.css' }
@@ -8,9 +10,8 @@
 
     module.exports = function(app) {
 
-        'use strict';
-
         var object = app['core.object'],
+            dom = app['core.dom'],
             bless = object.bless,
             arrayInsert = object.arrayInsert;
 
@@ -23,9 +24,9 @@
         var InstanceSameSpaceArea = function(o) {
 
             this.name = 'space';
-            this.container = function(dom) {
+            this.container = function(domMgr) {
 
-                return dom.mk('div',null,o.content,o.className);
+                return domMgr.mk('div',null,o.content,o.className);
             };
 
             bless.call(this,o);
@@ -33,7 +34,7 @@
             var parent = this.parent,
                 self = this;
 
-            this.li = this.managers.dom.mk('li',parent.nav.firstChild,null,function() {
+            this.li = dom.mk('li',parent.nav.firstChild,null,function() {
 
                 this.addEventListener('click',function() {
 
@@ -63,9 +64,9 @@
             this.children = {
                 spaces:'space'
             };
-            this.container = function(dom) {
+            this.container = function(domMgr) {
 
-                return dom.mk('div',o,null,function() {
+                return domMgr.mk('div',o,null,function() {
 
                     if (o.className)
                         this.classList.add(o.className);
@@ -78,10 +79,9 @@
 
             bless.call(this,o);
 
-            var managers = this.managers,
-                domMgr = managers.dom;
+            var managers = this.managers;
 
-            this.nav = domMgr.mk('nav',this,domMgr.mk('ul'));
+            this.nav = dom.mk('nav',this,dom.mk('ul'));
             this.loop = typeof o.loop === 'boolean'? o.loop : true;
 
             if (! o.transparent)

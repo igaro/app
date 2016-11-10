@@ -3,7 +3,7 @@
 @import "font.glyph.awesome.scss";
 @import "../sass-global/mixins.scss";
 
-@mixin instanceTableColStatus {
+@mixin instanceTableColStatusColorize {
 
     &.green {
         text-align:center;
@@ -21,9 +21,33 @@
         }
     }
 
-    &.orange {
+    &.orange, &.amber {
         text-align:center;
         color:$common-trafficlight-amber;
+        >span {
+            @include fa-icon(exclamation);
+        }
+    }
+}
+
+@mixin instanceTableColStatus {
+
+    &.green {
+        text-align:center;
+        >span {
+            @include fa-icon(check);
+        }
+    }
+
+    &.red {
+        text-align:center;
+        >span {
+            @include fa-icon(times);
+        }
+    }
+
+    &.orange, &.amber {
+        text-align:center;
         >span {
             @include fa-icon(exclamation);
         }
@@ -33,29 +57,26 @@
 @mixin instanceTableColBackColor {
 
     &.green {
-        background-color:$common-trafflight-green;
+        background-color:$common-trafficlight-green;
         color:#fff;
     }
 
     &.red {
-        background-color:$common-trafflight-red;
+        background-color:$common-trafficlight-red;
         color:#fff;
     }
 
-    &.orange {
-        background-color:$common-trafflight-amber;
+    &.orange, &.amber {
+        background-color:$common-trafficlight-amber;
         color:#fff;
     }
 }
 
 .instance-table {
 
-    overflow-x:auto;
-    max-width:100%;
-    width:100%;
-
+    overflow-x: scroll;
     >table {
-        border:1px solid #eee;
+        width:100%;
         font-size:90%;
 
         >thead {

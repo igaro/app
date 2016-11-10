@@ -241,7 +241,18 @@ var httpd = function() {
 
         consoleInfo('Httpd:'+servePort);
     });
-    app.use(express.static(targetRootDir));
+    app.use('/res', express.static(targetRootDir + '/res'));
+    app.use('/cdn', express.static(targetRootDir + '/cdn'));
+    app.use('/', function(req, res) {
+
+        var url = req.url.split('?')[0];
+        res.sendFile(targetRootDir + (url.includes('.') && url.lastIndexOf('/') === 0? url : '/index.html'), null, function (err) {
+            if (err) {
+              console.log(err);
+              res.status(err.status).end();
+            }
+        });
+    });
 };
 
 /* WATCHER ------------------------------------------------------------ */
@@ -311,11 +322,11 @@ var build = {
               });
         }).then(function(files) {
 
-            // read only js and html
+            // read only js
             return Promise.all(
                 files.filter(function(file) {
 
-                    return file.slice(-3) === '.js' || file.slice(-5) === '.html';
+                    return file.slice(-3) === '.js';
                 }).map(function(file) {
 
                     // read file

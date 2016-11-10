@@ -14,6 +14,13 @@
             };
         }
 
+        var urlEncode = function (l) {
+
+            return Object.keys(l).map(function (k) {
+                return encodeURIComponent(k)+"="+encodeURIComponent(l[k]);
+            }).join('&');
+        };
+
         var bless = app['core.object'].bless,
             rootEmitter = app['core.events'].rootEmitter;
 
@@ -34,12 +41,21 @@
                 this.res = o.res;
             if (o.headers)
                 this.headers = o.headers;
-            if (o.vars)
-                this.vars = o.vars;
+            if (o.data) {
+                this.mode = typeof o.data === 'string'? 'plain' : 'json';
+                this.data = o.data;
+            }
             if (typeof o.withCredentials === 'boolean')
                 this.withCredentials = o.withCredentials;
-            if (o.form)
-                this.applyForm(o.form);
+            if (o.form) {
+                this.mode = 'urlenc';
+                this.form = o.form;
+            }
+            if (o.mode) {
+                if (! /json|plain|urlenc|multipart/.test(o.mode))
+                    throw new Error('instance.xhr mode only supports json (default), urlenc (default if form), plain (default if string) and multipart (default if form and upload ctl) modes');
+                this.mode = o.mode;
+            }
             if (typeof o.silent === 'boolean')
                 this.silent = o.silent;
             if (o.stash)
@@ -70,7 +86,7 @@
                 if (status === 0 && (! response || response.length === 0))
                     self.connectionFalure = true;
 
-                if (status === 200 || (status === 0 && response.length > 0)) {
+                if ((status >= 200 && status < 400) || (status === 0 && response.length > 0)) {
 
                     var cv = xhr.getResponseHeader("Content-Type");
 
@@ -121,15 +137,14 @@
                 xhr = this.xhr = new XMLHttpRequest(),
                 eventMgr = this.managers.event;
 
+            this.mode='json';
             this.res='';
             this.withCredentials=false;
-            this.vars = {};
             this.silent = false;
             this.aborted = false;
             this.connectionFailure = false;
             this.headers = {};
             this.response = false;
-            this.formdata = {};
             this.id = Math.floor((Math.random()*9999)+1);
             setBits.call(this,o);
 
@@ -165,8 +180,10 @@
             var self = this,
                 action = this.action,
                 xhr = this.xhr,
-                uri = this._uri,
-                t = this.res,
+                data = this._data,
+                res = this.res,
+                mode = this.mode,
+                headers = this.headers,
                 isPUTorPOST = /(PUT|POST)/.test(action);
 
             if (! this._promise) {
@@ -175,11 +192,30 @@
 
             return rootEmitter.dispatch('instance.xhr.start',self).then(function() {
 
-                if (! isPUTorPOST && uri.length) {
-                    t += t.indexOf('?') > -1? '&' : '?';
-                    t += uri;
+                if (isPUTorPOST) {
+                    switch (mode) {
+                        case 'urlenc':
+                            data = urlEncode(data);
+                            headers['Content-Type'] = 'application/x-www-form-urlencoded';
+                            break;
+                        case 'multipart':
+                            headers['Content-Type'] = 'multipart/form-data';
+                            break;
+                        case 'plain':
+                            data = 'data=' + encodeURIComponent(data);
+                            headers['Content-Type'] = 'text/plain';
+                            break;
+                        default:
+                            data = JSON.stringify(data);
+                            headers['Content-Type'] = 'application/json';
+                    }
+                } else {
+                    data = urlEncode(data);
+                    if (data.length)
+                        res += (res.indexOf('?') === -1? '?' : '&') + data;
                 }
-                xhr.open(action,t,true);
+
+                xhr.open(action,res,true);
                 xhr.withCredentials = self.withCredentials? true : false;
                 Object.keys(self.headers).forEach (function (k) {
 
@@ -189,8 +225,9 @@
                     if (header)
                         xhr.setRequestHeader(k,header);
                 });
+
                 self.response = false;
-                xhr.send(isPUTorPOST? self._uri:null);
+                xhr.send(isPUTorPOST? data:null);
             });
         };
 
@@ -203,28 +240,32 @@
 
             setBits.call(this,o);
 
-            var self = this,
-                vars = this.vars;
+            var self = this;
 
-            if (typeof vars === 'function')
-                vars = vars();
+            /* if (typeof data === 'function')
+                data = data();
 
             if (typeof vars !== 'object')
                 throw new TypeError("instance.xhr var function did not return an object");
+            */
 
             this.action = action;
             this.aborted = false;
             this.connectionFailure = false;
-            this._uri = [vars,self.formdata].map(function (l) {
 
-                return Object.keys(l).map(function (k) {
+            var data = {};
 
-                    return encodeURIComponent(k)+"="+encodeURIComponent(l[k]);
-                }).join('&');
-            }).join('&');
+            // shallow copy form data
+            if (this.form) {
+                Object.assign(data, this.formData(this.form));
+            }
 
-            if (this._uri.length < 2)
-                this._uri = '';
+            // shallow copy json style data
+            if (this.data) {
+                Object.assign(data, this.data);
+            }
+
+            this._data = data;
 
             return new Promise(function(resolve,reject) {
 
@@ -318,41 +359,34 @@
             });
         };
 
-        /* Applies elements on a form to be sent with the request and sets the encoding header
-         * @param {object} form - HTML FORM Element or literal impersonation with form.elements as Array
-         * @returns {null}
+        /* Produces a literal from a form elements, a copy
+         * @param {object} form - HTML FORM Element
+         * @returns {object}
          */
-        InstanceXhr.prototype.applyForm = function(form) {
+        InstanceXhr.prototype.formData = function(form) {
 
             if (typeof form !== 'object' || ! form.elements)
-                throw new TypeError("First argument must be an HTML FORM Element or an object with elements key");
+                throw new TypeError("First argument must be an HTML FORM Element");
 
-            var fd = this.formdata = {};
-            this.headers["Content-Type"] = "application/x-www-form-urlencoded";
-            Array.prototype.slice.call(form.elements).forEach(function(l) {
-
+            return Array.prototype.slice.call(form.elements).reduce(function(fd, l) {
                 if (l.disabled || ! l.name)
-                    return;
-
+                    return fd;
                 if (l.type === "checkbox" && l.checked) {
-
                     fd[l.name] = l.checked? 1:0;
                 } else if (l.type === "select-one" && l.selectedIndex > -1) {
-
                     if (l.options.length)
                         fd[l.name] = l.options[l.selectedIndex].value;
                 } else if (l.type === "select-multiple") {
-
                     var t=l.options.map(function(s) {
                         return ! s.selected? null : s.value;
                     }).join('\n');
                     if (t.length)
                         fd[l.name] = t;
                 } else {
-
                     fd[l.name] = l.value.trim();
                 }
-            });
+                return fd;
+            }, {});
         };
 
         return InstanceXhr;

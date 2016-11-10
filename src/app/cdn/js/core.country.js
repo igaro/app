@@ -1,6 +1,6 @@
 //# sourceURL=core.country.js
 
-(function(env) {
+(function() {
 
     "use strict";
 
@@ -26,27 +26,29 @@
 
             return country.managers.store.get('env').then(function (stored) {
 
-                var set = false;
-                return promiseSequencer([
+                var pool = [
                     stored,
                     params.conf.localeCountry,
                     url.getSearchValue('localeCountry'),
                     n,
                     'US'
-                ], function(code,i) {
-                    if (! set && code)
-                        return country.setEnv(code,true).then(
-                            function() {
-                                set = true;
-                            },
-                            function () { }
-                        );
-                }).then(
-                    function () {
-                        if (! set)
-                            throw new Error('Country failed to set');
-                    }
-                );
+                ].filter(function(v) {
+                    return typeof v === 'string' && v.length;
+                });
+
+                return promiseSequencer(pool, function(code) {
+                    return Promise.resolve().then(function() {
+                        return country.setEnv(code,true).then(function() {
+                            throw { id:22976543 };
+                        });
+                    })['catch'](function (e) {
+                        if (typeof e !== 'object' || e.id !== 38628137)
+                            throw e;
+                    });
+                })['catch'](function(e) {
+                    if (typeof e !== 'object' || e.id !== 22976543)
+                        throw { e:e, error:'Country failed to set', attempted:pool, pool:country.pool };
+                });
             });
         };
 
@@ -81,25 +83,22 @@
              * @param {boolean} [noStore] - don't store the code for persistance. Default false.
              * @returns {Promise}
              */
-            setEnv : function(id,noStore) {
+            setEnv : function(id, noStore) {
 
                 if (typeof id !== 'string')
                     throw new TypeError('First argument must be a string (country code)');
 
-                var self = this,
-                    managers = self.managers;
-
                 id = formatCode(id);
 
-                return Promise.resolve().then(function () {
+                if (! this.pool[id])
+                    throw { id:38628137, error:'Code is not in pool.', value:id, pool:this.pool };
 
-                    if (! self.pool[id])
-                        throw new Error('Code is not in pool.');
-                    self.env = id;
-                    return (noStore? Promise.resolve() : managers.store.set('env',id)).then(function() {
+                this.env = id;
 
-                        return managers.event.dispatch('setEnv',id);
-                    });
+                var managers = this.managers;
+                return (noStore? Promise.resolve() : managers.store.set('env',id)).then(function() {
+
+                    return managers.event.dispatch('setEnv',id);
                 });
             },
 

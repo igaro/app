@@ -18,6 +18,9 @@
             bless = object.bless,
             arrayInsert = object.arrayInsert;
 
+        // has history replacestate?
+        var isHTML5 = !! env.history.replaceState;
+
         /* A route, which represents a path or folder(s) on a url
          * @constructor
          */
@@ -25,9 +28,9 @@
 
             var self = this;
             this.name = o.name;
-            this.container = function(dom) {
+            this.container = function(domMgr) {
 
-                return dom.mk('div',o.container,null,function() {
+                return domMgr.mk('div',o.container,null,function() {
 
                     this.className = 'route';
                     self.wrapper = dom.mk('div',this,null,'wrapper');
@@ -522,11 +525,15 @@
                                 }
 
                                 // apply
-                                manageHashChangeListener(false);
-                                env.location.hash = '#!' + urlPath;
+                                manageUrlChangeListener(false);
+                                if (isHTML5) {
+                                    env.history.pushState({},null,urlPath);
+                                } else {
+                                    env.location.hash = '#!' + urlPath;
+                                }
                                 setTimeout(function() {
 
-                                    manageHashChangeListener(true);
+                                    manageUrlChangeListener(true);
                                 }, 300);
                             }
 
@@ -598,12 +605,12 @@
         };
 
         // window url change
-        var manageHashChangeListener = function(enabled) {
+        var manageUrlChangeListener = function(enabled) {
 
-            window[(enabled? 'add' : 'remove') + 'EventListener']('hashchange', autoRouter);
+            window[(enabled? 'add' : 'remove') + 'EventListener'](isHTML5? 'popState' : 'hashchange', autoRouter);
         };
 
-        manageHashChangeListener(true);
+        manageUrlChangeListener(true);
 
         // handle current url, if not on local filesystem (aka Phonegap app)
         if (document.location.protocol !== 'file:') {

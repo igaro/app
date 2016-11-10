@@ -80,13 +80,19 @@ body {
       }
 
       fieldset {
-        vertical-align:top;
         background-color: #FAFAFA;
         border: 1px solid #CCC;
         @include corners;
         padding:1em;
         color:#111;
+        &.transparent {
+            border:none;
+            color:inherit;
+            padding:0;
+            background-color:none;
+        }
         margin:0;
+        vertical-align:top;
         @include spacingbottom;
         legend {
           color:#222;
@@ -94,37 +100,33 @@ body {
           margin: 0 0 0 0.2em;
           border: 1px solid #AAA;
           background-color: #FFF;
+          font-weight:bold;
+          font-size:80%;
           @include corners;
         }
       }
 
-      @media screen and (min-width: 1000px) {
+      @media (min-width: 1000px) {
         >fieldset {
-          display:inline-block;;
+          display:inline-block;
           &:not(last-child) {
               margin-right:$PAGE_PADDING_STANDARD_WIDTH;
           }
         }
       }
 
-      @media screen and (max-width: 1000px) {
+      @media (max-width: 1000px) {
         >fieldset {
-          border:none;
+          border-left:none;
+          border-right:none;
+          border-bottom:none;
           padding-left:0;
           padding-right:0;
-          padding-bottom:0;
-          background-color:inherit;
           >div {
             &>select, &>textarea, &>input:not([type='button']):not([type='submit']):not([type='radio']):not([type='checkbox']) {
               width:100%;
               margin:0;
             }
-          }
-          >legend {
-            border:0;
-            margin-left:0;
-            background-color:inherit;
-            font-weight:bold;
           }
         }
         >input[type="submit"] , >button {
@@ -242,12 +244,12 @@ body {
     sub, sup { font-size: 75%; line-height:0; position: relative; vertical-align: baseline; }
     sup { top: -0.5em; }
     sub { bottom: -0.25em; }
-    h1 { font-size: 200%; margin:2.5% 0 0 0; line-height:normal; }
-    h2 { font-size: 150%; margin:2.2% 0 0 0; opacity:.9; line-height:normal; }
-    h3 { font-size: 115%; margin:1.7% 0 0 0; opacity:.8; line-height:normal; }
-    h4 { font-size: 105%; margin:1.4% 0 0 0; opacity:.7; line-height:normal; }
-    h5 { font-size: 100%; margin:1.1% 0 0 0; opacity:.6; line-height:normal; }
-    h6 { font-size: 95%; margin:0.8% 0 0 0; opacity:.5; line-height:normal; }
+    h1 { font-size: 200%; margin:2.5% 0 0 0; line-height:normal;font-weight:normal; }
+    h2 { font-size: 150%; margin:2.2% 0 0 0; opacity:.9; line-height:normal;font-weight:normal; }
+    h3 { font-size: 115%; margin:1.7% 0 0 0; opacity:.8; line-height:normal;font-weight:normal; }
+    h4 { font-size: 100%; margin:1.4% 0 0 0; opacity:.7; line-height:normal;font-weight:normal; }
+    h5 { font-size: 95%; margin:1.1% 0 0 0; opacity:.6; line-height:normal; font-weight:normal;}
+    h6 { font-size: 82%; margin:0.8% 0 0 0; opacity:.5; line-height:normal; font-weight:normal; }
 
     >.igaro-loading, >.igaro-router-loading {
         position:fixed;
@@ -287,10 +289,7 @@ body {
 
             padding:1em;
 
-            &.error {
-                margin:9em 1em 1em 1em;
-                background: url("../images/igaro/error.gif") no-repeat 50% 4em;
-            }
+            &.error {}
 
             &.working, &.workers_done {
             }
@@ -302,11 +301,7 @@ body {
 
                 border-radius:0.2em;
                 border: 1px solid #eee;
-                margin-bottom:0.5em;
-
-                &:not(:last-child) {
-                    margin-right:0.5em;
-                }
+                margin:0.25em 0.25em;
 
                 >div {
                     width:1em;

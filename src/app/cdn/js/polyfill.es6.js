@@ -1,3 +1,5 @@
+'use strict';
+
 // ES6 Polyfills taken from MDN
 
 if (! Object.assign) {
@@ -6,7 +8,6 @@ if (! Object.assign) {
         configurable: true,
         writable: true,
         value: function(target) {
-          'use strict';
           if (target === undefined || target === null) {
             throw new TypeError('Cannot convert first argument to object');
           }
@@ -35,7 +36,6 @@ if (! Object.assign) {
 
 if (!Array.prototype.includes) {
   Array.prototype.includes = function(searchElement /*, fromIndex*/ ) {
-    'use strict';
     var O = Object(this);
     var len = parseInt(O.length) || 0;
     if (len === 0) {
@@ -151,11 +151,6 @@ if (!Array.prototype.findIndex) {
   };
 }
 
-
-
-console.error(window === this);
-
-
 //# sourceURL=polyfill.es6.js
 
 /*!
@@ -167,7 +162,6 @@ console.error(window === this);
  */
 
 (function() {
-    "use strict";
     function lib$es6$promise$utils$$objectOrFunction(x) {
       return typeof x === 'function' || (typeof x === 'object' && x !== null);
     }
@@ -237,13 +231,6 @@ console.error(window === this);
       };
     }
 
-    // vertx
-    function lib$es6$promise$asap$$useVertxTimer() {
-      return function() {
-        lib$es6$promise$asap$$vertxNext(lib$es6$promise$asap$$flush);
-      };
-    }
-
     function lib$es6$promise$asap$$useMutationObserver() {
       var iterations = 0;
       var observer = new lib$es6$promise$asap$$BrowserMutationObserver(lib$es6$promise$asap$$flush);
@@ -285,17 +272,6 @@ console.error(window === this);
       lib$es6$promise$asap$$len = 0;
     }
 
-    function lib$es6$promise$asap$$attemptVertx() {
-      try {
-        var r = require;
-        var vertx = r('vertx');
-        lib$es6$promise$asap$$vertxNext = vertx.runOnLoop || vertx.runOnContext;
-        return lib$es6$promise$asap$$useVertxTimer();
-      } catch(e) {
-        return lib$es6$promise$asap$$useSetTimeout();
-      }
-    }
-
     var lib$es6$promise$asap$$scheduleFlush;
     // Decide what async method to use to triggering processing of queued callbacks:
     if (lib$es6$promise$asap$$isNode) {
@@ -304,8 +280,6 @@ console.error(window === this);
       lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$useMutationObserver();
     } else if (lib$es6$promise$asap$$isWorker) {
       lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$useMessageChannel();
-    } else if (lib$es6$promise$asap$$browserWindow === undefined && typeof require === 'function') {
-      lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$attemptVertx();
     } else {
       lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$useSetTimeout();
     }
@@ -1114,5 +1088,3 @@ console.error(window === this);
 
     lib$es6$promise$polyfill$$default();
 }).call(this);
-
-require('es6-promise').polyfill();

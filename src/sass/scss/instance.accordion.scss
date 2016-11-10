@@ -1,5 +1,5 @@
 .instance-accordion {
-	
+
 	>dl {
 
 		margin:0;
@@ -8,10 +8,10 @@
         }
 
 		>dt {
-			border-bottom:.05em solid rgba(0,0,0,.6);
+			border-bottom: 1px solid #eee;
 			padding-bottom:.2em;
 			font-weight:bold;
-			margin-bottom:.5em;
+			margin-bottom:.6em;
 			position:relative;
 			font-size:100%;
             text-align:left;
@@ -39,7 +39,6 @@
 				height:1em;
 				background: inline-image("instance.accordion/arrow.svg") no-repeat 100% 50%;
             	background-size: 100%;
-            	-webkit-transition: all .5s ease-in-out;                 
 				transition: all .5s ease-in-out;
 			}
 
@@ -49,7 +48,6 @@
 			max-height:0;
 			overflow:hidden;
 			margin:0;
-			-webkit-transition: all .6s;                 
 			transition: all .6s;
 			opacity:0;
             >.instance-accordion {
@@ -60,8 +58,9 @@
 		&.expand {
 			>dd {
 				max-height:999px;
+                margin-top:1em;
+                margin-bottom:0.5em;
 				opacity:1;
-				margin-bottom:.5em;
 			}
 			>dt {
 				>div {
@@ -72,8 +71,6 @@
 				}
 			}
 		}
-
 	}
-
 
 }

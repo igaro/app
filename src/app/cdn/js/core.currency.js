@@ -1,6 +1,6 @@
 //# sourceURL=core.currency.js
 
-(function(env) {
+(function() {
 
     "use strict";
 
@@ -21,35 +21,35 @@
             bless = coreObject.bless,
             promiseSequencer = coreObject.promiseSequencer;
 
-        // detects the language to use
+        // detects the currency to use
         var detect = function() {
 
             return currency.managers.store.get('env').then(function (stored) {
 
-                var set = false;
-
-                return promiseSequencer([
+                var countryEnv = country.env;
+                var pool = [
                     stored,
                     params.conf.localeCurrency,
                     url.getSearchValue('localeCurrency'),
-                    country.env && country.pool[country.env] && country.pool[country.env].currency? country.pool[country.env].currency[0] : null,
+                    countryEnv && country.pool[countryEnv] && country.pool[countryEnv].currency? country.pool[country.env].currency[0] : null,
                     'USD'
-                ], function(code,i) {
+                ].filter(function(v) {
+                    return typeof v === 'string' && v.length;
+                });
 
-                    if (! set && code)
-                        return currency.setEnv(code,true).then(
-                            function() {
-                                set = true;
-                            },
-                            function () { }
-                        );
-                }).then(
-
-                    function () {
-                        if (! set)
-                            throw new Error('Currency failed to set');
-                    }
-                );
+                return promiseSequencer(pool, function(code) {
+                    return Promise.resolve().then(function() {
+                        return currency.setEnv(code,true).then(function() {
+                            throw { id:22976543 };
+                        });
+                    })['catch'](function (e) {
+                        if (typeof e !== 'object' || e.id !== 38628137)
+                            throw e;
+                    });
+                })['catch'](function(e) {
+                    if (typeof e !== 'object' || e.id !== 22976543)
+                        throw { e:e, error:'Currency failed to set', attempted:pool, pool:currency.pool };
+                });
             });
         };
 
@@ -69,7 +69,7 @@
             env : null,
             pool : {},
 
-            /* Sets the language code pool
+            /* Sets the currency code pool
              * @param {object} o - an object literal of codes. See app.conf for an example
              * @returns {Promise}
              */
@@ -84,26 +84,22 @@
              * @param {boolean} [noStore] - don't store the code for persistance. Default false.
              * @returns {Promise}
              */
-            setEnv : function(id,noStore) {
+            setEnv : function(id, noStore) {
 
                 if (typeof id !== 'string')
                     throw new TypeError('First argument must be a string (currency code)');
 
-                var self = this,
-                    managers = self.managers;
+                id = formatCode(id);
 
-                return Promise.resolve().then(function() {
+                if (! this.pool[id])
+                    throw { id:38628137, error:'Code is not in pool.', value:id, pool:this.pool };
 
-                    id = formatCode(id);
+                this.env = id;
 
-                    if (! id)
-                        throw new Error('Code is not in pool.');
+                var managers = this.managers;
+                return (noStore? Promise.resolve() : managers.store.set('env',id)).then(function() {
 
-                    self.env = id;
-                    return (noStore? Promise.resolve() : managers.store.set('env',id)).then(function() {
-
-                        return managers.event.dispatch('setEnv',id);
-                    });
+                    return managers.event.dispatch('setEnv',id);
                 });
             },
 
@@ -134,19 +130,10 @@
             getFromPoolById : function(id) {
 
                 if (typeof id !== 'string')
-                    throw new TypeError('First argument must be a string (language code)');
+                    throw new TypeError('First argument must be a string (currency code)');
 
                 id = formatCode(id);
                 return this.pool[id];
-            },
-
-            /* Formats a value into 2dp
-             * @param {(number|float)} v - value to format
-             * @returns {float}
-             */
-            normalize : function(v) {
-
-                return parseFloat(Math.round(v * 100) / 100).toFixed(2);
             },
 
             /* Comma delimits a value, ie 2,000.00
@@ -176,13 +163,14 @@
             },
 
             /* Formats a value with a positive spin on it (or negative!)
-             * @param {(number|float|string)} v - value to format
+             * @param {number} v - value to format
              * @param {*} [q] - the value to use, plus any prepend text, $100,000.00 USD
              * @returns {object} span dom element
              */
             colorize : function(v,q) {
 
-                v = parseFloat(v);
+                if (typeof v !== 'number')
+                    throw new TypeError("First argument must be a number");
                 return dom.mk('span',null,q,function() {
                     if (v !== 0)
                         this.className = 'core-currency-' + (v>0? 'positive': 'negative');
@@ -190,21 +178,25 @@
             },
 
             /* A helper which commarizes, adds a symbol and colourizes
-             * @param {(number|float|string)} v - value to format
+             * @param {number} v - value to format
              * @param {*} [o] - a config literal to switch ops on/off
              * @returns {object} span dom element
              */
             format : function(v,o) {
 
-                v = o && o.noNormalize? parseFloat(v) : this.normalize(v);
+                if (typeof v !== 'number')
+                    throw new TypeError("First argument must be a number");
                 var c = o && o.type? o.type : this.env,
-                    f = this.pool[c].format,
-                    q = f? f.call(this,v,o) : (v < 0? '-': '') + this.pool[c].symbol + this.commarize(Number(v < 0? v*-1 : v).toFixed(2));
+                    t = this.pool[c],
+                    f = t.format,
+                    p = t.prefix || '',
+                    s = t.symbol || '' ,
+                    a = t.affix || '',
+                    q = f? f.call(this,v,o) : (v < 0? '-': '') + p + s + this.commarize((Number(v < 0? v*-1 : v)/100).toFixed(2) + a);
                 if (o && o.colorize)
                     q = this.colorize(v, q);
                 return dom.mk('span',null,q,'core-currency-formatted');
             }
-
         };
 
         // bless service
@@ -216,7 +208,6 @@
         });
 
         return currency;
-
     };
 
 })(this);

@@ -10,6 +10,7 @@ module.exports = function(app) {
     "use strict";
 
     var object = app['core.object'],
+        dom = app['core.dom'],
         bless = object.bless,
         arrayInsert = object.arrayInsert;
 
@@ -22,9 +23,9 @@ module.exports = function(app) {
     var InstanceListItem = function(o) {
 
         this.name = 'item';
-        this.container = function(dom) {
+        this.container = function(domMgr) {
 
-            return dom.mk('li',o.parent.ol,o.content,o.className);
+            return domMgr.mk('li',o.parent.ol,o.content,o.className);
         };
         bless.call(this,o);
     };
@@ -41,10 +42,10 @@ module.exports = function(app) {
         o = o || {};
         this.name='instance.list';
         this.asRoot=true;
-        this.container=function(dom) {
+        this.container=function(domMgr) {
 
-            return dom.mk('div',o,null,function() {
-
+            return domMgr.mk('div',o,null,function() {
+                this.className = self.name;
                 self.ol = dom.mk('ol',this,null,o.className);
             });
         };

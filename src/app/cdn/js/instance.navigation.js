@@ -13,6 +13,7 @@
 
         var object = app['core.object'],
             bless = object.bless,
+            dom = app['core.dom'],
             arrayInsert = object.arrayInsert;
 
 /*------------------------------------------------------------------------------------------------*/
@@ -27,9 +28,9 @@
                 parent = o.parent;
 
             this.name = 'option';
-            this.container = function (dom) {
+            this.container = function (domMgr) {
 
-                return dom.mk('li',parent.container,null,function() {
+                return domMgr.mk('li',parent.container,null,function() {
 
                     if (o.className)
                         this.classList.add(o.className);

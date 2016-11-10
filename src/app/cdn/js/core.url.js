@@ -4,6 +4,9 @@
 
     "use strict";
 
+    // has history replacestate?
+    var isHTML5 = !! env.history.replaceState;
+
     /* Holds a url
      * @constructor
      */
@@ -25,7 +28,7 @@
      */
     CoreURLMgr.prototype.toString = function() {
 
-        var url = '#!/' + this.path.join('/'),
+        var url = (isHTML5? '' : '#!/') + this.path.join('/'),
             hash = this.hash,
             search = this.search;
         if (search) {
@@ -39,21 +42,47 @@
         return url;
     };
 
-    module.exports = function() {
+    /* Gets the current url path/search/hash (html5 history api or held in hash)
+     * @returns {string}
+     */
+    var getCurrent = function() {
 
-        /* Gets the current location (held in hash)
-         * @returns {string}
-         */
-        var getCurrent = function() {
+        var location = env.location,
+            locHash = location.hash,
+            hashbangLocation = locHash.match(/\#\!(.*?)/),
+            path = location.pathname,
+            search = location.search,
+            hash = location.hash;
 
-            var location = env.location,
-                escapedFrag = coreUrl.getSearchValue("_escaped_fragment_",location.href);
+        if (hashbangLocation) {
+            var url = locHash.substring(2);
+            path = search = hash = '';
+            if (url.length) {
+                var pieces = url.split('?');
+                path = pieces[0];
+                pieces = pieces[1];
+                if (pieces) {
+                    pieces = pieces.split('#');
+                    search = pieces[0];
+                    pieces = pieces[1];
+                    if (pieces)
+                        hash = pieces;
+                }
+            }
+            if (isHTML5) {
+                location.hash = hash;
+                env.history.replaceState({},null,url);
+            }
+        }
 
-            if (escapedFrag)
-                location.hash = '#!'+escapedFrag;
-
-            return location.hash.substr(2);
+        return {
+            path : path,
+            search : search,
+            hash : hash
         };
+    };
+
+    module.exports = function() {
 
         // service
         var coreUrl = {
@@ -67,7 +96,7 @@
             getPath : function(url) {
 
                 if (! url)
-                    url = getCurrent();
+                    url = getCurrent().path;
                 // rm hash & search & split
                 return url.split('#')[0].split('?')[0].split('/').reduce(function(a,b) {
 
@@ -84,7 +113,7 @@
             getSearch : function(url) {
 
                 if (! url)
-                    url = getCurrent();
+                    url = getCurrent().search;
                 // rm hash and get search
                 url = url.split('#')[0].split('?')[1];
                 // exists?
@@ -93,8 +122,9 @@
                 // split
                 return url.split('&').reduce(function(a,b) {
 
-                    var v = b.split('=');
-                    a[decodeURIComponent(v[0])] = decodeURIComponent(v[1]) || true;
+                    var v = b.split('='),
+                        value = v[1];
+                    a[decodeURIComponent(v[0])] = value? ((/^\w+$/).test(value)? Number(value) : decodeURIComponent(v[1])) : true;
                     return a;
                 }, {});
             },
@@ -119,7 +149,7 @@
             getHash : function(url) {
 
                 if (! url)
-                    url = getCurrent();
+                    url = getCurrent().hash;
                 return  url.split('#')[1];
             },
 
@@ -158,5 +188,8 @@
 
         return coreUrl;
     };
+
+    // will update url if in html4 and support html5
+    getCurrent();
 
 })(this);

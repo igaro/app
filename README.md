@@ -46,6 +46,14 @@ To use the devel recipe, launch a web server on localhost:3006, minify the JavaS
 
 ## History
 
+###1.5.1
+- Bug fixes to country, currency and language for auto detection
+- Both #/ and pushState support with auto url redirect
+- Google Bot 404 redirect
+- Many css tweaks for many modules
+- Bug fixes for many instance modules
+- Updated test, build scripts
+
 ###1.5
 - Full GetText language translation support
 - new native build system (requires Node 5.8+) for spectacular speed. Grunt removed

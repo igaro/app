@@ -37,7 +37,7 @@
         line-height:normal;
 
         >div {
-            padding:0.4em;
+            padding:0.4em 0.4em 0.4em 2.3em;
         }
 
         >div, >a {
@@ -59,10 +59,6 @@
                 cursor:pointer;
             }
         }
-    }
-
-    >.warn, >.error, >.default, >.info, >.ok, >.success, >.critical {
-        padding-left:2.3em;
     }
 
     >.warn, >.error {

@@ -55,7 +55,6 @@
 
                 var r,
                     i,
-                    self = this,
                     type = t.indexOf('[');
                 if (type !== -1) {
                     r = document.createElement(t.substr(0,type));
@@ -89,7 +88,11 @@
                         r.className=m;
                         break;
                     case 'function' :
-                        m.call(r);
+                        try {
+                            m.call(r);
+                        } catch (e) {
+                            throw { error: e, fn:m.toString() };
+                        }
                         break;
                 }
                 if (c)
@@ -127,13 +130,12 @@
              * @param {boolean} [v] - whether to hide (default true)
              * @returns {null}
              */
-            hide : function(r,v) {
+            hide : function(r, hide) {
 
+                r = getContainer(r);
                 if (! (r instanceof Node))
                     throw new TypeError('No DOM element supplied');
-                if (typeof v === 'boolean' && v === false)
-                    return this.show(r);
-                r.classList.add('core-dom-hide');
+                r.classList[typeof hide === 'boolean' && hide === false? 'remove' : 'add']('core-dom-hide');
             },
 
             /* Detects if a DOM element is visible
@@ -142,6 +144,7 @@
              */
             isHidden : function(r) {
 
+                r = getContainer(r);
                 var t = r,
                     style = window.getComputedStyle(r);
                 while (t.parentNode && ! t.classList.contains('core-dom-hide')) {
@@ -158,6 +161,7 @@
              */
             toggleVisibility : function(r) {
 
+                r = getContainer(r);
                 if (! (r instanceof Node))
                     throw new TypeError('No DOM element supplied');
                 this.hide(r,! r.classList.contains('core-dom-hide'));
@@ -165,13 +169,12 @@
 
             /* Shows a DOM element - shortcut className remover
              * @param {Node} r - DOM element
+             * @param {boolean} [hide] - whether to hide (default false)
              * @returns {null}
              */
-            show : function(r) {
+            show : function(r, hide) {
 
-                if (! (r instanceof Node))
-                    throw new TypeError('No DOM element supplied');
-                r.classList.remove('core-dom-hide');
+                return this.hide(r, !! hide);
             },
 
             /* Works out an objects position coordinates through the tree
