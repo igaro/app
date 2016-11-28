@@ -28,14 +28,16 @@
      */
     CoreURLMgr.prototype.toString = function() {
 
-        var url = (isHTML5? '' : '#!/') + this.path.join('/'),
+        var url = (isHTML5? '/' : '#!/') + this.path.join('/'),
             hash = this.hash,
             search = this.search;
         if (search) {
-            url += '?' + Object.keys(search).map(function(pair) {
+            var str = Object.keys(search).map(function(key) {
 
-                return encodeURIComponent(pair[0])+'='+encodeURIComponent(pair[1]);
+                return encodeURIComponent(key)+'='+encodeURIComponent(search[key]);
             }).join('&');
+            if (str)
+                url += '?' + str;
         }
         if (hash)
             url += '#'+hash;
@@ -87,6 +89,7 @@
         // service
         var coreUrl = {
 
+            __isHTML5 : isHTML5, 
             __CoreURLMgr : CoreURLMgr,
 
             /* Path value from a url (or current).
@@ -114,6 +117,8 @@
 
                 if (! url)
                     url = getCurrent().search;
+
+
                 // rm hash and get search
                 url = url.split('#')[0].split('?')[1];
                 // exists?
@@ -123,8 +128,8 @@
                 return url.split('&').reduce(function(a,b) {
 
                     var v = b.split('='),
-                        value = v[1];
-                    a[decodeURIComponent(v[0])] = value? ((/^\w+$/).test(value)? Number(value) : decodeURIComponent(v[1])) : true;
+                        value = decodeURIComponent(v[1]);
+                    a[decodeURIComponent(v[0])] = value? ((/[0-9]+$/).test(value)? Number(value) : value) : true;
                     return a;
                 }, {});
             },
@@ -171,6 +176,25 @@
             getCurrent : function() {
 
                 return new CoreURLMgr(coreUrl.getPath(),coreUrl.getSearch(),coreUrl.getHash());
+            },
+
+            /* Returns manager for a url
+             * @param {string|CoreURLMgr} url - to use;
+             * @returns {undefined}
+             */
+            setCurrent : function(url) {
+                var isCoreURLMgr = url instanceof CoreURLMgr;
+                if (typeof url !== 'string' && ! isCoreURLMgr)
+                    throw new TypeError("First argument must be of type string or instanceof CoreURLMgr.");
+
+                if (isCoreURLMgr)
+                    url = url.toString();
+
+                if (isHTML5) {
+                    env.history.pushState({},null,url);
+                } else {
+                    env.location.hash = '#!' + url;
+                }
             },
 
             /* Makes a manager from components

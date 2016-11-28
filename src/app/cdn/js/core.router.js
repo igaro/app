@@ -1,6 +1,6 @@
 //# sourceURL=core.router.js
 
-(function(env) {
+(function() {
 
     'use strict';
 
@@ -17,9 +17,6 @@
             coreUrl = app['core.url'],
             bless = object.bless,
             arrayInsert = object.arrayInsert;
-
-        // has history replacestate?
-        var isHTML5 = !! env.history.replaceState;
 
         /* A route, which represents a path or folder(s) on a url
          * @constructor
@@ -311,22 +308,23 @@
                 g.originalUri = o.uri || [];
 
                 // fire events
-                return g.managers.event.dispatch('enter').then(function() {
+                var gMgrEvt = g.managers.event;
+                return gMgrEvt.dispatch('enter').then(function() {
 
+                    // show
                     if (!g._initilized)
-                        return g.managers.event.dispatch('init').then(function() {
+                        return gMgrEvt.dispatch('init').then(function() {
 
                             g._initilized = true;
                         });
                 }).then(function() {
 
-                    // show
+                    if (g.defaultHideParentViewWrapper)
+                        dom.hide(g.parent.wrapper);
                     if (g.defaultShowWrapper)
                         dom.show(g.wrapper);
                     if (g.defaultHideRoutes)
                         g.hideRoutes();
-                    if (g.defaultHideParentViewWrapper)
-                        dom.hide(g.parent.wrapper);
                     return g;
                 });
             })['catch'](function (e) {
@@ -351,13 +349,13 @@
         };
 
         /* Hides all child routes
-         * @returns {null}
+         * @returns {Array} unused
          */
         CoreRouterRoute.prototype.hideRoutes = function() {
 
-            this.routes.forEach(function (m) {
+            return this.routes.map(function (m) {
 
-                m.hide();
+                return m.hide();
             });
         };
 
@@ -526,11 +524,7 @@
 
                                 // apply
                                 manageUrlChangeListener(false);
-                                if (isHTML5) {
-                                    env.history.pushState({},null,urlPath);
-                                } else {
-                                    env.location.hash = '#!' + urlPath;
-                                }
+                                coreUrl.setCurrent(urlPath);
                                 setTimeout(function() {
 
                                     manageUrlChangeListener(true);
@@ -607,7 +601,7 @@
         // window url change
         var manageUrlChangeListener = function(enabled) {
 
-            window[(enabled? 'add' : 'remove') + 'EventListener'](isHTML5? 'popState' : 'hashchange', autoRouter);
+            window[(enabled? 'add' : 'remove') + 'EventListener'](coreUrl.__isHTML5? 'popState' : 'hashchange', autoRouter);
         };
 
         manageUrlChangeListener(true);

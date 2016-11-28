@@ -16,12 +16,12 @@
 "use strict";
 
 // node version check
-var nodeVersion = process.version.slice(1).split('.');
+const nodeVersion = process.version.slice(1).split('.');
 if (nodeVersion[0] < 4 && nodeVersion[1] < 3)
     throw new Error("NodeJS 4.3+ is required to run this script. The current version is "+nodeVersion.join('.'));
 
 // main vars
-var args = require("yargs").argv,
+const args = require("yargs").argv,
     recipe = args.recipe,
     fs = require("fs-extra"),
     sass = require("node-sass"),
@@ -32,11 +32,9 @@ var args = require("yargs").argv,
     linter = require("eslint").linter;
 
 // get recipes
-var recipes = fs.readdirSync("src/recipes").filter(function(recipe) {
-    return recipe.slice(-5) === '.json';
-}).map(function(recipe) {
-    return recipe.slice(0,-5);
-});
+const recipes = fs.readdirSync("src/recipes")
+    .filter(recipe => recipe.slice(-5) === '.json')
+    .map(recipe => recipe.slice(0,-5));
 
 // check recipe supplied
 if (! recipe)
@@ -47,13 +45,13 @@ if (recipes.indexOf(recipe) === -1)
     throw new Error("Arg --recipe invalid. Valid recipes are: "+recipes.join(", "));
 
 // process recipe
-var recipeConf = require(__dirname + "/src/recipes/"+recipe+".json"),
-    minifyEnabled = !! args.minify,
+const recipeConf = require(__dirname + "/src/recipes/"+recipe+".json"),
+    minifyEnabled = recipeConf.uglify.enabled,
     watchEnabled = !! args.watch,
     servePort = args.serve || recipeConf.serve;
 
 // folders
-var srcRootDir = __dirname + '/src',
+const srcRootDir = __dirname + '/src',
     srcSassDir = srcRootDir  + '/sass/scss',
     srcAppDir = srcRootDir  + '/app',
     srcCpDir = srcRootDir  + '/cp',
@@ -62,21 +60,21 @@ var srcRootDir = __dirname + '/src',
     targetCssDir = targetRootDir + '/cdn/css';
 
 // regexps
-var includeRegExp = /\@\@include\((.*?)\)/g,
+const includeRegExp = /\@\@include\((.*?)\)/g,
     varRegExp = /\@\@var\((.*?)\)/g,
-    trRegExp = function() { return /\.tr\(\(\(\{(.*?)\}\)\)/g; };
+    trRegExp = function() { return /\.tr\(\(\(\s?\{(.*?)\}\s?\)\)/g; };
 
 // pkg meta (useful for version number)
-var packageMeta = require(__dirname + "/package.json");
+const packageMeta = require(__dirname + "/package.json");
 
 /* HELPERS ------------------------------------------------------------ */
 
-var padNumber = function(n) {
+const padNumber = function(n) {
 
     return n<10? "0"+n : n;
 };
 
-var pullTrData = function(str) {
+const pullTrData = function(str) {
 
     str = "(function() { return " + str.slice(6,-2) + "; })()";
     try {
@@ -87,33 +85,23 @@ var pullTrData = function(str) {
     }
 };
 
-var makePotHeader = function() {
+const makePotHeader = function() {
 
-    var now = new Date(), //2016-01-01 00:00+0000
+    const now = new Date(), //2016-01-01 00:00+0000
         str = now.getUTCFullYear() +'-'+padNumber(now.getUTCMonth())+'-'+padNumber(now.getUTCDate())+' '+padNumber(now.getUTCHours())+':'+padNumber(now.getUTCMinutes())+'+0000';
-    return 'msgid ""\n\
-msgstr ""\n\
-"Project-Id-Version: PACKAGE VERSION"\n\
-"Language-Team: LANGUAGE <LL@li.org>"\n\
-"Report-Msgid-Bugs-To:"\n\
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE"\n\
-"Language:"\n\
-"MIME-Version: 1.0"\n\
-"Content-Type: text/plain; charset=utf-8"\n\
-"Content-Transfer-Encoding: 8bit"\n\
-"POT-Creation-Date: ' + str + '"';
+    return '"POT-Creation-Date: ' + str + '\\n"';
 };
 
-var poSanitise = function(str) {
+const poSanitise = function(str) {
 
     return str
         .replace(/\n/g,"\\n")
         .replace(/\"/g,"\\\"");
 };
 
-var potMakeSection = function(key,data) {
+const potMakeSection = function(key, data) {
 
-    var a = "\n";
+    let a = "\n";
     data.map(function(x) {
 
         if (x[2].comment)
@@ -130,10 +118,8 @@ var potMakeSection = function(key,data) {
             a += "\nmsgctxt \"" + poSanitise(x[2].context) + "\"";
     });
     a += "\nmsgid \"" + poSanitise(key) + "\"";
-    var pluralData = data.find(function(x) {
+    let pluralData = data.find(x => x[2].plural);
 
-        return x[2].plural;
-    });
     if (pluralData) {
         a += "\nmsgid_plural \""+ poSanitise(pluralData[2].plural) + "\"";
         a += "\nmsgstr[0] \"\"";
@@ -145,7 +131,7 @@ var potMakeSection = function(key,data) {
     return a;
 };
 
-var mkdir = function(dir) {
+const mkdir = function(dir) {
 
     return new Promise(function(resolve,reject) {
 
@@ -160,7 +146,7 @@ var mkdir = function(dir) {
     });
 };
 
-var readdir = function(dir,filter) {
+const readdir = function(dir,filter) {
 
     return new Promise(function(resolve,reject) {
 
@@ -180,7 +166,7 @@ var readdir = function(dir,filter) {
     });
 };
 
-var readfile = function(file) {
+const readfile = function(file) {
 
     return new Promise(function(resolve,reject) {
 
@@ -194,7 +180,7 @@ var readfile = function(file) {
     });
 };
 
-var writefile = function(file,data) {
+const writefile = function(file,data) {
 
     return mkdir(file.substr(0,file.lastIndexOf('/'))).then(function() {
 
@@ -211,41 +197,62 @@ var writefile = function(file,data) {
     });
 };
 
-var consoleColor = function(txt,code) {
+const embedVars = function(data) {
+
+    // embed vars
+    recipeConf.buildTs = new Date().getTime();
+    recipeConf.version = packageMeta.version || 0;
+
+    return data.replace(varRegExp, function(match) {
+
+        const name = match.slice(7,-2),
+            value = recipeConf[name];
+        if (! value)
+            throw new Error("Entry missing from recipe: "+name);
+        return value;
+    });
+};
+
+const consoleColor = function(txt,code) {
 
     console.info('\x1b['+code+'m',txt,'\x1b[0m');
 };
 
-var consoleInfo = function(txt) {
+const consoleInfo = function(txt) {
 
     consoleColor(txt,32);
 };
 
-var consoleError = function(txt) {
+const consoleError = function(txt) {
 
     consoleColor(txt,31);
 };
 
-var consoleWarn = function(txt) {
+const consoleWarn = function(txt) {
 
     consoleColor(txt,33);
 };
 
+const fileExtMatch = function(file, ext) {
+
+    return file.slice(-1 - ext.length) === '.' + ext;
+};
+
+
 /* HTTPD -------------------------------------------------------------- */
 
-var httpd = function() {
+const httpd = function() {
 
-    var express = require('express');
-    var app = express();
-    app.listen(servePort, function () {
+    const express = require('express'),
+        app = express();
 
-        consoleInfo('Httpd:'+servePort);
-    });
+    app.listen(servePort, () => consoleInfo('Httpd:'+servePort));
+
     app.use('/res', express.static(targetRootDir + '/res'));
     app.use('/cdn', express.static(targetRootDir + '/cdn'));
     app.use('/', function(req, res) {
 
-        var url = req.url.split('?')[0];
+        const url = req.url.split('?')[0];
         res.sendFile(targetRootDir + (url.includes('.') && url.lastIndexOf('/') === 0? url : '/index.html'), null, function (err) {
             if (err) {
               console.log(err);
@@ -257,9 +264,9 @@ var httpd = function() {
 
 /* WATCHER ------------------------------------------------------------ */
 
-var watchers = function() {
+const watchers = function() {
 
-    var ignore = recipeConf.watch.ignore;
+    const ignore = recipeConf.watch.ignore;
     [
         ['SASS',srcSassDir + '/..' ,'sass'],
         ['APP',srcAppDir,'app'],
@@ -271,77 +278,53 @@ var watchers = function() {
 
         watch.watchTree(o[1], {
             ignoreDotFiles:true,
-            filter:function(file) {
-                return ignore.every(function(ext) {
-
-                    return file.slice(-1 - ext.length) !== '.'+ext;
-                });
+            filter:function (file) {
+                return ignore.every(ext => file.slice(-1 - ext.length) !== '.'+ext);
             }
-        }, function (f,curr,prev) {
+        }, function (f, curr, prev) {
 
             if (typeof f === "object" && prev === null && curr === null) {
                 consoleInfo("Watching:"+o[0]);
                 return; // finished walking tree
             }
 
-            Promise.resolve().then(function() {
-
-                return build[o[2]](f, curr && curr.nlink === 0);
-            }).catch(function(e) {
-
-                consoleError(e);
-            });
+            Promise.resolve()
+                .then(() => build[o[2]](f, curr && curr.nlink === 0))
+                .catch(e => consoleError(e));
         });
     });
 };
 
 /* BUILD -------------------------------------------------------------- */
 
-var build = {
+const build = {
 
     app : function() {
 
-        var start = process.hrtime();
+        const start = process.hrtime();
         consoleWarn("Building:APP...");
-        return new Promise(function(resolve,reject) {
+        return new Promise(function(resolve, reject) {
 
             // walk tree
-            var files = [];
+            let files = [];
             fs.walk(srcAppDir)
-              .on('data', function(file) {
-
-                files.push(file.path);
-              })
-              .on('end', function() {
-
-                resolve(files);
-              })
-              .on('error', function(err) {
-
-                reject(err);
-              });
+              .on('data', file => files.push(file.path))
+              .on('end', () => resolve(files))
+              .on('error', err => reject(err));
         }).then(function(files) {
 
             // read only js
             return Promise.all(
-                files.filter(function(file) {
-
-                    return file.slice(-3) === '.js';
-                }).map(function(file) {
-
-                    // read file
-                    return readfile(file).then(function(data) {
-
-                        return { name:file, data:data };
-                    });
-                })
+                files
+                    .filter(file => fileExtMatch(file, 'js') || fileExtMatch(file, 'html'))
+                    .map(file => readfile(file).then(data => ({ name:file, data:data, isHTML:fileExtMatch(file, 'html') })))
             );
 
         }).then(function(files) {
 
             // includes
-            var cache = {};
-            var scanInc = function(data) {
+            const cache = {};
+            const scanInc = function(data) {
 
                 // match pass
                 var matches = data.match(includeRegExp);
@@ -350,75 +333,57 @@ var build = {
 
                 // cache files
                 return Promise.all(
-
-                    matches.map(function(match) {
-
-                        var file = match.slice(11,-2);
-                        return readfile(srcRootDir + '/' + file).then(function(data) {
-
-                            cache[file] = data;
-                        });
-                    })
+                    matches
+                        .map(match => match.slice(11,-2))
+                        .map(match => readfile(srcRootDir + '/' + match).then(data => cache[match] = data))
 
                 // replace pass
                 ).then(function() {
 
-                    return scanInc(data.replace(includeRegExp, function(match) {
-
-                        return cache[match.slice(11,-2)];
-                    }));
+                    return scanInc(data.replace(includeRegExp, match => cache[match.slice(11,-2)] ));
                 });
             };
 
-            return Promise.all(files.map(function(file) {
+            return Promise.all(
+                files
+                    .map(file => scanInc(file.data)
+                        .then(function(data) {
 
-                return scanInc(file.data).then(function(data) {
+                            file.data = data;
+                            return file;
+                        })
+                    )
+            );
 
-                    file.data = data;
-                    return file;
-                });
-            }));
+        }).then(files => files
+            .map(file => {
+                file.data = embedVars(file.data);
+                return file;
+            })
+        ).then(function(files) {
 
-        }).then(function(files) {
+            // don't scan 3rd party or core files
+            const scanable = files.filter(function(file) {
 
-            // embed vars
-            recipeConf.buildTs = new Date().getTime();
-            recipeConf.version = packageMeta.version || 0;
-
-            files.forEach(function(file) {
-
-                file.data = file.data.replace(varRegExp, function(match) {
-
-                    var name = match.slice(7,-2),
-                        value = recipeConf[name];
-                    if (! value)
-                        throw new Error("Entry missing from recipe: "+name);
-                    return value;
-                });
-            });
-
-            return files;
-
-        }).then(function(files) {
-
-            // only scan route and instance files
-            var scanable = files.filter(function(file) {
-
-                var name = file.name.slice(srcRootDir.length+12);
-                return name.slice(0,6) === 'route.' || name.slice(0,9) === 'instance.';
+                const name = file.name.slice(srcRootDir.length+12);
+                return ! /^(3rdparty|core|polyfill)\..+$/.test(name);
             });
 
             // extract data
-            var pot = {};
+            const pot = {};
             scanable.forEach(function(file) {
 
-                var lines = file.data.split("\n");
+            console.error(file.name);
+
+
+
+                const lines = file.data.split("\n");
                 lines.forEach(function(line) {
 
-                    var re = trRegExp(),
-                        match;
+                    const re = trRegExp();
+                    let match;
                     while ((match = re.exec(line)) !== null) {
-                        var obj = pullTrData(match[0]),
+                        const obj = pullTrData(match[0]),
                             key = obj.key;
                         if (! pot[key])
                             pot[key] = [];
@@ -428,8 +393,7 @@ var build = {
                 });
             });
 
-
-            var lang = {};
+            const lang = {};
             return Promise.all([
 
                 // read .po file data
@@ -438,7 +402,7 @@ var build = {
                     return Promise.all(
                         pofiles.map(function(file) {
 
-                            var name = file.slice(0,-3).replace('_','-');
+                            const name = file.slice(0,-3).replace('_','-');
                             return new Promise(function(resolve,reject) {
 
                                 po2json.parseFile(srcTranslationsDir+'/'+file,{ },function(err,data) {
@@ -466,7 +430,7 @@ var build = {
                 writefile(srcTranslationsDir +'/messages.pot',
                     Object.keys(pot).reduce(function(a,b) {
 
-                        var data = pot[b];
+                        const data = pot[b];
                         if (data.some(function(x) {
 
                             return !! x[2].context;
@@ -488,12 +452,12 @@ var build = {
             ]).then(function() {
 
                 // embed translation data
-                var re = trRegExp();
+                const re = trRegExp();
                 scanable.forEach(function(file) {
 
                     file.data = file.data.replace(re,function(match) {
 
-                        var obj = pullTrData(match),
+                        const obj = pullTrData(match),
                             key = obj.context? obj.context + String.fromCharCode(4) + obj.key : obj.key,
                             dict = lang[key];
                         if (dict) {
@@ -513,6 +477,9 @@ var build = {
             if (recipeConf.esLint.enabled) {
                 files.forEach(function(file) {
 
+                    if (file.isHTML)
+                        return;
+
                     linter.verify(file.data, recipeConf.esLint.rules).forEach(function(message) {
 
                         message.fileName = file.name;
@@ -530,10 +497,13 @@ var build = {
 
             // minify
             if (minifyEnabled) {
-                var conf = recipeConf.uglify,
-                    origSize = 0,
+                const conf = recipeConf.uglify;
+                let origSize = 0,
                     nowSize = 0;
                 files.forEach(function(file) {
+
+                    if (file.isHTML)
+                        return;
 
                     origSize += file.data.length;
                     file.data = uglify.minify(file.data, conf).code;
@@ -546,10 +516,7 @@ var build = {
         }).then(function(files) {
 
             // write files
-            return Promise.all(files.map(function(file) {
-
-                return writefile(targetRootDir + file.name.slice(srcAppDir.length),file.data);
-            }));
+            return Promise.all(files.map(file => writefile(targetRootDir + file.name.slice(srcAppDir.length),file.data)));
 
         }).then(function() {
 
@@ -557,16 +524,16 @@ var build = {
         });
     },
 
-    cp : function(f,deleted) {
+    cp : function(f, deleted) {
 
-        var start = process.hrtime();
+        const start = process.hrtime();
         consoleWarn("Building:CP...");
         return Promise.resolve().then(function() {
 
             if (f) {
-                return new Promise(function(resolve,reject) {
+                return new Promise(function(resolve, reject) {
 
-                    var target = targetRootDir + '/' + f.substr(srcCpDir.length);
+                    const target = targetRootDir + '/' + f.substr(srcCpDir.length);
                     if (deleted) {
                         return fs.remove(target, function(err) {
 
@@ -576,7 +543,7 @@ var build = {
                         });
                     }
 
-                    fs.copy(f, target, { clobber:true }, function(err) {
+                    return fs.remove(target, function(err) {
 
                         if (err)
                             return reject(err);
@@ -584,7 +551,6 @@ var build = {
                     });
                 });
             }
-
             return mkdir(targetRootDir).then(function() {
 
                 return new Promise(function(resolve,reject) {
@@ -596,6 +562,7 @@ var build = {
                     });
                 });
             });
+
         }).then(function() {
 
             consoleInfo("Built:CP" + (f? ':'+f + (deleted? ' (deleted)' : '') : '') + " ("+ process.hrtime(start)[0]+'.'+(process.hrtime(start)[1] / 1000000).toFixed(0) + "s)");
@@ -605,7 +572,7 @@ var build = {
 
     sass : function() {
 
-        var start = process.hrtime();
+        const start = process.hrtime();
         consoleWarn("Building:SASS...");
         return mkdir(targetCssDir).then(function() {
 
@@ -656,16 +623,13 @@ console.info("");
 fs.emptyDir(targetRootDir, function() {
 
     Promise.all(
-        Object.keys(build).map(function(action) {
-
-            return build[action]();
-        })
+        Object.keys(build).map(action => build[action]())
     ).then(function() {
 
         console.info("");
         consoleInfo("Ready: "+ targetRootDir);
 
-        var isHttpd = typeof servePort === 'number';
+        const isHttpd = typeof servePort === 'number';
 
         if (! isHttpd && ! watchEnabled)
             return;
@@ -694,4 +658,3 @@ fs.emptyDir(targetRootDir, function() {
         consoleError(e);
     });
 });
-

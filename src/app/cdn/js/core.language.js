@@ -10,8 +10,11 @@ module.exports = function(app, params) {
     "use strict";
 
     var store = app['core.store'],
-        url = app['core.url'],
+        coreUrl = app['core.url'],
         coreObject = app['core.object'],
+        dom = app['core.dom'],
+        head = dom.head,
+        metaElements = [],
         promiseSequencer = coreObject.promiseSequencer;
 
     // detects the language to use
@@ -22,7 +25,7 @@ module.exports = function(app, params) {
             var pool = [
                 stored,
                 params.conf.localeLanguage,
-                url.getSearchValue('localeLanguage'),
+                coreUrl.getSearchValue('localeLanguage'),
                 window.navigator.userLanguage || window.navigator.language,
                 'en-US',
                 'en'
@@ -107,7 +110,7 @@ module.exports = function(app, params) {
             if (typeof o !== 'object')
                 throw new TypeError('First argument must be an object literal');
 
-            this.pool = o;
+            //  validate
 			Object.keys(o).forEach(function(key) {
 
 				var item = o[key],
@@ -122,6 +125,20 @@ module.exports = function(app, params) {
 
 				pluralForms.logic = eval("(function(n) { return (" + pluralLogic + "); })");
 			});
+
+            this.pool = o;
+            metaElements.forEach(function (element) {
+                head.removeChild(element);
+            });
+            metaElements = Object.keys(o).map(function(key) {
+                dom.mk('link',head,null,function() {
+                    this.rel = 'alternative';
+                    this.hreflang = key;
+                    var url = coreUrl.getCurrent();
+                    url.search.localeLanguage = key;
+                    this.href = url.toString();
+                });
+            });
 
             return this.managers.event.dispatch('setPool');
         },
@@ -157,6 +174,13 @@ module.exports = function(app, params) {
          * @returns {Promise} containing the detected code
          */
         reset : function() {
+
+            // remove any url param
+            var url = coreUrl.getCurrent();
+            if (url.search.localeLanguage) {
+                delete url.search.localeLanguage;
+                coreUrl.setCurrent(url);
+            }
 
             return this.managers.store.set('env').then(function() {
 

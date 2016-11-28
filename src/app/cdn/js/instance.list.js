@@ -45,7 +45,6 @@ module.exports = function(app) {
         this.container=function(domMgr) {
 
             return domMgr.mk('div',o,null,function() {
-                this.className = self.name;
                 self.ol = dom.mk('ol',this,null,o.className);
             });
         };

@@ -38,6 +38,7 @@ module.exports = function(app) {
         this.rules = o.rules || [];
         this.errorDisplayAmount = 'errorDisplayAmount' in o? o.errorDisplayAmount : 1;
         this.messages = [];
+        this.isValid = null;
         this.resizeHooks = [];
         this.onValidSubmit = o.onValidSubmit;
         this.managers.event.on('destroy', function() {
@@ -66,7 +67,6 @@ module.exports = function(app) {
 
         var self = this;
         this.form = form;
-        //this.__allowThrough = false;
         form.setAttribute('novalidate',true);
         form.classList.add('instance-form-validate');
 
@@ -74,17 +74,10 @@ module.exports = function(app) {
         form.addEventListener('submit', function(event) {
 
             event.preventDefault();
-            //if (self.__allowThough) {
-            //    self.__allowThrough = false;
-            //    return false;
-            //}
             return self.check().then(function(valid) {
 
-                if (! valid) {
-                    //self.__allowThrough = true;
-                //} else {
+                if (! valid)
                     event.stopImmediatePropagation();
-                }
             })['catch'](function(e) {
 
                 event.stopImmediatePropagation();
@@ -128,6 +121,9 @@ module.exports = function(app) {
      * @returns {Array} of form elements
      */
     InstanceFormValidate.prototype.getFormElements = function() {
+
+        if (! this.form)
+            throw new Error('Form has not been set yet');
 
         return Array.prototype.slice.call(this.form.elements).map(function(ctl) {
 
@@ -202,7 +198,7 @@ module.exports = function(app) {
         cl.add('validation-fail');
     };
 
-    /* Checks the fform for valididity
+    /* Checks the form for valididity
      * @returns {Promise} containing boolean
      */
     InstanceFormValidate.prototype.check = function() {
@@ -214,6 +210,8 @@ module.exports = function(app) {
                 self.displayError(n,l);
                 return Promise.resolve(true);
             };
+
+        self.isValid = null;
 
         return this.clear().then(function () {
 
@@ -285,7 +283,7 @@ module.exports = function(app) {
                 }, Promise.resolve());
             })).then(function(results) {
 
-                var valid = results.every(function(o) {
+                var valid = self.isValid = results.every(function(o) {
 
                     return !o;
                 });
