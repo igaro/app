@@ -1,20 +1,16 @@
 {
-
-    "watch" : {
-        "ignore" : ["pot","mo"]
-    },
-
-    "esLint" : {
-
-        "enabled":true,
-        "rules" : {
-
-        }
-    },
-
-    "uglify" : {
-
-        "fromString" : true
-    }
-
+  "watch" : {
+    "ignore" : ["pot","mo"]
+  },
+  "babel" : {
+    "enabled" : true,
+    "config" : {
+      "presets": [
+      ],
+      "minified": false
+   }
+  },
+  "css": {
+    "minify": true
+  }
 }

@@ -27,6 +27,7 @@ const args = require("yargs").argv,
   sass = require("node-sass"),
   sassXtra = require("node-sass-asset-functions"),
   watch = require("watch"),
+  klaw = require('klaw'),
   po2json = require("po2json"),
   jsTransform = require("babel-core").transform;
 
@@ -244,7 +245,7 @@ const build = {
         return new Promise((resolve, reject) => {
           // walk tree
           let files = [];
-          fs.walk(srcAppDir)
+          klaw(srcAppDir)
             .on('data', file => files.push(file.path))
             .on('end', () => resolve(files))
             .on('error', err => reject(err));
