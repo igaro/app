@@ -6,19 +6,19 @@
     "url": "https://github.com/igaro/app.git"
   },
   "engines": {
-    "node": ">=5.8"
+    "node": ">=6.0"
   },
   "license": "LGPL-3.0",
   "homepage": "http://app.igaro.com",
   "devDependencies": {
-    "eslint": "^2.12.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "express": "^4.13.4",
     "fs-extra": "^0.30",
     "nightwatch": "^0.9.3",
-    "node-sass": "^3.4.2",
-    "node-sass-asset-functions": "0.0.9",
+    "node-sass": "^4.7.2",
+    "node-sass-asset-functions": "^0.1.0",
     "po2json": "^0.3.2",
-    "uglify-js": "^2.6.2",
     "watch": "^0.17.1",
     "webdriver-manager": "^10.2.7",
     "yargs": "^4.3.2"
@@ -26,12 +26,11 @@
   "bin": {
     "nightwatch": "./node_modules/nightwatch/bin/nightwatch"
   },
-  "man": "",
   "scripts": {
     "postinstall": "./node_modules/webdriver-manager/bin/webdriver-manager update",
     "pretest": "fuser -k 4444/tcp | true && fuser -k 3006/tcp | true && (./node_modules/webdriver-manager/bin/webdriver-manager start &) && (./build.js --recipe=devel --serve=3006 &) && sleep 3",
     "test": "./node_modules/nightwatch/bin/nightwatch -e firefox -c ./tests/nightwatch.json ./tests/src",
-    "posttest": "fuser -k 3006/tcp | true && fuser -k 4444/tcp | true"
+    "posttest": "fuser -k 3006/tcp | true && fuser -k 4444/tcp | true",
+    "deploy": "./build.js --recipe=deploy && rsync -avPz --progress -e 'ssh -p 34' ./target/deploy/ root@igaro.com:/home/igaro/public_html"
   },
-  "dependencies": {}
 }
