@@ -7,7 +7,7 @@
     "enabled": true,
     "config" : {
       "presets": [
-        "env"
+        ["env", { "modules": false }]
       ],
       "minified": true
     }
