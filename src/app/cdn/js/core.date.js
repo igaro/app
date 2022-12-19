@@ -2,19 +2,19 @@
 
 module.requires = [
     { name: 'core.store.js' }
-];
+]
 
-module.exports = function(app) {
+module.exports = function (app) {
 
-    "use strict";
+    "use strict"
 
     var store = app['core.store'],
-        bless = app['core.object'].bless;
+        bless = app['core.object'].bless
 
     // service
     var coreDate = {
 
-        name:'core.date',
+        name: 'core.date',
         managers : {
             store : store
         },
@@ -24,9 +24,9 @@ module.exports = function(app) {
          * @param {number} t - year to use
          * @returns {boolean}
          */
-        isLeapYear : function(y) {
+        isLeapYear : function (y) {
 
-            return (new Date(y,1,29).getDate() === 29)? true:false;
+            return (new Date(y, 1, 29).getDate() === 29)? true: false
         },
 
         /* Works out how many days in a month
@@ -34,39 +34,39 @@ module.exports = function(app) {
          * @param {number} m - month to use
          * @returns {number}
          */
-        daysInMonth : function (y,m) {
+        daysInMonth : function (y, m) {
 
             if (m === 4 || m === 6 || m === 9 || m === 11)
-                return 30;
+                return 30
             if (m === 2)
-                return (this.isLeapYear(y))? 29:28;
-            return 31;
+                return (this.isLeapYear(y))? 29: 28
+            return 31
         },
 
         /* Supplies a date object with the users timezone offset applied
          * @param {(string|Date)} tz - date to offset
          * @returns {Date}
          */
-        userTz : function(tz) { //ISO 8601
+        userTz : function (tz) { //ISO 8601
 
-            var date = typeof tz === 'string'? new Date(tz) : tz;
+            var date = typeof tz === 'string'? new Date(tz) : tz
 
             if (! (date instanceof Date))
-                throw new TypeError("Invalid parameter passed to function. Use string or date object.");
+                throw new TypeError("Invalid parameter passed to function. Use string or date object.")
 
-            date = new Date(date.valueOf() + (date.getTimezoneOffset()*60000) + (this.envOffset*60000) );
-            return date;
+            date = new Date(date.valueOf() + (date.getTimezoneOffset()*60000) + (this.envOffset*60000) )
+            return date
         },
 
         /* Resets the active code to the system default (browser supplied)
          * @returns {Promise} containing the detected code
          */
-        resetEnvOffset : function() {
+        resetEnvOffset : function () {
 
-            var self = this;
-            return this.managers.store.set('envOffset').then(function() {
-                return self.setEnvOffset(null,true);
-            });
+            var self = this
+            return this.managers.store.set('envOffset').then(function () {
+                return self.setEnvOffset(null, true)
+            })
         },
 
         /* Set env Offset
@@ -74,36 +74,36 @@ module.exports = function(app) {
          * @param {boolean} [noStore] - don't store the code for persistance. Default false.
          * @returns {Promise}
          */
-        setEnvOffset : function(minutes, noStore) {
+        setEnvOffset : function (minutes, noStore) {
 
             var self = this,
-                managers = this.managers;
-            return Promise.resolve().then(function() {
+                managers = this.managers
+            return Promise.resolve().then(function () {
 
                 if (typeof minutes !== 'number')
-                    minutes = new Date().getTimezoneOffset() * -1;
+                    minutes = new Date().getTimezoneOffset() * -1
 
                 if (!((-840 <= minutes <= 840) || minutes %15))
-                    throw new Error('Timezone offset must be between +-840 and divide exactly by 15.');
+                    throw new Error('Timezone offset must be between +-840 and divide exactly by 15.')
 
-                self.envOffset = minutes;
-                return (noStore? Promise.resolve() : managers.store.set('envOffset',minutes)).then(function() {
+                self.envOffset = minutes
+                return (noStore? Promise.resolve() : managers.store.set('envOffset', minutes)).then(function () {
 
-                    return managers.event.dispatch('setEnvOffset', minutes);
-                });
-            });
+                    return managers.event.dispatch('setEnvOffset', minutes)
+                })
+            })
         }
-    };
+    }
 
     // bless service
-    bless.call(coreDate);
+    bless.call(coreDate)
 
     // get offset and return service
-    return coreDate.managers.store.get('envOffset').then(function(minutes) {
+    return coreDate.managers.store.get('envOffset').then(function (minutes) {
 
-        return coreDate.setEnvOffset(minutes,true).then(function() {
-            return coreDate;
-        });
-    });
+        return coreDate.setEnvOffset(minutes, true).then(function () {
+            return coreDate
+        })
+    })
 
-};
+}

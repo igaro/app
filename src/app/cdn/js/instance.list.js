@@ -1,161 +1,153 @@
 //# sourceURL=instance.list.js
 
 module.requires = [
-    { name: 'core.language.js' },
-    { name: 'instance.list.css' }
-];
+  { name: 'core.language.js' },
+  { name: 'instance.list.css' }
+]
 
-module.exports = function(app) {
+module.exports = app => {
 
-    "use strict";
-
-    var object = app['core.object'],
-        dom = app['core.dom'],
-        bless = object.bless,
-        arrayInsert = object.arrayInsert;
+  const coreObject = app['core.object'],
+    dom = app['core.dom'],
+    { bless, arrayInsert } = coreObject;
 
 /*------------------------------------------------------------------------------------------------*/
 
-    /* Item
-     * @constructor
-     * @param {object} o - config literal
-     */
-    var InstanceListItem = function(o) {
+  /* Item
+   * @constructor
+   * @param {object} o - config literal
+   */
+  const InstanceListItem = function (o) {
 
-        this.name = 'item';
-        this.container = function(domMgr) {
-
-            return domMgr.mk('li',o.parent.ol,o.content,o.className);
-        };
-        bless.call(this,o);
-    };
+    this.name = 'item';
+    this.container = domMgr => domMgr.mk('li', o.parent.ol, o.content, o.className);
+    bless.call(this, o);
+  };
 
 /*------------------------------------------------------------------------------------------------*/
 
-    /* List
-     * @constructor
-     * @param {object} o - config literal - see online help for attributes
-     */
-    var InstanceList = function(o) {
+  /* List
+   * @constructor
+   * @param {object} o - config literal - see online help for attributes
+   */
+  const InstanceList = function (o) {
 
-        var self = this;
-        o = o || {};
-        this.name='instance.list';
-        this.asRoot=true;
-        this.container=function(domMgr) {
+      var self = this;
+      o = o || {};
+      this.name = 'instance.list';
+      this.asRoot = true;
+      this.container = domMgr => domMgr.mk('div', o, null, function () {
+        self.ol = dom.mk('ol', this, null, o.className)
+      });
+      this.children = {
+        items: 'item'
+      }
+      bless.call(this, o);
+  };
 
-            return domMgr.mk('div',o,null,function() {
-                self.ol = dom.mk('ol',this,null,o.className);
-            });
-        };
-        this.children = {
-            items:'item'
-        };
-        bless.call(this,o);
-    };
+  /* Async constructor
+   * @param {object} o - config literal - see online help for attributes
+   * @returns {Promise}
+   */
+  InstanceList.prototype.init = async function (o) {
 
-    /* Async constructor
-     * @param {object} o - config literal - see online help for attributes
-     * @returns {Promise}
-     */
-    InstanceList.prototype.init = function(o) {
+    if (o && o.items) {
+      await this.addItems(o.items);
+    }
+  }
 
-        if (o && o.items)
-            return this.addItems(o.items);
-    };
+  /* Adds multiple items
+   * @param {Array} o - items to add
+   * @returns {Promise}
+   */
+  InstanceList.prototype.addItems = async function (o) {
 
-    /* Adds multiple items
-     * @param {Array} o - items to add
-     * @returns {Promise}
-     */
-    InstanceList.prototype.addItems = function(o) {
+    const items = [];
+    for(let item of o) {
+      items.push(await self.addItem(a));
+    }
+    return items;
+  }
 
-        var self = this;
-        return object.promiseSequencer(o,function(a) {
+  /* Adds multiple items
+   * @param {Array} o - items to add
+   * @returns {Promise}
+   */
+  InstanceList.prototype.addItem = async function (o) {
 
-            return self.addItem(a);
-        });
-    };
+    o = o || {};
+    o.parent = this;
+    var listItem = new InstanceListItem(o);
+    arrayInsert(this.items, listItem, o);
+    await this.managers.event.dispatch('addItem', listItem);
+    return listItem;
+  }
 
-    /* Adds multiple items
-     * @param {Array} o - items to add
-     * @returns {Promise}
-     */
-    InstanceList.prototype.addItem = function(o) {
+  /* Clear all items
+   * @returns {Promise}
+   */
+  InstanceList.prototype.clear = function () {
 
-        o = o || {};
-        o.parent = this;
-        var listItem = new InstanceListItem(o);
-        arrayInsert(this.items,listItem,o);
-        return this.managers.event.dispatch('addItem',listItem).then(function() {
+    return Promise.all(
+      this.items
+        .slice(0)
+        .map(o => o.destroy()));
+  }
 
-            return listItem;
-        });
-    };
+  /* Shifts and item up/down the array
+   * @param {InstanceListItem} listItem - to move
+   * @param {number} places - to move up/down by
+   * @returns {Promise}
+   */
+  InstanceList.prototype.shift = async function (listItem, places) {
 
-    /* Clear all items
-     * @returns {Promise}
-     */
-    InstanceList.prototype.clear = function() {
+    if (! (listItem instanceof InstanceListItem)) {
+      throw new TypeError("First argument must be instance of InstanceListItem");
+    }
 
-        return Promise.all([
-            this.items.slice(0).map(function (o) {
+    if (typeof places !== 'number') {
+      throw new TypeError("Second argument must be of type number");
+    }
 
-                return o.destroy();
-            })
-        ]);
-    };
+    const { ol, items } = this,
+      li = listItem.container,
+      itemCnt = items.length;
 
-    /* Shifts and item up/down the array
-     * @param {InstanceListItem} listItem - to move
-     * @param {number} places - to move up/down by
-     * @returns {Promise}
-     */
-    InstanceList.prototype.shift = function(listItem,places) {
+    let i = items.indexOf(listItem);
 
-        if (! (listItem instanceof InstanceListItem))
-            throw new TypeError("First argument must be instance of InstanceListItem");
+    // only one item?
+    if (itemCnt === 1) {
+      return;
+    }
 
-        if (typeof places !== 'number')
-            throw new TypeError("Second argument must be of type number");
+    // check exists
+    if (i === -1) {
+      throw new Error("InstanceListItem not within InstanceList pool");
+    }
 
-        var items = this.items,
-            ol = this.ol,
-            li = listItem.container,
-            i = items.indexOf(listItem),
-            itemCnt = items.length;
+    // places reducer
+    if (places+i >= itemCnt) {
+      places += i-1;
+      while (places >= 0) {
+        places -= (itemCnt-1);
+      }
+    }
 
-        // only one item?
-        if (itemCnt === 1)
-            return Promise.resolve();
+    // movidy array
+    items.splice(i+places, 0, items.splice(i, 1)[0]);
 
-        // cehck exists
-        if (i === -1)
-            throw new Error("InstanceListItem not within InstanceList pool");
+    // get new pos
+    i = items.indexOf(listItem);
 
-        // places reducer
-        if (places+i >= itemCnt) {
-            places += i-1;
-            while (places >= 0) {
-                places -= (itemCnt-1);
-            }
-        }
+    // end of array?
+    if (i === itemCnt-1) {
+      ol.appendChild(li);
+    } else {
+      ol.insertBefore(li, items[i+1].container);
+    }
 
-        // movidy array
-        items.splice(i+places,0,items.splice(i,1)[0]);
+    await this.managers.event.dispatch('shift', listItem);
+  }
 
-        // get new pos
-        i = items.indexOf(listItem);
-
-        // end of array?
-        if (i === itemCnt-1) {
-            ol.appendChild(li);
-        } else {
-            ol.insertBefore(li,items[i+1].container);
-        }
-
-        return this.managers.event.dispatch('shift',listItem);
-    };
-
-    return InstanceList;
-};
+  return InstanceList;
+}

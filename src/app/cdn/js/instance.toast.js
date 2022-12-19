@@ -1,72 +1,74 @@
 //# sourceURL=instance.toast.js
 
-(function(env) {
+(function (env) {
 
-    "use strict";
+  module.requires = [
+    { name: 'instance.toast.css' },
+    { name: 'core.language.js' }
+  ];
 
-    module.requires = [
-        { name: 'instance.toast.css' },
-        { name: 'core.language.js' }
-    ];
+  module.exports = app => {
 
-    module.exports = function(app) {
+    const coreDom = app['core.dom'],
+      coreBless = app['core.object'].bless
 
-        var dom = app['core.dom'],
-            bless = app['core.object'].bless;
+    const showTime = {
+      short: 2250,
+      long: 4250
+    }
 
-        var showTime = {
-            short : 2000,
-            long : 4000
-        };
+    const container = dom.mk('div', document.body, null, 'igaro-instance-toast'),
+      recentInstanceToastMessages = [];
 
-        var container = dom.mk('div',document.body,null,'igaro-instance-toast'),
-            recentInstanceToastMessages = [];
+    /* Toast
+     * @constructor
+     * @param {object} o - config literal. See online help for attributes.
+     */
+    const InstanceToast = function (o) {
 
-        /* Toast
-         * @constructor
-         * @param {object} o - config literal. See online help for attributes.
-         */
-        var InstanceToast = function(o) {
+      bless.call(this, {
+        name: 'instance.toast',
+        parent: o.parent,
+        asRoot: true
+      });
 
-            bless.call(this,{
-                name:'instance.toast',
-                parent:o.parent,
-                asRoot:true
-            });
+      const domMgr = this.managers.dom,
+        duration = o.duration || 'short',
+        position = o.position,
+        txt = o.message,
+        str = JSON.stringify(txt);
 
-            var domMgr = this.managers.dom,
-                duration = o.duration || 'short',
-                position = o.position,
-                txt = o.message,
-                str = JSON.stringify(txt);
+      // self destruct
+      window.setTimeout(() => {
 
-            // self destruct
-            var self = this;
-            window.setTimeout(function() {
+        this.destroy();
+      }, showTime[duration]+200);
 
-                self.destroy();
-            }, showTime[duration]+200);
+      // prevent toasting of same message within limited period
+      if (recentInstanceToastMessages.indexOf(str) > -1) {
+        return;
+      }
 
-            // prevent toasting of same message within limited period
-            if (recentInstanceToastMessages.indexOf(str) > -1)
-                return;
+      recentInstanceToastMessages
+        .push(str);
 
-            recentInstanceToastMessages.push(str);
+      window.setTimeout(() => {
 
-            window.setTimeout(function() {
+        recentInstanceToastMessages
+          .splice(recentInstanceToastMessages
+            .indexOf(str), 1)
+      }, 1000);
 
-                recentInstanceToastMessages.splice(recentInstanceToastMessages.indexOf(str),1);
-            },1000);
+      // phonegap InstanceToast plugin
+      if (env.plugins && env.plugins.toast) {
+        return env.plugins.toast.show(typeof txt === 'function'? txt() : txt, duration, position);
+      }
 
-            // phonegap InstanceToast plugin
-            if (env.plugins && env.plugins.toast)
-                return env.plugins.toast.show(typeof txt === 'function'? txt() : txt,duration,position);
+      // html
+      domMgr.mk('div', container, txt, duration);
+    }
 
-            // html
-            domMgr.mk('div',container,txt,duration);
-        };
-
-        return InstanceToast;
-    };
+    return InstanceToast;
+  }
 
 })(this);

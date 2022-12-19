@@ -1,223 +1,198 @@
 //# sourceURL=instance.samespace.js
 
-(function() {
+(function () {
 
-    'use strict';
+  module.requires = [
+    { name: 'instance.samespace.css' }
+  ];
 
-    module.requires = [
-        { name:'instance.samespace.css' }
-    ];
+  module.exports = app => {
 
-    module.exports = function(app) {
-
-        var object = app['core.object'],
-            dom = app['core.dom'],
-            bless = object.bless,
-            arrayInsert = object.arrayInsert;
+    const coreObject = app['core.object'],
+      dom = app['core.dom'],
+      { bless, arrayInsert } = coreObject;
 
 /*------------------------------------------------------------------------------------------------*/
 
-        /* Area
-         * @constructor
-         * @param {object} [o] - config literal. See online help
-         */
-        var InstanceSameSpaceArea = function(o) {
+    /* Area
+     * @constructor
+     * @param {object} [o] - config literal. See online help
+     */
+    const InstanceSameSpaceArea = function (o) {
 
-            this.name = 'space';
-            this.container = function(domMgr) {
+      this.name = 'space';
+      this.container = domMgr => domMgr.mk('div', null, o.content, o.className);
 
-                return domMgr.mk('div',null,o.content,o.className);
-            };
+      bless.call(this, o);
 
-            bless.call(this,o);
+      var parent = this.parent,
+        self = this;
 
-            var parent = this.parent,
-                self = this;
-
-            this.li = dom.mk('li',parent.nav.firstChild,null,function() {
-
-                this.addEventListener('click',function() {
-
-                    return parent.stop().then(function() {
-
-                        return parent.to(self);
-                    })['catch'](function(e) {
-
-                        return self.managers.debug.handle(e);
-                    });
-                });
-            });
-        };
+      this.li = dom.mk('li', parent.nav.firstChild, null, function () {
+        this.addEventListener('click', async () => {
+          try {
+            await parent.stop();
+            await parent.to(self);
+          } catch (e) {
+            return self.managers.debug.handle(e);
+          }
+        });
+      });
+    }
 
 /*------------------------------------------------------------------------------------------------*/
 
-        /* Manager
-         * @constructor
-         * @param {object} [o] - config literal. See online help
-         */
-        var InstanceSameSpace = function(o)  {
+    /* Manager
+     * @constructor
+     * @param {object} [o] - config literal. See online help
+     */
+    const InstanceSameSpace = function (o)  {
 
-            o = o || {};
-            var self = this;
-            this.name = 'instance.samespace';
-            this.asRoot = true;
-            this.children = {
-                spaces:'space'
-            };
-            this.container = function(domMgr) {
+      o = o || {};
+      var self = this;
+      this.name = 'instance.samespace';
+      this.asRoot = true;
+      this.children = {
+        spaces: 'space'
+      };
+      this.container = domMgr => domMgr.mk('div', o, null, function () {
+        if (o.className) {
+          this.classList.add(o.className);
+        }
+        self.canvas = dom.mk('div', this, null, o.effect);
+      });
+      this.current = -1;
+      this.delay = o.delay || 5000;
 
-                return domMgr.mk('div',o,null,function() {
+      bless.call(this, o);
 
-                    if (o.className)
-                        this.classList.add(o.className);
+      this.nav = dom.mk('nav', this, dom.mk('ul'));
+      this.loop = typeof o.loop === 'boolean'? o.loop : true;
 
-                    self.canvas = dom.mk('div',this,null,o.effect);
-                });
-            };
-            this.current = -1;
-            this.delay = o.delay || 5000;
+      if (! o.transparent) {
+        this.canvas.style.backgroundColor = 'black';
+      }
 
-            bless.call(this,o);
+      this.managers.event.on('destroy', () => {
+        if (this.timerRef) {
+            window.clearInterval(this.timerRef);
+        }
+      });
+    }
 
-            var managers = this.managers;
+    /* Async Constructor
+     * @constructor
+     * @param {object} [o] - config literal. See online help
+     * @returns {Promise}
+     */
+    InstanceSameSpace.prototype.init = async function (o) {
 
-            this.nav = dom.mk('nav',this,dom.mk('ul'));
-            this.loop = typeof o.loop === 'boolean'? o.loop : true;
+      const { spaces } = o;
+      if (spaces) {
+        await this.addSpaces(spaces);
+      }
+      if (this.spaces.length) {
+        await this.to(this.spaces[0]);
+      }
+      if (o.start) {
+        return this.start();
+      }
+    }
 
-            if (! o.transparent)
-                this.canvas.style.backgroundColor = 'black';
+    /* Adds multiple spaces
+     * @param {Array} o - spaces
+     * @returns {Promise}
+     */
+    InstanceSameSpace.prototype.addSpaces = async function (spaces) {
 
-            managers.event.on('destroy', function() {
+      const newSpaces = [];
+      for (space of spaces) {
+        newSpaces.push(await this.addSpace(space));
+      }
+      return newSpaces;
+    }
 
-                if (self.timerRef)
-                    window.clearInterval(self.timerRef);
-            });
-        };
+    /* Adds a space
+     * @param {Array} o - spaces
+     * @returns {Promise} containing InstanceSameSpace
+     */
+    InstanceSameSpace.prototype.addSpace = async function (o) {
 
-        /* Async Constructor
-         * @constructor
-         * @param {object} [o] - config literal. See online help
-         * @returns {Promise}
-         */
-        InstanceSameSpace.prototype.init = function(o) {
+      o.parent = this;
+      const s = new InstanceSameSpaceArea(o);
+      arrayInsert(this.spaces, s, o);
+      dom.hide(s.container);
+      this.canvas.appendChild(s.container);
+      await this.managers.event.dispatch('addSpace', s);
+      return s;
+    }
 
-            var self = this,
-                spaces = o.spaces;
+    /* Stops transition
+     * @returns {Promise}
+     */
+    InstanceSameSpace.prototype.stop = async function () {
 
-            return (spaces?
-                self.addSpaces(spaces)
-                :
-                Promise.resolve()
-            ).then(function() {
+      if (this.timerRef) {
+        window.clearInterval(this.timerRef);
+      }
+      this.canvas.setAttribute('status', 'stopped');
+      await this.managers.event.dispatch('stop');
+    }
 
-                return (self.spaces.length?
-                    self.to(self.spaces[0])
-                    :
-                    Promise.resolve()
-                ).then(function() {
+    /* Starts transition
+     * @returns {Promise}
+     */
+    InstanceSameSpace.prototype.start = async function () {
 
-                    if (o.start)
-                        return self.start();
-                });
-            });
-        };
+      if (this.timerRef) {
+        window.clearInterval(this.timerRef);
+      }
 
-        /* Adds multiple spaces
-         * @param {Array} o - spaces
-         * @returns {Promise}
-         */
-        InstanceSameSpace.prototype.addSpaces = function(o) {
+      const self = this;
+      this.canvas.setAttribute('status', 'playing');
+      this.timerRef = window.setInterval(() => {
 
-            var self = this;
-            return object.promiseSequencer(o,function(a) {
+        if (self.current === self.spaces.length-1 && ! self.loop) {
+          return self.stop();
+        }
+        const to = self.current === self.spaces.length-1? 0 : self.current+1;
+        self.to(self.spaces[to]);
+      }, self.delay);
 
-                return self.addSpace(a);
-            });
-        };
+      await this.managers.event.dispatch('start');
+    }
 
-        /* Adds a space
-         * @param {Array} o - spaces
-         * @returns {Promise} containing InstanceSameSpace
-         */
-        InstanceSameSpace.prototype.addSpace = function(o) {
+    /* Moves to a particular space
+     * @returns {Promise}
+     */
+    InstanceSameSpace.prototype.to = async function (s) {
 
-            o.parent = this;
-            var s = new InstanceSameSpaceArea(o);
-            arrayInsert(this.spaces,s,o);
-            return this.managers.event.dispatch('addSpace',s).then(function() {
+      if (! (s instanceof InstanceSameSpaceArea)) {
+        throw new TypeError("First argument must be of type InstanceSameSpaceArea");
+      }
 
-                return s;
-            });
-        };
+      const { spaces } = this,
+        i = spaces.indexOf(s);
 
-        /* Stops transition
-         * @returns {Promise}
-         */
-        InstanceSameSpace.prototype.stop = function() {
+      if (i === -1) {
+        throw new Error("InstanceSameSpaceArea does not exist in InstanceSameSpace pool");
+      }
 
-            if (this.timerRef)
-                window.clearInterval(this.timerRef);
+      if (i === this.current) {
+        return;
+      }
 
-            this.canvas.setAttribute('status','stopped');
-            return this.managers.event.dispatch('stop');
-        };
+      if (this.current > -1) {
+        dom.hide(spaces[this.current].container);
+      }
+      this.current = i;
+      dom.show(s.container);
+      spaces
+        .forEach(space=> space.li.classList[s === space? 'add' : 'remove']('active'));
+      await this.managers.event.dispatch('to', s);
+    }
 
-        /* Starts transition
-         * @returns {Promise}
-         */
-        InstanceSameSpace.prototype.start = function() {
-
-            if (this.timerRef)
-                window.clearInterval(this.timerRef);
-
-            var self = this;
-            this.canvas.setAttribute('status','playing');
-            this.timerRef = window.setInterval(function() {
-
-                if (self.current === self.spaces.length-1 && ! self.loop)
-                    return self.stop();
-
-                var to = self.current === self.spaces.length-1? 0 : self.current+1;
-                self.to(self.spaces[to]);
-            }, self.delay);
-
-            return this.managers.event.dispatch('start');
-        };
-
-
-        /* Moves to a particular space
-         * @returns {Promise}
-         */
-        InstanceSameSpace.prototype.to = function(s) {
-
-            if (! (s instanceof InstanceSameSpaceArea))
-                throw new TypeError("First argument must be of type InstanceSameSpaceArea");
-
-            var spaces = this.spaces,
-                i = spaces.indexOf(s);
-
-            if (i === -1)
-                throw new Error("InstanceSameSpaceArea does not exist in InstanceSameSpace pool");
-
-            if (i === this.current)
-                return;
-
-            this.current = i;
-            this.canvas.appendChild(s.container);
-            spaces.forEach(function (a) {
-
-                var cl = a.li.classList;
-                if (s === a) {
-                    cl.add('active');
-                } else {
-                    cl.remove('active');
-                }
-            });
-            return this.managers.event.dispatch('to',s);
-        };
-
-        return InstanceSameSpace;
-
-    };
+    return InstanceSameSpace;
+  }
 
 })(this);

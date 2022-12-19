@@ -1,10 +1,10 @@
 //# sourceURL=core.file.js
 
-(function(env) {
+((env) => {
 
-    "use strict";
+    "use strict"
 
-    module.exports = function() {
+    module.exports = () => {
 
         // service
         return {
@@ -13,36 +13,36 @@
              * @param {number} bytes
              * @returns (string} sane representation
              */
-            formatSize : function(v) {
+            formatSize : (v) => {
 
                 if (typeof v !== 'number')
-                    throw new TypeError('First argument must be of type number');
+                    throw new TypeError('First argument must be of type number')
 
                 if (v < 1000000)
-                    return (v/1000).toFixed(2)+'Kb';
+                    return (v/1000).toFixed(2)+'Kb'
                 if (v < 1000000000)
-                    return (v/1000000).toFixed(2)+'Mb';
+                    return (v/1000000).toFixed(2)+'Mb'
                 if (v < 1000000000000)
-                    return (v/1000000000).toFixed(2)+'Gb';
+                    return (v/1000000000).toFixed(2)+'Gb'
                 if (v < 1000000000000000)
-                    return (v/1000000000000).toFixed(2)+'Tb';
-                return v;
+                    return (v/1000000000000).toFixed(2)+'Tb'
+                return v
             },
 
             /* Returns the extension for a filename
              * @param {string} filename
              * @returns (string} extension
              */
-            getExtension : function(f) {
+            getExtension : (f) => {
 
                 if (typeof f !== 'string')
-                    throw new TypeError('First argument must be of type string');
+                    throw new TypeError('First argument must be of type string')
 
-                var e = /^.+\.([^.]+)$/.exec(f.toUpperCase());
-                return e === null? '' : e[1];
+                var e = /^.+\.([^.]+)$/.exec(f.toUpperCase())
+                return e === null? '' : e[1]
             }
 
-        };
-    };
+        }
+    }
 
-})(this);
+})(this)

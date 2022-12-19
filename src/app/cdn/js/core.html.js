@@ -1,10 +1,10 @@
 //# sourceURL=core.html.js
 
-(function(env) {
+(function (env) {
 
-    "use strict";
+    "use strict"
 
-    module.exports = function() {
+    module.exports = function () {
 
         return {
 
@@ -12,60 +12,60 @@
              * @param {string} v - text to replace
              * @returns {string}
              */
-            to : function(v) {
+            to : function (v) {
 
                 if (typeof v !== 'string')
-                    throw new TypeError('First argument must be of type string');
+                    throw new TypeError('First argument must be of type string')
 
-                return v.replace(/</g,"\&lt;")
-                    .replace(/\>/g,"\&gt;")
-                    .replace(/\|/g,"\&#124;")
-                    .replace(/  /g," \&nbsp;")
-                    .replace(/'/g,"\&#39;")
-                    .replace(/"/gi,"\&quot;")
-                    .replace(/\n\n/gi,"<p>")
-                    .replace(/\n/gi,"<br>");
+                return v.replace(/</g, "\&lt;")
+                    .replace(/\>/g, "\&gt;")
+                    .replace(/\|/g, "\&#124;")
+                    .replace(/  /g, " \&nbsp;")
+                    .replace(/'/g, "\&#39;")
+                    .replace(/"/gi, "\&quot;")
+                    .replace(/\n\n/gi, "<p>")
+                    .replace(/\n/gi, "<br>")
             },
 
             /* Decodes HTML
              * @param {string} v - text to replace
              * @returns {string}
              */
-            from : function(v) {
+            from : function (v) {
 
                 if (typeof v !== 'string')
-                    throw new TypeError('First argument must be of type string');
+                    throw new TypeError('First argument must be of type string')
 
-                return v.replace(/\&lt;/g,"\<")
-                    .replace(/\&gt;/g,"\>")
-                    .replace(/\&#124;/g,"\|")
-                    .replace(/ \&nbsp;/g,"  ")
-                    .replace(/\&#39;/g,"\'")
-                    .replace(/\&#039;/g,"\'")
-                    .replace(/\&quot;/g,"\"");
+                return v.replace(/\&lt;/g, "\<")
+                    .replace(/\&gt;/g, "\>")
+                    .replace(/\&#124;/g, "\|")
+                    .replace(/ \&nbsp;/g, "  ")
+                    .replace(/\&#39;/g, "\'")
+                    .replace(/\&#039;/g, "\'")
+                    .replace(/\&quot;/g, "\"")
             },
 
             /* Strips HTML
              * @param {string} v - text to replace
              * @returns {string}
              */
-            strip : function(v) {
+            strip : function (v) {
 
                 if (typeof v !== 'string')
-                    throw new TypeError('First argument must be of type string');
+                    throw new TypeError('First argument must be of type string')
 
-                v = v.replace(/(<([^>]+)>)/ig,"")
-                    .replace(/\r\n/g,"")
-                    .replace(/\n/g,"")
-                    .replace(/\r/g,"")
+                v = v.replace(/(<([^>]+)>)/ig, "")
+                    .replace(/\r\n/g, "")
+                    .replace(/\n/g, "")
+                    .replace(/\r/g, "")
                     .replace("&nbsp;", "")
-                    .replace(/^\s+|\s+$/g,"");
+                    .replace(/^\s+|\s+$/g, "")
 
-                return v === '<>' || v === '>' || v === '<'? '' : v;
+                return v === '<>' || v === '>' || v === '<'? '' : v
             }
 
-        };
+        }
 
-    };
+    }
 
-})(this);
+})(this)

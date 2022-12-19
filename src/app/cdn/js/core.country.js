@@ -1,142 +1,131 @@
 //# sourceURL=core.country.js
 
-(function() {
+(function () {
 
-    "use strict";
+  module.requires = [
+    { name: 'core.store.js' },
+    { name: 'core.url.js' }
+  ];
 
-    module.requires = [
-        { name:'core.store.js' },
-        { name:'core.url.js' }
-    ];
+  module.exports = (app, params) => {
 
-    module.exports = function(app, params) {
+    const store = app['core.store'],
+      url = app['core.url'],
+      coreObject = app['core.object'],
+      bless = coreObject.bless;
 
-        var store = app['core.store'],
-            url = app['core.url'],
-            coreObject = app['core.object'],
-            bless = coreObject.bless,
-            promiseSequencer = coreObject.promiseSequencer;
+    // detects the country to use
+    const detect = async () => {
 
-        // detects the country to use
-        var detect = function() {
+      let n = window.navigator.userLanguage || window.navigator.language;
+      if (n.length > 3) {
+        n = n.substr(3);
+      }
 
-            var n = window.navigator.userLanguage || window.navigator.language;
-            if (n.length > 3)
-                n=n.substr(3);
+      const stored = await country.managers.store.get('env');
 
-            return country.managers.store.get('env').then(function (stored) {
+      const pool = [
+        stored,
+        params.conf.localeCountry,
+        url.getSearchValue('localeCountry'),
+        n,
+        'US'
+      ].filter(v => typeof v === 'string' && v.length);
 
-                var pool = [
-                    stored,
-                    params.conf.localeCountry,
-                    url.getSearchValue('localeCountry'),
-                    n,
-                    'US'
-                ].filter(function(v) {
-                    return typeof v === 'string' && v.length;
-                });
+      let success;
+      for (let code of pool) {
+        try {
+          await country.setEnv(code, true);
+          success = true;
+          break;
+        } catch (e) {
 
-                return promiseSequencer(pool, function(code) {
-                    return Promise.resolve().then(function() {
-                        return country.setEnv(code,true).then(function() {
-                            throw { id:22976543 };
-                        });
-                    })['catch'](function (e) {
-                        if (typeof e !== 'object' || e.id !== 38628137)
-                            throw e;
-                    });
-                })['catch'](function(e) {
-                    if (typeof e !== 'object' || e.id !== 22976543)
-                        throw { e:e, error:'Country failed to set', attempted:pool, pool:country.pool };
-                });
-            });
-        };
+        }
+      }
+      if (! success) {
+        throw { error: 'Country failed to set', attempted: pool, config: country.config }
+      }
+    }
 
-        // case standarizer
-        var formatCode = function(id) {
+    // case standarizer
+    const formatCode = id => id.toUpperCase();
 
-            return id.toUpperCase();
-        };
+    // service
+    const country = {
 
-        // service
-        var country = {
+      name: 'core.country',
+      managers : {
+        store
+      },
+      env : null,
+      config : {},
 
-            name:'core.country',
-            managers : {
-                store : store
-            },
-            env : null,
-            pool : {},
+      /* Sets the country pool code
+       * @param {object} config - an object literal of codes. See app.conf for an example
+       * @returns {Promise}
+       */
+      setConfig: async function (config) {
 
-            /* Sets the country pool code
-             * @param {object} o - an object literal of codes. See app.conf for an example
-             * @returns {Promise}
-             */
-            setPool : function(o) {
+        this.config = config;
+        return this.managers.event.dispatch('setConfig');
+      },
 
-                this.pool = o;
-                return this.managers.event.dispatch('setPool');
-            },
+      /* Makes a country pool code active
+       * @param {string} id - the country code to use, i.e 'FR, GR'
+       * @param {boolean} [noStore] - don't store the code for persistance. Default false.
+       * @returns {Promise}
+       */
+      setEnv: async function (id, noStore) {
 
-            /* Makes a country pool code active
-             * @param {string} id - the country code to use, i.e 'FR, GR'
-             * @param {boolean} [noStore] - don't store the code for persistance. Default false.
-             * @returns {Promise}
-             */
-            setEnv : function(id, noStore) {
+        if (typeof id !== 'string') {
+          throw new TypeError('First argument must be a string (country code)');
+        }
 
-                if (typeof id !== 'string')
-                    throw new TypeError('First argument must be a string (country code)');
+        id = formatCode(id);
 
-                id = formatCode(id);
+        const { config, managers } = this;
+        if (! config.pool[id]) {
+          throw { error:'Code is not in pool.', value: id, config };
+        }
 
-                if (! this.pool[id])
-                    throw { id:38628137, error:'Code is not in pool.', value:id, pool:this.pool };
+        this.env = id;
 
-                this.env = id;
+        if (! noStore) {
+          await managers.store.set('env', id);
+        }
+        return managers.event.dispatch('setEnv', id);
+      },
 
-                var managers = this.managers;
-                return (noStore? Promise.resolve() : managers.store.set('env',id)).then(function() {
+      /* Resets the active code to the system default (usually browser supplied)
+       * @returns {Promise} containing the detected code
+       */
+      reset: async function () {
 
-                    return managers.event.dispatch('setEnv',id);
-                });
-            },
+        await this.managers.store.set('env');
+        return detect();
+      },
 
-            /* Resets the active code to the system default (usually browser supplied)
-             * @returns {Promise} containing the detected code
-             */
-            reset : function() {
+      /* Gets a country literal object by its id
+       * @param {string} id - the country code to use
+       * @returns {Promise} containing the detected code
+       */
+      getFromPoolById : function (id) {
 
-                return this.managers.store.set('env').then(function() {
+          if (typeof id !== 'string') {
+            throw new TypeError('First argument must be a string (language code)');
+          }
+          id = formatCode(id);
+          return this.pool[id];
+      }
+    }
 
-                    return detect();
-                });
-            },
+    // bless service
+    bless.call(country);
 
-            /* Gets a country literal object by its id
-             * @param {string} id - the country code to use
-             * @returns {Promise} containing the detected code
-             */
-            getFromPoolById : function(id) {
+    // attempt to reapply active code incase it's been removed from the pool
+    country.managers.event.on('setConfig', () => detect());
 
-                if (typeof id !== 'string')
-                    throw new TypeError('First argument must be a string (language code)');
-
-                id = formatCode(id);
-
-                return this.pool[id];
-            }
-        };
-
-        // bless service
-        bless.call(country);
-
-        // attempt to reapply active code incase it's been removed from the pool
-        country.managers.event.on('setPool', function() {
-            return detect();
-        });
-
-        return country;
-    };
+    return country;
+  }
 
 })(this);
