@@ -45,6 +45,9 @@
                 this.mode = typeof o.data === 'string'? 'plain' : 'json';
                 this.data = o.data;
             }
+            if (o.resBase) {
+              this.resBase = o.resBase;
+            }
             if (typeof o.withCredentials === 'boolean')
                 this.withCredentials = o.withCredentials;
             if (o.form) {
@@ -77,29 +80,28 @@
 
             rootEmitter.dispatch('instance.xhr.response',this).then(function(o) {
 
-                if (typeof o === 'object' && o.stopImmediatePropagation)
-                    return;
+                if (typeof o === 'object' && o.stopImmediatePropagation) {
+                  return;
+                }
 
-                var response = (! xhr.responseType) || xhr.responseType.match(/^.{0}$|text/)? xhr.responseText : xhr.response,
-                    status = xhr.status;
+                const response = (! xhr.responseType) || xhr.responseType.match(/^.{0}$|text/)? xhr.responseText : xhr.response,
+                  status = xhr.status;
 
-                if (status === 0 && (! response || response.length === 0))
-                    self.connectionFalure = true;
+                if (status === 0 && (! response || response.length === 0)) {
+                  self.connectionFalure = true;
+                }
+
+                const cv = xhr.getResponseHeader("Content-Type");
+                if (self.expectedContentType && cv && cv.indexOf('/'+self.expectedContentType) === -1) {
+                  throw({ status: 417, response:"unexpected content type" });
+                }
+                const data = ! cv || cv.indexOf('/json') === -1? response : JSON.parse(response);
 
                 if ((status >= 200 && status < 400) || (status === 0 && response.length > 0)) {
-
-                    var cv = xhr.getResponseHeader("Content-Type");
-
-                    if (self.expectedContentType && cv && cv.indexOf('/'+self.expectedContentType) === -1)
-                        throw(400);
-
-                    var data = ! cv || cv.indexOf('/json') === -1? response : JSON.parse(response);
-                    self._promise.resolve(data,xhr);
-                    return rootEmitter.dispatch('instance.xhr.success',self);
-
+                  self._promise.resolve(data,xhr);
+                  return rootEmitter.dispatch('instance.xhr.success',self);
                 } else {
-
-                    throw(status);
+                  throw({ status, data });
                 }
 
             })['catch'](function (e) {
@@ -108,9 +110,6 @@
             }).then(function() {
 
                 return rootEmitter.dispatch('instance.xhr.end',self);
-            })['catch'](function (e) {
-
-                return self.managers.debug.handle(e);
             });
         };
 
@@ -178,13 +177,13 @@
         InstanceXhr.prototype.send = function() {
 
             var self = this,
-                action = this.action,
-                xhr = this.xhr,
-                data = this._data,
-                res = this.res,
-                mode = this.mode,
-                headers = this.headers,
-                isPUTorPOST = /(PUT|POST)/.test(action);
+              action = this.action,
+              xhr = this.xhr,
+              data = this._data,
+              res = this.res,
+              mode = this.mode,
+              headers = this.headers,
+              isPUTorPOST = /(PUT|POST)/.test(action);
 
             if (! this._promise) {
                 throw new Error('instance.xhr -> Can\t send() before exec(). Send() is only for re-executing a request.');
@@ -215,7 +214,7 @@
                         res += (res.indexOf('?') === -1? '?' : '&') + data;
                 }
 
-                xhr.open(action,res,true);
+                xhr.open(action,(self.resBase || '') + res,true);
                 xhr.withCredentials = self.withCredentials? true : false;
                 Object.keys(self.headers).forEach (function (k) {
 
@@ -270,8 +269,8 @@
             return new Promise(function(resolve,reject) {
 
                 self._promise = {
-                    resolve : resolve,
-                    reject : reject
+                  resolve,
+                  reject
                 };
                 return self.send()['catch'](reject);
             });
@@ -375,7 +374,7 @@
                     fd[l.name] = l.checked? 1:0;
                 } else if (l.type === "select-one" && l.selectedIndex > -1) {
                     if (l.options.length)
-                        fd[l.name] = l.options[l.selectedIndex].value;
+                        fd[l.name] = l.value;
                 } else if (l.type === "select-multiple") {
                     var t=l.options.map(function(s) {
                         return ! s.selected? null : s.value;
