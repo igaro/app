@@ -4,17 +4,18 @@
 
 Igaro App is a web-app (SPA+) architecture using native ES5/6/7 JavaScript.
 
-It was written in 2014 by a senior JavaScript engineer (Andrew Charnley, UK contractor) who became despondent with learning various frameworks (i.e Angular 1) only to hit walls using them in real-life applications. Since then several frameworks have come and gone, but the architecture behind Igaro App is still rock solid.
+It was written in 2014 by Andrew Charnley, UK contractor, who became despondent with learning various frameworks (i.e Angular 1) only to hit walls using them in real-life applications. Since then several frameworks have come and gone, but the architecture behind Igaro App is still rock solid.
 
-As this is a large project with minimal time available for improvements some aspects, like testing, require improvement. Igaro App detects any error on the page or within it's modules and handles it. By looking for this handle many aspects are tested at once. The code base is currently being freshened up with arrow functions.
+As of 2022 this framework is still very much in use and will gradually be updated with some of the good stuff since 2014.
 
-## Zero Smell Code
+## Zero Smell
 
 - No callbacks (unless converting into a Promise).
 - No global object on window.* - very secure!
+- Bubble up error handling
 - 100% modularity.
 - 100% locale ready with support for multiple language, country and currency.
-- 100% JavaScript. 0% HTML.
+- 100% JavaScript. 0% HTML. A true SPA!
 
 ## Repo = App = Live Demo
 
@@ -30,7 +31,7 @@ All modules are comprehensibly documented in the /modules section within the app
 
 ## Install & Build
 
-Ensure you have `Node 6.0` or newer installed.
+Ensure you have `Node 16.0` or newer installed.
 
 install the dependencies;
 
